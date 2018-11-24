@@ -49,7 +49,7 @@
     "@loopback/core": "1.1.0",
     "@loopback/rest": "1.2.0",
     "@loopback/openapi-v3": "1.1.0",
-    "@loopback/repository": "1.0.3",
+    "@loopback/repository": "1.0.5",
     "@loopback/service-proxy": "1.0.2"
   },
   "devDependencies": {
