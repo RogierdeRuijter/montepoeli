@@ -1,0 +1,13 @@
+{
+  "name": "frontend",
+  "version": "0.0.0",
+  "scripts": {
+    "install": "npm run install-client & npm run install-server",
+    "install-client": "cd client && npm i",
+    "install-server": "cd server && npm i",
+    "test": "ng test",
+    "test-client": "cd client && npm test",
+    "test-server": "cd server && npm server"
+  },
+  "private": true
+}
