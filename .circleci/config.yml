@@ -18,19 +18,19 @@ jobs:
 
     steps:
     - checkout
-    - run: npm i @angular/cli
-    - run: npm i @angular-devkit/build-angular
-    - run: npm i @angular/compiler-cli
-    - run: npm i @angular/language-service
-    - run: npm i @angular/compiler
-    - run: npm i jasmine-core
-    - run: npm i jasmine-spec-reporter
-    - run: npm i karma
-    - run: npm i karma-chrome-launcher
-    - run: npm i karma-coverage-istanbul-reporter
-    - run: npm i karma-jasmine
-    - run: npm i karma-jasmine-html-reporter
-    - run: npm i protractor
+#    - run: npm i @angular/cli
+#    - run: npm i @angular-devkit/build-angular
+#    - run: npm i @angular/compiler-cli
+#    - run: npm i @angular/language-service
+#    - run: npm i @angular/compiler
+#    - run: npm i jasmine-core
+#    - run: npm i jasmine-spec-reporter
+#    - run: npm i karma
+#    - run: npm i karma-chrome-launcher
+#    - run: npm i karma-coverage-istanbul-reporter
+#    - run: npm i karma-jasmine
+#    - run: npm i karma-jasmine-html-reporter
+#    - run: npm i protractor
 
     # Download and cache dependencies
     - restore_cache:
@@ -39,6 +39,15 @@ jobs:
         # fallback to using the latest cache if no exact match is found
         - v1-dependencies-
 
+    - run: cd client
+    - run: npm install
+
+    - save_cache:
+        paths:
+          - node_modules
+        key: v1-dependencies-{{ checksum "package.json" }}
+
+    - run: cd ../server
     - run: npm install
 
     - save_cache:
@@ -47,5 +56,6 @@ jobs:
         key: v1-dependencies-{{ checksum "package.json" }}
 
     # run tests!
+    - run: cd client
     - run: npm test
 
