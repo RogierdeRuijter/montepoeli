@@ -5,7 +5,7 @@
     "install": "npm run install-client & npm run install-server",
     "install-client": "cd client && npm i",
     "install-server": "cd server && npm i",
-    "test": "npm run test-client & npm run test-server",
+    "test": "npm run test-client",
     "test-client": "cd client && npm test",
     "test-server": "cd server && npm test"
   },
