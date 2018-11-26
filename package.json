@@ -5,9 +5,9 @@
     "install": "npm run install-client & npm run install-server",
     "install-client": "cd client && npm i",
     "install-server": "cd server && npm i",
-    "test": "ng test",
+    "test": "npm run test-client & npm run test-server",
     "test-client": "cd client && npm test",
-    "test-server": "cd server && npm server"
+    "test-server": "cd server && npm test"
   },
   "private": true
 }
