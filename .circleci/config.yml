@@ -22,6 +22,7 @@ jobs:
     - run: npm i @angular-devkit/build-angular
     - run: npm i @angular/compiler-cli
     - run: npm i @angular/language-service
+    - run: npm i @angular/compiler
 
     # Download and cache dependencies
     - restore_cache:
