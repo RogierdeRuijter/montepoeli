@@ -47,7 +47,7 @@ jobs:
           - node_modules
         key: v1-dependencies-{{ checksum "package.json" }}
 
-    - run: cd ../server
+    - run: cd server
     - run: npm install
 
     - save_cache:
