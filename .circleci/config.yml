@@ -25,12 +25,12 @@ jobs:
     - run: npm i @angular/compiler
     - run: npm i jasmine-core
     - run: npm i jasmine-spec-reporter
-    - run: karma
-    - run: karma-chrome-launcher
-    - run: karma-coverage-istanbul-reporter
-    - run: karma-jasmine
-    - run: karma-jasmine-html-reporter
-    - run: protractor
+    - run: npm i karma
+    - run: npm i karma-chrome-launcher
+    - run: npm i karma-coverage-istanbul-reporter
+    - run: npm i karma-jasmine
+    - run: npm i karma-jasmine-html-reporter
+    - run: npm i protractor
 
     # Download and cache dependencies
     - restore_cache:
