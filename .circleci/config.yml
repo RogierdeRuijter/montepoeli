@@ -19,6 +19,7 @@ jobs:
     steps:
     - checkout
     - run: npm i @angular/cli
+    - run: npm i @angular-devkit/build-angular
 
     # Download and cache dependencies
     - restore_cache:
