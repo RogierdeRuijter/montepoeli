@@ -44,4 +44,5 @@ jobs:
 
     # run tests!
     - run: cd client && npm test
+    - run: cd server && npm test
 
