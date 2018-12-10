@@ -4,6 +4,7 @@ import {RepositoryMixin} from '@loopback/repository';
 import {RestApplication} from '@loopback/rest';
 import {ServiceMixin} from '@loopback/service-proxy';
 import {MySequence} from './sequence';
+import * as path from "path";
 
 export class MontepouliBackend extends BootMixin(
   ServiceMixin(RepositoryMixin(RestApplication)),
@@ -21,8 +22,11 @@ export class MontepouliBackend extends BootMixin(
         // Customize ControllerBooter Conventions here
         dirs: ['controllers'],
         extensions: ['.controller.js'],
-        nested: true,
+        nested: true
       },
     };
+
+    this.static('/ng', path.join(__dirname, '../../../client/dist/frontend'));
+
   }
 }
