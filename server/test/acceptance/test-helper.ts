@@ -7,7 +7,7 @@ import {
 
 export async function setupApplication(): Promise<AppWithClient> {
   const app = new MontepouliBackend({
-    rest: givenHttpServerConfig(),
+    rest: givenHttpServerConfig({host: '127.0.0.1'}),
   });
 
   await app.boot();
