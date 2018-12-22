@@ -26,7 +26,7 @@ export class MontepouliBackend extends BootMixin(
       },
     };
 
-    this.static('/ng', path.join(__dirname, '../../../client/dist/frontend'));
+    // this.static('/ng', path.join(__dirname, '../../../client/dist/frontend'));
 
   }
 }
