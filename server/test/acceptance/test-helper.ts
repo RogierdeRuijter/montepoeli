@@ -1,4 +1,4 @@
-import {MontepouliBackend} from '../..';
+import {ServerApplication} from '../..';
 import {
   createRestAppClient,
   givenHttpServerConfig,
@@ -6,7 +6,7 @@ import {
 } from '@loopback/testlab';
 
 export async function setupApplication(): Promise<AppWithClient> {
-  const app = new MontepouliBackend({
+  const app = new ServerApplication({
     rest: givenHttpServerConfig({host: '127.0.0.1'}),
   });
 
@@ -19,6 +19,6 @@ export async function setupApplication(): Promise<AppWithClient> {
 }
 
 export interface AppWithClient {
-  app: MontepouliBackend;
+  app: ServerApplication;
   client: Client;
 }

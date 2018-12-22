@@ -1,7 +1,7 @@
 {
-  "name": "loopback-backend",
+  "name": "server",
   "version": "1.0.0",
-  "description": "loopback-backend",
+  "description": "montepouli",
   "keywords": [
     "loopback-application",
     "loopback"
@@ -26,8 +26,9 @@
     "test": "lb-mocha --allow-console-logs \"dist/test\"",
     "posttest": "npm run lint",
     "test:dev": "lb-mocha --allow-console-logs dist/test/**/*.js && npm run posttest",
+    "migrate": "node ./dist/src/migrate",
     "prestart": "npm run build",
-    "start": "./node_modules/nodemon/bin/nodemon.js .",
+    "start": "node .",
     "prepublishOnly": "npm run test"
   },
   "repository": {
@@ -44,18 +45,19 @@
     "src"
   ],
   "dependencies": {
-    "@loopback/boot": "1.0.8",
-    "@loopback/context": "1.3.0",
-    "@loopback/core": "1.1.3",
-    "@loopback/rest": "1.4.0",
-    "@loopback/openapi-v3": "1.1.5",
-    "@loopback/repository": "1.1.1",
-    "@loopback/service-proxy": "1.0.5"
+    "@loopback/boot": "^1.0.8",
+    "@loopback/context": "^1.4.0",
+    "@loopback/core": "^1.1.3",
+    "@loopback/openapi-v3": "^1.1.5",
+    "@loopback/repository": "^1.1.1",
+    "@loopback/rest": "^1.5.1",
+    "@loopback/rest-explorer": "^1.1.4",
+    "@loopback/service-proxy": "^1.0.5"
   },
   "devDependencies": {
-    "@loopback/build": "1.1.0",
-    "@loopback/testlab": "1.0.3",
-    "@types/node": "10.12.18",
-    "nodemon": "1.18.9"
+    "@loopback/build": "^1.1.0",
+    "@loopback/testlab": "^1.0.3",
+    "@loopback/tslint-config": "^1.0.0",
+    "@types/node": "^10.11.2"
   }
 }
