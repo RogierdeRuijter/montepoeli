@@ -7,7 +7,7 @@ import {
 
 export async function setupApplication(): Promise<AppWithClient> {
   const app = new ServerApplication({
-    rest: givenHttpServerConfig({host: '127.0.0.1'}),
+    rest: givenHttpServerConfig({host: '0.0.0.0'}),
   });
 
   await app.boot();
