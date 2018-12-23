@@ -1,0 +1,15 @@
+{
+  "name": "montepouli",
+  "version": "0.1.0",
+  "scripts": {
+    "install": "npm run install-client & npm run install-server",
+    "install-client": "cd client && npm i",
+    "install-server": "cd server && npm i",
+    "build" : "cd client npm install ",
+    "build-client": "cd client && npm build",
+    "build-server": "cd server && npm build",
+    "start": "cd server && node ."
+  }
+
+
+}
