@@ -46,3 +46,11 @@ jobs:
     - run: cd client && npm test
     - run: cd server && npm run pretest && npm test
 
+    - setup_remote_docker
+
+    - run: docker build -t . montepoeli
+
+    - run: docker tag montepoeli tjokvol/montepoeli:bundle
+
+    - run: docker push tjokvol/montepoeli:bundle
+
