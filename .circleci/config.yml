@@ -48,7 +48,7 @@ jobs:
 
     - setup_remote_docker
     - run: echo $DOCKER_USER
-    - run: docker login -u $DOCKER_USER -p DOCKER_PASSWORD
+    - run: cat $DOCKER_PASSWORD | docker login --username $DOCKER_USER
 
     - run: docker build . -t montepoeli
 
