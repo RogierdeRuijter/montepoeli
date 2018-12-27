@@ -48,7 +48,7 @@ jobs:
 
     - setup_remote_docker
 
-    - run: docker build -t . montepoeli
+    - run: docker build . -t montepoeli
 
     - run: docker tag montepoeli tjokvol/montepoeli:bundle
 
