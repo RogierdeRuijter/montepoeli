@@ -6,6 +6,12 @@ WORKDIR app/src
 RUN chgrp -R 0 . && \
     chmod -R g=u .
 
+LABEL io.openshift.tags=loopback4,angular
+LABEL io.openshift.wants=node
+LABEL io.openshift.non-scalable=true
+LABEL io.openshift.min-memory=256Mi
+LABEL io.openshift.min-cpu=1
+
 COPY client client
 
 COPY server server
