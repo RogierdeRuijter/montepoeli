@@ -4,10 +4,10 @@
   "scripts": {
     "install": "npm run install-server",
     "install-client": "cd client && npm i",
-    "install-server": "cd client/server && npm i",
-    "build": "npm run build-client && npm run build-server",
+    "install-server": "cd server && npm i",
+    "build": "npm run build-server",
     "build-client": "cd client && npm run build",
-    "build-server": "cd client/server && npm run build",
-    "start": "cd client/server && node ."
+    "build-server": "cd server && npm run build",
+    "start": "cd server && node ."
   }
 }
