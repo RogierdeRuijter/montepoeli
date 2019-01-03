@@ -4,7 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --prod --baseHref=ng",
+    "build": "ng build --prod --baseHref=ng && npm run add-dist-to-git",
+    "add-dist-to-git": "git add dist",
     "test": "ng test --watch=false",
     "lint": "ng lint",
     "e2e": "ng e2e"
