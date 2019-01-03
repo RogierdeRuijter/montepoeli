@@ -2,9 +2,14 @@
   "name": "frontend",
   "version": "0.0.0",
   "scripts": {
+    "install": "npm i package.json && npm run install-server",
+    "install-server": "cd server && npm i",
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build --prod",
+    "start": "cd server && node .",
+    "start-dev": "ng serve",
+    "build": "npm run build-client && npm run build-server",
+    "build-client": "ng build --prod",
+    "build-server": "cd server && npm run build",
     "test": "ng test --watch=false",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -22,6 +27,7 @@
     "@angular/router": "~7.1.0",
     "core-js": "~2.6.0",
     "intl": "~1.2.5",
+    "package.json": "^2.0.1",
     "rxjs": "~6.3.3",
     "zone.js": "~0.8.26"
   },
