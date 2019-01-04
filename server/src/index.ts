@@ -4,6 +4,9 @@ import {ApplicationConfig} from '@loopback/core';
 export {ServerApplication};
 
 export async function main(options: ApplicationConfig = {}) {
+  options = {
+    basePath: '/api'
+  };
   const app = new ServerApplication(options);
   await app.boot();
   await app.start();
