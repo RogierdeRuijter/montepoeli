@@ -44,7 +44,7 @@
     "src"
   ],
   "dependencies": {
-    "@loopback/boot": "1.0.8",
+    "@loopback/boot": "1.2.4",
     "@loopback/context": "1.12.1",
     "@loopback/core": "1.1.3",
     "@loopback/openapi-v3": "1.1.5",
