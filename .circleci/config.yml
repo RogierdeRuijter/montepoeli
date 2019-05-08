@@ -18,40 +18,48 @@ jobs:
 
     steps:
     - checkout
-
-    # Download and cache dependencies
-    - restore_cache:
-        keys:
-        - v1-dependencies-{{ checksum "client/package.json" }}
-
-    - run: cd client && npm install
-
-    - save_cache:
-        paths:
-          - client/node_modules
-        key: v1-dependencies-{{ checksum "client/package.json" }}
-
-    - restore_cache:
-        keys:
-          - v1-dependencies-{{ checksum "server/package.json" }}
-
-    - run: cd server && npm install
-
-    - save_cache:
-        paths:
-        - server/node_modules
-        key: v1-dependencies-{{ checksum "server/package.json" }}
-
-    # run tests!
-    - run: cd client && npm test
-    - run: cd server && npm run pretest && npm test
-
     - setup_remote_docker
-    - run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+        - docker_layer_caching: true
 
-    - run: docker build . -t montepoeli
+    - run: |
+        TAG=0.1.$CIRCLE_BUILD_NUM
+        docker build -t $DOMAIN/$IMAGE_NAME:$TAG .
+        docker login -u $DOCKER_USER -p $DOCKER_PASS
+        docker push $DOMAIN/$IMAGE_NAME:$TAG
 
-    - run: docker tag montepoeli tjokvol/montepoeli:bundle
-
-    - run: docker push tjokvol/montepoeli:bundle
+#      # Download and cache dependencies
+#    - restore_cache:
+#        keys:
+#        - v1-dependencies-{{ checksum "client/package.json" }}
+#
+#    - run: cd client && npm install
+#
+#    - save_cache:
+#        paths:
+#          - client/node_modules
+#        key: v1-dependencies-{{ checksum "client/package.json" }}
+#
+#    - restore_cache:
+#        keys:
+#          - v1-dependencies-{{ checksum "server/package.json" }}
+#
+#    - run: cd server && npm install
+#
+#    - save_cache:
+#        paths:
+#        - server/node_modules
+#        key: v1-dependencies-{{ checksum "server/package.json" }}
+#
+#    # run tests!
+#    - run: cd client && npm test
+#    - run: cd server && npm run pretest && npm test
+#
+#    - setup_remote_docker
+#    - run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+#
+#    - run: docker build . -t montepoeli
+#
+#    - run: docker tag montepoeli tjokvol/montepoeli:bundle
+#
+#    - run: docker push tjokvol/montepoeli:bundle
 
