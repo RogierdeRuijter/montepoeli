@@ -8,12 +8,14 @@ if (require.main === module) {
     rest: {
       port: +process.env.PORT || 8080,
       host: process.env.HOST || '0.0.0.0',
+      basePath: '/api',
       openApiSpec: {
         // useful when used with OASGraph to locate your application
         setServersFromRequest: true,
       },
     },
   };
+
   application.main(config).catch(err => {
     console.error('Cannot start the application.', err);
     process.exit(1);
