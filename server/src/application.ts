@@ -20,11 +20,11 @@ export class ServerApplication extends BootMixin(
     this.sequence(MySequence);
 
     // Set up default home page
-    this.static('/', path.join(__dirname, '../../public'));
+    this.static('/', path.join(__dirname, '../../../client/dist/frontend'));
 
     // Customize @loopback/rest-explorer configuration here
     this.bind(RestExplorerBindings.CONFIG).to({
-      path: '/explorer',
+      path: '/explorer'
     });
     this.component(RestExplorerComponent);
 
@@ -38,6 +38,5 @@ export class ServerApplication extends BootMixin(
         nested: true,
       },
     };
-    this.static('/ng', path.join(__dirname, '../../../client/dist/frontend'));
   }
 }
