@@ -24,7 +24,7 @@ jobs:
     - run: |
         cd client
         CLIENT_TAG=0.1
-        IMAGE_CLIENT_NAME = client
+        IMAGE_CLIENT_NAME=client
         docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG .
         docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
         docker push $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG
