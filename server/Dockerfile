@@ -5,6 +5,6 @@ WORKDIR app/src
 COPY . .
 RUN npm install && npm run build
 
-EXPOSE 8080
+EXPOSE 3000
 
 CMD [ "npm", "start" ]
