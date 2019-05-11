@@ -24,10 +24,18 @@ jobs:
     - run: |
         cd client
         CLIENT_TAG=0.1
-        IMAGE_CLIENT_NAME=client
+        IMAGE_CLIENT_NAME=montepouli-client
         docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG .
         docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
         docker push $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG
+
+    - run: |
+        cd server
+        SERVER_TAG=0.1
+        IMAGE_SERVER_NAME=montepouli-server
+        docker build -t $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG .
+        docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
+        docker push $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG
 
 #      # Download and cache dependencies
 #    - restore_cache:
