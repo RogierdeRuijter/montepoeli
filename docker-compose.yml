@@ -19,6 +19,9 @@ services:
   server:
     build: server
     container_name: montepouli-server
+    environment:
+      - MONGO_USERNAME=root
+      - MONGO_PASSWORD=example
     ports:
       - "3000:3000"
     volumes:
