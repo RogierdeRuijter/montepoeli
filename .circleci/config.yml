@@ -22,10 +22,12 @@ jobs:
         docker_layer_caching: true
 
     - run: |
-        TAG=0.1
-        docker build -t $DOMAIN/$IMAGE_NAME:$TAG .
+        cd client
+        CLIENT_TAG=0.1
+        IMAGE_CLIENT_NAME = client
+        docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG .
         docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
-        docker push $DOMAIN/$IMAGE_NAME:$TAG
+        docker push $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG
 
 #      # Download and cache dependencies
 #    - restore_cache:
