@@ -1,0 +1,43 @@
+version: "2"
+services:
+  client:
+    build:
+      context: client
+      dockerfile: LocalDockerfile
+    container_name: montepouli-client
+    ports:
+      - "4200:4200"
+      - "49153:49153"
+    volumes:
+      - ./client/src:/usr/src/app/src
+      - ./client/angular.json:/usr/src/app/angular.json
+      - ./client/tslint.json:/usr/src/app/tslint.json
+    networks:
+      - dev
+    command: bash -c 'npm run start:container'
+
+  server:
+    build: server
+    container_name: montepouli-server
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./server/src:/usr/src/app/src
+    networks:
+      - dev
+    command: sh -c 'npm run start:dev'
+
+  mongodb:
+    container_name: montepouli-mongo-db
+    image: mongo:4.1
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=example
+    ports:
+      - "27017:27017"
+      - "28017:28017"
+    networks:
+      - dev
+
+networks:
+  dev:

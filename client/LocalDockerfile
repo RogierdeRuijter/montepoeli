@@ -1,0 +1,17 @@
+FROM node:10
+
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+
+RUN npm install -g @angular/cli --loglevel error
+
+# use cached layer for node modules
+COPY package.json package.json
+RUN cd /usr/src/app/ && npm install --loglevel error
+
+ADD . /usr/src/app
+
+EXPOSE 4200
+EXPOSE 49153
+
+CMD [ "npm", "run", "start:container" ]

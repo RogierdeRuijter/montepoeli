@@ -8,6 +8,7 @@
     "build": "npm run build-server",
     "build-client": "cd client && npm run build",
     "build-server": "cd server && npm run build",
-    "start": "cd server && node ."
+    "start": "cd server && node .",
+    "docker-compose-rebuild": "docker-compose build && docker-compose down && docker-compose up -d"
   }
 }
