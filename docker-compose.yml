@@ -14,7 +14,7 @@ services:
       - ./client/tslint.json:/usr/src/app/tslint.json
     networks:
       - dev
-    command: bash -c 'npm run start:container'
+    command: bash -c 'npm run start:dev'
 
   server:
     build: server
@@ -36,6 +36,9 @@ services:
     environment:
       - MONGO_INITDB_ROOT_USERNAME=root
       - MONGO_INITDB_ROOT_PASSWORD=example
+    volumes:
+      - montepouli-volume:/data/db
+      - montepouli-volume:/data/configdb
     ports:
       - "27017:27017"
       - "28017:28017"
@@ -44,3 +47,7 @@ services:
 
 networks:
   dev:
+
+volumes:
+  montepouli-volume:
+
