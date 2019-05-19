@@ -18,11 +18,12 @@ export const environment = {
     },
     WS: 'ws://localhost:5500',
     ENTRY_POINTS: {
-      SIGNIN: '/login',
+      SIGNIN: '/signIn',
       SIGNOUT: '/logout',
       DASHBOARD: '/statistics',
       STATUS: '/status',
       USERS: '/users',
+      CATS: '/cats',
     },
   },
 };
