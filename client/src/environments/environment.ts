@@ -18,15 +18,16 @@ export const environment = {
   },
   BACKEND: {
     URL: {
-      FULL: 'http://localhost:1337/api',
+      FULL: 'http://localhost:3000/api',
     },
     WS: 'ws://localhost:5500',
     ENTRY_POINTS: {
-      SIGNIN: '/login',
+      SIGNIN: '/signIn',
       SIGNOUT: '/logout',
       DASHBOARD: '/statistics',
       STATUS: '/status',
       USERS: '/users',
+      CATS: '/cats',
     },
   },
 };

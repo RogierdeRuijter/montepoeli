@@ -5,6 +5,7 @@ import {AuthService} from '../auth/auth.service';
 import {Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
 import {ToastrService} from 'ngx-toastr';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,8 @@ export class LoginComponent {
   public isSubmitting = false;
 
   constructor(private router: Router, private authService: AuthService,
-              private toastrService: ToastrService) {
+              private toastrService: ToastrService,
+              private translationService: TranslateService) {
   }
 
   public onLogin(): void {
@@ -27,14 +29,19 @@ export class LoginComponent {
     const user = {};
     user['username'] = this.currentForm.value.username;
     user['pwd'] = this.currentForm.value.password;
-    this.authService.login(user).subscribe(() => {
-    }, (error) => {
+    this.authService.login(user).subscribe(
+      () => {
+      }, (error) => {
+
       this.isSubmitting = false;
       let errMsg = 'login_error';
+        const title = this.translationService.instant('errors.incorrect_credentials.title');
       if (error && error['error']) {
-        errMsg = error.error.error_code;
+        if (error.status === 401) {
+          errMsg = this.translationService.instant('errors.incorrect_credentials.body');
+        }
       }
-      this.toastrService.error(JSON.stringify(errMsg), 'Login  Error:', {
+        this.toastrService.warning(errMsg, title + ':', {
         timeOut: 3000,
       });
     });

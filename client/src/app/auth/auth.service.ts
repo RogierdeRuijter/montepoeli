@@ -1,6 +1,6 @@
 import {Router} from '@angular/router';
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 
 import {environment} from '../../environments/environment';
 
@@ -26,11 +26,6 @@ export class AuthService {
   }
 
   login(user: any) {
-
-    const headers = new HttpHeaders({
-      'Authorization': 'Basic ' + btoa(user.username + ':' + user.pwd),
-    });
-
     return this.httpClient.post([
       environment.BACKEND.URL.FULL,
       environment.BACKEND.ENTRY_POINTS.SIGNIN,
@@ -38,11 +33,10 @@ export class AuthService {
       username: user.username,
       password: user.pwd,
     }, {
-      headers: headers,
+      withCredentials: true,
       observe: 'response',
-    })
-      .pipe(tap((data) => {
-        console.log('login - server response: ' + data);
+    }).pipe(
+      tap((data) => {
         if (data) {
           this.setSession(data.headers.get(environment.AUTHENTICATION.TOKENNAME));
           this.loggedIn = true;

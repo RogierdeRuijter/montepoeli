@@ -14,7 +14,7 @@ export const environment = {
   },
   BACKEND: {
     URL: {
-      FULL: 'https://angular-starter-kit-backend.herokuapp.com/api',
+      FULL: 'https://montepoeli.club/api',
     },
     WS: 'ws://localhost:5500',
     ENTRY_POINTS: {

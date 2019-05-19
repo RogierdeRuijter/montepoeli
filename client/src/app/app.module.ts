@@ -12,12 +12,14 @@ import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {FormsModule} from '@angular/forms';
 import {TranslateDirective} from './translate.directive';
+import {HomeComponent} from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     TranslateDirective,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,

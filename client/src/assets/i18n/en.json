@@ -38,5 +38,11 @@
   "general": {
     "filter": "Filter",
     "filters": "Filters"
+  },
+  "errors": {
+    "incorrect_credentials": {
+      "title": "Login  Error",
+      "body": "Your username or password is incorrect"
+    }
   }
 }

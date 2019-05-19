@@ -1,8 +1,10 @@
 import {Model} from 'mongoose';
-import {Injectable} from '@nestjs/common';
+import {Injectable, InternalServerErrorException, UnauthorizedException} from '@nestjs/common';
 import {User} from '../interfaces/user.interface';
 import {InjectModel} from '@nestjs/mongoose';
 import {CreateUserDto} from '../dtos/create-user.dto';
+import {JwtPayload} from '../interfaces/jwt-payload.interface';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UsersService {
@@ -17,12 +19,39 @@ export class UsersService {
     return new Promise(() => false);
   }
 
-  findOneByEmail(email: string): Promise<User> {
-    return this.userModel.find({email}).exec();
+  public findByUsername(payload: JwtPayload): Promise<User> {
+    return this.userModel.find({username: payload.username}).exec();
   }
 
-  create(createUserDto: CreateUserDto): Promise<User> {
-    const createdUser = new this.userModel(createUserDto);
-    return createdUser.save();
+  public verifyUser(payload): Promise<User> {
+    return new Promise((resolve, reject) => this.userModel.find({username: payload.username}).exec().then((users) => {
+      if (users.length === 0) {
+        reject(new UnauthorizedException());
+        return;
+      }
+
+      if (users.length > 1) {
+        reject(new InternalServerErrorException('more than 1 user with the same username'));
+        return;
+      }
+
+      const user = users[0];
+
+      bcrypt.compare(payload.password, user.password, (err, res) => {
+        if (res === true) {
+          resolve(user);
+        } else if (res === false) {
+          reject('hash comparison failed');
+        }
+      });
+    }));
+  }
+
+  public create(createUserDto: CreateUserDto): Promise<User> {
+    return new Promise((resolve) => bcrypt.hash(createUserDto.password, 10, (err, passwordHash) => {
+      createUserDto.password = passwordHash;
+      const createdUser = new this.userModel(createUserDto);
+      resolve(createdUser.save());
+    }));
   }
 }

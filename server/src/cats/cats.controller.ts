@@ -1,4 +1,4 @@
-import {Body, Controller, Get, Post, UseGuards} from '@nestjs/common';
+import {Body, Controller, Get, Post, Req, UseGuards} from '@nestjs/common';
 import {CreateCatDto} from '../dtos/create-cat.dto';
 import {CatsService} from './cats.service';
 import {Cat} from '../interfaces/cat.interface';
@@ -10,7 +10,7 @@ export class CatsController {
 
   @Get()
   @UseGuards(AuthGuard())
-  async findAll(): Promise<Cat[]> {
+  async findAll(@Req() req): Promise<Cat[]> {
     return this.catsService.findAll();
   }
 

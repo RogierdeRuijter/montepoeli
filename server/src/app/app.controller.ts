@@ -1,8 +1,10 @@
-import {Controller, Get} from '@nestjs/common';
+import {BadRequestException, Body, Controller, Get, Next, Post, Res} from '@nestjs/common';
 import {AppService} from './app.service';
 import {UsersService} from '../users/users.service';
 import {User} from '../interfaces/user.interface';
 import {AuthService} from '../auth/auth.service';
+import {Response} from 'express';
+import {CreateUserDto} from '../dtos/create-user.dto';
 
 @Controller()
 export class AppController {
@@ -13,13 +15,27 @@ export class AppController {
 
   @Get()
   public getHello(): Promise<User> {
-    // return this.usersService.create({email: 'user@email.com', password: 'edf23dfe'});
+    // return this.usersService.create({username: 'user', password: '123'});
     return null;
   }
 
-  @Get('/signIn')
-  public signIn(): Promise<string> {
-    // return this.authService.signIn();
-    return null;
+  @Post('/signIn')
+  public async signIn(@Body() body, @Res() res: Response, @Next() next): Promise<any> {
+    return await this.authService.signIn(body).then(jwt => {
+      res.cookie('jwt', jwt.jwt);
+      res.send({authenticated: true});
+    });
+  }
+
+  // @Post('/createUser')
+  public createUser(@Body() createUserDto: CreateUserDto): Promise<User> {
+    const username = createUserDto.username;
+    const password = createUserDto.password;
+
+    if (!username && !password) {
+      throw new BadRequestException('username and password should be defined');
+    }
+
+    return this.usersService.create(createUserDto);
   }
 }
