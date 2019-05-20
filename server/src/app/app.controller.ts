@@ -27,7 +27,7 @@ export class AppController {
     });
   }
 
-  // @Post('/createUser')
+  @Post('/createUser')
   public createUser(@Body() createUserDto: CreateUserDto): Promise<User> {
     const username = createUserDto.username;
     const password = createUserDto.password;

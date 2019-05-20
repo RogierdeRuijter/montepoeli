@@ -6,6 +6,10 @@ import {User} from '../interfaces/user.interface';
 
 @Injectable()
 export class AuthService {
+  private jwtOptions = {
+    expiresIn: '24h',
+  };
+
   constructor(
     private readonly usersService: UsersService,
     private readonly jwtService: JwtService,
@@ -18,7 +22,7 @@ export class AuthService {
     return new Promise<any>((resolve, reject) => this.usersService.verifyUser(body)
       .then((user: User) => {
         const jwtPayload: JwtPayload = {username: user.username};
-        resolve({jwt: this.jwtService.sign(jwtPayload)});
+        resolve({jwt: this.jwtService.sign(jwtPayload, this.jwtOptions)});
       }).catch((err) => {
         reject(new UnauthorizedException(err));
       }),

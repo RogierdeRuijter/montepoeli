@@ -1,5 +1,5 @@
 import {Model} from 'mongoose';
-import {Injectable, InternalServerErrorException, UnauthorizedException} from '@nestjs/common';
+import {Injectable, InternalServerErrorException} from '@nestjs/common';
 import {User} from '../interfaces/user.interface';
 import {InjectModel} from '@nestjs/mongoose';
 import {CreateUserDto} from '../dtos/create-user.dto';
@@ -26,7 +26,7 @@ export class UsersService {
   public verifyUser(payload): Promise<User> {
     return new Promise((resolve, reject) => this.userModel.find({username: payload.username}).exec().then((users) => {
       if (users.length === 0) {
-        reject(new UnauthorizedException());
+        reject('user not found');
         return;
       }
 
