@@ -6,6 +6,7 @@
   "pages": {
     "login": {
       "user": "User",
+      "username": "Username",
       "password": "Password",
       "do_login": "Login",
       "login": "Login",
