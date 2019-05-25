@@ -1,6 +1,6 @@
 FROM node:8-alpine AS builder
 
-WORKDIR /app
+WORKDIR /usr/src/app
 
 COPY . .
 
