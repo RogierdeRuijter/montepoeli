@@ -9,7 +9,7 @@ async function bootstrap() {
 
   let origin: boolean | string = true;
 
-  if (process.env.ENV !== 'prod') {
+  if (process.env.ENV === 'prod') {
     origin = 'https://www.montepoeli.club';
   }
 

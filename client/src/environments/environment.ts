@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   AUTHENTICATION: {
-    TOKENNAME: 'session-id',
+    TOKENNAME: 'montepoeli-jwt',
   },
   FRONTEND: {
     TITLE: 'Angular Starter kit',

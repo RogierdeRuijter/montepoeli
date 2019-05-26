@@ -13,6 +13,7 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {FormsModule} from '@angular/forms';
 import {TranslateDirective} from './translate.directive';
 import {HomeComponent} from './home/home.component';
+import {AuthGuard} from './guards/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import {HomeComponent} from './home/home.component';
       provide: LOCALE_ID,
       useValue: 'en-US',
     },
+    AuthGuard,
     // {
     //   provide: HTTP_INTERCEPTORS,
     //   useClass: ErrorInterceptor,

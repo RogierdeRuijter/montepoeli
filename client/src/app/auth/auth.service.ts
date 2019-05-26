@@ -5,6 +5,7 @@ import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 
 import {tap} from 'rxjs/operators';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -16,16 +17,11 @@ export class AuthService {
               private httpClient: HttpClient) {
   }
 
-  isAuthenticated() {
-    const promise = new Promise(
-      (resolve, reject) => {
-        resolve(this.getToken() ? true : false);
-      },
-    );
-    return promise;
+  public isAuthenticated(): boolean {
+    return !!this.getToken();
   }
 
-  login(user: any) {
+  public login(user: any): Observable<any> {
     return this.httpClient.post([
       environment.BACKEND.URL.FULL,
       environment.BACKEND.ENTRY_POINTS.SIGNIN,
@@ -37,35 +33,37 @@ export class AuthService {
       observe: 'response',
     }).pipe(
       tap((data) => {
+        console.log(data.body);
         if (data) {
-          this.setSession(data.headers.get(environment.AUTHENTICATION.TOKENNAME));
+          // @ts-ignore
+          this.setSession(data.body.jwt);
           this.loggedIn = true;
-          this.router.navigate([environment.FRONTEND.BASIC_ROUTES.HOME]);
         }
-      }));
+      }),
+      tap(() => this.router.navigate([environment.FRONTEND.BASIC_ROUTES.HOME])));
   }
 
-  logout() {
+  public logout(): void {
     this.clearSession();
     this.loggedIn = false;
     this.router.navigate([environment.FRONTEND.BASIC_ROUTES.LOGIN_ROUTE]);
   }
 
-  setSession(token: any) {
+  public setSession(token: any): void {
     // expires at - seconds . local storage
     // const expiresAt = moment().add(authResult.expiresIn,'second');
     // localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()) );
     sessionStorage.setItem(environment.AUTHENTICATION.TOKENNAME, token);
   }
 
-  getToken() {
+  public getToken(): string {
     const temp = sessionStorage.getItem(environment.AUTHENTICATION.TOKENNAME);
+
+    console.log(temp ? temp : '');
     return temp ? temp : '';
   }
 
-  clearSession() {
+  public clearSession(): void {
     sessionStorage.removeItem(environment.AUTHENTICATION.TOKENNAME);
   }
-
-
 }

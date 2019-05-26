@@ -35,10 +35,10 @@ export class LoginComponent {
 
       this.isSubmitting = false;
       let errMsg = 'login_error';
-        const title = this.translationService.instant('errors.incorrect_credentials.title');
+        const title = this.translationService.instant('warnings.incorrect_credentials.title');
       if (error && error['error']) {
         if (error.status === 401) {
-          errMsg = this.translationService.instant('errors.incorrect_credentials.body');
+          errMsg = this.translationService.instant('warnings.incorrect_credentials.body');
         }
       }
         this.toastrService.warning(errMsg, title + ':', {

@@ -23,7 +23,7 @@ export class AppController {
   public async signIn(@Body() body, @Res() res: Response, @Next() next): Promise<any> {
     return await this.authService.signIn(body).then(jwt => {
       res.cookie('jwt', jwt.jwt);
-      res.send({authenticated: true});
+      res.send({jwt: jwt.jwt});
     });
   }
 

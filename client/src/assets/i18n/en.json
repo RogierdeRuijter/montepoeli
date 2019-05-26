@@ -40,10 +40,14 @@
     "filter": "Filter",
     "filters": "Filters"
   },
-  "errors": {
+  "warnings": {
     "incorrect_credentials": {
       "title": "Login  Error",
       "body": "Your username or password is incorrect"
+    },
+    "not_authorized": {
+      "title": "Navigation error",
+      "body": "Your not allowed to see this route"
     }
   }
 }
