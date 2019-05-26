@@ -7,9 +7,15 @@ async function bootstrap() {
   app.use(cookieParser());
   app.setGlobalPrefix('api');
 
+  let origin: boolean | string = true;
+
+  if (process.env.ENV !== 'prod') {
+    origin = 'https://www.montepoeli.club';
+  }
+
   app.enableCors({
     credentials: true,
-    origin: true,
+    origin,
   });
 
   await app.listen(3000);
