@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
 import {forkJoin, Observable} from 'rxjs';
-import {AuthService} from '../auth/auth.service';
 import {environment} from '../../environments/environment';
 import {ToastrService} from 'ngx-toastr';
 import {TranslateService} from '@ngx-translate/core';
+import {AuthService} from '../services/auth/auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -20,6 +20,7 @@ export class AuthGuard implements CanActivate {
     if (this.authService.isAuthenticated()) {
       return true;
     }
+
     forkJoin([
       this.translateService.get('warnings.not_authorized.title'),
       this.translateService.get('warnings.not_authorized.body'),
@@ -28,7 +29,7 @@ export class AuthGuard implements CanActivate {
     });
 
 
-    this.router.navigate([environment.FRONTEND.BASIC_ROUTES.LOGIN_ROUTE]);
+    this.router.navigate([environment.FRONTEND.BASIC_ROUTES.LOGIN_ROUTE]).then();
     return false;
   }
 

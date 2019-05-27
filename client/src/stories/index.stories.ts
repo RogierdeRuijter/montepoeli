@@ -1,47 +1,23 @@
 import {storiesOf} from '@storybook/angular';
-import {action} from '@storybook/addon-actions';
-import {linkTo} from '@storybook/addon-links';
-
-import {Button, Welcome} from '@storybook/angular/demo';
-
-storiesOf('Welcome', module).add('to Storybook', () => ({
-  component: Welcome,
-  props: {},
-}));
-
-storiesOf('Another Button', module).add('button with link to another story', () => ({
-  component: Button,
-  props: {
-    text: 'Go to Welcome Story',
-    onClick: linkTo('Welcome'),
-  },
-}));
+import {ButtonComponent} from '../app/components/button/button.component';
+import {ButtonFunction, ButtonType} from '../app/static-files/enums';
+import {MatButtonModule} from '@angular/material';
+import {TranslateDirective} from '../app/directives/translate.directive';
+import {CustomTranslateModule} from '../app/modules/custom-translate.module';
 
 storiesOf('Button', module)
-  .add('with text', () => ({
-    component: Button,
+  .add('Primary button', () => ({
+    component: ButtonComponent,
     props: {
-      text: 'Hello Button',
+      buttonFunction: ButtonFunction.LOGIN,
+      buttonType: ButtonType.PRIMARY,
     },
-  }))
-  .add(
-    'with some emoji',
-    () => ({
-      component: Button,
-      props: {
-        text: '😀 😎 👍 💯',
-      },
-    }),
-    {notes: 'My notes on a button with emojis'},
-  )
-  .add(
-    'with some emoji and action',
-    () => ({
-      component: Button,
-      props: {
-        text: '😀 😎 👍 💯',
-        onClick: action('This was clicked OMG'),
-      },
-    }),
-    {notes: 'My notes on a button with emojis'},
-  );
+    moduleMetadata: {
+      imports: [
+        MatButtonModule,
+        CustomTranslateModule,
+      ],
+      declarations: [TranslateDirective],
+      providers: [],
+    },
+  }));

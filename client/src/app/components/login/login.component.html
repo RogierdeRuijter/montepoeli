@@ -25,9 +25,11 @@
           </mat-placeholder>
         </mat-form-field>
       </div>
-      <button [disabled]="!loginForm.valid || isSubmitting" class="full-width" color="primary" mat-raised-button
-              appTranslate="pages.login.do_login" type="submit">
-      </button>
+
+      <app-button [buttonFunction]="ButtonFunction.LOGIN"
+                  [buttonType]="ButtonTypes.PRIMARY"
+                  [disabled]="!loginForm.valid || isSubmitting">
+      </app-button>
     </form>
   </div>
 </div>

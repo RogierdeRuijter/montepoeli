@@ -23,6 +23,7 @@ services:
       - MONGO_USERNAME=root
       - MONGO_PASSWORD=example
       - SERVER_SECRET=secret01
+      - ENV=dev
     ports:
       - "3000:3000"
     volumes:

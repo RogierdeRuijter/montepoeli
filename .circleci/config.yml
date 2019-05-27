@@ -36,6 +36,14 @@ jobs:
         docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
         docker push $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG
 
+    - run: |
+        cd client
+        STORYBOOK_TAG=0.1
+        IMAGE_STORYBOOK_NAME=montepouli-storybook
+        docker build -f StorybookDockerfile -t $DOMAIN/$IMAGE_STORYBOOK_NAME:$STORYBOOK_TAG .
+        docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
+        docker push $DOMAIN/$IMAGE_STORYBOOK_NAME:$STORYBOOK_TAG
+
 #      # Download and cache dependencies
 #    - restore_cache:
 #        keys:

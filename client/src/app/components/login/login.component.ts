@@ -1,11 +1,12 @@
 import {Component, ViewChild} from '@angular/core';
 
-import {AuthService} from '../auth/auth.service';
 
 import {Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
 import {ToastrService} from 'ngx-toastr';
 import {TranslateService} from '@ngx-translate/core';
+import {ButtonFunction, ButtonType} from '../../static-files/enums';
+import {AuthService} from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,11 @@ export class LoginComponent {
 
   public isSubmitting = false;
 
-  constructor(private router: Router, private authService: AuthService,
+  public ButtonFunction = ButtonFunction;
+  public ButtonTypes = ButtonType;
+
+  constructor(private router: Router,
+              private authService: AuthService,
               private toastrService: ToastrService,
               private translationService: TranslateService) {
   }

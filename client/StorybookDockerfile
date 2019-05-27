@@ -1,0 +1,14 @@
+FROM node:8-alpine AS builder
+
+WORKDIR /usr/src/app
+
+COPY . .
+
+RUN npm install
+RUN npm run build-storybook-web-app
+RUN rm -rf node_modules
+
+FROM nginx:alpine
+
+COPY --from=builder /usr/src/app/.out/ /usr/share/nginx/html/
+COPY --from=builder /usr/src/app/src/assets/ /usr/share/nginx/html/assets/

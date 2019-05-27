@@ -8,7 +8,6 @@ async function bootstrap() {
   app.setGlobalPrefix('api');
 
   let origin: boolean | string = true;
-
   if (process.env.ENV === 'prod') {
     origin = 'https://www.montepoeli.club';
   }

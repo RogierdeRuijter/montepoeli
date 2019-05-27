@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {CatsService} from '../services/cats.service';
+import {CatsService} from '../../services/cats.service';
 
 @Component({
   selector: 'app-home',
