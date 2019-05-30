@@ -56,8 +56,6 @@ export class AuthService {
 
   public getToken(): string {
     const temp = sessionStorage.getItem(environment.AUTHENTICATION.TOKENNAME);
-
-    console.log(temp ? temp : '');
     return temp ? temp : '';
   }
 

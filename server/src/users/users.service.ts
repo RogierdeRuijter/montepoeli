@@ -1,22 +1,14 @@
 import {Model} from 'mongoose';
 import {Injectable, InternalServerErrorException} from '@nestjs/common';
-import {User} from '../interfaces/user.interface';
+import {User} from '../models/interfaces/user.interface';
 import {InjectModel} from '@nestjs/mongoose';
-import {CreateUserDto} from '../dtos/create-user.dto';
-import {JwtPayload} from '../interfaces/jwt-payload.interface';
+import {CreateUserDto} from '../models/create-dtos/create-user.dto';
+import {JwtPayload} from '../models/interfaces/jwt-payload.interface';
 import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UsersService {
   constructor(@InjectModel('User') private readonly userModel: Model<User>) {
-  }
-
-  getHello(): string {
-    return 'Hello World 1!';
-  }
-
-  findOneByToken(token: string): Promise<any> {
-    return new Promise(() => false);
   }
 
   public findByUsername(payload: JwtPayload): Promise<User> {

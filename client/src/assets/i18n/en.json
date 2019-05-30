@@ -17,6 +17,22 @@
       "title": "Sales",
       "chartTitle": "Sales of Samsung & iPhone"
     },
+    "home": {
+      "games": {
+        "labels": {
+          "white": "White",
+          "black": "Black",
+          "winner": "Winner"
+        },
+        "cell": {
+          "winner": {
+            "white": "White",
+            "black": "Black",
+            "draw": "Draw"
+          }
+        }
+      }
+    },
     "users": {
       "menuTitle": "Users",
       "title": "Users",

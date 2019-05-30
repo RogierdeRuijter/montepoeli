@@ -7,6 +7,3 @@ export enum ButtonFunction {
   LOGIN
 }
 
-export enum ButtonStyle {
-  RAISED
-}

@@ -1,7 +1,7 @@
 import {Body, Controller, Get, Post, Req, UseGuards} from '@nestjs/common';
-import {CreateCatDto} from '../dtos/create-cat.dto';
+import {CreateCatDto} from '../models/create-dtos/create-cat.dto';
 import {CatsService} from './cats.service';
-import {Cat} from '../interfaces/cat.interface';
+import {Cat} from '../models/interfaces/cat.interface';
 import {AuthGuard} from '@nestjs/passport';
 
 @Controller('cats')

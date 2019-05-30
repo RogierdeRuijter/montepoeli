@@ -1,10 +1,11 @@
-import {BadRequestException, Body, Controller, Get, Next, Post, Res} from '@nestjs/common';
+import {BadRequestException, Body, Controller, Get, Next, Post, Res, UseGuards} from '@nestjs/common';
 import {AppService} from './app.service';
 import {UsersService} from '../users/users.service';
-import {User} from '../interfaces/user.interface';
+import {User} from '../models/interfaces/user.interface';
 import {AuthService} from '../auth/auth.service';
 import {Response} from 'express';
-import {CreateUserDto} from '../dtos/create-user.dto';
+import {CreateUserDto} from '../models/create-dtos/create-user.dto';
+import {AuthGuard} from '@nestjs/passport';
 
 @Controller()
 export class AppController {
@@ -28,6 +29,7 @@ export class AppController {
   }
 
   @Post('/createUser')
+  @UseGuards(AuthGuard())
   public createUser(@Body() createUserDto: CreateUserDto): Promise<User> {
     const username = createUserDto.username;
     const password = createUserDto.password;

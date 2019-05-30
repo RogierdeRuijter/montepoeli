@@ -11,7 +11,7 @@ export class TranslateDirective implements OnInit {
   public key: string;
 
   @Input()
-  public properties: string | string[] = 'innerHTML';
+  public property = 'innerHTML';
 
   public constructor(private translateService: TranslateService,
                      private elementRef: ElementRef,
@@ -29,7 +29,15 @@ export class TranslateDirective implements OnInit {
   }
 
   private setProperty(translation: string): void {
-    this.renderer.setProperty(this.elementRef.nativeElement, this.properties as string, translation);
+    if (this.noTranslationIsFound(translation)) {
+      translation = '';
+    }
+
+    this.renderer.setProperty(this.elementRef.nativeElement, this.property, translation);
+  }
+
+  private noTranslationIsFound(translation: string): boolean {
+    return translation === this.key;
   }
 
 }

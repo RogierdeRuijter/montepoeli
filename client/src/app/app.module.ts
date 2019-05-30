@@ -15,6 +15,7 @@ import {LoginComponent} from './components/login/login.component';
 import {TranslateDirective} from './directives/translate.directive';
 import {HomeComponent} from './components/home/home.component';
 import {MaterialModule} from './modules/material/material.module';
+import {GameTableComponent} from './components/home/table/game-table.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import {MaterialModule} from './modules/material/material.module';
     TranslateDirective,
     HomeComponent,
     ButtonComponent,
+    GameTableComponent,
   ],
   imports: [
     BrowserModule,

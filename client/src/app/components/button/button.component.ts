@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ButtonFunction, ButtonStyle, ButtonType} from '../../static-files/enums';
+import {ButtonFunction, ButtonType} from '../../static-files/enums';
 
 @Component({
   selector: 'app-button',
@@ -16,9 +16,6 @@ export class ButtonComponent implements OnInit {
 
   @Input()
   public buttonFunction: ButtonFunction;
-
-  @Input()
-  public buttonStyle: ButtonStyle;
 
   public buttonColor: any;
   public translationKey: string;

@@ -45,39 +45,3 @@ jobs:
         docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
         docker push $DOMAIN/$IMAGE_STORYBOOK_NAME:$STORYBOOK_TAG
 
-#      # Download and cache dependencies
-#    - restore_cache:
-#        keys:
-#        - v1-dependencies-{{ checksum "client/package.json" }}
-#
-#    - run: cd client && npm install
-#
-#    - save_cache:
-#        paths:
-#          - client/node_modules
-#        key: v1-dependencies-{{ checksum "client/package.json" }}
-#
-#    - restore_cache:
-#        keys:
-#          - v1-dependencies-{{ checksum "server/package.json" }}
-#
-#    - run: cd server && npm install
-#
-#    - save_cache:
-#        paths:
-#        - server/node_modules
-#        key: v1-dependencies-{{ checksum "server/package.json" }}
-#
-#    # run tests!
-#    - run: cd client && npm test
-#    - run: cd server && npm run pretest && npm test
-#
-#    - setup_remote_docker
-#    - run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-#
-#    - run: docker build . -t montepoeli
-#
-#    - run: docker tag montepoeli tjokvol/montepoeli:bundle
-#
-#    - run: docker push tjokvol/montepoeli:bundle
-
