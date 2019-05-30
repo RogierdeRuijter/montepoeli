@@ -24,6 +24,7 @@ export const environment = {
       STATUS: '/status',
       USERS: '/users',
       CATS: '/cats',
+      GAME: '/game',
     },
   },
 };
