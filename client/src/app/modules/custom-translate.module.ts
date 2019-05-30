@@ -9,7 +9,6 @@ export function HttpLoaderFactory(http: HttpClient) {
 }
 
 @NgModule({
-  declarations: [],
   imports: [
     HttpClientModule,
     TranslateModule.forRoot({
@@ -20,10 +19,11 @@ export function HttpLoaderFactory(http: HttpClient) {
       },
     }),
   ],
+  declarations: [],
   exports: [TranslateModule],
 })
 export class CustomTranslateModule {
-  constructor(translate: TranslateService) {
+  public constructor(translate: TranslateService) {
     translate.setDefaultLang('en');
     translate.use('en');
   }

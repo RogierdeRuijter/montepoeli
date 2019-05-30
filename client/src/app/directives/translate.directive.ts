@@ -1,5 +1,6 @@
 import {Directive, ElementRef, Input, OnInit, Renderer2} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
+import {TranslateUtilService} from '../services/translate-util.service';
 
 @Directive({
   selector: '[appTranslate]',
@@ -7,19 +8,24 @@ import {TranslateService} from '@ngx-translate/core';
 export class TranslateDirective implements OnInit {
 
   @Input('appTranslate')
-  public keys: string | string[];
+  public key: string;
 
   @Input()
   public properties: string | string[] = 'innerHTML';
 
   public constructor(private translateService: TranslateService,
                      private elementRef: ElementRef,
-                     private renderer: Renderer2) {
+                     private renderer: Renderer2,
+                     private translateUtilService: TranslateUtilService) {
   }
 
   public ngOnInit(): void {
-    this.translateService.get(this.keys as string)
-      .subscribe((translation) => this.setProperty(translation));
+    if (this.translateUtilService.isLanguageKey(this.key)) {
+      this.translateService.get(this.key)
+        .subscribe((translation) => this.setProperty(translation));
+    } else {
+      this.setProperty(this.key);
+    }
   }
 
   private setProperty(translation: string): void {

@@ -24,8 +24,12 @@ export class ButtonComponent implements OnInit {
   public translationKey: string;
 
   public ngOnInit(): void {
-    if (this.buttonType === ButtonType.PRIMARY) {
-      this.buttonColor = 'primary';
+    switch (this.buttonType) {
+      case ButtonType.PRIMARY:
+        this.buttonColor = 'primary';
+        break;
+      case ButtonType.SECONDARY:
+        this.buttonColor = 'accent';
     }
 
     if (this.buttonFunction === ButtonFunction.LOGIN) {

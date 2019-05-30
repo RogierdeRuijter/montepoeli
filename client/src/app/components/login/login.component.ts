@@ -15,7 +15,7 @@ import {AuthService} from '../../services/auth/auth.service';
 })
 export class LoginComponent {
 
-  @ViewChild('loginForm')
+  @ViewChild('loginForm', {static: true})
   public currentForm: NgForm;
 
   public isSubmitting = false;

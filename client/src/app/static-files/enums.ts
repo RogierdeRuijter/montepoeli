@@ -1,5 +1,6 @@
 export enum ButtonType {
-  PRIMARY
+  PRIMARY,
+  SECONDARY
 }
 
 export enum ButtonFunction {
