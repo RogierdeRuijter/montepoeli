@@ -1,7 +1,7 @@
 import {storiesOf} from '@storybook/angular';
 import {ButtonComponent} from '../app/components/button/button.component';
 import {ButtonFunction, ButtonType} from '../app/static-files/enums';
-import {MatButtonModule} from '@angular/material';
+import {MatButtonModule} from '@angular/material/button';
 import {TranslateDirective} from '../app/directives/translate.directive';
 import {CustomTranslateModule} from '../app/modules/custom-translate.module';
 
