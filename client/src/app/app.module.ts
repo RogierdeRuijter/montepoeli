@@ -19,6 +19,9 @@ import {GameTableComponent} from './components/home/game-table/game-table.compon
 import {IconComponent} from './components/icon/icon.component';
 import {TableActionComponent} from './components/home/table-action/table-action.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {DialogDataComponent} from './components/home/dialog-data/dialog-data.component';
+import {DialogOverviewComponent} from './components/home/dialog-overview/dialog-overview.component';
+import {MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -30,6 +33,8 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
     GameTableComponent,
     IconComponent,
     TableActionComponent,
+    DialogDataComponent,
+    DialogOverviewComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,6 +60,7 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
       useValue: 'en-US',
     },
     AuthGuard,
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}},
     // {
     //   provide: HTTP_INTERCEPTORS,
     //   useClass: ErrorInterceptor,
@@ -66,7 +72,8 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
     //   multi: true
     // },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [DialogDataComponent],
 })
 export class AppModule { }
 

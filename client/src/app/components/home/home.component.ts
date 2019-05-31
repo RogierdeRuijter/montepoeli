@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor(private gameService: GameService) {
   }
 
+
   public ngOnInit(): void {
 
     this.getGames();
