@@ -1,5 +1,15 @@
 <h1>Montepoeli</h1>
 <div class="container">
-  <ui-game-table [games]="games">
-  </ui-game-table>
+  <div class="row">
+    <div class="col-md-10 col-lg-10">
+      <ui-game-table [games$]="games$">
+      </ui-game-table>
+    </div>
+    <div class="col-md-2 col-lg-2">
+      <ui-table-action (actionClickEvent)="handleActionEvent($event)"
+                       [actions]="actions"
+                       [disabled]="disabled">
+      </ui-table-action>
+    </div>
+  </div>
 </div>

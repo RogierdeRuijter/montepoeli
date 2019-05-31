@@ -1,4 +1,6 @@
-<table [dataSource]="games" class="mat-elevation-z8" mat-table>
+<table [dataSource]="games$"
+       class="mat-elevation-z8"
+       mat-table>
   <ng-container matColumnDef="white">
     <th *matHeaderCellDef appTranslate="pages.home.games.labels.white" mat-header-cell></th>
     <td *matCellDef="let element" mat-cell> {{element.white}} </td>
@@ -6,7 +8,7 @@
 
   <ng-container matColumnDef="winner">
     <th *matHeaderCellDef appTranslate="pages.home.games.labels.winner" mat-header-cell></th>
-    <td *matCellDef="let element" [appTranslate]="'pages.home.games.cell.winner.' + element.winner" mat-cell></td>
+    <td *matCellDef="let element" [appTranslate]="'pages.home.games$.cell.winner.' + element.winner" mat-cell></td>
   </ng-container>
 
   <ng-container matColumnDef="black">

@@ -15,7 +15,10 @@ import {LoginComponent} from './components/login/login.component';
 import {TranslateDirective} from './directives/translate.directive';
 import {HomeComponent} from './components/home/home.component';
 import {MaterialModule} from './modules/material/material.module';
-import {GameTableComponent} from './components/home/table/game-table.component';
+import {GameTableComponent} from './components/home/game-table/game-table.component';
+import {IconComponent} from './components/icon/icon.component';
+import {TableActionComponent} from './components/home/table-action/table-action.component';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -25,6 +28,8 @@ import {GameTableComponent} from './components/home/table/game-table.component';
     HomeComponent,
     ButtonComponent,
     GameTableComponent,
+    IconComponent,
+    TableActionComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,6 +47,7 @@ import {GameTableComponent} from './components/home/table/game-table.component';
     }),
     ToastrModule.forRoot(),
     FormsModule,
+    FontAwesomeModule,
   ],
   providers: [
     {

@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {Game} from '../../../interfaces/game.interface';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'ui-game-table',
@@ -9,7 +10,7 @@ import {Game} from '../../../interfaces/game.interface';
 export class GameTableComponent {
 
   @Input()
-  public games: Game[];
+  public games$: Observable<Game[]>;
 
   public displayedColumns: string[] = ['white', 'winner', 'black'];
 

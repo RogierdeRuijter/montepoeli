@@ -1,11 +1,11 @@
 import {storiesOf} from '@storybook/angular';
 import {TranslateDirective} from '../app/directives/translate.directive';
 import {CustomTranslateModule} from '../app/modules/custom-translate.module';
-import {GameTableComponent} from '../app/components/home/table/game-table.component';
+import {GameTableComponent} from '../app/components/home/game-table/game-table.component';
 import {MatTableModule} from '@angular/material';
 
 storiesOf('GameTable', module)
-  .add('Zero games', () => ({
+  .add('Zero games$', () => ({
     component: GameTableComponent,
     props: {
       games: [],
@@ -18,7 +18,7 @@ storiesOf('GameTable', module)
       declarations: [TranslateDirective],
     },
   }))
-  .add('Two games', () => ({
+  .add('Two games$', () => ({
     component: GameTableComponent,
     props: {
       games: [
@@ -34,7 +34,7 @@ storiesOf('GameTable', module)
       declarations: [TranslateDirective],
     },
   }))
-  .add('Two games with long names', () => ({
+  .add('Two games$ with long names', () => ({
     component: GameTableComponent,
     props: {
       games: [
@@ -50,7 +50,7 @@ storiesOf('GameTable', module)
       declarations: [TranslateDirective],
     },
   }))
-  .add('Two games and unkown winner states', () => ({
+  .add('Two games$ and unkown winner states', () => ({
     component: GameTableComponent,
     props: {
       games: [
@@ -66,7 +66,7 @@ storiesOf('GameTable', module)
       declarations: [TranslateDirective],
     },
   }))
-  .add('Three games', () => ({
+  .add('Three games$', () => ({
     component: GameTableComponent,
     props: {
       games: [
@@ -83,7 +83,7 @@ storiesOf('GameTable', module)
       declarations: [TranslateDirective],
     },
   }))
-  .add('Many games', () => ({
+  .add('Many games$', () => ({
     component: GameTableComponent,
     props: {
       games: [
