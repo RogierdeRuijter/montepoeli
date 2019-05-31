@@ -1,11 +1,35 @@
-<h1 mat-dialog-title>Hi {{data.name}}</h1>
+<h1 mat-dialog-title>Enter a score</h1>
 <div mat-dialog-content>
-  <p>What's your favorite animal?</p>
   <mat-form-field>
-    <input [(ngModel)]="data.animal" matInput>
+    <mat-label appTranslate="pages.home.games.labels.white"></mat-label>
+    <mat-select [(ngModel)]="data.white">
+      <mat-option *ngFor="let user of users" [value]="user.name">
+        {{user.name}}
+      </mat-option>
+    </mat-select>
   </mat-form-field>
+
+  <mat-form-field>
+    <mat-label appTranslate="pages.home.games.labels.winner"></mat-label>
+    <mat-select [(ngModel)]="data.winner">
+      <mat-option *ngFor="let winner of winners" [value]="winner">
+        <span [appTranslate]="'pages.home.games.cell.winner.' + winner"></span>
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label appTranslate="pages.home.games.labels.black"></mat-label>
+    <mat-select [(ngModel)]="data.black">
+      <mat-option *ngFor="let user of users" [value]="user.name">
+        {{user.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
 </div>
 <div mat-dialog-actions>
-  <button (click)="onNoClick()" mat-button>No Thanks</button>
-  <button [mat-dialog-close]="data.animal" cdkFocusInitial mat-button>Ok</button>
+  <!--  TODO: Use button component-->
+  <button (click)="onNoClick()" appTranslate="buttons.cancel" mat-button></button>
+  <button [mat-dialog-close]="data" appTranslate="buttons.save" cdkFocusInitial mat-button></button>
 </div>

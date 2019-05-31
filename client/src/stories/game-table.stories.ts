@@ -3,12 +3,13 @@ import {TranslateDirective} from '../app/directives/translate.directive';
 import {CustomTranslateModule} from '../app/modules/custom-translate.module';
 import {GameTableComponent} from '../app/components/home/game-table/game-table.component';
 import {MatTableModule} from '@angular/material';
+import {of} from 'rxjs';
 
 storiesOf('GameTable', module)
-  .add('Zero games$', () => ({
+  .add('Zero games', () => ({
     component: GameTableComponent,
     props: {
-      games: [],
+      games$: of([]),
     },
     moduleMetadata: {
       imports: [
@@ -18,10 +19,10 @@ storiesOf('GameTable', module)
       declarations: [TranslateDirective],
     },
   }))
-  .add('Two games$', () => ({
+  .add('Two games', () => ({
     component: GameTableComponent,
     props: {
-      games: [
+      games$: [
         {white: 'user 1', black: 'user 2', winner: 'white'},
         {white: 'user 1', black: 'user 2', winner: 'black'},
       ],
@@ -34,13 +35,13 @@ storiesOf('GameTable', module)
       declarations: [TranslateDirective],
     },
   }))
-  .add('Two games$ with long names', () => ({
+  .add('Two games with long names', () => ({
     component: GameTableComponent,
     props: {
-      games: [
+      games$: of([
         {white: 'user user user user user 1', black: 'user user user user user 2', winner: 'white'},
         {white: 'user user user user user 1', black: 'user user user user user 2', winner: 'black'},
-      ],
+      ]),
     },
     moduleMetadata: {
       imports: [
@@ -50,13 +51,13 @@ storiesOf('GameTable', module)
       declarations: [TranslateDirective],
     },
   }))
-  .add('Two games$ and unkown winner states', () => ({
+  .add('Two games and unkown winner states', () => ({
     component: GameTableComponent,
     props: {
-      games: [
+      games$: of([
         {white: 'user 1', black: 'user 2', winner: 'black'},
         {white: 'user 1', black: 'user 2', winner: 'unknown1'},
-      ],
+      ]),
     },
     moduleMetadata: {
       imports: [
@@ -69,11 +70,11 @@ storiesOf('GameTable', module)
   .add('Three games$', () => ({
     component: GameTableComponent,
     props: {
-      games: [
+      games$: of([
         {white: 'user 1', black: 'user 2', winner: 'white'},
         {white: 'user 1', black: 'user 2', winner: 'black'},
         {white: 'useruseruser 1', black: 'useruseruser 2', winner: 'draw'},
-      ],
+      ]),
     },
     moduleMetadata: {
       imports: [
@@ -86,7 +87,7 @@ storiesOf('GameTable', module)
   .add('Many games$', () => ({
     component: GameTableComponent,
     props: {
-      games: [
+      games$: of([
         {white: 'user 1', black: 'user 2', winner: 'white'},
         {white: 'user 1', black: 'user 2', winner: 'black'},
         {white: 'useruseruser 1', black: 'useruseruser 2', winner: 'draw'},
@@ -120,7 +121,7 @@ storiesOf('GameTable', module)
         {white: 'user 1', black: 'user 2', winner: 'white'},
         {white: 'user 1', black: 'user 2', winner: 'black'},
         {white: 'useruseruser 1', black: 'useruseruser 2', winner: 'draw'},
-      ],
+      ]),
     },
     moduleMetadata: {
       imports: [

@@ -22,6 +22,7 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {DialogDataComponent} from './components/home/dialog-data/dialog-data.component';
 import {DialogOverviewComponent} from './components/home/dialog-overview/dialog-overview.component';
 import {MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material';
+import {TitleBarComponent} from './components/title-bar/title-bar.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import {MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material';
     TableActionComponent,
     DialogDataComponent,
     DialogOverviewComponent,
+    TitleBarComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,7 +1,6 @@
-<h1>Montepoeli</h1>
 <div class="container">
   <div class="row">
-    <div class="col-md-10 col-lg-10">
+    <div class="col-md-10 col-lg-10"> <!-- TODO: create bootstrap directive -->
       <ui-game-table [games$]="games$">
       </ui-game-table>
     </div>
@@ -14,4 +13,6 @@
   </div>
 </div>
 
-<app-dialog-overview></app-dialog-overview>
+<app-dialog-overview #addDialog
+                     (addEvent)="handleAddEvent($event)">
+</app-dialog-overview>

@@ -23,3 +23,9 @@ export enum Actions {
   ADD,
   ACCEPT
 }
+
+export enum Winners {
+  WHITE = 'white',
+  BLACK = 'black',
+  DRAW = 'draw'
+}

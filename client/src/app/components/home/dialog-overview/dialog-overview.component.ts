@@ -1,6 +1,7 @@
-import {Component} from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {DialogDataComponent} from '../dialog-data/dialog-data.component';
+import {Game} from '../../../interfaces/game.interface';
 
 @Component({
   selector: 'app-dialog-overview',
@@ -9,21 +10,32 @@ import {DialogDataComponent} from '../dialog-data/dialog-data.component';
 })
 export class DialogOverviewComponent {
 
-  animal: string;
-  name: string;
+  @Output()
+  public addEvent: EventEmitter<Game> = new EventEmitter();
+
+  // TODO: use factory
+  public game: Game = {
+    white: null,
+    winner: null,
+    black: null,
+  };
 
   constructor(public dialog: MatDialog) {
   }
 
-  openDialog(): void {
+  public openDialog(): void {
     const dialogRef = this.dialog.open(DialogDataComponent, {
-      width: '250px',
-      data: {name: this.name, animal: this.animal},
+      width: '800px',
+      data: {
+        white: this.game.white,
+        winner: this.game.winner,
+        black: this.game.black,
+      } as Game,
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result: Game) => {
       console.log('The dialog was closed');
-      this.animal = result;
+      this.addEvent.emit(result);
     });
   }
 

@@ -1,9 +1,10 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Game} from '../../interfaces/game.interface';
 import {GameService} from '../../services/game.service';
 import {HttpResponse} from '@angular/common/http';
 import {Actions} from '../../static-files/enums';
 import {BehaviorSubject} from 'rxjs';
+import {DialogOverviewComponent} from './dialog-overview/dialog-overview.component';
 
 @Component({
   selector: 'app-home',
@@ -17,12 +18,13 @@ export class HomeComponent implements OnInit, OnDestroy {
   public actions: Actions[] = [Actions.ADD];
   public disabled: boolean[];
 
+  @ViewChild('addDialog', {read: DialogOverviewComponent, static: true})
+  public addDialog: DialogOverviewComponent;
+
   constructor(private gameService: GameService) {
   }
 
-
   public ngOnInit(): void {
-
     this.getGames();
   }
 
@@ -32,8 +34,17 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   public handleActionEvent(action: Actions): void {
+    // const games: Game[] = this.games$.getValue();
+    // this.games$.next(games);
+    this.addDialog.openDialog();
+  }
+
+  public handleAddEvent(game: Game): void {
+    console.log(game);
     const games: Game[] = this.games$.getValue();
+    games.unshift(game);
     this.games$.next(games);
+    // TODO: Save in the backend
   }
 
   public ngOnDestroy(): void {
