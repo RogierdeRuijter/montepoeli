@@ -25,6 +25,7 @@ import {MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material';
 import {TitleBarComponent} from './components/title-bar/title-bar.component';
 import {NgxSkeletonLoaderModule} from 'ngx-skeleton-loader';
 import {GameTableLoaderComponent} from './components/home/loader/game-table-loader/game-table-loader.component';
+import {CookieService} from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import {GameTableLoaderComponent} from './components/home/loader/game-table-load
     FormsModule,
     FontAwesomeModule,
     NgxSkeletonLoaderModule,
+
   ],
   providers: [
     {
@@ -67,6 +69,7 @@ import {GameTableLoaderComponent} from './components/home/loader/game-table-load
     },
     AuthGuard,
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}},
+    CookieService,
     // {
     //   provide: HTTP_INTERCEPTORS,
     //   useClass: ErrorInterceptor,

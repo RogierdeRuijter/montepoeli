@@ -8,6 +8,7 @@ import {DialogOverviewComponent} from './dialog-overview/dialog-overview.compone
 import {LoadingStore} from '../../stores/loading.store';
 import {takeUntil} from 'rxjs/operators';
 import {LoadingGamesFactory} from '../../factories/loading-games.factory';
+import {HomeService} from '../../services/home.service';
 
 @Component({
   selector: 'app-home',
@@ -27,11 +28,12 @@ export class HomeComponent implements OnInit, OnDestroy {
   public displayedColumns: string[] = ['white', 'winner', 'black'];
 
   public loading: boolean;
-  public loadingGames: any[] = new LoadingGamesFactory().create(3);
+  public loadingGames: any[] = new LoadingGamesFactory().create(this.homeService.getAmountOfLoadingGames());
   public observerStopper: Subject<void> = new Subject();
 
   constructor(private gameService: GameService,
-              private loadingStore: LoadingStore) {
+              private loadingStore: LoadingStore,
+              private homeService: HomeService) {
   }
 
   public ngOnInit(): void {
@@ -49,10 +51,16 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   public getGames(): void {
     this.gameService.getGames()
-      .subscribe((gamesResponse: HttpResponse<Game[]>) => {
-        this.games$.next(gamesResponse.body);
+      .subscribe((gamesResponse: HttpResponse<Game[]>) => { // TODO: create interceptor to strip body
+        const games: Game[] = gamesResponse.body;
+        this.games$.next(games);
+        this.setAmountOfLoadingGamesInCookie(games);
         this.stopLoading();
       });
+  }
+
+  private setAmountOfLoadingGamesInCookie(games: Game[]): void {
+    this.homeService.setAmountOfLoadingGamesInCookie(games);
   }
 
   private stopLoading(): void {
