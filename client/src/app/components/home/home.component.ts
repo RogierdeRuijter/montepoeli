@@ -79,6 +79,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     games.unshift(game);
     this.games$.next(games);
     // TODO: Save in the backend
+    // TODO: fix issues with this
   }
 
   public ngOnDestroy(): void {
