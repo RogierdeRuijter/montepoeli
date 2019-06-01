@@ -23,6 +23,8 @@ import {DialogDataComponent} from './components/home/dialog-data/dialog-data.com
 import {DialogOverviewComponent} from './components/home/dialog-overview/dialog-overview.component';
 import {MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material';
 import {TitleBarComponent} from './components/title-bar/title-bar.component';
+import {NgxSkeletonLoaderModule} from 'ngx-skeleton-loader';
+import {GameTableLoaderComponent} from './components/home/loader/game-table-loader/game-table-loader.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,7 @@ import {TitleBarComponent} from './components/title-bar/title-bar.component';
     DialogDataComponent,
     DialogOverviewComponent,
     TitleBarComponent,
+    GameTableLoaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,6 +58,7 @@ import {TitleBarComponent} from './components/title-bar/title-bar.component';
     ToastrModule.forRoot(),
     FormsModule,
     FontAwesomeModule,
+    NgxSkeletonLoaderModule,
   ],
   providers: [
     {

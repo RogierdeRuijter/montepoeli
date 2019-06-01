@@ -12,7 +12,8 @@ export class GameTableComponent {
   @Input()
   public games$: Observable<Game[]>;
 
-  public displayedColumns: string[] = ['white', 'winner', 'black'];
+  @Input()
+  public displayedColumns: string[];
 
   constructor() {
   }

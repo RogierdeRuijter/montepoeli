@@ -3,8 +3,11 @@ import {Game} from '../../interfaces/game.interface';
 import {GameService} from '../../services/game.service';
 import {HttpResponse} from '@angular/common/http';
 import {Actions} from '../../static-files/enums';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, Subject} from 'rxjs';
 import {DialogOverviewComponent} from './dialog-overview/dialog-overview.component';
+import {LoadingStore} from '../../stores/loading.store';
+import {takeUntil} from 'rxjs/operators';
+import {LoadingGamesFactory} from '../../factories/loading-games.factory';
 
 @Component({
   selector: 'app-home',
@@ -21,21 +24,44 @@ export class HomeComponent implements OnInit, OnDestroy {
   @ViewChild('addDialog', {read: DialogOverviewComponent, static: true})
   public addDialog: DialogOverviewComponent;
 
-  constructor(private gameService: GameService) {
+  public displayedColumns: string[] = ['white', 'winner', 'black'];
+
+  public loading: boolean;
+  public loadingGames: any[] = new LoadingGamesFactory().create(3);
+  public observerStopper: Subject<void> = new Subject();
+
+  constructor(private gameService: GameService,
+              private loadingStore: LoadingStore) {
   }
 
   public ngOnInit(): void {
     this.getGames();
+
+    this.loadingStore.get()
+      .pipe(
+        takeUntil(this.observerStopper),
+      ).subscribe((loading: boolean) => {
+      if (loading === true || loading === false) {
+        this.loading = loading;
+      }
+    });
   }
 
   public getGames(): void {
     this.gameService.getGames()
-      .subscribe((gamesResponse: HttpResponse<Game[]>) => this.games$.next(gamesResponse.body));
+      .subscribe((gamesResponse: HttpResponse<Game[]>) => {
+        this.games$.next(gamesResponse.body);
+        this.stopLoading();
+      });
+  }
+
+  private stopLoading(): void {
+    this.loadingStore.set(false);
+    this.observerStopper.next();
+    this.loading = false;
   }
 
   public handleActionEvent(action: Actions): void {
-    // const games: Game[] = this.games$.getValue();
-    // this.games$.next(games);
     this.addDialog.openDialog();
   }
 
