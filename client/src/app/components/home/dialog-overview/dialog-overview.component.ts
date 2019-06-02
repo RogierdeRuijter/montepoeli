@@ -2,6 +2,7 @@ import {Component, EventEmitter, Output} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {DialogDataComponent} from '../dialog-data/dialog-data.component';
 import {Game} from '../../../interfaces/game.interface';
+import {GameFactory} from '../../../factories/game.factory';
 
 @Component({
   selector: 'app-dialog-overview',
@@ -13,12 +14,7 @@ export class DialogOverviewComponent {
   @Output()
   public addEvent: EventEmitter<Game> = new EventEmitter();
 
-  // TODO: use factory
-  public game: Game = {
-    white: null,
-    winner: null,
-    black: null,
-  };
+  public game: Game = new GameFactory().create();
 
   constructor(public dialog: MatDialog) {
   }

@@ -4,7 +4,9 @@ export enum ButtonType {
 }
 
 export enum ButtonFunction {
-  LOGIN
+  LOGIN,
+  CANCEL,
+  SAVE
 }
 
 export enum Icons {
@@ -28,4 +30,9 @@ export enum Winners {
   WHITE = 'white',
   BLACK = 'black',
   DRAW = 'draw'
+}
+
+export enum GridSizes {
+  MEDIUM,
+  LARGE
 }

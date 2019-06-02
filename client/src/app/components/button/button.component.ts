@@ -1,5 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ButtonFunction, ButtonType} from '../../static-files/enums';
+import {UnknownCaseException} from '../../exceptions/UnknownCaseException';
 
 @Component({
   selector: 'app-button',
@@ -17,6 +18,12 @@ export class ButtonComponent implements OnInit {
   @Input()
   public buttonFunction: ButtonFunction;
 
+  @Input()
+  public dialogDataToSubmit: any;
+
+  @Output()
+  public clickEvent: EventEmitter<void> = new EventEmitter();
+
   public buttonColor: any;
   public translationKey: string;
 
@@ -29,8 +36,22 @@ export class ButtonComponent implements OnInit {
         this.buttonColor = 'accent';
     }
 
-    if (this.buttonFunction === ButtonFunction.LOGIN) {
-      this.translationKey = 'pages.login.do_login';
+    switch (this.buttonFunction) {
+      case ButtonFunction.LOGIN:
+        this.translationKey = 'pages.login.do_login';
+        break;
+      case ButtonFunction.CANCEL:
+        this.translationKey = 'buttons.cancel';
+        break;
+      case ButtonFunction.SAVE:
+        this.translationKey = 'buttons.save';
+        break;
+      default:
+        throw new UnknownCaseException(this.buttonFunction);
     }
+  }
+
+  public click(): void {
+    this.clickEvent.emit();
   }
 }

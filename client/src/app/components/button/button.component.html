@@ -1,6 +1,19 @@
-<button [appTranslate]="translationKey"
+<button (click)="click()"
+        *ngIf="!dialogDataToSubmit"
+        [appTranslate]="translationKey"
         [color]="buttonColor"
         [disabled]="disabled"
+        class="full-width"
+        mat-raised-button
+        type="submit">
+</button>
+
+<button (click)="click()"
+        *ngIf="dialogDataToSubmit"
+        [color]="buttonColor"
+        [disabled]="disabled"
+        [appTranslate]="translationKey"
+        [mat-dialog-close]="dialogDataToSubmit"
         class="full-width"
         mat-raised-button
         type="submit">

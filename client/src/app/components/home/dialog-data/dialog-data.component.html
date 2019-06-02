@@ -29,7 +29,19 @@
 
 </div>
 <div mat-dialog-actions>
-  <!--  TODO: Use button component-->
-  <button (click)="onNoClick()" appTranslate="buttons.cancel" mat-button></button>
-  <button [mat-dialog-close]="data" appTranslate="buttons.save" cdkFocusInitial mat-button></button>
+  <app-button (clickEvent)="onNoClick()"
+              [buttonFunction]="ButtonFunction.CANCEL"
+              [buttonType]="ButtonType.PRIMARY">
+  </app-button>
+
+  <app-button (clickEvent)="onNoClick()"
+              [buttonFunction]="ButtonFunction.SAVE"
+              [buttonType]="ButtonType.PRIMARY"
+              [dialogDataToSubmit]="data">
+  </app-button>
+
+  <!--  TODO: find out about focus initial on the button-->
+  <!--  <button appTranslate="buttons.save"-->
+  <!--          cdkFocusInitial-->
+  <!--          mat-button></button>-->
 </div>

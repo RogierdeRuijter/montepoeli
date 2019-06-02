@@ -1,5 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Actions, Icons} from '../../../static-files/enums';
+import {IllegalInputException} from '../../../exceptions/IllegalInputException';
+import {UnknownCaseException} from '../../../exceptions/UnknownCaseException';
 
 @Component({
   selector: 'ui-table-action',
@@ -21,7 +23,7 @@ export class TableActionComponent implements OnInit {
 
   public ngOnInit(): void {
     if (this.disabled && this.disabled.length !== this.actions.length) {
-      throw new Error('should be the same length'); // TODO: make specific error
+      throw new IllegalInputException('disabled and actions should be the same length');
     }
 
     this.actions.forEach((action: Actions, index) => this.iconsMap[action] = {
@@ -40,7 +42,8 @@ export class TableActionComponent implements OnInit {
         return Icons.PLUS;
       case Actions.ACCEPT:
         return Icons.CHECK;
-      // default: throw new UnknownCaseException();
+      default:
+        throw new UnknownCaseException(action);
     }
   }
 

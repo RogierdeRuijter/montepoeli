@@ -2,14 +2,15 @@ import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Game} from '../../interfaces/game.interface';
 import {GameService} from '../../services/game.service';
 import {HttpResponse} from '@angular/common/http';
-import {Actions} from '../../static-files/enums';
+import {Actions, GridSizes} from '../../static-files/enums';
 import {BehaviorSubject, Subject} from 'rxjs';
 import {DialogOverviewComponent} from './dialog-overview/dialog-overview.component';
 import {LoadingStore} from '../../stores/loading.store';
 import {takeUntil} from 'rxjs/operators';
-import {LoadingGamesFactory} from '../../factories/loading-games.factory';
+import {LoadingGameFactory} from '../../factories/loading-game.factory';
 import {HomeService} from '../../services/home.service';
 
+// TODO: refactor to smart component
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -28,8 +29,10 @@ export class HomeComponent implements OnInit, OnDestroy {
   public displayedColumns: string[] = ['white', 'winner', 'black'];
 
   public loading: boolean;
-  public loadingGames: any[] = new LoadingGamesFactory().create(this.homeService.getAmountOfLoadingGames());
+  public loadingGames: any[] = new LoadingGameFactory().createMany(this.homeService.getAmountOfLoadingGames());
   public observerStopper: Subject<void> = new Subject();
+  public GridSizes = GridSizes;
+
 
   constructor(private gameService: GameService,
               private loadingStore: LoadingStore,
@@ -37,6 +40,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
+
+    console.log(this.loadingGames);
     this.getGames();
 
     this.loadingStore.get()
@@ -50,6 +55,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   public getGames(): void {
+    // TODO: get all users
+
     this.gameService.getGames()
       .subscribe((gamesResponse: HttpResponse<Game[]>) => { // TODO: create interceptor to strip body
         const games: Game[] = gamesResponse.body;

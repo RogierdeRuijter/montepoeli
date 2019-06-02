@@ -26,6 +26,8 @@ import {TitleBarComponent} from './components/title-bar/title-bar.component';
 import {NgxSkeletonLoaderModule} from 'ngx-skeleton-loader';
 import {GameTableLoaderComponent} from './components/home/loader/game-table-loader/game-table-loader.component';
 import {CookieService} from 'ngx-cookie-service';
+import {BootstrapColumnDirective} from './directives/bootstrap-column.directive';
+import {BootstrapRowDirective} from './directives/bootstrap-row.directive';
 
 @NgModule({
   declarations: [
@@ -41,6 +43,8 @@ import {CookieService} from 'ngx-cookie-service';
     DialogOverviewComponent,
     TitleBarComponent,
     GameTableLoaderComponent,
+    BootstrapColumnDirective,
+    BootstrapRowDirective,
   ],
   imports: [
     BrowserModule,

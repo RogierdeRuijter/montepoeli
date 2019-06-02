@@ -1,7 +1,7 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {User} from '../../../interfaces/user.interface';
-import {Winners} from '../../../static-files/enums';
+import {ButtonFunction, ButtonType, Winners} from '../../../static-files/enums';
 import {Game} from '../../../interfaces/game.interface';
 
 @Component({
@@ -16,6 +16,8 @@ export class DialogDataComponent {
 
   // TODO: save winners somehwere else
   public winners: Winners[] = [Winners.WHITE, Winners.BLACK, Winners.DRAW];
+  public ButtonType = ButtonType;
+  public ButtonFunction = ButtonFunction;
 
   constructor(
     public dialogRef: MatDialogRef<DialogDataComponent>,
