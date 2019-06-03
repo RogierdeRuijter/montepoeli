@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
-import {Observable, timer} from 'rxjs';
+import {Observable} from 'rxjs';
 import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {Game} from '../interfaces/game.interface';
-import {LoadingStore} from '../stores/loading.store';
+import {LoadingService} from './loading.service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +11,7 @@ import {LoadingStore} from '../stores/loading.store';
 export class GameService {
 
   public constructor(private httpClient: HttpClient,
-                     private loadingStore: LoadingStore) {
+                     private loadingService: LoadingService) {
   }
 
   public getGames(): Observable<HttpResponse<Game[]>> {
@@ -21,8 +21,7 @@ export class GameService {
       observe: 'response' as 'response',
     };
 
-    // TODO: create a service for activating the loader
-    timer(250).subscribe(() => this.loadingStore.set(true));
+    this.loadingService.activateDelayedLoading();
 
     return this.httpClient.get<Game[]>(environment.BACKEND.URL.FULL + environment.BACKEND.ENTRY_POINTS.GAME, httpOptions);
   }

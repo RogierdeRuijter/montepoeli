@@ -14,7 +14,4 @@ export class GameTableComponent {
 
   @Input()
   public displayedColumns: string[];
-
-  constructor() {
-  }
 }
