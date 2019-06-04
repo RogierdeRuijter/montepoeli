@@ -14,16 +14,19 @@ export class GameService {
 
   public getGames(): Promise<GameDto[]> {
     return new Promise<GameDto[]>(resolve => {
-      this.gameModel.find().exec().then((games: Game[]) =>
-        this.gameMapper.convertGames(games).then((gameDtos: GameDto[]) => resolve(gameDtos)),
+      this.gameModel.find().exec().then((games: Game[]) => {
+          // TODO: refactor this to a sort service
+          games = games.sort((n1, n2) => n2.date.getTime() - n1.date.getTime());
+          this.gameMapper.convertGames(games).then((gameDtos: GameDto[]) => resolve(gameDtos));
+        },
       );
     });
   }
 
   public create(createGameDto: CreateGameDto): Promise<Game> {
     if (this.validDto(createGameDto)) {
-      const createdGame = new this.gameModel(createGameDto);
-      return createdGame.save();
+      return this.gameMapper.convertCreateDto(createGameDto)
+        .then((game: Game) => new this.gameModel(game).save());
     }
   }
 

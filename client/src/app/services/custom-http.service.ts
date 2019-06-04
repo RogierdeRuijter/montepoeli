@@ -13,16 +13,23 @@ export class CustomHttpService {
               private loadingService: LoadingService) {
   }
 
-  public get<T>(url: string): Observable<T> {
-    const httpOptions = {
-      headers: new HttpHeaders({'Content-Type': 'application/json'}),
-      withCredentials: true,
-      observe: 'response' as 'response',
-    };
+  public httpOptions = {
+    headers: new HttpHeaders({'Content-Type': 'application/json'}),
+    withCredentials: true,
+    observe: 'response' as 'response',
+  };
 
+  public get<T>(url: string): Observable<T> {
     this.loadingService.activateDelayedLoading();
 
-    return this.httpClient.get<T>(url, httpOptions)
+    return this.httpClient.get<T>(url, this.httpOptions)
+      .pipe(
+        map((httpResponse: HttpResponse<T>) => httpResponse.body),
+      );
+  }
+
+  public post<T>(url: string, body: T): Observable<T> {
+    return this.httpClient.post<T>(url, body, this.httpOptions)
       .pipe(
         map((httpResponse: HttpResponse<T>) => httpResponse.body),
       );

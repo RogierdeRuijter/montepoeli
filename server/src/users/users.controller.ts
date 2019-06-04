@@ -5,7 +5,7 @@ import {CreateUserDto} from '../models/create-dtos/create-user.dto';
 import {AuthGuard} from '@nestjs/passport';
 
 @Controller('/users')
-export class AppController {
+export class UsersController {
   constructor(private readonly usersService: UsersService) {
   }
 

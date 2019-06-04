@@ -1,7 +1,6 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Game} from '../../interfaces/game.interface';
 import {GameService} from '../../services/game.service';
-import {HttpResponse} from '@angular/common/http';
 import {Actions, GridSizes} from '../../static-files/enums';
 import {BehaviorSubject, Subject} from 'rxjs';
 import {DialogOverviewComponent} from './dialog-overview/dialog-overview.component';
@@ -9,6 +8,9 @@ import {LoadingStore} from '../../stores/loading.store';
 import {takeUntil} from 'rxjs/operators';
 import {LoadingGameFactory} from '../../factories/loading-game.factory';
 import {HomeService} from '../../services/home.service';
+import {UserService} from '../../services/user.service';
+import {User} from '../../interfaces/user.interface';
+import {UserStore} from '../../stores/user.store';
 
 // TODO: refactor to smart component
 @Component({
@@ -18,13 +20,13 @@ import {HomeService} from '../../services/home.service';
 })
 export class HomeComponent implements OnInit, OnDestroy {
 
-  public games$: BehaviorSubject<Game[]> = new BehaviorSubject(null);
-
-  public actions: Actions[] = [Actions.ADD];
-  public disabled: boolean[];
-
   @ViewChild('addDialog', {read: DialogOverviewComponent, static: true})
   public addDialog: DialogOverviewComponent;
+
+  public games$: BehaviorSubject<Game[]> = new BehaviorSubject(null);
+  public users: User[];
+  public actions: Actions[] = [Actions.ADD];
+  public disabled: boolean[];
 
   public displayedColumns: string[] = ['white', 'winner', 'black'];
 
@@ -33,15 +35,19 @@ export class HomeComponent implements OnInit, OnDestroy {
   public observerStopper: Subject<void> = new Subject();
   public GridSizes = GridSizes;
 
-
   constructor(private gameService: GameService,
               private loadingStore: LoadingStore,
-              private homeService: HomeService) {
+              private homeService: HomeService,
+              private userService: UserService,
+              private userStore: UserStore) {
   }
 
   public ngOnInit(): void {
+    this.userService.getUsers().subscribe((users: User[]) => {
+      this.users = users;
+      this.userStore.set(users);
+    });
 
-    console.log(this.loadingGames);
     this.getGames();
 
     this.loadingStore.get()
@@ -55,11 +61,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   public getGames(): void {
-    // TODO: get all users
-
     this.gameService.getGames()
-      .subscribe((gamesResponse: HttpResponse<Game[]>) => { // TODO: create interceptor to strip body
-        const games: Game[] = gamesResponse.body;
+      .subscribe((games: Game[]) => {
+        console.log(games);
         this.games$.next(games);
         this.setAmountOfLoadingGamesInCookie(games);
         this.stopLoading();
@@ -81,11 +85,12 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   public handleAddEvent(game: Game): void {
-    console.log(game);
     const games: Game[] = this.games$.getValue();
     games.unshift(game);
     this.games$.next(games);
-    // TODO: Save in the backend
+
+    // TODO: handle error response
+    this.gameService.saveGame(game).subscribe((res) => console.log(res));
     // TODO: fix issues with this
   }
 

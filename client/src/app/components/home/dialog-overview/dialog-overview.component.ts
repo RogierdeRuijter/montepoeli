@@ -30,7 +30,7 @@ export class DialogOverviewComponent {
     });
 
     dialogRef.afterClosed().subscribe((result: Game) => {
-      console.log('The dialog was closed');
+      console.log(result);
       this.addEvent.emit(result);
     });
   }

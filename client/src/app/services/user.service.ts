@@ -7,7 +7,7 @@ import {CustomHttpService} from './custom-http.service';
 @Injectable({
   providedIn: 'root',
 })
-export class UsersService {
+export class UserService {
 
   constructor(private customHttpService: CustomHttpService) {
   }
