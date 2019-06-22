@@ -72,6 +72,8 @@ export class SharedModule {
       : (navigator.language || navigator['userLanguage']);
     lang = lang.substring(0, 2);
 
+    console.log(lang);
+
     this.useLanguage(lang);
   }
 

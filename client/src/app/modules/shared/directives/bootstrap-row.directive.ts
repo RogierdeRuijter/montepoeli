@@ -42,6 +42,10 @@ export class BootstrapRowDirective implements OnInit {
     if (this.alignment === Alignments.RIGHT) {
       return 'justify-content-end';
     }
+
+    if (this.alignment === Alignments.CENTER) {
+      return 'justify-content-center';
+    }
   }
 
 }
