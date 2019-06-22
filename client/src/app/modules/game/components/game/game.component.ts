@@ -80,7 +80,10 @@ export class GameComponent implements OnInit, OnDestroy {
 
     this.gameService.saveGame(game)
       .subscribe(
-        () => this.removeAddedGame(game));
+        () => {
+        },
+        () => this.removeAddedGame(game),
+      );
   }
 
   public ngOnDestroy(): void {
