@@ -7,4 +7,6 @@ function loadStories() {
   req.keys().forEach(filename => req(filename));
 }
 
+// addParameters({ viewport: { viewports: newViewports } });
+
 configure(loadStories, module);

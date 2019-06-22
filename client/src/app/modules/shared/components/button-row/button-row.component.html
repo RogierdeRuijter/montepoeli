@@ -1,0 +1,17 @@
+<div *ngIf="buttonRowType === ButtonRowType.TWO">
+  <div [appBootstrapRow]="[GridSizes.EXTRA_SMALL, GridSizes.SMALL, GridSizes.MEDIUM, GridSizes.LARGE]">
+    <div [appBootstrapColumn]="[1, 1, 1, 1]">
+      <app-button [buttonFunction]="buttonFunctions[0]"
+                  [buttonType]="buttonTypes[0]">
+      </app-button>
+    </div>
+
+    <div [appBootstrapColumn]="[1, 1, 1, 1]">
+      <app-button [buttonFunction]="buttonFunctions[0]"
+                  [buttonType]="buttonTypes[0]"
+                  [disabled]="disabled">
+      </app-button>
+    </div>
+
+  </div>
+</div>

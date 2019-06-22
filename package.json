@@ -2,7 +2,6 @@
   "name": "montepouli",
   "version": "0.1.0",
   "scripts": {
-    "install": "npm run install-server",
     "install-client": "cd client && npm i",
     "install-server": "cd server && npm i",
     "build": "npm run build-server",
@@ -12,5 +11,14 @@
     "docker-compose-rebuild": "docker-compose build && docker-compose down && docker-compose up -d",
     "docker-compose-rebuild-no-cache": "docker-compose build --no-cache && docker-compose down && docker-compose up -d",
     "docker:storybook": "start-storybook -p 65200 --ci"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "cd client && npm run lint && cd ../server && npm run lint",
+      "pre-push": "cd client && npm run build"
+    }
+  },
+  "devDependencies": {
+    "husky": "2.3.0"
   }
 }

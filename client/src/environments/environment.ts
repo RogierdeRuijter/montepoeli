@@ -29,6 +29,7 @@ export const environment = {
       USERS: '/users',
       CATS: '/cats',
       GAME: '/game',
+      CREATE: '/create',
     },
   },
 };

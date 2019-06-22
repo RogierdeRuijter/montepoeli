@@ -6,12 +6,14 @@ import {AuthModule} from '../auth/auth.module';
 import {GameSchema} from '../schemas/game.schema';
 import {UserSchema} from '../schemas/user.schema';
 import {GameMapper} from './game.mapper';
+import {SharedModule} from '../shared/shared.module';
 
 @Module({
   imports: [
     MongooseModule.forFeature([{name: 'Game', schema: GameSchema}]),
     MongooseModule.forFeature([{name: 'User', schema: UserSchema}]),
     AuthModule,
+    SharedModule,
   ],
   providers: [GameService, GameMapper],
   controllers: [GameController],

@@ -31,7 +31,6 @@ export class AuthService {
       observe: 'response',
     }).pipe(
       tap((data) => {
-        console.log(data.body);
         if (data) {
           // @ts-ignore
           this.setSession(data.body.jwt);

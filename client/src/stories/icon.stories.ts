@@ -1,8 +1,8 @@
 import {storiesOf} from '@storybook/angular';
-import {Icons, IconSize} from '../app/static-files/enums';
-import {TranslateDirective} from '../app/directives/translate.directive';
+import {Icons, IconSize} from '../app/modules/shared/static-files/enums';
+import {TranslateDirective} from '../app/modules/shared/directives/translate.directive';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-import {IconComponent} from '../app/components/icon/icon.component';
+import {IconComponent} from '../app/modules/shared/components/icon/icon.component';
 
 storiesOf('Icons', module)
   .add('Check no size', () => ({

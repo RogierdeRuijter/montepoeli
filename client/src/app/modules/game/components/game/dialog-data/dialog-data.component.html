@@ -1,0 +1,45 @@
+<h1 appTranslate="pages.home.games.pop-up.title" mat-dialog-title>Enter a score</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-label appTranslate="pages.home.games.labels.white"></mat-label>
+    <mat-select [(ngModel)]="data.white">
+      <mat-option *ngFor="let user of determineAvailableUsersForSelect('white')" [value]="user.name">
+        {{user.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label appTranslate="pages.home.games.labels.winner"></mat-label>
+    <mat-select [(ngModel)]="data.winner">
+      <mat-option *ngFor="let winner of winners" [value]="winner">
+        <span [appTranslate]="'pages.home.games.cell.winner.' + winner"></span>
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label appTranslate="pages.home.games.labels.black"></mat-label>
+    <mat-select [(ngModel)]="data.black">
+      <mat-option *ngFor="let user of determineAvailableUsersForSelect('black')" [value]="user.name">
+        {{user.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<div [alignment]="Alignments.RIGHT"
+     [appBootstrapRow]="[GridSizes.EXTRA_SMALL, GridSizes.SMALL, GridSizes.MEDIUM, GridSizes.LARGE]" mat-dialog-actions>
+  <!-- TODO: app-button-row -->
+  <app-button (clickEvent)="onNoClick()"
+              [appBootstrapColumn]="[2, 2, 2, 2]"
+              [buttonFunction]="ButtonFunction.CANCEL"
+              [buttonType]="ButtonType.PRIMARY">
+  </app-button>
+
+  <app-button [appBootstrapColumn]="[2, 2, 2, 2]"
+              [buttonFunction]="ButtonFunction.SAVE"
+              [disabled]="ifAllFieldsAreNotField()"
+              [buttonType]="ButtonType.PRIMARY"
+              [dialogDataToSubmit]="data">
+  </app-button>
+</div>

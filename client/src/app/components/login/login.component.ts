@@ -3,10 +3,10 @@ import {Component, ViewChild} from '@angular/core';
 
 import {Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
-import {ToastrService} from 'ngx-toastr';
 import {TranslateService} from '@ngx-translate/core';
-import {ButtonFunction, ButtonType} from '../../static-files/enums';
+import {ButtonFunction, ButtonType} from '../../modules/shared/static-files/enums';
 import {AuthService} from '../../services/auth/auth.service';
+import {NotificationService} from '../../modules/shared/services/notification/notification.service';
 
 @Component({
   selector: 'app-login',
@@ -25,7 +25,7 @@ export class LoginComponent {
 
   constructor(private router: Router,
               private authService: AuthService,
-              private toastrService: ToastrService,
+              private notificationService: NotificationService,
               private translationService: TranslateService) {
   }
 
@@ -46,9 +46,7 @@ export class LoginComponent {
           errMsg = this.translationService.instant('warnings.incorrect_credentials.body');
         }
       }
-        this.toastrService.warning(errMsg, title + ':', {
-        timeOut: 3000,
-      });
+        this.notificationService.longWarning(errMsg, title + ':');
     });
   }
 

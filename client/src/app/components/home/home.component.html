@@ -1,24 +1,2 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-10 col-lg-10"> <!-- TODO: create bootstrap directive -->
-      <ui-game-table *ngIf="!loading"
-                     [displayedColumns]="displayedColumns"
-                     [games$]="games$">
-      </ui-game-table>
-      <app-game-table-loader *ngIf="loading"
-                             [displayedColumns]="displayedColumns"
-                             [games]="loadingGames">
-      </app-game-table-loader>
-    </div>
-    <div class="col-md-2 col-lg-2">
-      <ui-table-action (actionClickEvent)="handleActionEvent($event)"
-                       [actions]="actions"
-                       [disabled]="disabled">
-      </ui-table-action>
-    </div>
-  </div>
-</div>
-
-<app-dialog-overview #addDialog
-                     (addEvent)="handleAddEvent($event)">
-</app-dialog-overview>
+<app-title-bar></app-title-bar>
+<router-outlet></router-outlet>

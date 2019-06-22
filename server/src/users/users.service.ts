@@ -5,10 +5,13 @@ import {InjectModel} from '@nestjs/mongoose';
 import {CreateUserDto} from '../models/create-dtos/create-user.dto';
 import {JwtPayload} from '../models/interfaces/jwt-payload.interface';
 import * as bcrypt from 'bcrypt';
+import {UserDto} from '../models/dtos/user.dto';
+import {UserMapper} from './user.mapper';
 
 @Injectable()
 export class UsersService {
-  constructor(@InjectModel('User') private readonly userModel: Model<User>) {
+  constructor(@InjectModel('User') private readonly userModel: Model<User>,
+              private readonly userMapper: UserMapper) {
   }
 
   public findByUsername(payload: JwtPayload): Promise<User> {
@@ -45,5 +48,12 @@ export class UsersService {
       const createdUser = new this.userModel(createUserDto);
       resolve(createdUser.save());
     }));
+  }
+
+  public getAllUsers(): Promise<UserDto[]> {
+    return new Promise<UserDto[]>(resolve => {
+      this.userModel.find().exec().then((users: User[]) =>
+        resolve(this.userMapper.convertUsers(users)));
+    });
   }
 }
