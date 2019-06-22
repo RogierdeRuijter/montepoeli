@@ -19,6 +19,9 @@
     },
     "home": {
       "games": {
+        "pop-up": {
+          "title": "Enter a score"
+        },
         "labels": {
           "white": "White",
           "black": "Black",

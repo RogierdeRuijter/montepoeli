@@ -1,9 +1,10 @@
 import {storiesOf} from '@storybook/angular';
-import {ButtonComponent} from '../app/components/button/button.component';
-import {ButtonFunction, ButtonType} from '../app/static-files/enums';
+import {ButtonComponent} from '../app/modules/shared/components/button/button.component';
+import {ButtonFunction, ButtonType} from '../app/modules/shared/static-files/enums';
 import {MatButtonModule} from '@angular/material/button';
-import {TranslateDirective} from '../app/directives/translate.directive';
+import {TranslateDirective} from '../app/modules/shared/directives/translate.directive';
 import {CustomTranslateModule} from '../app/modules/custom-translate.module';
+import {MatDialogModule} from '@angular/material';
 
 storiesOf('Buttons', module)
   .add('Primary button', () => ({
@@ -15,6 +16,7 @@ storiesOf('Buttons', module)
     moduleMetadata: {
       imports: [
         MatButtonModule,
+        MatDialogModule,
         CustomTranslateModule,
       ],
       declarations: [TranslateDirective],
@@ -30,6 +32,7 @@ storiesOf('Buttons', module)
     moduleMetadata: {
       imports: [
         MatButtonModule,
+        MatDialogModule,
         CustomTranslateModule,
       ],
       declarations: [TranslateDirective],

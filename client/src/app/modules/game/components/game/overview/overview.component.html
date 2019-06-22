@@ -1,0 +1,20 @@
+<div class="container">
+  <div [appBootstrapRow]="[GridSizes.EXTRA_SMALL, GridSizes.SMALL, GridSizes.MEDIUM, GridSizes.LARGE]">
+    <div [appBootstrapColumn]="[10, 10 ,10, 10]">
+      <ui-game-table *ngIf="!loading"
+                     [displayedColumns]="displayedColumns"
+                     [games$]="games$">
+      </ui-game-table>
+      <app-game-table-loader *ngIf="loading"
+                             [displayedColumns]="displayedColumns"
+                             [games]="loadingGames">
+      </app-game-table-loader>
+    </div>
+    <div [appBootstrapColumn]="[2, 2, 2, 2]">
+      <ui-table-action (actionClickEvent)="emitActionEvent($event)"
+                       [actions]="actions"
+                       [disabled]="disabled">
+      </ui-table-action>
+    </div>
+  </div>
+</div>

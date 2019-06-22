@@ -3,6 +3,7 @@ import {GameService} from './game.service';
 import {Game} from '../models/interfaces/game.interface';
 import {CreateGameDto} from '../models/create-dtos/create-game.dto';
 import {AuthGuard} from '@nestjs/passport';
+import {GameDto} from '../models/dtos/game.dto';
 
 @Controller('/game')
 export class GameController {
@@ -11,7 +12,7 @@ export class GameController {
 
   @Get()
   @UseGuards(AuthGuard())
-  public getAll(): Promise<Game[]> {
+  public getAll(): Promise<GameDto[]> {
     return this.gameService.getGames();
   }
 

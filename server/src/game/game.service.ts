@@ -5,19 +5,20 @@ import {Game} from '../models/interfaces/game.interface';
 import {CreateGameDto} from '../models/create-dtos/create-game.dto';
 import {GameMapper} from './game.mapper';
 import {GameDto} from '../models/dtos/game.dto';
+import {SortService} from '../shared/sort.service';
 
 @Injectable()
 export class GameService {
   public constructor(@InjectModel('Game') private readonly gameModel: Model<Game>,
-                     private readonly gameMapper: GameMapper) {
+                     private readonly gameMapper: GameMapper,
+                     private readonly sortService: SortService) {
   }
 
   public getGames(): Promise<GameDto[]> {
     return new Promise<GameDto[]>(resolve => {
       this.gameModel.find().exec().then((games: Game[]) => {
-          // TODO: refactor this to a sort service
-          games = games.sort((n1, n2) => n2.date.getTime() - n1.date.getTime());
-          this.gameMapper.convertGames(games).then((gameDtos: GameDto[]) => resolve(gameDtos));
+        games = this.sortService.sortByDate(games);
+        this.gameMapper.convertGames(games).then((gameDtos: GameDto[]) => resolve(gameDtos));
         },
       );
     });
