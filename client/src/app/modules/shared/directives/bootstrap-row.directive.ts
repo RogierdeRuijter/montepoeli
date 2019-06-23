@@ -12,7 +12,7 @@ export class BootstrapRowDirective implements OnInit {
   public gridSizes: GridSizes[];
 
   @Input()
-  public alignment: Alignments;
+  public alignment: Alignments | Alignments[];
 
   constructor(private elementRef: ElementRef,
               private renderer: Renderer2,
@@ -24,10 +24,14 @@ export class BootstrapRowDirective implements OnInit {
       throw new ShouldBeDefinedException('All necessary grid sizes');
     }
 
-    this.renderer.addClass(this.elementRef.nativeElement, 'row');
+    this.addClassToElement('row');
 
     if (!this.utilService.isNullOrUndefined(this.alignment)) {
-      this.renderer.addClass(this.elementRef.nativeElement, this.addAlignment());
+      if (this.alignment instanceof Array) {
+        this.alignment.forEach(align => this.addAlignment(align));
+      } else {
+        this.addAlignment(this.alignment);
+      }
     }
   }
 
@@ -38,14 +42,23 @@ export class BootstrapRowDirective implements OnInit {
       && this.gridSizes.includes(GridSizes.LARGE));
   }
 
-  private addAlignment(): string {
-    if (this.alignment === Alignments.RIGHT) {
-      return 'justify-content-end';
+  private addAlignment(alignment: Alignments): void {
+    if (alignment === Alignments.RIGHT) {
+      this.addClassToElement('justify-content-end');
     }
 
-    if (this.alignment === Alignments.CENTER) {
-      return 'justify-content-center';
+    if (alignment === Alignments.CENTER) {
+      this.addClassToElement('align-items-center');
     }
+
+    if (alignment === Alignments.VERTICAL) {
+      this.addClassToElement('d-flex');
+      this.addClassToElement('flex-column');
+    }
+  }
+
+  private addClassToElement(cssClass: string): void {
+    this.renderer.addClass(this.elementRef.nativeElement, cssClass);
   }
 
 }

@@ -30,12 +30,16 @@
 }
 
 .image-container {
-  display: flex;
-  justify-content: center;
+  //display: flex;
+  //justify-content: center;
+}
+
+.pull-up {
+  margin-top: -15%;
 }
 
 .image {
-  max-width: 29%;
+  max-width: 100%;
   height: auto;
 }
 
@@ -45,10 +49,11 @@
 }
 
 .login-form {
+  display: flex;
   padding: 3rem;
-  max-width: 450px;
+  //max-width: 450px;
   margin: auto;
-  background: #fffffff3;
+  //background: #fffffff3;
 }
 
 #appTitle {
@@ -64,4 +69,12 @@
     width: 115px;
     margin-right: -23px;
   }
+}
+
+.mat-form-field-empty.mat-form-field-label {
+  color: white;
+}
+
+mat-placeholder {
+  color: white;
 }

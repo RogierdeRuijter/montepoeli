@@ -1,14 +1,14 @@
 <div class="content" id="loginPage">
-  <!--  <h1 id="appTitle">-->
-  <!--    <span appTranslate="app.title"></span>-->
-  <!--  </h1>-->
-  <div class="image-container">
-    <img class="image"
-         src="../../../assets/images/logo_transparent.png">
-  </div>
-  <div class="login-form shadow-2">
-    <form #loginForm="ngForm" (submit)="onLogin()">
-      <h2 appTranslate="pages.login.login_title" class="form-title"></h2>
+  <div [alignment]="[Alignments.VERTICAL, Alignments.CENTER]"
+       [appBootstrapRow]="[GridSizes.EXTRA_SMALL, GridSizes.SMALL, GridSizes.MEDIUM, GridSizes.LARGE]"
+       class="pull-up">
+    <div [appBootstrapColumn]="[3, 3, 3, 3]" class="image-container">
+      <img class="image" src="../../../assets/images/logo_transparent.png">
+    </div>
+    <!--    <div class="login-form shadow-2">-->
+    <form #loginForm="ngForm" (submit)="onLogin()" [alignment]="[Alignments.VERTICAL, Alignments.CENTER]"
+          [appBootstrapColumn]="[3, 3, 3, 3]"
+          [appBootstrapRow]="[GridSizes.EXTRA_SMALL, GridSizes.SMALL, GridSizes.MEDIUM, GridSizes.LARGE]">
       <div class="form-group">
         <mat-form-field class="full-width">
           <input appTranslate="pages.login.user" id="username" matInput name="username" ngModel required value="">
@@ -32,5 +32,6 @@
                   [disabled]="!loginForm.valid || isSubmitting">
       </app-button>
     </form>
+    <!--    </div>-->
   </div>
 </div>
