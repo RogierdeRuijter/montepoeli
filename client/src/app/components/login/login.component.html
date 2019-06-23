@@ -5,9 +5,9 @@
     <div [appBootstrapColumn]="[3, 3, 3, 3]" class="image-container">
       <img class="image" src="../../../assets/images/logo_transparent.png">
     </div>
-    <!--    <div class="login-form shadow-2">-->
-    <form #loginForm="ngForm" (submit)="onLogin()" [alignment]="[Alignments.VERTICAL, Alignments.CENTER]"
+    <form #loginForm="ngForm" (submit)="onLogin()"
           [appBootstrapColumn]="[3, 3, 3, 3]"
+          [alignment]="[Alignments.VERTICAL, Alignments.CENTER]"
           [appBootstrapRow]="[GridSizes.EXTRA_SMALL, GridSizes.SMALL, GridSizes.MEDIUM, GridSizes.LARGE]">
       <div class="form-group">
         <mat-form-field class="full-width">
@@ -32,6 +32,5 @@
                   [disabled]="!loginForm.valid || isSubmitting">
       </app-button>
     </form>
-    <!--    </div>-->
   </div>
 </div>
