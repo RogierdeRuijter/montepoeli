@@ -1,0 +1,12 @@
+{
+  "version": 3,
+  "file": "main.e8918c062f2e599fe39e.bundle.js",
+  "sources": [
+    "webpack:///./src/app/modules/shared/components/button/button.component.ts"
+  ],
+  "sourcesContent": [
+    "import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';\nimport {ButtonFunction, ButtonType} from '../../static-files/enums';\nimport {UnknownCaseException} from '../../exceptions/UnknownCaseException';\n\n@Component({\n  selector: 'app-button',\n  template: require('./button.component.html'),\n  styles: [require('./button.component.scss')],\n})\nexport class ButtonComponent implements OnInit {\n\n  @Input()\n  public disabled: boolean;\n\n  @Input()\n  public buttonType: ButtonType;\n\n  @Input()\n  public buttonFunction: ButtonFunction;\n\n  @Input()\n  public dialogDataToSubmit: any = false;\n\n  @Output()\n  public clickEvent: EventEmitter<void> = new EventEmitter();\n\n  public buttonColor: any;\n  public translationKey: string;\n\n  public ngOnInit(): void {\n    switch (this.buttonType) {\n      case ButtonType.PRIMARY:\n        this.buttonColor = 'primary';\n        break;\n      case ButtonType.SECONDARY:\n        this.buttonColor = 'accent';\n    }\n\n    switch (this.buttonFunction) {\n      case ButtonFunction.LOGIN:\n        this.translationKey = 'pages.login.do_login';\n        break;\n      case ButtonFunction.CANCEL:\n        this.translationKey = 'buttons.cancel';\n        break;\n      case ButtonFunction.SAVE:\n        this.translationKey = 'buttons.save';\n        break;\n      default:\n        throw new UnknownCaseException(this.buttonFunction);\n    }\n  }\n\n  public click(): void {\n    this.clickEvent.emit();\n  }\n}\n"
+  ],
+  "mappings": "AASA",
+  "sourceRoot": ""
+}
