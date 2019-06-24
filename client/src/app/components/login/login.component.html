@@ -11,7 +11,7 @@
           [appBootstrapRow]="[GridSizes.EXTRA_SMALL, GridSizes.SMALL, GridSizes.MEDIUM, GridSizes.LARGE]">
       <div class="form-group">
         <mat-form-field class="full-width">
-          <input appTranslate="pages.login.user" id="username" matInput name="username" ngModel required value="">
+          <input #username appTranslate="pages.login.user" matInput name="username" ngModel required value="">
           <mat-placeholder>
             <span appTranslate="pages.login.username"></span>
           </mat-placeholder>

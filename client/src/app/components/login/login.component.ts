@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
 
 
 import {Router} from '@angular/router';
@@ -13,10 +13,12 @@ import {NotificationService} from '../../modules/shared/services/notification/no
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent {
-
+export class LoginComponent implements AfterViewInit {
   @ViewChild('loginForm', {static: true})
   public currentForm: NgForm;
+
+  @ViewChild('username', {static: true})
+  public usernameField: ElementRef;
 
   public isSubmitting = false;
 
@@ -29,6 +31,11 @@ export class LoginComponent {
               private authService: AuthService,
               private notificationService: NotificationService,
               private translationService: TranslateService) {
+  }
+
+  public ngAfterViewInit(): void {
+    console.log(this.usernameField);
+    this.usernameField.nativeElement.focus();
   }
 
   public onLogin(): void {
