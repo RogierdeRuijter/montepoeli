@@ -1,10 +1,10 @@
 import {IApi, IGetStory} from '@storybook/angular';
 import {CompleteStory} from '../intefaces/complete-story.interface';
-import {GameTableComponent} from '../app/modules/game/components/game/game-table/game-table.component';
+import {GameTableComponent} from '../../app/modules/game/components/game/game-table/game-table.component';
 import {of} from 'rxjs';
 import {MatTableModule} from '@angular/material';
-import {CustomTranslateModule} from '../app/modules/custom-translate.module';
-import {TranslateDirective} from '../app/modules/shared/directives/translate.directive';
+import {CustomTranslateModule} from '../../app/modules/custom-translate.module';
+import {TranslateDirective} from '../../app/modules/shared/directives/translate.directive';
 
 
 export class GameTableStoryFactory {

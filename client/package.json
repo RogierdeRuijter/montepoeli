@@ -12,7 +12,8 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "build-storybook-web-app": "build-storybook -c .storybook -o .out",
-    "install-start": "npm install && npm start"
+    "install-start": "npm install && npm start",
+    "update-angular": "ng update @angular/cli @angular/core @angular/material"
   },
   "private": true,
   "dependencies": {

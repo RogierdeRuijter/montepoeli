@@ -22,12 +22,13 @@ import {HttpErrorInterceptor} from './interceptors/http-error.interceptor';
     HttpClientModule,
     CommonModule,
     MaterialModule,
-    TranslateModule.forRoot({
+    TranslateModule.forChild({
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
         deps: [HttpClient],
       },
+      isolate: true,
     }),
     ToastrModule.forRoot(),
     FormsModule,

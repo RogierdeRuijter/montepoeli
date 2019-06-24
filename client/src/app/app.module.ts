@@ -10,6 +10,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {CookieService} from 'ngx-cookie-service';
 import {HomeComponent} from './components/home/home.component';
 import {TitleBarComponent} from './components/title-bar/title-bar.component';
+import {TranslateStore} from '@ngx-translate/core';
 
 @NgModule({
   imports: [
@@ -27,6 +28,7 @@ import {TitleBarComponent} from './components/title-bar/title-bar.component';
   ],
   providers: [
     CookieService,
+    TranslateStore,
   ],
   bootstrap: [AppComponent],
 })
