@@ -2,7 +2,7 @@ import {LOCALE_ID, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
 import {MaterialModule} from '../material/material.module';
-import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {ToastrModule} from 'ngx-toastr';
 import {FormsModule} from '@angular/forms';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
@@ -66,22 +66,6 @@ import {HttpErrorInterceptor} from './interceptors/http-error.interceptor';
   ],
 })
 export class SharedModule {
-  constructor(private translate: TranslateService) {
-    translate.setDefaultLang('en');
-
-    let lang = navigator.languages ? navigator.languages[0]
-      : (navigator.language || navigator['userLanguage']);
-    lang = lang.substring(0, 2);
-
-    console.log(lang);
-
-    this.useLanguage(lang);
-  }
-
-  public useLanguage(language: string): void {
-    this.translate.use(language);
-  }
-
 }
 
 export function HttpLoaderFactory(http: HttpClient) {

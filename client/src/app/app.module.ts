@@ -10,7 +10,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {CookieService} from 'ngx-cookie-service';
 import {HomeComponent} from './components/home/home.component';
 import {TitleBarComponent} from './components/title-bar/title-bar.component';
-import {TranslateStore} from '@ngx-translate/core';
+import {TranslateService, TranslateStore} from '@ngx-translate/core';
 
 @NgModule({
   imports: [
@@ -32,4 +32,20 @@ import {TranslateStore} from '@ngx-translate/core';
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {
+  constructor(private translate: TranslateService) {
+    translate.setDefaultLang('en');
+
+    let lang = navigator.languages ? navigator.languages[0]
+      : (navigator.language || navigator['userLanguage']);
+    lang = lang.substring(0, 2);
+
+    console.log(lang);
+
+    this.useLanguage(lang);
+  }
+
+  public useLanguage(language: string): void {
+    this.translate.use(language);
+  }
+}
