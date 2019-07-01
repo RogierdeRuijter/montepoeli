@@ -35,17 +35,6 @@ import {TranslateService, TranslateStore} from '@ngx-translate/core';
 export class AppModule {
   constructor(private translate: TranslateService) {
     translate.setDefaultLang('en');
-
-    let lang = navigator.languages ? navigator.languages[0]
-      : (navigator.language || navigator['userLanguage']);
-    lang = lang.substring(0, 2);
-
-    console.log(lang);
-
-    this.useLanguage(lang);
-  }
-
-  public useLanguage(language: string): void {
-    this.translate.use(language);
+    this.translate.use('en');
   }
 }
