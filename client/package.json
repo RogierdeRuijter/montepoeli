@@ -7,13 +7,15 @@
     "start:dev": "ng serve --host 0.0.0.0",
     "build": "ng build --prod",
     "test": "ng test --watch=false",
+    "test:jest": "jest",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "build-storybook-web-app": "build-storybook -c .storybook -o .out",
     "install-start": "npm install && npm start",
-    "update-angular": "ng update @angular/cli @angular/core @angular/material"
+    "update-angular": "ng update @angular/cli @angular/core @angular/material",
+    "screenshot": "storybook-chrome-screenshot -p 9001 -c .storybook"
   },
   "private": true,
   "dependencies": {
@@ -48,20 +50,24 @@
     "@angular/cli": "~8.0.0",
     "@angular/compiler-cli": "~8.0.2",
     "@angular/language-service": "~8.0.2",
-    "@babel/core": "^7.4.5",
-    "@storybook/addon-actions": "^5.1.9",
-    "@storybook/addon-links": "^5.1.9",
-    "@storybook/addon-notes": "^5.1.9",
-    "@storybook/addons": "^5.1.9",
-    "@storybook/angular": "^5.1.9",
+    "@babel/core": "7.4.5",
+    "@storybook/addon-actions": "5.0.11",
+    "@storybook/addon-links": "5.0.11",
+    "@storybook/addon-notes": "5.0.11",
+    "@storybook/addon-storyshots": "5.0.11",
+    "@storybook/addons": "5.0.11",
+    "@storybook/angular": "5.0.11",
     "@types/jasmine": "~3.3.0",
     "@types/jasminewd2": "~2.0.6",
+    "@types/jest": "^24.0.15",
     "@types/node": "~12.0.8",
-    "babel-loader": "^8.0.6",
+    "babel-loader": "8.0.6",
     "codelyzer": "~5.0.1",
     "husky": "~2.3.0",
     "jasmine-core": "~3.4.0",
     "jasmine-spec-reporter": "~4.2.1",
+    "jest": "^24.8.0",
+    "jest-preset-angular": "^7.1.1",
     "karma": "~4.1.0",
     "karma-chrome-launcher": "~2.2.0",
     "karma-coverage-istanbul-reporter": "~2.0.4",
@@ -70,8 +76,15 @@
     "karma-phantomjs-launcher": "~1.0.4",
     "phantomjs-prebuilt": "~2.1.16",
     "protractor": "~5.4.1",
+    "storybook-chrome-screenshot": "1.4.0",
     "ts-node": "~8.2.0",
     "tslint": "~5.16.0",
     "typescript": "3.4.5"
+  },
+  "jest": {
+    "preset": "jest-preset-angular",
+    "setupFilesAfterEnv": [
+      "./src/setupJest.ts"
+    ]
   }
 }

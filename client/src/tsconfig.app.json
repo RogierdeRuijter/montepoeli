@@ -7,7 +7,7 @@
     ]
   },
   "exclude": [
-    "test.ts",
+    "karmaTest.ts",
     "**/*.spec.ts",
     "**/*.stories.ts"
   ]

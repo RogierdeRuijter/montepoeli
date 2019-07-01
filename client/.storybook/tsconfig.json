@@ -1,12 +1,18 @@
 {
   "extends": "../src/tsconfig.app.json",
   "compilerOptions": {
+    "target": "esnext",
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "module": "es6",
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
     "types": [
       "node"
     ]
   },
   "exclude": [
-    "../src/test.ts",
+    "../src/karmaTest.ts",
     "../src/**/*.spec.ts",
     "../projects/**/*.spec.ts"
   ],

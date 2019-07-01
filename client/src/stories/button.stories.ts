@@ -5,9 +5,10 @@ import {MatButtonModule} from '@angular/material/button';
 import {TranslateDirective} from '../app/modules/shared/directives/translate.directive';
 import {CustomTranslateModule} from '../app/modules/custom-translate.module';
 import {MatDialogModule} from '@angular/material';
+import {withScreenshot} from 'storybook-chrome-screenshot';
 
 storiesOf('Buttons', module)
-  .add('Primary button', () => ({
+  .add('Primary button', withScreenshot()(() => ({
     component: ButtonComponent,
     props: {
       buttonFunction: ButtonFunction.LOGIN,
@@ -22,7 +23,7 @@ storiesOf('Buttons', module)
       declarations: [TranslateDirective],
       providers: [],
     },
-  }))
+  })))
   .add('Secondary button', () => ({
     component: ButtonComponent,
     props: {
