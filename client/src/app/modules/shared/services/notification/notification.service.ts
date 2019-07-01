@@ -10,11 +10,11 @@ export class NotificationService {
   }
 
   public warning(message: string, title?: string): void {
-    this.toastrService.warning(title, message);
+    this.toastrService.warning(message, title);
   }
 
   public longWarning(message: string, title?: string): void {
-    this.toastrService.warning(title, message, {
+    this.toastrService.warning(message, title, {
       timeOut: 3000,
     });
   }
