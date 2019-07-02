@@ -1,6 +1,7 @@
 import {Directive, ElementRef, Input, OnInit, Optional, Renderer2} from '@angular/core';
 import {BootstrapRowDirective} from './bootstrap-row.directive';
-import {GridSizes} from '../static-files/enums';
+import {Alignments, GridSizes} from '../static-files/enums';
+import {UtilService} from '../services/util/util.service';
 
 @Directive({
   selector: '[appBootstrapColumn]',
@@ -10,9 +11,13 @@ export class BootstrapColumnDirective implements OnInit {
   @Input('appBootstrapColumn')
   public amountOfColumns: number[];
 
+  @Input()
+  public alignmentCol: Alignments;
+
   constructor(private elementRef: ElementRef,
               private renderer: Renderer2,
-              @Optional() private bootstrapRowDirective: BootstrapRowDirective) {
+              @Optional() private bootstrapRowDirective: BootstrapRowDirective,
+              private utilService: UtilService) {
   }
 
   public ngOnInit(): void {
@@ -33,14 +38,18 @@ export class BootstrapColumnDirective implements OnInit {
       const gridPrefix = this.getBootstrapClassFor(gridSize);
       bootstrapGridClass += gridPrefix + '-' + this.amountOfColumns[index];
 
-      this.renderer.addClass(this.elementRef.nativeElement, bootstrapGridClass);
+      this.addClassToElement(bootstrapGridClass);
     });
+
+    if (!this.utilService.isNullOrUndefined(this.alignmentCol)) {
+      this.addStyleToElement('text-align', 'center');
+    }
   }
 
   private getBootstrapClassFor(gridSize: GridSizes): string {
     switch (gridSize) {
       case GridSizes.EXTRA_SMALL:
-        return 'col-xs';
+        return 'col';
       case GridSizes.SMALL:
         return 'col-sm';
       case GridSizes.MEDIUM:
@@ -48,5 +57,13 @@ export class BootstrapColumnDirective implements OnInit {
       case GridSizes.LARGE:
         return 'col-lg';
     }
+  }
+
+  private addClassToElement(cssClass: string): void {
+    this.renderer.addClass(this.elementRef.nativeElement, cssClass);
+  }
+
+  private addStyleToElement(field: string, value: string): void {
+    this.renderer.setStyle(this.elementRef.nativeElement, field, value);
   }
 }

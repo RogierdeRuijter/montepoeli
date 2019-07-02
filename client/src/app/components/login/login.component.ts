@@ -1,10 +1,8 @@
-import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
+import {Component} from '@angular/core';
 
 
 import {Router} from '@angular/router';
-import {NgForm} from '@angular/forms';
 import {TranslateService} from '@ngx-translate/core';
-import {Alignments, ButtonFunction, ButtonType, GridSizes} from '../../modules/shared/static-files/enums';
 import {AuthService} from '../../services/auth/auth.service';
 import {NotificationService} from '../../modules/shared/services/notification/notification.service';
 
@@ -13,19 +11,9 @@ import {NotificationService} from '../../modules/shared/services/notification/no
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements AfterViewInit {
-  @ViewChild('loginForm', {static: true})
-  public currentForm: NgForm;
-
-  @ViewChild('username', {static: true})
-  public usernameField: ElementRef;
+export class LoginComponent {
 
   public isSubmitting = false;
-
-  public ButtonFunction = ButtonFunction;
-  public ButtonTypes = ButtonType;
-  public GridSizes = GridSizes;
-  public Alignments = Alignments;
 
   constructor(private router: Router,
               private authService: AuthService,
@@ -33,16 +21,11 @@ export class LoginComponent implements AfterViewInit {
               private translationService: TranslateService) {
   }
 
-  public ngAfterViewInit(): void {
-    console.log(this.usernameField);
-    this.usernameField.nativeElement.focus();
-  }
-
-  public onLogin(): void {
+  public onLogin(userInfo: any): void {
     this.isSubmitting = true;
     const user = {};
-    user['username'] = this.currentForm.value.username;
-    user['pwd'] = this.currentForm.value.password;
+    user['username'] = userInfo.username;
+    user['pwd'] = userInfo.password;
     this.authService.login(user).subscribe(
       () => {
       }, (error) => {

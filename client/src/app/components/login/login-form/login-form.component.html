@@ -1,0 +1,35 @@
+<div class="content" id="loginPage">
+  <div [alignment]="[Alignments.VERTICAL, Alignments.CENTER]"
+       [appBootstrapRow]="[GridSizes.EXTRA_SMALL, GridSizes.SMALL, GridSizes.MEDIUM, GridSizes.LARGE]"
+       class="pull-up">
+    <div [appBootstrapColumn]="[3, 3, 3, 3]" class="image-container">
+      <img class="image" src="../../../assets/images/logo_transparent.png">
+    </div>
+    <form #loginForm="ngForm" (submit)="loginEmitter()"
+          [alignment]="[Alignments.VERTICAL, Alignments.CENTER]"
+          [appBootstrapColumn]="[3, 3, 3, 3]"
+          [appBootstrapRow]="[GridSizes.EXTRA_SMALL, GridSizes.SMALL, GridSizes.MEDIUM, GridSizes.LARGE]">
+      <div class="form-group">
+        <mat-form-field class="full-width">
+          <input #username appTranslate="pages.login.user" matInput name="username" ngModel required value="">
+          <mat-placeholder>
+            <span appTranslate="pages.login.username"></span>
+          </mat-placeholder>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field class="full-width">
+          <input id="password" matInput name="password" ngModel required type="password" value="">
+          <mat-placeholder>
+            <span appTranslate="pages.login.password"></span>
+          </mat-placeholder>
+        </mat-form-field>
+      </div>
+
+      <app-button [buttonFunction]="ButtonFunction.LOGIN"
+                  [buttonType]="ButtonTypes.PRIMARY"
+                  [disabled]="!loginForm.valid || disabled">
+      </app-button>
+    </form>
+  </div>
+</div>

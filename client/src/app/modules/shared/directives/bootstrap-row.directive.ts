@@ -55,7 +55,13 @@ export class BootstrapRowDirective implements OnInit {
       this.addClassToElement('d-flex');
       this.addClassToElement('flex-column');
     }
+
+    if (alignment === Alignments.BASELINE) {
+      this.addClassToElement('d-flex');
+      this.addClassToElement('align-items-baseline');
+    }
   }
+
 
   private addClassToElement(cssClass: string): void {
     this.renderer.addClass(this.elementRef.nativeElement, cssClass);

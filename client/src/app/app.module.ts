@@ -11,6 +11,7 @@ import {CookieService} from 'ngx-cookie-service';
 import {HomeComponent} from './components/home/home.component';
 import {TitleBarComponent} from './components/title-bar/title-bar.component';
 import {TranslateStore} from '@ngx-translate/core';
+import {LoginFormComponent} from './components/login/login-form/login-form.component';
 
 @NgModule({
   imports: [
@@ -25,6 +26,7 @@ import {TranslateStore} from '@ngx-translate/core';
     LoginComponent,
     HomeComponent,
     TitleBarComponent,
+    LoginFormComponent,
   ],
   providers: [
     CookieService,

@@ -4,7 +4,7 @@ import {Observable} from 'rxjs';
 
 @Component({
   selector: 'ui-game-table',
-  templateUrl: '../overview/game-table.component.html',
+  templateUrl: './game-table.component.html',
   styleUrls: ['./game-table.component.scss'],
 })
 export class GameTableComponent {

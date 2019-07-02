@@ -46,5 +46,6 @@ export enum ButtonRowType {
 export enum Alignments {
   RIGHT,
   CENTER,
-  VERTICAL
+  VERTICAL,
+  BASELINE
 }

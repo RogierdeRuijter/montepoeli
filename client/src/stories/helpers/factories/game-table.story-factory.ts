@@ -1,10 +1,10 @@
 import {IApi, IGetStory} from '@storybook/angular';
 import {CompleteStory} from '../intefaces/complete-story.interface';
-import {GameTableComponent} from '../../app/modules/game/components/game/game-table/game-table.component';
+import {GameTableComponent} from '../../../app/modules/game/components/game/game-table/game-table.component';
 import {of} from 'rxjs';
 import {MatTableModule} from '@angular/material';
-import {CustomTranslateModule} from '../../app/modules/custom-translate.module';
-import {TranslateDirective} from '../../app/modules/shared/directives/translate.directive';
+import {CustomTranslateModule} from '../../../app/modules/custom-translate.module';
+import {TranslateDirective} from '../../../app/modules/shared/directives/translate.directive';
 
 
 export class GameTableStoryFactory {
@@ -13,7 +13,6 @@ export class GameTableStoryFactory {
   private stories: CompleteStory[] = [];
 
   constructor(private iApi: IApi) {
-
   }
 
   public create(): void {
@@ -83,10 +82,10 @@ export class GameTableStoryFactory {
     return () => ({
       component: GameTableComponent,
       props: {
-        games$: [
+        games$: of([
           {white: 'user 1', black: 'user 2', winner: 'white'},
           {white: 'user 1', black: 'user 2', winner: 'black'},
-        ],
+        ]),
         displayedColumns: this.displayedColumns,
       },
       moduleMetadata: {

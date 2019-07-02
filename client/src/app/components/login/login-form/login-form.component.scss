@@ -1,0 +1,56 @@
+#loginPage {
+  height: 100%;
+  overflow: auto;
+  background: url(../../../../assets/images/montepulciano.jpg) left top;
+  background-size: cover;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.content {
+  padding: 1em;
+}
+
+.pull-up {
+  margin-top: -15%;
+}
+
+.image {
+  max-width: 100%;
+  height: auto;
+}
+
+.form-title {
+  margin-bottom: 1em;
+}
+
+.login-form {
+  display: flex;
+  padding: 3rem;
+  margin: auto;
+}
+
+#appTitle {
+  text-align: center;
+  width: 100%;
+  color: #ffffff;
+  font-weight: bold;
+  flex: 1 auto;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    width: 115px;
+    margin-right: -23px;
+  }
+}
+
+.mat-form-field-empty.mat-form-field-label {
+  color: white;
+}
+
+mat-placeholder, input {
+  color: white;
+}
