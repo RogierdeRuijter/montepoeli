@@ -20,7 +20,7 @@
     "home": {
       "games": {
         "pop-up": {
-          "title": "Enter a score"
+          "title": "Enter match result"
         },
         "labels": {
           "white": "White",
