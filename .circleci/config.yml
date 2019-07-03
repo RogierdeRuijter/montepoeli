@@ -21,21 +21,21 @@ jobs:
     - setup_remote_docker:
         docker_layer_caching: true
 
-      #    - run: |
-      #        cd client
-      #        CLIENT_TAG=0.1
-      #        IMAGE_CLIENT_NAME=montepouli-client
-      #        docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG .
-      #        docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
-      #        docker push $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG
-      #
-      #    - run: |
-      #        cd server
-      #        SERVER_TAG=0.1
-      #        IMAGE_SERVER_NAME=montepouli-server
-      #        docker build -t $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG .
-      #        docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
-      #        docker push $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG
+          - run: |
+              cd client
+              CLIENT_TAG=0.1
+              IMAGE_CLIENT_NAME=montepouli-client
+              docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG .
+              docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
+              docker push $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG
+
+          - run: |
+              cd server
+              SERVER_TAG=0.1
+              IMAGE_SERVER_NAME=montepouli-server
+              docker build -t $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG .
+              docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
+              docker push $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG
 
 #    - run: |
 #        cd client
@@ -45,13 +45,13 @@ jobs:
 #        docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
 #        docker push $DOMAIN/$IMAGE_STORYBOOK_NAME:$STORYBOOK_TAG
 
-    - run: |
-        sudo apt-get update && sudo apt-get install sshpass
-
-    - run: |
-        echo $SERVER_PASSWORD
-        echo 'yes' | ssh $SERVER_USERNAME@$SERVER_IP
-        sshpass -p $SERVER_PASSWORD ssh $SERVER_USERNAME@$SERVER_IP 'bash -s' cd node_project/ && npm run update-images && exit
-
+#    - run: |
+#        sudo apt-get update && sudo apt-get install sshpass
+#
+#    - run: |
+#        echo $SERVER_PASSWORD
+#        echo 'yes' | ssh $SERVER_USERNAME@$SERVER_IP
+#        sshpass -p $SERVER_PASSWORD ssh $SERVER_USERNAME@$SERVER_IP 'bash -s' cd node_project/ && npm run update-images && exit
+#
 #        && npm run restart-core
 
