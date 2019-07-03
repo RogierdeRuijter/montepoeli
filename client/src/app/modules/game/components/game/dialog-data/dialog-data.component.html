@@ -32,16 +32,15 @@
   </div>
 </div>
 
-<div [alignment]="Alignments.RIGHT"
-     [appBootstrapRow]="[GridSizes.EXTRA_SMALL, GridSizes.SMALL, GridSizes.MEDIUM, GridSizes.LARGE]" mat-dialog-actions>
+<div [appBootstrapRow]="[GridSizes.EXTRA_SMALL, GridSizes.SMALL, GridSizes.MEDIUM, GridSizes.LARGE]" mat-dialog-actions>
   <!-- TODO: app-button-row -->
   <app-button (clickEvent)="onNoClick()"
-              [appBootstrapColumn]="[6, 2, 2, 2]"
+              [appBootstrapColumn]="[6, 6, 6, 6]"
               [buttonFunction]="ButtonFunction.CANCEL"
               [buttonType]="ButtonType.PRIMARY">
   </app-button>
 
-  <app-button [appBootstrapColumn]="[6, 2, 2, 2]"
+  <app-button [appBootstrapColumn]="[6, 6, 6, 6]"
               [buttonFunction]="ButtonFunction.SAVE"
               [disabled]="ifAllFieldsAreNotField()"
               [buttonType]="ButtonType.PRIMARY"
