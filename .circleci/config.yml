@@ -46,6 +46,8 @@ jobs:
 #        docker push $DOMAIN/$IMAGE_STORYBOOK_NAME:$STORYBOOK_TAG
 
     - run: |
+        echo SERVER_USERNAME
+        echo SERVER_IP
         ssh SERVER_USERNAME@SERVER_IP 'bash -s' cd node_project/ && npm run update-images && exit
 #        && npm run restart-core
 
