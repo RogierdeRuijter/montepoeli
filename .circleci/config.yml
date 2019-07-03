@@ -47,6 +47,9 @@ jobs:
 
     - run: |
         sudo apt-get update && sudo apt-get install sshpass
+
+    - run: |
         sshpass -p $SERVER_PASSWORD ssh $SERVER_USERNAME@$SERVER_IP 'bash -s' cd node_project/ && npm run update-images && exit
+
 #        && npm run restart-core
 
