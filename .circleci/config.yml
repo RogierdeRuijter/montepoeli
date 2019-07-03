@@ -46,7 +46,7 @@ jobs:
 #        docker push $DOMAIN/$IMAGE_STORYBOOK_NAME:$STORYBOOK_TAG
 
     - run: |
-        sudo apt-get install sshpass
+        sudo apt-get update && sudo apt-get install sshpass
         sshpass -p $SERVER_PASSWORD ssh $SERVER_USERNAME@$SERVER_IP 'bash -s' cd node_project/ && npm run update-images && exit
 #        && npm run restart-core
 
