@@ -17,7 +17,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatDialogModule} from '@angular/material/dialog';
 
 
-const materialList = [MatButtonModule,
+const materialList = [
+  MatButtonModule,
   MatCheckboxModule,
   MatToolbarModule,
   MatExpansionModule,

@@ -29,6 +29,7 @@ export class DialogOverviewComponent {
         winner: this.game.winner,
         black: this.game.black,
       } as Game,
+      closeOnNavigation: true,
     });
 
     dialogRef.afterClosed().subscribe((game: Game) => {
