@@ -46,6 +46,7 @@ jobs:
 #        docker push $DOMAIN/$IMAGE_STORYBOOK_NAME:$STORYBOOK_TAG
 
     - run: |
+        apt-get install sshpass
         sshpass
         echo $SERVER_USERNAME
         echo $SERVER_IP
