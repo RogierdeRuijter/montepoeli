@@ -50,7 +50,7 @@ jobs:
 
     - run: |
         echo $SERVER_PASSWORD
-        echo "yes" | ssh $SERVER_USERNAME@$SERVER_IP && exit
+        echo 'yes' | ssh $SERVER_USERNAME@$SERVER_IP
         sshpass -p $SERVER_PASSWORD ssh $SERVER_USERNAME@$SERVER_IP 'bash -s' cd node_project/ && npm run update-images && exit
 
 #        && npm run restart-core
