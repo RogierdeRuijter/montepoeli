@@ -30,4 +30,5 @@ export class DialogDataService {
       && !this.utilService.isNullOrUndefined(game.winner)
       && !this.utilService.isNullOrUndefined(game.black);
   }
+
 }
