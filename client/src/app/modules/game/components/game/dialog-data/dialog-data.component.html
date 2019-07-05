@@ -1,52 +1,7 @@
-<h1 appTranslate="pages.home.games.pop-up.title" mat-dialog-title></h1>
-<div mat-dialog-content>
-  <form #form="ngForm">
-    <div>
-      <mat-form-field>
-        <mat-label appTranslate="pages.home.games.labels.white"></mat-label>
-        <mat-select #white [(ngModel)]="data.white">
-          <mat-option (click)="form.controls.white.reset()"><i>clear</i></mat-option>
-          <mat-option *ngFor="let user of determineAvailableUsersForSelect('white')" [value]="user.name">
-            {{user.name}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-    <div>
-      <mat-form-field>
-        <mat-label appTranslate="pages.home.games.labels.winner"></mat-label>
-        <mat-select [(ngModel)]="data.winner">
-          <mat-option *ngFor="let winner of winners" [value]="winner">
-            <span [appTranslate]="'pages.home.games.cell.winner.' + winner"></span>
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-    <div>
-      <mat-form-field>
-        <mat-label appTranslate="pages.home.games.labels.black"></mat-label>
-        <mat-select [(ngModel)]="data.black">
-          <mat-option *ngFor="let user of determineAvailableUsersForSelect('black')" [value]="user.name">
-            {{user.name}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-  </form>
-</div>
-
-<div [appBootstrapRow]="[GridSizes.EXTRA_SMALL, GridSizes.SMALL, GridSizes.MEDIUM, GridSizes.LARGE]" mat-dialog-actions>
-  <!-- TODO: app-button-row -->
-  <app-button (clickEvent)="onNoClick()"
-              [appBootstrapColumn]="[6, 6, 6, 6]"
-              [buttonFunction]="ButtonFunction.CANCEL"
-              [buttonType]="ButtonType.PRIMARY">
-  </app-button>
-
-  <app-button [appBootstrapColumn]="[6, 6, 6, 6]"
-              [buttonFunction]="ButtonFunction.SAVE"
-              [disabled]="ifAllFieldsAreNotField()"
-              [buttonType]="ButtonType.PRIMARY"
-              [dialogDataToSubmit]="data">
-  </app-button>
-</div>
+<ui-game-result (cancelEvent)="onNoClick()"
+                [data]="data"
+                [disabled]="ifAllFieldsAreNotField()"
+                [usersBlack]="determineAvailableUsersForSelect(Sides.BLACK)"
+                [usersWhite]="determineAvailableUsersForSelect(Sides.WHITE)"
+                [winners]="winners">
+</ui-game-result>

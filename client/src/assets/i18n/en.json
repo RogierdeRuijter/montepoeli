@@ -70,7 +70,7 @@
     },
     "not_authorized": {
       "title": "Navigation error",
-      "body": "Your not allowed to see this route"
+      "body": "You're not allowed to see this route"
     }
   }
 }

@@ -12,7 +12,8 @@ export enum ButtonFunction {
 export enum Icons {
   CHECK,
   CROSS,
-  PLUS
+  PLUS,
+  DELETE
 }
 
 export enum IconSize {
@@ -30,6 +31,11 @@ export enum Winners {
   WHITE = 'white',
   BLACK = 'black',
   DRAW = 'draw'
+}
+
+export enum Sides {
+  WHITE = 'white',
+  BLACK = 'black'
 }
 
 export enum GridSizes {

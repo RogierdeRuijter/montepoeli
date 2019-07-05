@@ -20,7 +20,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     }),
   ],
   declarations: [],
-  exports: [TranslateModule],
+  exports: [
+    TranslateModule,
+  ],
 })
 export class CustomTranslateModule {
   public constructor(translate: TranslateService) {

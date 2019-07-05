@@ -1,10 +1,11 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {Alignments, ButtonFunction, ButtonType, GridSizes, Winners} from '../../../../shared/static-files/enums';
+import {Sides, Winners} from '../../../../shared/static-files/enums';
 import {Game} from '../../../../shared/interfaces/game.interface';
 import {UserStore} from '../../../stores/user.store';
 import {DialogDataService} from '../../../services/dialog-data.service';
 import {User} from '../../../../shared/interfaces/user.interface';
+import {UtilService} from '../../../../shared/services/util/util.service';
 
 @Component({
   selector: 'app-dialog-data',
@@ -15,15 +16,13 @@ export class DialogDataComponent implements OnInit {
   public users: User[];
   public winners: Winners[] = [Winners.WHITE, Winners.BLACK, Winners.DRAW];
 
-  public ButtonType = ButtonType;
-  public ButtonFunction = ButtonFunction;
-  public GridSizes = GridSizes;
-  public Alignments = Alignments;
+  public Sides = Sides;
 
   constructor(
     public dialogRef: MatDialogRef<DialogDataComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Game,
     private userStore: UserStore,
+    private utilService: UtilService,
     private dialogDataService: DialogDataService) {
   }
 
@@ -41,5 +40,8 @@ export class DialogDataComponent implements OnInit {
 
   public ifAllFieldsAreNotField(): boolean {
     return !this.dialogDataService.allFieldsAreDefined(this.data);
+  }
+
+  public print(value: string): void {
   }
 }

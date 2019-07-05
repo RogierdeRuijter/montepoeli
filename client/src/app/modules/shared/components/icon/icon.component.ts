@@ -32,6 +32,10 @@ export class IconComponent implements OnInit {
         break;
       case Icons.PLUS:
         this.iconDefinition = faPlus;
+        break;
+      case Icons.DELETE:
+        this.iconDefinition = faTimes;
+        break;
       // default: throw new UnknownCaseException();
     }
 
