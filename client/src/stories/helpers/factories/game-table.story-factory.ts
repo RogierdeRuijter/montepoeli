@@ -3,8 +3,8 @@ import {CompleteStory} from '../intefaces/complete-story.interface';
 import {GameTableComponent} from '../../../app/modules/game/components/game/game-table/game-table.component';
 import {of} from 'rxjs';
 import {MatTableModule} from '@angular/material';
-import {CustomTranslateModule} from '../../../app/modules/custom-translate.module';
-import {TranslateDirective} from '../../../app/modules/shared/directives/translate.directive';
+import {StorybookTranslateModule} from '../../storybook-translate.module';
+import {TranslateDirective} from '../../../app/modules/shared/modules/translate/translate.directive';
 
 
 export class GameTableStoryFactory {
@@ -71,7 +71,7 @@ export class GameTableStoryFactory {
       moduleMetadata: {
         imports: [
           MatTableModule,
-          CustomTranslateModule,
+          StorybookTranslateModule,
         ],
         declarations: [TranslateDirective],
       },
@@ -91,7 +91,7 @@ export class GameTableStoryFactory {
       moduleMetadata: {
         imports: [
           MatTableModule,
-          CustomTranslateModule,
+          StorybookTranslateModule,
         ],
         declarations: [TranslateDirective],
       },
@@ -111,7 +111,7 @@ export class GameTableStoryFactory {
       moduleMetadata: {
         imports: [
           MatTableModule,
-          CustomTranslateModule,
+          StorybookTranslateModule,
         ],
         declarations: [TranslateDirective],
       },
@@ -131,7 +131,7 @@ export class GameTableStoryFactory {
       moduleMetadata: {
         imports: [
           MatTableModule,
-          CustomTranslateModule,
+          StorybookTranslateModule,
         ],
         declarations: [TranslateDirective],
       },
@@ -152,7 +152,7 @@ export class GameTableStoryFactory {
       moduleMetadata: {
         imports: [
           MatTableModule,
-          CustomTranslateModule,
+          StorybookTranslateModule,
         ],
         declarations: [TranslateDirective],
       },
@@ -203,7 +203,7 @@ export class GameTableStoryFactory {
       moduleMetadata: {
         imports: [
           MatTableModule,
-          CustomTranslateModule,
+          StorybookTranslateModule,
         ],
         declarations: [TranslateDirective],
       },

@@ -20,9 +20,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     }),
   ],
   declarations: [],
-  exports: [TranslateModule],
+  exports: [
+    TranslateModule,
+  ],
 })
-export class CustomTranslateModule {
+export class StorybookTranslateModule {
   public constructor(translate: TranslateService) {
     translate.setDefaultLang('en');
     translate.use('en');

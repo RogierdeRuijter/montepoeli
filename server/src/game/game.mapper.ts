@@ -6,11 +6,13 @@ import {InjectModel} from '@nestjs/mongoose';
 import {User} from '../models/interfaces/user.interface';
 import {Outcomes} from '../constants/enums';
 import {CreateGameDto} from '../models/create-dtos/create-game.dto';
+import {UtilService} from '../shared/util.service';
 
 @Injectable()
 export class GameMapper {
 
-  public constructor(@InjectModel('User') private readonly userModel: Model<User>) {
+  public constructor(@InjectModel('User') private readonly userModel: Model<User>,
+                     private readonly utilService: UtilService) {
   }
 
   public convertGames(games: Game[]): Promise<GameDto[]> {
@@ -48,13 +50,15 @@ export class GameMapper {
   public convertCreateDto(createGameDto: CreateGameDto): Promise<Game> {
     return new Promise((resolve) =>
       this.userModel.find().exec().then((users: User[]) => {
-        const blackUser: User = users.find((user: User) => user.name === createGameDto.black);
-        const whiteUser: User = users.find((user: User) => user.name === createGameDto.white);
+        const blackUser: User = users.find((user: User) => user.name.toLowerCase() === createGameDto.black.toLowerCase());
+        const whiteUser: User = users.find((user: User) => user.name.toLowerCase() === createGameDto.white.toLowerCase());
 
-        if (blackUser === null || whiteUser === null) {
+        if (this.utilService.isNullOrUndefined(blackUser) || this.utilService.isNullOrUndefined(whiteUser)) {
           throw new NotFoundException('user not found');
         }
+
         const winnerName: string = this.getWinnerName(createGameDto);
+
         let winnerUser: User;
         if (winnerName === blackUser.name) {
           winnerUser = blackUser;
@@ -75,6 +79,6 @@ export class GameMapper {
   }
 
   private getWinnerName(createGameDto: CreateGameDto): string {
-    return createGameDto[createGameDto.winner];
+    return createGameDto[createGameDto.winner.toLowerCase()];
   }
 }

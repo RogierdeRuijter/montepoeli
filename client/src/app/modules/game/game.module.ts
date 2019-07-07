@@ -9,11 +9,17 @@ import {DialogOverviewComponent} from './components/game/dialog-overview/dialog-
 import {GameTableLoaderComponent} from './components/game/overview/game-table-loader/game-table-loader.component';
 import {MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material';
 import {OverviewComponent} from './components/game/overview/overview.component';
+import {UnSelectOnSecondSelectDirective} from './directives/un-select-on-second-select.directive';
+import {GameResultComponent} from './components/game/dialog-data/game-result/game-result.component';
+import {FormModule} from '../shared/modules/form/form.module';
+import {CustomTranslateModule} from '../shared/modules/translate/custom-translate.module';
 
 @NgModule({
   imports: [
     GameRoutingModule,
     SharedModule,
+    FormModule,
+    CustomTranslateModule,
   ],
   declarations: [
     GameComponent,
@@ -23,6 +29,8 @@ import {OverviewComponent} from './components/game/overview/overview.component';
     DialogDataComponent,
     DialogOverviewComponent,
     OverviewComponent,
+    UnSelectOnSecondSelectDirective,
+    GameResultComponent,
   ],
   providers: [
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}},

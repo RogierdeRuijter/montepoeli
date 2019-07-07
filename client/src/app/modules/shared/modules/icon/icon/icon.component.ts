@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Icons, IconSize} from '../../static-files/enums';
+import {Icons, IconSize} from '../../../static-files/enums';
 import {IconDefinition, SizeProp} from '@fortawesome/fontawesome-svg-core';
-import {faCheck, faPlus, faTimes} from '@fortawesome/free-solid-svg-icons';
+import {faCheck, faChessRook, faCoffee, faPlus, faTimes} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-icon',
@@ -32,6 +32,16 @@ export class IconComponent implements OnInit {
         break;
       case Icons.PLUS:
         this.iconDefinition = faPlus;
+        break;
+      case Icons.DELETE:
+        this.iconDefinition = faTimes;
+        break;
+      case Icons.ROOK:
+        this.iconDefinition = faChessRook;
+        break;
+      case Icons.COFFEE:
+        this.iconDefinition = faCoffee;
+        break;
       // default: throw new UnknownCaseException();
     }
 
