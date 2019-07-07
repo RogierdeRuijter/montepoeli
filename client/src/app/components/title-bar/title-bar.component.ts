@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {ThemePalette} from '@angular/material';
 
 @Component({
@@ -6,13 +6,6 @@ import {ThemePalette} from '@angular/material';
   templateUrl: './title-bar.component.html',
   styleUrls: ['./title-bar.component.scss'],
 })
-export class TitleBarComponent implements OnInit {
+export class TitleBarComponent {
   public color: ThemePalette = 'primary';
-
-  constructor() {
-  }
-
-  ngOnInit() {
-  }
-
 }

@@ -13,7 +13,9 @@ export enum Icons {
   CHECK,
   CROSS,
   PLUS,
-  DELETE
+  DELETE,
+  ROOK,
+  COFFEE
 }
 
 export enum IconSize {

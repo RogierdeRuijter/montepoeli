@@ -1,7 +1,7 @@
 import {storiesOf} from '@storybook/angular';
 import {MatButtonModule, MatDialogModule} from '@angular/material';
-import {CustomTranslateModule} from '../app/modules/custom-translate.module';
-import {TranslateDirective} from '../app/modules/shared/directives/translate.directive';
+import {StorybookTranslateModule} from './storybook-translate.module';
+import {TranslateDirective} from '../app/modules/shared/modules/translate/translate.directive';
 import {BootstrapRowDirective} from '../app/modules/shared/directives/bootstrap-row.directive';
 import {BootstrapColumnDirective} from '../app/modules/shared/directives/bootstrap-column.directive';
 import {ButtonComponent} from '../app/modules/shared/components/button/button.component';
@@ -18,7 +18,7 @@ storiesOf('LoginForm', module)
         MatButtonModule,
         MatDialogModule,
         MaterialModule,
-        CustomTranslateModule,
+        StorybookTranslateModule,
         BrowserAnimationsModule,
       ],
       declarations: [

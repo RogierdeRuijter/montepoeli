@@ -1,0 +1,8 @@
+{{value.substring(0, 15)}}<span *ngIf="value.length > 15">...</span>
+<!-- TODO: tooltip when longer than 15 chars -->
+<app-icon (click)="iconClick(); $event.stopPropagation();"
+          *ngIf="showIcon"
+          [iconSize]="IconSize.SMALL"
+          [icon]="Icons.DELETE"
+          class="float">
+</app-icon>

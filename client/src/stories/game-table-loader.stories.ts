@@ -1,6 +1,6 @@
 import {storiesOf} from '@storybook/angular';
-import {TranslateDirective} from '../app/modules/shared/directives/translate.directive';
-import {CustomTranslateModule} from '../app/modules/custom-translate.module';
+import {TranslateDirective} from '../app/modules/shared/modules/translate/translate.directive';
+import {StorybookTranslateModule} from './storybook-translate.module';
 import {MatTableModule} from '@angular/material';
 import {NgxSkeletonLoaderModule} from 'ngx-skeleton-loader';
 import {GameTableLoaderComponent} from '../app/modules/game/components/game/overview/game-table-loader/game-table-loader.component';
@@ -16,7 +16,7 @@ storiesOf('GameTableLoader', module)
     moduleMetadata: {
       imports: [
         MatTableModule,
-        CustomTranslateModule,
+        StorybookTranslateModule,
         NgxSkeletonLoaderModule,
       ],
       declarations: [TranslateDirective],

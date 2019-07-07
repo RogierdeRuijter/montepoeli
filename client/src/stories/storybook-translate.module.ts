@@ -24,7 +24,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     TranslateModule,
   ],
 })
-export class CustomTranslateModule {
+export class StorybookTranslateModule {
   public constructor(translate: TranslateService) {
     translate.setDefaultLang('en');
     translate.use('en');

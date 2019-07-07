@@ -6,6 +6,7 @@ import {UserStore} from '../../../stores/user.store';
 import {DialogDataService} from '../../../services/dialog-data.service';
 import {User} from '../../../../shared/interfaces/user.interface';
 import {UtilService} from '../../../../shared/services/util/util.service';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-dialog-data',
@@ -18,19 +19,24 @@ export class DialogDataComponent implements OnInit {
 
   public Sides = Sides;
 
+  public winnerOptions: string[] = [];
+
   constructor(
     public dialogRef: MatDialogRef<DialogDataComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Game,
     private userStore: UserStore,
     private utilService: UtilService,
-    private dialogDataService: DialogDataService) {
+    private dialogDataService: DialogDataService,
+    private translateService: TranslateService) {
   }
 
   public ngOnInit(): void {
     this.userStore.get().subscribe((users: User[]) => this.users = users);
+    this.winners.forEach(winner => this.winnerOptions.push(this.translateService.instant('pages.home.games.cell.winner.' + winner)));
   }
 
   public onNoClick(): void {
+    console.log(this.data);
     this.dialogRef.close();
   }
 

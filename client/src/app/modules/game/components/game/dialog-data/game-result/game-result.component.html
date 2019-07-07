@@ -2,49 +2,32 @@
 <div mat-dialog-content>
   <form #form="ngForm">
     <div>
-      <mat-form-field>
-        <mat-label appTranslate="pages.home.games.labels.white"></mat-label>
-        <!-- TODO: refactor to component -->
-        <mat-select #whiteSelect
-                    [(ngModel)]="data.white"
-                    [name]="Sides.WHITE">
-          <mat-option *ngFor="let user of usersWhite"
-                      [value]="user.name">
-            {{user.name.substring(0, 15)}}<span *ngIf="user.name.length > 15">...</span>
-            <app-icon (click)="removeOption(); $event.stopPropagation();"
-                      *ngIf="user.name === data.white && whiteSelect.panelOpen"
-                      [iconSize]="IconSize.SMALL"
-                      [icon]="Icons.DELETE"
-                      class="float">
-            </app-icon>
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+      <app-drop-down [(value)]="data.white"
+                     [options]="usersWhite"
+                     labelKey="pages.home.games.labels.white"
+                     optionDisplayField="name">
+      </app-drop-down>
     </div>
+    <!-- TODO: make this none special dropdown-->
     <div>
-      <mat-form-field>
-        <mat-label appTranslate="pages.home.games.labels.winner"></mat-label>
-        <mat-select [(ngModel)]="data.winner" name="winner">
-          <mat-option *ngFor="let winner of winners" [value]="winner">
-            <span [appTranslate]="'pages.home.games.cell.winner.' + winner"></span>
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+      <app-drop-down [(value)]="data.winner"
+                     [options]="winnerOptions"
+                     labelKey="pages.home.games.labels.winner">
+      </app-drop-down>
     </div>
+
     <div>
-      <mat-form-field>
-        <mat-label appTranslate="pages.home.games.labels.black"></mat-label>
-        <mat-select [(ngModel)]="data.black" name="black">
-          <mat-option *ngFor="let user of usersBlack" [value]="user.name">
-            {{user.name}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+      <app-drop-down [(value)]="data.black"
+                     [options]="usersBlack"
+                     labelKey="pages.home.games.labels.black"
+                     optionDisplayField="name">
+      </app-drop-down>
     </div>
   </form>
 </div>
 
-<div [appBootstrapRow]="[GridSizes.EXTRA_SMALL, GridSizes.SMALL, GridSizes.MEDIUM, GridSizes.LARGE]" mat-dialog-actions>
+<div [appBootstrapRow]="[GridSizes.EXTRA_SMALL, GridSizes.SMALL, GridSizes.MEDIUM, GridSizes.LARGE]"
+     mat-dialog-actions>
   <!-- TODO: app-button-row -->
   <app-button (clickEvent)="cancel()"
               [appBootstrapColumn]="[6, 6, 6, 6]"

@@ -11,11 +11,15 @@ import {MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material';
 import {OverviewComponent} from './components/game/overview/overview.component';
 import {UnSelectOnSecondSelectDirective} from './directives/un-select-on-second-select.directive';
 import {GameResultComponent} from './components/game/dialog-data/game-result/game-result.component';
+import {FormModule} from '../shared/modules/form/form.module';
+import {CustomTranslateModule} from '../shared/modules/translate/custom-translate.module';
 
 @NgModule({
   imports: [
     GameRoutingModule,
     SharedModule,
+    FormModule,
+    CustomTranslateModule,
   ],
   declarations: [
     GameComponent,

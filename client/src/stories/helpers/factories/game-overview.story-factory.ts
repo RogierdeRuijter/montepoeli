@@ -3,8 +3,8 @@ import {CompleteStory} from '../intefaces/complete-story.interface';
 import {GameTableComponent} from '../../../app/modules/game/components/game/game-table/game-table.component';
 import {of} from 'rxjs';
 import {MatTableModule} from '@angular/material';
-import {CustomTranslateModule} from '../../../app/modules/custom-translate.module';
-import {TranslateDirective} from '../../../app/modules/shared/directives/translate.directive';
+import {StorybookTranslateModule} from '../../storybook-translate.module';
+import {TranslateDirective} from '../../../app/modules/shared/modules/translate/translate.directive';
 import {OverviewComponent} from '../../../app/modules/game/components/game/overview/overview.component';
 import {Actions} from '../../../app/modules/shared/static-files/enums';
 import {NgxSkeletonLoaderModule} from 'ngx-skeleton-loader';
@@ -13,7 +13,7 @@ import {GameTableLoaderComponent} from '../../../app/modules/game/components/gam
 import {TableActionComponent} from '../../../app/modules/game/components/game/overview/table-action/table-action.component';
 import {BootstrapColumnDirective} from '../../../app/modules/shared/directives/bootstrap-column.directive';
 import {BootstrapRowDirective} from '../../../app/modules/shared/directives/bootstrap-row.directive';
-import {IconComponent} from '../../../app/modules/shared/components/icon/icon.component';
+import {IconComponent} from '../../../app/modules/shared/modules/icon/icon/icon.component';
 
 
 export class GameOverviewStoryFactory {
@@ -64,7 +64,7 @@ export class GameOverviewStoryFactory {
         moduleMetadata: {
           imports: [
             MatTableModule,
-            CustomTranslateModule,
+            StorybookTranslateModule,
             NgxSkeletonLoaderModule,
             FontAwesomeModule,
           ],

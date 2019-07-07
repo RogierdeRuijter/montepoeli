@@ -1,13 +1,5 @@
 import {Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
-import {
-  ButtonFunction,
-  ButtonType,
-  GridSizes,
-  Icons,
-  IconSize,
-  Sides,
-  Winners,
-} from '../../../../../shared/static-files/enums';
+import {ButtonFunction, ButtonType, GridSizes, Icons, Winners} from '../../../../../shared/static-files/enums';
 import {NgForm} from '@angular/forms';
 import {Game} from '../../../../../shared/interfaces/game.interface';
 import {User} from '../../../../../shared/interfaces/user.interface';
@@ -42,23 +34,21 @@ export class GameResultComponent {
   @Input()
   public usersBlack: User[];
 
+  @Input()
+  public winnerOptions: string[];
+
   @Output()
   public cancelEvent: EventEmitter<void> = new EventEmitter();
 
   public ButtonType = ButtonType;
   public ButtonFunction = ButtonFunction;
   public GridSizes = GridSizes;
-  public Sides = Sides;
   public Icons = Icons;
-  public IconSize = IconSize;
   public timer = timer;
 
   public cancel(): void {
+    console.log(this.winnerOptions);
+    console.log(this.data);
     this.cancelEvent.emit();
-  }
-
-  public removeOption(): void {
-    this.form.controls['white'].reset();
-    this.whiteSelect.close();
   }
 }
