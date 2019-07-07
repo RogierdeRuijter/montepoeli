@@ -23,7 +23,7 @@ jobs:
 
     - run: |
         cd client
-        CLIENT_TAG=0.1
+        CLIENT_TAG=1.0
         IMAGE_CLIENT_NAME=montepouli-client
         docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG .
         docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
@@ -31,7 +31,7 @@ jobs:
 
     - run: |
         cd server
-        SERVER_TAG=0.1
+        SERVER_TAG=1.0
         IMAGE_SERVER_NAME=montepouli-server
         docker build -t $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG .
         docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
@@ -39,7 +39,7 @@ jobs:
 
 #    - run: |
 #        cd client
-#        STORYBOOK_TAG=0.1
+#        STORYBOOK_TAG=1.0
 #        IMAGE_STORYBOOK_NAME=montepouli-storybook
 #        docker build -f StorybookDockerfile -t $DOMAIN/$IMAGE_STORYBOOK_NAME:$STORYBOOK_TAG .
 #        docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
