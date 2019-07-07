@@ -12,6 +12,7 @@ import {HomeComponent} from './components/home/home.component';
 import {TitleBarComponent} from './components/title-bar/title-bar.component';
 import {TranslateStore} from '@ngx-translate/core';
 import {LoginFormComponent} from './components/login/login-form/login-form.component';
+import {CustomTranslateModule} from './modules/shared/modules/translate/custom-translate.module';
 
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ import {LoginFormComponent} from './components/login/login-form/login-form.compo
     CommonModule,
     BrowserModule,
     SharedModule,
+    CustomTranslateModule,
     BrowserAnimationsModule,
   ],
   declarations: [
