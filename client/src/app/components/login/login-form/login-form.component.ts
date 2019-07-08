@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
 import {Alignments, ButtonFunction, ButtonType, GridSizes} from '../../../modules/shared/static-files/enums';
 import {NgForm} from '@angular/forms';
 
@@ -7,7 +7,7 @@ import {NgForm} from '@angular/forms';
   templateUrl: './login-form.component.html',
   styleUrls: ['./login-form.component.scss'],
 })
-export class LoginFormComponent implements AfterViewInit {
+export class LoginFormComponent {
 
   @ViewChild('loginForm', {static: true})
   public currentForm: NgForm;
@@ -25,10 +25,6 @@ export class LoginFormComponent implements AfterViewInit {
 
   @Input()
   public disabled: boolean;
-
-  public ngAfterViewInit(): void {
-    this.usernameField.nativeElement.focus();
-  }
 
   public loginEmitter(): void {
     this.loginEvent.emit({

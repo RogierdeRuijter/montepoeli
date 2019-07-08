@@ -7,7 +7,7 @@
     "build": "npm run build-server",
     "build-client": "cd client && npm run build",
     "build-server": "cd server && npm run build",
-    "start": "cd server && node .",
+    "start": "npm run docker-compose-rebuild",
     "docker-compose-rebuild": "docker-compose build && docker-compose down && docker-compose up -d",
     "docker-compose-rebuild-no-cache": "docker-compose build --no-cache && docker-compose down && docker-compose up -d",
     "docker:storybook": "start-storybook -p 65200 --ci"
