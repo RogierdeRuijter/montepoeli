@@ -36,7 +36,6 @@ export class DialogDataComponent implements OnInit {
   }
 
   public onNoClick(): void {
-    console.log(this.data);
     this.dialogRef.close();
   }
 

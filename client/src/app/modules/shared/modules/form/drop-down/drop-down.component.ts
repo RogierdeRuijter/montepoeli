@@ -41,8 +41,6 @@ export class DropDownComponent implements ControlValueAccessor {
   public select: MatSelect;
 
   public writeValue(obj: any) {
-    console.log(obj);
-    console.log(this.valueAccessor);
     this.valueAccessor.writeValue(obj);
   }
 
@@ -60,6 +58,7 @@ export class DropDownComponent implements ControlValueAccessor {
 
   public removeOption(): void {
     this.select.ngControl.reset();
+    this.valueChange.emit(null);
     this.select.close();
   }
 

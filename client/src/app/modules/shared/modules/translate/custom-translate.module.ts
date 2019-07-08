@@ -22,6 +22,7 @@ import {TranslateDirective} from './translate.directive';
   ],
   exports: [
     TranslateDirective,
+    TranslateModule,
   ],
 })
 export class CustomTranslateModule {

@@ -47,8 +47,6 @@ export class GameResultComponent {
   public timer = timer;
 
   public cancel(): void {
-    console.log(this.winnerOptions);
-    console.log(this.data);
     this.cancelEvent.emit();
   }
 }
