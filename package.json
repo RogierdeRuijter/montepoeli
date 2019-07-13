@@ -1,6 +1,6 @@
 {
   "name": "montepouli",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "scripts": {
     "install-client": "cd client && npm i",
     "install-server": "cd server && npm i",
