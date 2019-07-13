@@ -1,14 +1,14 @@
 <div class="content" id="loginPage">
   <div [alignment]="[Alignments.VERTICAL, Alignments.CENTER]"
-       [appBootstrapRow]="[GridSizes.EXTRA_SMALL, GridSizes.SMALL, GridSizes.MEDIUM, GridSizes.LARGE]"
+       [appGridRow]="[GridSizes.EXTRA_SMALL, GridSizes.SMALL, GridSizes.MEDIUM, GridSizes.LARGE]"
        class="pull-up">
-    <div [appBootstrapColumn]="[3, 3, 3, 3]" class="image-container">
+    <div [appGridColumn]="[3, 3, 3, 3]" class="image-container">
       <img class="image" src="../../../../assets/images/logo_transparent.png">
     </div>
     <form #loginForm="ngForm" (submit)="loginEmitter()"
           [alignment]="[Alignments.VERTICAL, Alignments.CENTER]"
-          [appBootstrapColumn]="[3, 3, 3, 3]"
-          [appBootstrapRow]="[GridSizes.EXTRA_SMALL, GridSizes.SMALL, GridSizes.MEDIUM, GridSizes.LARGE]">
+          [appGridColumn]="[3, 3, 3, 3]"
+          [appGridRow]="[GridSizes.EXTRA_SMALL, GridSizes.SMALL, GridSizes.MEDIUM, GridSizes.LARGE]">
       <div class="form-group">
         <mat-form-field class="full-width">
           <input #username autofocus matInput name="username" ngModel required>

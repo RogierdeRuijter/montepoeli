@@ -2,8 +2,8 @@ import {storiesOf} from '@storybook/angular';
 import {GameResultComponent} from '../../app/modules/game/components/game/dialog-data/game-result/game-result.component';
 import {StorybookTranslateModule} from '../storybook-translate.module';
 import {MaterialModule} from '../../app/modules/material/material.module';
-import {BootstrapRowDirective} from '../../app/modules/shared/directives/bootstrap-row.directive';
-import {BootstrapColumnDirective} from '../../app/modules/shared/directives/bootstrap-column.directive';
+import {GridRowDirective} from '../../app/modules/shared/directives/grid-row.directive';
+import {GridColumnDirective} from '../../app/modules/shared/directives/grid-column.directive';
 import {ButtonComponent} from '../../app/modules/shared/components/button/button.component';
 import {Winners} from '../../app/modules/shared/static-files/enums';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -32,8 +32,8 @@ storiesOf('GameResult', module)
       ],
       declarations: [
         ButtonComponent,
-        BootstrapRowDirective,
-        BootstrapColumnDirective,
+        GridRowDirective,
+        GridColumnDirective,
       ]
     },
   }));

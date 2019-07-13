@@ -6,8 +6,8 @@ import {TranslateDirective} from '../app/modules/shared/modules/translate/transl
 import {StorybookTranslateModule} from './storybook-translate.module';
 import {MatDialogModule} from '@angular/material';
 import {ButtonRowComponent} from '../app/modules/shared/components/button-row/button-row.component';
-import {BootstrapRowDirective} from '../app/modules/shared/directives/bootstrap-row.directive';
-import {BootstrapColumnDirective} from '../app/modules/shared/directives/bootstrap-column.directive';
+import {GridRowDirective} from '../app/modules/shared/directives/grid-row.directive';
+import {GridColumnDirective} from '../app/modules/shared/directives/grid-column.directive';
 
 storiesOf('Button row', module)
   .add('2 buttons', () => ({
@@ -25,8 +25,8 @@ storiesOf('Button row', module)
       ],
       declarations: [
         TranslateDirective,
-        BootstrapRowDirective,
-        BootstrapColumnDirective,
+        GridRowDirective,
+        GridColumnDirective,
         ButtonComponent],
       providers: [],
     },

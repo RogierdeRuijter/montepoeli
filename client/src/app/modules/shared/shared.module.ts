@@ -9,13 +9,14 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {NgxSkeletonLoaderModule} from 'ngx-skeleton-loader';
 import {ButtonComponent} from './components/button/button.component';
 import {IconComponent} from './modules/icon/icon/icon.component';
-import {BootstrapColumnDirective} from './directives/bootstrap-column.directive';
-import {BootstrapRowDirective} from './directives/bootstrap-row.directive';
+import {GridColumnDirective} from './directives/grid-column.directive';
+import {GridRowDirective} from './directives/grid-row.directive';
 import {AuthGuard} from './guards/auth-guard.service';
 import {ButtonRowComponent} from './components/button-row/button-row.component';
 import {HttpErrorInterceptor} from './interceptors/http-error.interceptor';
 import {IconModule} from './modules/icon/icon.module';
 import {CustomTranslateModule} from './modules/translate/custom-translate.module';
+import {PositionDirective} from './directives/position.directive';
 
 @NgModule({
   imports: [
@@ -30,9 +31,10 @@ import {CustomTranslateModule} from './modules/translate/custom-translate.module
   ],
   declarations: [
     ButtonComponent,
-    BootstrapColumnDirective,
-    BootstrapRowDirective,
+    GridColumnDirective,
+    GridRowDirective,
     ButtonRowComponent,
+    PositionDirective,
   ],
   providers: [
     {provide: LOCALE_ID, useValue: 'en-US'},
@@ -42,8 +44,10 @@ import {CustomTranslateModule} from './modules/translate/custom-translate.module
   exports: [
     ButtonComponent,
     IconComponent,
-    BootstrapColumnDirective,
-    BootstrapRowDirective,
+
+    GridColumnDirective,
+    GridRowDirective,
+    PositionDirective,
 
     CommonModule,
     HttpClientModule,

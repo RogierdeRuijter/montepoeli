@@ -1,14 +1,14 @@
 import {Directive, ElementRef, Input, OnInit, Optional, Renderer2} from '@angular/core';
-import {BootstrapRowDirective} from './bootstrap-row.directive';
+import {GridRowDirective} from './grid-row.directive';
 import {Alignments, GridSizes} from '../static-files/enums';
 import {UtilService} from '../services/util/util.service';
 
 @Directive({
-  selector: '[appBootstrapColumn]',
+  selector: '[appGridColumn]',
 })
-export class BootstrapColumnDirective implements OnInit {
+export class GridColumnDirective implements OnInit {
 
-  @Input('appBootstrapColumn')
+  @Input('appGridColumn')
   public amountOfColumns: number[];
 
   @Input()
@@ -16,7 +16,7 @@ export class BootstrapColumnDirective implements OnInit {
 
   constructor(private elementRef: ElementRef,
               private renderer: Renderer2,
-              @Optional() private bootstrapRowDirective: BootstrapRowDirective,
+              @Optional() private bootstrapRowDirective: GridRowDirective,
               private utilService: UtilService) {
   }
 
@@ -42,7 +42,12 @@ export class BootstrapColumnDirective implements OnInit {
     });
 
     if (!this.utilService.isNullOrUndefined(this.alignmentCol)) {
-      this.addStyleToElement('text-align', 'center');
+      if (this.alignmentCol === Alignments.CENTER) {
+        // TODO: move to position directive
+        this.addStyleToElement('text-align', 'center');
+      } else {
+        throw new Error('unkown');
+      }
     }
   }
 

@@ -26,16 +26,16 @@
   </form>
 </div>
 
-<div [appBootstrapRow]="[GridSizes.EXTRA_SMALL, GridSizes.SMALL, GridSizes.MEDIUM, GridSizes.LARGE]"
+<div [appGridRow]="[GridSizes.EXTRA_SMALL, GridSizes.SMALL, GridSizes.MEDIUM, GridSizes.LARGE]"
      mat-dialog-actions>
   <!-- TODO: app-button-row -->
   <app-button (clickEvent)="cancel()"
-              [appBootstrapColumn]="[6, 6, 6, 6]"
+              [appGridColumn]="[6, 6, 6, 6]"
               [buttonFunction]="ButtonFunction.CANCEL"
               [buttonType]="ButtonType.PRIMARY">
   </app-button>
 
-  <app-button [appBootstrapColumn]="[6, 6, 6, 6]"
+  <app-button [appGridColumn]="[6, 6, 6, 6]"
               [buttonFunction]="ButtonFunction.SAVE"
               [buttonType]="ButtonType.PRIMARY"
               [dialogDataToSubmit]="data"

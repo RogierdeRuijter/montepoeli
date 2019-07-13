@@ -1,18 +1,21 @@
 import {Directive, ElementRef, Input, OnInit, Renderer2} from '@angular/core';
-import {Alignments, GridSizes} from '../static-files/enums';
+import {Alignments, Directions, GridSizes} from '../static-files/enums';
 import {UtilService} from '../services/util/util.service';
 import {ShouldBeDefinedException} from '../exceptions/ShouldBeDefinedException';
 
 @Directive({
-  selector: '[appBootstrapRow]',
+  selector: '[appGridRow]',
 })
-export class BootstrapRowDirective implements OnInit {
+export class GridRowDirective implements OnInit {
 
-  @Input('appBootstrapRow')
+  @Input('appGridRow')
   public gridSizes: GridSizes[];
 
   @Input()
   public alignment: Alignments | Alignments[];
+
+  @Input()
+  public direction: Directions = Directions.ROW;
 
   constructor(private elementRef: ElementRef,
               private renderer: Renderer2,
@@ -24,7 +27,12 @@ export class BootstrapRowDirective implements OnInit {
       throw new ShouldBeDefinedException('All necessary grid sizes');
     }
 
-    this.addClassToElement('row');
+    if (this.direction === Directions.ROW) {
+      this.addClassToElement('row');
+    } else if (this.direction === Directions.COLUMN) {
+      this.addClassToElement('d-flex');
+      this.addClassToElement('flex-column');
+    }
 
     if (!this.utilService.isNullOrUndefined(this.alignment)) {
       if (this.alignment instanceof Array) {
@@ -59,6 +67,11 @@ export class BootstrapRowDirective implements OnInit {
     if (alignment === Alignments.BASELINE) {
       this.addClassToElement('d-flex');
       this.addClassToElement('align-items-baseline');
+    }
+
+    if (alignment === Alignments.END) {
+      this.addClassToElement('d-flex');
+      this.addClassToElement('align-items-end');
     }
   }
 

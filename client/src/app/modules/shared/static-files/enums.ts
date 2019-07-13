@@ -55,5 +55,15 @@ export enum Alignments {
   RIGHT,
   CENTER,
   VERTICAL,
-  BASELINE
+  BASELINE,
+  END
+}
+
+export enum Directions {
+  ROW,
+  COLUMN
+}
+
+export enum Positions {
+  FIXED_MIDDLE
 }

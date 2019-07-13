@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Actions, Alignments, GridSizes} from '../../../../shared/static-files/enums';
+import {Actions, Alignments, GridSizes, Positions} from '../../../../shared/static-files/enums';
 import {Observable} from 'rxjs';
 import {Game} from '../../../../shared/interfaces/game.interface';
 
@@ -34,6 +34,7 @@ export class OverviewComponent {
   public actionEvent: EventEmitter<any> = new EventEmitter();
 
   public Alignments = Alignments;
+  public Positions = Positions;
 
   public emitActionEvent(event: any): void {
     this.actionEvent.emit(event);
