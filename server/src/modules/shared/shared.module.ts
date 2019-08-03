@@ -1,6 +1,6 @@
 import {Module} from '@nestjs/common';
-import {SortService} from './sort.service';
-import {UtilService} from './util.service';
+import {SortService} from './services/sort/sort.service';
+import {UtilService} from './services/util.service';
 
 @Module({
   imports: [],

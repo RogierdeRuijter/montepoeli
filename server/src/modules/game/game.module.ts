@@ -5,8 +5,8 @@ import {MongooseModule} from '@nestjs/mongoose';
 import {AuthModule} from '../auth/auth.module';
 import {GameSchema} from '../../schemas/game.schema';
 import {UserSchema} from '../../schemas/user.schema';
-import {GameMapper} from './game.mapper';
 import {SharedModule} from '../shared/shared.module';
+import {GameMapperService} from './game-mapper/game-mapper.service';
 
 @Module({
   imports: [
@@ -15,7 +15,7 @@ import {SharedModule} from '../shared/shared.module';
     AuthModule,
     SharedModule,
   ],
-  providers: [GameService, GameMapper],
+  providers: [GameService, GameMapperService],
   controllers: [GameController],
   exports: [],
 })
