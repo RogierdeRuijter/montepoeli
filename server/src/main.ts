@@ -1,5 +1,5 @@
 import {NestFactory} from '@nestjs/core';
-import {AppModule} from './app/app.module';
+import {AppModule} from './modules/app/app.module';
 import * as cookieParser from 'cookie-parser';
 
 async function bootstrap() {
@@ -9,7 +9,7 @@ async function bootstrap() {
 
   let origin: boolean | string = true;
   if (process.env.ENV === 'prod') {
-    origin = 'https://www.montepoeli.club';
+    origin = 'https://www.montepoeli.club'; // TODO: use env variable
   }
 
   app.enableCors({

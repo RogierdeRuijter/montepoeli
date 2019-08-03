@@ -1,7 +1,7 @@
 import {BadRequestException, Body, Controller, Get, UseGuards} from '@nestjs/common';
 import {UsersService} from './users.service';
-import {User} from '../models/interfaces/user.interface';
-import {CreateUserDto} from '../models/create-dtos/create-user.dto';
+import {User} from '../../models/interfaces/user.interface';
+import {CreateUserDto} from '../../models/create-dtos/create-user.dto';
 import {AuthGuard} from '@nestjs/passport';
 
 @Controller('/users')

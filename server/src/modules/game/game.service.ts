@@ -1,10 +1,10 @@
 import {Model} from 'mongoose';
 import {BadRequestException, Injectable} from '@nestjs/common';
 import {InjectModel} from '@nestjs/mongoose';
-import {Game} from '../models/interfaces/game.interface';
-import {CreateGameDto} from '../models/create-dtos/create-game.dto';
+import {Game} from '../../models/interfaces/game.interface';
+import {CreateGameDto} from '../../models/create-dtos/create-game.dto';
 import {GameMapper} from './game.mapper';
-import {GameDto} from '../models/dtos/game.dto';
+import {GameDto} from '../../models/dtos/game.dto';
 import {SortService} from '../shared/sort.service';
 
 @Injectable()

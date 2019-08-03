@@ -1,8 +1,6 @@
 import {Module} from '@nestjs/common';
 import {AppController} from './app.controller';
-import {AppService} from './app.service';
 import {MongooseModule} from '@nestjs/mongoose';
-import {CatsModule} from '../cats/cats.module';
 import {AuthModule} from '../auth/auth.module';
 import {UsersModule} from '../users/users.module';
 import {GameModule} from '../game/game.module';
@@ -12,14 +10,12 @@ const password = process.env.MONGO_PASSWORD;
 
 @Module({
   imports: [
-    CatsModule,
     MongooseModule.forRoot('mongodb://' + username + ':' + password + '@mongodb/admin'),
     AuthModule,
     UsersModule,
     GameModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {
 }

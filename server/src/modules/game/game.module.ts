@@ -3,8 +3,8 @@ import {GameService} from './game.service';
 import {GameController} from './game.controller';
 import {MongooseModule} from '@nestjs/mongoose';
 import {AuthModule} from '../auth/auth.module';
-import {GameSchema} from '../schemas/game.schema';
-import {UserSchema} from '../schemas/user.schema';
+import {GameSchema} from '../../schemas/game.schema';
+import {UserSchema} from '../../schemas/user.schema';
 import {GameMapper} from './game.mapper';
 import {SharedModule} from '../shared/shared.module';
 

@@ -1,9 +1,9 @@
 import {Model} from 'mongoose';
 import {Injectable} from '@nestjs/common';
 import {InjectModel} from '@nestjs/mongoose';
-import {User} from '../models/interfaces/user.interface';
-import {Mapper} from '../models/interfaces/mapper.interface';
-import {UserDto} from '../models/dtos/user.dto';
+import {User} from '../../models/interfaces/user.interface';
+import {Mapper} from '../../models/interfaces/mapper.interface';
+import {UserDto} from '../../models/dtos/user.dto';
 
 @Injectable()
 export class UserMapper implements Mapper<UserDto> {

@@ -1,9 +1,9 @@
 import {Body, Controller, Get, Post, UseGuards} from '@nestjs/common';
 import {GameService} from './game.service';
-import {Game} from '../models/interfaces/game.interface';
-import {CreateGameDto} from '../models/create-dtos/create-game.dto';
+import {Game} from '../../models/interfaces/game.interface';
+import {CreateGameDto} from '../../models/create-dtos/create-game.dto';
 import {AuthGuard} from '@nestjs/passport';
-import {GameDto} from '../models/dtos/game.dto';
+import {GameDto} from '../../models/dtos/game.dto';
 
 @Controller('/game')
 export class GameController {

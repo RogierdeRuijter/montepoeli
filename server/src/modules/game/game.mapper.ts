@@ -1,11 +1,11 @@
 import {Model} from 'mongoose';
 import {Injectable, NotFoundException} from '@nestjs/common';
-import {GameDto} from '../models/dtos/game.dto';
-import {Game} from '../models/interfaces/game.interface';
+import {GameDto} from '../../models/dtos/game.dto';
+import {Game} from '../../models/interfaces/game.interface';
 import {InjectModel} from '@nestjs/mongoose';
-import {User} from '../models/interfaces/user.interface';
-import {Outcomes} from '../constants/enums';
-import {CreateGameDto} from '../models/create-dtos/create-game.dto';
+import {User} from '../../models/interfaces/user.interface';
+import {Outcomes} from '../../constants/enums';
+import {CreateGameDto} from '../../models/create-dtos/create-game.dto';
 import {UtilService} from '../shared/util.service';
 
 @Injectable()

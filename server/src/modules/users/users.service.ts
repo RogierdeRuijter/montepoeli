@@ -1,11 +1,11 @@
 import {Model} from 'mongoose';
 import {Injectable, InternalServerErrorException} from '@nestjs/common';
-import {User} from '../models/interfaces/user.interface';
+import {User} from '../../models/interfaces/user.interface';
 import {InjectModel} from '@nestjs/mongoose';
-import {CreateUserDto} from '../models/create-dtos/create-user.dto';
-import {JwtPayload} from '../models/interfaces/jwt-payload.interface';
+import {CreateUserDto} from '../../models/create-dtos/create-user.dto';
+import {JwtPayload} from '../../models/interfaces/jwt-payload.interface';
 import * as bcrypt from 'bcrypt';
-import {UserDto} from '../models/dtos/user.dto';
+import {UserDto} from '../../models/dtos/user.dto';
 import {UserMapper} from './user.mapper';
 
 @Injectable()

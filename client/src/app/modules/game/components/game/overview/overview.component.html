@@ -11,7 +11,8 @@
       </app-game-table-loader>
     </div>
     <div [appGridColumn]="[2, 2, 1, 1]">
-      <ui-table-action (actionClickEvent)="emitActionEvent($event)" [appPosition]="Positions.FIXED_MIDDLE"
+      <ui-table-action (actionClickEvent)="emitActionEvent($event)"
+                       [appPosition]="Positions.FIXED_MIDDLE"
                        [actions]="actions"
                        [disabled]="disabled">
       </ui-table-action>
