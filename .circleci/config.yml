@@ -15,10 +15,10 @@ jobs:
     # - image: circleci/mongo:3.4.4
 
     working_directory: ~/repo
-      - image: circleci/mongo:4.1.10
-        environment:
-          - MONGO_INITDB_ROOT_USERNAME=root
-          - MONGO_INITDB_ROOT_PASSWORD=example
+    - image: circleci/mongo:4.1.10
+      environment:
+        - MONGO_INITDB_ROOT_USERNAME=root
+        - MONGO_INITDB_ROOT_PASSWORD=example
 
     steps:
     - checkout
