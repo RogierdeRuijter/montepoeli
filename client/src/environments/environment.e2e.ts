@@ -1,5 +1,9 @@
+// This file can be replaced during build by using the `fileReplacements` array.
+// `ng build ---prod` replaces `environment.ts` with `environment.prod.ts`.
+// The list of file replacements can be found in `angular.json`.
+
 export const environment = {
-  production: true,
+  production: false,
   AUTHENTICATION: {
     TOKENNAME: 'montepoeli-jwt',
   },
@@ -14,7 +18,7 @@ export const environment = {
   },
   BACKEND: {
     URL: {
-      FULL: 'https://montepoeli.club/api',
+      FULL: 'http://localhost:3001/api',
     },
     ENTRY_POINTS: {
       SIGNIN: '/signIn',

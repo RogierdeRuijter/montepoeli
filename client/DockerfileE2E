@@ -1,0 +1,29 @@
+FROM node:12
+
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+
+RUN npm install -g @angular/cli --loglevel error
+
+# Install Java
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    echo 'Y' | apt-get install default-jdk
+
+# Install Chrome for Selenium
+RUN curl https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -o /chrome.deb && \
+    dpkg -i /chrome.deb || apt-get install -yf && \
+    rm /chrome.deb
+
+# Install chromedriver for Selenium
+RUN curl https://chromedriver.storage.googleapis.com/2.31/chromedriver_linux64.zip -o /usr/local/bin/chromedriver && \
+    chmod +x /usr/local/bin/chromedriver
+
+# use cached layer for node modules
+COPY package.json package.json
+RUN cd /usr/src/app/ && npm install --loglevel error
+
+ADD . /usr/src/app
+
+EXPOSE 4200
+EXPOSE 49153

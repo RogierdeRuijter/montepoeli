@@ -24,6 +24,7 @@ services:
       - MONGO_PASSWORD=example
       - SERVER_SECRET=secret01
       - ENV=dev
+      - MONGO_DNS_NAME=mongodb
     ports:
       - "3000:3000"
     volumes:

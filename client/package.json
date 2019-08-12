@@ -12,7 +12,7 @@
     "test:jest": "jest",
     "lint": "ng lint",
     "e2e": "ng e2e --no-webdriver-update",
-    "e2e:build-server": "npm run webdriver-update:protractor && ng e2e --no-webdriver-update",
+    "e2e:build-server": "npm run webdriver-update && npm run webdriver-update:protractor && ng e2e --no-webdriver-update",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "build-storybook-web-app": "build-storybook -c .storybook -o .out",

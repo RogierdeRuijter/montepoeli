@@ -8,9 +8,11 @@ import {GameModule} from '../game/game.module';
 const username = process.env.MONGO_USERNAME;
 const password = process.env.MONGO_PASSWORD;
 
+const mongoDNS = process.env.MONGO_DNS_NAME;
+
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://' + username + ':' + password + '@mongodb/admin'),
+    MongooseModule.forRoot('mongodb://' + username + ':' + password + '@' + mongoDNS + '/admin'),
     AuthModule,
     UsersModule,
     GameModule,

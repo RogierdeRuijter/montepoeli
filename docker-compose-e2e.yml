@@ -1,13 +1,13 @@
 version: "2"
 services:
-  client-e2e-tests:
+  client-e2e:
     build:
       context: client
-      dockerfile: LocalDockerfile
-    container_name: montepouli-client
+      dockerfile: DockerfileE2E
+    container_name: montepouli-client-e2e
     ports:
-      - "4200:4200"
-      - "49153:49153"
+      - "4201:4200"
+      - "49154:49153"
     volumes:
       - ./client/src:/usr/src/app/src
       - ./client/angular.json:/usr/src/app/angular.json
@@ -15,28 +15,29 @@ services:
     networks:
       - e2e
     depends_on:
-      - server
-      - mongodb
+      - server-e2e
+      - mongodb-e2e
     command: bash -c 'npm run e2e:build-server'
 
-  server:
+  server-e2e:
     build: server
-    container_name: montepouli-e2e-server
+    container_name: montepouli-server-e2e
     environment:
       - MONGO_USERNAME=root
       - MONGO_PASSWORD=example
       - SERVER_SECRET=secret01
       - ENV=dev
+      - MONGO_DNS_NAME=mongodb-e2e
     ports:
-      - "3000:3000"
+      - "3001:3000"
     volumes:
       - ./server/src:/usr/src/app/src
     networks:
       - e2e
     command: sh -c 'npm run start:dev'
 
-  mongodb:
-    container_name: montepouli-e2e-mongo-db
+  mongodb-e2e:
+    container_name: montepouli-mongodb-e2e
     image: mongo:4.1
     environment:
       - MONGO_INITDB_ROOT_USERNAME=root
@@ -45,8 +46,8 @@ services:
       - montepouli-e2e-volume:/data/db
       - montepouli-e2e-volume:/data/configdb
     ports:
-      - "27017:27017"
-      - "28017:28017"
+      - "27017"
+      - "28017"
     networks:
       - e2e
 
