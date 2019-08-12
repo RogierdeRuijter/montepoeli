@@ -24,6 +24,7 @@ jobs:
     - run: |
         cd client
         npm i
+        npm run start:e2e-environment
         npm run e2e:build-server
         CLIENT_TAG=1.0
         IMAGE_CLIENT_NAME=montepouli-client

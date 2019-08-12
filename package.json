@@ -8,6 +8,8 @@
     "build-client": "cd client && npm run build",
     "build-server": "cd server && npm run build",
     "start": "npm run docker-compose-rebuild",
+    "start:e2e-environment": "docker-compose -f docker-compose-e2e.yml up -d",
+    "stop": "docker-compose down",
     "docker-compose-rebuild": "docker-compose build && docker-compose down && docker-compose up -d",
     "docker-compose-rebuild-no-cache": "docker-compose build --no-cache && docker-compose down && docker-compose up -d",
     "docker:storybook": "start-storybook -p 65200 --ci"

@@ -1,0 +1,38 @@
+version: "2"
+services:
+  server:
+    build: server
+    container_name: montepouli-e2e-server
+    environment:
+      - MONGO_USERNAME=root
+      - MONGO_PASSWORD=example
+      - SERVER_SECRET=secret01
+      - ENV=dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./server/src:/usr/src/app/src
+    networks:
+      - e2e
+    command: sh -c 'npm run start:dev'
+
+  mongodb:
+    container_name: montepouli-e2e-mongo-db
+    image: mongo:4.1
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=example
+    volumes:
+      - montepouli-e2e-volume:/data/db
+      - montepouli-e2e-volume:/data/configdb
+    ports:
+      - "27017:27017"
+      - "28017:28017"
+    networks:
+      - e2e
+
+networks:
+  e2e:
+
+volumes:
+  montepouli-e2e-volume:
