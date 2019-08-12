@@ -18,7 +18,7 @@ export const environment = {
   },
   BACKEND: {
     URL: {
-      FULL: 'http://localhost:3001/api',
+      FULL: 'http://server-e2e:3000/api',
     },
     ENTRY_POINTS: {
       SIGNIN: '/signIn',
