@@ -10,7 +10,7 @@ export class UserFactory implements Factory<User> {
       id: id ? id : this.factoryUtilService.id(),
       name: this.factoryUtilService.name(),
       username: this.factoryUtilService.name(),
-      passwordHash: this.factoryUtilService.passwordHash(),
+      password: this.factoryUtilService.passwordHash(),
     };
   }
 

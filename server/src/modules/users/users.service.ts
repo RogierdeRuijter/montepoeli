@@ -26,7 +26,7 @@ export class UsersService {
         return;
       }
 
-      bcrypt.compare(payload.password, user.passwordHash, (err, res) => {
+      bcrypt.compare(payload.password, user.password, (err, res) => {
         if (res === true) {
           resolve(user);
         } else if (res === false) {

@@ -6,14 +6,16 @@ import {UserMapper} from './user.mapper';
 import {UsersController} from './users.controller';
 import {AuthModule} from '../auth/auth.module';
 import {UserRepositoryService} from './user-repository/user-repository.service';
+import {SharedModule} from '../shared/shared.module';
 
 @Module({
   imports: [
     MongooseModule.forFeature([{name: 'User', schema: UserSchema}]),
     AuthModule,
+    SharedModule,
   ],
   controllers: [UsersController],
   providers: [UsersService, UserMapper, UserRepositoryService],
-  exports: [UsersService]
+  exports: [UsersService, UserRepositoryService],
 })
 export class UsersModule {}

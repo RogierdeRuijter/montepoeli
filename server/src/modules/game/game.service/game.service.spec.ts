@@ -56,6 +56,7 @@ describe('GameService', () => {
         black: 'Isabelle',
         white: 'Rogier',
       }] as Game[];
+
       expect(result).toEqual(output);
     });
   });

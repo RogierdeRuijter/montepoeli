@@ -11,7 +11,7 @@
           [appGridRow]="[GridSizes.EXTRA_SMALL, GridSizes.SMALL, GridSizes.MEDIUM, GridSizes.LARGE]">
       <div class="form-group">
         <mat-form-field class="full-width">
-          <input #username autofocus matInput name="username" ngModel required>
+          <input #username autofocus id="username" matInput name="username" ngModel required>
           <mat-placeholder>
             <span appTranslate="pages.login.username"></span>
           </mat-placeholder>
@@ -19,7 +19,7 @@
       </div>
       <div class="form-group">
         <mat-form-field class="full-width">
-          <input id="password" matInput name="password" ngModel required type="password">
+          <input id="password" id="password" matInput name="password" ngModel required type="password">
           <mat-placeholder>
             <span appTranslate="pages.login.password"></span>
           </mat-placeholder>
@@ -27,6 +27,7 @@
       </div>
 
       <app-button [buttonFunction]="ButtonFunction.LOGIN"
+                  id="submit"
                   [buttonType]="ButtonTypes.PRIMARY"
                   [disabled]="!loginForm.valid || disabled">
       </app-button>

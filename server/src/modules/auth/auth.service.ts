@@ -17,8 +17,6 @@ export class AuthService {
   }
 
   async signIn(body): Promise<any> {
-    // In the real-world app you shouldn't expose this method publicly
-    // instead, return a token once you verify user credentials
     return new Promise<any>((resolve, reject) => this.usersService.verifyUser(body)
       .then((user: User) => {
         const jwtPayload: JwtPayload = {username: user.username};

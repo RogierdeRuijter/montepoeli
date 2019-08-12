@@ -7,6 +7,8 @@ import {UsersService} from '../users/users.service';
 import {MongooseModule} from '@nestjs/mongoose';
 import {UserSchema} from '../../schemas/user.schema';
 import {UserMapper} from '../users/user.mapper';
+import {UserRepositoryService} from '../users/user-repository/user-repository.service';
+import {SharedModule} from '../shared/shared.module';
 
 @Module({
   imports: [
@@ -17,9 +19,14 @@ import {UserMapper} from '../users/user.mapper';
       signOptions: {
         expiresIn: 3600,
       },
-    })
+    }),
+    SharedModule,
   ],
-  providers: [AuthService, JwtStrategy, UsersService, UserMapper],
+  providers: [AuthService,
+    JwtStrategy,
+    UsersService,
+    UserMapper,
+    UserRepositoryService],
   exports: [PassportModule, AuthService],
 })
 export class AuthModule {}

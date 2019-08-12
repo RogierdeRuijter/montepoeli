@@ -3,7 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {AuthGuard} from './modules/shared/guards/auth-guard.service';
 import {LoginComponent} from './components/login/login.component';
 import {HomeComponent} from './components/home/home.component';
-
+// TODO: use route constants
 const appRoutes: Routes = [
   {
     path: '',
