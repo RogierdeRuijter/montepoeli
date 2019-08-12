@@ -1,5 +1,24 @@
 version: "2"
 services:
+  client-e2e-tests:
+    build:
+      context: client
+      dockerfile: LocalDockerfile
+    container_name: montepouli-client
+    ports:
+      - "4201:4200"
+      - "49154:49153"
+    volumes:
+      - ./client/src:/usr/src/app/src
+      - ./client/angular.json:/usr/src/app/angular.json
+      - ./client/tslint.json:/usr/src/app/tslint.json
+    networks:
+      - e2e
+    depends_on:
+      - server
+      - mongodb
+    command: bash -c 'npm run e2e:build-server'
+
   server:
     build: server
     container_name: montepouli-e2e-server
@@ -9,7 +28,7 @@ services:
       - SERVER_SECRET=secret01
       - ENV=dev
     ports:
-      - "3000:3000"
+      - "3001:3001"
     volumes:
       - ./server/src:/usr/src/app/src
     networks:
@@ -26,8 +45,8 @@ services:
       - montepouli-e2e-volume:/data/db
       - montepouli-e2e-volume:/data/configdb
     ports:
-      - "27017:27017"
-      - "28017:28017"
+      - "27018:27017"
+      - "28018:28017"
     networks:
       - e2e
 
