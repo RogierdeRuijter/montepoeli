@@ -9,6 +9,7 @@ import {UtilService} from '../../shared/services/util/util.service';
 import {GameDto} from '../../../models/dtos/game.dto';
 import {GameDtoFactory} from '../../../factories/gameDto.factory';
 import {FactoryUtilService} from '../../../factories/factory-util.service';
+import {UserRepositoryService} from '../../users/user-repository/user-repository.service';
 
 describe('GameMapperService', () => {
   let service: GameMapperService;
@@ -23,6 +24,7 @@ describe('GameMapperService', () => {
         {provide: getModelToken('User'), useFactory: factory},
         UtilService,
         GameMapperService,
+        UserRepositoryService,
       ],
     }).compile();
 

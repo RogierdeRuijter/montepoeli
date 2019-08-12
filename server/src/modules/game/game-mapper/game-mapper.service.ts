@@ -1,23 +1,22 @@
-import {Model} from 'mongoose';
 import {Injectable, NotFoundException} from '@nestjs/common';
-import {InjectModel} from '@nestjs/mongoose';
 import {UtilService} from '../../shared/services/util/util.service';
 import {User} from '../../../models/interfaces/user.interface';
 import {GameDto} from '../../../models/dtos/game.dto';
 import {Game} from '../../../models/interfaces/game.interface';
 import {Outcomes} from '../../../constants/enums';
 import {CreateGameDto} from '../../../models/create-dtos/create-game.dto';
+import {UserRepositoryService} from '../../users/user-repository/user-repository.service';
 
 @Injectable()
 export class GameMapperService {
 
-  public constructor(@InjectModel('User') private readonly userModel: Model<User>,
+  public constructor(private readonly userRepositoryService: UserRepositoryService,
                      private readonly utilService: UtilService) {
   }
 
   public convertGames(games: Game[]): Promise<GameDto[]> {
     return new Promise((resolve) =>
-      this.userModel.find().exec().then((users: User[]) => {
+      this.userRepositoryService.find().then((users: User[]) => {
         resolve(this.swapUsersIdsWithNames(games, users));
       }),
     );
@@ -39,7 +38,7 @@ export class GameMapperService {
 
   public convertCreateDto(createGameDto: CreateGameDto): Promise<Game> {
     return new Promise((resolve) =>
-      this.userModel.find().exec().then((users: User[]) => {
+      this.userRepositoryService.find().then((users: User[]) => {
         const blackUser: User = users.find((user: User) => user.name.toLowerCase() === createGameDto.black.toLowerCase());
         const whiteUser: User = users.find((user: User) => user.name.toLowerCase() === createGameDto.white.toLowerCase());
 

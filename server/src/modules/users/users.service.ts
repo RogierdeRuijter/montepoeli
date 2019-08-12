@@ -1,38 +1,32 @@
-import {Model} from 'mongoose';
-import {Injectable, InternalServerErrorException} from '@nestjs/common';
+import {Injectable} from '@nestjs/common';
 import {User} from '../../models/interfaces/user.interface';
-import {InjectModel} from '@nestjs/mongoose';
 import {CreateUserDto} from '../../models/create-dtos/create-user.dto';
 import {JwtPayload} from '../../models/interfaces/jwt-payload.interface';
 import * as bcrypt from 'bcrypt';
 import {UserDto} from '../../models/dtos/user.dto';
 import {UserMapper} from './user.mapper';
+import {UserRepositoryService} from './user-repository/user-repository.service';
+import {UtilService} from '../shared/services/util/util.service';
 
 @Injectable()
 export class UsersService {
-  constructor(@InjectModel('User') private readonly userModel: Model<User>,
-              private readonly userMapper: UserMapper) {
+  constructor(private readonly userRepositoryService: UserRepositoryService,
+              private readonly userMapper: UserMapper,
+              private readonly utilService: UtilService) {
   }
 
   public findByUsername(payload: JwtPayload): Promise<User> {
-    return this.userModel.find({username: payload.username}).exec();
+    return this.userRepositoryService.findByUsername(payload.username);
   }
 
   public verifyUser(payload): Promise<User> {
-    return new Promise((resolve, reject) => this.userModel.find({username: payload.username}).exec().then((users) => {
-      if (users.length === 0) {
+    return new Promise((resolve, reject) => this.userRepositoryService.findByUsername(payload.username).then((user: User) => {
+      if (this.utilService.isNullOrUndefined(user)) {
         reject('user not found');
         return;
       }
 
-      if (users.length > 1) {
-        reject(new InternalServerErrorException('more than 1 user with the same username'));
-        return;
-      }
-
-      const user = users[0];
-
-      bcrypt.compare(payload.password, user.password, (err, res) => {
+      bcrypt.compare(payload.password, user.passwordHash, (err, res) => {
         if (res === true) {
           resolve(user);
         } else if (res === false) {
@@ -45,14 +39,15 @@ export class UsersService {
   public create(createUserDto: CreateUserDto): Promise<User> {
     return new Promise((resolve) => bcrypt.hash(createUserDto.password, 10, (err, passwordHash) => {
       createUserDto.password = passwordHash;
-      const createdUser = new this.userModel(createUserDto);
-      resolve(createdUser.save());
+      // @ts-ignore
+      // FIXME: convert dto
+      resolve(this.userRepositoryService.save(createUserDto));
     }));
   }
 
   public getAllUsers(): Promise<UserDto[]> {
     return new Promise<UserDto[]>(resolve => {
-      this.userModel.find().exec().then((users: User[]) =>
+      this.userRepositoryService.find().then((users: User[]) =>
         resolve(this.userMapper.convertUsers(users)));
     });
   }

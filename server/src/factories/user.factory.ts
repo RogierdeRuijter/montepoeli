@@ -5,9 +5,9 @@ import {FactoryUtilService} from './factory-util.service';
 export class UserFactory implements Factory<User> {
   private factoryUtilService = new FactoryUtilService();
 
-  public create(): User {
+  public create(id?: string): User {
     return {
-      id: this.factoryUtilService.id(),
+      id: id ? id : this.factoryUtilService.id(),
       name: this.factoryUtilService.name(),
       username: this.factoryUtilService.name(),
       passwordHash: this.factoryUtilService.passwordHash(),
