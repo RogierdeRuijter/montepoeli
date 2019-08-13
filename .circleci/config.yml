@@ -14,10 +14,10 @@ jobs:
       # documented at https://circleci.com/docs/2.0/circleci-images/
       # - image: circleci/mongo:3.4.4
 
-      - image: circleci/mongo:4.1.10
-        environment:
-          - MONGO_INITDB_ROOT_USERNAME=root
-          - MONGO_INITDB_ROOT_PASSWORD=example
+    #      - image: circleci/mongo:4.1.10
+    #        environment:
+    #          - MONGO_INITDB_ROOT_USERNAME=root
+    #          - MONGO_INITDB_ROOT_PASSWORD=example
 
     working_directory: ~/repo
 
@@ -27,9 +27,7 @@ jobs:
           docker_layer_caching: true
 
       - run: |
-          cd client
-          npm i
-          npm run e2e:build-server
+          npm run start:e2e-environment
 
       - run: |
           cd client
