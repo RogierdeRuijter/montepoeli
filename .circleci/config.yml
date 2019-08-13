@@ -23,6 +23,9 @@ jobs:
           - docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
 
       - image: montepoeli.club/montepouli-server:1.0
+        auth:
+          username: $DOCKER_USER
+          password: $DOCKER_PASSWORD
         environment:
           - MONGO_USERNAME=root
           - MONGO_PASSWORD=example
