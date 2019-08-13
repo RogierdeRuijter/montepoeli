@@ -19,9 +19,6 @@ jobs:
           - MONGO_INITDB_ROOT_USERNAME=root
           - MONGO_INITDB_ROOT_PASSWORD=example
 
-      - run: |
-          - docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
-
       - image: montepoeli.club/montepouli-server:1.0
         auth:
           username: $DOCKER_USER
