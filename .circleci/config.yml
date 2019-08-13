@@ -19,6 +19,14 @@ jobs:
           - MONGO_INITDB_ROOT_USERNAME=root
           - MONGO_INITDB_ROOT_PASSWORD=example
 
+      - image: montepoeli.club/montepouli-server:1.0
+        environment:
+          - MONGO_USERNAME=root
+          - MONGO_PASSWORD=example
+          - SERVER_SECRET=secret01
+          - ENV=dev
+          - MONGO_DNS_NAME=mongodb
+
     working_directory: ~/repo
 
     steps:
