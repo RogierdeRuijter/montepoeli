@@ -28,6 +28,7 @@ jobs:
 
       - run: |
           cd client
+          npm i
           npm run e2e:build-server
 
       - run: |
