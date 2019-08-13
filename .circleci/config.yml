@@ -28,7 +28,7 @@ jobs:
           - MONGO_PASSWORD=example
           - SERVER_SECRET=secret01
           - ENV=dev
-          - MONGO_DNS_NAME=mongodb
+          - MONGO_DNS_NAME=localhost
         command: sh -c 'npm run start:dev'
 
     working_directory: ~/repo
