@@ -10,9 +10,9 @@ jobs:
       - image: circleci/node:11
 
       - image: circleci/mongo:4.1.10
-          environment:
-            - MONGO_INITDB_ROOT_USERNAME=root
-            - MONGO_INITDB_ROOT_PASSWORD=example
+        environment:
+          - MONGO_INITDB_ROOT_USERNAME=root
+          - MONGO_INITDB_ROOT_PASSWORD=example
 
       - image: montepoeli.club/montepouli-server:1.0
         auth:
