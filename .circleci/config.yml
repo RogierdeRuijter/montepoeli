@@ -111,7 +111,7 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       - run: |
-        npm run protractor
+          npm run protractor
 
 workflows:
   version: 2
