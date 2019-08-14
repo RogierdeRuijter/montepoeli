@@ -16,10 +16,11 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: true
 
+      CLIENT_TAG=1.0
+      IMAGE_CLIENT_NAME=montepouli-client
+
       - run: |
           cd client
-          CLIENT_TAG=1.0
-          IMAGE_CLIENT_NAME=montepouli-client
           docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG .
 
       - deploy:
@@ -39,10 +40,10 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: true
 
+      SERVER_TAG=1.0
+      IMAGE_SERVER_NAME=montepouli-server
       - run: |
           cd server
-          SERVER_TAG=1.0
-          IMAGE_SERVER_NAME=montepouli-server
           docker build -t $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG .
 
       - deploy:
