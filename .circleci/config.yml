@@ -9,6 +9,30 @@ jobs:
       # specify the version you desire here
       - image: circleci/node:11
 
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+
+      - run: |
+          cd client
+          CLIENT_TAG=1.0
+          IMAGE_CLIENT_NAME=montepouli-client
+          docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG .
+          docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
+          docker push $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG
+
+      - run: |
+          cd server
+          SERVER_TAG=1.0
+          IMAGE_SERVER_NAME=montepouli-server
+          docker build -t $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG .
+          docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
+          docker push $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG
+  test:
+    docker:
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
@@ -42,31 +66,6 @@ jobs:
           username: $DOCKER_USER
           password: $DOCKER_PASSWORD
         command: sh -c 'sleep 20 && npm run protractor'
-
-    working_directory: ~/repo
-
-    steps:
-      - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true
-
-      - run: |
-          cd client
-          CLIENT_TAG=1.0
-          IMAGE_CLIENT_NAME=montepouli-client
-          docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG .
-          docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
-          docker push $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG
-
-      #          docker push montepoeli.club/montepoeli-client-e2e:0.1
-      #          docker target dockere2e:latest montepoeli.club/montepoeli-client-e2e:0.1
-      - run: |
-          cd server
-          SERVER_TAG=1.0
-          IMAGE_SERVER_NAME=montepouli-server
-          docker build -t $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG .
-          docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
-          docker push $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG
 
 #    - run: |
 #        cd client
