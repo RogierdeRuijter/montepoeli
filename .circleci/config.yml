@@ -9,8 +9,37 @@ jobs:
       # specify the version you desire here
       - image: circleci/node:11
 
+      - image: circleci/mongo:4.1.10
+          environment:
+            - MONGO_INITDB_ROOT_USERNAME=root
+            - MONGO_INITDB_ROOT_PASSWORD=example
+
+      - image: montepoeli.club/montepouli-server:1.0
+        auth:
+          username: $DOCKER_USER
+          password: $DOCKER_PASSWORD
+        environment:
+          - MONGO_USERNAME=root
+          - MONGO_PASSWORD=example
+          - SERVER_SECRET=secret01
+          - ENV=dev
+          - MONGO_DNS_NAME=localhost
+        command: sh -c 'npm run start:dev'
+
+      - image: montepoeli.club/montepoeli-client-e2e:0.1
+        auth:
+          username: $DOCKER_USER
+          password: $DOCKER_PASSWORD
+        command: sh -c 'npm run start:dev'
+
+      - image: montepoeli.club/montepoeli-client-e2e:0.1
+        auth:
+          username: $DOCKER_USER
+          password: $DOCKER_PASSWORD
+        command: sh -c 'sleep 20 && npm run protractor'
+
     working_directory: ~/repo
-    parallelism: 2
+    #    parallelism: 2
     steps:
       - checkout
       - setup_remote_docker:
@@ -38,49 +67,24 @@ jobs:
           docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
           docker push $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG
 
-  test:
-    docker:
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/mongo:3.4.4
-
-      - image: circleci/mongo:4.1.10
-        environment:
-          - MONGO_INITDB_ROOT_USERNAME=root
-          - MONGO_INITDB_ROOT_PASSWORD=example
-
-      - image: montepoeli.club/montepouli-server:1.0
-        auth:
-          username: $DOCKER_USER
-          password: $DOCKER_PASSWORD
-        environment:
-          - MONGO_USERNAME=root
-          - MONGO_PASSWORD=example
-          - SERVER_SECRET=secret01
-          - ENV=dev
-          - MONGO_DNS_NAME=localhost
-        command: sh -c 'npm run start:dev'
-
-      - image: montepoeli.club/montepoeli-client-e2e:0.1
-        auth:
-          username: $DOCKER_USER
-          password: $DOCKER_PASSWORD
-        command: sh -c 'npm run start:dev'
-
-      - image: montepoeli.club/montepoeli-client-e2e:0.1
-        auth:
-          username: $DOCKER_USER
-          password: $DOCKER_PASSWORD
-        command: sh -c 'sleep 20 && npm run protractor'
-
-    steps:
-      - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true
-
-      - run: |
-          echo hello
+#  test:
+#    docker:
+#      # Specify service dependencies here if necessary
+#      # CircleCI maintains a library of pre-built images
+#      # documented at https://circleci.com/docs/2.0/circleci-images/
+#      # - image: circleci/mongo:3.4.4
+#
+#    steps:
+#      - checkout
+#      - setup_remote_docker:
+#          docker_layer_caching: true
+#
+#      - run: |
+#          echo hello
+#
+#  deploy:
+#    docker:
+#      - image
 #    - run: |
 #        cd client
 #        STORYBOOK_TAG=1.0
