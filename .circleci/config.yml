@@ -67,8 +67,13 @@ jobs:
           password: $DOCKER_PASSWORD
         command: sh -c 'sleep 20 && npm run protractor'
 
-      steps:
-        - run: "true"
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+
+      - run: |
+          echo hello
 #    - run: |
 #        cd client
 #        STORYBOOK_TAG=1.0
