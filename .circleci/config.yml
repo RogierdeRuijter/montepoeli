@@ -35,33 +35,33 @@ jobs:
   test:
     docker:
       - image: circleci/mongo:4.1.10
-          environment:
+        environment:
             - MONGO_INITDB_ROOT_USERNAME=root
             - MONGO_INITDB_ROOT_PASSWORD=example
 
-            - image: montepoeli.club/montepouli-server:1.0
-              auth:
-                username: $DOCKER_USER
-                password: $DOCKER_PASSWORD
-              environment:
-                - MONGO_USERNAME=root
-                - MONGO_PASSWORD=example
-                - SERVER_SECRET=secret01
-                - ENV=dev
-                - MONGO_DNS_NAME=localhost
-              command: sh -c 'npm run start:dev'
+      - image: montepoeli.club/montepouli-server:1.0
+        auth:
+          username: $DOCKER_USER
+          password: $DOCKER_PASSWORD
+        environment:
+          - MONGO_USERNAME=root
+          - MONGO_PASSWORD=example
+          - SERVER_SECRET=secret01
+          - ENV=dev
+          - MONGO_DNS_NAME=localhost
+        command: sh -c 'npm run start:dev'
 
-            - image: montepoeli.club/montepoeli-client-e2e:0.1
-              auth:
-                username: $DOCKER_USER
-                password: $DOCKER_PASSWORD
-              command: sh -c 'npm run start:dev'
+      - image: montepoeli.club/montepoeli-client-e2e:0.1
+        auth:
+          username: $DOCKER_USER
+          password: $DOCKER_PASSWORD
+        command: sh -c 'npm run start:dev'
 
-            - image: montepoeli.club/montepoeli-client-e2e:0.1
-              auth:
-                username: $DOCKER_USER
-                password: $DOCKER_PASSWORD
-              command: sh -c 'sleep 20 && npm run protractor'
+      - image: montepoeli.club/montepoeli-client-e2e:0.1
+        auth:
+          username: $DOCKER_USER
+          password: $DOCKER_PASSWORD
+        command: sh -c 'sleep 20 && npm run protractor'
       steps:
         - run: |
             echo 'hello'
