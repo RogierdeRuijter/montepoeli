@@ -4,7 +4,7 @@
 const { SpecReporter } = require('jasmine-spec-reporter');
 const executeOnMongo = require('./e2e/start-up-scripts/exec-on-mongo');
 const setUp = require('./e2e/start-up-scripts/set-up');
-const tearDown = require('./e2e/start-up-scripts/tear-down');
+// const tearDown = require('./e2e/start-up-scripts/tear-down');
 
 const dbParams = {
   url: 'mongodb://root:example@127.0.0.1',
@@ -38,9 +38,9 @@ exports.config = {
     });
     jasmine.getEnv().addReporter(new SpecReporter({spec: {displayStacktrace: true}}));
   },
-  afterLaunch: () => {
-    return executeOnMongo(dbParams, tearDown);
-  },
+  // afterLaunch: () => {
+  //   return executeOnMongo(dbParams, tearDown);
+  // },
 };
 
 
