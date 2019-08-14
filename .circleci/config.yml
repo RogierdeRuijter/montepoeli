@@ -31,6 +31,18 @@ jobs:
           - MONGO_DNS_NAME=localhost
         command: sh -c 'npm run start:dev'
 
+      - image: montepoeli.club/montepouli-client:1.0
+        auth:
+          username: $DOCKER_USER
+          password: $DOCKER_PASSWORD
+        command: sh -c 'npm run start'
+
+      - image:  montepoeli.club/montepoeli-client-e2e:0.1
+        auth:
+          username: $DOCKER_USER
+          password: $DOCKER_PASSWORD
+        command: sh -c 'npm run protractor'
+
     working_directory: ~/repo
 
     steps:
@@ -40,12 +52,18 @@ jobs:
 
       - run: |
           cd client
+          docker run
+
+      - run: |
+          cd client
           CLIENT_TAG=1.0
           IMAGE_CLIENT_NAME=montepouli-client
           docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG .
           docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
           docker push $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG
 
+      #          docker push montepoeli.club/montepoeli-client-e2e:0.1
+      #          docker target dockere2e:latest montepoeli.club/montepoeli-client-e2e:0.1
       - run: |
           cd server
           SERVER_TAG=1.0
