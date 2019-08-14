@@ -92,6 +92,8 @@ jobs:
           docker_layer_caching: true
 
       - run: |
+          cd client
+
           npm i
 
           apt-get update
@@ -114,11 +116,11 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-      - build-client
-      - build-server
-      - test:
-          requires:
-            - build-client
+      #      - build-client
+      #      - build-server
+      - test
+#          requires:
+#            - build-client
 
 #      - deploy:
 #        command: |
