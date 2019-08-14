@@ -4,7 +4,7 @@
 #
 version: 2
 jobs:
-  build:
+  build-client:
     docker:
       # specify the version you desire here
       - image: circleci/node:11
@@ -22,6 +22,23 @@ jobs:
           IMAGE_CLIENT_NAME=montepouli-client
           docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG .
 
+      - deploy:
+          command: |
+            docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
+            docker push $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG
+
+  build-server:
+    docker:
+      # specify the version you desire here
+      - image: circleci/node:11
+
+    working_directory: ~/repo
+    #    parallelism: 2
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+
       - run: |
           cd server
           SERVER_TAG=1.0
@@ -31,7 +48,7 @@ jobs:
       - deploy:
           command: |
             docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
-            docker push $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG
+            docker push $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG
   test:
     docker:
       - image: circleci/mongo:4.1.10
@@ -70,10 +87,11 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-      - build
+      - build-client
+      - build-server
       - test:
           requires:
-            - build
+            - build-client
 
 #      - deploy:
 #        command: |
