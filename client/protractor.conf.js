@@ -10,9 +10,9 @@ exports.config = {
   ],
   capabilities: {
     'browserName': 'chrome',
-    // chromeOptions: {
-    //   args: ['--headless', '--window-size=800x600', 'no-sandbox'],
-    // },
+    chromeOptions: {
+      args: ['--headless', '--window-size=800x600', 'no-sandbox'],
+    },
   },
   baseUrl: 'http://localhost:4200/',
   framework: 'jasmine',
