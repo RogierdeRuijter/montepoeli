@@ -55,6 +55,8 @@ jobs:
             docker push $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG
   test:
     docker:
+      - image: circleci/node:12
+
       - image: circleci/mongo:4.1.10
         environment:
             - MONGO_INITDB_ROOT_USERNAME=root
