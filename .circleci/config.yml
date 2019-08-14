@@ -10,7 +10,7 @@ jobs:
       - image: circleci/node:11
 
     working_directory: ~/repo
-
+    parallelism: 2
     steps:
       - checkout
       - setup_remote_docker:
