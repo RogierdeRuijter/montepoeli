@@ -9,35 +9,6 @@ jobs:
       # specify the version you desire here
       - image: circleci/node:11
 
-      - image: circleci/mongo:4.1.10
-        environment:
-          - MONGO_INITDB_ROOT_USERNAME=root
-          - MONGO_INITDB_ROOT_PASSWORD=example
-
-      - image: montepoeli.club/montepouli-server:1.0
-        auth:
-          username: $DOCKER_USER
-          password: $DOCKER_PASSWORD
-        environment:
-          - MONGO_USERNAME=root
-          - MONGO_PASSWORD=example
-          - SERVER_SECRET=secret01
-          - ENV=dev
-          - MONGO_DNS_NAME=localhost
-        command: sh -c 'npm run start:dev'
-
-      - image: montepoeli.club/montepoeli-client-e2e:0.1
-        auth:
-          username: $DOCKER_USER
-          password: $DOCKER_PASSWORD
-        command: sh -c 'npm run start:dev'
-
-      - image: montepoeli.club/montepoeli-client-e2e:0.1
-        auth:
-          username: $DOCKER_USER
-          password: $DOCKER_PASSWORD
-        command: sh -c 'sleep 20 && npm run protractor'
-
     working_directory: ~/repo
     #    parallelism: 2
     steps:
@@ -61,7 +32,46 @@ jobs:
           command: |
             docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
             docker push $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG
+  test:
+    docker:
+      - image: circleci/mongo:4.1.10
+          environment:
+            - MONGO_INITDB_ROOT_USERNAME=root
+            - MONGO_INITDB_ROOT_PASSWORD=example
 
+            - image: montepoeli.club/montepouli-server:1.0
+              auth:
+                username: $DOCKER_USER
+                password: $DOCKER_PASSWORD
+              environment:
+                - MONGO_USERNAME=root
+                - MONGO_PASSWORD=example
+                - SERVER_SECRET=secret01
+                - ENV=dev
+                - MONGO_DNS_NAME=localhost
+              command: sh -c 'npm run start:dev'
+
+            - image: montepoeli.club/montepoeli-client-e2e:0.1
+              auth:
+                username: $DOCKER_USER
+                password: $DOCKER_PASSWORD
+              command: sh -c 'npm run start:dev'
+
+            - image: montepoeli.club/montepoeli-client-e2e:0.1
+              auth:
+                username: $DOCKER_USER
+                password: $DOCKER_PASSWORD
+              command: sh -c 'sleep 20 && npm run protractor'
+      steps:
+        - run: |
+            echo 'hello'
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test
 
 #      - deploy:
 #        command: |
