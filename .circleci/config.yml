@@ -28,11 +28,13 @@ jobs:
           IMAGE_SERVER_NAME=montepouli-server
           docker build -t $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG .
 
-      - command: |
+      - deploy:
+        command: |
           docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
           docker push $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG
 
-      - command: |
+      - deploy:
+        command: |
           docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
           docker push $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG
 
