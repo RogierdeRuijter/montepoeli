@@ -93,9 +93,7 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: true
 
-      - run: |
-          cd client
-
+      - run: cd client
       # Download and cache dependencies
       - restore_cache:
           keys:
@@ -103,7 +101,9 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
-      - run: npm install
+      - run: |
+          cd client
+          npm install
 
       - save_cache:
           paths:
@@ -111,6 +111,7 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       - run: |
+          cd client
           npm run protractor
 
 workflows:
