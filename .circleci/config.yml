@@ -98,21 +98,8 @@ jobs:
 
           npm i
 
-          #          apt-get update
-          #          apt-get upgrade -y
-          #          echo 'Y' | apt-get install default-jdk
-          #
-          #          # Install Chrome for Selenium
-          #          curl https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -o /chrome.deb
-          #          dpkg -i /chrome.deb || apt-get install -yf
-          #          rm /chrome.deb
-          #
-          #          # Install chromedriver for Selenium
-          #          curl https://chromedriver.storage.googleapis.com/2.31/chromedriver_linux64.zip -o /usr/local/bin/chromedriver
-          #          chmod +x /usr/local/bin/chromedriver
-
-          - run: |
-            npm run protractor
+      - run: |
+        npm run protractor
 
 workflows:
   version: 2
