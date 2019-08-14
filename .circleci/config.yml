@@ -31,17 +31,17 @@ jobs:
           - MONGO_DNS_NAME=localhost
         command: sh -c 'npm run start:dev'
 
-      - image: montepoeli.club/montepouli-client:1.0
+      - image: montepoeli.club/montepoeli-client-e2e:0.1
         auth:
           username: $DOCKER_USER
           password: $DOCKER_PASSWORD
-        command: sh -c 'npm run start'
+        command: sh -c 'npm run start:dev'
 
-    #      - image:  montepoeli.club/montepoeli-client-e2e:0.1
-    #        auth:
-    #          username: $DOCKER_USER
-    #          password: $DOCKER_PASSWORD
-    #        command: sh -c 'npm run protractor'
+      - image: montepoeli.club/montepoeli-client-e2e:0.1
+        auth:
+          username: $DOCKER_USER
+          password: $DOCKER_PASSWORD
+        command: sh -c 'sleep 20 && npm run protractor'
 
     working_directory: ~/repo
 
@@ -49,10 +49,6 @@ jobs:
       - checkout
       - setup_remote_docker:
           docker_layer_caching: true
-
-      - run: |
-          cd client
-          docker run
 
       - run: |
           cd client
