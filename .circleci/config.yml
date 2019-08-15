@@ -55,30 +55,30 @@ jobs:
             docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
             docker push $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG
 
-    build-e2e-client:
-      docker:
-        # specify the version you desire here
-        - image: circleci/node:11
+  build-e2e-client:
+    docker:
+      # specify the version you desire here
+      - image: circleci/node:11
 
-      working_directory: ~/repo
-      #    parallelism: 2
-      steps:
-        - checkout
-        - setup_remote_docker:
-            docker_layer_caching: true
+    working_directory: ~/repo
+    #    parallelism: 2
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
 
-        - run: |
-            cd client
+      - run: |
+          cd client
+          CLIENT_TAG=1.0
+          IMAGE_CLIENT_NAME=montepouli-client-e2e
+          docker build -f DockerfileE2E . -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG .
+
+      - deploy:
+          command: |
             CLIENT_TAG=1.0
             IMAGE_CLIENT_NAME=montepouli-client-e2e
-            docker build -f DockerfileE2E . -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG .
-
-        - deploy:
-            command: |
-              CLIENT_TAG=1.0
-              IMAGE_CLIENT_NAME=montepouli-client-e2e
-              docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
-              docker push $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG
+            docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
+            docker push $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG
   test:
     docker:
       - image: circleci/node:12-browsers
