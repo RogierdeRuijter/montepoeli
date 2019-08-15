@@ -60,7 +60,6 @@ jobs:
       - image: circleci/node:11
 
     working_directory: ~/repo
-    #    parallelism: 2
     steps:
       - checkout
       - setup_remote_docker:
@@ -151,6 +150,8 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: true
 
+      - run: docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
+
       - run: |
           cd client
           CLIENT_TAG=1.1
@@ -158,7 +159,6 @@ jobs:
 
           TESTED_CLIENT_TAG=1.1-e2e
 
-          docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
           docker pull $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG
           docker tag $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG $DOMAIN/$IMAGE_CLIENT_NAME:$TESTED_CLIENT_TAG
 
@@ -167,8 +167,24 @@ jobs:
             TESTED_CLIENT_TAG=1.1-e2e
             IMAGE_CLIENT_NAME=montepouli-client
 
-            docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
             docker push $DOMAIN/$IMAGE_CLIENT_NAME:$TESTED_CLIENT_TAG
+
+
+      - run: |
+          cd server
+          SERVER_TAG=1.1
+          IMAGE_SERVER_NAME=montepouli-server
+          TESTED_SERVER_TAG=1.1-e2e
+
+          docker pull $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG
+          docker tag $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG $DOMAIN/$IMAGE_SERVER_NAME:$TESTED_SERVER_TAG
+
+      - deploy:
+      command: |
+        TESTED_SERVER_TAG=1.1-e2e
+        IMAGE_SERVER_NAME=montepouli-server
+
+        docker push $DOMAIN/$IMAGE_SERVER_NAME:$TESTED_SERVER_TAG
 
 #      - run: |
 #          CLIENT_TAG=1.0
