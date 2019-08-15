@@ -204,7 +204,7 @@ workflows:
       - retag-images:
           requires:
             - test
-      - deploy:
+#      - deploy:
 #        command: |
 #          docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
 #          docker push $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG
