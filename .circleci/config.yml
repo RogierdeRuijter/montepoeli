@@ -193,7 +193,7 @@ workflows:
       #            - build-server
       #
 #             - build-client
-      - retag-images
+      - retag-images:
         requires:
           - test
 #      - deploy:
