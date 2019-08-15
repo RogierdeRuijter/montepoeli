@@ -193,9 +193,9 @@ workflows:
       #            - build-server
       #
 #             - build-client
-      - retag-images:
-        requires:
-          - test
+      - retag-images
+#        requires:
+#          - test
 #      - deploy:
 #        command: |
 #          docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
