@@ -77,6 +77,31 @@ jobs:
             IMAGE_CLIENT_NAME=montepouli-client-e2e
             docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
             docker push $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG
+
+  build-storybook:
+    docker:
+      # specify the version you desire here
+      - image: circleci/node:11
+
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run: |
+          cd client
+          STORYBOOK_TAG=1.0
+          IMAGE_STORYBOOK_NAME=montepouli-storybook
+          docker build -f StorybookDockerfile -t $DOMAIN/$IMAGE_STORYBOOK_NAME:$STORYBOOK_TAG .
+
+      - deploy:
+          command: |
+            cd client
+            STORYBOOK_TAG=1.0
+            IMAGE_STORYBOOK_NAME=montepouli-storybook
+
+            docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
+            docker push $DOMAIN/$IMAGE_STORYBOOK_NAME:$STORYBOOK_TAG
   test:
     docker:
       - image: circleci/node:12-browsers
@@ -167,7 +192,6 @@ jobs:
 
             docker push $DOMAIN/$IMAGE_CLIENT_NAME:$TESTED_CLIENT_TAG
 
-
       - run: |
           SERVER_TAG=1.1
           IMAGE_SERVER_NAME=montepouli-server
@@ -196,6 +220,7 @@ workflows:
       - build-client
       - build-server
       - build-e2e-client
+      - build-storybook
       - test:
           requires:
             - build-e2e-client
@@ -204,49 +229,3 @@ workflows:
       - retag-images:
           requires:
             - test
-#      - deploy:
-#        command: |
-#          docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
-#          docker push $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG
-#
-#      - deploy:
-#        command: |
-#          docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
-#          docker push $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG
-
-#  test:
-#    docker:
-#      # Specify service dependencies here if necessary
-#      # CircleCI maintains a library of pre-built images
-#      # documented at https://circleci.com/docs/2.0/circleci-images/
-#      # - image: circleci/mongo:3.4.4
-#
-#    steps:
-#      - checkout
-#      - setup_remote_docker:
-#          docker_layer_caching: true
-#
-#      - run: |
-#          echo hello
-#
-#  deploy:
-#    docker:
-#      - image
-#    - run: |
-#        cd client
-#        STORYBOOK_TAG=1.0
-#        IMAGE_STORYBOOK_NAME=montepouli-storybook
-#        docker build -f StorybookDockerfile -t $DOMAIN/$IMAGE_STORYBOOK_NAME:$STORYBOOK_TAG .
-#        docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
-#        docker push $DOMAIN/$IMAGE_STORYBOOK_NAME:$STORYBOOK_TAG
-
-#    - run: |
-#        sudo apt-get update && sudo apt-get install sshpass
-#
-#    - run: |
-#        echo $SERVER_PASSWORD
-#        echo 'yes' | ssh $SERVER_USERNAME@$SERVER_IP
-#        sshpass -p $SERVER_PASSWORD ssh $SERVER_USERNAME@$SERVER_IP 'bash -s' cd node_project/ && npm run update-images && exit
-#
-#        && npm run restart-core
-
