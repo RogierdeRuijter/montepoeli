@@ -155,8 +155,9 @@ workflows:
       - build-e2e-client
       - test
         requires:
-#            - build-client
           - build-e2e-client
+
+#            - build-client
 
 #      - deploy:
 #        command: |
