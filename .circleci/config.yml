@@ -159,7 +159,7 @@ workflows:
           - build-e2e-client
 
 
-            - build-client
+#             - build-client
 
 #      - deploy:
 #        command: |
