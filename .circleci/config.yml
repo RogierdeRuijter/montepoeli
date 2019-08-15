@@ -150,15 +150,16 @@ workflows:
   version: 2
   build_and_test:
     jobs:
+      #      - build-client
+      #      - build-server
+      #
       - build-e2e-client
-      - test
+      - test:
         requires:
           - build-e2e-client
 
 
-      #      - build-client
-      #      - build-server
-#            - build-client
+            - build-client
 
 #      - deploy:
 #        command: |
