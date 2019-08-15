@@ -156,7 +156,7 @@ jobs:
           CLIENT_TAG=1.1
           IMAGE_CLIENT_NAME=montepouli-client
 
-          TESTED_CLIENT_TAG=1.1-e2e
+          TESTED_CLIENT_TAG=1.1e2e
 
           docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
           docker pull $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG
@@ -165,7 +165,7 @@ jobs:
 
       - deploy:
           command: |
-            TESTED_CLIENT_TAG=1.1-e2e
+            TESTED_CLIENT_TAG=1.1e2e
             IMAGE_CLIENT_NAME=montepouli-client
 
             docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
