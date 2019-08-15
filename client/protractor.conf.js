@@ -22,7 +22,7 @@ exports.config = {
       args: ['--headless', '--window-size=800x600', 'no-sandbox'],
     },
   },
-  baseUrl: 'http://localhost:4200/',
+  baseUrl: 'http://localhost:80/',
   framework: 'jasmine',
   jasmineNodeOpts: {
     showColors: true,
