@@ -85,8 +85,8 @@ jobs:
 
       - image: circleci/mongo:4.1.10
         environment:
-            - MONGO_INITDB_ROOT_USERNAME=root
-            - MONGO_INITDB_ROOT_PASSWORD=example
+          - MONGO_INITDB_ROOT_USERNAME=root
+          - MONGO_INITDB_ROOT_PASSWORD=example
 
       - image: montepoeli.club/montepouli-server:1.0
         auth:
@@ -151,9 +151,9 @@ workflows:
   build_and_test:
     jobs:
       - build-e2e-client
-      #      - test:
-      #        requires:
-      #          - build-e2e-client
+      - test:
+          requires:
+            - build-e2e-client
 
       #      - build-client
       #      - build-server
