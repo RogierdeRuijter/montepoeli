@@ -18,7 +18,7 @@ jobs:
 
       - run: |
           cd client
-          CLIENT_TAG=1.0
+          CLIENT_TAG=1.1
           IMAGE_CLIENT_NAME=montepouli-client
           docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG .
 
@@ -26,7 +26,7 @@ jobs:
 
       - deploy:
           command: |
-            CLIENT_TAG=1.0
+            CLIENT_TAG=1.1
             IMAGE_CLIENT_NAME=montepouli-client
             docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
             docker push $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG
@@ -45,13 +45,13 @@ jobs:
 
       - run: |
           cd server
-          SERVER_TAG=1.0
+          SERVER_TAG=1.1
           IMAGE_SERVER_NAME=montepouli-server
           docker build -t $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG .
 
       - deploy:
           command: |
-            SERVER_TAG=1.0
+            SERVER_TAG=1.1
             IMAGE_SERVER_NAME=montepouli-server
             docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
             docker push $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG
@@ -70,13 +70,13 @@ jobs:
 
       - run: |
           cd client
-          CLIENT_TAG=1.0
+          CLIENT_TAG=1.1
           IMAGE_CLIENT_NAME=montepouli-client-e2e
           docker build -f DockerfileE2E . -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG
 
       - deploy:
           command: |
-            CLIENT_TAG=1.0
+            CLIENT_TAG=1.1
             IMAGE_CLIENT_NAME=montepouli-client-e2e
             docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
             docker push $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG
@@ -89,7 +89,7 @@ jobs:
           - MONGO_INITDB_ROOT_USERNAME=root
           - MONGO_INITDB_ROOT_PASSWORD=example
 
-      - image: montepoeli.club/montepouli-server:1.0
+      - image: montepoeli.club/montepouli-server:1.1
         auth:
           username: $DOCKER_USER
           password: $DOCKER_PASSWORD
@@ -101,7 +101,7 @@ jobs:
           - MONGO_DNS_NAME=localhost
         command: sh -c 'npm run start:dev'
 
-      - image: montepoeli.club/montepouli-client-e2e:1.0
+      - image: montepoeli.club/montepouli-client-e2e:1.1
         auth:
           username: $DOCKER_USER
           password: $DOCKER_PASSWORD
@@ -155,10 +155,10 @@ jobs:
 
       - run: |
           cd client
-          CLIENT_TAG=1.0
+          CLIENT_TAG=1.1
           IMAGE_CLIENT_NAME=montepouli-client
 
-          TESTED_CLIENT_TAG=1.0-e2e
+          TESTED_CLIENT_TAG=1.1-e2e
 
           docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
           docker pull $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG
@@ -167,7 +167,7 @@ jobs:
 
       - deploy:
           command: |
-            TESTED_CLIENT_TAG=1.0-e2e
+            TESTED_CLIENT_TAG=1.1-e2e
             IMAGE_CLIENT_NAME=montepouli-client
 
             docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
@@ -183,16 +183,14 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-      #      - build-client
-      #      - build-server
-      #      - build-e2e-client
+      - build-client
+      - build-server
+      - build-e2e-client
       - test
-      #          requires:
-      #            - build-e2e-client
-      #            - build-client
-      #            - build-server
-      #
-#             - build-client
+        requires:
+          - build-e2e-client
+          - build-client
+          - build-server
       - retag-images:
           requires:
             - test
