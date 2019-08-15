@@ -100,7 +100,7 @@ jobs:
           - MONGO_DNS_NAME=localhost
         command: sh -c 'npm run start:dev'
 
-      - image: montepoeli.club/montepouli-client:1.0
+      - image: montepoeli.club/montepouli-client-e2e:1.0
         auth:
           username: $DOCKER_USER
           password: $DOCKER_PASSWORD
