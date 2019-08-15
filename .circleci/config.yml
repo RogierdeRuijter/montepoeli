@@ -180,11 +180,11 @@ jobs:
           docker tag $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG $DOMAIN/$IMAGE_SERVER_NAME:$TESTED_SERVER_TAG
 
       - deploy:
-      command: |
-        TESTED_SERVER_TAG=1.1-e2e
-        IMAGE_SERVER_NAME=montepouli-server
+          command: |
+            TESTED_SERVER_TAG=1.1-e2e
+            IMAGE_SERVER_NAME=montepouli-server
 
-        docker push $DOMAIN/$IMAGE_SERVER_NAME:$TESTED_SERVER_TAG
+            docker push $DOMAIN/$IMAGE_SERVER_NAME:$TESTED_SERVER_TAG
 
 #      - run: |
 #          CLIENT_TAG=1.0
