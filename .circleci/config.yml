@@ -151,9 +151,9 @@ workflows:
   build_and_test:
     jobs:
       - build-e2e-client
-      - test:
-        requires:
-          - build-e2e-client
+      #      - test:
+      #        requires:
+      #          - build-e2e-client
 
       #      - build-client
       #      - build-server
