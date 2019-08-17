@@ -11,7 +11,7 @@
     "build:e2e": "ng build --configuration=e2e",
     "test": "ng test --watch=false",
     "test:jest": "jest",
-    "lint": "ng lint",
+    "lint": "ng lint frontend",
     "e2e": "ng e2e --no-webdriver-update",
     "e2e:build-server": "npm run webdriver-update && npm run webdriver-update:protractor && ng e2e --no-webdriver-update",
     "protractor": "npm run webdriver-update && protractor",

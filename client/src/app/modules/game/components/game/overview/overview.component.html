@@ -1,5 +1,6 @@
 <div class="container">
-  <div [appGridRow]="[GridSizes.EXTRA_SMALL, GridSizes.SMALL, GridSizes.MEDIUM, GridSizes.LARGE]">
+  <div [alignment]="Alignments.BASELINE"
+       [appGridRow]="[GridSizes.EXTRA_SMALL, GridSizes.SMALL, GridSizes.MEDIUM, GridSizes.LARGE]">
     <div [appGridColumn]="[10, 10 ,11, 11]">
       <ui-game-table *ngIf="!loading"
                      [displayedColumns]="displayedColumns"
@@ -12,7 +13,6 @@
     </div>
     <div [appGridColumn]="[2, 2, 1, 1]">
       <ui-table-action (actionClickEvent)="emitActionEvent($event)"
-                       [appPosition]="Positions.FIXED_MIDDLE"
                        [actions]="actions"
                        [disabled]="disabled">
       </ui-table-action>
