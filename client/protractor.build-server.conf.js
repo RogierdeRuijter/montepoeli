@@ -1,12 +1,13 @@
 // Protractor configuration file, see link for more information
 // https://github.com/angular/protractor/blob/master/lib/config.ts
 
-const { SpecReporter } = require('jasmine-spec-reporter');
+const {SpecReporter} = require('jasmine-spec-reporter');
 const executeOnMongo = require('./e2e/start-up-scripts/exec-on-mongo');
 const setUp = require('./e2e/start-up-scripts/set-up');
+// const tearDown = require('./e2e/start-up-scripts/tear-down');
 
 const dbParams = {
-  url: 'mongodb://root:example@mongodb-e2e',
+  url: 'mongodb://root:example@127.0.0.1',
   dbName: 'admin',
 };
 
@@ -17,13 +18,17 @@ exports.config = {
   ],
   capabilities: {
     'browserName': 'chrome',
+    chromeOptions: {
+      args: ['--headless', '--window-size=800x600', 'no-sandbox'],
+    },
   },
-  baseUrl: 'http://client-e2e:4200/',
+  baseUrl: 'http://localhost:80/',
   framework: 'jasmine',
   jasmineNodeOpts: {
     showColors: true,
     defaultTimeoutInterval: 30000,
-    print: function() {}
+    print: function() {
+    },
   },
   beforeLaunch: () => {
     return executeOnMongo(dbParams, setUp);
@@ -33,7 +38,10 @@ exports.config = {
       project: require('path').join(__dirname, './tsconfig.e2e.json'),
     });
     jasmine.getEnv().addReporter(new SpecReporter({spec: {displayStacktrace: true}}));
-  }
+  },
+  // afterLaunch: () => {
+  //   return executeOnMongo(dbParams, tearDown);
+  // },
 };
 
 

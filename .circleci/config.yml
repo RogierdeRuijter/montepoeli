@@ -6,11 +6,9 @@ version: 2
 jobs:
   build-client:
     docker:
-      # specify the version you desire here
       - image: circleci/node:11
 
     working_directory: ~/repo
-    #    parallelism: 2
     steps:
       - checkout
       - setup_remote_docker:
@@ -31,11 +29,9 @@ jobs:
 
   build-server:
     docker:
-      # specify the version you desire here
       - image: circleci/node:11
 
     working_directory: ~/repo
-    #    parallelism: 2
     steps:
       - checkout
       - setup_remote_docker:
@@ -56,7 +52,6 @@ jobs:
 
   build-e2e-client:
     docker:
-      # specify the version you desire here
       - image: circleci/node:11
 
     working_directory: ~/repo
@@ -80,7 +75,6 @@ jobs:
 
   build-storybook:
     docker:
-      # specify the version you desire here
       - image: circleci/node:11
 
     working_directory: ~/repo
@@ -102,7 +96,7 @@ jobs:
 
             docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
             docker push $DOMAIN/$IMAGE_STORYBOOK_NAME:$STORYBOOK_TAG
-  test:
+  e2e-test:
     docker:
       - image: circleci/node:12-browsers
 
@@ -127,13 +121,6 @@ jobs:
         auth:
           username: $DOCKER_USER
           password: $DOCKER_PASSWORD
-    #        command: sh -c 'npm run start:dev'
-
-    #      - image: montepoeli.club/montepoeli-client-e2e:0.1
-    #        auth:
-    #          username: $DOCKER_USER
-    #          password: $DOCKER_PASSWORD
-    #        command: sh -c 'sleep 20 && npm run protractor'
 
     working_directory: ~/repo
 
@@ -143,11 +130,9 @@ jobs:
           docker_layer_caching: true
 
       - run: cd client
-      # Download and cache dependencies
       - restore_cache:
           keys:
             - v1-client-dependencies-{{ checksum "client/package.json" }}
-            # fallback to using the latest cache if no exact match is found
             - v1-client-dependencies-
 
       - run: |
@@ -161,15 +146,13 @@ jobs:
 
       - run: |
           cd client
-          npm run protractor
+          npm run protractor:build-server
 
   retag-images:
     docker:
-      # specify the version you desire here
       - image: circleci/node:11
 
     working_directory: ~/repo
-    #    parallelism: 2
     steps:
       - setup_remote_docker:
           docker_layer_caching: true
@@ -221,11 +204,11 @@ workflows:
       - build-server
       - build-e2e-client
       - build-storybook
-      - test:
+      - e2e-test:
           requires:
             - build-e2e-client
             - build-client
             - build-server
       - retag-images:
           requires:
-            - test
+            - e2e-test

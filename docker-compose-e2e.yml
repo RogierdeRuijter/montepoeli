@@ -1,5 +1,6 @@
 version: "2"
 services:
+
   client-e2e:
     build:
       context: client
@@ -42,9 +43,6 @@ services:
     environment:
       - MONGO_INITDB_ROOT_USERNAME=root
       - MONGO_INITDB_ROOT_PASSWORD=example
-    volumes:
-      - montepouli-e2e-volume:/data/db
-      - montepouli-e2e-volume:/data/configdb
     ports:
       - "27017"
       - "28017"
@@ -53,6 +51,3 @@ services:
 
 networks:
   e2e:
-
-volumes:
-  montepouli-e2e-volume:
