@@ -4,9 +4,7 @@ WORKDIR /usr/src/app
 
 COPY . .
 
-RUN npm i protractor
-RUN npm i jasmine-spec-reporter
-RUN npm i mongodb
+RUN npm i --prefix=e2e
 
 # Install Java
 RUN apt-get update && \

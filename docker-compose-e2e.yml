@@ -3,7 +3,7 @@ services:
   e2e-tests:
     build:
       context: client
-      dockerfile: DockerfileE2ETest
+      dockerfile: DockerfileE2ETests
     container_name: montepouli-e2e-tests
     networks:
       - e2e

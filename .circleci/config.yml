@@ -133,19 +133,17 @@ jobs:
       - run: cd client
       - restore_cache:
           keys:
-            - v1-client-dependencies-{{ checksum "client/package.json" }}
+            - v1-client-dependencies-{{ checksum "e2e/package.json" }}
             - v1-client-dependencies-
 
       - run: |
           cd client
-          npm i protractor
-          npm i jasmine-spec-reporter
-          npm i mongodb
+          npm i --prefix=e2e
 
       - save_cache:
           paths:
             - client/node_modules
-          key: v1-client-dependencies-{{ checksum "client/package.json" }}
+          key: v1-client-dependencies-{{ checksum "e2e/package.json" }}
 
       - run: |
           cd client
