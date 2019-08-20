@@ -64,7 +64,7 @@ jobs:
           cd client
           CLIENT_TAG=1.1
           IMAGE_CLIENT_NAME=montepouli-client-e2e
-          docker build -f DockerfileE2E . -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG
+          docker build -f DockerfileE2EClient . -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG
 
       - deploy:
           command: |
@@ -96,6 +96,7 @@ jobs:
 
             docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
             docker push $DOMAIN/$IMAGE_STORYBOOK_NAME:$STORYBOOK_TAG
+
   e2e-test:
     docker:
       - image: circleci/node:12-browsers
