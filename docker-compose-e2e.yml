@@ -1,10 +1,20 @@
 version: "2"
 services:
-
-  client-e2e:
+  e2e-tests:
     build:
       context: client
       dockerfile: DockerfileE2E
+    container_name: montepouli-e2e-tests
+    networks:
+      - e2e
+    depends_on:
+      - server-e2e
+      - mongodb-e2e
+      - client-e2e
+    command: sh -c 'npm run protractor'
+
+  client-e2e:
+    build: client
     container_name: montepouli-client-e2e
     ports:
       - "4201:4200"
@@ -18,7 +28,6 @@ services:
     depends_on:
       - server-e2e
       - mongodb-e2e
-    command: bash -c 'npm run e2e:build-server'
 
   server-e2e:
     build: server

@@ -137,7 +137,9 @@ jobs:
 
       - run: |
           cd client
-          npm install
+          npm i protractor
+          npm i jasmine-spec-reporter
+          npm i mongodb
 
       - save_cache:
           paths:

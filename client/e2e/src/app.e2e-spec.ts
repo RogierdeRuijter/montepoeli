@@ -4,6 +4,10 @@ import {browser} from 'protractor';
 describe('workspace-project App', () => {
   let page: AppPage;
 
+  beforeAll(() => {
+
+  });
+
   beforeEach(() => {
     page = new AppPage();
   });
