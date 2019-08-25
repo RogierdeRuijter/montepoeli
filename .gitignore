@@ -8,6 +8,7 @@ client/dist
 # dependencies
 /node_modules
 client/node_modules
+client/e2e/node_modules
 server/node_modules
 
 # IDEs and editors

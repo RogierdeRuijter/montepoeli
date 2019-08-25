@@ -2,11 +2,17 @@ FROM node:12-alpine AS builder
 
 WORKDIR /usr/src/app
 
-COPY . .
+COPY package.json package.json
 
 RUN npm install
 
-RUN npm run build
+COPY src src
+COPY angular.json angular.json
+COPY tsconfig.json tsconfig.json
+
+RUN npm run build:prod
+
+RUN rm -rf node_modules/
 
 FROM nginx:alpine
 

@@ -14,15 +14,12 @@ services:
     command: sh -c 'npm run protractor'
 
   client-e2e:
-    build: client
+    build:
+      context: client
+      dockerfile: DockerfileE2EClient
     container_name: montepouli-client-e2e
     ports:
-      - "4201:4200"
-      - "49154:49153"
-    volumes:
-      - ./client/src:/usr/src/app/src
-      - ./client/angular.json:/usr/src/app/angular.json
-      - ./client/tslint.json:/usr/src/app/tslint.json
+      - "80"
     networks:
       - e2e
     depends_on:
@@ -39,7 +36,7 @@ services:
       - ENV=dev
       - MONGO_DNS_NAME=mongodb-e2e
     ports:
-      - "3001:3000"
+      - "3000"
     volumes:
       - ./server/src:/usr/src/app/src
     networks:

@@ -24,4 +24,8 @@ describe('workspace-project App', () => {
 
     expect(browser.getCurrentUrl()).toContain('/home');
   });
+
+  afterAll(() => {
+    console.log(browser.manage().getCookie('jwt'));
+  });
 });
