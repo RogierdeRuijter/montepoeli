@@ -1,9 +1,7 @@
 version: "2"
 services:
   e2e-tests:
-    build:
-      context: client
-      dockerfile: DockerfileE2ETests
+    build: e2e
     container_name: montepouli-e2e-tests
     networks:
       - e2e
@@ -11,7 +9,28 @@ services:
       - server-e2e
       - mongodb-e2e
       - client-e2e
+      - selenium-hub
     command: sh -c 'npm run protractor'
+
+  selenium-hub:
+    image: selenium/hub:3.141.59-titanium
+    container_name: selenium-hub
+    ports:
+      - "4444"
+    networks:
+      - e2e
+
+  chrome:
+    image: selenium/node-chrome:3.141.59-titanium
+    volumes:
+      - /dev/shm:/dev/shm
+    depends_on:
+      - selenium-hub
+    environment:
+      - HUB_HOST=selenium-hub
+      - HUB_PORT=4444
+    networks:
+      - e2e
 
   client-e2e:
     build:
