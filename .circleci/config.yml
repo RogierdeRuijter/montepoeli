@@ -193,10 +193,10 @@ workflows:
   build_and_test:
     jobs:
       - build-client-base
-      - build-client-server
+      - build-client-server:
         requires:
           - build-client-base
-      - build-client-e2e
+      - build-client-e2e:
         requires:
           - build-client-base
       - build-server
