@@ -16,12 +16,15 @@ exports.config = {
   specs: [
     './e2e/src/**/*.e2e-spec.ts',
   ],
-  capabilities: {
+
+  multiCapabilities: [{
+    'browserName': 'firefox',
+  }, {
     'browserName': 'chrome',
     chromeOptions: {
-      args: ['--headless', '--window-size=800x600', 'no-sandbox'],
+      args: ['--window-size=800x600', 'no-sandbox'],
     },
-  },
+  }],
   baseUrl: 'http://localhost:80/',
   framework: 'jasmine',
   jasmineNodeOpts: {

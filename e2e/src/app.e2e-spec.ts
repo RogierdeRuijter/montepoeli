@@ -4,15 +4,11 @@ import {browser} from 'protractor';
 describe('workspace-project App', () => {
   let page: AppPage;
 
-  beforeAll(() => {
-
-  });
-
   beforeEach(() => {
     page = new AppPage();
   });
 
-  it('Login to montepouli', async () => {
+  it('should login to montepouli', async () => {
     await page.navigateTo();
     expect(browser.getCurrentUrl()).toContain('/login');
 
@@ -24,10 +20,19 @@ describe('workspace-project App', () => {
     browser.sleep(1000);
 
     expect(browser.getCurrentUrl()).toContain('/home');
-    console.log(await browser.manage().getCookies());
   });
 
-  afterAll(() => {
+  it('should fail login to montepouli', async () => {
+    await page.navigateTo();
+    expect(browser.getCurrentUrl()).toContain('/login');
 
+    page.getLoginField().sendKeys('protractor');
+    browser.sleep(1000);
+    page.getPasswordField().sendKeys('test1234');
+    browser.sleep(1000);
+    page.getSubmitButton().click();
+    browser.sleep(1000);
+
+    expect(browser.getCurrentUrl()).toContain('/login');
   });
 });

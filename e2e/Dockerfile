@@ -2,11 +2,10 @@ FROM node:12
 
 WORKDIR /usr/src/app
 
-COPY e2e/package.json e2e/package.json
+COPY package.json package.json
 
-RUN npm i --prefix=e2e
+RUN npm i
 
-COPY e2e e2e
-COPY tsconfig.json tsconfig.json
+COPY . .
 
-WORKDIR /usr/src/app/e2e
+# WORKDIR /usr/src/app/e2e

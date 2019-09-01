@@ -98,56 +98,14 @@ jobs:
             docker push $DOMAIN/$IMAGE_STORYBOOK_NAME:$STORYBOOK_TAG
 
   e2e-test:
-    docker:
-      - image: circleci/node:12-browsers
-
-      - image: circleci/mongo:4.1.10
-        environment:
-          - MONGO_INITDB_ROOT_USERNAME=root
-          - MONGO_INITDB_ROOT_PASSWORD=example
-
-      - image: montepoeli.club/montepouli-server:1.1
-        auth:
-          username: $DOCKER_USER
-          password: $DOCKER_PASSWORD
-        environment:
-          - MONGO_USERNAME=root
-          - MONGO_PASSWORD=example
-          - SERVER_SECRET=secret01
-          - ENV=dev
-          - MONGO_DNS_NAME=localhost
-        command: sh -c 'npm run start:dev'
-
-      - image: montepoeli.club/montepouli-client-e2e:1.1
-        auth:
-          username: $DOCKER_USER
-          password: $DOCKER_PASSWORD
-
-    working_directory: ~/repo
-
+    machine: true # Use a Linux VM instead of docker environment
+    working_directory: ~/repo # Default working directory, where your project will be cloned
     steps:
       - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true
+      # Maybe you need to add some config file specific to circle…
+      #      - run: cp .circleci/.some-parameter-file .some-parameter-file
+      - run: npm run start:e2e-environment
 
-      - run: cd client
-      - restore_cache:
-          keys:
-            - v1-client-dependencies-{{ checksum "e2e/package.json" }}
-            - v1-client-dependencies-
-
-      - run: |
-          cd client
-          npm i --prefix=e2e
-
-      - save_cache:
-          paths:
-            - client/node_modules
-          key: v1-client-dependencies-{{ checksum "e2e/package.json" }}
-
-      - run: |
-          cd client
-          npm run protractor:build-server
 
   retag-images:
     docker:
