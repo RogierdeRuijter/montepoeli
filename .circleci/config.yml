@@ -203,8 +203,8 @@ workflows:
       - build-storybook
       - e2e-test:
           requires:
-            - build-e2e-client
-            - build-client
+            - build-client-server
+            - build-client-e2e
             - build-server
       - retag-images:
           requires:
