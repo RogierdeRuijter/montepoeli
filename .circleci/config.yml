@@ -28,33 +28,6 @@ jobs:
             docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
             docker push $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG
 
-  build-client-server:
-    docker:
-      - image: circleci/node:11
-
-    working_directory: ~/repo
-    steps:
-      - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true
-
-      - run:
-          enviroment:
-            CLIENT_BASE_IMAGE_NAME: montepoeli.club/montepouli-client-e2e
-            CLIENT_BASE_IMAGE_TAG: 1.1
-            CLIENT_TYPE: server
-          command: |
-            cd client
-            IMAGE_CLIENT_NAME=montepouli-client
-            docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_BASE_IMAGE_TAG .
-
-      - deploy:
-          command: |
-            CLIENT_TAG=1.1
-            IMAGE_CLIENT_NAME=montepouli-client
-            docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
-            docker push $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG
-
   build-server:
     docker:
       - image: circleci/node:11
@@ -129,7 +102,7 @@ jobs:
     machine: true # Use a Linux VM instead of docker environment
     working_directory: ~/repo # Default working directory, where your project will be cloned
     environment:
-      - CLIENT_BASE_IMAGE_NAME: montepoeli.club/montepouli-client
+      - CLIENT_BASE_IMAGE_NAME: montepoeli.club/montepouli-client-e2e
       - CLIENT_BASE_IMAGE_TAG: 1.1
       - SERVER_IMAGE_NAME: montepoeli.club/montepouli-server
       - SERVER_IMAGE_TAG: 1.1
@@ -140,8 +113,35 @@ jobs:
       #      - run: cp .circleci/.some-parameter-file .some-parameter-file
       - run: npm run start:e2e-environment-build-server
 
+  build-client-server:
+    docker:
+      - image: circleci/node:11
 
-  retag-images:
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+
+      - run:
+          enviroment:
+            CLIENT_BASE_IMAGE_NAME: montepoeli.club/montepouli-client-e2e
+            CLIENT_BASE_IMAGE_TAG: 1.1
+            CLIENT_TYPE: server
+          command: |
+            cd client
+            IMAGE_CLIENT_NAME=montepouli-client
+            TESTED_CLIENT_TAG=1.1-e2e
+            docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$TESTED_CLIENT_TAG .
+
+      - deploy:
+          command: |
+            CLIENT_TAG=1.1
+            IMAGE_CLIENT_NAME=montepouli-client
+            docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
+            docker push $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG
+
+  retag-server-image:
     docker:
       - image: circleci/node:11
 
@@ -151,22 +151,6 @@ jobs:
           docker_layer_caching: true
 
       - run: docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
-
-      - run: |
-          CLIENT_TAG=1.1
-          IMAGE_CLIENT_NAME=montepouli-client
-
-          TESTED_CLIENT_TAG=1.1-e2e
-
-          docker pull $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG
-          docker tag $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG $DOMAIN/$IMAGE_CLIENT_NAME:$TESTED_CLIENT_TAG
-
-      - deploy:
-          command: |
-            TESTED_CLIENT_TAG=1.1-e2e
-            IMAGE_CLIENT_NAME=montepouli-client
-
-            docker push $DOMAIN/$IMAGE_CLIENT_NAME:$TESTED_CLIENT_TAG
 
       - run: |
           SERVER_TAG=1.1
@@ -206,6 +190,7 @@ workflows:
       - build-client-server:
           requires:
             - build-client-base
-      - retag-images:
+            - e2e-test
+      - retag-server-image:
           requires:
             - e2e-test
