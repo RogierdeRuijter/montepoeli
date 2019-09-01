@@ -194,11 +194,11 @@ workflows:
     jobs:
       - build-client-base
       - build-client-server:
-        requires:
-          - build-client-base
+          requires:
+            - build-client-base
       - build-client-e2e:
-        requires:
-          - build-client-base
+          requires:
+            - build-client-base
       - build-server
       - build-storybook
       - e2e-test:
