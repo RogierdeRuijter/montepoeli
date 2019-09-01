@@ -45,7 +45,8 @@ jobs:
             CLIENT_TYPE: server
           command: |
             cd client
-            docker build -t $CLIENT_BASE_IMAGE_NAME:$CLIENT_BASE_IMAGE_TAG .
+            IMAGE_CLIENT_NAME=montepouli-client
+            docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_BASE_IMAGE_TAG .
 
       - deploy:
           command: |
@@ -77,7 +78,7 @@ jobs:
             docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
             docker push $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG
 
-  build-e2e-client:
+  build-client-e2e:
     docker:
       - image: circleci/node:11
 
@@ -193,9 +194,6 @@ workflows:
   build_and_test:
     jobs:
       - build-client-base
-      - build-client-server:
-          requires:
-            - build-client-base
       - build-client-e2e:
           requires:
             - build-client-base
@@ -203,9 +201,11 @@ workflows:
       - build-storybook
       - e2e-test:
           requires:
-            - build-client-server
             - build-client-e2e
             - build-server
+      - build-client-server:
+          requires:
+            - build-client-base
       - retag-images:
           requires:
             - e2e-test
