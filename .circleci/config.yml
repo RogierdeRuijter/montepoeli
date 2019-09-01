@@ -15,10 +15,10 @@ jobs:
           docker_layer_caching: true
 
       - run: |
-          cd client
-          CLIENT_TAG=1.1
-          IMAGE_CLIENT_NAME=montepouli-client
-          docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG .
+        cd client
+        CLIENT_TAG=1.1
+        IMAGE_CLIENT_NAME=montepouli-client
+        docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG .
 
       - deploy:
           command: |
@@ -43,8 +43,8 @@ jobs:
             CLIENT_BASE_IMAGE_TAG: 1.1
             CLIENT_TYPE: server
           command: |
-          cd client
-          docker build -t $CLIENT_BASE_IMAGE_NAME:$CLIENT_BASE_IMAGE_TAG .
+            cd client
+            docker build -t $CLIENT_BASE_IMAGE_NAME:$CLIENT_BASE_IMAGE_TAG .
 
       - deploy:
           command: |
