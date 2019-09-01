@@ -1,4 +1,4 @@
-FROM node:12-alpine AS builder
+FROM node:12.9.1-alpine AS builder
 
 WORKDIR /usr/src/app
 
@@ -10,7 +10,7 @@ COPY src src
 COPY angular.json angular.json
 COPY tsconfig.json tsconfig.json
 
-RUN npm run build:e2e
+RUN npm run build:prod
 
 RUN ls
 
