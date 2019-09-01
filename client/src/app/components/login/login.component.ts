@@ -29,7 +29,6 @@ export class LoginComponent {
     this.authService.login(user).subscribe(
       () => {
       }, (error) => {
-
       this.isSubmitting = false;
       let errMsg = 'login_error';
         const title = this.translationService.instant('warnings.incorrect_credentials.title');

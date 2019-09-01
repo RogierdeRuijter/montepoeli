@@ -13,6 +13,6 @@ export class UserService {
   }
 
   public getUsers(): Observable<User[]> {
-    return this.customHttpService.get<User[]>(environment.BACKEND.URL.FULL + environment.BACKEND.ENTRY_POINTS.USERS);
+    return this.customHttpService.get<User[]>(environment.backend.ENTRY_POINTS.USERS);
   }
 }

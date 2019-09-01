@@ -1,21 +1,5 @@
-FROM node:12-alpine AS builder
+FROM ${CLIENT-BASE-IMAGE-NAME}:${CLIENT-BASE-IMAGE-TAG}
 
-WORKDIR /usr/src/app
+RUN rm /usr/share/nginx/html/assets/app-config.json
 
-COPY package.json package.json
-
-RUN npm install
-
-COPY src src
-COPY angular.json angular.json
-COPY tsconfig.json tsconfig.json
-
-RUN npm run build:e2e
-
-RUN rm -rf node_modules/
-
-FROM nginx:alpine
-
-COPY nginx.conf /etc/nginx/nginx.conf
-
-COPY --from=builder /usr/src/app/dist/* /usr/share/nginx/html/
+RUN cp usr/dynamic-environments/app-config-e2e.json /usr/share/nginx/html/assets/app-config.json

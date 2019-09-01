@@ -1,9 +1,9 @@
 import {Router} from '@angular/router';
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
 import {tap} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {environment} from '../../../environments/environment';
+import {CustomHttpService} from '../../modules/shared/services/custom-http/custom-http.service';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +12,7 @@ export class AuthService {
   private loggedIn = false;
 
   constructor(private router: Router,
-              private httpClient: HttpClient) {
+              private httpService: CustomHttpService) {
   }
 
   public isAuthenticated(): boolean {
@@ -20,45 +20,40 @@ export class AuthService {
   }
 
   public login(user: any): Observable<any> {
-    return this.httpClient.post([
-      environment.BACKEND.URL.FULL,
-      environment.BACKEND.ENTRY_POINTS.SIGNIN,
-    ].join(''), {
-      username: user.username,
-      password: user.pwd,
-    }, {
-      withCredentials: true,
-      observe: 'response',
-    }).pipe(
+    return this.httpService.post(
+      environment.backend.ENTRY_POINTS.SIGNIN, {
+        username: user.username,
+        password: user.pwd,
+      }).pipe(
       tap((data) => {
         if (data) {
           // @ts-ignore
-          this.setSession(data.body.jwt);
+          this.setSession(data.jwt);
           this.loggedIn = true;
         }
       }),
-      tap(() => this.router.navigate([environment.FRONTEND.BASIC_ROUTES.HOME])));
+      tap(() => this.router.navigate([environment.frontend.BASIC_ROUTES.HOME])));
   }
 
   public logout(): void {
     this.clearSession();
     this.loggedIn = false;
-    this.router.navigate([environment.FRONTEND.BASIC_ROUTES.LOGIN_ROUTE]);
+    this.router.navigate([environment.frontend.BASIC_ROUTES.LOGIN_ROUTE]);
   }
 
   public setSession(token: any): void {
     // expires at - seconds . local storage
     // const expiresAt = moment().add(authResult.expiresIn,'second');
     // localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()) );
-    sessionStorage.setItem(environment.AUTHENTICATION.TOKENNAME, token);
+    sessionStorage.setItem(environment.authentication.TOKENNAME, token);
   }
 
   public getToken(): string {
-    const temp = sessionStorage.getItem(environment.AUTHENTICATION.TOKENNAME);
+    const temp = sessionStorage.getItem(environment.authentication.TOKENNAME);
     return temp ? temp : '';
   }
 
   public clearSession(): void {
-    sessionStorage.removeItem(environment.AUTHENTICATION.TOKENNAME);
+    sessionStorage.removeItem(environment.authentication.TOKENNAME);
   }
 }

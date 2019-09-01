@@ -13,12 +13,10 @@ export class GameService {
   }
 
   public getGames(): Observable<Game[]> {
-    return this.httpService.get<Game[]>(environment.BACKEND.URL.FULL + environment.BACKEND.ENTRY_POINTS.GAME);
+    return this.httpService.get<Game[]>(environment.backend.ENTRY_POINTS.GAME);
   }
 
   public saveGame(game: Game): Observable<Game> {
-    return this.httpService.post<Game>(environment.BACKEND.URL.FULL
-      + environment.BACKEND.ENTRY_POINTS.GAME
-      + environment.BACKEND.ENTRY_POINTS.CREATE, game);
+    return this.httpService.post<Game>(environment.backend.ENTRY_POINTS.GAME + environment.backend.ENTRY_POINTS.CREATE, game);
   }
 }

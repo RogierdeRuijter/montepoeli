@@ -8,7 +8,7 @@
     "start:dev-no-host": "ng serve --host 0.0.0.0 --disable-host-check",
     "start:dev-no-host-aot": "ng serve --host 0.0.0.0 --aot --disable-host-check",
     "build": "ng build",
-    "build:prod": "ng build --prod",
+    "build:prod": "ng build --configuration=production",
     "build:e2e": "ng build --configuration=e2e",
     "test": "ng test --watch=false",
     "test:jest": "jest",

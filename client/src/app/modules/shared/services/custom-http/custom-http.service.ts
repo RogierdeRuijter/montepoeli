@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
 import {LoadingService} from '../loading/loading.service';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
+import {environment} from '../../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -19,17 +20,19 @@ export class CustomHttpService {
     observe: 'response' as 'response',
   };
 
+  private baseUrl: string = environment.environment.backendUrl;
+
   public get<T>(url: string): Observable<T> {
     this.loadingService.activateDelayedLoading();
 
-    return this.httpClient.get<T>(url, this.httpOptions)
+    return this.httpClient.get<T>(this.baseUrl + url, this.httpOptions)
       .pipe(
         map((httpResponse: HttpResponse<T>) => httpResponse.body),
       );
   }
 
   public post<T>(url: string, body: T): Observable<T> {
-    return this.httpClient.post<T>(url, body, this.httpOptions)
+    return this.httpClient.post<T>(this.baseUrl + url, body, this.httpOptions)
       .pipe(
         map((httpResponse: HttpResponse<T>) => httpResponse.body),
       );

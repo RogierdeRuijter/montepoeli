@@ -1,0 +1,10 @@
+ARG CLIENT_BASE_IMAGE_NAME
+ARG CLIENT_BASE_IMAGE_TAG
+
+FROM $CLIENT_BASE_IMAGE_NAME:$CLIENT_BASE_IMAGE_TAG
+
+ARG CLIENT_TYPE
+
+RUN rm /usr/share/nginx/html/assets/app-config.json
+
+RUN cp usr/dynamic-environments/app-config-$CLIENT_TYPE.json /usr/share/nginx/html/assets/app-config.json
