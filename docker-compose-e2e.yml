@@ -12,6 +12,8 @@ services:
       - mongodb-e2e
       - client-e2e
       - selenium-hub
+      - chrome
+      - firefox
     command: sh -c 'npm run protractor'
 
   client-e2e:
