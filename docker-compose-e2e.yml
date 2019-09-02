@@ -15,13 +15,7 @@ services:
     command: sh -c 'npm run protractor'
 
   client-e2e:
-    build:
-      context: client
-      dockerfile: client/Dockerfile.configured
-      args:
-        CLIENT_BASE_IMAGE_NAME: ${CLIENT_BASE_IMAGE_NAME}
-        CLIENT_BASE_IMAGE_TAG: ${CLIENT_BASE_IMAGE_TAG}
-        CLIENT_TYPE: ${CLIENT_TYPE}
+    image: ${CLIENT_BASE_IMAGE_NAME}:${CLIENT_BASE_IMAGE_TAG}
     container_name: montepouli-client-e2e
     ports:
       - "80"
