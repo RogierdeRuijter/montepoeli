@@ -139,9 +139,9 @@ jobs:
 
       - deploy:
           command: |
-            CLIENT_TAG=1.1
+            TESTED_CLIENT_TAG=1.1-e2e
             IMAGE_CLIENT_NAME=montepouli-client
-            docker push $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG
+            docker push $DOMAIN/$IMAGE_CLIENT_NAME:$TESTED_CLIENT_TAG
 
   retag-server-image:
     docker:
@@ -173,20 +173,20 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-      #      - build-client-base
-      #      - swap-client-config-e2e:
-      #          requires:
-      #            - build-client-base
-      #      - build-server
-      #      - build-storybook
-      - e2e-test
-#          requires:
-#            - swap-client-config-e2e
-#            - build-server
-#      - swap-client-config:
-#          requires:
-#            - build-client-base
-#            - e2e-test
-#      - retag-server-image:
-#          requires:
-#            - e2e-test
+      - build-client-base
+      - swap-client-config-e2e:
+          requires:
+            - build-client-base
+      - build-server
+      - build-storybook
+      - e2e-test:
+          requires:
+            - swap-client-config-e2e
+            - build-server
+      - swap-client-config:
+          requires:
+            - build-client-base
+            - e2e-test
+      - retag-server-image:
+          requires:
+            - e2e-test

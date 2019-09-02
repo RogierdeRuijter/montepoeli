@@ -4,14 +4,7 @@ WORKDIR /usr/src/app
 
 COPY . .
 
-RUN npm install @babel/core@7.4.5
-RUN npm install @storybook/addon-actions@5.0.11
-RUN npm install @storybook/addon-links@5.0.11
-RUN npm install @storybook/addon-notes@5.0.11
-RUN npm install @storybook/addon-storyshots@5.0.11
-RUN npm install @storybook/addon-viewport@5.0.11
-RUN npm install @storybook/addons@5.0.11
-RUN npm install @storybook/angular@5.0.11
+RUN npm install
 RUN npm run build-storybook-web-app
 RUN rm -rf node_modules
 
