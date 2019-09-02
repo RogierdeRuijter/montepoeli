@@ -61,11 +61,16 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: true
 
-      - run: |
-          cd client
-          CLIENT_TAG=1.1
-          IMAGE_CLIENT_NAME=montepouli-client-e2e
-          docker build -f DockerfileE2EClient . -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG
+      - run:
+          enviroment:
+            CLIENT_BASE_IMAGE_NAME: montepoeli.club/montepouli-client-e2e
+            CLIENT_BASE_IMAGE_TAG: 1.1
+            CLIENT_TYPE: e2e
+          command: |
+            cd client
+            CLIENT_TAG=1.1
+            IMAGE_CLIENT_NAME=montepouli-client-e2e
+            docker build -f DockerfileE2EClient . -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG
 
       - deploy:
           command: |
@@ -113,7 +118,7 @@ jobs:
       #      - run: cp .circleci/.some-parameter-file .some-parameter-file
       - run: npm run start:e2e-environment-build-server
 
-  build-client-server:
+  swap-client-config:
     docker:
       - image: circleci/node:11
 
@@ -187,7 +192,7 @@ workflows:
           requires:
             - build-client-e2e
             - build-server
-      - build-client-server:
+      - swap-client-config:
           requires:
             - build-client-base
             - e2e-test
