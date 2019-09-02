@@ -49,9 +49,6 @@ services:
   mongodb-e2e:
     container_name: montepouli-mongodb-e2e
     image: mongo:4.1
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=root
-      - MONGO_INITDB_ROOT_PASSWORD=example
     ports:
       - "27017"
       - "28017"

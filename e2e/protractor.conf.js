@@ -6,7 +6,7 @@ const executeOnMongo = require('./start-up-scripts/exec-on-mongo');
 const setUp = require('./start-up-scripts/set-up');
 
 const dbParams = {
-  url: 'mongodb://root:example@mongodb-e2e:27017',
+  url: 'mongodb://mongodb-e2e:27017',
   dbName: 'admin',
 };
 
