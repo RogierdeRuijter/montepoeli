@@ -66,7 +66,7 @@ jobs:
             cd client
             CLIENT_TAG=1.1
             IMAGE_CLIENT_NAME=montepouli-client-e2e
-            docker build -f DockerfileE2EClient . -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG --build-arg CLIENT_BASE_IMAGE_NAME=montepoeli.club/montepouli-client --build-arg CLIENT_BASE_IMAGE_TAG=1.1 --build-arg CLIENT_TYPE=e2e
+            docker build -f Dockerfile.configured . -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG --build-arg CLIENT_BASE_IMAGE_NAME=montepoeli.club/montepouli-client --build-arg CLIENT_BASE_IMAGE_TAG=1.1 --build-arg CLIENT_TYPE=e2e
 
       - deploy:
           command: |
@@ -88,7 +88,7 @@ jobs:
           cd client
           STORYBOOK_TAG=1.0
           IMAGE_STORYBOOK_NAME=montepouli-storybook
-          docker build -f StorybookDockerfile -t $DOMAIN/$IMAGE_STORYBOOK_NAME:$STORYBOOK_TAG .
+          docker build -f Dockerfile.storybook -t $DOMAIN/$IMAGE_STORYBOOK_NAME:$STORYBOOK_TAG .
 
       - deploy:
           command: |
@@ -129,7 +129,7 @@ jobs:
             cd client
             IMAGE_CLIENT_NAME=montepouli-client
             TESTED_CLIENT_TAG=1.1-e2e
-            docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$TESTED_CLIENT_TAG . --build-arg CLIENT_BASE_IMAGE_NAME=montepoeli.club/montepouli-client-e2e --build-arg CLIENT_BASE_IMAGE_TAG=1.1 --build-arg CLIENT_TYPE=server
+            docker build -f Dockerfile.configured -t $DOMAIN/$IMAGE_CLIENT_NAME:$TESTED_CLIENT_TAG . --build-arg CLIENT_BASE_IMAGE_NAME=montepoeli.club/montepouli-client-e2e --build-arg CLIENT_BASE_IMAGE_TAG=1.1 --build-arg CLIENT_TYPE=server
 
       - deploy:
           command: |

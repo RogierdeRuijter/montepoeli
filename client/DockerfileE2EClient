@@ -1,5 +1,0 @@
-FROM ${CLIENT-BASE-IMAGE-NAME}:${CLIENT-BASE-IMAGE-TAG}
-
-RUN rm /usr/share/nginx/html/assets/app-config.json
-
-RUN cp usr/dynamic-environments/app-config-e2e.json /usr/share/nginx/html/assets/app-config.json

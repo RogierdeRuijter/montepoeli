@@ -3,7 +3,7 @@ services:
   client:
     build:
       context: client
-      dockerfile: LocalDockerfile
+      dockerfile: client/Dockerfile.local
     container_name: montepouli-client
     ports:
       - "4200:4200"

@@ -17,7 +17,7 @@ services:
   client-e2e:
     build:
       context: client
-      dockerfile: DockerfileConfigured
+      dockerfile: client/Dockerfile.configured
       args:
         CLIENT_BASE_IMAGE_NAME: ${CLIENT_BASE_IMAGE_NAME}
         CLIENT_BASE_IMAGE_TAG: ${CLIENT_BASE_IMAGE_TAG}
