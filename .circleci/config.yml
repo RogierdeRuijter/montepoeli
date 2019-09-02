@@ -181,7 +181,7 @@ workflows:
   build_and_test:
     jobs:
       #      - build-client-base
-      - swap-client-config-e2e:
+      - swap-client-config-e2e
 #          requires:
 #            - build-client-base
 #      - build-server
