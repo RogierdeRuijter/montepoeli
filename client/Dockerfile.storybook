@@ -5,6 +5,7 @@ WORKDIR /usr/src/app
 COPY . .
 
 RUN npm install
+RUN npm run build-storybook-web-app
 RUN rm -rf node_modules
 
 FROM nginx:alpine
