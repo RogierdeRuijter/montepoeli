@@ -14,7 +14,7 @@ services:
       - selenium-hub
       - chrome
       - firefox
-    command: sh -c 'npm run protractor'
+    command: sh -c 'sleep 10 && npm run protractor'
 
   client-e2e:
     image: ${CLIENT_BASE_IMAGE_NAME}:${CLIENT_BASE_IMAGE_TAG}
@@ -31,8 +31,6 @@ services:
     image: ${SERVER_IMAGE_NAME}:${SERVER_IMAGE_TAG}
     container_name: montepouli-server-e2e
     environment:
-      - MONGO_USERNAME=root
-      - MONGO_PASSWORD=example
       - SERVER_SECRET=secret01
       - ENV=dev
       - MONGO_DNS_NAME=mongodb-e2e

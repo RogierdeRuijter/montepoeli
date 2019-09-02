@@ -15,7 +15,8 @@ const constructDatabaseUrl = () => {
   if (username && password) {
     url += username + ':' + password + '@';
   }
-  return url + mongoDNS + '/admin';
+  url += mongoDNS + '/admin';
+  return url;
 };
 
 @Module({
