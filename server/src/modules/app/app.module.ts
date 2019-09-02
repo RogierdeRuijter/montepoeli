@@ -10,9 +10,18 @@ const password = process.env.MONGO_PASSWORD;
 
 const mongoDNS = process.env.MONGO_DNS_NAME;
 
+const constructDatabaseUrl = () => {
+  let url = 'mongodb://';
+  if (username && password) {
+    url += username + ':' + password + '@';
+  }
+  url += mongoDNS + '/admin';
+  return url;
+};
+
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://' + username + ':' + password + '@' + mongoDNS + '/admin'),
+    MongooseModule.forRoot(constructDatabaseUrl()),
     AuthModule,
     UsersModule,
     GameModule,
