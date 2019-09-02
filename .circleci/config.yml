@@ -139,9 +139,9 @@ jobs:
 
       - deploy:
           command: |
-            CLIENT_TAG=1.1
+            TESTED_CLIENT_TAG=1.1-e2e
             IMAGE_CLIENT_NAME=montepouli-client
-            docker push $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG
+            docker push $DOMAIN/$IMAGE_CLIENT_NAME:$TESTED_CLIENT_TAG
 
   retag-server-image:
     docker:
