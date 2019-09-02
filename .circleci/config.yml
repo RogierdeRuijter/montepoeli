@@ -63,6 +63,10 @@ jobs:
 
       - run:
           command: |
+            docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
+
+      - run:
+          command: |
             cd client
             CLIENT_TAG=1.1
             IMAGE_CLIENT_NAME=montepouli-client-e2e
@@ -72,7 +76,6 @@ jobs:
           command: |
             CLIENT_TAG=1.1
             IMAGE_CLIENT_NAME=montepouli-client-e2e
-            docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
             docker push $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG
 
   build-storybook:
@@ -126,6 +129,10 @@ jobs:
 
       - run:
           command: |
+            docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
+
+      - run:
+          command: |
             cd client
             IMAGE_CLIENT_NAME=montepouli-client
             TESTED_CLIENT_TAG=1.1-e2e
@@ -135,7 +142,6 @@ jobs:
           command: |
             CLIENT_TAG=1.1
             IMAGE_CLIENT_NAME=montepouli-client
-            docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
             docker push $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG
 
   retag-server-image:
@@ -174,20 +180,20 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-      - build-client-base
+      #      - build-client-base
       - swap-client-config-e2e:
-          requires:
-            - build-client-base
-      - build-server
-      - build-storybook
-      - e2e-test:
-          requires:
-            - swap-client-config-e2e
-            - build-server
-      - swap-client-config:
-          requires:
-            - build-client-base
-            - e2e-test
-      - retag-server-image:
-          requires:
-            - e2e-test
+#          requires:
+#            - build-client-base
+#      - build-server
+#      - build-storybook
+#      - e2e-test:
+#          requires:
+#            - swap-client-config-e2e
+#            - build-server
+#      - swap-client-config:
+#          requires:
+#            - build-client-base
+#            - e2e-test
+#      - retag-server-image:
+#          requires:
+#            - e2e-test
