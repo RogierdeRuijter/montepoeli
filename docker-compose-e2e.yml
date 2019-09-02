@@ -40,6 +40,8 @@ services:
       - ./server/src:/usr/src/app/src
     networks:
       - e2e
+    depends_on:
+      - mongodb-e2e
     command: sh -c 'npm run start:dev'
 
   mongodb-e2e:
