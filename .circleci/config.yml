@@ -51,7 +51,7 @@ jobs:
             docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
             docker push $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG
 
-  build-client-e2e:
+  swap-client-config-e2e:
     docker:
       - image: circleci/node:11
 
@@ -183,14 +183,14 @@ workflows:
   build_and_test:
     jobs:
       - build-client-base
-      - build-client-e2e:
+      - swap-client-config-e2e:
           requires:
             - build-client-base
       - build-server
       - build-storybook
       - e2e-test:
           requires:
-            - build-client-e2e
+            - swap-client-config-e2e
             - build-server
       - swap-client-config:
           requires:
