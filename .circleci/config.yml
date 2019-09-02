@@ -62,15 +62,11 @@ jobs:
           docker_layer_caching: true
 
       - run:
-          enviroment:
-            CLIENT_BASE_IMAGE_NAME: montepoeli.club/montepouli-client-e2e
-            CLIENT_BASE_IMAGE_TAG: 1.1
-            CLIENT_TYPE: e2e
           command: |
             cd client
             CLIENT_TAG=1.1
             IMAGE_CLIENT_NAME=montepouli-client-e2e
-            docker build -f DockerfileE2EClient . -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG
+            docker build -f DockerfileE2EClient . -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG --build-arg CLIENT_BASE_IMAGE_NAME=montepoeli.club/montepouli-client --build-arg CLIENT_BASE_IMAGE_TAG=1.1 --build-arg CLIENT_TYPE=e2e
 
       - deploy:
           command: |
@@ -129,15 +125,11 @@ jobs:
           docker_layer_caching: true
 
       - run:
-          enviroment:
-            CLIENT_BASE_IMAGE_NAME: montepoeli.club/montepouli-client-e2e
-            CLIENT_BASE_IMAGE_TAG: 1.1
-            CLIENT_TYPE: server
           command: |
             cd client
             IMAGE_CLIENT_NAME=montepouli-client
             TESTED_CLIENT_TAG=1.1-e2e
-            docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$TESTED_CLIENT_TAG .
+            docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$TESTED_CLIENT_TAG . --build-arg CLIENT_BASE_IMAGE_NAME=montepoeli.club/montepouli-client-e2e --build-arg CLIENT_BASE_IMAGE_TAG=1.1 --build-arg CLIENT_TYPE=server
 
       - deploy:
           command: |
