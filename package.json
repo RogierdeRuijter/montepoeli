@@ -1,6 +1,7 @@
 {
   "name": "montepouli",
   "version": "1.0.0",
+  "license": "MIT",
   "scripts": {
     "build:client": "docker build client -t montepouli_client:latest",
     "build:server": "docker build server -t montepouli_server:latest",
@@ -18,8 +19,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint && cd ../server && npm run lint",
-      "pre-push": "npm run build && cd ../server && npm test"
+      "pre-commit": "cd client && npm run lint && cd ../server && npm run lint",
+      "pre-push": "cd client && npm run build && cd ../server && npm test"
     }
   },
   "devDependencies": {
