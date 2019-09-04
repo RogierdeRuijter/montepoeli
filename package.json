@@ -20,7 +20,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "cd client && npm run lint && cd ../server && npm run lint",
-      "pre-push": "cd client && npm run build && cd ../server && npm test"
+      "pre-push": "cd client && npm run build -- --aot && cd ../server && npm test"
     }
   },
   "devDependencies": {
