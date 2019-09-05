@@ -8242,10 +8242,10 @@ ngx-skeleton-loader@~1.2.0:
   dependencies:
     tslib "^1.9.0"
 
-ngx-toastr@~10.0.4:
-  version "10.0.4"
-  resolved "https://registry.yarnpkg.com/ngx-toastr/-/ngx-toastr-10.0.4.tgz#cbc61b8d67d748194ea7a28542b01e39bf1fc6c2"
-  integrity sha512-iN+zr2Msae5wV334c1dytRhSYNdUz467jwv1NE91lMmllsMkpUzZlu8VdFCeTFt+/R4TWzz19xBRqhpp+OAuVA==
+ngx-toastr@~10.2.0:
+  version "10.2.0"
+  resolved "https://registry.yarnpkg.com/ngx-toastr/-/ngx-toastr-10.2.0.tgz#8a79008de0b1c013f90120a53e0355af5762e969"
+  integrity sha512-6ASr5bcvQmtNKb4D2VEsQjCXyROq6GwberBWO0bVt+xcBYPUea4aRTgX8in9apX9buaTafzG+h3HlnIraspoPg==
   dependencies:
     tslib "^1.9.0"
 
