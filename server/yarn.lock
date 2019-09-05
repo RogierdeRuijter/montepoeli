@@ -57,15 +57,15 @@
   resolved "https://registry.yarnpkg.com/@nestjs/passport/-/passport-6.1.0.tgz#80da326cc976a82530648d8025b04c8e2d41c10e"
   integrity sha512-V4KdtFFLsdZQ/HlIECpiK6byzGz57Y12TAc+Iatykk8jWuVFE1jq8RJbpTfB0zG0PTfcGm9crQ6Ut2Rwdmis4Q==
 
-"@nestjs/platform-express@~6.3.1":
-  version "6.3.2"
-  resolved "https://registry.yarnpkg.com/@nestjs/platform-express/-/platform-express-6.3.2.tgz#2b224a87daa193ffa56ef64acd48f28b4a754060"
-  integrity sha512-fQTh+zXDgw7W/30ctVlhOCZVDn8P0Ry1UcxltH2dAmyYDih+gQtWeEMzotwB6MwaAAAo8hQ8nBWWY4vez1dzJQ==
+"@nestjs/platform-express@~6.6.7":
+  version "6.6.7"
+  resolved "https://registry.yarnpkg.com/@nestjs/platform-express/-/platform-express-6.6.7.tgz#8258a301b1b0ac99204d3623c6431edd16619f50"
+  integrity sha512-cflh5DqKF3ofhs2wWKij4JJ25fxJB0/04jLzX2WZDssU8FFPzlLg/mU+VoJqar6VT9taZl/Q6LnRGSjiRnXhUw==
   dependencies:
     body-parser "1.19.0"
     cors "2.8.5"
     express "4.17.1"
-    multer "1.4.1"
+    multer "1.4.2"
 
 "@nestjs/testing@~6.3.1":
   version "6.3.2"
@@ -3470,10 +3470,10 @@ ms@2.1.2, ms@^2.1.1:
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.2.tgz#d09d1f357b443f493382a8eb3ccd183872ae6009"
   integrity sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==
 
-multer@1.4.1:
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/multer/-/multer-1.4.1.tgz#24b12a416a22fec2ade810539184bf138720159e"
-  integrity sha512-zzOLNRxzszwd+61JFuAo0fxdQfvku12aNJgnla0AQ+hHxFmfc/B7jBVuPr5Rmvu46Jze/iJrFpSOsD7afO8SDw==
+multer@1.4.2:
+  version "1.4.2"
+  resolved "https://registry.yarnpkg.com/multer/-/multer-1.4.2.tgz#2f1f4d12dbaeeba74cb37e623f234bf4d3d2057a"
+  integrity sha512-xY8pX7V+ybyUpbYMxtjM9KAiD9ixtg5/JkeKUTD6xilfDv0vzzOFcCp4Ljb1UU3tSOM3VTZtKo63OmzOrGi3Cg==
   dependencies:
     append-field "^1.0.0"
     busboy "^0.2.11"
