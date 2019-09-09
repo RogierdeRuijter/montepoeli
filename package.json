@@ -1,6 +1,7 @@
 {
   "name": "montepouli",
   "version": "1.0.0",
+  "license": "MIT",
   "scripts": {
     "build:client": "docker build client -t montepouli_client:latest",
     "build:server": "docker build server -t montepouli_server:latest",
@@ -15,14 +16,5 @@
     "docker-compose-rebuild": "docker-compose build && docker-compose down && docker-compose up -d",
     "docker-compose-rebuild-no-cache": "docker-compose build --no-cache && docker-compose down && docker-compose up -d",
     "docker:storybook": "start-storybook -p 65200 --ci"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint && cd ../server && npm run lint",
-      "pre-push": "npm run build && cd ../server && npm test"
-    }
-  },
-  "devDependencies": {
-    "husky": "2.3.0"
   }
 }
