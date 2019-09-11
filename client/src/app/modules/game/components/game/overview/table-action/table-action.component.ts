@@ -11,6 +11,9 @@ import {UnknownCaseException} from '../../../../../shared/exceptions/UnknownCase
 export class TableActionComponent implements OnInit {
 
   @Input()
+  public ids: string[];
+
+  @Input()
   public actions: Actions[];
 
   @Input()

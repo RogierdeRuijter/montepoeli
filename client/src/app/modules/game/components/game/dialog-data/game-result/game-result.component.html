@@ -2,7 +2,8 @@
 <div mat-dialog-content>
   <form #form="ngForm">
     <div>
-      <app-drop-down [(value)]="data.white"
+      <app-drop-down id='white-user'
+                     [(value)]="data.white"
                      [options]="usersWhite"
                      labelKey="pages.home.games.labels.white"
                      optionDisplayField="name">
@@ -10,14 +11,16 @@
     </div>
     <!-- TODO: make this none special dropdown-->
     <div>
-      <app-drop-down [(value)]="data.winner"
+      <app-drop-down id='winner-user'
+                     [(value)]="data.winner"
                      [options]="winnerOptions"
                      labelKey="pages.home.games.labels.winner">
       </app-drop-down>
     </div>
 
     <div>
-      <app-drop-down [(value)]="data.black"
+      <app-drop-down id='black-user'
+                     [(value)]="data.black"
                      [options]="usersBlack"
                      labelKey="pages.home.games.labels.black"
                      optionDisplayField="name">
@@ -35,7 +38,8 @@
               [buttonType]="ButtonType.PRIMARY">
   </app-button>
 
-  <app-button [appGridColumn]="[6, 6, 6, 6]"
+  <app-button id="save"
+              [appGridColumn]="[6, 6, 6, 6]"
               [buttonFunction]="ButtonFunction.SAVE"
               [buttonType]="ButtonType.PRIMARY"
               [dialogDataToSubmit]="data"

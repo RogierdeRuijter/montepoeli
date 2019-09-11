@@ -8,13 +8,13 @@ const setUp = require('./start-up-scripts/set-up');
 const HtmlScreenshotReporter = require('protractor-jasmine2-screenshot-reporter');
 
 const reporter = new HtmlScreenshotReporter({
-  dest: '/root/target/screenshots/images/',
-  filename: 'my-report.html'
+  dest: './reports/images/',
+  filename: 'my-report.html',
 });
 
 
 const dbParams = {
-  url: 'mongodb://mongodb-e2e:27017',
+  url: 'mongodb://localhost:27019',
   dbName: 'admin',
 };
 
@@ -24,16 +24,10 @@ exports.config = {
     './src/**/*.e2e-spec.ts',
   ],
 
-  multiCapabilities: [{
-    'browserName': 'firefox',
-  }, {
-    'browserName': 'chrome',
-    chromeOptions: {
-      args: ['--window-size=800x600', 'no-sandbox', '--whitelisted-ips'],
-    },
-  }],
-  seleniumAddress: 'http://selenium-hub:4444/wd/hub',
-  baseUrl: 'http://client-e2e:80/',
+  capabilities: {
+    'browserName': 'chrome'
+  },
+  baseUrl: 'http://localhost:4200/',
   framework: 'jasmine',
   jasmineNodeOpts: {
     showColors: true,

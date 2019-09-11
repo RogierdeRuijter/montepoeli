@@ -1,5 +1,4 @@
-<a (click)="actionClick(action)"
-   *ngFor="let action of actions">
+<a (click)="actionClick(action)" *ngFor="let action of actions; let i = index" [id]="ids[i]">
   <app-icon [disabled]="iconsMap[action].disabled"
             [icon]="iconsMap[action].icon">
   </app-icon>
