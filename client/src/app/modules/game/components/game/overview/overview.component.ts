@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
 import {Actions, Alignments, GridSizes, Positions} from '../../../../shared/static-files/enums';
 import {Observable} from 'rxjs';
 import {Game} from '../../../../shared/interfaces/game.interface';
@@ -7,6 +7,7 @@ import {Game} from '../../../../shared/interfaces/game.interface';
   selector: 'ui-overview',
   templateUrl: './overview.component.html',
   styleUrls: ['./overview.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class OverviewComponent {
 

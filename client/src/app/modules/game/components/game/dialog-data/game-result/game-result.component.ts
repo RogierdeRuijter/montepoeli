@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
 import {ButtonFunction, ButtonType, GridSizes, Icons, Winners} from '../../../../../shared/static-files/enums';
 import {NgForm} from '@angular/forms';
 import {Game} from '../../../../../shared/interfaces/game.interface';
@@ -10,6 +10,7 @@ import {timer} from 'rxjs';
   selector: 'ui-game-result',
   templateUrl: './game-result.component.html',
   styleUrls: ['./game-result.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GameResultComponent {
 

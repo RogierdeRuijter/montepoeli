@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ButtonFunction, ButtonType} from '../../static-files/enums';
 import {UnknownCaseException} from '../../exceptions/UnknownCaseException';
 
@@ -6,6 +6,7 @@ import {UnknownCaseException} from '../../exceptions/UnknownCaseException';
   selector: 'app-button',
   templateUrl: './button.component.html',
   styleUrls: ['./button.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ButtonComponent implements OnInit {
 

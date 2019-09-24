@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Game} from '../../../shared/interfaces/game.interface';
 import {GameService} from '../../services/game.service';
 import {Actions, GridSizes} from '../../../shared/static-files/enums';
@@ -17,6 +17,7 @@ import {UserStore} from '../../stores/user.store';
   selector: 'app-game',
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GameComponent implements OnInit, OnDestroy {
 

@@ -1,4 +1,4 @@
-import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
+import {ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
 import {Alignments, ButtonFunction, ButtonType, GridSizes} from '../../../modules/shared/static-files/enums';
 import {NgForm} from '@angular/forms';
 
@@ -6,6 +6,7 @@ import {NgForm} from '@angular/forms';
   selector: 'ui-login-form',
   templateUrl: './login-form.component.html',
   styleUrls: ['./login-form.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginFormComponent {
 

@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {Sides, Winners} from '../../../../shared/static-files/enums';
 import {Game} from '../../../../shared/interfaces/game.interface';
@@ -11,6 +11,7 @@ import {TranslateService} from '@ngx-translate/core';
 @Component({
   selector: 'app-dialog-data',
   templateUrl: './dialog-data.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DialogDataComponent implements OnInit {
 

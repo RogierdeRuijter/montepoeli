@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Output} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {DialogDataComponent} from '../dialog-data/dialog-data.component';
 import {Game} from '../../../../shared/interfaces/game.interface';
@@ -8,6 +8,7 @@ import {UtilService} from '../../../../shared/services/util/util.service';
 @Component({
   selector: 'app-dialog-overview',
   template: ``,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DialogOverviewComponent {
 

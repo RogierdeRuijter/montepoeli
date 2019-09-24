@@ -1,10 +1,11 @@
-import {IApi, IGetStory} from '@storybook/angular';
 import {CompleteStory} from '../intefaces/complete-story.interface';
 import {GameTableComponent} from '../../../app/modules/game/components/game/game-table/game-table.component';
 import {of} from 'rxjs';
 import {MatTableModule} from '@angular/material';
 import {StorybookTranslateModule} from '../../storybook-translate.module';
 import {TranslateDirective} from '../../../app/modules/shared/modules/translate/translate.directive';
+import {StoryApi} from '@storybook/addons/src/types';
+import {StoryFn} from '@storybook/addons';
 
 
 export class GameTableStoryFactory {
@@ -12,7 +13,7 @@ export class GameTableStoryFactory {
   private readonly displayedColumns: string[] = ['white', 'winner', 'black'];
   private stories: CompleteStory[] = [];
 
-  constructor(private iApi: IApi) {
+  constructor(private storiesInterface: StoryApi<unknown>) {
   }
 
   public create(): void {
@@ -21,7 +22,7 @@ export class GameTableStoryFactory {
   }
 
   private appendStories(): void {
-    this.stories.forEach((story: CompleteStory) => this.iApi.add(story.name, story.story));
+    this.stories.forEach((story: CompleteStory) => this.storiesInterface.add(story.name, story.story));
   }
 
   private createInputs(): void {
@@ -61,7 +62,7 @@ export class GameTableStoryFactory {
     });
   }
 
-  private zeroGameStory(): IGetStory {
+  private zeroGameStory(): StoryFn<unknown> {
     return () => ({
       component: this.component,
       props: {
@@ -78,7 +79,7 @@ export class GameTableStoryFactory {
     });
   }
 
-  private twoGamesStory(): IGetStory {
+  private twoGamesStory(): StoryFn<unknown> {
     return () => ({
       component: GameTableComponent,
       props: {
@@ -98,7 +99,7 @@ export class GameTableStoryFactory {
     });
   }
 
-  private twoGamesWithLongNames(): IGetStory {
+  private twoGamesWithLongNames(): StoryFn<unknown> {
     return () => ({
       component: GameTableComponent,
       props: {
@@ -118,7 +119,7 @@ export class GameTableStoryFactory {
     });
   }
 
-  private twoGamesAndUnknownWinnerStates(): IGetStory {
+  private twoGamesAndUnknownWinnerStates(): StoryFn<unknown> {
     return () => ({
       component: GameTableComponent,
       props: {
@@ -138,7 +139,7 @@ export class GameTableStoryFactory {
     });
   }
 
-  private threeGames(): IGetStory {
+  private threeGames(): StoryFn<unknown> {
     return () => ({
       component: GameTableComponent,
       props: {
@@ -159,7 +160,7 @@ export class GameTableStoryFactory {
     });
   }
 
-  private manyGames(): IGetStory {
+  private manyGames(): StoryFn<unknown> {
     return () => ({
       component: GameTableComponent,
       props: {

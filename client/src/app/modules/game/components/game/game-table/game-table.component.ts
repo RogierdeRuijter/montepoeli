@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 import {Game} from '../../../../shared/interfaces/game.interface';
 import {Observable} from 'rxjs';
 
@@ -6,6 +6,7 @@ import {Observable} from 'rxjs';
   selector: 'ui-game-table',
   templateUrl: './game-table.component.html',
   styleUrls: ['./game-table.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GameTableComponent {
 

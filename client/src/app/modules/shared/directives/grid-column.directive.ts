@@ -4,7 +4,7 @@ import {Alignments, GridSizes} from '../static-files/enums';
 import {UtilService} from '../services/util/util.service';
 
 @Directive({
-  selector: '[appGridColumn]',
+  selector: '[appGridColumn]'
 })
 export class GridColumnDirective implements OnInit {
 

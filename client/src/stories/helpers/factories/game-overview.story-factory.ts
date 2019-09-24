@@ -1,4 +1,3 @@
-import {IApi, IGetStory} from '@storybook/angular';
 import {CompleteStory} from '../intefaces/complete-story.interface';
 import {GameTableComponent} from '../../../app/modules/game/components/game/game-table/game-table.component';
 import {of} from 'rxjs';
@@ -15,7 +14,8 @@ import {GridColumnDirective} from '../../../app/modules/shared/directives/grid-c
 import {GridRowDirective} from '../../../app/modules/shared/directives/grid-row.directive';
 import {IconComponent} from '../../../app/modules/shared/modules/icon/icon/icon.component';
 import {PositionDirective} from '../../../app/modules/shared/directives/position.directive';
-
+import {StoryApi} from '@storybook/addons/src/types';
+import {StoryFn} from '@storybook/addons';
 
 export class GameOverviewStoryFactory {
   private component = OverviewComponent;
@@ -24,7 +24,7 @@ export class GameOverviewStoryFactory {
   private actions: Actions[] = [Actions.ADD];
   private readonly module: any;
 
-  constructor(private iApi: IApi) {
+  constructor(private iApi: StoryApi<unknown>) {
     this.module = {
       imports: [
         MatTableModule,
@@ -72,7 +72,7 @@ export class GameOverviewStoryFactory {
     });
   }
 
-  private twoGameStory(): IGetStory {
+  private twoGameStory(): StoryFn<unknown> {
     return () => ({
         component: this.component,
         props: {
@@ -97,7 +97,7 @@ export class GameOverviewStoryFactory {
     );
   }
 
-  private sevenGameStory(): IGetStory {
+  private sevenGameStory(): StoryFn<unknown> {
     return () => ({
         component: this.component,
         props: {
@@ -119,7 +119,7 @@ export class GameOverviewStoryFactory {
     );
   }
 
-  private sevenTeenGameStory(): IGetStory {
+  private sevenTeenGameStory(): StoryFn<unknown> {
     return () => ({
         component: this.component,
         props: {
@@ -219,7 +219,7 @@ export class GameOverviewStoryFactory {
     );
   }
 
-  private thirtyFiveGameStory(): IGetStory {
+  private thirtyFiveGameStory(): StoryFn<unknown> {
     return () => ({
         component: this.component,
         props: {

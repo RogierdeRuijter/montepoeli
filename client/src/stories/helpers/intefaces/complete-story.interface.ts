@@ -1,6 +1,6 @@
-import {IGetStory} from '@storybook/angular';
+import {StoryFn} from '@storybook/addons';
 
 export interface CompleteStory {
   name: string;
-  story: IGetStory;
+  story: StoryFn<unknown>;
 }

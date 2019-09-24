@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Actions, Icons} from '../../../../../shared/static-files/enums';
 import {IllegalInputException} from '../../../../../shared/exceptions/IllegalInputException';
 import {UnknownCaseException} from '../../../../../shared/exceptions/UnknownCaseException';
@@ -7,6 +7,7 @@ import {UnknownCaseException} from '../../../../../shared/exceptions/UnknownCase
   selector: 'ui-table-action',
   templateUrl: './table-action.component.html',
   styleUrls: ['./table-action.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TableActionComponent implements OnInit {
 
