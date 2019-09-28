@@ -116,7 +116,6 @@ jobs:
       - checkout
       - run: sudo curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
       - run: sudo chmod +x /usr/local/bin/docker-compose
-      - run: docker-compose -v
       - run: docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
       - run: npm run start:e2e-environment-build-server
 
@@ -177,24 +176,24 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-#      - build-client-base
-#      - build-server
-#      - swap-client-config-e2e:
-#          requires:
-#            - build-client-base
-      - e2e-test
-#          requires:
-#            - swap-client-config-e2e
-#            - build-server
+      - build-client-base
+      - build-server
+      - swap-client-config-e2e:
+          requires:
+            - build-client-base
+      - e2e-test:
+          requires:
+            - swap-client-config-e2e
+            - build-server
       - build-storybook:
           filters:
             branches:
               only:
                 - /feature-.*/
       - swap-client-config:
-#          requires:
-#            - build-client-base
-#            - e2e-test
+          requires:
+            - build-client-base
+            - e2e-test
           filters:
             branches:
               only: master
