@@ -3,10 +3,10 @@ FROM node:12
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
-RUN npm install -g @angular/cli --loglevel error
+RUN yarn install -g @angular/cli --loglevel error
 
 COPY package.json package.json
-RUN cd /usr/src/app/ && npm install --loglevel error
+RUN cd /usr/src/app/ && yarn install --frozen-lockfile
 
 ADD . /usr/src/app
 
