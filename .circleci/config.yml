@@ -112,12 +112,10 @@ jobs:
       - SERVER_IMAGE_NAME: montepoeli.club/montepouli-server
       - SERVER_IMAGE_TAG: 1.1
       - CLIENT_TYPE: e2e
-      - PATH: "/opt/yarn/yarn-v1.17.3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
     steps:
       - checkout
-      - run: curl -o- -L https://yarnpkg.com/install.sh | bash
       - run: docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
-      - run: yarn start:e2e-environment-build-server
+      - run: npm start:e2e-environment-build-server
 
   swap-client-config:
     docker:
