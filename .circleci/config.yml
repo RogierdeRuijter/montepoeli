@@ -113,6 +113,7 @@ jobs:
       - CLIENT_TYPE: e2e
     steps:
       - checkout
+      - run: docker-compose -v
       - run: docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
       - run: npm run start:e2e-environment-build-server
 
