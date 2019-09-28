@@ -103,7 +103,8 @@ jobs:
             docker push $DOMAIN/$IMAGE_STORYBOOK_NAME:$STORYBOOK_TAG
 
   e2e-test:
-    machine: true # Use a Linux VM instead of docker environment
+    machine:
+      image: circleci/classic:201808-01
     working_directory: ~/repo # Default working directory, where your project will be cloned
     environment:
       - CLIENT_BASE_IMAGE_NAME: montepoeli.club/montepouli-client-e2e
@@ -113,6 +114,8 @@ jobs:
       - CLIENT_TYPE: e2e
     steps:
       - checkout
+      - run: sudo curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+      - run: sudo chmod +x /usr/local/bin/docker-compose
       - run: docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
       - run: npm run start:e2e-environment-build-server
 

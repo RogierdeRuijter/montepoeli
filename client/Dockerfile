@@ -1,8 +1,9 @@
-FROM node:12.9.1-alpine AS builder
+FROM node:12.9.0-alpine AS builder
 
 WORKDIR /usr/src/app
 
 COPY package.json package.json
+COPY yarn.lock yarn.lock
 
 RUN yarn install --frozen-lockfile
 

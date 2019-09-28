@@ -1,4 +1,5 @@
 <button (click)="click()"
+        [id]="id"
         *ngIf="!dialogDataToSubmit"
         [appTranslate]="translationKey"
         [color]="buttonColor"
@@ -9,6 +10,7 @@
 </button>
 
 <button (click)="click()"
+        [id]="id"
         *ngIf="dialogDataToSubmit"
         [color]="buttonColor"
         [disabled]="disabled"

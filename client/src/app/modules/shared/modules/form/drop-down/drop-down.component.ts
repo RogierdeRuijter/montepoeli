@@ -17,6 +17,9 @@ import {MatSelect} from '@angular/material';
 export class DropDownComponent implements ControlValueAccessor {
 
   @Input()
+  public id: string;
+
+  @Input()
   public value: any;
 
   @Input()

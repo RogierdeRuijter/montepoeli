@@ -11,6 +11,9 @@ import {faCheck, faChessRook, faCoffee, faPlus, faTimes} from '@fortawesome/free
 export class IconComponent implements OnInit {
 
   @Input()
+  public id: string;
+
+  @Input()
   public icon: Icons;
 
   @Input()

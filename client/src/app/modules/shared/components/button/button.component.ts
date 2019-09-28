@@ -10,6 +10,9 @@ import {UnknownCaseException} from '../../exceptions/UnknownCaseException';
 export class ButtonComponent implements OnInit {
 
   @Input()
+  public id: string;
+
+  @Input()
   public disabled: boolean;
 
   @Input()

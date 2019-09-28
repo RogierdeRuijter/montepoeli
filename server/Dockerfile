@@ -2,8 +2,12 @@ FROM node:11
 
 WORKDIR usr/src/app
 
-COPY . .
+COPY package.json package.json
+COPY yarn.lock yarn.lock
+
 RUN yarn install --frozen-lockfile
+
+COPY . .
 
 RUN npm run build
 
