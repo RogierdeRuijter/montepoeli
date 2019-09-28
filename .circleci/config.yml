@@ -103,7 +103,8 @@ jobs:
             docker push $DOMAIN/$IMAGE_STORYBOOK_NAME:$STORYBOOK_TAG
 
   e2e-test:
-    machine: true # Use a Linux VM instead of docker environment
+    machine:
+      image: ubuntu-1604:201903-01
     working_directory: ~/repo # Default working directory, where your project will be cloned
     environment:
       - CLIENT_BASE_IMAGE_NAME: montepoeli.club/montepouli-client-e2e
@@ -115,7 +116,6 @@ jobs:
       - checkout
       - run: curl -o- -L https://yarnpkg.com/install.sh | bash
       - run: docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
-      - run: . ~/.nvm/nvm.sh
       - run: yarn start:e2e-environment-build-server
 
   swap-client-config:
