@@ -44,7 +44,8 @@ export enum GridSizes {
   EXTRA_SMALL,
   SMALL,
   MEDIUM,
-  LARGE
+  LARGE,
+  ALL
 }
 
 export enum ButtonRowType {

@@ -23,7 +23,8 @@ export class GridRowDirective implements OnInit {
   }
 
   public ngOnInit(): void {
-    if (this.itDoesNotAllNecessaryGridSizes()) {
+    console.log(this.itDoesNotHaveAllNecessaryGridSizes());
+    if (this.itDoesNotHaveAllNecessaryGridSizes()) {
       throw new ShouldBeDefinedException('All necessary grid sizes');
     }
 
@@ -43,11 +44,13 @@ export class GridRowDirective implements OnInit {
     }
   }
 
-  private itDoesNotAllNecessaryGridSizes(): boolean {
-    return !(this.gridSizes.includes(GridSizes.EXTRA_SMALL)
-      && this.gridSizes.includes(GridSizes.SMALL)
-      && this.gridSizes.includes(GridSizes.MEDIUM)
-      && this.gridSizes.includes(GridSizes.LARGE));
+  private itDoesNotHaveAllNecessaryGridSizes(): boolean {
+    return !(
+      this.gridSizes.includes(GridSizes.EXTRA_SMALL) &&
+      this.gridSizes.includes(GridSizes.SMALL) &&
+      this.gridSizes.includes(GridSizes.MEDIUM) &&
+      this.gridSizes.includes(GridSizes.LARGE)
+    ) && !this.gridSizes.includes(GridSizes.ALL);
   }
 
   private addAlignment(alignment: Alignments): void {

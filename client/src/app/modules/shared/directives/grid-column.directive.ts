@@ -61,6 +61,8 @@ export class GridColumnDirective implements OnInit {
         return 'col-md';
       case GridSizes.LARGE:
         return 'col-lg';
+      case GridSizes.ALL:
+        return 'col';
     }
   }
 
