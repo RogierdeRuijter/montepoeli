@@ -103,7 +103,8 @@ jobs:
             docker push $DOMAIN/$IMAGE_STORYBOOK_NAME:$STORYBOOK_TAG
 
   e2e-test:
-    machine: true
+    machine:
+      image: circleci/classic:201808-01
     working_directory: ~/repo # Default working directory, where your project will be cloned
     environment:
       - CLIENT_BASE_IMAGE_NAME: montepoeli.club/montepouli-client-e2e
