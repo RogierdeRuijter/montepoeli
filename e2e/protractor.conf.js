@@ -24,14 +24,12 @@ exports.config = {
     './src/**/*.e2e-spec.ts',
   ],
 
-  multiCapabilities: [{
-    'browserName': 'firefox',
-  }, {
+  capabilities: {
     'browserName': 'chrome',
     chromeOptions: {
       args: ['--window-size=800x600', 'no-sandbox', '--whitelisted-ips'],
     },
-  }],
+  },
   seleniumAddress: 'http://selenium-hub:4444/wd/hub',
   baseUrl: 'http://client-e2e:80/',
   framework: 'jasmine',

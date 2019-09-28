@@ -50,6 +50,7 @@ services:
     ports:
       - "27017"
       - "28017"
+    restart: always
     networks:
       - e2e
 

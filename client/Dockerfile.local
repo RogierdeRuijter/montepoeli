@@ -3,7 +3,7 @@ FROM node:12
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
-RUN yarn install -g @angular/cli --loglevel error
+RUN yarn global add @angular/cli
 
 COPY package.json package.json
 RUN cd /usr/src/app/ && yarn install --frozen-lockfile

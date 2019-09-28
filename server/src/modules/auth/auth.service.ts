@@ -22,7 +22,7 @@ export class AuthService {
         const jwtPayload: JwtPayload = {username: user.username};
         resolve({jwt: this.jwtService.sign(jwtPayload, this.jwtOptions)});
       }).catch((err) => {
-        reject(new UnauthorizedException(err));
+        reject(new UnauthorizedException('Wrong username or password.'));
       }),
     );
   }

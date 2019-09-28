@@ -14,6 +14,14 @@ export class Helper {
     return element(by.id(id));
   }
 
+  public findByCss(css: string): ElementFinder {
+    return element(by.css(css));
+  }
+
+  public findByXPath(xpath: string): ElementFinder {
+    return element(by.xpath(xpath));
+  }
+
   public getTextOfElement(element: ElementFinder): any {
     return element.getText();
   }

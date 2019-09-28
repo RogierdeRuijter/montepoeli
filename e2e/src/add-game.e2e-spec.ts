@@ -11,7 +11,7 @@ describe('Add a game', () => {
     page = new AppPage();
   });
 
-  it('should login to montepouli', async () => {
+  it('should add a game and show it in the table', async () => {
     await page.navigateTo();
 
     expect(browser.getCurrentUrl()).toContain('/login');
@@ -35,7 +35,7 @@ describe('Add a game', () => {
     helper.sleep();
     page.getProtractorUser().click();
 
-    expect(page.getWhiteDropDownList().getText()).toEqual('protractor');
+    expect(page.getWhiteDropDownField().getText()).toEqual('protractor');
 
     helper.sleep();
     page.getWinnerDropDownList().click();
@@ -43,7 +43,7 @@ describe('Add a game', () => {
     helper.sleep();
     page.getWhiteOption().click();
 
-    expect(page.getWhiteOption().getText()).toEqual('White');
+    expect(page.getWinnerDropDownField().getText()).toEqual('White');
 
     helper.sleep();
     page.getBlackDropDownList().click();
@@ -51,7 +51,7 @@ describe('Add a game', () => {
     helper.sleep();
     page.getProtractorUser1().click();
 
-    expect(page.getWhiteOption().getText()).toEqual('protractor1');
+    expect(page.getBlackDropDownField().getText()).toEqual('protractor1');
 
     helper.sleep();
     page.getSaveButton().click();

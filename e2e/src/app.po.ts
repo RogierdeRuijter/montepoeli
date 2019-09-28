@@ -20,12 +20,20 @@ export class AppPage {
     return this.helper.findById('submit');
   }
 
+  public getLoginFailedWarning(): ElementFinder {
+    return this.helper.findByXPath('//*[@id="toast-container"]/div');
+  }
+
   public getAddGameButton(): ElementFinder {
     return this.helper.findById('add-game-button');
   }
 
   public getWhiteDropDownList(): ElementFinder {
     return this.helper.findById('white-user');
+  }
+
+  public getWhiteDropDownField(): ElementFinder {
+    return this.helper.findByXPath('//*[@id="white-user"]/div/div[1]/span/span');
   }
 
   public getProtractorUser(): ElementFinder {
@@ -40,8 +48,16 @@ export class AppPage {
     return this.helper.findById('White');
   }
 
+  public getWinnerDropDownField(): ElementFinder {
+    return this.helper.findByXPath('//*[@id="winner-user"]/div/div[1]/span/span');
+  }
+
   public getBlackDropDownList(): ElementFinder {
     return this.helper.findById('black-user');
+  }
+
+  public getBlackDropDownField(): ElementFinder {
+    return this.helper.findByXPath('//*[@id="black-user"]/div/div[1]/span');
   }
 
   public getProtractorUser1(): ElementFinder {
