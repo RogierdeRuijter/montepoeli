@@ -174,24 +174,24 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-      - build-client-base
-      - build-server
-      - swap-client-config-e2e:
-          requires:
-            - build-client-base
-      - e2e-test:
-          requires:
-            - swap-client-config-e2e
-            - build-server
+#      - build-client-base
+#      - build-server
+#      - swap-client-config-e2e:
+#          requires:
+#            - build-client-base
+      - e2e-test
+#          requires:
+#            - swap-client-config-e2e
+#            - build-server
       - build-storybook:
           filters:
             branches:
               only:
                 - /feature-.*/
       - swap-client-config:
-          requires:
-            - build-client-base
-            - e2e-test
+#          requires:
+#            - build-client-base
+#            - e2e-test
           filters:
             branches:
               only: master
