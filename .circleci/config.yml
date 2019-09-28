@@ -114,6 +114,7 @@ jobs:
     steps:
       - checkout
       - run: docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
+      - run: curl -o- -L https://yarnpkg.com/install.sh | bash
       - run: npm run start:e2e-environment-build-server
 
   swap-client-config:
