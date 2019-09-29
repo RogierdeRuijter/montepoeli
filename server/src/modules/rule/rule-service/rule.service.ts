@@ -4,15 +4,18 @@ import {CreateRuleDto} from '../../../models/create-dtos/create-rule.dto';
 import {RuleRepositoryService} from '../rule-repository/rule-repository.service';
 import {Rule} from '../../../models/interfaces/rule.interface';
 import {RuleMapperService} from '../rule-mapper/rule-mapper.service';
+import {SortService} from '../../shared/services/sort/sort.service';
 
 @Injectable()
 export class RuleService {
   constructor(private ruleRepositoryService: RuleRepositoryService,
-              private ruleMapperService: RuleMapperService) {
+              private ruleMapperService: RuleMapperService,
+              private sortService: SortService) {
   }
 
   public async getAll(): Promise<RuleDto[]> {
-    const rules: Rule[] = await this.ruleRepositoryService.find();
+    const unSortedRules: Rule[] = await this.ruleRepositoryService.find();
+    const rules = this.sortService.sortByDateDescending(unSortedRules);
 
     return rules.map((rule: Rule) => this.ruleMapperService.convert(rule));
   }
