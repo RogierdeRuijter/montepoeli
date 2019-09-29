@@ -2,7 +2,7 @@
   "app": {
     "title": "Montepoeli",
     "alternativeTitle": "ngular Starter Kit",
-    "footer": "Powered with \uD83D\uDC9Aby Dacia"
+    "footer": "Powered by Dacia"
   },
   "pages": {
     "login": {
