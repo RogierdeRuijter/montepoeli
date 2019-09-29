@@ -1,3 +1,9 @@
 <footer class="footer">
-  <p appTranslate="app.footer"></p>
+  <p>
+    <span appTranslate="app.footer.part1"></span>
+    {{ SPACER }}
+    <app-icon [icon]="Icons.GREEN_HEART" [iconSize]="IconSize.SMALL"></app-icon>
+    {{ SPACER }}
+    <span appTranslate="app.footer.part2"></span>
+  </p>
 </footer>
