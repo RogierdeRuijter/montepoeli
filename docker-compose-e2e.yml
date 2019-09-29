@@ -13,7 +13,6 @@ services:
       - client-e2e
       - selenium-hub
       - chrome
-      - firefox
     command: sh -c 'sleep 10 && npm run protractor'
 
   client-e2e:
@@ -74,17 +73,17 @@ services:
     networks:
       - e2e
 
-  firefox:
-    image: selenium/node-firefox:3.141.59-titanium
-    volumes:
-      - /dev/shm:/dev/shm
-    depends_on:
-      - selenium-hub
-    environment:
-      - HUB_HOST=selenium-hub
-      - HUB_PORT=4444
-    networks:
-      - e2e
+#  firefox:
+#    image: selenium/node-firefox:3.141.59-titanium
+#    volumes:
+#      - /dev/shm:/dev/shm
+#    depends_on:
+#      - selenium-hub
+#    environment:
+#      - HUB_HOST=selenium-hub
+#      - HUB_PORT=4444
+#    networks:
+#      - e2e
 
 networks:
   e2e:

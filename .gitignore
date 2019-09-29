@@ -5,6 +5,7 @@
 /out-tsc
 client/dist
 server/dist
+e2e/reports
 
 # dependencies
 /node_modules
