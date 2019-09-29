@@ -3,6 +3,8 @@ import {Icons, IconSize} from '../../../static-files/enums';
 import {IconDefinition, SizeProp} from '@fortawesome/fontawesome-svg-core';
 import {faCheck, faChessRook, faCoffee, faPlus, faTimes} from '@fortawesome/free-solid-svg-icons';
 import {faHeart} from '@fortawesome/free-solid-svg-icons/faHeart';
+import {faChess} from '@fortawesome/free-solid-svg-icons/faChess';
+import {faBook} from '@fortawesome/free-solid-svg-icons/faBook';
 
 @Component({
   selector: 'app-icon',
@@ -49,6 +51,12 @@ export class IconComponent implements OnInit {
       case Icons.GREEN_HEART:
         this.iconDefinition = faHeart;
         break;
+      case Icons.CHESS_PIECES:
+        this.iconDefinition = faChess;
+        break;
+      case Icons.BOOK:
+        this.iconDefinition = faBook;
+        break;
       // default: throw new UnknownCaseException();
 
     }
@@ -57,6 +65,9 @@ export class IconComponent implements OnInit {
       case IconSize.SMALL:
         this.size = '1x';
         break;
+      case IconSize.SMALL_MEDIUM:
+        this.size = 'lg';
+        break;
       case IconSize.MEDIUM:
         this.size = '2x';
         break;
@@ -64,11 +75,6 @@ export class IconComponent implements OnInit {
         this.size = '3x';
         break;
       // default: throw new UnknownCaseException();
-    }
-
-    switch (this.icon) {
-      case Icons.GREEN_HEART:
-        // TODO: use render to set the color to green
     }
   }
 }

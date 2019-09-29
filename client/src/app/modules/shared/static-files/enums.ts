@@ -16,11 +16,14 @@ export enum Icons {
   DELETE,
   ROOK,
   COFFEE,
-  GREEN_HEART
+  GREEN_HEART,
+  CHESS_PIECES,
+  BOOK
 }
 
 export enum IconSize {
   SMALL,
+  SMALL_MEDIUM,
   MEDIUM,
   LARGE
 }
