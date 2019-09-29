@@ -15,7 +15,8 @@ export enum Icons {
   PLUS,
   DELETE,
   ROOK,
-  COFFEE
+  COFFEE,
+  GREEN_HEART
 }
 
 export enum IconSize {

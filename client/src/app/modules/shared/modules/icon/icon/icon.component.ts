@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Icons, IconSize} from '../../../static-files/enums';
 import {IconDefinition, SizeProp} from '@fortawesome/fontawesome-svg-core';
 import {faCheck, faChessRook, faCoffee, faPlus, faTimes} from '@fortawesome/free-solid-svg-icons';
+import {faHeart} from '@fortawesome/free-solid-svg-icons/faHeart';
 
 @Component({
   selector: 'app-icon',
@@ -45,7 +46,11 @@ export class IconComponent implements OnInit {
       case Icons.COFFEE:
         this.iconDefinition = faCoffee;
         break;
+      case Icons.GREEN_HEART:
+        this.iconDefinition = faHeart;
+        break;
       // default: throw new UnknownCaseException();
+
     }
 
     switch (this.iconSize) {
@@ -60,7 +65,10 @@ export class IconComponent implements OnInit {
         break;
       // default: throw new UnknownCaseException();
     }
+
+    switch (this.icon) {
+      case Icons.GREEN_HEART:
+        // TODO: use render to set the color to green
+    }
   }
-
-
 }
