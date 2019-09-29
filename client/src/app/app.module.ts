@@ -9,11 +9,12 @@ import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {CookieService} from 'ngx-cookie-service';
 import {HomeComponent} from './components/home/home.component';
-import {TitleBarComponent} from './components/title-bar/title-bar.component';
+import {TitleBarComponent} from './components/home/title-bar/title-bar.component';
 import {TranslateStore} from '@ngx-translate/core';
 import {LoginFormComponent} from './components/login/login-form/login-form.component';
 import {CustomTranslateModule} from './modules/shared/modules/translate/custom-translate.module';
 import {AppInitService} from './services/app.init';
+import {FooterComponent} from './components/home/footer/footer.component';
 
 export function init_app(appLoadService: AppInitService) {
   return () => appLoadService.init();
@@ -33,6 +34,7 @@ export function init_app(appLoadService: AppInitService) {
     HomeComponent,
     TitleBarComponent,
     LoginFormComponent,
+    FooterComponent,
   ],
   providers: [
     CookieService,
