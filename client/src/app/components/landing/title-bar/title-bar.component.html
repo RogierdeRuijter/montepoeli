@@ -1,32 +1,26 @@
 <mat-toolbar [color]="color">
-  <div [appGridRow]="[GridSizes.ALL]" [alignment]="Alignments.CENTER">
-    <div [appGridColumn]="[3]">
+  <div>
+    <span class="margin-right-10">
       <app-icon [icon]="Icons.MONTEPOELI"></app-icon>
-    </div>
-    <div [appGridColumn]="[6]">
-      Montepoeli
-    </div>
+    </span>
+    <span>Montepoeli</span>
   </div>
-
+  <div class="left-spacer"></div>
   <mat-tab-group animationDuration="0ms" (selectedTabChange)="handleChangeEvent($event)">
-    <mat-tab >
+    <mat-tab>
       <ng-template mat-tab-label>
-        <div [appGridRow]="[GridSizes.ALL]" [alignment]="Alignments.END">
-          <div [appGridColumn]="[3]">
-            <app-icon matTooltip="Games" [icon]="Icons.CHESS_PIECES" [iconSize]="IconSize.MEDIUM"></app-icon>
-          </div>
-        </div>
+        <app-icon [matTooltip]="'pages.home.games.tooltip' | translate"
+                  [icon]="Icons.CHESS_PIECES"
+                  [iconSize]="IconSize.MEDIUM"></app-icon>
       </ng-template>
     </mat-tab>
     <mat-tab>
       <ng-template mat-tab-label>
-        <div [appGridRow]="[GridSizes.ALL]">
-          <div [appGridColumn]="[3]">
-            <app-icon [matTooltip]="'Rules'" [icon]="Icons.SCROLL" [iconSize]="IconSize.MEDIUM"></app-icon>
-          </div>
-        </div>
+        <app-icon [matTooltip]="'pages.home.games.tooltip' | translate"
+                  [icon]="Icons.SCROLL"
+                  [iconSize]="IconSize.MEDIUM"></app-icon>
       </ng-template>
     </mat-tab>
   </mat-tab-group>
-
+  <div class="right-spacer"></div>
 </mat-toolbar>
