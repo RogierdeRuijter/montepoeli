@@ -1,4 +1,10 @@
-<fa-icon [class.disabled]="disabled"
-         [icon]="iconDefinition"
-         [size]="size">
-</fa-icon>
+<ng-container *ngIf="!svgIcon">
+  <fa-icon [class.disabled]="disabled"
+           [icon]="iconDefinition"
+           [size]="size">
+  </fa-icon>
+</ng-container>
+
+<ng-container *ngIf="svgIcon">
+  <img #svgIconElement [src]="svgIcon">
+</ng-container>

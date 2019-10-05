@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {RuleService} from '../../services/rule.service';
 import {Rule} from '../../../shared/interfaces/rule.interface';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-rule',
@@ -9,14 +10,12 @@ import {Rule} from '../../../shared/interfaces/rule.interface';
 })
 export class RuleComponent implements OnInit {
 
-  public rules: Rule[];
+  public rules$: Observable<Rule[]>;
 
   constructor(private ruleService: RuleService) { }
 
   public ngOnInit(): void {
-    this.ruleService
-      .getAll()
-      .subscribe((rules: Rule[]) => this.rules = rules);
+    this.rules$ = this.ruleService.getAll();
   }
 
 }

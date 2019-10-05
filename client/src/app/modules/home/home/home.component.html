@@ -1,25 +1,2 @@
-<!-- TODO: wrap mat-tab-group in a component -->
-<mat-tab-group animationDuration="0ms">
-  <mat-tab>
-    <ng-template mat-tab-label>
-      <div [appGridRow]="[GridSizes.ALL]" [alignment]="Alignments.END">
-        <div [appGridColumn]="[3]">
-          <app-icon [icon]="Icons.CHESS_PIECES" [iconSize]="IconSize.MEDIUM"></app-icon>
-        </div>
-        <div [appGridColumn]="[7]">Games</div>
-      </div>
-    </ng-template>
-    <app-game></app-game>
-  </mat-tab>
-  <mat-tab>
-    <ng-template mat-tab-label>
-      <div [appGridRow]="[GridSizes.ALL]">
-        <div [appGridColumn]="[3]">
-          <app-icon [icon]="Icons.BOOK" [iconSize]="IconSize.SMALL_MEDIUM"></app-icon>
-        </div>
-        <div [appGridColumn]="[7]">Rules</div>
-      </div>
-    </ng-template>
-    <app-rule></app-rule>
-  </mat-tab>
-</mat-tab-group>
+<app-game *ngIf="showGames"></app-game>
+<app-rule *ngIf="showRules"></app-rule>

@@ -1,8 +1,32 @@
-<mat-toolbar [color]="color"
-             class="margin-bottom-20">
-  <div class="center-align">
-    <img class="margin-right-10" height="56px" src="../../../../assets/images/florance_logo.png" width="41px">
-    <p>Montepoeli</p>
+<mat-toolbar [color]="color">
+  <div [appGridRow]="[GridSizes.ALL]" [alignment]="Alignments.CENTER">
+    <div [appGridColumn]="[3]">
+      <app-icon [icon]="Icons.MONTEPOELI"></app-icon>
+    </div>
+    <div [appGridColumn]="[6]">
+      Montepoeli
+    </div>
   </div>
-  <div class="spacer"></div>
+
+  <mat-tab-group animationDuration="0ms" (selectedTabChange)="handleChangeEvent($event)">
+    <mat-tab >
+      <ng-template mat-tab-label>
+        <div [appGridRow]="[GridSizes.ALL]" [alignment]="Alignments.END">
+          <div [appGridColumn]="[3]">
+            <app-icon matTooltip="Games" [icon]="Icons.CHESS_PIECES" [iconSize]="IconSize.MEDIUM"></app-icon>
+          </div>
+        </div>
+      </ng-template>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <div [appGridRow]="[GridSizes.ALL]">
+          <div [appGridColumn]="[3]">
+            <app-icon [matTooltip]="'Rules'" [icon]="Icons.SCROLL" [iconSize]="IconSize.MEDIUM"></app-icon>
+          </div>
+        </div>
+      </ng-template>
+    </mat-tab>
+  </mat-tab-group>
+
 </mat-toolbar>

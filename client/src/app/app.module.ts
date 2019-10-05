@@ -15,6 +15,9 @@ import {LoginFormComponent} from './components/login/login-form/login-form.compo
 import {CustomTranslateModule} from './modules/shared/modules/translate/custom-translate.module';
 import {AppInitService} from './services/app.init';
 import {FooterComponent} from './components/landing/footer/footer.component';
+import {MatTabsModule} from '@angular/material/tabs';
+import {GameModule} from './modules/game/game.module';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 export function init_app(appLoadService: AppInitService) {
   return () => appLoadService.init();
@@ -27,6 +30,9 @@ export function init_app(appLoadService: AppInitService) {
     SharedModule,
     CustomTranslateModule,
     BrowserAnimationsModule,
+    MatTabsModule,
+    GameModule,
+    MatTooltipModule,
   ],
   declarations: [
     AppComponent,

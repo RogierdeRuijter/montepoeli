@@ -6,6 +6,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {GameModule} from '../game/game.module';
 import {RuleModule} from '../rule/rule.module';
 import {SharedModule} from '../shared/shared.module';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import {SharedModule} from '../shared/shared.module';
     GameModule,
     RuleModule,
     SharedModule,
+    MatTooltipModule,
   ],
   declarations: [
     HomeComponent

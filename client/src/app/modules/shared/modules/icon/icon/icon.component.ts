@@ -1,17 +1,17 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Input, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {Icons, IconSize} from '../../../static-files/enums';
 import {IconDefinition, SizeProp} from '@fortawesome/fontawesome-svg-core';
 import {faCheck, faChessRook, faCoffee, faPlus, faTimes} from '@fortawesome/free-solid-svg-icons';
 import {faHeart} from '@fortawesome/free-solid-svg-icons/faHeart';
 import {faChess} from '@fortawesome/free-solid-svg-icons/faChess';
-import {faBook} from '@fortawesome/free-solid-svg-icons/faBook';
+import {faScroll} from '@fortawesome/free-solid-svg-icons/faScroll';
 
 @Component({
   selector: 'app-icon',
   templateUrl: './icon.component.html',
   styleUrls: ['./icon.component.scss'],
 })
-export class IconComponent implements OnInit {
+export class IconComponent implements OnInit, AfterViewInit {
 
   @Input()
   public id: string;
@@ -25,8 +25,15 @@ export class IconComponent implements OnInit {
   @Input()
   public disabled = false;
 
+  @ViewChild('svgIconElement', {static: false})
+  public svgIconElementRef: ElementRef;
+
   public iconDefinition: IconDefinition;
   public size: SizeProp;
+
+  public svgIcon: string;
+
+  constructor(private renderer: Renderer2) {}
 
   public ngOnInit(): void {
     switch (this.icon) {
@@ -54,9 +61,12 @@ export class IconComponent implements OnInit {
       case Icons.CHESS_PIECES:
         this.iconDefinition = faChess;
         break;
-      case Icons.BOOK:
-        this.iconDefinition = faBook;
+      case Icons.SCROLL:
+        this.iconDefinition = faScroll;
         break;
+      case Icons.MONTEPOELI:
+        this.svgIcon = '../../../../../../assets/images/florance_logo.png';
+        // <img class="margin-right-10" height="56px" src="" width="41px">
       // default: throw new UnknownCaseException();
 
     }
@@ -75,6 +85,13 @@ export class IconComponent implements OnInit {
         this.size = '3x';
         break;
       // default: throw new UnknownCaseException();
+    }
+  }
+
+  public ngAfterViewInit(): void {
+    if (this.icon === Icons.MONTEPOELI) {
+        this.renderer.setStyle(this.svgIconElementRef.nativeElement, 'height', '56px');
+        this.renderer.setStyle(this.svgIconElementRef.nativeElement, 'width', '41px');
     }
   }
 }

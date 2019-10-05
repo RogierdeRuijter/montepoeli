@@ -18,7 +18,8 @@ export enum Icons {
   COFFEE,
   GREEN_HEART,
   CHESS_PIECES,
-  BOOK
+  SCROLL,
+  MONTEPOELI
 }
 
 export enum IconSize {
@@ -71,4 +72,9 @@ export enum Directions {
 
 export enum Positions {
   FIXED_MIDDLE
+}
+
+export enum Tabs {
+  GAMES,
+  RULES
 }

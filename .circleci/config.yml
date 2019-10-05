@@ -105,7 +105,7 @@ jobs:
   e2e-test:
     machine:
       image: circleci/classic:201808-01
-    working_directory: ~/repo # Default working directory, where your project will be cloned
+    working_directory: ~/repo
     environment:
       - CLIENT_BASE_IMAGE_NAME: montepoeli.club/montepouli-client-e2e
       - CLIENT_BASE_IMAGE_TAG: 1.1
