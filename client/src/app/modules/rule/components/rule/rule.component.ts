@@ -1,6 +1,5 @@
 import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 import {Rule} from '../../../shared/interfaces/rule.interface';
-import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-rule',
@@ -11,6 +10,6 @@ import {Observable} from 'rxjs';
 export class RuleComponent {
 
   @Input()
-  public rules$: Observable<Rule[]>;
+  public rules: Rule[];
 
 }

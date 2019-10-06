@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
   public games$: BehaviorSubject<Game[]> = new BehaviorSubject<Game[]>(null);
   public loadingGames: any[] = new LoadingGameFactory().createMany(this.homeService.getAmountOfLoadingGames());
 
-  public rules$: Observable<Rule[]>;
+  public rules: Observable<Rule[]>;
 
   public observerStopper$: Subject<void> = new Subject();
   public stopDelayedLoading$: Subject<void> = new Subject<void>();
@@ -79,7 +79,8 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
       }
     });
 
-    this.rules$ = this.ruleService.getAll();
+    this.ruleService.getAll()
+      .subscribe((rules: Rule[]) => this.rules = rules);
   }
 
   public ngAfterContentInit(): void {
