@@ -89,11 +89,11 @@ export class AppPage {
   }
 
   public getNavBarGamesTab(): ElementFinder {
-    return this.helper.findById('nav-bar-games');
+    return this.helper.findById('mat-tab-label-0-0');
   }
 
   public getNavBarRulesTab(): ElementFinder {
-    return this.helper.findById('nav-bar-rules');
+    return this.helper.findById('mat-tab-label-0-1');
   }
 
 }
