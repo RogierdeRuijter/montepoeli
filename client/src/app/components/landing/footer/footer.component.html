@@ -1,6 +1,9 @@
 <footer class="footer">
-  <p appTranslate="app.footer"></p>
-<!--  TODO: add green <3 to the footer text.
-        Can't do it straight in the language file because browsers render differently,
-        make own icon out of it and add it to the icon file.-->
+  <p>
+    <span appTranslate="app.footer.part1"></span>
+    {{ SPACER }}
+    <app-icon [icon]="Icons.GREEN_HEART" [iconSize]="IconSize.SMALL"></app-icon>
+    {{ SPACER }}
+    <span appTranslate="app.footer.part2"></span>
+  </p>
 </footer>
