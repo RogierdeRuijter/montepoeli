@@ -35,4 +35,10 @@ describe('Tab navigation', () => {
 
     expect(page.getGamesView()).toBeTruthy();
   });
+
+  afterEach(() => {
+    browser.manage().logs().get('browser').then((browserLog) => {
+      expect(browserLog.length).toEqual(0);
+    });
+  });
 });
