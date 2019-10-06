@@ -6,16 +6,17 @@
     <span>Montepoeli</span>
   </div>
   <div class="left-spacer"></div>
+
   <mat-tab-group animationDuration="0ms" (selectedTabChange)="handleChangeEvent($event)">
     <mat-tab>
-      <ng-template mat-tab-label>
+      <ng-template mat-tab-label id="nav-bar-games">
         <app-icon [matTooltip]="'pages.home.games.tooltip' | translate"
                   [icon]="Icons.CHESS_PIECES"
                   [iconSize]="IconSize.MEDIUM"></app-icon>
       </ng-template>
     </mat-tab>
     <mat-tab>
-      <ng-template mat-tab-label>
+      <ng-template mat-tab-label id="nav-bar-rules">
         <app-icon [matTooltip]="'pages.home.rules.tooltip' | translate"
                   [icon]="Icons.SCROLL"
                   [iconSize]="IconSize.MEDIUM"></app-icon>

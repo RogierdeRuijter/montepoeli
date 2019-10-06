@@ -80,4 +80,20 @@ export class AppPage {
     return this.helper.findById('table-protractor1-0');
   }
 
+  public getGamesView(): ElementFinder {
+    return this.helper.findById('games');
+  }
+
+  public getRulesView(): ElementFinder {
+    return this.helper.findById('rules');
+  }
+
+  public getNavBarGamesTab(): ElementFinder {
+    return this.helper.findById('nav-bar-games');
+  }
+
+  public getNavBarRulesTab(): ElementFinder {
+    return this.helper.findById('nav-bar-rules');
+  }
+
 }
