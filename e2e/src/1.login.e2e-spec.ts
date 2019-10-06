@@ -20,6 +20,10 @@ describe('montepoeli login', () => {
     browser.sleep(1000);
 
     expect(browser.getCurrentUrl()).toContain('/home');
+
+    browser.manage().logs().get('browser').then((browserLog) => {
+      expect(browserLog.length).toEqual(0);
+    });
   });
 
   it('should fail login to montepouli', async () => {
@@ -35,6 +39,10 @@ describe('montepoeli login', () => {
 
     expect(browser.getCurrentUrl()).toContain('/login');
     browser.sleep(100);
+
     expect(page.getLoginFailedWarning().getText()).toEqual('Error: Wrong username or password.');
+    browser.manage().logs().get('browser').then((browserLog) => {
+      expect(browserLog.length).toEqual(3);
+    });
   });
 });

@@ -61,4 +61,10 @@ describe('Add a game', () => {
     expect(page.getTableBlackUserFirstRowText().getText()).toEqual('protractor1');
 
   });
+
+  afterEach(() => {
+    browser.manage().logs().get('browser').then((browserLog) => {
+      expect(browserLog.length).toEqual(0);
+    });
+  });
 });
