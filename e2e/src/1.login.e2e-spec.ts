@@ -42,7 +42,7 @@ describe('montepoeli login', () => {
 
     expect(page.getLoginFailedWarning().getText()).toEqual('Error: Wrong username or password.');
     browser.manage().logs().get('browser').then((browserLog) => {
-      expect(browserLog.length).toEqual(1);
+      expect(browserLog.length).toEqual(3);
     });
   });
 });
