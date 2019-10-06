@@ -1,2 +1,10 @@
-<app-game *ngIf="showGames"></app-game>
-<app-rule *ngIf="showRules"></app-rule>
+<app-game *ngIf="showGames"
+          [games$]="games$"
+          [loadingGames]="loadingGames"
+          [loading]="loading"
+          [users]="users">
+</app-game>
+
+<app-rule *ngIf="showRules"
+          [rules$]="rules$">
+</app-rule>
