@@ -1,12 +1,12 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {AuthGuard} from '../shared/guards/auth-guard.service';
-import {GameComponent} from './components/game/game.component';
+import {HomeComponent} from './home/home.component';
 
 const homeRoutes: Routes = [
   {
     path: '',
-    component: GameComponent,
+    component: HomeComponent,
     canActivate: [AuthGuard],
   },
 ];
@@ -15,5 +15,5 @@ const homeRoutes: Routes = [
   imports: [RouterModule.forChild(homeRoutes)],
   exports: [RouterModule],
 })
-export class GameRoutingModule {
+export class HomeRoutingModule {
 }

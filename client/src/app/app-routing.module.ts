@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {AuthGuard} from './modules/shared/guards/auth-guard.service';
 import {LoginComponent} from './components/login/login.component';
-import {HomeComponent} from './components/home/home.component';
+import {LandingComponent} from './components/landing/landing.component';
 // TODO: use route constants
 const appRoutes: Routes = [
   {
@@ -16,8 +16,8 @@ const appRoutes: Routes = [
   },
   {
     path: 'home',
-    loadChildren: './modules/game/game.module#GameModule',
-    component: HomeComponent,
+    loadChildren: './modules/home/home.module#HomeModule',
+    component: LandingComponent,
     canActivate: [AuthGuard],
   },
 ];

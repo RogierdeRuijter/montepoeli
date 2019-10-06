@@ -3,6 +3,8 @@ import {Icons, IconSize} from '../../../static-files/enums';
 import {IconDefinition, SizeProp} from '@fortawesome/fontawesome-svg-core';
 import {faCheck, faChessRook, faCoffee, faPlus, faTimes} from '@fortawesome/free-solid-svg-icons';
 import {faHeart} from '@fortawesome/free-solid-svg-icons/faHeart';
+import {faChess} from '@fortawesome/free-solid-svg-icons/faChess';
+import {faScroll} from '@fortawesome/free-solid-svg-icons/faScroll';
 
 @Component({
   selector: 'app-icon',
@@ -23,11 +25,16 @@ export class IconComponent implements OnInit, AfterViewInit {
   @Input()
   public disabled = false;
 
+  @ViewChild('svgIconElement', {static: false})
+  public svgIconElementRef: ElementRef;
+
   @ViewChild('fontAwesomeComponent', {static: false})
   public faIcon: ElementRef;
 
   public iconDefinition: IconDefinition;
   public size: SizeProp;
+
+  public svgIcon: string;
 
   constructor(private renderer: Renderer2) {}
 
@@ -53,12 +60,23 @@ export class IconComponent implements OnInit, AfterViewInit {
         break;
       case Icons.GREEN_HEART:
         this.iconDefinition = faHeart;
-      // default: throw new UnknownCaseException();
+        break;
+      case Icons.CHESS_PIECES:
+        this.iconDefinition = faChess;
+        break;
+      case Icons.SCROLL:
+        this.iconDefinition = faScroll;
+        break;
+      case Icons.MONTEPOELI:
+        this.svgIcon = '../../../../../../assets/images/florance_logo.png';
     }
 
     switch (this.iconSize) {
       case IconSize.SMALL:
         this.size = '1x';
+        break;
+      case IconSize.SMALL_MEDIUM:
+        this.size = 'lg';
         break;
       case IconSize.MEDIUM:
         this.size = '2x';
@@ -71,10 +89,13 @@ export class IconComponent implements OnInit, AfterViewInit {
   }
 
   public ngAfterViewInit(): void {
+    if (this.icon === Icons.MONTEPOELI) {
+        this.renderer.setStyle(this.svgIconElementRef.nativeElement, 'height', '56px');
+        this.renderer.setStyle(this.svgIconElementRef.nativeElement, 'width', '41px');
+    }
+
     if (this.icon === Icons.GREEN_HEART) {
       this.renderer.setStyle(this.faIcon.nativeElement, 'color', 'green');
     }
   }
-
-
 }

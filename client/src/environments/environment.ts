@@ -37,8 +37,8 @@ class Environment extends DynamicEnvironment {
         DASHBOARD: '/statistics',
         STATUS: '/status',
         USERS: '/users',
-        CATS: '/cats',
         GAME: '/game',
+        RULE: '/rule',
         CREATE: '/create',
       },
     };

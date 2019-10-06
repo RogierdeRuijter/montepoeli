@@ -14,7 +14,7 @@ services:
       - ./client/tslint.json:/usr/src/app/tslint.json
     networks:
       - dev
-    command: bash -c 'npm run start:dev'
+    command: bash -c 'npm run start:dev-no-host'
 
   server:
     build: server

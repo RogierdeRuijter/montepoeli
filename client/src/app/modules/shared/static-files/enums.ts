@@ -16,11 +16,15 @@ export enum Icons {
   DELETE,
   ROOK,
   COFFEE,
-  GREEN_HEART
+  GREEN_HEART,
+  CHESS_PIECES,
+  SCROLL,
+  MONTEPOELI
 }
 
 export enum IconSize {
   SMALL,
+  SMALL_MEDIUM,
   MEDIUM,
   LARGE
 }
@@ -68,4 +72,9 @@ export enum Directions {
 
 export enum Positions {
   FIXED_MIDDLE
+}
+
+export enum Tabs {
+  GAMES,
+  RULES
 }

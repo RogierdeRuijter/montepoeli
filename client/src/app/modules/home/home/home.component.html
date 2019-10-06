@@ -1,0 +1,12 @@
+<app-game id="games"
+          *ngIf="showGames"
+          [games$]="games$"
+          [loadingGames]="loadingGames"
+          [loading]="loading"
+          [users]="users">
+</app-game>
+
+<app-rule id="rules"
+          *ngIf="showRules"
+          [rules$]="rules$">
+</app-rule>

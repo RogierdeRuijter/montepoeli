@@ -23,6 +23,7 @@
     },
     "home": {
       "games": {
+        "tooltip": "Games",
         "pop-up": {
           "title": "Enter match result"
         },
@@ -38,6 +39,9 @@
             "draw": "Draw"
           }
         }
+      },
+      "rules": {
+        "tooltip": "Rules"
       }
     },
     "users": {

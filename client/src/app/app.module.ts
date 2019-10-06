@@ -8,13 +8,16 @@ import {CommonModule} from '@angular/common';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {CookieService} from 'ngx-cookie-service';
-import {HomeComponent} from './components/home/home.component';
-import {TitleBarComponent} from './components/home/title-bar/title-bar.component';
+import {LandingComponent} from './components/landing/landing.component';
+import {TitleBarComponent} from './components/landing/title-bar/title-bar.component';
 import {TranslateStore} from '@ngx-translate/core';
 import {LoginFormComponent} from './components/login/login-form/login-form.component';
 import {CustomTranslateModule} from './modules/shared/modules/translate/custom-translate.module';
 import {AppInitService} from './services/app.init';
-import {FooterComponent} from './components/home/footer/footer.component';
+import {FooterComponent} from './components/landing/footer/footer.component';
+import {MatTabsModule} from '@angular/material/tabs';
+import {GameModule} from './modules/game/game.module';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 export function init_app(appLoadService: AppInitService) {
   return () => appLoadService.init();
@@ -27,11 +30,14 @@ export function init_app(appLoadService: AppInitService) {
     SharedModule,
     CustomTranslateModule,
     BrowserAnimationsModule,
+    MatTabsModule,
+    GameModule,
+    MatTooltipModule,
   ],
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent,
+    LandingComponent,
     TitleBarComponent,
     LoginFormComponent,
     FooterComponent,

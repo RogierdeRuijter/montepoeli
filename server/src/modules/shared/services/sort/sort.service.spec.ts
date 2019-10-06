@@ -4,6 +4,15 @@ import {SortService} from './sort.service';
 describe('SortService', () => {
   let service: SortService;
 
+  beforeAll(() => {
+    this.input = [
+      {date: new Date(1000)},
+      {date: new Date(1800)},
+      {date: new Date(1400)},
+      {date: new Date(1200)},
+    ];
+  });
+
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [SortService],
@@ -17,15 +26,32 @@ describe('SortService', () => {
   });
 
   describe('sortByDateDescending', () => {
-    it('should sort the list by the last date first', () => {
+    it('should handle an empty list', () => {
+      const input = [];
+
+      const result = service.sortByDateDescending(input);
+
+      const output = [];
+
+      expect(result).toEqual(output);
+    });
+
+    it('should handle one entry in the list', () => {
       const input = [
-        {date: new Date(1000)},
-        {date: new Date(1800)},
-        {date: new Date(1400)},
-        {date: new Date(1200)},
+        {date: new Date(1000)}
       ];
 
       const result = service.sortByDateDescending(input);
+
+      const output = [
+        {date: new Date(1000)}
+      ];
+
+      expect(result).toEqual(output);
+    });
+
+    it('should sort the list by the last date first', () => {
+      const result = service.sortByDateDescending(this.input);
 
       const output = [
         {date: new Date(1800)},
@@ -38,14 +64,8 @@ describe('SortService', () => {
     });
 
     it('should not sort the list ascending', () => {
-      const input = [
-        {date: new Date(1000)},
-        {date: new Date(1800)},
-        {date: new Date(1400)},
-        {date: new Date(1200)},
-      ];
 
-      const result = service.sortByDateDescending(input);
+      const result = service.sortByDateDescending(this.input);
 
       const output = [
         {date: new Date(1000)},
@@ -55,6 +75,45 @@ describe('SortService', () => {
       ];
 
       expect(result).not.toEqual(output);
+    });
+  });
+
+  describe('sortByDateAscending', () => {
+    it ('should handle an empty list', () => {
+      const input = [];
+
+      const result = service.sortByDateAscending(input);
+
+      const output = [];
+
+      expect(result).toEqual(output);
+    });
+
+    it ('should handle one entry in a list', () => {
+      const input = [
+        {date: new Date(1000)}
+      ];
+
+      const result = service.sortByDateAscending(input);
+
+      const output = [
+        {date: new Date(1000)}
+      ];
+
+      expect(result).toEqual(output);
+    });
+
+    it('should sort the list by the first date first', () => {
+      const result = service.sortByDateAscending(this.input);
+
+      const output = [
+        {date: new Date(1000)},
+        {date: new Date(1200)},
+        {date: new Date(1400)},
+        {date: new Date(1800)},
+      ];
+
+      expect(result).toEqual(output);
     });
   });
 });

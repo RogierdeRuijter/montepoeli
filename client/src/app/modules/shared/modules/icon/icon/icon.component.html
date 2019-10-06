@@ -1,6 +1,12 @@
-<span #fontAwesomeComponent>
-  <fa-icon [class.disabled]="disabled"
-           [icon]="iconDefinition"
-           [size]="size">
-  </fa-icon>
-</span>
+<ng-container *ngIf="!svgIcon">
+  <span #fontAwesomeComponent>
+    <fa-icon [class.disabled]="disabled"
+             [icon]="iconDefinition"
+             [size]="size">
+    </fa-icon>
+  </span>
+</ng-container>
+
+<ng-container *ngIf="svgIcon">
+  <img #svgIconElement [src]="svgIcon">
+</ng-container>

@@ -1,5 +1,4 @@
 import {NgModule} from '@angular/core';
-import {GameRoutingModule} from './game-routing.module';
 import {SharedModule} from '../shared/shared.module';
 import {GameComponent} from './components/game/game.component';
 import {GameTableComponent} from './components/game/overview/game-table/game-table.component';
@@ -12,13 +11,14 @@ import {OverviewComponent} from './components/game/overview/overview.component';
 import {GameResultComponent} from './components/game/dialog-data/game-result/game-result.component';
 import {FormModule} from '../shared/modules/form/form.module';
 import {CustomTranslateModule} from '../shared/modules/translate/custom-translate.module';
+import {RuleModule} from '../rule/rule.module';
 
 @NgModule({
   imports: [
-    GameRoutingModule,
     SharedModule,
     FormModule,
     CustomTranslateModule,
+    RuleModule
   ],
   declarations: [
     GameComponent,
@@ -35,6 +35,9 @@ import {CustomTranslateModule} from '../shared/modules/translate/custom-translat
   ],
   entryComponents: [
     DialogDataComponent,
+  ],
+  exports: [
+    GameComponent,
   ],
 })
 export class GameModule {

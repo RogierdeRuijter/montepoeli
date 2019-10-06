@@ -23,11 +23,9 @@ export class CustomHttpService {
   private baseUrl: string = environment.environment.backendUrl;
 
   public get<T>(url: string): Observable<T> {
-    this.loadingService.activateDelayedLoading();
-
     return this.httpClient.get<T>(this.baseUrl + url, this.httpOptions)
       .pipe(
-        map((httpResponse: HttpResponse<T>) => httpResponse.body),
+        map((httpResponse: HttpResponse<T>) => httpResponse.body)
       );
   }
 
