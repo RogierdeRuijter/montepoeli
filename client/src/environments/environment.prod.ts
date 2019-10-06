@@ -39,6 +39,7 @@ class Environment extends DynamicEnvironment {
         USERS: '/users',
         CATS: '/cats',
         GAME: '/game',
+        RULE: '/rule',
         CREATE: '/create',
       },
     };
