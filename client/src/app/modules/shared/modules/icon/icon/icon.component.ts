@@ -28,6 +28,9 @@ export class IconComponent implements OnInit, AfterViewInit {
   @ViewChild('svgIconElement', {static: false})
   public svgIconElementRef: ElementRef;
 
+  @ViewChild('fontAwesomeComponent', {static: false})
+  public faIcon: ElementRef;
+
   public iconDefinition: IconDefinition;
   public size: SizeProp;
 
@@ -66,9 +69,6 @@ export class IconComponent implements OnInit, AfterViewInit {
         break;
       case Icons.MONTEPOELI:
         this.svgIcon = '../../../../../../assets/images/florance_logo.png';
-        // <img class="margin-right-10" height="56px" src="" width="41px">
-      // default: throw new UnknownCaseException();
-
     }
 
     switch (this.iconSize) {
@@ -89,9 +89,18 @@ export class IconComponent implements OnInit, AfterViewInit {
   }
 
   public ngAfterViewInit(): void {
+
+  }
+
+
+  public ngAfterViewInit(): void {
     if (this.icon === Icons.MONTEPOELI) {
         this.renderer.setStyle(this.svgIconElementRef.nativeElement, 'height', '56px');
         this.renderer.setStyle(this.svgIconElementRef.nativeElement, 'width', '41px');
+    }
+
+    if (this.icon === Icons.GREEN_HEART) {
+      this.renderer.setStyle(this.faIcon.nativeElement, 'color', 'green');
     }
   }
 }
