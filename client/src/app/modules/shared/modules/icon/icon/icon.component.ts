@@ -89,11 +89,6 @@ export class IconComponent implements OnInit, AfterViewInit {
   }
 
   public ngAfterViewInit(): void {
-
-  }
-
-
-  public ngAfterViewInit(): void {
     if (this.icon === Icons.MONTEPOELI) {
         this.renderer.setStyle(this.svgIconElementRef.nativeElement, 'height', '56px');
         this.renderer.setStyle(this.svgIconElementRef.nativeElement, 'width', '41px');

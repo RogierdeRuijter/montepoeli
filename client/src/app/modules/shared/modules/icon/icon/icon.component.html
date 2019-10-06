@@ -1,5 +1,6 @@
 <ng-container *ngIf="!svgIcon">
-  <fa-icon [class.disabled]="disabled"
+  <fa-icon #fontAwesomeComponent
+           [class.disabled]="disabled"
            [icon]="iconDefinition"
            [size]="size">
   </fa-icon>
