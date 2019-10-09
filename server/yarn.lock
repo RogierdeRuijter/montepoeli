@@ -287,19 +287,19 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^13.0.0"
 
-"@nestjs/common@6.8.0":
-  version "6.8.0"
-  resolved "https://registry.yarnpkg.com/@nestjs/common/-/common-6.8.0.tgz#b353d07ca6e659899b6bf50e1d2137791424042e"
-  integrity sha512-YNRrlk6VTSDGp/TvrBYZvGx1SQ5l7lF7WYg9O2t+rDS4PtqV73gRNhBIFpelYuMrNkgkc38hHlFxtzPZkaUaMg==
+"@nestjs/common@6.8.2":
+  version "6.8.2"
+  resolved "https://registry.yarnpkg.com/@nestjs/common/-/common-6.8.2.tgz#0fe8d79eae91fa0512486023eb1a8621bd5007fd"
+  integrity sha512-dIHT8L6lQbKKPlVdMG/K00o1rZRI8Y9+Tz6vwQi6flBTnbotPerRF7ppcCABvqnpKi3gOzgph8iV7eOCMFdMRw==
   dependencies:
     axios "0.19.0"
     cli-color "1.4.0"
     uuid "3.3.3"
 
-"@nestjs/core@6.8.0":
-  version "6.8.0"
-  resolved "https://registry.yarnpkg.com/@nestjs/core/-/core-6.8.0.tgz#5edb0f09e30f2acb1d4cb4e0f01ede6e39701cca"
-  integrity sha512-12KzKo2Veg0dde3U9++DD8tTrmQufsVhrg9yIvDoNR7rF4yimhf1Fm/KvjfBXy5WdbVKxPBmeULYm54hr0dQWw==
+"@nestjs/core@6.8.2":
+  version "6.8.2"
+  resolved "https://registry.yarnpkg.com/@nestjs/core/-/core-6.8.2.tgz#2d27d45e15a425e12d254fba4ee045527f54d2ed"
+  integrity sha512-2OzpWLfSEdQuY5ssAz1STfvs1TUam1qIDRMk6ReWThCIkgWdBe87AlkEiahB7qkXZ//M1IVeDdnFs61xCmx7mg==
   dependencies:
     "@nuxtjs/opencollective" "0.2.2"
     fast-safe-stringify "2.0.7"
@@ -325,20 +325,20 @@
   resolved "https://registry.yarnpkg.com/@nestjs/passport/-/passport-6.1.0.tgz#80da326cc976a82530648d8025b04c8e2d41c10e"
   integrity sha512-V4KdtFFLsdZQ/HlIECpiK6byzGz57Y12TAc+Iatykk8jWuVFE1jq8RJbpTfB0zG0PTfcGm9crQ6Ut2Rwdmis4Q==
 
-"@nestjs/platform-express@6.8.0":
-  version "6.8.0"
-  resolved "https://registry.yarnpkg.com/@nestjs/platform-express/-/platform-express-6.8.0.tgz#c098941fcbfba42f07cf47fb079e563453191eff"
-  integrity sha512-jV6IWvdrQ3KW3iLYJ7ECvETIQwVzBezL1UOyUbpv/P2C+wpZbRC+L4F4dIUTihS5FEgHkNP5h6C+At4GMNjD+Q==
+"@nestjs/platform-express@6.8.2":
+  version "6.8.2"
+  resolved "https://registry.yarnpkg.com/@nestjs/platform-express/-/platform-express-6.8.2.tgz#dde5e72b489f48361dd9dad04e3f0c8cac5a8ab4"
+  integrity sha512-6idjB+xrLVNeYV0O3emGM954iGPvuDNHDjqFW1sqi9ZpHPLD+n3MCGdlmhZ65zWfU30rmDQLA9qaeSQw8uTN9Q==
   dependencies:
     body-parser "1.19.0"
     cors "2.8.5"
     express "4.17.1"
     multer "1.4.2"
 
-"@nestjs/testing@6.8.0":
-  version "6.8.0"
-  resolved "https://registry.yarnpkg.com/@nestjs/testing/-/testing-6.8.0.tgz#3c6ab8bbc851bd25d75d948e51d0a2ac5759fa72"
-  integrity sha512-qElK5EkJbnqGXyulEwDn+U+Gi7Pc6u5ufSkOJuzkTyYozjOgu4Mz22zamFSJuCGJW+nul2EMoT+7QR5LdxpH1w==
+"@nestjs/testing@6.8.2":
+  version "6.8.2"
+  resolved "https://registry.yarnpkg.com/@nestjs/testing/-/testing-6.8.2.tgz#1c28fbe6c46fa3757ee0143b49f6c0f917117f93"
+  integrity sha512-suNHK7Ij933zDdvi+JLe7Y1y4aJ6yhrdw4J7AcX5NiwQgkzgrJxgEs7dgjXO5i0CAVb7yB8hxyQEi+jQOv6ctQ==
   dependencies:
     optional "0.1.4"
 
@@ -433,10 +433,10 @@
     "@types/express-serve-static-core" "*"
     "@types/serve-static" "*"
 
-"@types/faker@4.1.5":
-  version "4.1.5"
-  resolved "https://registry.yarnpkg.com/@types/faker/-/faker-4.1.5.tgz#8f620f9c9a67150aa0a32b4e8a407da43fca61d4"
-  integrity sha512-YSDqoBEWYGdNk53xSkkb6REaUaVSlIjxIAGjj/nbLzlZOit7kUU+nA2zC2qQkIVO4MQ+3zl4Sz7aw+kbpHHHUQ==
+"@types/faker@4.1.6":
+  version "4.1.6"
+  resolved "https://registry.yarnpkg.com/@types/faker/-/faker-4.1.6.tgz#e931064b1d50333044c28668c13033334cf67c71"
+  integrity sha512-Tp4xHecf4UX8VOvSfsL1QlMbOfukGbbAhQbHvPIcX56NmNql4MAamV7E/K5zdYfxlk8FTcxwsaCZTxM79zJzPQ==
 
 "@types/istanbul-lib-coverage@*", "@types/istanbul-lib-coverage@^2.0.0":
   version "2.0.1"
@@ -492,10 +492,10 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-12.7.4.tgz#64db61e0359eb5a8d99b55e05c729f130a678b04"
   integrity sha512-W0+n1Y+gK/8G2P/piTkBBN38Qc5Q1ZSO6B5H3QmPCUewaiXOo2GCAWZ4ElZCcNhjJuBSUSLGFUJnmlCn5+nxOQ==
 
-"@types/node@12.7.8":
-  version "12.7.8"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.7.8.tgz#cb1bf6800238898bc2ff6ffa5702c3cadd350708"
-  integrity sha512-FMdVn84tJJdV+xe+53sYiZS4R5yn1mAIxfj+DVoNiQjTYz1+OYmjwEZr1ev9nU0axXwda0QDbYl06QHanRVH3A==
+"@types/node@12.7.11":
+  version "12.7.11"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.7.11.tgz#be879b52031cfb5d295b047f5462d8ef1a716446"
+  integrity sha512-Otxmr2rrZLKRYIybtdG/sgeO+tHY20GxeDjcGmUnmmlCWyEnv2a2x1ZXBo3BTec4OiTXMQCiazB8NMBf0iRlFw==
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.0"
@@ -2212,10 +2212,10 @@ http-signature@~1.2.0:
     jsprim "^1.2.2"
     sshpk "^1.7.0"
 
-husky@3.0.7:
-  version "3.0.7"
-  resolved "https://registry.yarnpkg.com/husky/-/husky-3.0.7.tgz#05e869006c7d9a31b27893aeda520e730bd125b9"
-  integrity sha512-fIrkaREoQk6DO8KnSX16Aq7Kg9SxqYYQZH/9b+4AxXyXNNgpJLsc8lWlQCShLus1nbujIyZ/WQZBHGwClohK/w==
+husky@3.0.8:
+  version "3.0.8"
+  resolved "https://registry.yarnpkg.com/husky/-/husky-3.0.8.tgz#8de3fed26ce9b43034ef51013c4ad368b6b74ea8"
+  integrity sha512-HFOsgcyrX3qe/rBuqyTt+P4Gxn5P0seJmr215LAZ/vnwK3jWB3r0ck7swbzGRUbufCf9w/lgHPVbF/YXQALgfQ==
   dependencies:
     chalk "^2.4.2"
     cosmiconfig "^5.2.1"
