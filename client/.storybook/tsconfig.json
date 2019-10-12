@@ -4,7 +4,7 @@
     "target": "esnext",
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
-    "module": "es6",
+    "module": "es5",
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "types": [
@@ -12,7 +12,7 @@
     ]
   },
   "exclude": [
-    "../src/karmaTest.ts",
+    "../src/test.ts",
     "../src/**/*.spec.ts",
     "../projects/**/*.spec.ts"
   ],

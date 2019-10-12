@@ -1,6 +1,6 @@
 {
   "name": "frontend",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -8,6 +8,7 @@
     "start:dev-no-host": "ng serve --host 0.0.0.0 --disable-host-check",
     "start:dev-no-host-aot": "ng serve --host 0.0.0.0 --aot --disable-host-check",
     "build": "ng build",
+    "build:pre-push": "ng build --aot",
     "build:prod": "ng build --configuration=production",
     "build:e2e": "ng build --configuration=e2e",
     "test": "ng test --watch=false",
@@ -73,7 +74,6 @@
     "@types/node": "12.7.11",
     "babel-loader": "8.0.6",
     "codelyzer": "5.1.2",
-    "husky": "3.0.8",
     "jasmine-core": "3.5.0",
     "jasmine-spec-reporter": "4.2.1",
     "jest": "24.9.0",
@@ -98,11 +98,5 @@
     "setupFilesAfterEnv": [
       "./src/setupJest.ts"
     ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint",
-      "pre-push": "npm run build -- --aot"
-    }
   }
 }

@@ -4,7 +4,7 @@
 
 import {DynamicEnvironment} from './dynamic-environment';
 
-class Environment extends DynamicEnvironment {
+export class Environment extends DynamicEnvironment {
 
   public production: boolean;
   public authentication: any;
@@ -44,5 +44,3 @@ class Environment extends DynamicEnvironment {
     };
   }
 }
-
-export const environment = new Environment();

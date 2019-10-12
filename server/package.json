@@ -6,6 +6,8 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
+    "get-v": "grep '\"version\":' package.json | cut -d\\\" -f4",
+    "build:pre-push": "yarn build && rm -r dist",
     "format": "prettier --write \"src/**/*.ts\"",
     "start": "ts-node -r tsconfig-paths/register src/main.ts",
     "start:dev": "nodemon",
@@ -25,8 +27,8 @@
     "@nestjs/jwt": "6.1.1",
     "@nestjs/mongoose": "6.1.2",
     "@nestjs/passport": "6.1.0",
-    "@nestjs/typeorm": "6.2.0",
     "@nestjs/platform-express": "6.8.2",
+    "@nestjs/typeorm": "6.2.0",
     "@types/bcrypt": "3.0.0",
     "@types/faker": "4.1.6",
     "bcrypt": "3.0.6",
@@ -56,8 +58,7 @@
     "ts-node": "8.4.1",
     "tsconfig-paths": "3.9.0",
     "tslint": "5.20.0",
-    "typescript": "3.6.3",
-    "husky": "3.0.8"
+    "typescript": "3.6.3"
   },
   "jest": {
     "moduleFileExtensions": [
@@ -72,11 +73,5 @@
     },
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint",
-      "pre-push": "npm test"
-    }
   }
 }

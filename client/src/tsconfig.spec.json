@@ -5,10 +5,11 @@
     "types": [
       "jasmine",
       "node"
-    ]
+    ],
+    "target": "es5"
   },
   "files": [
-    "karmaTest.ts",
+    "test.ts",
     "polyfills.ts"
   ],
   "include": [
