@@ -7,9 +7,10 @@ import {Environment} from '../../environments/environment';
 export class EnvironmentServiceMock {
   public environment: any;
 
-  public get(): void {
+  public g(): void {
     if (!this.environment) {
-      this.setEnvironment();
+      // this.setEnvironment();
+      this.environment = {};
     }
 
     return this.environment;

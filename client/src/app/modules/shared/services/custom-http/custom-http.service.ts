@@ -10,7 +10,7 @@ import {EnvironmentService} from '../environment/environment.service';
 export class CustomHttpService {
   private environment: any;
 
-  private readonly baseUrl: string;
+  private baseUrl: string;
 
   public httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'}),
@@ -20,16 +20,14 @@ export class CustomHttpService {
 
   constructor(private httpClient: HttpClient,
               private environmentService: EnvironmentService) {
-    console.log(environmentService);
-
-    this.environment = this.environmentService.get();
-    console.log(this.environment.environment);
-
-    this.baseUrl = this.environment.environment.backendUrl;
   }
 
 
   public get<T>(url: string): Observable<T> {
+    if (!this.environment) {
+      this.initEnvironment();
+    }
+
     return this.httpClient.get<T>(this.baseUrl + url, this.httpOptions)
       .pipe(
         map((httpResponse: HttpResponse<T>) => httpResponse.body)
@@ -37,9 +35,19 @@ export class CustomHttpService {
   }
 
   public post<T>(url: string, body: T): Observable<T> {
+    if (!this.environment) {
+      this.initEnvironment();
+    }
+
     return this.httpClient.post<T>(this.baseUrl + url, body, this.httpOptions)
       .pipe(
         map((httpResponse: HttpResponse<T>) => httpResponse.body),
       );
+  }
+
+  private initEnvironment(): void {
+    this.environment = this.environmentService.get();
+
+    this.baseUrl = this.environment.environment.backendUrl;
   }
 }
