@@ -16,14 +16,14 @@ jobs:
 
       - run:
           command: |
-            CLIENT_TAG=1.1
+            CLIENT_TAG=$CIRCLE_WORKFLOW_ID
             IMAGE_CLIENT_NAME=montepouli-client
             cd client
             docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG .
 
       - deploy:
           command: |
-            CLIENT_TAG=1.1
+            CLIENT_TAG=$CIRCLE_WORKFLOW_ID
             IMAGE_CLIENT_NAME=montepouli-client
             docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
             docker push $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG
@@ -40,13 +40,13 @@ jobs:
 
       - run: |
           cd server
-          SERVER_TAG=1.1
+          SERVER_TAG=$CIRCLE_WORKFLOW_ID
           IMAGE_SERVER_NAME=montepouli-server
           docker build -t $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG .
 
       - deploy:
           command: |
-            SERVER_TAG=1.1
+            SERVER_TAG=$CIRCLE_WORKFLOW_ID
             IMAGE_SERVER_NAME=montepouli-server
             docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
             docker push $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG
@@ -68,13 +68,13 @@ jobs:
       - run:
           command: |
             cd client
-            CLIENT_TAG=1.1
+            CLIENT_TAG=$CIRCLE_WORKFLOW_ID
             IMAGE_CLIENT_NAME=montepouli-client-e2e
-            docker build -f Dockerfile.configured . -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG --build-arg CLIENT_BASE_IMAGE_NAME=montepoeli.club/montepouli-client --build-arg CLIENT_BASE_IMAGE_TAG=1.1 --build-arg CLIENT_TYPE=e2e
+            docker build -f Dockerfile.configured . -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG --build-arg CLIENT_BASE_IMAGE_NAME=montepoeli.club/montepouli-client --build-arg CLIENT_BASE_IMAGE_TAG=$CIRCLE_WORKFLOW_ID --build-arg CLIENT_TYPE=e2e
 
       - deploy:
           command: |
-            CLIENT_TAG=1.1
+            CLIENT_TAG=$CIRCLE_WORKFLOW_ID
             IMAGE_CLIENT_NAME=montepouli-client-e2e
             docker push $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG
 
@@ -108,9 +108,9 @@ jobs:
     working_directory: ~/repo
     environment:
       - CLIENT_BASE_IMAGE_NAME: montepoeli.club/montepouli-client-e2e
-      - CLIENT_BASE_IMAGE_TAG: 1.1
+      - CLIENT_BASE_IMAGE_TAG: $CIRCLE_WORKFLOW_ID
       - SERVER_IMAGE_NAME: montepoeli.club/montepouli-server
-      - SERVER_IMAGE_TAG: 1.1
+      - SERVER_IMAGE_TAG: $CIRCLE_WORKFLOW_ID
       - CLIENT_TYPE: e2e
     steps:
       - checkout
@@ -137,12 +137,12 @@ jobs:
           command: |
             cd client
             IMAGE_CLIENT_NAME=montepouli-client
-            TESTED_CLIENT_TAG=1.1-e2e
-            docker build -f Dockerfile.configured -t $DOMAIN/$IMAGE_CLIENT_NAME:$TESTED_CLIENT_TAG . --build-arg CLIENT_BASE_IMAGE_NAME=montepoeli.club/montepouli-client-e2e --build-arg CLIENT_BASE_IMAGE_TAG=1.1 --build-arg CLIENT_TYPE=server
+            TESTED_CLIENT_TAG=$CIRCLE_WORKFLOW_ID-e2e
+            docker build -f Dockerfile.configured -t $DOMAIN/$IMAGE_CLIENT_NAME:$TESTED_CLIENT_TAG . --build-arg CLIENT_BASE_IMAGE_NAME=montepoeli.club/montepouli-client-e2e --build-arg CLIENT_BASE_IMAGE_TAG=$CIRCLE_WORKFLOW_ID --build-arg CLIENT_TYPE=server
 
       - deploy:
           command: |
-            TESTED_CLIENT_TAG=1.1-e2e
+            TESTED_CLIENT_TAG=$CIRCLE_WORKFLOW_ID-e2e
             IMAGE_CLIENT_NAME=montepouli-client
             docker push $DOMAIN/$IMAGE_CLIENT_NAME:$TESTED_CLIENT_TAG
 
@@ -158,16 +158,16 @@ jobs:
       - run: docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
 
       - run: |
-          SERVER_TAG=1.1
+          SERVER_TAG=$CIRCLE_WORKFLOW_ID
           IMAGE_SERVER_NAME=montepouli-server
-          TESTED_SERVER_TAG=1.1-e2e
+          TESTED_SERVER_TAG=$CIRCLE_WORKFLOW_ID-e2e
 
           docker pull $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG
           docker tag $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG $DOMAIN/$IMAGE_SERVER_NAME:$TESTED_SERVER_TAG
 
       - deploy:
           command: |
-            TESTED_SERVER_TAG=1.1-e2e
+            TESTED_SERVER_TAG=$CIRCLE_WORKFLOW_ID-e2e
             IMAGE_SERVER_NAME=montepouli-server
 
             docker push $DOMAIN/$IMAGE_SERVER_NAME:$TESTED_SERVER_TAG
