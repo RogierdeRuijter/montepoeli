@@ -1,4 +1,4 @@
-import {Injectable, OnInit} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
@@ -7,10 +7,10 @@ import {EnvironmentService} from '../environment/environment.service';
 @Injectable({
   providedIn: 'root',
 })
-export class CustomHttpService implements OnInit {
+export class CustomHttpService {
   private environment: any;
 
-  private baseUrl: string;
+  private readonly baseUrl: string;
 
   public httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'}),
@@ -20,12 +20,14 @@ export class CustomHttpService implements OnInit {
 
   constructor(private httpClient: HttpClient,
               private environmentService: EnvironmentService) {
-  }
+    console.log(environmentService);
 
-  public ngOnInit(): void {
     this.environment = this.environmentService.get();
+    console.log(this.environment.environment);
+
     this.baseUrl = this.environment.environment.backendUrl;
   }
+
 
   public get<T>(url: string): Observable<T> {
     return this.httpClient.get<T>(this.baseUrl + url, this.httpOptions)

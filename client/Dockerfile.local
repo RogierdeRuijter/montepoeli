@@ -6,7 +6,7 @@ WORKDIR /usr/src/app
 RUN yarn global add @angular/cli
 
 COPY package.json package.json
-RUN cd /usr/src/app/ && yarn install --frozen-lockfile
+RUN cd /usr/src/app/ && yarn install
 
 ADD . /usr/src/app
 

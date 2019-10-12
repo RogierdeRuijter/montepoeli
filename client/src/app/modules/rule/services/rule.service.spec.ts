@@ -5,7 +5,8 @@ import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {EnvironmentService} from '../../shared/services/environment/environment.service';
 import {EnvironmentServiceMock} from '../../../../testing/mocks/environment-service.mock';
 
-describe('RuleService', () => {
+fdescribe('RuleService', () => {
+
   beforeEach(() => TestBed.configureTestingModule({
     imports: [HttpClientTestingModule],
     providers: [
