@@ -1,6 +1,6 @@
 {
   "name": "e2e",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "scripts": {
     "protractor": "protractor",
     "protractor:local": "npm run webdriver-update && protractor protractor-local.conf.js ",

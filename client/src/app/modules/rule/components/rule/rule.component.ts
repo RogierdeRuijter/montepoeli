@@ -11,5 +11,4 @@ export class RuleComponent {
 
   @Input()
   public rules: Rule[];
-
 }
