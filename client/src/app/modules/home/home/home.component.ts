@@ -15,7 +15,7 @@ import {UserStore} from '../../game/stores/user.store';
 import {Game} from '../../shared/interfaces/game.interface';
 import {LoadingService} from '../../shared/services/loading/loading.service';
 import {LoadingStore} from '../../shared/stores/loading.store';
-import {BehaviorSubject, Observable, Subject} from 'rxjs';
+import {BehaviorSubject, Subject} from 'rxjs';
 import {GameService} from '../../game/services/game.service';
 import {LoadingGameFactory} from '../../game/factories/loading-game.factory';
 import {HomeService} from '../../game/services/home.service';
@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
   public games$: BehaviorSubject<Game[]> = new BehaviorSubject<Game[]>(null);
   public loadingGames: any[] = new LoadingGameFactory().createMany(this.homeService.getAmountOfLoadingGames());
 
-  public rules: Observable<Rule[]>;
+  public rules: Rule[];
 
   public observerStopper$: Subject<void> = new Subject();
   public stopDelayedLoading$: Subject<void> = new Subject<void>();
