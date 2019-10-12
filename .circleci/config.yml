@@ -41,6 +41,8 @@ jobs:
       - run: |
           cd server
           SERVER_TAG=$CIRCLE_WORKFLOW_ID
+          echo $SERVER_TAG
+          echo $CIRCLE_WORKFLOW_ID
           IMAGE_SERVER_NAME=montepouli-server
           docker build -t $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG .
 
