@@ -28,8 +28,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lerna run lint",
-      "pre-push": "lerna run test"
+      "pre-commit": "lerna run --parallel lint",
+      "pre-push": "lerna run --parallel test && lerna run --parallel build:pre-push"
     }
   }
 }

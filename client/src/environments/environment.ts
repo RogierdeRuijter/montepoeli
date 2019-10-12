@@ -44,5 +44,3 @@ export class Environment extends DynamicEnvironment {
     };
   }
 }
-
-export const environment = new Environment();

@@ -3,7 +3,8 @@
   "packages": [
     ".circleci",
     "client",
-    "server"
+    "server",
+    "e2e"
   ],
   "version": "0.0.1"
 }
