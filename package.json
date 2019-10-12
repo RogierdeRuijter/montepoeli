@@ -21,13 +21,5 @@
     "docker-compose-rebuild": "docker-compose build --parallel && docker-compose down && docker-compose up -d",
     "docker-compose-rebuild-no-cache": "docker-compose build --no-cache && docker-compose down && docker-compose up -d",
     "docker:storybook": "start-storybook -p 65200 --ci"
-  },
-  "dependencies": {
-    "husky": "3.0.7"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "circleci config validate"
-    }
   }
 }
