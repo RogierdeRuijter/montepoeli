@@ -207,8 +207,13 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-      - build-client-base
-      - build-server
+      - save-version
+      - build-client-base:
+          requires:
+            - save-version
+      - build-server:
+          requires:
+            - save-version
       - swap-client-config-e2e:
           requires:
             - build-client-base
