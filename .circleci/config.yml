@@ -11,6 +11,10 @@ jobs:
           command: |
             grep '"version":' package.json | cut -d\" -f4 > version-$CIRCLE_WORKFLOW_ID.txt
 
+      - store_artifacts:
+          path: version-$CIRCLE_WORKFLOW_ID.txt
+          destination: /tmp/workspace
+
       - persist_to_workspace:
             root: /tmp/workspace
             paths:
