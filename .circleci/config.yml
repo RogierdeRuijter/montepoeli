@@ -13,8 +13,7 @@ jobs:
             grep '"version":' package.json | cut -d\" -f4 > /tmp/workspace/version-$CIRCLE_WORKFLOW_ID.txt
 
       - store_artifacts:
-          path: version-$CIRCLE_WORKFLOW_ID.txt
-          destination: /tmp/workspace
+          path: /tmp/workspace/version-$CIRCLE_WORKFLOW_ID.txt
 
       - persist_to_workspace:
             root: /tmp/workspace
