@@ -9,7 +9,7 @@ jobs:
       - checkout
       - run:
           command: |
-            - grep '"version":' package.json | cut -d\" -f4 > version-$CIRCLE_WORKFLOW_ID.txt
+            grep '"version":' package.json | cut -d\" -f4 > version-$CIRCLE_WORKFLOW_ID.txt
 
       - persist_to_workspace:
             root: /tmp/workspace
