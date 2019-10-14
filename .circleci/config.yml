@@ -1,9 +1,21 @@
-# Javascript Node CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-javascript/ for more details
-#
 version: 2
 jobs:
+  save-version:
+    docker:
+      - image: circleci/node:11
+
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run:
+          command: |
+            - grep '"version":' package.json | cut -d\" -f4 > version-$CIRCLE_WORKFLOW_ID.txt
+
+      - persist_to_workspace:
+            root: /tmp/workspace
+            paths:
+              - version-$CIRCLE_WORKFLOW_ID.txt
+
   build-client-base:
     docker:
       - image: circleci/node:11
@@ -14,16 +26,20 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: true
 
+      - attach_workspace:
+          at: /tmp/workspace
+
       - run:
           command: |
-            CLIENT_TAG=$CIRCLE_WORKFLOW_ID
+            cat /tmp/workspace/version-$CIRCLE_WORKFLOW_ID.txt
+            CLIENT_TAG=$CIRCLE_PR_NUMBER
             IMAGE_CLIENT_NAME=montepouli-client
             cd client
             docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG .
 
       - deploy:
           command: |
-            CLIENT_TAG=$CIRCLE_WORKFLOW_ID
+            CLIENT_TAG=$CIRCLE_PR_NUMBER
             IMAGE_CLIENT_NAME=montepouli-client
             docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
             docker push $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG
@@ -38,9 +54,12 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: true
 
+      - attach_workspace:
+          at: /tmp/workspace
+
       - run: |
           cd server
-          SERVER_TAG=$CIRCLE_WORKFLOW_ID
+          SERVER_TAG=$CIRCLE_PR_NUMBER
           echo $SERVER_TAG
           echo $CIRCLE_WORKFLOW_ID
           IMAGE_SERVER_NAME=montepouli-server
@@ -48,7 +67,7 @@ jobs:
 
       - deploy:
           command: |
-            SERVER_TAG=$CIRCLE_WORKFLOW_ID
+            SERVER_TAG=$CIRCLE_PR_NUMBER
             IMAGE_SERVER_NAME=montepouli-server
             docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
             docker push $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG
@@ -63,6 +82,9 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: true
 
+      - attach_workspace:
+          at: /tmp/workspace
+
       - run:
           command: |
             docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
@@ -70,13 +92,13 @@ jobs:
       - run:
           command: |
             cd client
-            CLIENT_TAG=$CIRCLE_WORKFLOW_ID
+            CLIENT_TAG=$CIRCLE_PR_NUMBER
             IMAGE_CLIENT_NAME=montepouli-client-e2e
-            docker build -f Dockerfile.configured . -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG --build-arg CLIENT_BASE_IMAGE_NAME=montepoeli.club/montepouli-client --build-arg CLIENT_BASE_IMAGE_TAG=$CIRCLE_WORKFLOW_ID --build-arg CLIENT_TYPE=e2e
+            docker build -f Dockerfile.configured . -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG --build-arg CLIENT_BASE_IMAGE_NAME=montepoeli.club/montepouli-client --build-arg CLIENT_BASE_IMAGE_TAG=$CIRCLE_PR_NUMBER --build-arg CLIENT_TYPE=e2e
 
       - deploy:
           command: |
-            CLIENT_TAG=$CIRCLE_WORKFLOW_ID
+            CLIENT_TAG=$CIRCLE_PR_NUMBER
             IMAGE_CLIENT_NAME=montepouli-client-e2e
             docker push $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG
 
@@ -89,6 +111,10 @@ jobs:
       - checkout
       - setup_remote_docker:
           docker_layer_caching: true
+
+      - attach_workspace:
+          at: /tmp/workspace
+
       - run: |
           cd client
           STORYBOOK_TAG=1.0
@@ -110,9 +136,9 @@ jobs:
     working_directory: ~/repo
     environment:
       - CLIENT_BASE_IMAGE_NAME: montepoeli.club/montepouli-client-e2e
-      - CLIENT_BASE_IMAGE_TAG: $CIRCLE_WORKFLOW_ID
+      - CLIENT_BASE_IMAGE_TAG: $CIRCLE_PR_NUMBER
       - SERVER_IMAGE_NAME: montepoeli.club/montepouli-server
-      - SERVER_IMAGE_TAG: $CIRCLE_WORKFLOW_ID
+      - SERVER_IMAGE_TAG: $CIRCLE_PR_NUMBER
       - CLIENT_TYPE: e2e
     steps:
       - checkout
@@ -130,6 +156,9 @@ jobs:
       - checkout
       - setup_remote_docker:
           docker_layer_caching: true
+
+      - attach_workspace:
+          at: /tmp/workspace
 
       - run:
           command: |
