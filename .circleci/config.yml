@@ -11,18 +11,15 @@ jobs:
       - checkout
       - run:
           command: |
-            grep '"version":' package.json | cut -d\" -f4 > /tmp/version-$WORKFLOW_ID.txt
+            grep '"version":' package.json | cut -d\" -f4 > /tmp/version.txt
 
       - store_artifacts:
-          path: /tmp/version-$WORKFLOW_ID.txt
-
-          command: |
-            cat /tmp/version-$WORKFLOW_ID.txt
+          path: /tmp/version.txt
 
       - persist_to_workspace:
-            root: /tmp
-            paths:
-              - version-$WORKFLOW_ID.txt
+          root: /tmp
+          paths:
+            - version.txt
 
   build-client-base:
     docker:
@@ -35,12 +32,17 @@ jobs:
           docker_layer_caching: true
 
       - attach_workspace:
-          at: /tmp/workspace
+          at: /tmp
+
+      - run:
+          name: Setup Environment Variables
+          command: |
+            cat /tmp/version.txt >> VERSION
+            echo "export CLIENT_TAG=$VERSION" >> $BASH_ENV
 
       - run:
           command: |
-            cat /tmp/workspace/version-$CIRCLE_WORKFLOW_ID.txt
-            CLIENT_TAG=$CIRCLE_PR_NUMBER
+            echo $CLIENT_TAG
             IMAGE_CLIENT_NAME=montepouli-client
             cd client
             docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG .
@@ -63,7 +65,7 @@ jobs:
           docker_layer_caching: true
 
       - attach_workspace:
-          at: /tmp/workspace
+          at: /tmp
 
       - run: |
           cd server
