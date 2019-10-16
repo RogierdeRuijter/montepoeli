@@ -11,15 +11,34 @@ jobs:
       - checkout
       - run:
           command: |
-            grep '"version":' package.json | cut -d\" -f4 > /tmp/version.txt
+            cd client
+            grep '"version":' package.json | cut -d\" -f4 > /tmp/client-version.txt
+
+      - run:
+          command: |
+            cd client
+            grep '"version":' package.json | cut -d\" -f4 > /tmp/server-version.txt
+
+      - run:
+          command: |
+            cd client
+            cat /tmp/client-version.txt > /tmp/storybook-version.txt
 
       - store_artifacts:
-          path: /tmp/version.txt
+          path: /tmp/client-version.txt
+
+      - store_artifacts:
+          path: /tmp/server-version.txt
+
+      - store_artifacts:
+          path: /tmp/storybook-version.txt
 
       - persist_to_workspace:
           root: /tmp
           paths:
-            - version.txt
+            - client-version.txt
+            - server-version.txt
+            - storybook-version.txt
 
   build-client-base:
     docker:
@@ -32,23 +51,21 @@ jobs:
           docker_layer_caching: true
 
       - attach_workspace:
-          at: /tmp
+          at: /tmp/client-version.txt
 
       - run:
           name: Setup Environment Variables
           command: |
-            echo "export CLIENT_TAG=$(cat /tmp/version.txt)" >> $BASH_ENV
+            echo "export CLIENT_TAG=$(cat /tmp/client-version.txt)" >> $BASH_ENV
 
       - run:
           command: |
-            echo ${CLIENT_TAG}
             IMAGE_CLIENT_NAME=montepouli-client
             cd client
             docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG .
 
       - deploy:
           command: |
-            CLIENT_TAG=$CIRCLE_PR_NUMBER
             IMAGE_CLIENT_NAME=montepouli-client
             docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
             docker push $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG
@@ -64,19 +81,20 @@ jobs:
           docker_layer_caching: true
 
       - attach_workspace:
-          at: /tmp
+          at: /tmp/server-version.txt
+
+      - run:
+          name: Setup Environment Variables
+          command: |
+            echo "export SERVER_TAG=$(cat /tmp/server-version.txt)" >> $BASH_ENV
 
       - run: |
           cd server
-          SERVER_TAG=$CIRCLE_PR_NUMBER
-          echo $SERVER_TAG
-          echo $CIRCLE_WORKFLOW_ID
           IMAGE_SERVER_NAME=montepouli-server
           docker build -t $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG .
 
       - deploy:
           command: |
-            SERVER_TAG=$CIRCLE_PR_NUMBER
             IMAGE_SERVER_NAME=montepouli-server
             docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
             docker push $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG
@@ -92,7 +110,12 @@ jobs:
           docker_layer_caching: true
 
       - attach_workspace:
-          at: /tmp/workspace
+          at: /tmp/client-version.txt
+
+      - run:
+          name: Setup Environment Variables
+          command: |
+            echo "export CLIENT_TAG=$(cat /tmp/client-version.txt)" >> $BASH_ENV
 
       - run:
           command: |
@@ -101,13 +124,11 @@ jobs:
       - run:
           command: |
             cd client
-            CLIENT_TAG=$CIRCLE_PR_NUMBER
             IMAGE_CLIENT_NAME=montepouli-client-e2e
-            docker build -f Dockerfile.configured . -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG --build-arg CLIENT_BASE_IMAGE_NAME=montepoeli.club/montepouli-client --build-arg CLIENT_BASE_IMAGE_TAG=$CIRCLE_PR_NUMBER --build-arg CLIENT_TYPE=e2e
+            docker build -f Dockerfile.configured . -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG --build-arg CLIENT_BASE_IMAGE_NAME=montepoeli.club/montepouli-client --build-arg CLIENT_BASE_IMAGE_TAG=$CLIENT_TAG --build-arg CLIENT_TYPE=e2e
 
       - deploy:
           command: |
-            CLIENT_TAG=$CIRCLE_PR_NUMBER
             IMAGE_CLIENT_NAME=montepouli-client-e2e
             docker push $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG
 
@@ -122,18 +143,21 @@ jobs:
           docker_layer_caching: true
 
       - attach_workspace:
-          at: /tmp/workspace
+          at: /tmp/storybook-version.txt
+
+      - run:
+          name: Setup Environment Variables
+          command: |
+            echo "export STORYBOOK_TAG=$(cat /tmp/storybook-version.txt)" >> $BASH_ENV
 
       - run: |
           cd client
-          STORYBOOK_TAG=1.0
           IMAGE_STORYBOOK_NAME=montepouli-storybook
           docker build -f Dockerfile.storybook -t $DOMAIN/$IMAGE_STORYBOOK_NAME:$STORYBOOK_TAG .
 
       - deploy:
           command: |
             cd client
-            STORYBOOK_TAG=1.0
             IMAGE_STORYBOOK_NAME=montepouli-storybook
 
             docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
@@ -145,12 +169,20 @@ jobs:
     working_directory: ~/repo
     environment:
       - CLIENT_BASE_IMAGE_NAME: montepoeli.club/montepouli-client-e2e
-      - CLIENT_BASE_IMAGE_TAG: $CIRCLE_PR_NUMBER
       - SERVER_IMAGE_NAME: montepoeli.club/montepouli-server
-      - SERVER_IMAGE_TAG: $CIRCLE_PR_NUMBER
       - CLIENT_TYPE: e2e
     steps:
       - checkout
+
+      - attach_workspace:
+          at: /tmp
+
+      - run:
+          name: Setup Environment Variables
+          command: |
+            echo "export CLIENT_BASE_IMAGE_TAG=$(cat /tmp/client-version.txt)" >> $BASH_ENV
+            echo "export SERVER_IMAGE_TAG=$(cat /tmp/server-version.txt)" >> $BASH_ENV
+      - run
       - run: sudo curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
       - run: sudo chmod +x /usr/local/bin/docker-compose
       - run: docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
@@ -167,7 +199,12 @@ jobs:
           docker_layer_caching: true
 
       - attach_workspace:
-          at: /tmp/workspace
+          at: /tmp/client-version.txt
+
+      - run:
+          name: Setup Environment Variables
+          command: |
+            echo "export CLIENT_TAG=$(cat /tmp/client-version.txt)" >> $BASH_ENV
 
       - run:
           command: |
@@ -175,14 +212,13 @@ jobs:
 
       - run:
           command: |
-            cd client
             IMAGE_CLIENT_NAME=montepouli-client
-            TESTED_CLIENT_TAG=$CIRCLE_WORKFLOW_ID-e2e
-            docker build -f Dockerfile.configured -t $DOMAIN/$IMAGE_CLIENT_NAME:$TESTED_CLIENT_TAG . --build-arg CLIENT_BASE_IMAGE_NAME=montepoeli.club/montepouli-client-e2e --build-arg CLIENT_BASE_IMAGE_TAG=$CIRCLE_WORKFLOW_ID --build-arg CLIENT_TYPE=server
+            TESTED_CLIENT_TAG=$CLIENT_TAG-e2e
+            docker build -f Dockerfile.configured -t $DOMAIN/$IMAGE_CLIENT_NAME:$TESTED_CLIENT_TAG . --build-arg CLIENT_BASE_IMAGE_NAME=montepoeli.club/montepouli-client-e2e --build-arg CLIENT_BASE_IMAGE_TAG=$CLIENT_TAG --build-arg CLIENT_TYPE=server
 
       - deploy:
           command: |
-            TESTED_CLIENT_TAG=$CIRCLE_WORKFLOW_ID-e2e
+            TESTED_CLIENT_TAG=$CLIENT_TAG-e2e
             IMAGE_CLIENT_NAME=montepouli-client
             docker push $DOMAIN/$IMAGE_CLIENT_NAME:$TESTED_CLIENT_TAG
 
@@ -195,19 +231,26 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: true
 
+      - attach_workspace:
+          at: /tmp/server-version.txt
+
+      - run:
+          name: Setup Environment Variables
+          command: |
+            echo "export SERVER_TAG=$(cat /tmp/server-version.txt)" >> $BASH_ENV
+
       - run: docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
 
       - run: |
-          SERVER_TAG=$CIRCLE_WORKFLOW_ID
           IMAGE_SERVER_NAME=montepouli-server
-          TESTED_SERVER_TAG=$CIRCLE_WORKFLOW_ID-e2e
+          TESTED_SERVER_TAG=$SERVER_TAG-e2e
 
           docker pull $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG
           docker tag $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG $DOMAIN/$IMAGE_SERVER_NAME:$TESTED_SERVER_TAG
 
       - deploy:
           command: |
-            TESTED_SERVER_TAG=$CIRCLE_WORKFLOW_ID-e2e
+            TESTED_SERVER_TAG=$SERVER_TAG-e2e
             IMAGE_SERVER_NAME=montepouli-server
 
             docker push $DOMAIN/$IMAGE_SERVER_NAME:$TESTED_SERVER_TAG
