@@ -9,18 +9,15 @@ jobs:
       - checkout
       - run:
           command: |
-            grep '"version":' package.json | cut -d\" -f4 > /tmp/version-$CIRCLE_WORKFLOW_ID.txt
+            grep '"version":' package.json | cut -d\" -f4 > /tmp/version-1.txt
 
       - store_artifacts:
-          path: /tmp/version-$CIRCLE_WORKFLOW_ID.txt
-
-          command: |
-            cat /tmp/version-$CIRCLE_WORKFLOW_ID.txt
+          path: /tmp/version-1.txt
 
       - persist_to_workspace:
             root: /tmp
             paths:
-              - version-$CIRCLE_WORKFLOW_ID.txt
+              - version-1.txt
 
   build-client-base:
     docker:
