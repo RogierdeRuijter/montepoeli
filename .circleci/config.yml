@@ -14,7 +14,8 @@ jobs:
       - store_artifacts:
           path: /tmp/version-$CIRCLE_WORKFLOW_ID.txt
 
-        command: cat /tmp/version-$CIRCLE_WORKFLOW_ID.txt
+          command: |
+            cat /tmp/version-$CIRCLE_WORKFLOW_ID.txt
 
       - persist_to_workspace:
             root: /tmp
