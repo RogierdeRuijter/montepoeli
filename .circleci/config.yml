@@ -3,21 +3,26 @@ jobs:
   save-version:
     docker:
       - image: circleci/node:11
+        environment:
+          WORKFLOW_ID: $CIRCLE_WORKFLOW_ID
 
     working_directory: ~/repo
     steps:
       - checkout
       - run:
           command: |
-            grep '"version":' package.json | cut -d\" -f4 > /tmp/version-1.txt
+            grep '"version":' package.json | cut -d\" -f4 > /tmp/version-$WORKFLOW_ID.txt
 
       - store_artifacts:
-          path: /tmp/version-1.txt
+          path: /tmp/version-$WORKFLOW_ID.txt
+
+          command: |
+            cat /tmp/version-$WORKFLOW_ID.txt
 
       - persist_to_workspace:
             root: /tmp
             paths:
-              - version-1.txt
+              - version-$WORKFLOW_ID.txt
 
   build-client-base:
     docker:
