@@ -9,14 +9,13 @@ jobs:
       - checkout
       - run:
           command: |
-            mkdir /tmp/workspace
-            grep '"version":' package.json | cut -d\" -f4 > /tmp/workspace/version-$CIRCLE_WORKFLOW_ID.txt
+            grep '"version":' package.json | cut -d\" -f4 > /tmp/version-$CIRCLE_WORKFLOW_ID.txt
 
       - store_artifacts:
-          path: /tmp/workspace/version-$CIRCLE_WORKFLOW_ID.txt
+          path: /tmp/version-$CIRCLE_WORKFLOW_ID.txt
 
       - persist_to_workspace:
-            root: /tmp/workspace
+            root: /tmp
             paths:
               - version-$CIRCLE_WORKFLOW_ID.txt
 
