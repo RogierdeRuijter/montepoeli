@@ -37,14 +37,11 @@ jobs:
       - run:
           name: Setup Environment Variables
           command: |
-            cat /tmp/version.txt >> VERSION
-
-            cat /tmp/version.txt
-            echo "export CLIENT_TAG=$VERSION" >> $BASH_ENV
+            echo "export CLIENT_TAG=$(cat /tmp/version.txt)'" >> $BASH_ENV
 
       - run:
           command: |
-            echo $CLIENT_TAG
+            echo ${CLIENT_TAG}
             IMAGE_CLIENT_NAME=montepouli-client
             cd client
             docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG .
