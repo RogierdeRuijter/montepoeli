@@ -38,6 +38,8 @@ jobs:
           name: Setup Environment Variables
           command: |
             cat /tmp/version.txt >> VERSION
+
+            cat /tmp/version.txt
             echo "export CLIENT_TAG=$VERSION" >> $BASH_ENV
 
       - run:
