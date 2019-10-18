@@ -1,9 +1,45 @@
-# Javascript Node CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-javascript/ for more details
-#
 version: 2
 jobs:
+  save-version:
+    docker:
+      - image: circleci/node:11
+        environment:
+          WORKFLOW_ID: $CIRCLE_WORKFLOW_ID
+
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run:
+          command: |
+            cd client
+            grep '"version":' package.json | cut -d\" -f4 > /tmp/client-version.txt
+
+      - run:
+          command: |
+            cd client
+            grep '"version":' package.json | cut -d\" -f4 > /tmp/server-version.txt
+
+      - run:
+          command: |
+            cd client
+            cat /tmp/client-version.txt > /tmp/storybook-version.txt
+
+      - store_artifacts:
+          path: /tmp/client-version.txt
+
+      - store_artifacts:
+          path: /tmp/server-version.txt
+
+      - store_artifacts:
+          path: /tmp/storybook-version.txt
+
+      - persist_to_workspace:
+          root: /tmp
+          paths:
+            - client-version.txt
+            - server-version.txt
+            - storybook-version.txt
+
   build-client-base:
     docker:
       - image: circleci/node:11
@@ -14,16 +50,22 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: true
 
+      - attach_workspace:
+          at: /tmp
+
+      - run:
+          name: Setup Environment Variables
+          command: |
+            echo "export CLIENT_TAG=$(cat /tmp/client-version.txt)" >> $BASH_ENV
+
       - run:
           command: |
-            CLIENT_TAG=1.1
             IMAGE_CLIENT_NAME=montepouli-client
             cd client
             docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG .
 
       - deploy:
           command: |
-            CLIENT_TAG=1.1
             IMAGE_CLIENT_NAME=montepouli-client
             docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
             docker push $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG
@@ -38,15 +80,21 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: true
 
+      - attach_workspace:
+          at: /tmp
+
+      - run:
+          name: Setup Environment Variables
+          command: |
+            echo "export SERVER_TAG=$(cat /tmp/server-version.txt)" >> $BASH_ENV
+
       - run: |
           cd server
-          SERVER_TAG=1.1
           IMAGE_SERVER_NAME=montepouli-server
           docker build -t $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG .
 
       - deploy:
           command: |
-            SERVER_TAG=1.1
             IMAGE_SERVER_NAME=montepouli-server
             docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
             docker push $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG
@@ -61,6 +109,14 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: true
 
+      - attach_workspace:
+          at: /tmp
+
+      - run:
+          name: Setup Environment Variables
+          command: |
+            echo "export CLIENT_TAG=$(cat /tmp/client-version.txt)" >> $BASH_ENV
+
       - run:
           command: |
             docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
@@ -68,13 +124,11 @@ jobs:
       - run:
           command: |
             cd client
-            CLIENT_TAG=1.1
             IMAGE_CLIENT_NAME=montepouli-client-e2e
-            docker build -f Dockerfile.configured . -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG --build-arg CLIENT_BASE_IMAGE_NAME=montepoeli.club/montepouli-client --build-arg CLIENT_BASE_IMAGE_TAG=1.1 --build-arg CLIENT_TYPE=e2e
+            docker build -f Dockerfile.configured . -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG --build-arg CLIENT_BASE_IMAGE_NAME=montepoeli.club/montepouli-client --build-arg CLIENT_BASE_IMAGE_TAG=$CLIENT_TAG --build-arg CLIENT_TYPE=e2e
 
       - deploy:
           command: |
-            CLIENT_TAG=1.1
             IMAGE_CLIENT_NAME=montepouli-client-e2e
             docker push $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG
 
@@ -87,16 +141,23 @@ jobs:
       - checkout
       - setup_remote_docker:
           docker_layer_caching: true
+
+      - attach_workspace:
+          at: /tmp
+
+      - run:
+          name: Setup Environment Variables
+          command: |
+            echo "export STORYBOOK_TAG=$(cat /tmp/storybook-version.txt)" >> $BASH_ENV
+
       - run: |
           cd client
-          STORYBOOK_TAG=1.0
           IMAGE_STORYBOOK_NAME=montepouli-storybook
           docker build -f Dockerfile.storybook -t $DOMAIN/$IMAGE_STORYBOOK_NAME:$STORYBOOK_TAG .
 
       - deploy:
           command: |
             cd client
-            STORYBOOK_TAG=1.0
             IMAGE_STORYBOOK_NAME=montepouli-storybook
 
             docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
@@ -108,12 +169,19 @@ jobs:
     working_directory: ~/repo
     environment:
       - CLIENT_BASE_IMAGE_NAME: montepoeli.club/montepouli-client-e2e
-      - CLIENT_BASE_IMAGE_TAG: 1.1
       - SERVER_IMAGE_NAME: montepoeli.club/montepouli-server
-      - SERVER_IMAGE_TAG: 1.1
       - CLIENT_TYPE: e2e
     steps:
       - checkout
+
+      - attach_workspace:
+          at: /tmp
+
+      - run:
+          name: Setup Environment Variables
+          command: |
+            echo "export CLIENT_BASE_IMAGE_TAG=$(cat /tmp/client-version.txt)" >> $BASH_ENV
+            echo "export SERVER_IMAGE_TAG=$(cat /tmp/server-version.txt)" >> $BASH_ENV
       - run: sudo curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
       - run: sudo chmod +x /usr/local/bin/docker-compose
       - run: docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
@@ -129,20 +197,27 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: true
 
+      - attach_workspace:
+          at: /tmp
+
+      - run:
+          name: Setup Environment Variables
+          command: |
+            echo "export CLIENT_TAG=$(cat /tmp/client-version.txt)" >> $BASH_ENV
+
       - run:
           command: |
             docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
 
       - run:
           command: |
-            cd client
             IMAGE_CLIENT_NAME=montepouli-client
-            TESTED_CLIENT_TAG=1.1-e2e
-            docker build -f Dockerfile.configured -t $DOMAIN/$IMAGE_CLIENT_NAME:$TESTED_CLIENT_TAG . --build-arg CLIENT_BASE_IMAGE_NAME=montepoeli.club/montepouli-client-e2e --build-arg CLIENT_BASE_IMAGE_TAG=1.1 --build-arg CLIENT_TYPE=server
+            TESTED_CLIENT_TAG=$CLIENT_TAG-e2e
+            docker build -f Dockerfile.configured -t $DOMAIN/$IMAGE_CLIENT_NAME:$TESTED_CLIENT_TAG . --build-arg CLIENT_BASE_IMAGE_NAME=montepoeli.club/montepouli-client-e2e --build-arg CLIENT_BASE_IMAGE_TAG=$CLIENT_TAG --build-arg CLIENT_TYPE=server
 
       - deploy:
           command: |
-            TESTED_CLIENT_TAG=1.1-e2e
+            TESTED_CLIENT_TAG=$CLIENT_TAG-e2e
             IMAGE_CLIENT_NAME=montepouli-client
             docker push $DOMAIN/$IMAGE_CLIENT_NAME:$TESTED_CLIENT_TAG
 
@@ -155,19 +230,26 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: true
 
+      - attach_workspace:
+          at: /tmp
+
+      - run:
+          name: Setup Environment Variables
+          command: |
+            echo "export SERVER_TAG=$(cat /tmp/server-version.txt)" >> $BASH_ENV
+
       - run: docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
 
       - run: |
-          SERVER_TAG=1.1
           IMAGE_SERVER_NAME=montepouli-server
-          TESTED_SERVER_TAG=1.1-e2e
+          TESTED_SERVER_TAG=$SERVER_TAG-e2e
 
           docker pull $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG
           docker tag $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG $DOMAIN/$IMAGE_SERVER_NAME:$TESTED_SERVER_TAG
 
       - deploy:
           command: |
-            TESTED_SERVER_TAG=1.1-e2e
+            TESTED_SERVER_TAG=$SERVER_TAG-e2e
             IMAGE_SERVER_NAME=montepouli-server
 
             docker push $DOMAIN/$IMAGE_SERVER_NAME:$TESTED_SERVER_TAG
@@ -176,8 +258,13 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-      - build-client-base
-      - build-server
+      - save-version
+      - build-client-base:
+          requires:
+            - save-version
+      - build-server:
+          requires:
+            - save-version
       - swap-client-config-e2e:
           requires:
             - build-client-base
