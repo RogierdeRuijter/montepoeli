@@ -19,27 +19,18 @@ jobs:
             cd client
             grep '"version":' package.json | cut -d\" -f4 > /tmp/server-version.txt
 
-      - run:
-          command: |
-            cd client
-            cat /tmp/client-version.txt > /tmp/storybook-version.txt
-
       - store_artifacts:
           path: /tmp/client-version.txt
 
       - store_artifacts:
           path: /tmp/server-version.txt
 
-      - store_artifacts:
-          path: /tmp/storybook-version.txt
-
       - persist_to_workspace:
           root: /tmp
           paths:
             - client-version.txt
             - server-version.txt
-            - storybook-version.txt
-
+            
   build-client-base:
     docker:
       - image: circleci/node:11
@@ -131,37 +122,6 @@ jobs:
           command: |
             IMAGE_CLIENT_NAME=montepouli-client-e2e
             docker push $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG
-
-  build-storybook:
-    docker:
-      - image: circleci/node:11
-
-    working_directory: ~/repo
-    steps:
-      - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true
-
-      - attach_workspace:
-          at: /tmp
-
-      - run:
-          name: Setup Environment Variables
-          command: |
-            echo "export STORYBOOK_TAG=$(cat /tmp/storybook-version.txt)" >> $BASH_ENV
-
-      - run: |
-          cd client
-          IMAGE_STORYBOOK_NAME=montepouli-storybook
-          docker build -f Dockerfile.storybook -t $DOMAIN/$IMAGE_STORYBOOK_NAME:$STORYBOOK_TAG .
-
-      - deploy:
-          command: |
-            cd client
-            IMAGE_STORYBOOK_NAME=montepouli-storybook
-
-            docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
-            docker push $DOMAIN/$IMAGE_STORYBOOK_NAME:$STORYBOOK_TAG
 
   e2e-test:
     machine:
@@ -274,12 +234,6 @@ workflows:
           requires:
             - swap-client-config-e2e
             - build-server
-      - build-storybook:
-          requires:
-            - save-version
-          filters:
-            branches:
-              only: master
       - swap-client-config:
           requires:
             - build-client-base
