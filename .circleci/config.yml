@@ -275,10 +275,11 @@ workflows:
             - swap-client-config-e2e
             - build-server
       - build-storybook:
+          requires:
+            - save-version
           filters:
             branches:
-              only:
-                - feature-.*/
+              only: master
       - swap-client-config:
           requires:
             - build-client-base
