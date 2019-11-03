@@ -56,8 +56,8 @@
     "zone.js": "0.10.2"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "0.803.15",
-    "@angular/cli": "8.3.15",
+    "@angular-devkit/build-angular": "0.803.17",
+    "@angular/cli": "8.3.17",
     "@angular/compiler-cli": "8.2.13",
     "@angular/language-service": "8.2.13",
     "@babel/core": "7.6.4",
@@ -68,10 +68,10 @@
     "@storybook/addon-viewport": "5.2.5",
     "@storybook/addons": "5.2.5",
     "@storybook/angular": "5.2.5",
-    "@types/jasmine": "3.4.4",
+    "@types/jasmine": "3.4.5",
     "@types/jasminewd2": "2.0.8",
     "@types/jest": "24.0.21",
-    "@types/node": "12.12.3",
+    "@types/node": "12.12.5",
     "babel-loader": "8.0.6",
     "codelyzer": "5.2.0",
     "jasmine-core": "3.5.0",
