@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
-import {ThemePalette} from '@angular/material';
 import {Alignments, GridSizes, Icons, IconSize, Tabs} from '../../../modules/shared/static-files/enums';
 import {MatTabChangeEvent} from '@angular/material/tabs';
 import {UnknownCaseException} from '../../../modules/shared/exceptions/UnknownCaseException';
 import {TabChangeGlobalEventEmitter} from '../../../services/tab-change.global-event-emitter';
+import {ThemePalette} from '@angular/material/core';
 
 @Component({
   selector: 'app-title-bar',

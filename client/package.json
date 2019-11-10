@@ -12,7 +12,6 @@
     "build:prod": "ng build --configuration=production",
     "build:e2e": "ng build --configuration=e2e",
     "test": "ng test --watch=false",
-    "test:jestJtes": "jest",
     "lint": "ng lint frontend",
     "e2e": "ng ../e2e --no-webdriver-update",
     "e2e:build-server": "npm run webdriver-update && npm run webdriver-update:protractor && ng ../e2e --no-webdriver-update",
@@ -28,16 +27,16 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "8.2.13",
-    "@angular/cdk": "8.2.3",
-    "@angular/common": "8.2.13",
-    "@angular/compiler": "8.2.13",
-    "@angular/core": "8.2.13",
-    "@angular/forms": "8.2.13",
-    "@angular/material": "8.2.3",
-    "@angular/platform-browser": "8.2.13",
-    "@angular/platform-browser-dynamic": "8.2.13",
-    "@angular/router": "8.2.13",
+    "@angular/animations": "9.0.0-rc.0",
+    "@angular/cdk": "9.0.0-rc.0",
+    "@angular/common": "9.0.0-rc.0",
+    "@angular/compiler": "9.0.0-rc.0",
+    "@angular/core": "9.0.0-rc.0",
+    "@angular/forms": "9.0.0-rc.0",
+    "@angular/material": "9.0.0-rc.0",
+    "@angular/platform-browser": "9.0.0-rc.0",
+    "@angular/platform-browser-dynamic": "9.0.0-rc.0",
+    "@angular/router": "9.0.0-rc.0",
     "@fortawesome/angular-fontawesome": "0.5.0",
     "@fortawesome/fontawesome-svg-core": "1.2.25",
     "@fortawesome/free-solid-svg-icons": "5.11.2",
@@ -52,14 +51,15 @@
     "ngx-skeleton-loader": "1.2.2",
     "ngx-toastr": "11.2.0",
     "rxjs": "6.5.3",
+    "tslib": "1.10.0",
     "webdriver-manager": "12.1.7",
     "zone.js": "0.10.2"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "0.803.17",
-    "@angular/cli": "8.3.17",
-    "@angular/compiler-cli": "8.2.13",
-    "@angular/language-service": "8.2.13",
+    "@angular-devkit/build-angular": "0.900.0-rc.0",
+    "@angular/cli": "9.0.0-rc.0",
+    "@angular/compiler-cli": "9.0.0-rc.0",
+    "@angular/language-service": "9.0.0-rc.0",
     "@babel/core": "7.6.4",
     "@storybook/addon-actions": "5.2.5",
     "@storybook/addon-links": "5.2.5",
@@ -70,14 +70,11 @@
     "@storybook/angular": "5.2.5",
     "@types/jasmine": "3.4.5",
     "@types/jasminewd2": "2.0.8",
-    "@types/jest": "24.0.21",
     "@types/node": "12.12.5",
     "babel-loader": "8.0.6",
     "codelyzer": "5.2.0",
     "jasmine-core": "3.5.0",
     "jasmine-spec-reporter": "4.2.1",
-    "jest": "24.9.0",
-    "jest-preset-angular": "8.0.0",
     "karma": "4.4.1",
     "karma-chrome-launcher": "3.1.0",
     "karma-coverage-istanbul-reporter": "2.1.0",
@@ -91,12 +88,6 @@
     "storybook-chrome-screenshot": "1.4.0",
     "ts-node": "8.4.1",
     "tslint": "5.20.0",
-    "typescript": "3.5.3"
-  },
-  "jest": {
-    "preset": "jest-preset-angular",
-    "setupFilesAfterEnv": [
-      "./src/setupJest.ts"
-    ]
+    "typescript": "3.6.4"
   }
 }

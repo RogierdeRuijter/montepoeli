@@ -1,9 +1,9 @@
 import {Component, EventEmitter, Output} from '@angular/core';
-import {MatDialog} from '@angular/material';
 import {DialogDataComponent} from '../dialog-data/dialog-data.component';
 import {Game} from '../../../../shared/interfaces/game.interface';
 import {GameFactory} from '../../../factories/game.factory';
 import {UtilService} from '../../../../shared/services/util/util.service';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-dialog-overview',

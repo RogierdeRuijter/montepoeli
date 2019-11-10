@@ -6,12 +6,12 @@ import {TableActionComponent} from './components/game/overview/table-action/tabl
 import {DialogDataComponent} from './components/game/dialog-data/dialog-data.component';
 import {DialogOverviewComponent} from './components/game/dialog-overview/dialog-overview.component';
 import {GameTableLoaderComponent} from './components/game/overview/game-table-loader/game-table-loader.component';
-import {MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material';
 import {OverviewComponent} from './components/game/overview/overview.component';
 import {GameResultComponent} from './components/game/dialog-data/game-result/game-result.component';
 import {FormModule} from '../shared/modules/form/form.module';
 import {CustomTranslateModule} from '../shared/modules/translate/custom-translate.module';
 import {RuleModule} from '../rule/rule.module';
+import {MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material/dialog';
 
 @NgModule({
   imports: [

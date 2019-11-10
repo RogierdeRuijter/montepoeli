@@ -3,8 +3,8 @@ import {ButtonFunction, ButtonType, GridSizes, Icons, Winners} from '../../../..
 import {NgForm} from '@angular/forms';
 import {Game} from '../../../../../shared/interfaces/game.interface';
 import {User} from '../../../../../shared/interfaces/user.interface';
-import {MatSelect} from '@angular/material';
 import {timer} from 'rxjs';
+import {MatSelect} from '@angular/material/select';
 
 @Component({
   selector: 'ui-game-result',
