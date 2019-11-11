@@ -18,6 +18,7 @@ import {FooterComponent} from './components/landing/footer/footer.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import {GameModule} from './modules/game/game.module';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 export function init_app(appLoadService: AppInitService) {
   return () => appLoadService.init();
@@ -33,6 +34,7 @@ export function init_app(appLoadService: AppInitService) {
     MatTabsModule,
     GameModule,
     MatTooltipModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: true }),
   ],
   declarations: [
     AppComponent,
