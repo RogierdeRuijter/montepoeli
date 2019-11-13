@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {ChangeDetectorRef, Component} from '@angular/core';
 
 
 import {Router} from '@angular/router';
@@ -14,7 +14,8 @@ export class LoginComponent {
   public isSubmitting = false;
 
   constructor(private router: Router,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private changeDetectorRef: ChangeDetectorRef) {
   }
 
   public onLogin(userInfo: any): void {
@@ -28,5 +29,9 @@ export class LoginComponent {
         this.isSubmitting = false;
       });
   }
+
+ public doExplicitChangeDetectionForAutofill(): void {
+   this.changeDetectorRef.detectChanges();
+ }
 
 }

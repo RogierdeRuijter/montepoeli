@@ -1,3 +1,4 @@
 <ui-login-form (loginEvent)="onLogin($event)"
-               [disabled]="isSubmitting">
+               [disabled]="isSubmitting"
+               (focusout)="doExplicitChangeDetectionForAutofill()">
 </ui-login-form>
