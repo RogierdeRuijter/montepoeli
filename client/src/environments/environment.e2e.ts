@@ -15,7 +15,7 @@ export class Environment extends DynamicEnvironment {
     super();
     this.production = true;
     this.authentication = {
-      TOKENNAME: 'montepoeli-jwt',
+      TOKENNAME: 'montepoeliJwt',
     };
     this.frontend = {
       TITLE: 'Angular Starter kit',
