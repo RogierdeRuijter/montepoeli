@@ -21,8 +21,10 @@ export class LoginComponent {
   public onLogin(userInfo: any): void {
     this.isSubmitting = true;
     const user = {};
+
     user['username'] = userInfo.username;
     user['pwd'] = userInfo.password;
+
     this.authService.login(user).subscribe(
       () => {
       }, (error) => {
