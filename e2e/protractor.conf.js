@@ -27,7 +27,7 @@ exports.config = {
   capabilities: {
     'browserName': 'chrome',
     chromeOptions: {
-      args: ['--window-size=800x600', 'no-sandbox', '--whitelisted-ips', 'user-data-dir=selenium'],
+      args: ['--window-size=800x600', 'no-sandbox', '--whitelisted-ips'],
     },
   },
   seleniumAddress: 'http://selenium-hub:4444/wd/hub',
