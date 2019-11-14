@@ -14,8 +14,8 @@ export class AppController {
   @Post('/signIn')
   public async signIn(@Body() body, @Res() res: Response, @Next() next): Promise<any> {
     return await this.authService.signIn(body).then(jwt => {
-      res.cookie('jwt', jwt.jwt);
-      res.send({jwt: jwt.jwt});
+      res.cookie('montepoeliJwt', jwt.jwt);
+      res.send({montepoeliJwt: jwt.jwt});
     });
   }
 
