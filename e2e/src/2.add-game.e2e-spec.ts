@@ -14,16 +14,8 @@ describe('Add a game', () => {
   it('should add a game and show it in the table', async () => {
     await page.navigateTo();
 
-    expect(browser.getCurrentUrl()).toContain('/login');
-    helper.sleep();
-    page.getLoginField().sendKeys('protractor');
-
-    page.getPasswordField().sendKeys('test');
-    helper.sleep();
-
-    page.getSubmitButton().click();
-    helper.sleep();
-
+    browser.waitForAngular();
+    
     expect(browser.getCurrentUrl()).toContain('/home');
 
     helper.sleep();

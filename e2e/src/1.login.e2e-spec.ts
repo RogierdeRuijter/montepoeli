@@ -8,24 +8,6 @@ describe('montepoeli login', () => {
     page = new AppPage();
   });
 
-  it('should login to montepouli', async () => {
-    await page.navigateTo();
-    expect(browser.getCurrentUrl()).toContain('/login');
-
-    page.getLoginField().sendKeys('protractor');
-    browser.sleep(1000);
-    page.getPasswordField().sendKeys('test');
-    browser.sleep(1000);
-    page.getSubmitButton().click();
-    browser.sleep(1000);
-
-    expect(browser.getCurrentUrl()).toContain('/home');
-
-    browser.manage().logs().get('browser').then((browserLog) => {
-      expect(browserLog.length).toEqual(0);
-    });
-  });
-
   it('should fail login to montepouli', async () => {
     await page.navigateTo();
     expect(browser.getCurrentUrl()).toContain('/login');
@@ -43,6 +25,24 @@ describe('montepoeli login', () => {
     expect(page.getLoginFailedWarning().getText()).toEqual('Error: Wrong username or password.');
     browser.manage().logs().get('browser').then((browserLog) => {
       expect(browserLog.length).toEqual(3);
+    });
+  });
+
+  it('should login to montepouli', async () => {
+    await page.navigateTo();
+    expect(browser.getCurrentUrl()).toContain('/login');
+
+    page.getLoginField().sendKeys('protractor');
+    browser.sleep(1000);
+    page.getPasswordField().sendKeys('test');
+    browser.sleep(1000);
+    page.getSubmitButton().click();
+    browser.sleep(1000);
+
+    expect(browser.getCurrentUrl()).toContain('/home');
+
+    browser.manage().logs().get('browser').then((browserLog) => {
+      expect(browserLog.length).toEqual(0);
     });
   });
 });
