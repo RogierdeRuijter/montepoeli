@@ -6,29 +6,29 @@ import {MainContentComponent} from './components/main-content/main-content.compo
 import {Environment} from '../environments/environment';
 import {LandingComponent} from './components/landing/landing.component';
 
-const environment = new Environment();
-
+// TODO: figure out how to use the environment here for the environment routes
 const appRoutes: Routes = [
   {
     path: '',
-    redirectTo: '/' + environment.frontend.BASIC_ROUTES.LANDING,
+    redirectTo: '/landing',
+
     pathMatch: 'full',
   },
   {
-    path: environment.frontend.BASIC_ROUTES.LANDING,
+    path: 'landing',
     component: LandingComponent
   },
   {
-    path: environment.frontend.BASIC_ROUTES.LOGIN,
+    path: 'login',
     component: LoginComponent,
   },
   {
-    path: environment.frontend.BASIC_ROUTES.HOME,
+    path: 'home',
     loadChildren: './modules/home/home.module#HomeModule',
     component: MainContentComponent,
     canActivate: [AuthGuard],
   },
-  { path: '**', redirectTo: '/' + environment.frontend.BASIC_ROUTES.LANDING }
+  { path: '**', redirectTo: '/landing' }
 ];
 @NgModule({
   imports: [RouterModule.forRoot(appRoutes)],
