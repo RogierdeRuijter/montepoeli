@@ -22,20 +22,23 @@ import {HomeService} from '../../game/services/home.service';
 import {Rule} from '../../shared/interfaces/rule.interface';
 import {RuleService} from '../../rule/services/rule.service';
 
+// TODO: figure out if component is still needed
+//  Maybe we can directly route to the game component and is this not needed
+//  I believe it still is as a container for the router-outlet
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
+export class HomeComponent implements AfterContentInit, OnDestroy {
 
   public showGames = true;
   public showRules = false;
 
   public users: User[];
   public games$: BehaviorSubject<Game[]> = new BehaviorSubject<Game[]>(null);
-  public loadingGames: any[] = new LoadingGameFactory().createMany(this.homeService.getAmountOfLoadingGames());
+  public loadingGames: any[];
 
   public rules: Rule[];
 
@@ -60,29 +63,7 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
 
   }
 
-  public ngOnInit(): void {
-    this.userService.getUsers()
-      .subscribe((users: User[]) => {
-        this.users = users;
-        this.userStore.set(users);
-      });
-
-    this.getGames();
-
-    this.loadingStore.get()
-      .pipe(
-        takeUntil(this.observerStopper$),
-      ).subscribe((loading: boolean) => {
-      if (loading === true || loading === false) {
-        this.loading = loading;
-        this.changeDetectorRef.detectChanges();
-      }
-    });
-
-    this.ruleService.getAll()
-      .subscribe((rules: Rule[]) => this.rules = rules);
-  }
-
+  // TOOD: see what to do with the tab navigation
   public ngAfterContentInit(): void {
     this.tabChangeGlobalEventEmitter
       .get()
@@ -99,30 +80,6 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
           this.changeDetectorRef.detectChanges();
         }
       });
-  }
-
-  public getGames(): void {
-    this.loadingService.activateDelayedLoading(this.stopDelayedLoading$);
-
-    this.gameService.getGames()
-      .pipe(
-        tap(() => this.stopDelayedLoading$.next())
-      )
-      .subscribe((games: Game[]) => {
-        this.games$.next(games);
-        this.setAmountOfLoadingGamesInCookie(games);
-        this.stopLoading();
-      });
-  }
-
-  private setAmountOfLoadingGamesInCookie(games: Game[]): void {
-    this.homeService.setAmountOfLoadingGamesInCookie(games);
-  }
-
-  private stopLoading(): void {
-    this.loadingStore.set(false);
-    this.observerStopper$.next();
-    this.loading = false;
   }
 
   public ngOnDestroy(): void {
