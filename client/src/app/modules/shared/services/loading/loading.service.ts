@@ -17,7 +17,6 @@ export class LoadingService {
         takeUntil(stop$)
       )
       .subscribe(() => {
-        console.log('loadingStore');
         this.loadingStore.set(true);
       });
   }

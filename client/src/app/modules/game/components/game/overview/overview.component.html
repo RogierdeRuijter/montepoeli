@@ -11,7 +11,8 @@
                              [games]="loadingGames">
       </app-game-table-loader>
     </div>
-    <div [appGridColumn]="[2, 2, 1, 1]">
+    <div [appGridColumn]="[2, 2, 1, 1]"
+         [appGridPosition]="[Positions.FIXED_MIDDLE, Positions.DEFAULT, Positions.DEFAULT, Positions.DEFAULT]">
       <ui-table-action [ids]="['add-game-button']"
                        (actionClickEvent)="emitActionEvent($event)"
                        [actions]="actions"

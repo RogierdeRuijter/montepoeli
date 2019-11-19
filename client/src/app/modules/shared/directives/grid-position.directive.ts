@@ -1,21 +1,19 @@
 import {Directive, ElementRef, Input, OnInit, Optional, Renderer2} from '@angular/core';
+import {GridSizes, Positions} from '../static-files/enums';
 import {GridRowDirective} from './grid-row.directive';
-import {Alignments, GridSizes} from '../static-files/enums';
-import {UtilService} from '../services/util/util.service';
 import {GridService} from '../services/grid/grid.service';
 
 @Directive({
-  selector: '[appGridColumn]',
+  selector: '[appGridPosition]',
 })
-export class GridColumnDirective implements OnInit {
+export class GridPositionDirective implements OnInit {
 
-  @Input('appGridColumn')
-  public amountOfColumns: number[];
+  @Input('appGridPosition')
+  public positions: Positions[];
 
   constructor(private elementRef: ElementRef,
               private renderer: Renderer2,
               @Optional() private bootstrapRowDirective: GridRowDirective,
-              private utilService: UtilService,
               private gridService: GridService) {
   }
 
@@ -26,7 +24,7 @@ export class GridColumnDirective implements OnInit {
 
     const gridSizes: GridSizes[] = this.bootstrapRowDirective.gridSizes;
 
-    if (gridSizes.length !== this.amountOfColumns.length) {
+    if (gridSizes.length !== this.positions.length) {
       throw new Error('gridSizes and amountOfColumns should have the same size');
     }
 
@@ -34,13 +32,20 @@ export class GridColumnDirective implements OnInit {
       let bootstrapGridClass = '';
 
       const gridPrefix = this.gridService.getBootstrapClassFor(gridSize);
-      bootstrapGridClass += gridPrefix + '-' + this.amountOfColumns[index];
+      const position = this.positions[index];
+      bootstrapGridClass += gridPrefix + '-' + 'visible' + position;
 
-      this.addClassToElement(bootstrapGridClass);
+      if (position === Positions.FIXED_MIDDLE) {
+        // TODO: only show these style one the current grid size
+        this.addStyleToElement('position', 'fixed');
+        this.addStyleToElement('bottom', '35%');
+      }
     });
   }
 
-  private addClassToElement(cssClass: string): void {
-    this.renderer.addClass(this.elementRef.nativeElement, cssClass);
+  private addStyleToElement(field: string, value: string): void {
+    this.renderer.setStyle(this.elementRef.nativeElement, field, value);
   }
+
+
 }

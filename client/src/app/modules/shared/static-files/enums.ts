@@ -71,6 +71,7 @@ export enum Directions {
 }
 
 export enum Positions {
+  DEFAULT,
   FIXED_MIDDLE
 }
 
