@@ -11,7 +11,6 @@ const appRoutes: Routes = [
   {
     path: '',
     redirectTo: '/landing',
-
     pathMatch: 'full',
   },
   {
