@@ -13,9 +13,6 @@ describe('Add a game', () => {
 
   it('should add a game and show it in the table', async () => {
     await page.navigateTo();
-    expect(browser.getCurrentUrl()).toContain('/landing');
-
-    await page.navigateTo();
 
     browser.waitForAngular();
     
