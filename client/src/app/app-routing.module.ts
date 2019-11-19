@@ -2,24 +2,33 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {AuthGuard} from './modules/shared/guards/auth-guard.service';
 import {LoginComponent} from './components/login/login.component';
+import {MainContentComponent} from './components/main-content/main-content.component';
+import {Environment} from '../environments/environment';
 import {LandingComponent} from './components/landing/landing.component';
-// TODO: use route constants
+
+const environment = new Environment();
+
 const appRoutes: Routes = [
   {
     path: '',
-    redirectTo: '/login',
+    redirectTo: '/' + environment.frontend.BASIC_ROUTES.LANDING,
     pathMatch: 'full',
   },
   {
-    path: 'login',
+    path: environment.frontend.BASIC_ROUTES.LANDING,
+    component: LandingComponent
+  },
+  {
+    path: environment.frontend.BASIC_ROUTES.LOGIN,
     component: LoginComponent,
   },
   {
-    path: 'home',
+    path: environment.frontend.BASIC_ROUTES.HOME,
     loadChildren: './modules/home/home.module#HomeModule',
-    component: LandingComponent,
+    component: MainContentComponent,
     canActivate: [AuthGuard],
   },
+  { path: '**', redirectTo: '/' + environment.frontend.BASIC_ROUTES.LANDING }
 ];
 @NgModule({
   imports: [RouterModule.forRoot(appRoutes)],
