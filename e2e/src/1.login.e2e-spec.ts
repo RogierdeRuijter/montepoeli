@@ -10,6 +10,9 @@ describe('montepoeli login', () => {
 
   it('should fail login to montepouli', async () => {
     await page.navigateTo();
+    expect(browser.getCurrentUrl()).toContain('/landing');
+
+    await page.navigateTo();
     expect(browser.getCurrentUrl()).toContain('/login');
 
     page.getLoginField().sendKeys('protractor');
@@ -29,6 +32,9 @@ describe('montepoeli login', () => {
   });
 
   it('should login to montepouli', async () => {
+    await page.navigateTo();
+    expect(browser.getCurrentUrl()).toContain('/landing');
+
     await page.navigateTo();
     expect(browser.getCurrentUrl()).toContain('/login');
 

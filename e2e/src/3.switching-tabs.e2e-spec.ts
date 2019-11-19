@@ -13,6 +13,9 @@ describe('Tab navigation', () => {
 
   it('should switch to the rules tab and back to the games tab', async () => {
     await page.navigateTo();
+    expect(browser.getCurrentUrl()).toContain('/landing');
+
+    await page.navigateTo();
 
     browser.waitForAngular();
 
