@@ -46,7 +46,7 @@ export class AuthService {
   public logout(): void {
     this.clearSession();
     this.loggedIn = false;
-    this.router.navigate([this.environment.frontend.BASIC_ROUTES.LOGIN_ROUTE]);
+    this.router.navigate([this.environment.frontend.BASIC_ROUTES.LOGIN]);
   }
 
   public getToken(): string {
