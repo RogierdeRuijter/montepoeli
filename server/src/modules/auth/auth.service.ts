@@ -6,9 +6,6 @@ import {User} from '../../models/interfaces/user.interface';
 
 @Injectable()
 export class AuthService {
-  private jwtOptions = {
-    expiresIn: '24h',
-  };
 
   constructor(
     private readonly usersService: UsersService,
@@ -20,7 +17,7 @@ export class AuthService {
     return new Promise<any>((resolve, reject) => this.usersService.verifyUser(body)
       .then((user: User) => {
         const jwtPayload: JwtPayload = {username: user.username};
-        resolve({jwt: this.jwtService.sign(jwtPayload, this.jwtOptions)});
+        resolve({jwt: this.jwtService.sign(jwtPayload)});
       }).catch((err) => {
         reject(new UnauthorizedException('Wrong username or password.'));
       }),

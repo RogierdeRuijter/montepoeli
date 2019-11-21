@@ -11,10 +11,8 @@ import {Environment} from '../../../environments/environment';
 export class LoginComponent {
 
   public isSubmitting = false;
-  private environment = new Environment();
 
-  constructor(private router: Router,
-              private authService: AuthService,
+  constructor(private authService: AuthService,
               private changeDetectorRef: ChangeDetectorRef) {
   }
 
