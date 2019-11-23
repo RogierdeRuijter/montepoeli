@@ -13,8 +13,7 @@ export class GridPositionDirective implements OnInit {
 
   constructor(private elementRef: ElementRef,
               private renderer: Renderer2,
-              @Optional() private bootstrapRowDirective: GridRowDirective,
-              private gridService: GridService) {
+              @Optional() private bootstrapRowDirective: GridRowDirective) {
   }
 
   public ngOnInit(): void {
@@ -29,22 +28,48 @@ export class GridPositionDirective implements OnInit {
     }
 
     gridSizes.forEach((gridSize: GridSizes, index: number) => {
-      let bootstrapGridClass = '';
-
-      const gridPrefix = this.gridService.getBootstrapClassFor(gridSize);
       const position = this.positions[index];
-      bootstrapGridClass += gridPrefix + '-' + 'visible' + position;
 
       if (position === Positions.FIXED_MIDDLE) {
-        // TODO: only show these style one the current grid size
-        this.addStyleToElement('position', 'fixed');
+        this.addCssVisableClass(gridSize);
+
+        this.addStyleToElement('position', 'absolute');
         this.addStyleToElement('bottom', '35%');
+        this.addStyleToElement('right', '0%');
       }
     });
   }
 
   private addStyleToElement(field: string, value: string): void {
     this.renderer.setStyle(this.elementRef.nativeElement, field, value);
+  }
+
+  private addClassToElement(cssClass: string): void {
+    this.renderer.addClass(this.elementRef.nativeElement, cssClass);
+  }
+
+  private addCssVisableClass(gridSize: GridSizes): void {
+    switch (gridSize) {
+      case GridSizes.EXTRA_SMALL:
+        this.addClassToElement('.d-block');
+        this.addClassToElement('.d-sm-none');
+        break;
+      case GridSizes.SMALL:
+        this.addClassToElement('.d-none');
+        this.addClassToElement('.d-sm-block');
+        this.addClassToElement('.d-md-none');
+        break;
+      case GridSizes.MEDIUM:
+        this.addClassToElement('.d-none');
+        this.addClassToElement('.d-md-block');
+        this.addClassToElement('.d-lg-none');
+        break;
+      case GridSizes.LARGE:
+        this.addClassToElement('.d-none');
+        this.addClassToElement('.d-lg-block');
+        this.addClassToElement('.d-xl-none');
+        break;
+    }
   }
 
 
