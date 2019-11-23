@@ -46,7 +46,7 @@ export class AuthService {
   public logout(): void {
     this.clearSession();
     this.loggedIn = false;
-    this.router.navigate([this.environment.frontend.BASIC_ROUTES.LOGIN_ROUTE]);
+    this.router.navigate([this.environment.frontend.BASIC_ROUTES.LOGIN]);
   }
 
   public getToken(): string {
@@ -55,6 +55,6 @@ export class AuthService {
   }
 
   public clearSession(): void {
-    // TODO: remove jwt from cookie.
+    this.cookieService.delete(this.environment.authentication.TOKENNAME);
   }
 }

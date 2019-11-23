@@ -73,12 +73,17 @@
   },
   "warnings": {
     "incorrect_credentials": {
-      "title": "Login  Error",
+      "title": "Login Error",
       "body": "Your username or password is incorrect"
     },
     "not_authorized": {
       "title": "Navigation error",
       "body": "You're not allowed to see this route"
+    }
+  },
+  "info": {
+    "no-valid-session": {
+      "body": "You have to login again"
     }
   }
 }

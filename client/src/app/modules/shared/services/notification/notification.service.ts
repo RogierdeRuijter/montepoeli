@@ -12,4 +12,8 @@ export class NotificationService {
   public warning(message: string, title?: string): void {
     this.toastrService.warning(message, title);
   }
+
+  public info(message: string, title?: string): void {
+    this.toastrService.info(message, title);
+  }
 }
