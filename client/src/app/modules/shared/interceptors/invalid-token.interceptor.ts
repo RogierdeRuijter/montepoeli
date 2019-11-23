@@ -24,7 +24,7 @@ export class InvalidTokenInterceptor implements HttpInterceptor {
             this.authService.logout();
 
             this.translateService.get('info.no-valid-session.body')
-              .subscribe(([title, message]: [string, string]) => this.notificationService.info(message));
+              .subscribe((message: string) => this.notificationService.info(message));
         }
         return throwError(error);
         }),
