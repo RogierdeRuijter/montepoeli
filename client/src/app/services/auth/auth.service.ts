@@ -55,6 +55,6 @@ export class AuthService {
   }
 
   public clearSession(): void {
-    // TODO: remove jwt from cookie.
+    this.cookieService.delete(this.environment.authentication.TOKENNAME);
   }
 }

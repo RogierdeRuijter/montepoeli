@@ -17,6 +17,7 @@ import {HttpErrorInterceptor} from './interceptors/http-error.interceptor';
 import {IconModule} from './modules/icon/icon.module';
 import {CustomTranslateModule} from './modules/translate/custom-translate.module';
 import {PositionDirective} from './directives/position.directive';
+import { InvalidTokenInterceptor } from './interceptors/invalid-token.interceptor';
 
 @NgModule({
   imports: [
@@ -39,7 +40,8 @@ import {PositionDirective} from './directives/position.directive';
   providers: [
     {provide: LOCALE_ID, useValue: 'en-US'},
     AuthGuard,
-    {provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: InvalidTokenInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true}
   ],
   exports: [
     ButtonComponent,
