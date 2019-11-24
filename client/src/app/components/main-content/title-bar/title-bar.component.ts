@@ -21,7 +21,6 @@ export class TitleBarComponent {
   constructor(private tabChangeGlobalEventEmitter: TabChangeGlobalEventEmitter) {
   }
 
-
   public handleChangeEvent(matTabChangeEvent: MatTabChangeEvent): void {
     switch (matTabChangeEvent.index) {
       case 0:
@@ -40,7 +39,6 @@ export class TitleBarComponent {
   }
 
   public emitRulesSelected(): void {
-    console.log(this.tabChangeGlobalEventEmitter);
     this.tabChangeGlobalEventEmitter.emit(Tabs.RULES);
   }
 }

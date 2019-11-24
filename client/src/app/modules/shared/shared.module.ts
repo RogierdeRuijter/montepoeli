@@ -1,7 +1,7 @@
 import {LOCALE_ID, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import {MaterialModule} from '../material/material.module';
+import {MaterialModule} from './modules/material/material.module';
 import {TranslateModule} from '@ngx-translate/core';
 import {ToastrModule} from 'ngx-toastr';
 import {FormsModule} from '@angular/forms';

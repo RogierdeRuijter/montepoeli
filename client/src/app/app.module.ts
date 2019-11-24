@@ -16,7 +16,7 @@ import {CustomTranslateModule} from './modules/shared/modules/translate/custom-t
 import {AppInitService} from './services/app.init';
 import {FooterComponent} from './components/main-content/footer/footer.component';
 import {MatTabsModule} from '@angular/material/tabs';
-import {GameModule} from './modules/game/game.module';
+import {GameModule} from './modules/overview/modules/game/game.module';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { LandingComponent } from './components/landing/landing.component';

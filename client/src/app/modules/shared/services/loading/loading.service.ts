@@ -16,9 +16,6 @@ export class LoadingService {
       .pipe(
         takeUntil(stop$)
       )
-      .subscribe(() => {
-        console.log('loadingStore');
-        this.loadingStore.set(true);
-      });
+      .subscribe(() => this.loadingStore.set(true));
   }
 }

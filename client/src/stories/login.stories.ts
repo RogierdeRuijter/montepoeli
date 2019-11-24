@@ -5,7 +5,7 @@ import {TranslateDirective} from '../app/modules/shared/modules/translate/transl
 import {GridRowDirective} from '../app/modules/shared/directives/grid-row.directive';
 import {GridColumnDirective} from '../app/modules/shared/directives/grid-column.directive';
 import {ButtonComponent} from '../app/modules/shared/components/button/button.component';
-import {MaterialModule} from '../app/modules/material/material.module';
+import {MaterialModule} from '../app/modules/shared/modules/material/material.module';
 import {LoginFormComponent} from '../app/components/login/login-form/login-form.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
