@@ -1,0 +1,12 @@
+<ui-game-view (actionEvent)="handleActionEvent()"
+             [actions]="actions"
+             [disabled]="disabled"
+             [displayedColumns]="displayedColumns"
+             [games$]="games$"
+             [loadingGames]="loadingGames"
+             [loading]="loading">
+</ui-game-view>
+
+<app-dialog-overview #addDialog
+                     (addEvent)="handleAddEvent($event)">
+</app-dialog-overview>

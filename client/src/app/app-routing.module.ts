@@ -22,8 +22,8 @@ const appRoutes: Routes = [
     component: LoginComponent,
   },
   {
-    path: 'home',
-    loadChildren: './modules/home/home.module#HomeModule',
+    path: 'overview',
+    loadChildren: './modules/overview/overview.module#OverviewModule',
     component: MainContentComponent,
     canActivate: [AuthGuard],
   },

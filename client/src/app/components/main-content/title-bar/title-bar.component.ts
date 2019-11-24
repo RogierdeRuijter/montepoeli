@@ -21,7 +21,6 @@ export class TitleBarComponent {
   constructor(private tabChangeGlobalEventEmitter: TabChangeGlobalEventEmitter) {
   }
 
-
   public handleChangeEvent(matTabChangeEvent: MatTabChangeEvent): void {
     switch (matTabChangeEvent.index) {
       case 0:

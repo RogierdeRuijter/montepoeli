@@ -1,7 +1,7 @@
 import {storiesOf} from '@storybook/angular';
 import {Actions} from '../app/modules/shared/static-files/enums';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-import {TableActionComponent} from '../app/modules/game/components/game/overview/table-action/table-action.component';
+import {TableActionComponent} from '../app/modules/overview/modules/game/components/game/game-view/table-action/table-action.component';
 import {IconComponent} from '../app/modules/shared/modules/icon/icon/icon.component';
 
 storiesOf('Table action', module)

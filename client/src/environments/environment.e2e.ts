@@ -24,7 +24,7 @@ export class Environment extends DynamicEnvironment {
       BASIC_ROUTES: {
         LANDING: 'landing',
         LOGIN: 'login',
-        HOME: 'home',
+        OVERVIEW: 'overview',
       },
     };
 
