@@ -40,7 +40,7 @@ export class AuthService {
           this.loggedIn = true;
         }
       }),
-      tap(() => this.router.navigate([this.environment.frontend.BASIC_ROUTES.OVERVIEW])));
+      tap(() => this.router.navigate([this.environment.frontend.BASIC_ROUTES.HOME])));
   }
 
   public logout(): void {

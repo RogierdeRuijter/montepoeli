@@ -39,7 +39,7 @@ describe('montepoeli login', () => {
     page.getSubmitButton().click();
     browser.sleep(1000);
 
-    expect(browser.getCurrentUrl()).toContain('/overview/games');
+    expect(browser.getCurrentUrl()).toContain('/home');
 
     browser.manage().logs().get('browser').then((browserLog) => {
       expect(browserLog.length).toEqual(0);

@@ -15,19 +15,16 @@ describe('Tab navigation', () => {
     await page.navigateTo();
 
     browser.waitForAngular();
-    expect(browser.getCurrentUrl()).toContain('/overview/games');
 
     page.getNavBarRulesTab().click();
     helper.sleep();
-    
-    expect(browser.getCurrentUrl()).toContain('/overview/rules');
+
     expect(page.getRulesView()).toBeTruthy();
     helper.sleep();
 
     page.getNavBarGamesTab().click();
     helper.sleep();
 
-    expect(browser.getCurrentUrl()).toContain('/overview/games');
     expect(page.getGamesView()).toBeTruthy();
   });
 

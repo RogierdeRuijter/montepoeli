@@ -1,6 +1,6 @@
 import {IApi, IGetStory} from '@storybook/angular';
 import {CompleteStory} from '../intefaces/complete-story.interface';
-import {GameTableComponent} from '../../../app/modules/overview/modules/game/components/game/game-view/game-table/game-table.component';
+import {GameTableComponent} from '../../../app/modules/game/components/game/overview/game-table/game-table.component';
 import {of} from 'rxjs';
 import {MatTableModule} from '@angular/material';
 import {StorybookTranslateModule} from '../../storybook-translate.module';

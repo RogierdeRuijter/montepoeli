@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {MaterialModule} from '../material/material.module';
+import {MaterialModule} from '../../../material/material.module';
 import {IconModule} from '../icon/icon.module';
 import {DropDownComponent} from './drop-down/drop-down.component';
 import {FormsModule} from '@angular/forms';

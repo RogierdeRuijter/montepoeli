@@ -1,16 +1,16 @@
 import {IApi, IGetStory} from '@storybook/angular';
 import {CompleteStory} from '../intefaces/complete-story.interface';
-import {GameTableComponent} from '../../../app/modules/overview/modules/game/components/game/game-view/game-table/game-table.component';
+import {GameTableComponent} from '../../../app/modules/game/components/game/overview/game-table/game-table.component';
 import {of} from 'rxjs';
 import {MatTableModule} from '@angular/material';
 import {StorybookTranslateModule} from '../../storybook-translate.module';
 import {TranslateDirective} from '../../../app/modules/shared/modules/translate/translate.directive';
-import {GameViewComponent} from '../../../app/modules/overview/modules/game/components/game/game-view/game-view.component';
+import {OverviewComponent} from '../../../app/modules/game/components/game/overview/overview.component';
 import {Actions} from '../../../app/modules/shared/static-files/enums';
 import {NgxSkeletonLoaderModule} from 'ngx-skeleton-loader';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-import {GameTableLoaderComponent} from '../../../app/modules/overview/modules/game/components/game/game-view/game-table-loader/game-table-loader.component';
-import {TableActionComponent} from '../../../app/modules/overview/modules/game/components/game/game-view/table-action/table-action.component';
+import {GameTableLoaderComponent} from '../../../app/modules/game/components/game/overview/game-table-loader/game-table-loader.component';
+import {TableActionComponent} from '../../../app/modules/game/components/game/overview/table-action/table-action.component';
 import {GridColumnDirective} from '../../../app/modules/shared/directives/grid-column.directive';
 import {GridRowDirective} from '../../../app/modules/shared/directives/grid-row.directive';
 import {IconComponent} from '../../../app/modules/shared/modules/icon/icon/icon.component';
@@ -18,7 +18,7 @@ import {PositionDirective} from '../../../app/modules/shared/directives/position
 
 
 export class GameOverviewStoryFactory {
-  private component = GameViewComponent;
+  private component = OverviewComponent;
   private readonly displayedColumns: string[] = ['white', 'winner', 'black'];
   private stories: CompleteStory[] = [];
   private actions: Actions[] = [Actions.ADD];

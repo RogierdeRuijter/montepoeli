@@ -16,6 +16,7 @@ export class AppInitService {
       }),
     ).pipe(
       map((config) => {
+        console.log(config);
         window.config = config;
         return;
       })).toPromise();
