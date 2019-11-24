@@ -22,8 +22,9 @@ export class Environment extends DynamicEnvironment {
       POLLING_TIMEOUT: 1000,
       PAGE_SIZE: 20,
       BASIC_ROUTES: {
-        LOGIN_ROUTE: '/login',
-        HOME: '/home',
+        LANDING: 'landing',
+        LOGIN: 'login',
+        HOME: 'home',
       },
     };
 

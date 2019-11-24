@@ -8,20 +8,12 @@ import {Environment} from '../../../environments/environment';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
   public isSubmitting = false;
-  private environment = new Environment();
 
-  constructor(private router: Router,
-              private authService: AuthService,
+  constructor(private authService: AuthService,
               private changeDetectorRef: ChangeDetectorRef) {
-  }
-
-  public ngOnInit(): void {
-    if (this.authService.isAuthenticated()) {
-      this.router.navigate([this.environment.frontend.BASIC_ROUTES.HOME]);
-    }
   }
 
   public onLogin(userInfo: any): void {
