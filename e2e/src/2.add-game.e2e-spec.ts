@@ -16,7 +16,7 @@ describe('Add a game', () => {
 
     browser.waitForAngular();
     
-    expect(browser.getCurrentUrl()).toContain('/home');
+    expect(browser.getCurrentUrl()).toContain('/overview/games');
 
     helper.sleep();
     page.getAddGameButton().click();
