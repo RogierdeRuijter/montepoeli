@@ -1,8 +1,9 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {Tabs} from '../../shared/static-files/enums';
 import {TabChangeGlobalEventEmitter} from '../../../services/tab-change.global-event-emitter';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, Router, NavigationStart} from '@angular/router';
 import { Environment } from 'src/environments/environment';
+import { filter } from 'rxjs/operators';
 
 @Component({
   templateUrl: './overview.component.html',
@@ -17,6 +18,17 @@ export class OverviewComponent implements OnInit {
 
   public ngOnInit(): void {
     this.initialRouting();
+    // TODO: figure out another way to do this
+    // This now shows the games on the overview route.
+    // Maybe we should go back to the none route solution
+    this.router.events
+      .pipe(
+        filter(event => event instanceof NavigationStart)
+      ).subscribe((event: NavigationStart) => {
+        if (event.url === '/overview') {
+          this.emitTab(Tabs.GAMES);
+        }
+      });
 
     this.tabChangeGlobalEventEmitter
       .get()
