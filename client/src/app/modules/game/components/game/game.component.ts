@@ -20,12 +20,6 @@ export class GameComponent {
   @Input()
   public users: User[];
 
-  @Input()
-  public loadingGames: any[];
-
-  @Input()
-  public loading: boolean;
-
   @ViewChild('addDialog', {read: DialogOverviewComponent, static: true})
   public addDialog: DialogOverviewComponent;
 
@@ -48,10 +42,9 @@ export class GameComponent {
     games.unshift(game);
     this.games$.next(games);
 
-    this.gameService.saveGame(game)
+    this.gameService.save(game)
       .subscribe(
-        () => {
-        },
+        () => {},
         () => this.removeAddedGame(game),
       );
   }

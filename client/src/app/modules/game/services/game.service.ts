@@ -12,11 +12,11 @@ export class GameService {
   public constructor(private httpService: CustomHttpService) {
   }
 
-  public getGames(): Observable<Game[]> {
+  public getAll(): Observable<Game[]> {
     return this.httpService.get<Game[]>(this.environment.backend.ENTRY_POINTS.GAME);
   }
 
-  public saveGame(game: Game): Observable<Game> {
+  public save(game: Game): Observable<Game> {
     return this.httpService.post<Game>(this.environment.backend.ENTRY_POINTS.GAME + this.environment.backend.ENTRY_POINTS.CREATE, game);
   }
 }
