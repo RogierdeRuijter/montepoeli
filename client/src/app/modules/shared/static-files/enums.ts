@@ -50,6 +50,7 @@ export enum GridSizes {
   SMALL,
   MEDIUM,
   LARGE,
+  EXTRA_LARGE,
   ALL
 }
 
