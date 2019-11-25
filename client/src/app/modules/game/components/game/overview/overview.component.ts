@@ -11,16 +11,10 @@ import {Game} from '../../../../shared/interfaces/game.interface';
 export class OverviewComponent {
 
   @Input()
-  public loading: boolean;
-
-  @Input()
   public displayedColumns: string[];
 
   @Input()
   public games$: Observable<Game[]>;
-
-  @Input()
-  public loadingGames: any;
 
   @Input()
   public actions: Actions[];
