@@ -34,7 +34,6 @@ export class OverviewComponent {
   public actionEvent: EventEmitter<any> = new EventEmitter();
 
   public Alignments = Alignments;
-  public Positions = Positions;
 
   public emitActionEvent(event: any): void {
     this.actionEvent.emit(event);

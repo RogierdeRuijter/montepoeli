@@ -5,6 +5,7 @@ import {Actions, GridSizes} from '../../../shared/static-files/enums';
 import {BehaviorSubject} from 'rxjs';
 import {DialogOverviewComponent} from './dialog-overview/dialog-overview.component';
 import {User} from '../../../shared/interfaces/user.interface';
+import {BlurStore} from '../../../shared/stores/blur.store';
 
 @Component({
   selector: 'app-game',
@@ -36,10 +37,13 @@ export class GameComponent {
 
   public GridSizes = GridSizes;
 
-  constructor(private gameService: GameService) {
+  constructor(private gameService: GameService,
+              private blurStore: BlurStore) {
   }
 
   public handleActionEvent(): void {
+    this.blurStore.set(true);
+
     this.addDialog.openDialog();
   }
 
