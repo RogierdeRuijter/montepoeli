@@ -2,8 +2,8 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {AuthGuard} from '../shared/guards/auth-guard.service';
 import {HomeComponent} from './components/home/home.component';
-import { GameResolver } from './resolvers/game.resolver';
-import { RuleResolver } from './resolvers/rule.resolver';
+import {GameResolver} from './resolvers/game.resolver';
+import {RuleResolver} from './resolvers/rule.resolver';
 
 const homeRoutes: Routes = [
   {

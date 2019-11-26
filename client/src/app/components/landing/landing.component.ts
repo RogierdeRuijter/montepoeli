@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {Environment} from '../../../environments/environment';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuthService} from '../../services/auth/auth.service';
-import {Environment} from '../../../environments/environment';
 
 @Component({
-  template: ``
+  template: ``,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LandingComponent implements OnInit {
 
@@ -12,7 +13,8 @@ export class LandingComponent implements OnInit {
 
   constructor(private router: Router,
               private activatedRoute: ActivatedRoute,
-              private authService: AuthService) { }
+              private authService: AuthService) {
+  }
 
   public ngOnInit(): void {
     if (this.authService.isAuthenticated()) {

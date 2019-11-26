@@ -18,8 +18,8 @@ import {FooterComponent} from './components/main-content/footer/footer.component
 import {MatTabsModule} from '@angular/material/tabs';
 import {GameModule} from './modules/game/game.module';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { LandingComponent } from './components/landing/landing.component';
+import {ServiceWorkerModule} from '@angular/service-worker';
+import {LandingComponent} from './components/landing/landing.component';
 
 export function init_app(appLoadService: AppInitService) {
   return () => appLoadService.init();
