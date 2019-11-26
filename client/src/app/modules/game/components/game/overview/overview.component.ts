@@ -10,6 +10,11 @@ import {Game} from '../../../../shared/interfaces/game.interface';
 })
 export class OverviewComponent {
 
+  public GridSizes = GridSizes;
+
+  @Input()
+  public loading: boolean;
+
   @Input()
   public displayedColumns: string[];
 
@@ -27,7 +32,6 @@ export class OverviewComponent {
 
   public Alignments = Alignments;
   public Positions = Positions;
-  public GridSizes = GridSizes;
 
   public emitActionEvent(event: any): void {
     this.actionEvent.emit(event);
