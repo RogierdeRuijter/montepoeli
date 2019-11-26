@@ -6,8 +6,7 @@
                      [games$]="games$">
       </ui-game-table>
     </div>
-    <div [appGridColumn]="[2, 2, 1, 1]"
-         [appGridPosition]="[Positions.FIXED_MIDDLE, Positions.DEFAULT, Positions.DEFAULT, Positions.DEFAULT]">
+    <div [appGridColumn]="[2, 2, 1, 1]">
       <ui-table-action [ids]="['add-game-button']"
                        (actionClickEvent)="emitActionEvent($event)"
                        [actions]="actions"

@@ -1,6 +1,6 @@
 {
   "name": "frontend",
-  "version": "2.4.0",
+  "version": "2.2.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -15,7 +15,6 @@
     "test": "ng test --watch=false",
     "test:jestJtes": "jest",
     "lint": "ng lint frontend",
-    "lint:fix": "ng lint frontend --fix",
     "e2e": "ng ../e2e --no-webdriver-update",
     "e2e:build-server": "npm run webdriver-update && npm run webdriver-update:protractor && ng ../e2e --no-webdriver-update",
     "protractor": "npm run webdriver-update && protractor",
