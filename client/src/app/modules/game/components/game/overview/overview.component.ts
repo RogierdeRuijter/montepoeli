@@ -10,19 +10,11 @@ import {Game} from '../../../../shared/interfaces/game.interface';
 })
 export class OverviewComponent {
 
-  public GridSizes = GridSizes;
-
-  @Input()
-  public loading: boolean;
-
   @Input()
   public displayedColumns: string[];
 
   @Input()
   public games$: Observable<Game[]>;
-
-  @Input()
-  public loadingGames: any;
 
   @Input()
   public actions: Actions[];
@@ -34,6 +26,8 @@ export class OverviewComponent {
   public actionEvent: EventEmitter<any> = new EventEmitter();
 
   public Alignments = Alignments;
+  public Positions = Positions;
+  public GridSizes = GridSizes;
 
   public emitActionEvent(event: any): void {
     this.actionEvent.emit(event);

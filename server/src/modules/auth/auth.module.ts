@@ -12,12 +12,15 @@ import {SharedModule} from '../shared/shared.module';
 
 @Module({
   imports: [
-    PassportModule.register({ defaultStrategy: 'jwt' }),
+    PassportModule.register({
+      defaultStrategy: 'jwt',
+      session: false
+    }),
     MongooseModule.forFeature([{name: 'User', schema: UserSchema}]),
     JwtModule.register({
-      secretOrPrivateKey: process.env.SERVER_SECRET,
+      secretOrPrivateKey: 'process.env.SERVER_SECRET',
       signOptions: {
-        expiresIn: 3600,
+        expiresIn: '365 days',
       },
     }),
     SharedModule,

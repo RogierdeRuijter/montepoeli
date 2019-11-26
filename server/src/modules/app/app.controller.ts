@@ -10,11 +10,11 @@ export class AppController {
   constructor(private readonly usersService: UsersService,
               private readonly authService: AuthService) {
   }
-
   @Post('/signIn')
   public async signIn(@Body() body, @Res() res: Response, @Next() next): Promise<any> {
     return await this.authService.signIn(body).then(jwt => {
-      res.cookie('montepoeliJwt', jwt.jwt);
+      const date = new Date();
+      res.cookie('montepoeliJwt', jwt.jwt, {expires: new Date(date.setFullYear(date.getFullYear() + 1))});
       res.send({montepoeliJwt: jwt.jwt});
     });
   }

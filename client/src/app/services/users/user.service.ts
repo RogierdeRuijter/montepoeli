@@ -13,7 +13,7 @@ export class UserService {
   constructor(private customHttpService: CustomHttpService) {
   }
 
-  public getUsers(): Observable<User[]> {
+  public getAll(): Observable<User[]> {
     return this.customHttpService.get<User[]>(this.environment.backend.ENTRY_POINTS.USERS);
   }
 }

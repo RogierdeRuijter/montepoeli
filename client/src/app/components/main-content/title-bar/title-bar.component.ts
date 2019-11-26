@@ -40,7 +40,6 @@ export class TitleBarComponent {
   }
 
   public emitRulesSelected(): void {
-    console.log(this.tabChangeGlobalEventEmitter);
     this.tabChangeGlobalEventEmitter.emit(Tabs.RULES);
   }
 }

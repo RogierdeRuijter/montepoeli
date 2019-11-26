@@ -6,10 +6,10 @@ import {UsersModule} from '../users/users.module';
 import {GameModule} from '../game/game.module';
 import {RuleModule} from '../rule/rule.module';
 
-const username = process.env.MONGO_USERNAME;
-const password = process.env.MONGO_PASSWORD;
+const username = 'root';
+const password = 'example';
 
-const mongoDNS = process.env.MONGO_DNS_NAME;
+const mongoDNS = 'localhost';
 
 const constructDatabaseUrl = () => {
   let url = 'mongodb://';

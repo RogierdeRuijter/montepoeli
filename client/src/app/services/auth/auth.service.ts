@@ -4,8 +4,8 @@ import {tap} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {CustomHttpService} from '../../modules/shared/services/custom-http/custom-http.service';
 import {Environment} from '../../../environments/environment';
-import { CookieService } from 'ngx-cookie-service';
-import { NotificationService } from 'src/app/modules/shared/services/notification/notification.service';
+import {CookieService} from 'ngx-cookie-service';
+import {NotificationService} from 'src/app/modules/shared/services/notification/notification.service';
 
 @Injectable({
   providedIn: 'root',
@@ -46,7 +46,7 @@ export class AuthService {
   public logout(): void {
     this.clearSession();
     this.loggedIn = false;
-    this.router.navigate([this.environment.frontend.BASIC_ROUTES.LOGIN_ROUTE]);
+    this.router.navigate([this.environment.frontend.BASIC_ROUTES.LOGIN]);
   }
 
   public getToken(): string {
@@ -55,6 +55,6 @@ export class AuthService {
   }
 
   public clearSession(): void {
-    // TODO: remove jwt from cookie.
+    this.cookieService.delete(this.environment.authentication.TOKENNAME);
   }
 }

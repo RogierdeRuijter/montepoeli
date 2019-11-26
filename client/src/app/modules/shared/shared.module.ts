@@ -16,7 +16,8 @@ import {ButtonRowComponent} from './components/button-row/button-row.component';
 import {HttpErrorInterceptor} from './interceptors/http-error.interceptor';
 import {IconModule} from './modules/icon/icon.module';
 import {CustomTranslateModule} from './modules/translate/custom-translate.module';
-import {PositionDirective} from './directives/position.directive';
+import {GridPositionDirective} from './directives/grid-position.directive';
+import {InvalidTokenInterceptor} from './interceptors/invalid-token.interceptor';
 
 @NgModule({
   imports: [
@@ -34,12 +35,13 @@ import {PositionDirective} from './directives/position.directive';
     GridColumnDirective,
     GridRowDirective,
     ButtonRowComponent,
-    PositionDirective,
+    GridPositionDirective,
   ],
   providers: [
     {provide: LOCALE_ID, useValue: 'en-US'},
     AuthGuard,
-    {provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: InvalidTokenInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true}
   ],
   exports: [
     ButtonComponent,
@@ -47,7 +49,7 @@ import {PositionDirective} from './directives/position.directive';
 
     GridColumnDirective,
     GridRowDirective,
-    PositionDirective,
+    GridPositionDirective,
 
     CommonModule,
     HttpClientModule,

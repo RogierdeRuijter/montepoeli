@@ -14,7 +14,7 @@ import {TableActionComponent} from '../../../app/modules/game/components/game/ov
 import {GridColumnDirective} from '../../../app/modules/shared/directives/grid-column.directive';
 import {GridRowDirective} from '../../../app/modules/shared/directives/grid-row.directive';
 import {IconComponent} from '../../../app/modules/shared/modules/icon/icon/icon.component';
-import {PositionDirective} from '../../../app/modules/shared/directives/position.directive';
+import {GridPositionDirective} from '../../../app/modules/shared/directives/grid-position.directive';
 
 
 export class GameOverviewStoryFactory {
@@ -39,7 +39,7 @@ export class GameOverviewStoryFactory {
         TableActionComponent,
         GridColumnDirective,
         GridRowDirective,
-        PositionDirective,
+        GridPositionDirective,
         IconComponent,
       ],
     };

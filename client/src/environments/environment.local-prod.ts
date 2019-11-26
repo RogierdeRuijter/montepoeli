@@ -30,7 +30,7 @@ export class Environment extends DynamicEnvironment {
 
     this.backend = {
       URL: {
-        FULL: 'https://montepoeli.club/api',
+        FULL: 'http://192.168.178.16:3000/api',
       },
       ENTRY_POINTS: {
         SIGNIN: '/signIn',
