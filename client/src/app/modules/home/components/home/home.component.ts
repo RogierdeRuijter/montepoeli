@@ -9,13 +9,12 @@ import {
 import {Alignments, GridSizes, Icons, IconSize, Tabs} from '../../../shared/static-files/enums';
 import {TabChangeGlobalEventEmitter} from '../../../../services/tab-change.global-event-emitter';
 import {User} from '../../../shared/interfaces/user.interface';
-import {takeUntil, tap} from 'rxjs/operators';
 import {UserService} from '../../../../services/users/user.service';
 import {UserStore} from '../../../game/stores/user.store';
 import {Game} from '../../../shared/interfaces/game.interface';
-import {BehaviorSubject, Subject} from 'rxjs';
+import {BehaviorSubject} from 'rxjs';
 import {Rule} from '../../../shared/interfaces/rule.interface';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-home',

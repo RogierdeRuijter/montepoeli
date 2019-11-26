@@ -1,7 +1,5 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {ChangeDetectorRef, Component} from '@angular/core';
 import {AuthService} from '../../services/auth/auth.service';
-import {Environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-login',
