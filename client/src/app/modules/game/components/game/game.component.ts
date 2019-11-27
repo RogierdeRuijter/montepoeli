@@ -5,6 +5,7 @@ import {Actions, GridSizes} from '../../../shared/static-files/enums';
 import {BehaviorSubject} from 'rxjs';
 import {DialogOverviewComponent} from './dialog-overview/dialog-overview.component';
 import {User} from '../../../shared/interfaces/user.interface';
+import {BlurStore} from '../../../shared/stores/blur.store';
 
 @Component({
   selector: 'app-game',
@@ -20,12 +21,6 @@ export class GameComponent {
   @Input()
   public users: User[];
 
-  @Input()
-  public loadingGames: any[];
-
-  @Input()
-  public loading: boolean;
-
   @ViewChild('addDialog', {read: DialogOverviewComponent, static: true})
   public addDialog: DialogOverviewComponent;
 
@@ -36,10 +31,13 @@ export class GameComponent {
 
   public GridSizes = GridSizes;
 
-  constructor(private gameService: GameService) {
+  constructor(private gameService: GameService,
+              private blurStore: BlurStore) {
   }
 
   public handleActionEvent(): void {
+    this.blurStore.set(true);
+
     this.addDialog.openDialog();
   }
 
@@ -48,10 +46,9 @@ export class GameComponent {
     games.unshift(game);
     this.games$.next(games);
 
-    this.gameService.saveGame(game)
+    this.gameService.save(game)
       .subscribe(
-        () => {
-        },
+        () => {},
         () => this.removeAddedGame(game),
       );
   }

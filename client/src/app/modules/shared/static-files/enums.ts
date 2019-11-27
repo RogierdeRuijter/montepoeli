@@ -50,7 +50,6 @@ export enum GridSizes {
   SMALL,
   MEDIUM,
   LARGE,
-  EXTRA_LARGE,
   ALL
 }
 
@@ -72,7 +71,6 @@ export enum Directions {
 }
 
 export enum Positions {
-  DEFAULT,
   FIXED_MIDDLE
 }
 
