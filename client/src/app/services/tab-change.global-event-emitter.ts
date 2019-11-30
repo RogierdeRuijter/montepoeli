@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {Tabs} from '../modules/shared/static-files/enums';
+import { takeUntil } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +14,11 @@ export class TabChangeGlobalEventEmitter {
     this.store$.next(tab);
   }
 
-  public get(): Observable<Tabs> {
-    return this.store$;
+  public get(destroy$: Observable<void>): Observable<Tabs> {
+    return this.store$
+            .pipe(
+              takeUntil(destroy$)
+            );
   }
 
   public method(): void {

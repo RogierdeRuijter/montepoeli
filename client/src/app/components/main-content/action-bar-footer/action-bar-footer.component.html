@@ -1,20 +1,30 @@
-<div [appGridRow]="[GridSizes.ALL]">
-    <div [appGridColumn]=[4] [alignmentCol]="Alignments.CENTER">
-        <app-icon [icon]="Icons.CHESS_PIECES" 
-                  [iconSize]="IconSize.SMALL_MEDIUM" 
-                  (click)="chessSetClicked()">
-        </app-icon>
-    </div>
-    <div [appGridColumn]=[4] [alignmentCol]="Alignments.CENTER">
-        <app-icon [icon]="Icons.PLUS" 
-                  [iconSize]="IconSize.SMALL_MEDIUM" 
-                  (click)="plusClicked()">
-        </app-icon>
-    </div>
-    <div [appGridColumn]=[4] [alignmentCol]="Alignments.CENTER">
-        <app-icon [icon]="Icons.SCROLL" 
-                  [iconSize]="IconSize.SMALL_MEDIUM" 
-                  (click)="scrollClicked()">
-        </app-icon>
+<div class="footer">
+    <div [appGridRow]="[GridSizes.ALL]">
+        <div [appGridColumn]=[4] [alignmentCol]="Alignments.CENTER">
+            <!-- TODO: wrap in component -->
+            <button mat-icon-button>
+                <app-icon [icon]="Icons.CHESS_PIECES" 
+                          [iconSize]="IconSize.SMALL_MEDIUM" 
+                          (click)="chessSetClicked()">
+                </app-icon>
+            </button>
+        </div>
+        <div [appGridColumn]=[4] [alignmentCol]="Alignments.CENTER">
+            <!-- TODO: move show and hide transition to a directive -->
+            <button [class.show]="showPlusIcon" [class.hide]="!showPlusIcon" mat-icon-button> 
+                <app-icon [icon]="Icons.PLUS" 
+                          [iconSize]="IconSize.SMALL_MEDIUM" 
+                          (click)="plusClicked()">
+                </app-icon>
+            </button>
+        </div>
+        <div [appGridColumn]=[4] [alignmentCol]="Alignments.CENTER">
+            <button mat-icon-button>
+                <app-icon [icon]="Icons.SCROLL" 
+                          [iconSize]="IconSize.SMALL_MEDIUM" 
+                          (click)="scrollClicked()">
+                </app-icon>
+            </button>
+        </div>
     </div>
 </div>

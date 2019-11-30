@@ -12,7 +12,7 @@ import {User} from '../../../shared/interfaces/user.interface';
 import {UserService} from '../../../../services/users/user.service';
 import {UserStore} from '../../../game/stores/user.store';
 import {Game} from '../../../shared/interfaces/game.interface';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, Subject} from 'rxjs';
 import {Rule} from '../../../shared/interfaces/rule.interface';
 import {ActivatedRoute} from '@angular/router';
 
@@ -35,6 +35,8 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
   public IconSize = IconSize;
   public GridSizes = GridSizes;
   public Alignments = Alignments;
+
+  private destroy$: Subject<void> = new Subject();
 
   constructor(private tabChangeGlobalEventEmitter: TabChangeGlobalEventEmitter,
               private userService: UserService,
@@ -59,7 +61,7 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
 
   public ngAfterContentInit(): void {
     this.tabChangeGlobalEventEmitter
-      .get()
+      .get(this.destroy$)
       .subscribe((tab: Tabs) => {
         if (tab === Tabs.GAMES) {
           this.showRules = false;
@@ -77,6 +79,8 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
 
   public ngOnDestroy(): void {
     this.games$.complete();
-  }
 
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 }

@@ -90,8 +90,14 @@ export class IconComponent implements OnInit, AfterViewInit {
 
   public ngAfterViewInit(): void {
     if (this.icon === Icons.MONTEPOELI) {
+      if (this.iconSize === IconSize.SMALL) {
+        this.renderer.setStyle(this.svgIconElementRef.nativeElement, 'height', '45px');
+        // this.renderer.setStyle(this.svgIconElementRef.nativeElement, 'width', '33px');
+      }
+      if (this.iconSize === IconSize.MEDIUM) {
         this.renderer.setStyle(this.svgIconElementRef.nativeElement, 'height', '56px');
         this.renderer.setStyle(this.svgIconElementRef.nativeElement, 'width', '41px');
+      }
     }
 
     if (this.icon === Icons.GREEN_HEART) {

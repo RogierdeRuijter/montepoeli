@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { Icons, IconSize, GridSizes, Alignments } from '../../../modules/shared/static-files/enums';
 
 @Component({
@@ -7,6 +7,9 @@ import { Icons, IconSize, GridSizes, Alignments } from '../../../modules/shared/
   styleUrls: ['./action-bar-footer.component.scss']
 })
 export class ActionBarFooterComponent {
+
+  @Input()
+  public showPlusIcon: boolean;
 
   @Output()
   public chessSetSelected: EventEmitter<void> = new EventEmitter();

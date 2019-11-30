@@ -1,11 +1,12 @@
-import {ChangeDetectionStrategy, Component, Input, ViewChild} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, ViewChild, OnInit, OnDestroy} from '@angular/core';
 import {Game} from '../../../shared/interfaces/game.interface';
 import {GameService} from '../../services/game.service';
 import {Actions, GridSizes} from '../../../shared/static-files/enums';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, Subject} from 'rxjs';
 import {DialogOverviewComponent} from './dialog-overview/dialog-overview.component';
 import {User} from '../../../shared/interfaces/user.interface';
 import {BlurStore} from '../../../shared/stores/blur.store';
+import { AddGameStore } from 'src/app/modules/shared/stores/add-game.store';
 
 @Component({
   selector: 'app-game',
@@ -13,7 +14,7 @@ import {BlurStore} from '../../../shared/stores/blur.store';
   styleUrls: ['./game.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class GameComponent {
+export class GameComponent implements OnInit, OnDestroy {
 
   @Input()
   public games$: BehaviorSubject<Game[]>;
@@ -31,8 +32,22 @@ export class GameComponent {
 
   public GridSizes = GridSizes;
 
+  private destroy$: Subject<void> = new Subject();
+
   constructor(private gameService: GameService,
-              private blurStore: BlurStore) {
+              private blurStore: BlurStore,
+              private addGameStore: AddGameStore) {
+  }
+
+  public ngOnInit(): void {
+    this.addGameStore
+    .get(this.destroy$)
+    .subscribe(() => {
+      this.handleActionEvent();
+      // TODO: move to method empty store. in the store with
+      // a store finalize method where you empty the store
+      this.addGameStore.set(null);
+    });
   }
 
   public handleActionEvent(): void {
@@ -42,6 +57,7 @@ export class GameComponent {
   }
 
   public handleAddEvent(game: Game): void {
+    // TODO: move to service
     const games: Game[] = this.games$.getValue();
     games.unshift(game);
     this.games$.next(games);
@@ -59,4 +75,8 @@ export class GameComponent {
     );
   }
 
+  public ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 }

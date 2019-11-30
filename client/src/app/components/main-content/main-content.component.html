@@ -1,16 +1,28 @@
 <div id="page-container" [class.blur]="blur">
   <div id="content-wrap">
-    <app-title-bar (gamesSelected)="gamesHandler()" 
-                   (rulesSelected)="rulesHandler()">
-    </app-title-bar>
+    <!-- TODO: wrap in component -->
+    <ng-container *ngIf="!showBottomActionMenu">
+      <app-title-bar (gamesSelected)="gamesHandler()" 
+                     (rulesSelected)="rulesHandler()">
+      </app-title-bar>
+    </ng-container>
+    
+    <ng-container *ngIf="showBottomActionMenu">
+      <app-simple-title-bar></app-simple-title-bar>
+    </ng-container>
+    
     <router-outlet></router-outlet>
+    
+    <ng-container *ngIf="showBottomActionMenu">
+      <app-action-bar-footer [showPlusIcon]="gameView"
+                             (chessSetSelected)="gamesHandler()" 
+                             (scrollSelected)="rulesHandler()" 
+                             (plusSelected)="addGameHandler()">
+      </app-action-bar-footer>
+  </ng-container>
   </div>
-  <!-- <div>
-    <app-footer id="footer"></app-footer>
-  </div> -->
-  <app-action-bar-footer (chessSetSelected)="gamesHandler()" 
-                         (scrollSelected)="rulesHandler()" 
-                         (plusHandler)="addGameHandler()">
-
-  </app-action-bar-footer>
 </div>
+
+<!-- <app-dialog-overview #addDialog
+                     (addEvent)="handleAddEvent($event)">
+</app-dialog-overview> -->
