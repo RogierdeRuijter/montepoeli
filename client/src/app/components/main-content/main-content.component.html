@@ -1,9 +1,16 @@
 <div id="page-container" [class.blur]="blur">
   <div id="content-wrap">
-    <app-title-bar></app-title-bar>
+    <app-title-bar (gamesSelected)="gamesHandler()" 
+                   (rulesSelected)="rulesHandler()">
+    </app-title-bar>
     <router-outlet></router-outlet>
   </div>
-  <div>
+  <!-- <div>
     <app-footer id="footer"></app-footer>
-  </div>
+  </div> -->
+  <app-action-bar-footer (chessSetSelected)="gamesHandler()" 
+                         (scrollSelected)="rulesHandler()" 
+                         (plusHandler)="addGameHandler()">
+
+  </app-action-bar-footer>
 </div>

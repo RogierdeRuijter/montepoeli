@@ -1,9 +1,8 @@
-import {Component} from '@angular/core';
+import {Component, Output, EventEmitter} from '@angular/core';
 import {ThemePalette} from '@angular/material';
 import {Alignments, GridSizes, Icons, IconSize, Tabs} from '../../../modules/shared/static-files/enums';
 import {MatTabChangeEvent} from '@angular/material/tabs';
 import {UnknownCaseException} from '../../../modules/shared/exceptions/UnknownCaseException';
-import {TabChangeGlobalEventEmitter} from '../../../services/tab-change.global-event-emitter';
 
 @Component({
   selector: 'app-title-bar',
@@ -11,16 +10,19 @@ import {TabChangeGlobalEventEmitter} from '../../../services/tab-change.global-e
   styleUrls: ['./title-bar.component.scss'],
 })
 export class TitleBarComponent {
+
+  @Output()
+  public gamesSelected: EventEmitter<void> = new EventEmitter();
+
+  @Output()
+  public rulesSelected: EventEmitter<void> = new EventEmitter();
+
   public color: ThemePalette = 'primary';
 
   public Icons = Icons;
   public IconSize = IconSize;
   public GridSizes = GridSizes;
   public Alignments = Alignments;
-
-  constructor(private tabChangeGlobalEventEmitter: TabChangeGlobalEventEmitter) {
-  }
-
 
   public handleChangeEvent(matTabChangeEvent: MatTabChangeEvent): void {
     switch (matTabChangeEvent.index) {
@@ -36,10 +38,10 @@ export class TitleBarComponent {
   }
 
   public emitGamesSelected(): void {
-    this.tabChangeGlobalEventEmitter.emit(Tabs.GAMES);
+    this.gamesSelected.emit();
   }
 
   public emitRulesSelected(): void {
-    this.tabChangeGlobalEventEmitter.emit(Tabs.RULES);
+    this.rulesSelected.emit();
   }
 }

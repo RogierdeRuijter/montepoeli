@@ -1,0 +1,20 @@
+<div [appGridRow]="[GridSizes.ALL]">
+    <div [appGridColumn]=[4] [alignmentCol]="Alignments.CENTER">
+        <app-icon [icon]="Icons.CHESS_PIECES" 
+                  [iconSize]="IconSize.SMALL_MEDIUM" 
+                  (click)="chessSetClicked()">
+        </app-icon>
+    </div>
+    <div [appGridColumn]=[4] [alignmentCol]="Alignments.CENTER">
+        <app-icon [icon]="Icons.PLUS" 
+                  [iconSize]="IconSize.SMALL_MEDIUM" 
+                  (click)="plusClicked()">
+        </app-icon>
+    </div>
+    <div [appGridColumn]=[4] [alignmentCol]="Alignments.CENTER">
+        <app-icon [icon]="Icons.SCROLL" 
+                  [iconSize]="IconSize.SMALL_MEDIUM" 
+                  (click)="scrollClicked()">
+        </app-icon>
+    </div>
+</div>

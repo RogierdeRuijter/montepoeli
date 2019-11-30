@@ -20,6 +20,7 @@ import {GameModule} from './modules/game/game.module';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {LandingComponent} from './components/landing/landing.component';
+import { ActionBarFooterComponent } from './components/main-content/action-bar-footer/action-bar-footer.component';
 
 export function init_app(appLoadService: AppInitService) {
   return () => appLoadService.init();
@@ -45,6 +46,7 @@ export function init_app(appLoadService: AppInitService) {
     LoginFormComponent,
     FooterComponent,
     LandingComponent,
+    ActionBarFooterComponent,
   ],
   providers: [
     CookieService,
