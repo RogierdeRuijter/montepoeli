@@ -16,6 +16,7 @@ import {BehaviorSubject, Subject} from 'rxjs';
 import {Rule} from '../../../shared/interfaces/rule.interface';
 import {ActivatedRoute} from '@angular/router';
 
+// TODO: add hammerjs for swiping left and right between games and rules
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',

@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnInit, OnDestroy} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {Sides, Winners} from '../../../../shared/static-files/enums';
 import {Game} from '../../../../shared/interfaces/game.interface';
@@ -7,12 +7,13 @@ import {DialogDataService} from '../../../services/dialog-data.service';
 import {User} from '../../../../shared/interfaces/user.interface';
 import {UtilService} from '../../../../shared/services/util/util.service';
 import {TranslateService} from '@ngx-translate/core';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-dialog-data',
   templateUrl: './dialog-data.component.html',
 })
-export class DialogDataComponent implements OnInit {
+export class DialogDataComponent implements OnInit, OnDestroy {
 
   public users: User[];
   public winners: Winners[] = [Winners.WHITE, Winners.BLACK, Winners.DRAW];
@@ -21,17 +22,21 @@ export class DialogDataComponent implements OnInit {
 
   public winnerOptions: string[] = [];
 
+  private destory$: Subject<void> = new Subject();
+
   constructor(
     public dialogRef: MatDialogRef<DialogDataComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Game,
     private userStore: UserStore,
-    private utilService: UtilService,
     private dialogDataService: DialogDataService,
     private translateService: TranslateService) {
   }
 
   public ngOnInit(): void {
-    this.userStore.get().subscribe((users: User[]) => this.users = users);
+    this.userStore
+      .get(this.destory$)
+      .subscribe((users: User[]) => this.users = users);
+
     this.winners.forEach(winner => this.winnerOptions.push(this.translateService.instant('pages.home.games.cell.winner.' + winner)));
   }
 
@@ -47,6 +52,10 @@ export class DialogDataComponent implements OnInit {
     return !this.dialogDataService.allFieldsAreDefined(this.data);
   }
 
-  public print(value: string): void {
+  // TODO: refactor to base component that has the destory method and destory variable
+  // It should be called baseAsyncComponent
+  public ngOnDestroy(): void {
+    this.destory$.next();
+    this.destory$.complete();
   }
 }

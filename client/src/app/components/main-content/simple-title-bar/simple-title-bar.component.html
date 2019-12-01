@@ -1,10 +1,10 @@
 <mat-toolbar>
-    <div>
-        <span class="margin-right-10">
-        <app-icon [icon]="Icons.MONTEPOELI" [iconSize]="IconSize.SMALL"></app-icon>
-        </span>
-        <span style="color: unset;">Montepoeli</span>
-    </div>
-    <!-- TODO: add a user icon to the top right of the screen where you can logout -->
+    <span class="margin-right-10">
+    <app-icon [icon]="Icons.MONTEPOELI" [iconSize]="IconSize.SMALL"></app-icon>
+    </span>
+    <span style="color: darkslategray;">Montepoeli</span> <!-- TODO: make title component -->
+    <div class="spacer"></div>
+    <!-- TODO: move user settings to component and make user icon a button icon-->
+    <app-button-icon [icon]="Icons.USER" [iconSize]="IconSize.SMALL_MEDIUM"></app-button-icon>
 </mat-toolbar>
       

@@ -1,12 +1,13 @@
 <div id="page-container" [class.blur]="blur">
   <div id="content-wrap">
+    <!-- split standalone view from browser view -->
+    
     <!-- TODO: wrap in component -->
     <ng-container *ngIf="!showBottomActionMenu">
       <app-title-bar (gamesSelected)="gamesHandler()" 
                      (rulesSelected)="rulesHandler()">
       </app-title-bar>
     </ng-container>
-    
     <ng-container *ngIf="showBottomActionMenu">
       <app-simple-title-bar></app-simple-title-bar>
     </ng-container>

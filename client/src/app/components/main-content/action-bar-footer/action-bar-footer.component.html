@@ -1,30 +1,25 @@
 <div class="footer">
     <div [appGridRow]="[GridSizes.ALL]">
         <div [appGridColumn]=[4] [alignmentCol]="Alignments.CENTER">
-            <!-- TODO: wrap in component -->
-            <button mat-icon-button>
-                <app-icon [icon]="Icons.CHESS_PIECES" 
-                          [iconSize]="IconSize.SMALL_MEDIUM" 
-                          (click)="chessSetClicked()">
-                </app-icon>
-            </button>
+            <app-button-icon [icon]="Icons.CHESS_PIECES" 
+                             [iconSize]="IconSize.SMALL_MEDIUM" 
+                             (clickEvent)="chessSetClicked()">
+            </app-button-icon>
         </div>
         <div [appGridColumn]=[4] [alignmentCol]="Alignments.CENTER">
             <!-- TODO: move show and hide transition to a directive -->
-            <button [class.show]="showPlusIcon" [class.hide]="!showPlusIcon" mat-icon-button> 
-                <app-icon [icon]="Icons.PLUS" 
-                          [iconSize]="IconSize.SMALL_MEDIUM" 
-                          (click)="plusClicked()">
-                </app-icon>
-            </button>
+            <!-- TODO: use plus icon with box arround it to show that this is something different than the chess and scroll -->
+            <app-button-icon [appShowAndHide]="showPlusIcon"
+                             [icon]="Icons.PLUS" 
+                             [iconSize]="IconSize.SMALL_MEDIUM" 
+                             (clickEvent)="plusClicked()">
+            </app-button-icon>
         </div>
         <div [appGridColumn]=[4] [alignmentCol]="Alignments.CENTER">
-            <button mat-icon-button>
-                <app-icon [icon]="Icons.SCROLL" 
-                          [iconSize]="IconSize.SMALL_MEDIUM" 
-                          (click)="scrollClicked()">
-                </app-icon>
-            </button>
+            <app-button-icon [icon]="Icons.SCROLL" 
+                                [iconSize]="IconSize.SMALL_MEDIUM" 
+                                (clickEvent)="scrollClicked()">
+            </app-button-icon>
         </div>
     </div>
 </div>

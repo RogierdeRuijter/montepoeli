@@ -19,7 +19,9 @@ export enum Icons {
   GREEN_HEART,
   CHESS_PIECES,
   SCROLL,
-  MONTEPOELI
+  MONTEPOELI,
+  USER,
+  PLUS_WITH_BOX
 }
 
 export enum IconSize {

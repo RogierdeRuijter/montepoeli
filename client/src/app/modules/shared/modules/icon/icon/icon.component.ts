@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, ElementRef, Input, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {Icons, IconSize} from '../../../static-files/enums';
 import {IconDefinition, SizeProp} from '@fortawesome/fontawesome-svg-core';
-import {faCheck, faChessRook, faCoffee, faPlus, faTimes} from '@fortawesome/free-solid-svg-icons';
+import {faCheck, faChessRook, faCoffee, faPlus, faTimes, faUser, faPlusSquare} from '@fortawesome/free-solid-svg-icons';
 import {faHeart} from '@fortawesome/free-solid-svg-icons/faHeart';
 import {faChess} from '@fortawesome/free-solid-svg-icons/faChess';
 import {faScroll} from '@fortawesome/free-solid-svg-icons/faScroll';
@@ -66,6 +66,12 @@ export class IconComponent implements OnInit, AfterViewInit {
         break;
       case Icons.SCROLL:
         this.iconDefinition = faScroll;
+        break;
+      case Icons.USER:
+        this.iconDefinition = faUser;
+        break;
+      case Icons.PLUS_WITH_BOX:
+        this.iconDefinition = faPlusSquare;
         break;
       case Icons.MONTEPOELI:
         this.svgIcon = '../../../../../../assets/images/florance_logo.png';

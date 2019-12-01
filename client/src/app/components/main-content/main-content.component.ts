@@ -5,7 +5,6 @@ import { Tabs } from 'src/app/modules/shared/static-files/enums';
 import { TabChangeGlobalEventEmitter } from 'src/app/services/tab-change.global-event-emitter';
 import { AddGameStore } from 'src/app/modules/shared/stores/add-game.store';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-main-content',
@@ -27,12 +26,9 @@ export class MainContentComponent implements OnInit, OnDestroy {
               private changeDetectorRef: ChangeDetectorRef) {}
 
   public ngOnInit(): void {
-    console.log('ngOnInit');
     this.blurStore
       .get(this.destory$)
-      .pipe(
-        takeUntil(this.destory$)
-      ).subscribe((value: boolean) => {
+      .subscribe((value: boolean) => {
         if (!this.utilService.isNullOrUndefined(value)) {
           console.log(value);
           this.blur = value;
@@ -40,7 +36,6 @@ export class MainContentComponent implements OnInit, OnDestroy {
         }
       });
   }
-
 
   public gamesHandler(): void {
     this.gameView = true;

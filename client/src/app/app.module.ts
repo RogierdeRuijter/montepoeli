@@ -22,6 +22,8 @@ import {ServiceWorkerModule} from '@angular/service-worker';
 import {LandingComponent} from './components/landing/landing.component';
 import { ActionBarFooterComponent } from './components/main-content/action-bar-footer/action-bar-footer.component';
 import { SimpleTitleBarComponent } from './components/main-content/simple-title-bar/simple-title-bar.component';
+import { ButtonModule } from './modules/shared/modules/button/button.module';
+import { TransitionModule } from './modules/shared/modules/transition/transition.module';
 
 export function init_app(appLoadService: AppInitService) {
   return () => appLoadService.init();
@@ -38,6 +40,8 @@ export function init_app(appLoadService: AppInitService) {
     GameModule,
     MatTooltipModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: true }),
+    ButtonModule,
+    TransitionModule
   ],
   declarations: [
     AppComponent,
