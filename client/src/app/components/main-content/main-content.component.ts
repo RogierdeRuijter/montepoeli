@@ -5,6 +5,8 @@ import { Tabs } from 'src/app/modules/shared/static-files/enums';
 import { TabChangeGlobalEventEmitter } from 'src/app/services/tab-change.global-event-emitter';
 import { AddGameStore } from 'src/app/modules/shared/stores/add-game.store';
 import { Subject } from 'rxjs';
+import { AuthService } from 'src/app/services/auth/auth.service';
+import { StandaloneStore } from 'src/app/modules/shared/stores/standalone.store';
 
 @Component({
   selector: 'app-main-content',
@@ -17,24 +19,32 @@ export class MainContentComponent implements OnInit, OnDestroy {
 
   public gameView = true;
 
+  public standalone: boolean;
+
   private destory$: Subject<void> = new Subject();
 
   constructor(private blurStore: BlurStore,
               private addGameStore: AddGameStore,
-              private utilService: UtilService,
               private tabChangeGlobalEventEmitter: TabChangeGlobalEventEmitter,
-              private changeDetectorRef: ChangeDetectorRef) {}
+              private changeDetectorRef: ChangeDetectorRef,
+              private authService: AuthService,
+              private standaloneStore: StandaloneStore) {}
 
   public ngOnInit(): void {
     this.blurStore
       .get(this.destory$)
       .subscribe((value: boolean) => {
-        if (!this.utilService.isNullOrUndefined(value)) {
-          console.log(value);
-          this.blur = value;
-          this.changeDetectorRef.detectChanges();
-        }
+        this.blur = value;
+        this.changeDetectorRef.detectChanges();
       });
+
+    // TODO: pass this with a resolver
+    this.standaloneStore
+    .get(this.destory$)
+    .subscribe((standalone: boolean) => {
+      this.standalone = standalone;
+      this.changeDetectorRef.detectChanges();
+    });
   }
 
   public gamesHandler(): void {
@@ -54,6 +64,10 @@ export class MainContentComponent implements OnInit, OnDestroy {
     // Move the component here or use the store
     // Store seems to be easier but it seems to be more logical if the popup lives here
     this.addGameStore.set(true);
+  }
+
+  public logoutHandler(): void {
+    this.authService.logout();
   }
 
   public ngOnDestroy(): void {

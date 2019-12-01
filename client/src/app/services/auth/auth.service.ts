@@ -5,22 +5,21 @@ import {Observable} from 'rxjs';
 import {CustomHttpService} from '../../modules/shared/services/custom-http/custom-http.service';
 import {Environment} from '../../../environments/environment';
 import {CookieService} from 'ngx-cookie-service';
-import {NotificationService} from 'src/app/modules/shared/services/notification/notification.service';
+import { UtilService } from 'src/app/modules/shared/services/util/util.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private loggedIn = false;
   private environment = new Environment();
   constructor(private router: Router,
               private httpService: CustomHttpService,
               private cookieService: CookieService,
-              private notificationService: NotificationService) {
+              private utilService: UtilService) {
   }
 
   public isAuthenticated(): boolean {
-    return !!this.getToken();
+    return !this.utilService.isNullOrUndefined(this.getToken());
   }
 
   public login(user: any): Observable<any> {
@@ -30,22 +29,18 @@ export class AuthService {
         password: user.pwd,
       }).pipe(
         tap(jwt => {
-          // TODO: work around for automation tests
+          // Work around for the automation tests
           if (!this.cookieService.check(this.environment.authentication.TOKENNAME)) {
             this.cookieService.set(this.environment.authentication.TOKENNAME, jwt[this.environment.authentication.TOKENNAME]);
           }
         }),
-      tap((data: any) => {
-        if (data) {
-          this.loggedIn = true;
-        }
-      }),
-      tap(() => this.router.navigate([this.environment.frontend.BASIC_ROUTES.HOME])));
+        tap(() => this.router.navigate([this.environment.frontend.BASIC_ROUTES.HOME]))
+      );
   }
 
   public logout(): void {
     this.clearSession();
-    this.loggedIn = false;
+
     this.router.navigate([this.environment.frontend.BASIC_ROUTES.LOGIN]);
   }
 

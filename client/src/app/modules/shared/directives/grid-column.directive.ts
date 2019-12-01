@@ -14,6 +14,9 @@ export class GridColumnDirective implements OnInit {
   @Input()
   public alignmentCol: Alignments;
 
+  @Input()
+  public offsets: number[];
+
   constructor(private elementRef: ElementRef,
               private renderer: Renderer2,
               @Optional() private bootstrapRowDirective: GridRowDirective,
@@ -31,15 +34,17 @@ export class GridColumnDirective implements OnInit {
       throw new Error('gridSizes and amountOfColumns should have the same size');
     }
 
+    if (!this.utilService.isNullOrUndefined(this.offsets) && this.amountOfColumns.length !== this.offsets.length) {
+      throw new Error('collumns and offsets should have the same size');
+    }
 
     gridSizes.forEach((gridSize: GridSizes, index: number) => {
-      let bootstrapGridClass = '';
-
-      const gridPrefix = this.getBootstrapClassFor(gridSize);
-      bootstrapGridClass += gridPrefix + '-' + this.amountOfColumns[index];
-
-      this.addClassToElement(bootstrapGridClass);
+      this.addGridClass(gridSize, index);
+      if (!this.utilService.isNullOrUndefined(this.offsets)) {
+        this.addOffsetClass(gridSize, index);
+      }
     });
+
 
     if (!this.utilService.isNullOrUndefined(this.alignmentCol)) {
       if (this.alignmentCol === Alignments.CENTER) {
@@ -51,18 +56,36 @@ export class GridColumnDirective implements OnInit {
     }
   }
 
+  private addGridClass(gridSize: GridSizes, index: number): void {
+    let bootstrapGridClass = '';
+
+    const gridPrefix = this.getBootstrapClassFor(gridSize);
+    bootstrapGridClass += 'col' + gridPrefix + '-' + this.amountOfColumns[index];
+
+    this.addClassToElement(bootstrapGridClass);
+  }
+
+  private addOffsetClass(gridSize: GridSizes, index: number): void {
+    let offsetClass = 'offset';
+
+    const gridPrefix = this.getBootstrapClassFor(gridSize);
+    offsetClass += gridPrefix + '-' + this.offsets[index];
+
+    this.addClassToElement(offsetClass);
+  }
+
   private getBootstrapClassFor(gridSize: GridSizes): string {
     switch (gridSize) {
       case GridSizes.EXTRA_SMALL:
-        return 'col';
+        return '';
       case GridSizes.SMALL:
-        return 'col-sm';
+        return '-sm';
       case GridSizes.MEDIUM:
-        return 'col-md';
+        return '-md';
       case GridSizes.LARGE:
-        return 'col-lg';
+        return '-lg';
       case GridSizes.ALL:
-        return 'col';
+        return '';
     }
   }
 

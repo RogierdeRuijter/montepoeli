@@ -24,6 +24,7 @@ import { ActionBarFooterComponent } from './components/main-content/action-bar-f
 import { SimpleTitleBarComponent } from './components/main-content/simple-title-bar/simple-title-bar.component';
 import { ButtonModule } from './modules/shared/modules/button/button.module';
 import { TransitionModule } from './modules/shared/modules/transition/transition.module';
+import { MaterialModule } from './modules/material/material.module';
 
 export function init_app(appLoadService: AppInitService) {
   return () => appLoadService.init();
@@ -41,7 +42,8 @@ export function init_app(appLoadService: AppInitService) {
     MatTooltipModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: true }),
     ButtonModule,
-    TransitionModule
+    TransitionModule,
+    MaterialModule
   ],
   declarations: [
     AppComponent,

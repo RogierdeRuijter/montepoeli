@@ -1,6 +1,7 @@
 <ui-overview (actionEvent)="handleActionEvent()"
              [actions]="actions"
              [disabled]="disabled"
+             [showAddGame]="!standalone"
              [displayedColumns]="displayedColumns"
              [games$]="games$">
 </ui-overview>

@@ -1,12 +1,12 @@
 <div class="footer">
     <div [appGridRow]="[GridSizes.ALL]">
-        <div [appGridColumn]=[4] [alignmentCol]="Alignments.CENTER">
+        <div [appGridColumn]=[2] [offsets]=[3] [alignmentCol]="Alignments.CENTER">
             <app-button-icon [icon]="Icons.CHESS_PIECES" 
                              [iconSize]="IconSize.SMALL_MEDIUM" 
                              (clickEvent)="chessSetClicked()">
             </app-button-icon>
         </div>
-        <div [appGridColumn]=[4] [alignmentCol]="Alignments.CENTER">
+        <div [appGridColumn]=[2] [alignmentCol]="Alignments.CENTER">
             <!-- TODO: move show and hide transition to a directive -->
             <!-- TODO: use plus icon with box arround it to show that this is something different than the chess and scroll -->
             <app-button-icon [appShowAndHide]="showPlusIcon"
@@ -15,7 +15,7 @@
                              (clickEvent)="plusClicked()">
             </app-button-icon>
         </div>
-        <div [appGridColumn]=[4] [alignmentCol]="Alignments.CENTER">
+        <div [appGridColumn]=[2] [alignmentCol]="Alignments.CENTER">
             <app-button-icon [icon]="Icons.SCROLL" 
                                 [iconSize]="IconSize.SMALL_MEDIUM" 
                                 (clickEvent)="scrollClicked()">

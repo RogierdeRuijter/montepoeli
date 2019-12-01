@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, Input, ViewChild, OnInit, OnDestroy} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, ViewChild, OnInit, OnDestroy, ChangeDetectorRef} from '@angular/core';
 import {Game} from '../../../shared/interfaces/game.interface';
 import {GameService} from '../../services/game.service';
 import {Actions, GridSizes} from '../../../shared/static-files/enums';
@@ -7,6 +7,7 @@ import {DialogOverviewComponent} from './dialog-overview/dialog-overview.compone
 import {User} from '../../../shared/interfaces/user.interface';
 import {BlurStore} from '../../../shared/stores/blur.store';
 import { AddGameStore } from 'src/app/modules/shared/stores/add-game.store';
+import { StandaloneStore } from 'src/app/modules/shared/stores/standalone.store';
 
 @Component({
   selector: 'app-game',
@@ -30,13 +31,17 @@ export class GameComponent implements OnInit, OnDestroy {
 
   public displayedColumns: string[] = ['white', 'winner', 'black'];
 
+  public standalone: boolean;
+
   public GridSizes = GridSizes;
 
   private destroy$: Subject<void> = new Subject();
 
   constructor(private gameService: GameService,
               private blurStore: BlurStore,
-              private addGameStore: AddGameStore) {
+              private addGameStore: AddGameStore,
+              private standaloneStore: StandaloneStore,
+              private changeDetectorRef: ChangeDetectorRef) {
   }
 
   public ngOnInit(): void {
@@ -48,6 +53,14 @@ export class GameComponent implements OnInit, OnDestroy {
       // a store finalize method where you empty the store
       this.addGameStore.set(null);
     });
+
+    this.standaloneStore
+    .get(this.destroy$)
+    .subscribe((standalone) => {
+      this.standalone = standalone;
+      this.changeDetectorRef.detectChanges();
+    });
+
   }
 
   public handleActionEvent(): void {

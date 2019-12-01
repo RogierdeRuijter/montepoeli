@@ -1,25 +1,26 @@
 <div id="page-container" [class.blur]="blur">
   <div id="content-wrap">
     <!-- split standalone view from browser view -->
-    
-    <!-- TODO: wrap in component -->
-    <ng-container *ngIf="!showBottomActionMenu">
-      <app-title-bar (gamesSelected)="gamesHandler()" 
-                     (rulesSelected)="rulesHandler()">
-      </app-title-bar>
-    </ng-container>
-    <ng-container *ngIf="showBottomActionMenu">
-      <app-simple-title-bar></app-simple-title-bar>
-    </ng-container>
-    
-    <router-outlet></router-outlet>
-    
-    <ng-container *ngIf="showBottomActionMenu">
+  <ng-container *ngIf="standalone">
+      <app-simple-title-bar (logoutEvent)="logoutHandler()"></app-simple-title-bar>
+
+      <router-outlet></router-outlet>
+
       <app-action-bar-footer [showPlusIcon]="gameView"
                              (chessSetSelected)="gamesHandler()" 
                              (scrollSelected)="rulesHandler()" 
                              (plusSelected)="addGameHandler()">
       </app-action-bar-footer>
+  </ng-container>
+
+  <ng-container *ngIf="!standalone">
+      <app-title-bar (gamesSelected)="gamesHandler()" 
+                     (rulesSelected)="rulesHandler()">
+      </app-title-bar>
+      
+      <router-outlet></router-outlet>
+
+      <app-footer></app-footer>
   </ng-container>
   </div>
 </div>
