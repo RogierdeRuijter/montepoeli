@@ -1,7 +1,7 @@
 <div id="page-container" [class.blur]="blur">
   <div id="content-wrap">
     <!-- split standalone view from browser view -->
-  <ng-container *ngIf="standalone">
+  <div class="d-block d-sm-none">
       <app-simple-title-bar (logoutEvent)="logoutHandler()"></app-simple-title-bar>
 
       <router-outlet></router-outlet>
@@ -11,9 +11,14 @@
                              (scrollSelected)="rulesHandler()" 
                              (plusSelected)="addGameHandler()">
       </app-action-bar-footer>
-  </ng-container>
 
-  <ng-container *ngIf="!standalone">
+      <!-- <app-dialog-overview #addDialog
+                           (addEvent)="handleAddEvent($event)">
+      </app-dialog-overview> -->
+
+    </div>
+
+  <div class="d-none d-sm-block">
       <app-title-bar (gamesSelected)="gamesHandler()" 
                      (rulesSelected)="rulesHandler()">
       </app-title-bar>
@@ -21,10 +26,6 @@
       <router-outlet></router-outlet>
 
       <app-footer></app-footer>
-  </ng-container>
+    </div>
   </div>
 </div>
-
-<!-- <app-dialog-overview #addDialog
-                     (addEvent)="handleAddEvent($event)">
-</app-dialog-overview> -->

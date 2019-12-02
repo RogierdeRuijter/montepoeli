@@ -6,6 +6,7 @@
                      [games$]="games$">
       </ui-game-table>
     </div>
+    <!-- TODO: move this higher up so the ngif is not needed -->
     <ng-container *ngIf="showAddGame">
       <div [appGridColumn]="[2, 2, 1, 1]">
         <ui-table-action [ids]="['add-game-button']"

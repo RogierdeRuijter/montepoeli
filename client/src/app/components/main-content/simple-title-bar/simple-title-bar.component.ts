@@ -9,21 +9,6 @@ import { MatSelect } from '@angular/material';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SimpleTitleBarComponent {
-
-  @ViewChild('userSettingsDropDown', {static: true})
-  public userSettingsDropDown: MatSelect;
-
-  @Output()
-  public logoutEvent: EventEmitter<void> = new EventEmitter();
-
   public Icons = Icons;
   public IconSize = IconSize;
-
-  public userIconHandler(): void {
-    this.userSettingsDropDown.open();
-  }
-
-  public optionSelected(): void {
-    this.logoutEvent.emit();
-  }
 }

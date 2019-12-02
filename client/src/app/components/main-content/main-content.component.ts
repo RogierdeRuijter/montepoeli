@@ -1,10 +1,9 @@
 import {ChangeDetectorRef, Component, OnInit, OnDestroy} from '@angular/core';
 import {BlurStore} from '../../modules/shared/stores/blur.store';
-import {UtilService} from '../../modules/shared/services/util/util.service';
 import { Tabs } from 'src/app/modules/shared/static-files/enums';
 import { TabChangeGlobalEventEmitter } from 'src/app/services/tab-change.global-event-emitter';
 import { AddGameStore } from 'src/app/modules/shared/stores/add-game.store';
-import { Subject } from 'rxjs';
+import { Subject, fromEvent } from 'rxjs';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { StandaloneStore } from 'src/app/modules/shared/stores/standalone.store';
 
@@ -27,10 +26,10 @@ export class MainContentComponent implements OnInit, OnDestroy {
               private addGameStore: AddGameStore,
               private tabChangeGlobalEventEmitter: TabChangeGlobalEventEmitter,
               private changeDetectorRef: ChangeDetectorRef,
-              private authService: AuthService,
               private standaloneStore: StandaloneStore) {}
 
   public ngOnInit(): void {
+
     this.blurStore
       .get(this.destory$)
       .subscribe((value: boolean) => {
@@ -64,10 +63,6 @@ export class MainContentComponent implements OnInit, OnDestroy {
     // Move the component here or use the store
     // Store seems to be easier but it seems to be more logical if the popup lives here
     this.addGameStore.set(true);
-  }
-
-  public logoutHandler(): void {
-    this.authService.logout();
   }
 
   public ngOnDestroy(): void {

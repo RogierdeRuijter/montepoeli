@@ -25,6 +25,8 @@ import { SimpleTitleBarComponent } from './components/main-content/simple-title-
 import { ButtonModule } from './modules/shared/modules/button/button.module';
 import { TransitionModule } from './modules/shared/modules/transition/transition.module';
 import { MaterialModule } from './modules/material/material.module';
+import { UserActionsComponent } from './components/main-content/user-actions/user-actions.component';
+import { UserActionsViewComponent } from './components/main-content/user-actions/user-actions-view/user-actions-view.component';
 
 export function init_app(appLoadService: AppInitService) {
   return () => appLoadService.init();
@@ -55,6 +57,8 @@ export function init_app(appLoadService: AppInitService) {
     LandingComponent,
     ActionBarFooterComponent,
     SimpleTitleBarComponent,
+    UserActionsComponent,
+    UserActionsViewComponent,
   ],
   providers: [
     CookieService,

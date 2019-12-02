@@ -3,15 +3,9 @@
     <app-icon [icon]="Icons.MONTEPOELI" [iconSize]="IconSize.SMALL"></app-icon>
     </span>
     <span style="color: darkslategray;">Montepoeli</span> <!-- TODO: make title component -->
-    <div class="spacer"></div>
-    <!-- TODO: move user settings to component and make user icon a button icon-->
-    <app-button-icon [icon]="Icons.USER" [iconSize]="IconSize.SMALL_MEDIUM" (clickEvent)="userIconHandler()">
-    </app-button-icon>
     
-    <mat-select #userSettingsDropDown style="visibility:hidden;width: 0; margin-top:100px" >
-        <mat-option *ngFor="let option of ['Logout']" (click)="optionSelected()">
-            {{option}}
-        </mat-option>
-    </mat-select>
+    <div class="spacer"></div>
+    
+    <app-user-actions></app-user-actions>
 </mat-toolbar>
       
