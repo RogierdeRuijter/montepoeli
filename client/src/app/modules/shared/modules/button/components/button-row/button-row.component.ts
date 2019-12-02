@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {ButtonFunction, ButtonRowType, ButtonType, GridSizes} from '../../../../static-files/enums';
 
 @Component({
@@ -6,7 +6,7 @@ import {ButtonFunction, ButtonRowType, ButtonType, GridSizes} from '../../../../
   templateUrl: './button-row.component.html',
   styleUrls: ['./button-row.component.scss'],
 })
-export class ButtonRowComponent implements OnInit {
+export class ButtonRowComponent {
 
   @Input()
   public buttonRowType: ButtonRowType;

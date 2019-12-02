@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {ButtonFunction, ButtonType} from '../../static-files/enums';
-import {UnknownCaseException} from '../../exceptions/UnknownCaseException';
+import {ButtonFunction, ButtonType} from '../../../../static-files/enums';
+import { UnknownCaseException } from 'src/app/modules/shared/exceptions/UnknownCaseException';
 
 @Component({
   selector: 'app-button',
