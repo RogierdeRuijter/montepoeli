@@ -1,7 +1,7 @@
 import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {catchError, retry} from 'rxjs/operators';
-import {NotificationService} from '../services/notification/notification.service';
+import {NotificationService} from '../modules/notification/services/notification/notification.service';
 import {Injectable} from '@angular/core';
 
 @Injectable({

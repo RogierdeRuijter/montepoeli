@@ -77,7 +77,6 @@ export class GridRowDirective implements OnInit {
     }
   }
 
-
   private addClassToElement(cssClass: string): void {
     this.renderer.addClass(this.elementRef.nativeElement, cssClass);
   }

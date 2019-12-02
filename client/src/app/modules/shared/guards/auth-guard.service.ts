@@ -3,7 +3,7 @@ import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '
 import {forkJoin, Observable} from 'rxjs';
 import {TranslateService} from '@ngx-translate/core';
 import {AuthService} from '../../../services/auth/auth.service';
-import {NotificationService} from '../services/notification/notification.service';
+import {NotificationService} from '../modules/notification/services/notification/notification.service';
 import {Environment} from '../../../../environments/environment';
 
 @Injectable({
@@ -29,7 +29,6 @@ export class AuthGuard implements CanActivate {
     ]).subscribe(([message, title]: [string, string]) => {
       this.notificationService.warning(message, title);
     });
-
 
     this.router.navigate([this.environment.frontend.BASIC_ROUTES.LOGIN]);
     return false;

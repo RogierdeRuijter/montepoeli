@@ -16,7 +16,6 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatDialogModule} from '@angular/material/dialog';
 
-
 const materialList = [
   MatButtonModule,
   MatCheckboxModule,

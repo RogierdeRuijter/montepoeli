@@ -6,7 +6,6 @@ import { MatButtonModule } from '@angular/material';
 import { ButtonComponent } from './components/button/button.component';
 import { ButtonRowComponent } from './components/button-row/button-row.component';
 
-
 @NgModule({
   declarations: [
     ButtonComponent,

@@ -2,9 +2,7 @@ import {ChangeDetectorRef, Component, OnInit, OnDestroy} from '@angular/core';
 import {BlurStore} from '../../modules/shared/stores/blur.store';
 import { Tabs } from 'src/app/modules/shared/static-files/enums';
 import { TabChangeGlobalEventEmitter } from 'src/app/services/tab-change.global-event-emitter';
-import { AddGameStore } from 'src/app/modules/shared/stores/add-game.store';
-import { Subject, fromEvent } from 'rxjs';
-import { AuthService } from 'src/app/services/auth/auth.service';
+import { Subject } from 'rxjs';
 import { StandaloneStore } from 'src/app/modules/shared/stores/standalone.store';
 
 @Component({

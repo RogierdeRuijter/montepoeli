@@ -9,4 +9,3 @@ export class UtilService {
     return value === null || value === undefined;
   }
 }
-

@@ -5,8 +5,6 @@ import { IconModule } from '../icon/icon.module';
 import { ButtonModule } from '../button/button.module';
 import { UserActionsComponent } from './components/user-actions/user-actions.component';
 
-
-
 @NgModule({
   declarations: [UserActionsComponent],
   exports: [UserActionsComponent],

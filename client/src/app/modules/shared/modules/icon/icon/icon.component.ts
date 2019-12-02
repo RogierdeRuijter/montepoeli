@@ -5,6 +5,7 @@ import {faCheck, faChessRook, faCoffee, faPlus, faTimes, faUser, faPlusSquare} f
 import {faHeart} from '@fortawesome/free-solid-svg-icons/faHeart';
 import {faChess} from '@fortawesome/free-solid-svg-icons/faChess';
 import {faScroll} from '@fortawesome/free-solid-svg-icons/faScroll';
+import { UnknownCaseException } from '../../../exceptions/UnknownCaseException';
 
 @Component({
   selector: 'app-icon',
@@ -75,6 +76,8 @@ export class IconComponent implements OnInit, AfterViewInit {
         break;
       case Icons.MONTEPOELI:
         this.svgIcon = '../../../../../../assets/images/florance_logo.png';
+        break;
+      default: throw new UnknownCaseException('unkown');
     }
 
     switch (this.iconSize) {
@@ -90,7 +93,7 @@ export class IconComponent implements OnInit, AfterViewInit {
       case IconSize.LARGE:
         this.size = '3x';
         break;
-      // default: throw new UnknownCaseException();
+      default: throw new UnknownCaseException('unkown');
     }
   }
 

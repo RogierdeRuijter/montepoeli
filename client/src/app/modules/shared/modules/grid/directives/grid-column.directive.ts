@@ -2,6 +2,7 @@ import {Directive, ElementRef, Input, OnInit, Optional, Renderer2} from '@angula
 import {GridRowDirective} from './grid-row.directive';
 import {Alignments, GridSizes} from '../../../static-files/enums';
 import {UtilService} from '../../../services/util/util.service';
+import { UnknownCaseException } from '../../../exceptions/UnknownCaseException';
 
 @Directive({
   selector: '[appGridColumn]',
@@ -45,7 +46,6 @@ export class GridColumnDirective implements OnInit {
       }
     });
 
-
     if (!this.utilService.isNullOrUndefined(this.alignmentCol)) {
       if (this.alignmentCol === Alignments.CENTER) {
         // TODO: move to position directive
@@ -86,6 +86,7 @@ export class GridColumnDirective implements OnInit {
         return '-lg';
       case GridSizes.ALL:
         return '';
+      default: throw new UnknownCaseException('unkown');
     }
   }
 

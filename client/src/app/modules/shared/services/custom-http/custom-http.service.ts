@@ -22,7 +22,6 @@ export class CustomHttpService {
               private environmentService: EnvironmentService) {
   }
 
-
   public get<T>(url: string): Observable<T> {
     if (!this.environment) {
       this.initEnvironment();

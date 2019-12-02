@@ -22,10 +22,4 @@ export class ButtonRowComponent implements OnInit {
 
   public ButtonRowType = ButtonRowType;
   public GridSizes = GridSizes;
-
-  constructor() {
-  }
-
-  ngOnInit() {
-  }
 }

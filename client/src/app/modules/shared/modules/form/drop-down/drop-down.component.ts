@@ -43,19 +43,19 @@ export class DropDownComponent implements ControlValueAccessor {
   @ViewChild('select', {static: true})
   public select: MatSelect;
 
-  public writeValue(obj: any) {
+  public writeValue(obj: any): void {
     this.valueAccessor.writeValue(obj);
   }
 
-  public registerOnChange(fn: any) {
+  public registerOnChange(fn: any): void {
     this.valueAccessor.registerOnChange(fn);
   }
 
-  public registerOnTouched(fn: any) {
+  public registerOnTouched(fn: any): void {
     this.valueAccessor.registerOnTouched(fn);
   }
 
-  public setDisabledState(isDisabled: boolean) {
+  public setDisabledState(isDisabled: boolean): void {
     this.valueAccessor.setDisabledState(isDisabled);
   }
 

@@ -3,7 +3,7 @@ import {Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 import {AuthService} from 'src/app/services/auth/auth.service';
-import {NotificationService} from '../services/notification/notification.service';
+import {NotificationService} from '../modules/notification/services/notification/notification.service';
 import {TranslateService} from '@ngx-translate/core';
 
 @Injectable({

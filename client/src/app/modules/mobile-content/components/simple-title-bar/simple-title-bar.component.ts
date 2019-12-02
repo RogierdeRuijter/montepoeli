@@ -1,6 +1,5 @@
-import { Component, OnInit, ViewChild, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Icons, IconSize } from '../../../shared/static-files/enums';
-import { MatSelect } from '@angular/material';
 
 @Component({
   selector: 'app-simple-title-bar',

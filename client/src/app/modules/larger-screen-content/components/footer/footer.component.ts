@@ -13,5 +13,3 @@ export class FooterComponent {
   public IconSize = IconSize;
   public Icons = Icons;
 }
-
-

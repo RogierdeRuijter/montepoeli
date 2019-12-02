@@ -4,8 +4,6 @@ import { GridColumnDirective } from './directives/grid-column.directive';
 import { GridRowDirective } from './directives/grid-row.directive';
 import { PositionDirective } from './directives/position.directive';
 
-
-
 @NgModule({
   declarations: [
     GridColumnDirective,

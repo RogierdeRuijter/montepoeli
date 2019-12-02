@@ -3,4 +3,3 @@ export interface Game {
   black: string;
   winner: string;
 }
-

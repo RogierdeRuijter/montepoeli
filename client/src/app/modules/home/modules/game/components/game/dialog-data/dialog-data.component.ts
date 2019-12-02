@@ -5,7 +5,6 @@ import {Game} from '../../../../../../shared/interfaces/game.interface';
 import {UserStore} from '../../../stores/user.store';
 import {DialogDataService} from '../../../services/dialog-data.service';
 import {User} from '../../../../../../shared/interfaces/user.interface';
-import {UtilService} from '../../../../../../shared/services/util/util.service';
 import {TranslateService} from '@ngx-translate/core';
 import { Subject } from 'rxjs';
 

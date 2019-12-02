@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
 import {ToastrService} from 'ngx-toastr';
+import { NotificationModule } from '../../notification.module';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: NotificationModule,
 })
 export class NotificationService {
 
