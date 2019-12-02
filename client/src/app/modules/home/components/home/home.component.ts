@@ -10,7 +10,7 @@ import {Alignments, GridSizes, Icons, IconSize, Tabs} from '../../../shared/stat
 import {TabChangeGlobalEventEmitter} from '../../../../services/tab-change.global-event-emitter';
 import {User} from '../../../shared/interfaces/user.interface';
 import {UserService} from '../../../../services/users/user.service';
-import {UserStore} from '../../../game/stores/user.store';
+import {UserStore} from '../../modules/game/stores/user.store';
 import {Game} from '../../../shared/interfaces/game.interface';
 import {BehaviorSubject, Subject} from 'rxjs';
 import {Rule} from '../../../shared/interfaces/rule.interface';

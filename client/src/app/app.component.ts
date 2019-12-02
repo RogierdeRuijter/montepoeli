@@ -10,6 +10,7 @@ export class AppComponent implements OnInit {
   constructor(private standaloneStore: StandaloneStore) {}
 
   public ngOnInit(): void {
+    // TODO: remove standalone store
     this.standaloneStore.set(this.isInStandaloneMode());
   }
   private isInStandaloneMode(): boolean {
