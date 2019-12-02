@@ -11,10 +11,10 @@ import {NgxSkeletonLoaderModule} from 'ngx-skeleton-loader';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {GameTableLoaderComponent} from '../../../app/modules/home/modules/game/components/game/overview/game-table-loader/game-table-loader.component';
 import {TableActionComponent} from '../../../app/modules/home/modules/game/components/game/overview/table-action/table-action.component';
-import {GridColumnDirective} from '../../../app/modules/shared/directives/grid-column.directive';
-import {GridRowDirective} from '../../../app/modules/shared/directives/grid-row.directive';
+import {GridColumnDirective} from '../../../app/modules/shared/modules/grid/directives/grid-column.directive';
+import {GridRowDirective} from '../../../app/modules/shared/modules/grid/directives/grid-row.directive';
 import {IconComponent} from '../../../app/modules/shared/modules/icon/icon/icon.component';
-import {PositionDirective} from '../../../app/modules/shared/directives/position.directive';
+import {PositionDirective} from '../../../app/modules/shared/modules/grid/directives/position.directive';
 
 
 export class GameOverviewStoryFactory {

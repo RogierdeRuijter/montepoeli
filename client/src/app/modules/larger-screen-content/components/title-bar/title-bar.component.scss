@@ -1,0 +1,25 @@
+.left-spacer {
+  flex: 0.5 0.5 auto;
+}
+
+.right-spacer {
+  flex: 1 1 auto;
+}
+
+.center-align {
+  display: flex;
+  align-items: flex-end;
+}
+
+.margin-right-10 {
+  margin-right: 10px;
+}
+
+.margin-bottom-20 {
+  margin-bottom: 20px;
+}
+
+.mat-tab-label-active{
+  background-color: #3398dc !important;
+  opacity: 1 !important;
+}

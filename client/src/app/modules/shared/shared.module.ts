@@ -9,47 +9,25 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {NgxSkeletonLoaderModule} from 'ngx-skeleton-loader';
 import {ButtonComponent} from './components/button/button.component';
 import {IconComponent} from './modules/icon/icon/icon.component';
-import {GridColumnDirective} from './directives/grid-column.directive';
-import {GridRowDirective} from './directives/grid-row.directive';
+import {GridColumnDirective} from './modules/grid/directives/grid-column.directive';
+import {GridRowDirective} from './modules/grid/directives/grid-row.directive';
 import {AuthGuard} from './guards/auth-guard.service';
-import {ButtonRowComponent} from './components/button-row/button-row.component';
+import {ButtonRowComponent} from './modules/button/components/button-row/button-row.component';
 import {HttpErrorInterceptor} from './interceptors/http-error.interceptor';
 import {IconModule} from './modules/icon/icon.module';
 import {CustomTranslateModule} from './modules/translate/custom-translate.module';
-import {PositionDirective} from './directives/position.directive';
+import {PositionDirective} from './modules/grid/directives/position.directive';
 import {InvalidTokenInterceptor} from './interceptors/invalid-token.interceptor';
+import { ButtonModule } from './modules/button/button.module';
 
 @NgModule({
-  imports: [
-    HttpClientModule,
-    CommonModule,
-    MaterialModule,
-    ToastrModule.forRoot(),
-    FormsModule,
-    NgxSkeletonLoaderModule,
-    IconModule,
-    CustomTranslateModule,
-  ],
   declarations: [
     ButtonComponent,
-    GridColumnDirective,
-    GridRowDirective,
     ButtonRowComponent,
-    PositionDirective,
-  ],
-  providers: [
-    {provide: LOCALE_ID, useValue: 'en-US'},
-    AuthGuard,
-    {provide: HTTP_INTERCEPTORS, useClass: InvalidTokenInterceptor, multi: true},
-    {provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true}
   ],
   exports: [
     ButtonComponent,
     IconComponent,
-
-    GridColumnDirective,
-    GridRowDirective,
-    PositionDirective,
 
     CommonModule,
     HttpClientModule,
@@ -59,6 +37,23 @@ import {InvalidTokenInterceptor} from './interceptors/invalid-token.interceptor'
     FormsModule,
     FontAwesomeModule,
     NgxSkeletonLoaderModule,
+  ],
+  providers: [
+    {provide: LOCALE_ID, useValue: 'en-US'},
+    AuthGuard,
+    {provide: HTTP_INTERCEPTORS, useClass: InvalidTokenInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true}
+  ],
+  imports: [
+    HttpClientModule,
+    CommonModule,
+    MaterialModule,
+    ToastrModule.forRoot(),
+    FormsModule,
+    NgxSkeletonLoaderModule,
+    IconModule,
+    CustomTranslateModule,
+    ButtonModule
   ],
 })
 export class SharedModule {

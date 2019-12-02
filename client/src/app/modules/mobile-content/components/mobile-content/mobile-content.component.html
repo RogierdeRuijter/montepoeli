@@ -1,0 +1,13 @@
+<app-simple-title-bar (logoutEvent)="logoutHandler()"></app-simple-title-bar>
+
+<router-outlet></router-outlet>
+
+<app-action-bar-footer [showPlusIcon]="gameView"
+                       (chessSetSelected)="gamesHandler()" 
+                       (scrollSelected)="rulesHandler()" 
+                       (plusSelected)="addGameHandler()">
+</app-action-bar-footer>
+
+<!-- <app-dialog-overview #addDialog
+                     (addEvent)="handleAddEvent($event)">
+</app-dialog-overview> -->

@@ -1,0 +1,23 @@
+<div class="footer">
+    <div [appGridRow]="[GridSizes.ALL]">
+        <div [appGridColumn]=[2] [offsets]=[3] [alignmentCol]="Alignments.CENTER">
+            <app-button-icon [icon]="Icons.CHESS_PIECES" 
+                             [iconSize]="IconSize.SMALL_MEDIUM" 
+                             (clickEvent)="chessSetClicked()">
+            </app-button-icon>
+        </div>
+        <div [appGridColumn]=[2] [alignmentCol]="Alignments.CENTER">
+            <app-button-icon [appShowAndHide]="showPlusIcon"
+                             [icon]="Icons.PLUS" 
+                             [iconSize]="IconSize.SMALL_MEDIUM" 
+                             (clickEvent)="plusClicked()">
+            </app-button-icon>
+        </div>
+        <div [appGridColumn]=[2] [alignmentCol]="Alignments.CENTER">
+            <app-button-icon [icon]="Icons.SCROLL" 
+                                [iconSize]="IconSize.SMALL_MEDIUM" 
+                                (clickEvent)="scrollClicked()">
+            </app-button-icon>
+        </div>
+    </div>
+</div>

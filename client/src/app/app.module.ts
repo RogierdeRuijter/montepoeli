@@ -20,13 +20,9 @@ import {GameModule} from './modules/home/modules/game/game.module';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {LandingComponent} from './components/landing/landing.component';
-import { ActionBarFooterComponent } from './modules/mobile-content/components/action-bar-footer/action-bar-footer.component';
-import { SimpleTitleBarComponent } from './modules/mobile-content/components/simple-title-bar/simple-title-bar.component';
-import { ButtonModule } from './modules/shared/modules/button/button.module';
-import { TransitionModule } from './modules/shared/modules/transition/transition.module';
-import { MaterialModule } from './modules/material/material.module';
-import { UserActionsComponent } from './modules/shared/components/user-actions/user-actions.component';
-import { UserActionsViewComponent } from './modules/shared/components/user-actions/user-actions-view/user-actions-view.component';
+import { MobileContentModule } from './modules/mobile-content/mobile-content.module';
+import { LargerScreenContentModule } from './modules/larger-screen-content/larger-screen-content.module';
+import { GridModule } from './modules/shared/modules/grid/grid.module';
 
 export function init_app(appLoadService: AppInitService) {
   return () => appLoadService.init();
@@ -36,28 +32,18 @@ export function init_app(appLoadService: AppInitService) {
     AppRoutingModule,
     CommonModule,
     BrowserModule,
-    SharedModule,
-    CustomTranslateModule,
     BrowserAnimationsModule,
-    MatTabsModule,
-    GameModule,
-    MatTooltipModule,
+    GridModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: true }),
-    ButtonModule,
-    TransitionModule,
-    MaterialModule
+    MobileContentModule, // TODO: remove imports that are not used
+    LargerScreenContentModule
   ],
   declarations: [
     AppComponent,
     LoginComponent,
     MainContentComponent,
-    TitleBarComponent,
     LoginFormComponent,
-    FooterComponent,
     LandingComponent,
-    SimpleTitleBarComponent,
-    UserActionsComponent,
-    UserActionsViewComponent,
   ],
   providers: [
     CookieService,

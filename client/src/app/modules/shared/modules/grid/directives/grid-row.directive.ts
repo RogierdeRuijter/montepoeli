@@ -1,7 +1,7 @@
 import {Directive, ElementRef, Input, OnInit, Renderer2} from '@angular/core';
-import {Alignments, Directions, GridSizes} from '../static-files/enums';
-import {UtilService} from '../services/util/util.service';
-import {ShouldBeDefinedException} from '../exceptions/ShouldBeDefinedException';
+import {Alignments, Directions, GridSizes} from '../../../static-files/enums';
+import {UtilService} from '../../../services/util/util.service';
+import {ShouldBeDefinedException} from '../../../exceptions/ShouldBeDefinedException';
 
 @Directive({
   selector: '[appGridRow]',

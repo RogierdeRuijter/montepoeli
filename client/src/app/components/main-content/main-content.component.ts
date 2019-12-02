@@ -23,13 +23,11 @@ export class MainContentComponent implements OnInit, OnDestroy {
   private destory$: Subject<void> = new Subject();
 
   constructor(private blurStore: BlurStore,
-              private addGameStore: AddGameStore,
               private tabChangeGlobalEventEmitter: TabChangeGlobalEventEmitter,
               private changeDetectorRef: ChangeDetectorRef,
               private standaloneStore: StandaloneStore) {}
 
   public ngOnInit(): void {
-
     this.blurStore
       .get(this.destory$)
       .subscribe((value: boolean) => {
@@ -56,13 +54,6 @@ export class MainContentComponent implements OnInit, OnDestroy {
     this.gameView = false;
 
     this.tabChangeGlobalEventEmitter.emit(Tabs.RULES);
-  }
-
-  public addGameHandler(): void {
-    // TODO: figure out how to set this properly
-    // Move the component here or use the store
-    // Store seems to be easier but it seems to be more logical if the popup lives here
-    this.addGameStore.set(true);
   }
 
   public ngOnDestroy(): void {

@@ -5,9 +5,9 @@ import {MatButtonModule} from '@angular/material/button';
 import {TranslateDirective} from '../app/modules/shared/modules/translate/translate.directive';
 import {StorybookTranslateModule} from './storybook-translate.module';
 import {MatDialogModule} from '@angular/material';
-import {ButtonRowComponent} from '../app/modules/shared/components/button-row/button-row.component';
-import {GridRowDirective} from '../app/modules/shared/directives/grid-row.directive';
-import {GridColumnDirective} from '../app/modules/shared/directives/grid-column.directive';
+import {ButtonRowComponent} from '../app/modules/shared/modules/button/components/button-row/button-row.component';
+import {GridRowDirective} from '../app/modules/shared/modules/grid/directives/grid-row.directive';
+import {GridColumnDirective} from '../app/modules/shared/modules/grid/directives/grid-column.directive';
 
 storiesOf('Button row', module)
   .add('2 buttons', () => ({

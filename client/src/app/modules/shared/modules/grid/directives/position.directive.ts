@@ -1,5 +1,5 @@
 import {Directive, ElementRef, Input, OnInit, Renderer2} from '@angular/core';
-import {Positions} from '../static-files/enums';
+import {Positions} from '../../../static-files/enums';
 
 @Directive({
   selector: '[appPosition]',

@@ -1,0 +1,20 @@
+<div class="container">
+  <div [alignment]="Alignments.BASELINE"
+       [appGridRow]="[GridSizes.EXTRA_SMALL, GridSizes.SMALL, GridSizes.MEDIUM, GridSizes.LARGE]">
+    <div [appGridColumn]="[10, 10 ,11, 11]">
+      <ui-game-table [displayedColumns]="displayedColumns"
+                     [games$]="games$">
+      </ui-game-table>
+    </div>
+    <!-- TODO: move this higher up so the ngif is not needed -->
+    <ng-container *ngIf="showAddGame">
+      <div [appGridColumn]="[2, 2, 1, 1]">
+        <ui-table-action [ids]="['add-game-button']"
+                        (actionClickEvent)="emitActionEvent($event)"
+                        [actions]="actions"
+                        [disabled]="disabled">
+        </ui-table-action>
+      </div>
+    </ng-container>
+  </div>
+</div>

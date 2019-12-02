@@ -1,7 +1,7 @@
 import {Directive, ElementRef, Input, OnInit, Optional, Renderer2} from '@angular/core';
 import {GridRowDirective} from './grid-row.directive';
-import {Alignments, GridSizes} from '../static-files/enums';
-import {UtilService} from '../services/util/util.service';
+import {Alignments, GridSizes} from '../../../static-files/enums';
+import {UtilService} from '../../../services/util/util.service';
 
 @Directive({
   selector: '[appGridColumn]',

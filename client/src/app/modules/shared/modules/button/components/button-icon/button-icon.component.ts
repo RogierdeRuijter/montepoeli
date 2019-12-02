@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Icons, IconSize } from '../../../static-files/enums';
+import { Icons, IconSize } from '../../../../static-files/enums';
 
 @Component({
   selector: 'app-button-icon',
