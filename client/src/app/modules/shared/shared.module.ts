@@ -7,12 +7,15 @@ import {NgxSkeletonLoaderModule} from 'ngx-skeleton-loader';
 import {AuthGuard} from './guards/auth-guard.service';
 import {HttpErrorInterceptor} from './interceptors/http-error.interceptor';
 import {InvalidTokenInterceptor} from './interceptors/invalid-token.interceptor';
+import { CustomTranslateModule } from './modules/translate/custom-translate.module';
+import { TransitionModule } from './modules/transition/transition.module';
 
 @NgModule({
   exports: [
     CommonModule,
     HttpClientModule,
     NgxSkeletonLoaderModule,
+    CustomTranslateModule
   ],
   providers: [
     {provide: LOCALE_ID, useValue: 'en-US'},
@@ -26,6 +29,8 @@ import {InvalidTokenInterceptor} from './interceptors/invalid-token.interceptor'
     MaterialModule,
     FormsModule,
     NgxSkeletonLoaderModule,
+    CustomTranslateModule,
+    TransitionModule
   ],
 })
 export class SharedModule {

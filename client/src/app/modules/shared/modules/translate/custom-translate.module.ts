@@ -3,7 +3,7 @@ import {CommonModule} from '@angular/common';
 import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
 import {HttpClient} from '@angular/common/http';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-import {TranslateDirective} from './translate.directive';
+import {TranslateDirective} from './directives/translate.directive';
 
 @NgModule({
   imports: [

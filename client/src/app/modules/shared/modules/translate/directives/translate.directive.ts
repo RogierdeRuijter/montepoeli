@@ -23,8 +23,7 @@ export class TranslateDirective implements OnInit {
         .pipe(
           debounceTime(200),
           retry(5)
-        )
-        .subscribe((translation) => this.setProperty(translation));
+        ).subscribe((translation) => this.setProperty(translation));
   }
 
   private setProperty(translation: string): void {

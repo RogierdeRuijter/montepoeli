@@ -1,7 +1,7 @@
 import {storiesOf} from '@storybook/angular';
 import {MatButtonModule, MatDialogModule} from '@angular/material';
 import {StorybookTranslateModule} from './storybook-translate.module';
-import {TranslateDirective} from '../app/modules/shared/modules/translate/translate.directive';
+import {TranslateDirective} from '../app/modules/shared/modules/translate/directives/translate.directive';
 import {GridRowDirective} from '../app/modules/shared/modules/grid/directives/grid-row.directive';
 import {GridColumnDirective} from '../app/modules/shared/modules/grid/directives/grid-column.directive';
 import {ButtonComponent} from '../app/modules/shared/components/button/button.component';

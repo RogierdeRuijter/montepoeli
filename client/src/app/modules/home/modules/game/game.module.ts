@@ -10,15 +10,15 @@ import {MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material';
 import {OverviewComponent} from './components/game/overview/overview.component';
 import {GameResultComponent} from './components/game/dialog-data/game-result/game-result.component';
 import {FormModule} from '../../../shared/modules/form/form.module';
-import {CustomTranslateModule} from '../../../shared/modules/translate/custom-translate.module';
 import {RuleModule} from '../rule/rule.module';
+import { ButtonModule } from 'src/app/modules/shared/modules/button/button.module';
 
 @NgModule({
   imports: [
     SharedModule,
     FormModule,
-    CustomTranslateModule,
-    RuleModule
+    RuleModule,
+    ButtonModule
   ],
   declarations: [
     GameComponent,

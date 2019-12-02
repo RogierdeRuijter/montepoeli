@@ -16,21 +16,12 @@ import {LandingComponent} from './components/landing/landing.component';
 import { MobileContentModule } from './modules/mobile-content/mobile-content.module';
 import { LargerScreenContentModule } from './modules/larger-screen-content/larger-screen-content.module';
 import { GridModule } from './modules/shared/modules/grid/grid.module';
+import { FormsModule } from '@angular/forms';
 
 export function init_app(appLoadService: AppInitService): () => Promise<any> {
   return () => appLoadService.init();
 }
 @NgModule({
-  imports: [
-    AppRoutingModule,
-    CommonModule,
-    BrowserModule,
-    BrowserAnimationsModule,
-    GridModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: true }),
-    MobileContentModule, // TODO: remove imports that are not used
-    LargerScreenContentModule
-  ],
   declarations: [
     AppComponent,
     LoginComponent,
@@ -48,6 +39,17 @@ export function init_app(appLoadService: AppInitService): () => Promise<any> {
       deps: [AppInitService],
       multi: true,
     },
+  ],
+  imports: [
+    AppRoutingModule,
+    CommonModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    GridModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: true }),
+    MobileContentModule, // TODO: remove imports that are not used
+    LargerScreenContentModule,
+    FormsModule
   ],
   bootstrap: [AppComponent],
 })

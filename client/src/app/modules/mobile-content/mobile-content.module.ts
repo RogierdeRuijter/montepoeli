@@ -11,6 +11,7 @@ import { RouterModule } from '@angular/router';
 import { MatToolbarModule } from '@angular/material';
 import { IconModule } from '../shared/modules/icon/icon.module';
 import { UserActionModule } from '../shared/modules/user-action/user-action.module';
+import { GridModule } from '../shared/modules/grid/grid.module';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { UserActionModule } from '../shared/modules/user-action/user-action.modu
     RouterModule,
     MatToolbarModule,
     IconModule,
-    UserActionModule
+    UserActionModule,
+    GridModule
   ]
 })
 export class MobileContentModule { }

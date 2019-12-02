@@ -9,6 +9,7 @@ import { TitleBarComponent } from './components/title-bar/title-bar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { IconModule } from '../shared/modules/icon/icon.module';
 import { UserActionModule } from '../shared/modules/user-action/user-action.module';
+import { GridModule } from '../shared/modules/grid/grid.module';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,9 @@ import { UserActionModule } from '../shared/modules/user-action/user-action.modu
 
     ButtonModule,
     RouterModule,
-    UserActionModule
+    UserActionModule,
+    
+    GridModule
   ]
 })
 export class LargerScreenContentModule { }
