@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {LargeSreenContentComponent} from './components/large-sreen-content/large-screen-content.component';
+import {LargeScreenContentComponent} from './components/large-sreen-content/large-screen-content.component';
 import {CustomTranslateModule} from '../../shared/modules/translate/custom-translate.module';
 import {MatTabsModule, MatToolbarModule, MatTooltipModule} from '@angular/material';
 import {ButtonModule} from '../../shared/modules/button/button.module';
@@ -13,12 +13,12 @@ import {GridModule} from '../../shared/modules/grid/grid.module';
 
 @NgModule({
   declarations: [
-    LargeSreenContentComponent,
+    LargeScreenContentComponent,
     TitleBarComponent,
     FooterComponent
   ],
   exports: [
-    LargeSreenContentComponent
+    LargeScreenContentComponent
   ],
   imports: [
     CommonModule,

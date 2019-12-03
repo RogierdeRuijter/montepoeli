@@ -1,7 +1,5 @@
 import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {BlurStore} from '../../shared/stores/blur.store';
-import {Tabs} from 'src/app/shared/static-files/enums';
-import {TabChangeGlobalEventEmitter} from 'src/app/services/tab-change.global-event-emitter';
 import {Subject} from 'rxjs';
 import {StandaloneStore} from 'src/app/shared/stores/standalone.store';
 
@@ -12,16 +10,12 @@ import {StandaloneStore} from 'src/app/shared/stores/standalone.store';
 })
 export class MainContentComponent implements OnInit, OnDestroy {
   public blur = false;
-  public showBottomActionMenu = true;
-
-  public gameView = true;
 
   public standalone: boolean;
 
   private destory$: Subject<void> = new Subject();
 
   constructor(private blurStore: BlurStore,
-              private tabChangeGlobalEventEmitter: TabChangeGlobalEventEmitter,
               private changeDetectorRef: ChangeDetectorRef,
               private standaloneStore: StandaloneStore) {}
 
@@ -40,18 +34,6 @@ export class MainContentComponent implements OnInit, OnDestroy {
       this.standalone = standalone;
       this.changeDetectorRef.detectChanges();
     });
-  }
-
-  public gamesHandler(): void {
-    this.gameView = true;
-
-    this.tabChangeGlobalEventEmitter.emit(Tabs.GAMES);
-  }
-
-  public rulesHandler(): void {
-    this.gameView = false;
-
-    this.tabChangeGlobalEventEmitter.emit(Tabs.RULES);
   }
 
   public ngOnDestroy(): void {

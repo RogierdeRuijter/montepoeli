@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, ViewChild, ViewEncapsulation} from '@angular/core';
+import {ChangeDetectionStrategy, Component, ViewChild} from '@angular/core';
 import {Icons, IconSize} from 'src/app/shared/static-files/enums';
 import {MatSelect} from '@angular/material';
 import {AuthService} from 'src/app/shared/modules/auth/services/auth/auth.service';
@@ -7,8 +7,7 @@ import {AuthService} from 'src/app/shared/modules/auth/services/auth/auth.servic
   selector: 'app-user-actions',
   templateUrl: './user-actions.component.html',
   styleUrls: ['./user-actions.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserActionsComponent {
 
