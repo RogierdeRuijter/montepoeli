@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { AddGameStore } from 'src/app/modules/shared/stores/add-game.store';
+import {Component} from '@angular/core';
+import {AddGameStore} from 'src/app/shared/stores/add-game.store';
 
 @Component({
   selector: 'app-mobile-content',

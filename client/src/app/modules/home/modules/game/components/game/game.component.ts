@@ -1,13 +1,21 @@
-import {ChangeDetectionStrategy, Component, Input, ViewChild, OnInit, OnDestroy, ChangeDetectorRef} from '@angular/core';
-import {Game} from '../../../../../shared/interfaces/game.interface';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import {Game} from '../../../../../../shared/interfaces/game.interface';
 import {GameService} from '../../services/game.service';
-import {Actions, GridSizes} from '../../../../../shared/static-files/enums';
+import {Actions, GridSizes} from '../../../../../../shared/static-files/enums';
 import {BehaviorSubject, Subject} from 'rxjs';
 import {DialogOverviewComponent} from './dialog-overview/dialog-overview.component';
-import {User} from '../../../../../shared/interfaces/user.interface';
-import {BlurStore} from '../../../../../shared/stores/blur.store';
-import { AddGameStore } from 'src/app/modules/shared/stores/add-game.store';
-import { StandaloneStore } from 'src/app/modules/shared/stores/standalone.store';
+import {User} from '../../../../../../shared/interfaces/user.interface';
+import {BlurStore} from '../../../../../../shared/stores/blur.store';
+import {AddGameStore} from 'src/app/shared/stores/add-game.store';
+import {StandaloneStore} from 'src/app/shared/stores/standalone.store';
 
 @Component({
   selector: 'app-game',

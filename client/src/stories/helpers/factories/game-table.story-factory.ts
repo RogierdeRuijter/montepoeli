@@ -4,8 +4,7 @@ import {GameTableComponent} from '../../../app/modules/home/modules/game/compone
 import {of} from 'rxjs';
 import {MatTableModule} from '@angular/material';
 import {StorybookTranslateModule} from '../../storybook-translate.module';
-import {TranslateDirective} from '../../../app/modules/shared/modules/translate/directives/translate.directive';
-
+import {TranslateDirective} from '../../../app/shared/modules/translate/directives/translate.directive';
 
 export class GameTableStoryFactory {
   private component = GameTableComponent;

@@ -1,12 +1,12 @@
-import {Component, Inject, OnInit, OnDestroy} from '@angular/core';
+import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {Sides, Winners} from '../../../../../../shared/static-files/enums';
-import {Game} from '../../../../../../shared/interfaces/game.interface';
+import {Sides, Winners} from '../../../../../../../shared/static-files/enums';
+import {Game} from '../../../../../../../shared/interfaces/game.interface';
 import {UserStore} from '../../../stores/user.store';
 import {DialogDataService} from '../../../services/dialog-data.service';
-import {User} from '../../../../../../shared/interfaces/user.interface';
+import {User} from '../../../../../../../shared/interfaces/user.interface';
 import {TranslateService} from '@ngx-translate/core';
-import { Subject } from 'rxjs';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-dialog-data',

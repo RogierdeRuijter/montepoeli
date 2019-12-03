@@ -1,10 +1,10 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {DialogDataComponent} from '../dialog-data/dialog-data.component';
-import {Game} from '../../../../../../shared/interfaces/game.interface';
+import {Game} from '../../../../../../../shared/interfaces/game.interface';
 import {GameFactory} from '../../../factories/game.factory';
-import {UtilService} from '../../../../../../shared/services/util/util.service';
-import {BlurStore} from '../../../../../../shared/stores/blur.store';
+import {UtilService} from '../../../../../../../shared/services/util/util.service';
+import {BlurStore} from '../../../../../../../shared/stores/blur.store';
 
 @Component({
   selector: 'app-dialog-overview',

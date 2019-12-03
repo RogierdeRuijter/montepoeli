@@ -49,7 +49,7 @@
 18 silly found diff in client/src/app/modules/shared/services/grid/grid.service.ts
 18 silly found diff in client/src/app/modules/shared/services/loading/loading.service.ts
 18 silly found diff in client/src/app/modules/shared/services/notification/notification.service.ts
-18 silly found diff in client/src/app/modules/shared/shared.module.ts
+18 silly found diff in client/src/app/modules/shared/interceptor.module.ts
 18 silly found diff in client/src/app/modules/shared/static-files/enums.ts
 18 silly found diff in client/src/app/services/auth/auth.service.ts
 18 silly found diff in client/src/assets/i18n/en.json
@@ -130,7 +130,7 @@
 19 verbose filtered diff   'client/src/app/modules/shared/services/grid/grid.service.ts',
 19 verbose filtered diff   'client/src/app/modules/shared/services/loading/loading.service.ts',
 19 verbose filtered diff   'client/src/app/modules/shared/services/notification/notification.service.ts',
-19 verbose filtered diff   'client/src/app/modules/shared/shared.module.ts',
+19 verbose filtered diff   'client/src/app/modules/shared/interceptor.module.ts',
 19 verbose filtered diff   'client/src/app/modules/shared/static-files/enums.ts',
 19 verbose filtered diff   'client/src/app/services/auth/auth.service.ts',
 19 verbose filtered diff   'client/src/assets/i18n/en.json',

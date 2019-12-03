@@ -1,5 +1,5 @@
-import {Factory} from '../../../../shared/interfaces/factory.interface';
-import {Game} from '../../../../shared/interfaces/game.interface';
+import {Factory} from '../../../../../shared/interfaces/factory.interface';
+import {Game} from '../../../../../shared/interfaces/game.interface';
 
 export class GameFactory implements Factory<Game> {
   public create(game?: Game): Game {

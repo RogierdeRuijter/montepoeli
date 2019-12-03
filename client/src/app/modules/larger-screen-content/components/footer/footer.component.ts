@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {SPACER} from '../../../shared/static-files/contants';
-import {Icons, IconSize} from '../../../shared/static-files/enums';
+import {SPACER} from '../../../../shared/static-files/contants';
+import {Icons, IconSize} from '../../../../shared/static-files/enums';
 
 @Component({
   selector: 'app-footer',

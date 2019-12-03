@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {User} from '../../../../shared/interfaces/user.interface';
-import {Game} from '../../../../shared/interfaces/game.interface';
-import {UtilService} from '../../../../shared/services/util/util.service';
+import {User} from '../../../../../shared/interfaces/user.interface';
+import {Game} from '../../../../../shared/interfaces/game.interface';
+import {UtilService} from '../../../../../shared/services/util/util.service';
 
 @Injectable({
   providedIn: 'root',

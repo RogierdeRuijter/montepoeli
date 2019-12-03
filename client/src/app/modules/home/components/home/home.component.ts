@@ -6,14 +6,14 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import {Alignments, GridSizes, Icons, IconSize, Tabs} from '../../../shared/static-files/enums';
+import {Alignments, GridSizes, Icons, IconSize, Tabs} from '../../../../shared/static-files/enums';
 import {TabChangeGlobalEventEmitter} from '../../../../services/tab-change.global-event-emitter';
-import {User} from '../../../shared/interfaces/user.interface';
+import {User} from '../../../../shared/interfaces/user.interface';
 import {UserService} from '../../../../services/users/user.service';
 import {UserStore} from '../../modules/game/stores/user.store';
-import {Game} from '../../../shared/interfaces/game.interface';
+import {Game} from '../../../../shared/interfaces/game.interface';
 import {BehaviorSubject, Subject} from 'rxjs';
-import {Rule} from '../../../shared/interfaces/rule.interface';
+import {Rule} from '../../../../shared/interfaces/rule.interface';
 import {ActivatedRoute} from '@angular/router';
 
 // TODO: add hammerjs for swiping left and right between games and rules

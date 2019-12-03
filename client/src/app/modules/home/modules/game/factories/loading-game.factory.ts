@@ -1,4 +1,4 @@
-import {Factory} from '../../../../shared/interfaces/factory.interface';
+import {Factory} from '../../../../../shared/interfaces/factory.interface';
 
 export class LoadingGameFactory implements Factory<any> {
   public create(): any {

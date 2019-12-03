@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {Game} from '../../../../shared/interfaces/game.interface';
-import {CustomHttpService} from '../../../../shared/services/custom-http/custom-http.service';
+import {Game} from '../../../../../shared/interfaces/game.interface';
+import {CustomHttpService} from '../../../../../shared/modules/http/services/custom-http/custom-http.service';
 import {Environment} from '../../../../../../environments/environment';
 
 @Injectable({

@@ -1,7 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {AuthGuard} from './modules/shared/guards/auth-guard.service';
-import {LoginComponent} from './components/login/login.component';
+import {AuthGuard} from './shared/modules/auth/guards/auth-guard.service';
 import {MainContentComponent} from './components/main-content/main-content.component';
 import {LandingComponent} from './components/landing/landing.component';
 
@@ -9,24 +8,19 @@ import {LandingComponent} from './components/landing/landing.component';
 const appRoutes: Routes = [
   {
     path: '',
-    redirectTo: '/landing',
-    pathMatch: 'full',
-  },
-  {
-    path: 'landing',
     component: LandingComponent
   },
   {
     path: 'login',
-    component: LoginComponent,
+    loadChildren: () => import('./modules/login/login.module').then(m => m.LoginModule)
   },
   {
     path: 'home',
-    loadChildren: './modules/home/home.module#HomeModule',
+    loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule),
     component: MainContentComponent,
     canActivate: [AuthGuard],
   },
-  { path: '**', redirectTo: '/landing' }
+  { path: '**', redirectTo: '' }
 ];
 @NgModule({
   imports: [RouterModule.forRoot(appRoutes)],

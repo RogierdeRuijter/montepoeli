@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import { StandaloneStore } from './modules/shared/stores/standalone.store';
+import {StandaloneStore} from './shared/stores/standalone.store';
 
 @Component({
   selector: 'app-root',

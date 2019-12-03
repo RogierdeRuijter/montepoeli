@@ -1,9 +1,9 @@
-import {ChangeDetectorRef, Component, OnInit, OnDestroy} from '@angular/core';
-import {BlurStore} from '../../modules/shared/stores/blur.store';
-import { Tabs } from 'src/app/modules/shared/static-files/enums';
-import { TabChangeGlobalEventEmitter } from 'src/app/services/tab-change.global-event-emitter';
-import { Subject } from 'rxjs';
-import { StandaloneStore } from 'src/app/modules/shared/stores/standalone.store';
+import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
+import {BlurStore} from '../../shared/stores/blur.store';
+import {Tabs} from 'src/app/shared/static-files/enums';
+import {TabChangeGlobalEventEmitter} from 'src/app/services/tab-change.global-event-emitter';
+import {Subject} from 'rxjs';
+import {StandaloneStore} from 'src/app/shared/stores/standalone.store';
 
 @Component({
   selector: 'app-main-content',

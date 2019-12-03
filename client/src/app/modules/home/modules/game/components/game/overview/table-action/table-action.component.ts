@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Actions, Icons} from '../../../../../../../shared/static-files/enums';
-import {IllegalInputException} from '../../../../../../../shared/exceptions/IllegalInputException';
-import {UnknownCaseException} from '../../../../../../../shared/exceptions/UnknownCaseException';
+import {Actions, Icons} from '../../../../../../../../shared/static-files/enums';
+import {IllegalInputException} from '../../../../../../../../shared/exceptions/IllegalInputException';
+import {UnknownCaseException} from '../../../../../../../../shared/exceptions/UnknownCaseException';
 
 @Component({
   selector: 'ui-table-action',

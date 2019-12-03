@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {Game} from '../../../../../../../shared/interfaces/game.interface';
+import {Game} from '../../../../../../../../shared/interfaces/game.interface';
 import {Observable} from 'rxjs';
 
 @Component({

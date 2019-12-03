@@ -1,5 +1,5 @@
 import {storiesOf} from '@storybook/angular';
-import {TranslateDirective} from '../app/modules/shared/modules/translate/directives/translate.directive';
+import {TranslateDirective} from '../app/shared/modules/translate/directives/translate.directive';
 import {StorybookTranslateModule} from './storybook-translate.module';
 import {MatTableModule} from '@angular/material';
 import {NgxSkeletonLoaderModule} from 'ngx-skeleton-loader';

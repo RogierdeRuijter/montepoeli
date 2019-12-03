@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Actions, Alignments, GridSizes, Positions} from '../../../../../../shared/static-files/enums';
+import {Actions, Alignments, GridSizes, Positions} from '../../../../../../../shared/static-files/enums';
 import {Observable} from 'rxjs';
-import {Game} from '../../../../../../shared/interfaces/game.interface';
+import {Game} from '../../../../../../../shared/interfaces/game.interface';
 
 @Component({
   selector: 'ui-overview',
