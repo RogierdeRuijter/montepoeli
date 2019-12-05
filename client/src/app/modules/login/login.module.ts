@@ -1,13 +1,14 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {LoginComponent} from './login/login.component';
-import {LoginFormComponent} from './login/login-form/login-form.component';
 import {GridModule} from '../../shared/modules/grid/grid.module';
 import {ButtonModule} from '../../shared/modules/button/button.module';
 import {FormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {LoginRoutingModule} from './login-routing.module';
 import {CustomTranslateModule} from '../../shared/modules/translate/custom-translate.module';
+import { AuthModule } from 'src/app/shared/modules/auth/auth.module';
+import { LoginComponent } from './components/login/login.component';
+import { LoginFormComponent } from './components/login/login-form/login-form.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import {CustomTranslateModule} from '../../shared/modules/translate/custom-trans
     FormsModule,
     MatInputModule,
     CustomTranslateModule,
+    AuthModule
   ],
 })
 export class LoginModule { }

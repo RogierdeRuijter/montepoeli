@@ -1,5 +1,5 @@
-import {AfterViewInit, Component, ElementRef, Input, OnInit, Renderer2, ViewChild} from '@angular/core';
-import {Icons, IconSize} from '../../../../static-files/enums';
+import {AfterViewInit, Component, ElementRef, Input, OnInit, Renderer2, ViewChild, OnChanges} from '@angular/core';
+import {Icons, IconSize, IconColor} from '../../../../static-files/enums';
 import {IconDefinition, SizeProp} from '@fortawesome/fontawesome-svg-core';
 import {faCheck, faChessRook, faCoffee, faPlus, faPlusSquare, faTimes, faUser} from '@fortawesome/free-solid-svg-icons';
 import {faHeart} from '@fortawesome/free-solid-svg-icons/faHeart';
@@ -12,7 +12,7 @@ import {UnknownCaseException} from '../../../../exceptions/UnknownCaseException'
   templateUrl: './icon.component.html',
   styleUrls: ['./icon.component.scss'],
 })
-export class IconComponent implements OnInit, AfterViewInit {
+export class IconComponent implements OnInit, AfterViewInit, OnChanges {
 
   @Input()
   public id: string;
@@ -22,6 +22,9 @@ export class IconComponent implements OnInit, AfterViewInit {
 
   @Input()
   public iconSize: IconSize = IconSize.MEDIUM;
+
+  @Input()
+  public iconColor: IconColor = IconColor.BLACK;
 
   @Input()
   public disabled = false;
@@ -34,6 +37,7 @@ export class IconComponent implements OnInit, AfterViewInit {
 
   public iconDefinition: IconDefinition;
   public size: SizeProp;
+  public color: string;
 
   public svgIcon: string;
 
@@ -92,6 +96,18 @@ export class IconComponent implements OnInit, AfterViewInit {
         break;
       case IconSize.LARGE:
         this.size = '3x';
+        break;
+      default: throw new UnknownCaseException('unkown');
+    }
+  }
+
+  public ngOnChanges(): void {
+    switch (this.iconColor) {
+      case IconColor.BLACK:
+        this.color = 'black';
+        break;
+      case IconColor.GRAY:
+        this.color = 'gray';
         break;
       default: throw new UnknownCaseException('unkown');
     }

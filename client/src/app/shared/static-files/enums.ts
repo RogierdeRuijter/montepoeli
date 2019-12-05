@@ -31,6 +31,11 @@ export enum IconSize {
   LARGE
 }
 
+export enum IconColor {
+  GRAY,
+  BLACK
+}
+
 export enum Actions {
   ADD,
   ACCEPT

@@ -1,5 +1,5 @@
 import {ChangeDetectorRef, Component} from '@angular/core';
-import {AuthService} from '../../../shared/modules/auth/services/auth/auth.service';
+import { AuthService } from 'src/app/shared/modules/auth/services/auth/auth.service';
 
 // TODO: move to own module
 @Component({

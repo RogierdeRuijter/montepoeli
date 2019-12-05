@@ -3,20 +3,23 @@
         <div [appGridColumn]=[2] [offsets]=[3] [alignmentCol]="Alignments.CENTER">
             <app-button-icon [icon]="Icons.CHESS_PIECES"
                              [iconSize]="IconSize.MEDIUM"
-                             (clickEvent)="chessSetClicked()">
+                             [iconColor]="selected === Icons.CHESS_PIECES ? IconColor.BLACK : IconColor.GRAY"
+                             (clickEvent)="chessSetClicked()"> 
             </app-button-icon>
         </div>
         <div [appGridColumn]=[2] [alignmentCol]="Alignments.CENTER">
             <app-button-icon [appShowAndHide]="showPlusIcon"
                              [icon]="Icons.PLUS"
                              [iconSize]="IconSize.MEDIUM"
+                             [iconColor]="selected === Icons.PLUS ? IconColor.BLACK : IconColor.GRAY"
                              (clickEvent)="plusClicked()">
             </app-button-icon>
         </div>
         <div [appGridColumn]=[2] [alignmentCol]="Alignments.CENTER">
             <app-button-icon [icon]="Icons.SCROLL"
-                                [iconSize]="IconSize.MEDIUM"
-                                (clickEvent)="scrollClicked()">
+                             [iconSize]="IconSize.MEDIUM"
+                             [iconColor]="selected === Icons.SCROLL ? IconColor.BLACK : IconColor.GRAY"
+                             (clickEvent)="scrollClicked()">
             </app-button-icon>
         </div>
     </div>

@@ -3,6 +3,7 @@
 <router-outlet></router-outlet>
 
 <app-action-bar-footer [showPlusIcon]="gameView"
+                       [selected]="selected"
                        (chessSetSelected)="gamesHandler()"
                        (scrollSelected)="rulesHandler()"
                        (plusSelected)="addGameHandler()">

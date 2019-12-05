@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Alignments, GridSizes, Icons, IconSize} from '../../../../shared/static-files/enums';
+import {Alignments, GridSizes, Icons, IconSize, IconColor} from '../../../../shared/static-files/enums';
 
 @Component({
   selector: 'app-action-bar-footer',
@@ -10,6 +10,9 @@ export class ActionBarFooterComponent {
 
   @Input()
   public showPlusIcon: boolean;
+
+  @Input()
+  public selected: Icons;
 
   @Output()
   public chessSetSelected: EventEmitter<void> = new EventEmitter();
@@ -22,6 +25,8 @@ export class ActionBarFooterComponent {
 
   public Icons = Icons;
   public IconSize = IconSize;
+  public IconColor = IconColor;
+
   public GridSizes = GridSizes;
   public Alignments = Alignments;
 

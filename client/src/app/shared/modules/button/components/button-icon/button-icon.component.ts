@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Icons, IconSize} from '../../../../static-files/enums';
+import {Icons, IconSize, IconColor} from '../../../../static-files/enums';
 
 @Component({
   selector: 'app-button-icon',
@@ -13,6 +13,9 @@ export class ButtonIconComponent {
 
   @Input()
   public iconSize: IconSize;
+
+  @Input()
+  public iconColor: IconColor;
 
   @Output()
   public clickEvent: EventEmitter<void> = new EventEmitter();
