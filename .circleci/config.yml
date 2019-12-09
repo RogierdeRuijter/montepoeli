@@ -243,7 +243,7 @@ workflows:
             branches:
               only: 
                 - master
-                - /depfu*/
+                - /depfu.*/
       - swap-client-config:
           requires:
             - build-client-base
