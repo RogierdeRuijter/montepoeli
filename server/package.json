@@ -22,19 +22,19 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
-    "@nestjs/common": "6.10.1",
-    "@nestjs/core": "6.10.1",
+    "@nestjs/common": "6.10.8",
+    "@nestjs/core": "6.10.8",
     "@nestjs/jwt": "6.1.1",
     "@nestjs/mongoose": "6.1.2",
-    "@nestjs/passport": "6.1.0",
-    "@nestjs/platform-express": "6.10.1",
+    "@nestjs/passport": "6.1.1",
+    "@nestjs/platform-express": "6.10.8",
     "@nestjs/typeorm": "6.2.0",
     "@types/bcrypt": "3.0.0",
-    "@types/faker": "4.1.7",
+    "@types/faker": "4.1.8",
     "bcrypt": "3.0.7",
     "cookie-parser": "1.4.4",
     "faker": "4.1.0",
-    "mongoose": "5.7.12",
+    "mongoose": "5.7.14",
     "mysql": "2.17.1",
     "passport": "0.4.0",
     "passport-http-bearer": "1.0.1",
@@ -42,10 +42,10 @@
     "reflect-metadata": "0.1.13",
     "rimraf": "3.0.0",
     "rxjs": "6.5.3",
-    "typeorm": "0.2.20"
+    "typeorm": "0.2.21"
   },
   "devDependencies": {
-    "@nestjs/testing": "6.10.1",
+    "@nestjs/testing": "6.10.8",
     "@types/express": "4.17.2",
     "@types/jest": "24.0.23",
     "@types/node": "12.12.14",
@@ -55,10 +55,10 @@
     "prettier": "1.19.1",
     "supertest": "4.0.2",
     "ts-jest": "24.2.0",
-    "ts-node": "8.5.2",
+    "ts-node": "8.5.4",
     "tsconfig-paths": "3.9.0",
     "tslint": "5.20.1",
-    "typescript": "3.7.2"
+    "typescript": "3.7.3"
   },
   "jest": {
     "moduleFileExtensions": [
