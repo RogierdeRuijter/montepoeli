@@ -232,14 +232,18 @@ workflows:
             - build-client-base
           filters:
             branches:
-              only: [master, depfu/*]
+              only: 
+                - master
+                - /depfu.*/
       - e2e-test:
           requires:
             - swap-client-config-e2e
             - build-server
           filters:
             branches:
-              only: [master, depfu/*]
+              only: 
+                - master
+                - /depfu.*/
       - swap-client-config:
           requires:
             - build-client-base
