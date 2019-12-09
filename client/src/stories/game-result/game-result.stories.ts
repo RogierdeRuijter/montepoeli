@@ -1,5 +1,5 @@
 import {storiesOf} from '@storybook/angular';
-import {GameResultComponent} from '../../app/modules/home/modules/game/components/game/dialog-data/game-result/game-result.component';
+import {GameResultComponent} from '../../app/shared/modules/add-game/components/dialog-data/game-result/game-result.component';
 import {StorybookTranslateModule} from '../storybook-translate.module';
 import {MaterialModule} from '../../app/modules/material/material.module';
 import {GridRowDirective} from '../../app/shared/modules/grid/directives/grid-row.directive';

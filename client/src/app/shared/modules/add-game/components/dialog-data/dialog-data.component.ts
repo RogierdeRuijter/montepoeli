@@ -1,10 +1,10 @@
 import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {Sides, Winners} from '../../../../../../../shared/static-files/enums';
-import {Game} from '../../../../../../../shared/interfaces/game.interface';
-import {UserStore} from '../../../stores/user.store';
-import {DialogDataService} from '../../../services/dialog-data.service';
-import {User} from '../../../../../../../shared/interfaces/user.interface';
+import {Sides, Winners} from '../../../../static-files/enums';
+import {Game} from '../../../../interfaces/game.interface';
+import {UserStore} from '../../../../../modules/home/modules/game/stores/user.store';
+import {DialogDataService} from '../../services/dialog-data/dialog-data.service';
+import {User} from '../../../../interfaces/user.interface';
 import {TranslateService} from '@ngx-translate/core';
 import {Subject} from 'rxjs';
 
@@ -23,12 +23,11 @@ export class DialogDataComponent implements OnInit, OnDestroy {
 
   private destory$: Subject<void> = new Subject();
 
-  constructor(
-    public dialogRef: MatDialogRef<DialogDataComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Game,
-    private userStore: UserStore,
-    private dialogDataService: DialogDataService,
-    private translateService: TranslateService) {
+  constructor(public dialogRef: MatDialogRef<DialogDataComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: Game,
+              private userStore: UserStore,
+              private dialogDataService: DialogDataService,
+              private translateService: TranslateService) {
   }
 
   public ngOnInit(): void {

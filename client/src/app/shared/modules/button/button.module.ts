@@ -7,17 +7,20 @@ import {ButtonComponent} from './components/button/button.component';
 import {ButtonRowComponent} from './components/button-row/button-row.component';
 import {CustomTranslateModule} from '../translate/custom-translate.module';
 import {GridModule} from '../grid/grid.module';
+import { ButtonIconActiveStateComponent } from './components/button-icon-active-state/button-icon-active-state.component';
 
 @NgModule({
   declarations: [
     ButtonComponent,
     ButtonRowComponent,
-    ButtonIconComponent
+    ButtonIconComponent,
+    ButtonIconActiveStateComponent
   ],
   exports: [
     ButtonComponent,
     ButtonRowComponent,
-    ButtonIconComponent
+    ButtonIconComponent,
+    ButtonIconActiveStateComponent
   ],
   imports: [
     CommonModule,

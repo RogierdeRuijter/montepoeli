@@ -23,6 +23,7 @@ import {MatSelectModule} from '@angular/material/select';
   ],
   exports: [
     DropDownComponent,
+    FormsModule
   ],
 })
 export class FormModule {

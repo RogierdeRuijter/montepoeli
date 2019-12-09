@@ -24,7 +24,7 @@ export class IconComponent implements OnInit, AfterViewInit, OnChanges {
   public iconSize: IconSize = IconSize.MEDIUM;
 
   @Input()
-  public iconColor: IconColor = IconColor.BLACK;
+  public iconColor: IconColor;
 
   @Input()
   public disabled = false;
@@ -101,15 +101,17 @@ export class IconComponent implements OnInit, AfterViewInit, OnChanges {
     }
   }
 
-  public ngOnChanges(): void {
-    switch (this.iconColor) {
-      case IconColor.BLACK:
-        this.color = 'black';
-        break;
-      case IconColor.GRAY:
-        this.color = 'gray';
-        break;
-      default: throw new UnknownCaseException('unkown');
+  public ngOnChanges(changes: any): void {
+    if (changes.iconColor) {
+      switch (this.iconColor) {
+        case IconColor.BLACK:
+          this.color = 'black';
+          break;
+        case IconColor.GRAY:
+          this.color = 'gray';
+          break;
+        default: throw new UnknownCaseException('unkown');
+      }
     }
   }
 
