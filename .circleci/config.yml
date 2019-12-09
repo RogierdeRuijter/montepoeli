@@ -234,7 +234,7 @@ workflows:
             branches:
               only: 
                 - master
-                - /depfu*/
+                - /depfu.*/
       - e2e-test:
           requires:
             - swap-client-config-e2e
