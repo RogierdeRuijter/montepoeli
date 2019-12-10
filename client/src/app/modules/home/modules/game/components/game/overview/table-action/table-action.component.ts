@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Actions, Icons} from '../../../../../../../../shared/static-files/enums';
+import {Actions, IconColor, Icons} from '../../../../../../../../shared/static-files/enums';
 import {IllegalInputException} from '../../../../../../../../shared/exceptions/IllegalInputException';
 import {UnknownCaseException} from '../../../../../../../../shared/exceptions/UnknownCaseException';
 
@@ -23,6 +23,8 @@ export class TableActionComponent implements OnInit {
   public actionClickEvent: EventEmitter<Actions> = new EventEmitter();
 
   public iconsMap: any = {};
+
+  public IconColor = IconColor;
 
   public ngOnInit(): void {
     if (this.disabled && this.disabled.length !== this.actions.length) {

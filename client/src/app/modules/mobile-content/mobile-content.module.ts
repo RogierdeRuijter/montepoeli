@@ -11,6 +11,7 @@ import {MatToolbarModule} from '@angular/material';
 import {IconModule} from '../../shared/modules/icon/icon.module';
 import {UserActionModule} from '../../shared/modules/user-action/user-action.module';
 import {GridModule} from '../../shared/modules/grid/grid.module';
+import {AddGameModule} from '../../shared/modules/add-game/add-game.module';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import {GridModule} from '../../shared/modules/grid/grid.module';
     MatToolbarModule,
     IconModule,
     UserActionModule,
-    GridModule
-  ]
+    GridModule,
+    AddGameModule,
+  ],
 })
 export class MobileContentModule { }

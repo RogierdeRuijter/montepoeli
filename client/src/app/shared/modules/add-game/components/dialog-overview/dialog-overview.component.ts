@@ -4,7 +4,6 @@ import {DialogDataComponent} from '../dialog-data/dialog-data.component';
 import {Game} from '../../../../interfaces/game.interface';
 import {GameFactory} from '../../../../../modules/home/modules/game/factories/game.factory';
 import {UtilService} from '../../../../services/util/util.service';
-import {BlurStore} from '../../../../stores/blur.store';
 
 @Component({
   selector: 'app-dialog-overview',
@@ -15,11 +14,13 @@ export class DialogOverviewComponent {
   @Output()
   public addEvent: EventEmitter<Game> = new EventEmitter();
 
+  @Output()
+  public cancelEvent: EventEmitter<Game> = new EventEmitter();
+
   public game: Game = new GameFactory().create();
 
   constructor(public dialog: MatDialog,
-              private utilService: UtilService,
-              private blurStore: BlurStore) {
+              private utilService: UtilService) {
   }
 
   public openDialog(): void {
@@ -35,9 +36,10 @@ export class DialogOverviewComponent {
     });
 
     dialogRef.afterClosed().subscribe((game: Game) => {
-      this.blurStore.set(false);
       if (this.addEventIsReceived(game)) {
         this.addEvent.emit(game);
+      } else {
+        this.cancelEvent.emit();
       }
     });
   }

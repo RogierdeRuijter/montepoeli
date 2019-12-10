@@ -6,10 +6,10 @@ import {CustomHttpService} from '../../../http/services/custom-http/custom-http.
 import {Environment} from '../../../../../../environments/environment';
 import {CookieService} from 'ngx-cookie-service';
 import {UtilService} from 'src/app/shared/services/util/util.service';
-import {AuthModule} from '../../auth.module';
 
+// TODO: move to shared services
 @Injectable({
-  providedIn: AuthModule,
+  providedIn: 'root',
 })
 export class AuthService {
   private environment = new Environment();

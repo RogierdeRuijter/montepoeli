@@ -1,8 +1,12 @@
-import {Component, ChangeDetectionStrategy, OnInit, OnDestroy} from '@angular/core';
-import {AddGameStore} from 'src/app/shared/stores/add-game.store';
-import {Tabs, Icons} from '../../../../shared/static-files/enums';
+import {ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {NewGameStore} from 'src/app/shared/stores/new-game.store';
+import {Icons, Tabs} from '../../../../shared/static-files/enums';
 import {TabChangeGlobalEventEmitter} from '../../../../services/tab-change.global-event-emitter';
-import { AsyncBaseComponent } from 'src/app/shared/modules/async/components/async-base-component/async-base.component';
+import {AsyncBaseComponent} from 'src/app/shared/modules/async/components/async-base-component/async-base.component';
+import {Game} from '../../../../shared/interfaces/game.interface';
+import {GameService} from '../../../home/modules/game/services/game.service';
+import {RemoveLastAddedGameStore} from '../../../../shared/stores/remove-last-added-game.store';
+import {DialogOverviewComponent} from '../../../../shared/modules/add-game/components/dialog-overview/dialog-overview.component';
 
 @Component({
   selector: 'app-mobile-content',
@@ -11,14 +15,20 @@ import { AsyncBaseComponent } from 'src/app/shared/modules/async/components/asyn
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MobileContentComponent extends AsyncBaseComponent implements OnInit, OnDestroy {
+
+  @ViewChild('addDialog', {read: DialogOverviewComponent, static: true})
+  public addDialog: DialogOverviewComponent;
+
   public gameView: boolean;
   public selected = Icons.CHESS_PIECES;
 
-  constructor(private addGameStore: AddGameStore,
-              private tabChangeGlobalEventEmitter: TabChangeGlobalEventEmitter) { 
+  constructor(private newGameStore: NewGameStore,
+              private tabChangeGlobalEventEmitter: TabChangeGlobalEventEmitter,
+              private gameService: GameService,
+              private removeLastAddedGameStore: RemoveLastAddedGameStore) {
                 super();
   }
-  
+
   public ngOnInit(): void {
     this.tabChangeGlobalEventEmitter
       .get(this.destroy$)
@@ -35,22 +45,45 @@ export class MobileContentComponent extends AsyncBaseComponent implements OnInit
       });
   }
 
-  // TODO: when the game game add popup gets submitted reset selected to Icon.CHESS_PIECES
-  // See if you wanna do it at all maybe it is a bit to transitiony with the plus icon transition
-  // Or add the same transition to the color movement
-  public addGameHandler(): void {
-    // TODO: figure out how to set this properly
-    // Move the component here or use the store
-    // Store seems to be easier but it seems to be more logical if the popup lives here
+  public plusEventHandler(): void {
     this.selected = Icons.PLUS;
-    this.addGameStore.set(true);
+
+    this.addDialog.openDialog();
   }
 
   public gamesHandler(): void {
+    this.changeToGamesView();
+  }
+
+  private changeToGamesView(): void {
     this.tabChangeGlobalEventEmitter.emit(Tabs.GAMES);
   }
 
   public rulesHandler(): void {
     this.tabChangeGlobalEventEmitter.emit(Tabs.RULES);
+  }
+
+  public addHandler(game: Game): void {
+    this.changeToGamesView();
+
+    this.updateViewWithNewGame(game);
+
+    this.gameService.save(game)
+      .subscribe(
+        () => {},
+        () => this.removeAddedGameFromView(game),
+      );
+  }
+
+  public updateViewWithNewGame(game: Game): void {
+    this.newGameStore.set(game);
+  }
+
+  public removeAddedGameFromView(game: Game): void {
+    this.removeLastAddedGameStore.set(game);
+  }
+
+  public cancelHandler(): void {
+    this.changeToGamesView();
   }
 }

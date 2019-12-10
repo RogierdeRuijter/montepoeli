@@ -2,10 +2,9 @@ import {Injectable} from '@angular/core';
 import {User} from '../../../../interfaces/user.interface';
 import {Game} from '../../../../interfaces/game.interface';
 import {UtilService} from '../../../../services/util/util.service';
-import { AddGameModule } from '../../add-game.module';
 
 @Injectable({
-  providedIn: AddGameModule,
+  providedIn: 'root',
 })
 export class DialogDataService {
 

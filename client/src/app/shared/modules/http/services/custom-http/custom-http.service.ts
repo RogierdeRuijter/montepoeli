@@ -3,10 +3,10 @@ import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {EnvironmentService} from '../../../../services/environment/environment.service';
-import {HttpModule} from '../../http.module';
 
+// TODO: move to shared services
 @Injectable({
-  providedIn: HttpModule,
+  providedIn: 'root',
 })
 export class CustomHttpService {
   private environment: any;

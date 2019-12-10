@@ -1,29 +1,21 @@
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  Input,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Game} from '../../../../../../shared/interfaces/game.interface';
 import {GameService} from '../../services/game.service';
 import {Actions, GridSizes} from '../../../../../../shared/static-files/enums';
-import {BehaviorSubject, Subject} from 'rxjs';
+import {BehaviorSubject} from 'rxjs';
 import {DialogOverviewComponent} from '../../../../../../shared/modules/add-game/components/dialog-overview/dialog-overview.component';
 import {User} from '../../../../../../shared/interfaces/user.interface';
-import {BlurStore} from '../../../../../../shared/stores/blur.store';
-import {AddGameStore} from 'src/app/shared/stores/add-game.store';
-import {StandaloneStore} from 'src/app/shared/stores/standalone.store';
+import {NewGameStore} from 'src/app/shared/stores/new-game.store';
+import {RemoveLastAddedGameStore} from '../../../../../../shared/stores/remove-last-added-game.store';
+import {AsyncBaseComponent} from '../../../../../../shared/modules/async/components/async-base-component/async-base.component';
 
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GameComponent implements OnInit, OnDestroy {
+export class GameComponent extends AsyncBaseComponent implements OnInit, OnDestroy {
 
   @Input()
   public games$: BehaviorSubject<Game[]>;
@@ -39,49 +31,37 @@ export class GameComponent implements OnInit, OnDestroy {
 
   public displayedColumns: string[] = ['white', 'winner', 'black'];
 
-  public standalone: boolean;
+  public standalone = true;
 
   public GridSizes = GridSizes;
 
-  private destroy$: Subject<void> = new Subject();
-
   constructor(private gameService: GameService,
-              private blurStore: BlurStore,
-              private addGameStore: AddGameStore,
-              private standaloneStore: StandaloneStore,
-              private changeDetectorRef: ChangeDetectorRef) {
+              private newGameStore: NewGameStore,
+              private removeLastAddedGameStore: RemoveLastAddedGameStore) {
+    super();
   }
 
   public ngOnInit(): void {
-    this.addGameStore
-    .get(this.destroy$)
-    .subscribe(() => {
-      this.handleActionEvent();
-      // TODO: move to method empty store. in the store with
-      // a store finalize method where you empty the store
-      this.addGameStore.set(null);
-    });
+    this.newGameStore
+      .get(this.destroy$)
+      .subscribe((game: Game) => this.addGameToView(game));
 
-    this.standaloneStore
-    .get(this.destroy$)
-    .subscribe((standalone) => {
-      this.standalone = standalone;
-      this.changeDetectorRef.detectChanges();
-    });
+    this.removeLastAddedGameStore
+      .get(this.destroy$)
+      .subscribe((game: Game) => {
+        if (game) {
+          this.removeAddedGame(game);
+        }
+      });
 
   }
 
   public handleActionEvent(): void {
-    this.blurStore.set(true);
-
     this.addDialog.openDialog();
   }
 
   public handleAddEvent(game: Game): void {
-    // TODO: move to service
-    const games: Game[] = this.games$.getValue();
-    games.unshift(game);
-    this.games$.next(games);
+    this.addGameToView(game);
 
     this.gameService.save(game)
       .subscribe(
@@ -90,14 +70,15 @@ export class GameComponent implements OnInit, OnDestroy {
       );
   }
 
-  private removeAddedGame(game: Game): void {
-    this.games$.next(
-      this.games$.getValue().filter((game1) => game1 !== game),
-    );
+  private addGameToView(game: Game): void {
+    const games: Game[] = this.games$.getValue();
+    games.unshift(game);
+    this.games$.next(games);
   }
 
-  public ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
+  private removeAddedGame(game: Game): void {
+    this.games$.next(
+      this.games$.getValue().filter((game1: Game) => game1 !== game),
+    );
   }
 }

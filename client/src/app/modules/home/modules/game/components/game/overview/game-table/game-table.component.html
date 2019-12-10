@@ -2,8 +2,8 @@
        class="mat-elevation-z8"
        mat-table>
   <ng-container matColumnDef="white">
-    <th *matHeaderCellDef appTranslate="pages.home.games.labels.white" mat-header-cell></th>
-    <td *matCellDef="let element; let i = index" mat-cell [id]="'table-' + element.white + '-' + i"> {{element?.white}} </td>
+    <th *matHeaderCellDef [ngClass]="'customWidthClass'" appTranslate="pages.home.games.labels.white" mat-header-cell></th>
+    <td *matCellDef="let element; let i = index" [ngClass]="'customWidthClass'" mat-cell [id]="'table-' + element.white + '-' + i"> {{element?.white}} </td>
   </ng-container>
 
   <ng-container matColumnDef="winner">

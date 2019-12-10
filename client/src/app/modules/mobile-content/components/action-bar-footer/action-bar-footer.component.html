@@ -1,26 +1,26 @@
-<div class="footer">
-    <div [appGridRow]="[GridSizes.ALL]">
-        <div [appGridColumn]=[2] [offsets]=[3] [alignmentCol]="Alignments.CENTER">
-            <app-button-icon-active-state [icon]="Icons.CHESS_PIECES" 
-                                          [iconSize]="IconSize.MEDIUM" 
-                                          [active]="selected === Icons.CHESS_PIECES" 
-                                          (clickEvent)="chessSetClicked()">
-            </app-button-icon-active-state>
-        </div>
-        <div [appGridColumn]=[2] [alignmentCol]="Alignments.CENTER">
-            <app-button-icon-active-state [appShowAndHide]="showPlusIcon" 
-                                          [icon]="Icons.PLUS" 
-                                          [iconSize]="IconSize.MEDIUM" 
-                                          [active]="selected === Icons.PLUS" 
-                                          (clickEvent)="plusClicked()">
-            </app-button-icon-active-state>
-        </div>
-        <div [appGridColumn]=[2] [alignmentCol]="Alignments.CENTER">
-            <app-button-icon-active-state [icon]="Icons.SCROLL" 
-                                          [iconSize]="IconSize.MEDIUM" 
-                                          [active]="selected === Icons.SCROLL" 
-                                          (clickEvent)="scrollClicked()">
-            </app-button-icon-active-state>
-        </div>
+<div class="footer container">
+  <div [appGridRow]="[GridSizes.ALL]">
+    <div [appGridColumn]=[2] [offsets]=[3] [alignmentCol]="Alignments.CENTER">
+      <app-button-icon-active-state [icon]="Icons.CHESS_PIECES"
+                                    [iconSize]="IconSize.MEDIUM"
+                                    [active]="selected === Icons.CHESS_PIECES"
+                                    (clickEvent)="chessSetClicked()">
+      </app-button-icon-active-state>
     </div>
+    <div [appGridColumn]=[2] [alignmentCol]="Alignments.CENTER">
+      <app-button-icon-active-state [appShowAndHide]="showPlusIcon"
+                                    [icon]="Icons.PLUS"
+                                    [iconSize]="IconSize.MEDIUM"
+                                    [active]="selected === Icons.PLUS"
+                                    (clickEvent)="plusClicked()">
+      </app-button-icon-active-state>
+    </div>
+    <div [appGridColumn]=[2] [alignmentCol]="Alignments.CENTER">
+      <app-button-icon-active-state [icon]="Icons.SCROLL"
+                                    [iconSize]="IconSize.MEDIUM"
+                                    [active]="selected === Icons.SCROLL"
+                                    (clickEvent)="scrollClicked()">
+      </app-button-icon-active-state>
+    </div>
+  </div>
 </div>

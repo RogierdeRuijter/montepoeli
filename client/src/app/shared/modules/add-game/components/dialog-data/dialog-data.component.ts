@@ -6,13 +6,13 @@ import {UserStore} from '../../../../../modules/home/modules/game/stores/user.st
 import {DialogDataService} from '../../services/dialog-data/dialog-data.service';
 import {User} from '../../../../interfaces/user.interface';
 import {TranslateService} from '@ngx-translate/core';
-import {Subject} from 'rxjs';
+import {AsyncBaseComponent} from '../../../async/components/async-base-component/async-base.component';
 
 @Component({
   selector: 'app-dialog-data',
   templateUrl: './dialog-data.component.html',
 })
-export class DialogDataComponent implements OnInit, OnDestroy {
+export class DialogDataComponent extends AsyncBaseComponent implements OnInit, OnDestroy {
 
   public users: User[];
   public winners: Winners[] = [Winners.WHITE, Winners.BLACK, Winners.DRAW];
@@ -21,18 +21,17 @@ export class DialogDataComponent implements OnInit, OnDestroy {
 
   public winnerOptions: string[] = [];
 
-  private destory$: Subject<void> = new Subject();
-
   constructor(public dialogRef: MatDialogRef<DialogDataComponent>,
               @Inject(MAT_DIALOG_DATA) public data: Game,
               private userStore: UserStore,
               private dialogDataService: DialogDataService,
               private translateService: TranslateService) {
+    super();
   }
 
   public ngOnInit(): void {
     this.userStore
-      .get(this.destory$)
+      .get(this.destroy$)
       .subscribe((users: User[]) => this.users = users);
 
     this.winners.forEach(winner => this.winnerOptions.push(this.translateService.instant('pages.home.games.cell.winner.' + winner)));
@@ -48,12 +47,5 @@ export class DialogDataComponent implements OnInit, OnDestroy {
 
   public ifAllFieldsAreNotField(): boolean {
     return !this.dialogDataService.allFieldsAreDefined(this.data);
-  }
-
-  // TODO: refactor to base component that has the destory method and destory variable
-  // It should be called baseAsyncComponent
-  public ngOnDestroy(): void {
-    this.destory$.next();
-    this.destory$.complete();
   }
 }

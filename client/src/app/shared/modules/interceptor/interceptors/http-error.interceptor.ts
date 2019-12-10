@@ -3,10 +3,10 @@ import {Observable, throwError} from 'rxjs';
 import {catchError, retry} from 'rxjs/operators';
 import {NotificationService} from '../../notification/services/notification/notification.service';
 import {Injectable} from '@angular/core';
-import {InterceptorModule} from '../interceptor.module';
 
+// TODO: move to shared services
 @Injectable({
-  providedIn: InterceptorModule,
+  providedIn: 'root',
 })
 export class HttpErrorInterceptor implements HttpInterceptor {
 

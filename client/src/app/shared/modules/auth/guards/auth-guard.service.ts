@@ -5,10 +5,10 @@ import {TranslateService} from '@ngx-translate/core';
 import {AuthService} from '../services/auth/auth.service';
 import {NotificationService} from '../../notification/services/notification/notification.service';
 import {Environment} from '../../../../../environments/environment';
-import {AuthModule} from '../auth.module';
 
+// TODO: move to shared services
 @Injectable({
-  providedIn: AuthModule,
+  providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
   private environment = new Environment();
