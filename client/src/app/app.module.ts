@@ -41,7 +41,7 @@ export function init_app(appLoadService: AppInitService): () => Promise<any> {
     ServiceWorkerModule.register('ngsw-worker.js', {enabled: true}),
     AuthModule,
     MobileContentModule,
-    LargerScreenContentModule,
+    LargerScreenContentModule  
   ],
   bootstrap: [AppComponent],
 })
