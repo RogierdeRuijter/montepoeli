@@ -1,6 +1,9 @@
 import {browser, by, element, ElementFinder} from 'protractor';
 
 export class Helper {
+  public mobileWidth = 320;
+  public mobileHeigth = 568;
+
   public delayAction(fun: () => any): void {
     this.sleep();
     fun();

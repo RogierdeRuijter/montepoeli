@@ -1,5 +1,8 @@
 import { AppPage } from './app.po';
 import { browser } from 'protractor';
+import {Helper} from './helper';
+
+const helper = new Helper();
 
 describe('montepoeli login', () => {
   let page: AppPage;
@@ -12,7 +15,9 @@ describe('montepoeli login', () => {
     await page.navigateTo();
     expect(browser.getCurrentUrl()).toContain('/home');
 
+    page.getUserSettings().click();
     page.getLogout().click();
+    helper.sleep();
 
     expect(browser.getCurrentUrl()).toContain('/login');
 
