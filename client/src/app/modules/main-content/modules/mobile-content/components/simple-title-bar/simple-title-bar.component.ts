@@ -1,5 +1,5 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
-import {Icons, IconSize} from '../../../../shared/static-files/enums';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Icons, IconSize } from '../../../../../../shared/static-files/enums';
 
 @Component({
   selector: 'app-simple-title-bar',

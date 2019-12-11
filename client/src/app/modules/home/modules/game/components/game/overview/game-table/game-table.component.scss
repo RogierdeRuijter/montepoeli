@@ -1,15 +1,28 @@
 table {
+  //text-align: center !important;
   width: 100%;
 }
+//
+//.mat-header-cell {
+//  text-align: center;
+//}
 
-.mat-column-white {
-  flex: 0 0 100px;
-}
-
-.mat-column-winner {
-  flex: 0 0 100px;
-}
-
-.mat-column-black {
-  flex: 0 0 100px;
-}
+//:host ::ng-deep .mat-sort-header-container {
+//  display: flex;
+//  justify-content: center;
+//}
+//
+//.mat-table {
+//  mat-row, mat-header-row, mat-footer-row {
+//    padding-left: 24px;
+//    padding-right: 24px;
+//  }
+//
+//  mat-cell:first-child, mat-footer-cell:first-child, mat-header-cell:first-child {
+//    padding-left: 0;
+//  }
+//
+//  mat-cell:last-child, mat-footer-cell:last-child, mat-header-cell:last-child {
+//    padding-right: 0;
+//  }
+//}

@@ -1,26 +1,24 @@
-<table [dataSource]="games$"
-       class="mat-elevation-z8"
-       mat-table>
+<table mat-table [dataSource]="games$"
+       class="mat-elevation-z8">
   <ng-container matColumnDef="white">
-    <th *matHeaderCellDef [ngClass]="'customWidthClass'" appTranslate="pages.home.games.labels.white" mat-header-cell></th>
-    <td *matCellDef="let element; let i = index" [ngClass]="'customWidthClass'" mat-cell [id]="'table-' + element.white + '-' + i"> {{element?.white}} </td>
+    <th mat-header-cell *matHeaderCellDef appTranslate="pages.home.games.labels.white"></th>
+    <td mat-cell *matCellDef="let element; let i = index" mat-cell [id]="'table-' + element.white + '-' + i"> {{element?.white}} </td>
   </ng-container>
 
   <ng-container matColumnDef="winner">
-    <th *matHeaderCellDef appTranslate="pages.home.games.labels.winner" mat-header-cell></th>
-    <td *matCellDef="let element; let i = index"
+    <th mat-header-cell *matHeaderCellDef appTranslate="pages.home.games.labels.winner"></th>
+    <td mat-cell *matCellDef="let element; let i = index"
         [id]="'table-' + element?.winner.toLowerCase() + '-' + i"
-        [appTranslate]="'pages.home.games.cell.winner.' + element?.winner.toLowerCase()"
-        mat-cell></td>
+        [appTranslate]="'pages.home.games.cell.winner.' + element?.winner.toLowerCase()">
+    </td>
   </ng-container>
 
   <ng-container matColumnDef="black">
-    <th *matHeaderCellDef appTranslate="pages.home.games.labels.black" mat-header-cell></th>
-    <td *matCellDef="let element; let i = index"
-        mat-cell
+    <th mat-header-cell *matHeaderCellDef appTranslate="pages.home.games.labels.black"></th>
+    <td mat-cell *matCellDef="let element; let i = index"
         [id]="'table-' + element?.black + '-' + i"> {{element?.black}} </td>
   </ng-container>
 
-  <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
-  <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>

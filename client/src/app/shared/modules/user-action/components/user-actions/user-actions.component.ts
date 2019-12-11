@@ -1,7 +1,7 @@
-import {ChangeDetectionStrategy, Component, ViewChild} from '@angular/core';
-import {Icons, IconSize} from 'src/app/shared/static-files/enums';
-import {MatSelect} from '@angular/material';
-import {AuthService} from 'src/app/shared/modules/auth/services/auth/auth.service';
+import { ChangeDetectionStrategy, Component, Input, ViewChild } from '@angular/core';
+import { IconColor, Icons, IconSize } from 'src/app/shared/static-files/enums';
+import { MatSelect } from '@angular/material';
+import { AuthService } from 'src/app/shared/modules/auth/services/auth/auth.service';
 
 @Component({
   selector: 'app-user-actions',
@@ -13,6 +13,9 @@ export class UserActionsComponent {
 
   @ViewChild('userSettingsDropDown', {static: true})
   public userSettingsDropDown: MatSelect;
+
+  @Input()
+  public settingsIconColor: IconColor;
 
   public Icons = Icons;
   public IconSize = IconSize;

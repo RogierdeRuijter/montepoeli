@@ -1,5 +1,5 @@
-import {browser, ElementFinder, promise as wdpromise} from 'protractor';
-import {Helper} from './helper';
+import { browser, ElementFinder, promise as wdpromise } from 'protractor';
+import { Helper } from './helper';
 
 export class AppPage {
   private helper = new Helper();
@@ -96,4 +96,19 @@ export class AppPage {
     return this.helper.findById('mat-tab-label-0-1');
   }
 
+  public getMobileNavButtonGames(): ElementFinder {
+    return this.helper.findById('games-tab');
+  }
+
+  public getMobileNavButtonRules(): ElementFinder {
+    return this.helper.findById('rules-tab');
+  }
+
+  public getUserSettings(): ElementFinder {
+    return this.helper.findById('user-settings');
+  }
+
+  public getLogout(): ElementFinder {
+    return this.helper.findById('Logout');
+  }
 }
