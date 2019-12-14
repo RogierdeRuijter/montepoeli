@@ -5,10 +5,9 @@ import {Injectable} from '@angular/core';
 import {AuthService} from 'src/app/shared/modules/auth/services/auth/auth.service';
 import {NotificationService} from '../../notification/services/notification/notification.service';
 import {TranslateService} from '@ngx-translate/core';
-import {InterceptorModule} from '../interceptor.module';
 
 @Injectable({
-  providedIn: InterceptorModule,
+  providedIn: 'root',
 })
 export class InvalidTokenInterceptor implements HttpInterceptor {
 

@@ -9,7 +9,6 @@ import {CustomTranslateModule} from '../../shared/modules/translate/custom-trans
 import { AuthModule } from 'src/app/shared/modules/auth/auth.module';
 import { LoginComponent } from './components/login/login.component';
 import { LoginFormComponent } from './components/login/login-form/login-form.component';
-import { InterceptorModule } from 'src/app/shared/modules/interceptor/interceptor.module';
 
 @NgModule({
   declarations: [
@@ -24,8 +23,7 @@ import { InterceptorModule } from 'src/app/shared/modules/interceptor/intercepto
     FormsModule,
     MatInputModule,
     CustomTranslateModule,
-    AuthModule,
-    InterceptorModule
+    AuthModule  
   ],
 })
 export class LoginModule { }

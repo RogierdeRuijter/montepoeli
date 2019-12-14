@@ -13,6 +13,7 @@ import { LandingComponent } from './components/landing/landing.component';
 import { MobileContentModule } from './modules/main-content/modules/mobile-content/mobile-content.module';
 import { LargerScreenContentModule } from './modules/main-content/modules/larger-screen-content/larger-screen-content.module';
 import { AuthModule } from './shared/modules/auth/auth.module';
+import { InterceptorModule } from './shared/modules/interceptor/interceptor.module';
 
 export function init_app(appLoadService: AppInitService): () => Promise<any> {
   return () => appLoadService.init();
@@ -41,7 +42,8 @@ export function init_app(appLoadService: AppInitService): () => Promise<any> {
     ServiceWorkerModule.register('ngsw-worker.js', {enabled: true}),
     AuthModule,
     MobileContentModule,
-    LargerScreenContentModule  
+    LargerScreenContentModule,
+    InterceptorModule
   ],
   bootstrap: [AppComponent],
 })

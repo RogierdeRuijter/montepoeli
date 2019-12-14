@@ -99,7 +99,7 @@ export class IconComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   public ngOnChanges(changes: any): void {
-    if (changes.iconColor) {
+    if (changes.iconColor && changes.iconColor.currentValue) {
       switch (this.iconColor) {
         case IconColor.BLACK:
           this.color = 'black';
@@ -107,7 +107,7 @@ export class IconComponent implements OnInit, AfterViewInit, OnChanges {
         case IconColor.GRAY:
           this.color = 'dark-grey';
           break;
-        default: throw new UnknownCaseException('unkown');
+        default: throw new UnknownCaseException(this.iconColor);
       }
     }
   }
