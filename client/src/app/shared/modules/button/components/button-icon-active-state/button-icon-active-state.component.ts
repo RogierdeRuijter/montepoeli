@@ -17,6 +17,9 @@ export class ButtonIconActiveStateComponent {
   @Input()
   public active: boolean;
 
+  @Input()
+  public squareButton: boolean;
+
   @Output()
   public clickEvent: EventEmitter<void> = new EventEmitter();
 

@@ -14,38 +14,38 @@ describe('Add a game', () => {
   it('should add a game and show it in the table', async () => {
     await page.navigateTo();
 
-    browser.waitForAngular();
+    await browser.waitForAngular();
     
     expect(browser.getCurrentUrl()).toContain('/home');
 
-    helper.sleep();
+    await helper.sleep();
     page.getAddGameButton().click();
 
-    helper.sleep();
+    await helper.sleep();
     page.getWhiteDropDownList().click();
 
-    helper.sleep();
+    await helper.sleep();
     page.getProtractorUser().click();
 
     expect(page.getWhiteDropDownField().getText()).toEqual('protractor');
 
-    helper.sleep();
+    await helper.sleep();
     page.getWinnerDropDownList().click();
 
-    helper.sleep();
+    await helper.sleep();
     page.getWhiteOption().click();
 
     expect(page.getWinnerDropDownField().getText()).toEqual('White');
 
-    helper.sleep();
+    await helper.sleep();
     page.getBlackDropDownList().click();
 
-    helper.sleep();
+    await helper.sleep();
     page.getProtractorUser1().click();
 
     expect(page.getBlackDropDownField().getText()).toEqual('protractor1');
 
-    helper.sleep();
+    await helper.sleep();
     page.getSaveButton().click();
 
     expect(page.getTableWhiteUserFirstRowText().getText()).toEqual('protractor');

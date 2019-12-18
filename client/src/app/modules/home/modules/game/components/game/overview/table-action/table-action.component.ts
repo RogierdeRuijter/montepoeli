@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Actions, IconColor, Icons} from '../../../../../../../../shared/static-files/enums';
+import {Actions, IconColor, Icons, IconSize} from '../../../../../../../../shared/static-files/enums';
 import {IllegalInputException} from '../../../../../../../../shared/exceptions/IllegalInputException';
 import {UnknownCaseException} from '../../../../../../../../shared/exceptions/UnknownCaseException';
 
@@ -25,7 +25,8 @@ export class TableActionComponent implements OnInit {
   public iconsMap: any = {};
 
   public IconColor = IconColor;
-
+  public IconSize = IconSize;
+  
   public ngOnInit(): void {
     if (this.disabled && this.disabled.length !== this.actions.length) {
       throw new IllegalInputException('disabled and actions should be the same length');

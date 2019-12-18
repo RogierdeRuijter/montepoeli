@@ -18,6 +18,9 @@ export class ButtonIconComponent implements AfterViewInit {
   @Input()
   public iconColor: IconColor;
 
+  @Input()
+  public squareButton = false;
+
   @Output()
   public clickEvent: EventEmitter<void> = new EventEmitter();
 
@@ -31,9 +34,11 @@ export class ButtonIconComponent implements AfterViewInit {
   }
 
   public ngAfterViewInit(): void {
-    this.renderer.setStyle(this.buttonOne._elementRef.nativeElement, 'width', 'inherit');
-    this.renderer.setStyle(this.buttonOne._elementRef.nativeElement, 'height', 'inherit');
-    this.renderer.setStyle(this.buttonOne._elementRef.nativeElement, 'line-height', 'inherit');
-    this.renderer.setStyle(this.buttonOne._elementRef.nativeElement, 'border-radius', 'inherit');
+    if (this.squareButton) {
+      this.renderer.setStyle(this.buttonOne._elementRef.nativeElement, 'width', 'inherit');
+      this.renderer.setStyle(this.buttonOne._elementRef.nativeElement, 'height', 'inherit');
+      this.renderer.setStyle(this.buttonOne._elementRef.nativeElement, 'line-height', 'inherit');
+      this.renderer.setStyle(this.buttonOne._elementRef.nativeElement, 'border-radius', 'inherit');
+   }
   }
 }

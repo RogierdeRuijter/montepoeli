@@ -27,9 +27,6 @@ export class OverviewComponent {
   @Input()
   public disabled: boolean[];
 
-  @Input()
-  public showAddGame: boolean;
-
   @Output()
   public actionEvent: EventEmitter<any> = new EventEmitter();
 

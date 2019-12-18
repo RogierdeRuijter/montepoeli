@@ -4,6 +4,7 @@
       <app-button-icon-active-state id="games-tab"
                                     [icon]="Icons.CHESS_PIECES"
                                     [iconSize]="IconSize.MEDIUM"
+                                    [squareButton]="true"
                                     [active]="selected === Icons.CHESS_PIECES"
                                     (clickEvent)="chessSetClicked()">
       </app-button-icon-active-state>
@@ -12,6 +13,7 @@
       <app-button-icon-active-state [appShowAndHide]="showPlusIcon"
                                     [icon]="Icons.PLUS"
                                     [iconSize]="IconSize.MEDIUM"
+                                    [squareButton]="true"
                                     [active]="selected === Icons.PLUS"
                                     (clickEvent)="plusClicked()">
       </app-button-icon-active-state>
@@ -20,6 +22,7 @@
       <app-button-icon-active-state id="rules-tab"
                                     [icon]="Icons.SCROLL"
                                     [iconSize]="IconSize.MEDIUM"
+                                    [squareButton]="true"
                                     [active]="selected === Icons.SCROLL"
                                     (clickEvent)="scrollClicked()">
       </app-button-icon-active-state>

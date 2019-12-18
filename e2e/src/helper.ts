@@ -9,8 +9,8 @@ export class Helper {
     fun();
   }
 
-  public sleep(): void {
-    browser.sleep(200);
+  public async sleep(): Promise<any> {
+    return browser.sleep(200);
   }
 
   public findById(id: string): ElementFinder {
