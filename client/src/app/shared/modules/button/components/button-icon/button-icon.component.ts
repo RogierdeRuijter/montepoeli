@@ -24,15 +24,16 @@ export class ButtonIconComponent implements AfterViewInit {
   @ViewChild(MatButton, {static: true})
   public buttonOne: MatButton;
 
+  constructor(private renderer: Renderer2) {}
+
   public clicked(): void {
     this.clickEvent.emit();
   }
 
-  constructor(private renderer: Renderer2) {}
-
   public ngAfterViewInit(): void {
-    this.renderer.setStyle(this.buttonOne._elementRef.nativeElement, 'width', '25px');
-    this.renderer.setStyle(this.buttonOne._elementRef.nativeElement, 'height', '25px');
-    this.renderer.setStyle(this.buttonOne._elementRef.nativeElement, 'line-height', '25px');
+    this.renderer.setStyle(this.buttonOne._elementRef.nativeElement, 'width', 'inherit');
+    this.renderer.setStyle(this.buttonOne._elementRef.nativeElement, 'height', 'inherit');
+    this.renderer.setStyle(this.buttonOne._elementRef.nativeElement, 'line-height', 'inherit');
+    this.renderer.setStyle(this.buttonOne._elementRef.nativeElement, 'border-radius', 'inherit');
   }
 }

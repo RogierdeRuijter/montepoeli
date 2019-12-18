@@ -2,7 +2,13 @@ button {
     outline: none;
 }
 
-// ::ng-deep .mat-icon-button {
-//     width: inherit;
-//     height: inherit;
-// }
+.smaller-button {
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+}
+
+mat-icon-button {
+    padding: 0;
+    min-width: 0;
+}

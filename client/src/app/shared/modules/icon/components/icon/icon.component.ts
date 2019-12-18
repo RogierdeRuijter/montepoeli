@@ -123,7 +123,7 @@ export class IconComponent implements OnInit, AfterViewInit, OnChanges {
         this.renderer.setStyle(this.svgIconElementRef.nativeElement, 'width', '41px');
       }
     }
-
+    // TODO: refactor this to use colorIcon green
     if (this.icon === Icons.GREEN_HEART) {
       this.renderer.setStyle(this.faIcon.nativeElement, 'color', 'green');
     }
