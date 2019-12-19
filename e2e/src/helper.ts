@@ -17,6 +17,10 @@ export class Helper {
     return element(by.id(id));
   }
 
+  public selectLastElementWithId(id: string): ElementFinder {
+    return element.all(by.id(id)).last();
+  }
+
   public findByCss(css: string): ElementFinder {
     return element(by.css(css));
   }
@@ -27,5 +31,13 @@ export class Helper {
 
   public getTextOfElement(element: ElementFinder): any {
     return element.getText();
+  }
+
+  public setBrowserToMobileSize(browser: any): void {
+    browser.driver.manage().window().setSize(this.mobileWidth, this.mobileHeigth);
+  }
+
+  public deleteAllCookies(browser: any): void {
+    browser.driver.manage().deleteAllCookies();
   }
 }

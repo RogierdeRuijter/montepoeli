@@ -4,6 +4,7 @@
 const {SpecReporter} = require('jasmine-spec-reporter');
 const executeOnMongo = require('./start-up-scripts/exec-on-mongo');
 const setUp = require('./start-up-scripts/set-up');
+const tearDown = require('./start-up-scripts/tear-down');
 
 const HtmlScreenshotReporter = require('protractor-jasmine2-screenshot-reporter');
 
@@ -56,9 +57,10 @@ exports.config = {
     jasmine.getEnv().addReporter(new SpecReporter({spec: {displayStacktrace: true}}));
   },
   afterLaunch: function(exitCode) {
-    return new Promise(function(resolve){
-      reporter.afterLaunch(resolve.bind(this, exitCode));
-    });
+    return Promise.all([
+      executeOnMongo(dbParams, tearDown),
+      new Promise((resolve) => reporter.afterLaunch(resolve.bind(this, exitCode)))
+    ]);
   }
 };
 

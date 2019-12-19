@@ -3,7 +3,8 @@
   "version": "2.5.0",
   "scripts": {
     "protractor": "protractor",
-    "protractor:local": "npm run webdriver-update && protractor protractor-local.conf.js ",
+    "protractor:local-with-webdriver": "yarn webdriver-update:protractor && protractor protractor-local.conf.js",
+    "protractor:local": "protractor protractor-local.conf.js",
     "webdriver-update": "webdriver-manager clean && webdriver-manager update",
     "webdriver-update:protractor": "./node_modules/protractor/bin/webdriver-manager update"
   },

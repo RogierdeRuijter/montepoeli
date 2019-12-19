@@ -8,10 +8,7 @@ describe('Mobile screen tests', () => {
   let page: AppPage;
 
   beforeAll(() => {
-    const width = helper.mobileWidth;
-    const height = helper.mobileHeigth;
-
-    browser.driver.manage().window().setSize(width, height);
+    helper.setBrowserToMobileSize(browser);
   });
 
   beforeEach(() => {
@@ -27,12 +24,26 @@ describe('Mobile screen tests', () => {
     helper.sleep();
 
     expect(page.getRulesView()).toBeTruthy();
+
+    helper.sleep();
+    
+    expect(page.getMobileNavButtonGames()).toBeTruthy();
+    expect(page.getMobileAddGameButton()).toBeFalsy();
+    expect(page.getMobileNavButtonRules()).toBeTruthy();
+
     helper.sleep();
 
     page.getMobileNavButtonGames().click();
+
     helper.sleep();
 
     expect(page.getGamesView()).toBeTruthy();
+
+    helper.sleep();
+
+    expect(page.getMobileNavButtonGames()).toBeTruthy();
+    expect(page.getMobileAddGameButton()).toBeTruthy();
+    expect(page.getMobileNavButtonRules()).toBeTruthy();
   });
 
   afterEach(() => {

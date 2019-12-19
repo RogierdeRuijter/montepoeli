@@ -8,10 +8,8 @@ describe('montepoeli login', () => {
   let page: AppPage;
   
   beforeAll(() => {
-    const width = helper.mobileWidth;
-    const height = helper.mobileHeigth;
-
-    browser.driver.manage().window().setSize(width, height);
+    helper.deleteAllCookies(browser);
+    helper.setBrowserToMobileSize(browser);
   });
 
   beforeEach(() => {

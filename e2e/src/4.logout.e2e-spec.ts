@@ -4,14 +4,14 @@ import {Helper} from './helper';
 
 const helper = new Helper();
 
-describe('montepoeli login', () => {
+describe('montepoeli', () => {
   let page: AppPage;
 
   beforeEach(() => {
     page = new AppPage();
   });
 
-  it('should login to montepouli', async () => {
+  it('should logout to montepouli', async () => {
     await page.navigateTo();
     expect(browser.getCurrentUrl()).toContain('/home');
 

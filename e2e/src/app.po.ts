@@ -25,7 +25,7 @@ export class AppPage {
   }
 
   public getAddGameButton(): ElementFinder {
-    return this.helper.findById('add-game-button');
+    return this.helper.selectLastElementWithId('add-game-button');
   }
 
   public getWhiteDropDownList(): ElementFinder {
@@ -48,6 +48,10 @@ export class AppPage {
     return this.helper.findById('White');
   }
 
+  public getBlackOption(): ElementFinder {
+    return this.helper.findById('Black');
+  }
+
   public getWinnerDropDownField(): ElementFinder {
     return this.helper.findByXPath('//*[@id="winner-user"]/div/div[1]/span/span');
   }
@@ -68,16 +72,16 @@ export class AppPage {
     return this.helper.findById('save');
   }
 
-  public getTableWhiteUserFirstRowText(): ElementFinder {
-    return this.helper.findById('table-protractor-0');
+  public getTableWhiteUserForRow(rowNumber: number): ElementFinder {
+    return this.helper.findById('table-protractor-' + rowNumber);
   }
 
-  public getTableWinnerUserFirstRowText(): ElementFinder {
-    return this.helper.findById('table-white-0');
+  public getTableWinnerUserForRow(winner: string, rowNumber: number): ElementFinder {
+    return this.helper.findById('table-' + winner + '-' + rowNumber);
   }
 
-  public getTableBlackUserFirstRowText(): ElementFinder {
-    return this.helper.findById('table-protractor1-0');
+  public getTableBlackUserForRow(rowNumber: number): ElementFinder {
+    return this.helper.findById('table-protractor1-' + rowNumber);
   }
 
   public getGamesView(): ElementFinder {
@@ -100,12 +104,16 @@ export class AppPage {
     return this.helper.findById('games-tab');
   }
 
+  public getMobileAddGameButton(): ElementFinder {
+    return this.helper.selectLastElementWithId('add-game-footer');
+  }
+
   public getMobileNavButtonRules(): ElementFinder {
     return this.helper.findById('rules-tab');
   }
 
   public getUserSettings(): ElementFinder {
-    return this.helper.findById('user-settings');
+    return this.helper.selectLastElementWithId('user-settings');
   }
 
   public getLogout(): ElementFinder {

@@ -6,6 +6,10 @@ const helper = new Helper();
 
 describe('Add a game', () => {
   let page: AppPage;
+  
+  beforeAll(() => {
+    helper.setBrowserToMobileSize(browser);
+  });
 
   beforeEach(() => {
     page = new AppPage();
@@ -17,9 +21,9 @@ describe('Add a game', () => {
     await browser.waitForAngular();
     
     expect(browser.getCurrentUrl()).toContain('/home');
-
+    // TODO: refactor adding a user with the pop up to a method
     await helper.sleep();
-    page.getAddGameButton().click();
+    page.getMobileAddGameButton().click();
 
     await helper.sleep();
     page.getWhiteDropDownList().click();
@@ -33,9 +37,9 @@ describe('Add a game', () => {
     page.getWinnerDropDownList().click();
 
     await helper.sleep();
-    page.getWhiteOption().click();
+    page.getBlackOption().click();
 
-    expect(page.getWinnerDropDownField().getText()).toEqual('White');
+    expect(page.getWinnerDropDownField().getText()).toEqual('Black');
 
     await helper.sleep();
     page.getBlackDropDownList().click();
@@ -48,9 +52,10 @@ describe('Add a game', () => {
     await helper.sleep();
     page.getSaveButton().click();
 
-    expect(page.getTableWhiteUserForRow(0).getText()).toEqual('protractor');
-    expect(page.getTableWinnerUserForRow('white', 0).getText()).toEqual('White');
-    expect(page.getTableBlackUserForRow(0).getText()).toEqual('protractor1');
+    await helper.sleep();
+    expect(page.getTableWhiteUserForRow(1).getText()).toEqual('protractor');
+    expect(page.getTableWinnerUserForRow('black', 0).getText()).toEqual('Black');
+    expect(page.getTableBlackUserForRow(1).getText()).toEqual('protractor1');
 
   });
 

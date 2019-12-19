@@ -10,7 +10,7 @@ import { MatButton } from '@angular/material';
 export class ButtonIconComponent implements AfterViewInit {
 
   @Input()
-  public id: string;
+  public idForElement: string;
 
   @Input()
   public icon: Icons;
