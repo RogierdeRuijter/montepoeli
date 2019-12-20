@@ -12,7 +12,9 @@ import {UtilService} from 'src/app/shared/services/util/util.service';
   providedIn: 'root',
 })
 export class AuthService {
+
   private environment = new Environment();
+
   constructor(private router: Router,
               private httpService: CustomHttpService,
               private cookieService: CookieService,
@@ -32,7 +34,15 @@ export class AuthService {
         tap(jwt => {
           // Work around for the automation tests
           if (!this.cookieService.check(this.environment.authentication.TOKENNAME)) {
-            this.cookieService.set(this.environment.authentication.TOKENNAME, jwt[this.environment.authentication.TOKENNAME]);
+            this.cookieService.set(
+              this.environment.authentication.TOKENNAME, 
+              jwt[this.environment.authentication.TOKENNAME],
+              10000,
+              '/',
+              '',
+              false,
+              'Strict'
+              );
           }
         }),
         tap(() => this.router.navigate([this.environment.frontend.BASIC_ROUTES.HOME]))

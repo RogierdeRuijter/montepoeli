@@ -72,16 +72,16 @@ export class AppPage {
     return this.helper.findById('save');
   }
 
-  public getTableWhiteUserForRow(rowNumber: number): ElementFinder {
-    return this.helper.findById('table-protractor-' + rowNumber);
+  public getTableWhiteUserForLastAddedGame(): ElementFinder {
+    return this.helper.findById('table-protractor-0');
   }
 
-  public getTableWinnerUserForRow(winner: string, rowNumber: number): ElementFinder {
-    return this.helper.findById('table-' + winner + '-' + rowNumber);
+  public getTableWinnerUserForLastAddedGame(winner: string): ElementFinder {
+    return this.helper.findById('table-' + winner + '-0');
   }
 
-  public getTableBlackUserForRow(rowNumber: number): ElementFinder {
-    return this.helper.findById('table-protractor1-' + rowNumber);
+  public getTableBlackUserForLastAddedGame(): ElementFinder {
+    return this.helper.findById('table-protractor1-0');
   }
 
   public getGamesView(): ElementFinder {

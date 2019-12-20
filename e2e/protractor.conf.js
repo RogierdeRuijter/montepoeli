@@ -30,6 +30,9 @@ exports.config = {
     chromeOptions: {
       args: ['--window-size=800x600', 'no-sandbox', '--whitelisted-ips'],
     },
+    'goog:chromeOptions': {
+      'w3c': false
+    }
   },
   seleniumAddress: 'http://selenium-hub:4444/wd/hub',
   baseUrl: 'http://client-e2e:80/',
@@ -57,10 +60,7 @@ exports.config = {
     jasmine.getEnv().addReporter(new SpecReporter({spec: {displayStacktrace: true}}));
   },
   afterLaunch: function(exitCode) {
-    return Promise.all([
-      executeOnMongo(dbParams, tearDown),
-      new Promise((resolve) => reporter.afterLaunch(resolve.bind(this, exitCode)))
-    ]);
+      return new Promise((resolve) => reporter.afterLaunch(resolve.bind(this, exitCode)));
   }
 };
 

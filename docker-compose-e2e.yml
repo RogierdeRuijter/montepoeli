@@ -54,7 +54,7 @@ services:
       - e2e
 
   selenium-hub:
-    image: selenium/hub:3.141.59-titanium
+    image: selenium/hub:3.141.59
     container_name: selenium-hub
     ports:
       - "4444"
@@ -62,7 +62,7 @@ services:
       - e2e
 
   chrome:
-    image: selenium/node-chrome:3.141.59-titanium
+    image: selenium/node-chrome:3.141.59
     volumes:
       - /dev/shm:/dev/shm
     depends_on:

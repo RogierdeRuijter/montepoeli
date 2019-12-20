@@ -21,6 +21,7 @@ describe('Add a game', () => {
     await browser.waitForAngular();
     
     expect(browser.getCurrentUrl()).toContain('/home');
+    
     // TODO: refactor adding a user with the pop up to a method
     await helper.sleep();
     page.getMobileAddGameButton().click();
@@ -53,15 +54,13 @@ describe('Add a game', () => {
     page.getSaveButton().click();
 
     await helper.sleep();
-    expect(page.getTableWhiteUserForRow(1).getText()).toEqual('protractor');
-    expect(page.getTableWinnerUserForRow('black', 0).getText()).toEqual('Black');
-    expect(page.getTableBlackUserForRow(1).getText()).toEqual('protractor1');
+    expect(page.getTableWhiteUserForLastAddedGame().getText()).toEqual('protractor');
+    expect(page.getTableWinnerUserForLastAddedGame('black').getText()).toEqual('Black');
+    expect(page.getTableBlackUserForLastAddedGame().getText()).toEqual('protractor1');
 
   });
 
   afterEach(() => {
-    browser.manage().logs().get('browser').then((browserLog) => {
-      expect(browserLog.length).toEqual(0);
-    });
+    helper.expectNoErrorsInConsole(browser);
   });
 });

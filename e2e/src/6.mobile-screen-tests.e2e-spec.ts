@@ -28,7 +28,8 @@ describe('Mobile screen tests', () => {
     helper.sleep();
     
     expect(page.getMobileNavButtonGames()).toBeTruthy();
-    expect(page.getMobileAddGameButton()).toBeFalsy();
+    expect(page.getMobileAddGameButton().getCssValue('opacity')).toEqual('0');
+    expect(page.getMobileAddGameButton().getCssValue('pointer-events')).toEqual('none');
     expect(page.getMobileNavButtonRules()).toBeTruthy();
 
     helper.sleep();
@@ -42,13 +43,11 @@ describe('Mobile screen tests', () => {
     helper.sleep();
 
     expect(page.getMobileNavButtonGames()).toBeTruthy();
-    expect(page.getMobileAddGameButton()).toBeTruthy();
+    expect(page.getMobileAddGameButton().getCssValue('opacity')).toEqual('1');    
     expect(page.getMobileNavButtonRules()).toBeTruthy();
   });
 
   afterEach(() => {
-    browser.manage().logs().get('browser').then((browserLog) => {
-      expect(browserLog.length).toEqual(0);
-    });
+    helper.expectNoErrorsInConsole(browser);
   });
 });

@@ -48,15 +48,13 @@ describe('Add a game', () => {
     await helper.sleep();
     page.getSaveButton().click();
 
-    expect(page.getTableWhiteUserForRow(0).getText()).toEqual('protractor');
-    expect(page.getTableWinnerUserForRow('white', 0).getText()).toEqual('White');
-    expect(page.getTableBlackUserForRow(0).getText()).toEqual('protractor1');
+    expect(page.getTableWhiteUserForLastAddedGame().getText()).toEqual('protractor');
+    expect(page.getTableWinnerUserForLastAddedGame('white').getText()).toEqual('White');
+    expect(page.getTableBlackUserForLastAddedGame().getText()).toEqual('protractor1');
 
   });
 
   afterEach(() => {
-    browser.manage().logs().get('browser').then((browserLog) => {
-      expect(browserLog.length).toEqual(0);
-    });
+    helper.expectNoErrorsInConsole(browser);
   });
 });

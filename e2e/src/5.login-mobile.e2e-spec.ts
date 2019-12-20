@@ -8,7 +8,6 @@ describe('montepoeli login', () => {
   let page: AppPage;
   
   beforeAll(() => {
-    helper.deleteAllCookies(browser);
     helper.setBrowserToMobileSize(browser);
   });
 
@@ -29,8 +28,6 @@ describe('montepoeli login', () => {
 
     expect(browser.getCurrentUrl()).toContain('/home');
 
-    browser.manage().logs().get('browser').then((browserLog) => {
-      expect(browserLog.length).toEqual(0);
-    });
+    helper.expectNoErrorsInConsole(browser);
   });
 });

@@ -34,10 +34,33 @@ export class Helper {
   }
 
   public setBrowserToMobileSize(browser: any): void {
-    browser.driver.manage().window().setSize(this.mobileWidth, this.mobileHeigth);
+    browser.driver.manage().window().setSize(this.mobileHeigth, this.mobileWidth);
   }
 
   public deleteAllCookies(browser: any): void {
     browser.driver.manage().deleteAllCookies();
+  }
+
+  public expectNoErrorsInConsole(browser: any): void {
+    const numberOfExpectedErrors = 0;
+    
+    this.expectErrorsInConsole(browser, numberOfExpectedErrors);
+  }
+
+  public expectThreeErrorsInConsole(browser: any): void {
+    const numberOfExpectedErrors = 3;
+
+    this.expectErrorsInConsole(browser, numberOfExpectedErrors);
+  }
+
+  private expectErrorsInConsole(browser: any, numberOfExpectedErrors: number): void {
+    browser.manage().logs().get('browser').then((browserLog) => {
+      const numberOfErrors = browserLog.length;
+      expect(numberOfErrors).toEqual(numberOfExpectedErrors);
+
+      if (numberOfErrors !== numberOfExpectedErrors) {
+        console.log(browserLog);
+      }
+    });
   }
 }
