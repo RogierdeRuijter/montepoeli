@@ -18,7 +18,8 @@ export class AppController {
       jwt.jwt,
       {
         expires: new Date(date.setFullYear(date.getFullYear() + 1)),
-        sameSite: true
+        secure: true,
+        sameSite: 'None' // Should be true on production
       });
       res.send({montepoeliJwt: jwt.jwt});
     });

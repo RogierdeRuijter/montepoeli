@@ -41,7 +41,7 @@ export class AuthService {
               '/',
               '',
               false,
-              'Strict'
+              'Lax'
               );
           }
         }),
