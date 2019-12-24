@@ -6,12 +6,11 @@ pull_request_rules:
     actions:
       merge:
         method: merge
-  
-    - name: automatic merge dependabot on successfull e2e tests
-    conditions:
-      - 'status-success=ci/circleci: e2e-test'
-      - 'head~=dependabot*'
-    actions:
-      merge:
-        method: merge
+  - name: automatic merge dependabot on successfull e2e tests
+  conditions:
+    - 'status-success=ci/circleci: e2e-test'
+    - 'head~=dependabot*'
+  actions:
+    merge:
+      method: merge
     
