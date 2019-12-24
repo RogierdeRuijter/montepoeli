@@ -4,7 +4,7 @@ import * as cookieParser from 'cookie-parser';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.use(cookieParser());
+  app.use(cookieParser('secret')); // TODO: use env variable
   app.setGlobalPrefix('api');
 
   let origin: boolean | string = true;
@@ -12,6 +12,7 @@ async function bootstrap() {
     origin = 'https://www.montepoeli.club'; // TODO: use env variable
   }
 
+  // TODO: should be disabled on production
   app.enableCors({
     credentials: true,
     origin,

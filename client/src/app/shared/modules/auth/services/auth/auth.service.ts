@@ -33,17 +33,17 @@ export class AuthService {
       }).pipe(
         tap(jwt => {
           // Work around for the automation tests
-          if (!this.cookieService.check(this.environment.authentication.TOKENNAME)) {
-            this.cookieService.set(
-              this.environment.authentication.TOKENNAME, 
-              jwt[this.environment.authentication.TOKENNAME],
-              10000,
-              '/',
-              '',
-              false,
-              'Lax'
-              );
-          }
+          // if (!this.cookieService.check(this.environment.authentication.TOKENNAME)) {
+          //   this.cookieService.set(
+          //     this.environment.authentication.TOKENNAME, 
+          //     jwt[this.environment.authentication.TOKENNAME],
+          //     10000,
+          //     '/',
+          //     '',
+          //     false,
+          //     'Lax'
+          //     );
+          // }
         }),
         tap(() => this.router.navigate([this.environment.frontend.BASIC_ROUTES.HOME]))
       );

@@ -18,9 +18,15 @@ export class AppController {
       jwt.jwt,
       {
         expires: new Date(date.setFullYear(date.getFullYear() + 1)),
+        // httpOnly: true, TODO: make httpOnly true work
         secure: true,
-        sameSite: 'None' // Should be true on production
+        sameSite: 'None' // Should be 'Strict' on production
       });
+
+      // This secure true makes the application give a 401.
+      // I think because you need ssl certificates to make this work.
+      // On production it would probably work.
+      // Maybe good to add ssl ceriticates anyway to have it more 1 on 1 with production
       res.send({montepoeliJwt: jwt.jwt});
     });
   }

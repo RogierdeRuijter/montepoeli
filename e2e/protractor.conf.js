@@ -27,15 +27,24 @@ exports.config = {
 
   capabilities: {
     'browserName': 'chrome',
+    trustAllSSLCertificates: true,
+    acceptInsecureCerts: true,
+    acceptSslCerts: true,
     chromeOptions: {
-      args: ['--window-size=800x600', 'no-sandbox', '--whitelisted-ips'],
+      args: [
+        '--ignore-certificate-errors',
+        '--unsafely-treat-insecure-origin-as-secure=https://webserver-e2e',
+        '--window-size=800x600', 
+        'no-sandbox', 
+        '--whitelisted-ips'
+      ],
     },
     'goog:chromeOptions': {
-      'w3c': false
+      'w3c': false,
     }
   },
   seleniumAddress: 'http://selenium-hub:4444/wd/hub',
-  baseUrl: 'http://client-e2e:80/',
+  baseUrl: 'https://webserver-e2e',
   framework: 'jasmine',
   jasmineNodeOpts: {
     showColors: true,
