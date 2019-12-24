@@ -235,6 +235,7 @@ workflows:
               only: 
                 - master
                 - /depfu.*/
+                - /dependabot.*/
       - e2e-test:
           requires:
             - swap-client-config-e2e
@@ -244,6 +245,7 @@ workflows:
               only: 
                 - master
                 - /depfu.*/
+                - dependabot.*/
       - swap-client-config:
           requires:
             - build-client-base
