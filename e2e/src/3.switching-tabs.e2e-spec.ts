@@ -14,15 +14,7 @@ describe('Tab navigation', () => {
   it('should switch to the rules tab and back to the games tab', async () => {
     await page.navigateTo();
 
-    expect(browser.getCurrentUrl()).toContain('/login');
-    helper.sleep();
-    page.getLoginField().sendKeys('protractor');
-
-    page.getPasswordField().sendKeys('test');
-    helper.sleep();
-
-    page.getSubmitButton().click();
-    helper.sleep();
+    browser.waitForAngular();
 
     page.getNavBarRulesTab().click();
     helper.sleep();

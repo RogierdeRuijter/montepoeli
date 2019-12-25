@@ -22,9 +22,6 @@ export class OverviewComponent {
   public games$: Observable<Game[]>;
 
   @Input()
-  public loadingGames: any;
-
-  @Input()
   public actions: Actions[];
 
   @Input()

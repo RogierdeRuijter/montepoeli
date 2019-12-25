@@ -1,7 +1,8 @@
 {
   "name": "e2e",
-  "version": "2.0.1",
+  "version": "2.5.0",
   "scripts": {
+    "install-node-modules": "yarn install",
     "protractor": "protractor",
     "protractor:local": "npm run webdriver-update && protractor protractor-local.conf.js ",
     "webdriver-update": "webdriver-manager clean && webdriver-manager update",

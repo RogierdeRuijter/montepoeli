@@ -23,7 +23,6 @@ export class GridRowDirective implements OnInit {
   }
 
   public ngOnInit(): void {
-    console.log(this.itDoesNotHaveAllNecessaryGridSizes());
     if (this.itDoesNotHaveAllNecessaryGridSizes()) {
       throw new ShouldBeDefinedException('All necessary grid sizes');
     }

@@ -10,6 +10,7 @@ RUN yarn install --frozen-lockfile
 COPY src src
 COPY angular.json angular.json
 COPY tsconfig.json tsconfig.json
+COPY ngsw-config.json ngsw-config.json
 
 RUN npm run build:prod
 

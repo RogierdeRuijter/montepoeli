@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
+    "install-sub-modules": "lerna run install-node-modules --parallel",
+    "install-node-modules": "yarn install",
     "build:client": "docker build client -t montepouli_client:latest",
     "build:e2e-client": "docker build -f client/Dockerfile.configured client -t montepouli_client:e2e --build-arg CLIENT_BASE_IMAGE_NAME=montepouli_client --build-arg CLIENT_BASE_IMAGE_TAG=latest --build-arg CLIENT_TYPE=e2e",
     "build:server": "docker build server -t montepouli_server:latest",
@@ -28,7 +30,8 @@
   "husky": {
     "hooks": {
       "pre-commit": "lerna run --parallel lint",
-      "pre-push": "lerna run --parallel test & lerna run --parallel build:pre-push"
+      "pre-push": "lerna run --parallel test & lerna run --parallel build:pre-push",
+      "post-merge": "yarn install-sub-modules"
     }
   }
 }

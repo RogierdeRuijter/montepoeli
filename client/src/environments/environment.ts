@@ -17,7 +17,7 @@ export class Environment extends DynamicEnvironment {
     this.production = false;
 
     this.authentication = {
-      TOKENNAME: 'montepoeli-jwt',
+      TOKENNAME: 'montepoeliJwt',
     };
 
     this.frontend = {
@@ -25,8 +25,9 @@ export class Environment extends DynamicEnvironment {
       POLLING_TIMEOUT: 1000,
       PAGE_SIZE: 20,
       BASIC_ROUTES: {
-        LOGIN_ROUTE: '/login',
-        HOME: '/home',
+        LANDING: 'landing',
+        LOGIN: 'login',
+        HOME: 'home',
       },
     };
 

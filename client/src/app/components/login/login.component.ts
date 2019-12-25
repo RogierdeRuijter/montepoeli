@@ -1,7 +1,4 @@
-import {Component} from '@angular/core';
-
-
-import {Router} from '@angular/router';
+import {ChangeDetectorRef, Component} from '@angular/core';
 import {AuthService} from '../../services/auth/auth.service';
 
 @Component({
@@ -13,20 +10,26 @@ export class LoginComponent {
 
   public isSubmitting = false;
 
-  constructor(private router: Router,
-              private authService: AuthService) {
+  constructor(private authService: AuthService,
+              private changeDetectorRef: ChangeDetectorRef) {
   }
 
   public onLogin(userInfo: any): void {
     this.isSubmitting = true;
     const user = {};
+
     user['username'] = userInfo.username;
     user['pwd'] = userInfo.password;
+
     this.authService.login(user).subscribe(
       () => {
       }, (error) => {
         this.isSubmitting = false;
       });
   }
+
+ public doExplicitChangeDetectionForAutofill(): void {
+   this.changeDetectorRef.detectChanges();
+ }
 
 }

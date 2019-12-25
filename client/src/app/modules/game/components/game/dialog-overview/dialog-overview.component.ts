@@ -4,6 +4,7 @@ import {Game} from '../../../../shared/interfaces/game.interface';
 import {GameFactory} from '../../../factories/game.factory';
 import {UtilService} from '../../../../shared/services/util/util.service';
 import {MatDialog} from '@angular/material/dialog';
+import { BlurStore } from 'src/app/modules/shared/stores/blur.store';
 
 @Component({
   selector: 'app-dialog-overview',
@@ -17,7 +18,8 @@ export class DialogOverviewComponent {
   public game: Game = new GameFactory().create();
 
   constructor(public dialog: MatDialog,
-              private utilService: UtilService) {
+              private utilService: UtilService,
+              private blurStore: BlurStore) {
   }
 
   public openDialog(): void {
@@ -33,6 +35,7 @@ export class DialogOverviewComponent {
     });
 
     dialogRef.afterClosed().subscribe((game: Game) => {
+      this.blurStore.set(false);
       if (this.addEventIsReceived(game)) {
         this.addEvent.emit(game);
       }

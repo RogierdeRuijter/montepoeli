@@ -13,3 +13,9 @@
   width: 100%;
   height: 2.5rem;            /* Footer height */
 }
+
+.blur {
+  filter: blur(10px);
+  -webkit-filter: blur(10px);
+  transition: 0.5s ease all;
+}
