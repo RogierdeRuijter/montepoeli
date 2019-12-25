@@ -4,6 +4,6 @@
   "license": "MIT",
   "scripts": {
     "lint": "circleci config validate config.yml",
-    "test": "./test-circleci"
+    "test": "./test-circleci.sh"
   }
 }
