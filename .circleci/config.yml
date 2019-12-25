@@ -245,7 +245,7 @@ workflows:
               only: 
                 - master
                 - /depfu.*/
-                - dependabot.*/
+                - /dependabot.*/
       - swap-client-config:
           requires:
             - build-client-base
