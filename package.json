@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
+    "lint": "./lint-mergify.sh",
     "build:client": "docker build client -t montepouli_client:latest",
     "build:e2e-client": "docker build -f client/Dockerfile.configured client -t montepouli_client:e2e --build-arg CLIENT_BASE_IMAGE_NAME=montepouli_client --build-arg CLIENT_BASE_IMAGE_TAG=latest --build-arg CLIENT_TYPE=e2e",
     "build:server": "docker build server -t montepouli_server:latest",
