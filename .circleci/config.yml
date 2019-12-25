@@ -234,14 +234,20 @@ workflows:
             - build-client-base
           filters:
             branches:
-              only: master
+              only: 
+                - master
+                - /depfu.*/
+                - /dependabot.*/
       - e2e-test:
           requires:
             - swap-client-config-e2e
             - build-server
           filters:
             branches:
-              only: master
+              only: 
+                - master
+                - /depfu.*/
+                - dependabot.*/
       - swap-client-config:
           requires:
             - build-client-base

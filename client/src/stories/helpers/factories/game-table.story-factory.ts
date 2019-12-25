@@ -1,17 +1,19 @@
-import {IApi, IGetStory} from '@storybook/angular';
 import {CompleteStory} from '../intefaces/complete-story.interface';
 import {GameTableComponent} from '../../../app/modules/home/modules/game/components/game/overview/game-table/game-table.component';
 import {of} from 'rxjs';
 import {MatTableModule} from '@angular/material';
 import {StorybookTranslateModule} from '../../storybook-translate.module';
 import {TranslateDirective} from '../../../app/shared/modules/translate/directives/translate.directive';
+import { StoryApi, StoryFn } from '@storybook/addons';
+import { StoryFnAngularReturnType } from '@storybook/angular/dist/client/preview/types';
+
 
 export class GameTableStoryFactory {
   private component = GameTableComponent;
   private readonly displayedColumns: string[] = ['white', 'winner', 'black'];
   private stories: CompleteStory[] = [];
 
-  constructor(private iApi: IApi) {
+  constructor(private storyApi: StoryApi<StoryFnAngularReturnType>) {
   }
 
   public create(): void {
@@ -20,7 +22,7 @@ export class GameTableStoryFactory {
   }
 
   private appendStories(): void {
-    this.stories.forEach((story: CompleteStory) => this.iApi.add(story.name, story.story));
+    this.stories.forEach((story: CompleteStory) => this.storyApi.add(story.name, story.story));
   }
 
   private createInputs(): void {
@@ -60,7 +62,7 @@ export class GameTableStoryFactory {
     });
   }
 
-  private zeroGameStory(): IGetStory {
+  private zeroGameStory(): StoryFn<StoryFnAngularReturnType> {
     return () => ({
       component: this.component,
       props: {
@@ -77,7 +79,7 @@ export class GameTableStoryFactory {
     });
   }
 
-  private twoGamesStory(): IGetStory {
+  private twoGamesStory(): StoryFn<StoryFnAngularReturnType> {
     return () => ({
       component: GameTableComponent,
       props: {
@@ -97,7 +99,7 @@ export class GameTableStoryFactory {
     });
   }
 
-  private twoGamesWithLongNames(): IGetStory {
+  private twoGamesWithLongNames(): StoryFn<StoryFnAngularReturnType> {
     return () => ({
       component: GameTableComponent,
       props: {
@@ -117,7 +119,7 @@ export class GameTableStoryFactory {
     });
   }
 
-  private twoGamesAndUnknownWinnerStates(): IGetStory {
+  private twoGamesAndUnknownWinnerStates(): StoryFn<StoryFnAngularReturnType> {
     return () => ({
       component: GameTableComponent,
       props: {
@@ -137,7 +139,7 @@ export class GameTableStoryFactory {
     });
   }
 
-  private threeGames(): IGetStory {
+  private threeGames(): StoryFn<StoryFnAngularReturnType> {
     return () => ({
       component: GameTableComponent,
       props: {
@@ -158,7 +160,7 @@ export class GameTableStoryFactory {
     });
   }
 
-  private manyGames(): IGetStory {
+  private manyGames(): StoryFn<StoryFnAngularReturnType> {
     return () => ({
       component: GameTableComponent,
       props: {

@@ -1,4 +1,3 @@
-import {IApi, IGetStory} from '@storybook/angular';
 import {CompleteStory} from '../intefaces/complete-story.interface';
 import {GameTableComponent} from '../../../app/modules/home/modules/game/components/game/overview/game-table/game-table.component';
 import {of} from 'rxjs';
@@ -9,12 +8,14 @@ import {OverviewComponent} from '../../../app/modules/home/modules/game/componen
 import {Actions} from '../../../app/shared/static-files/enums';
 import {NgxSkeletonLoaderModule} from 'ngx-skeleton-loader';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-import {GameTableLoaderComponent} from '../../../app/modules/home/modules/game/components/game/overview/game-table-loader/game-table-loader.component';
-import {TableActionComponent} from '../../../app/modules/home/modules/game/components/game/overview/table-action/table-action.component';
-import {GridColumnDirective} from '../../../app/shared/modules/grid/directives/grid-column.directive';
-import {GridRowDirective} from '../../../app/shared/modules/grid/directives/grid-row.directive';
-import {IconComponent} from '../../../app/shared/modules/icon/components/icon/icon.component';
-import {PositionDirective} from '../../../app/shared/modules/grid/directives/position.directive';
+import { StoryApi, StoryFn } from '@storybook/addons';
+import { StoryFnAngularReturnType } from '@storybook/angular/dist/client/preview/types';
+import { TableActionComponent } from 'src/app/modules/home/modules/game/components/game/overview/table-action/table-action.component';
+import { GridColumnDirective } from 'src/app/shared/modules/grid/directives/grid-column.directive';
+import { GridRowDirective } from 'src/app/shared/modules/grid/directives/grid-row.directive';
+import { PositionDirective } from 'src/app/shared/modules/grid/directives/position.directive';
+import { IconComponent } from 'src/app/shared/modules/icon/components/icon/icon.component';
+
 
 export class GameOverviewStoryFactory {
   private component = OverviewComponent;
@@ -23,7 +24,7 @@ export class GameOverviewStoryFactory {
   private actions: Actions[] = [Actions.ADD];
   private readonly module: any;
 
-  constructor(private iApi: IApi) {
+  constructor(private storyApi: StoryApi<StoryFnAngularReturnType>) {    
     this.module = {
       imports: [
         MatTableModule,
@@ -33,7 +34,6 @@ export class GameOverviewStoryFactory {
       ],
       declarations: [
         TranslateDirective,
-        GameTableLoaderComponent,
         GameTableComponent,
         TableActionComponent,
         GridColumnDirective,
@@ -71,7 +71,7 @@ export class GameOverviewStoryFactory {
     });
   }
 
-  private twoGameStory(): IGetStory {
+  private twoGameStory(): StoryFn<StoryFnAngularReturnType> {
     return () => ({
         component: this.component,
         props: {
@@ -96,7 +96,7 @@ export class GameOverviewStoryFactory {
     );
   }
 
-  private sevenGameStory(): IGetStory {
+  private sevenGameStory(): StoryFn<StoryFnAngularReturnType> {
     return () => ({
         component: this.component,
         props: {
@@ -118,7 +118,7 @@ export class GameOverviewStoryFactory {
     );
   }
 
-  private sevenTeenGameStory(): IGetStory {
+  private sevenTeenGameStory(): StoryFn<StoryFnAngularReturnType> {
     return () => ({
         component: this.component,
         props: {
@@ -218,7 +218,7 @@ export class GameOverviewStoryFactory {
     );
   }
 
-  private thirtyFiveGameStory(): IGetStory {
+  private thirtyFiveGameStory(): StoryFn<StoryFnAngularReturnType> {
     return () => ({
         component: this.component,
         props: {
@@ -270,6 +270,6 @@ export class GameOverviewStoryFactory {
 
 
   private appendStories(): void {
-    this.stories.forEach((story: CompleteStory) => this.iApi.add(story.name, story.story));
+    this.stories.forEach((story: CompleteStory) => this.storyApi.add(story.name, story.story));
   }
 }

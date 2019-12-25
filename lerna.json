@@ -1,6 +1,8 @@
 {
   "npmClient": "yarn",
   "packages": [
+    ".",
+    ".mergify",
     ".circleci",
     "client",
     "e2e",
