@@ -6,7 +6,7 @@ describe('DialogDataService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: DialogDataService = TestBed.get(DialogDataService);
+    const service: DialogDataService = TestBed.inject(DialogDataService);
     expect(service).toBeTruthy();
   });
 });

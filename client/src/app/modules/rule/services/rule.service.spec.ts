@@ -12,7 +12,7 @@ describe('RuleService', () => {
   }));
 
   it('should be created', () => {
-    const service: RuleService = TestBed.get(RuleService);
+    const service: RuleService = TestBed.inject(RuleService);
     expect(service).toBeTruthy();
   });
 });
