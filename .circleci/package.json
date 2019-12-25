@@ -3,6 +3,7 @@
   "version": "2.2.0",
   "license": "MIT",
   "scripts": {
-    "lint": "circleci config validate config.yml"
+    "lint": "circleci config validate config.yml",
+    "test": "circleci config process config.yml"
   }
 }

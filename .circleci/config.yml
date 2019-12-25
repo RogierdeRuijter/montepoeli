@@ -54,14 +54,11 @@ jobs:
             IMAGE_CLIENT_NAME=montepouli-client
             cd client
             docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG .
-      - when:
-          condition: <<parameters.custom_checkout>>
-          steps:
-          - deploy:
-              command: |
-                IMAGE_CLIENT_NAME=montepouli-client
-                docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
-                docker push $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG
+      - deploy:
+          command: |
+            IMAGE_CLIENT_NAME=montepouli-client
+            docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
+            docker push $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG
 
   build-server:
     docker:
