@@ -1,4 +1,3 @@
-import {IApi, IGetStory} from '@storybook/angular';
 import {CompleteStory} from '../intefaces/complete-story.interface';
 import {GameTableComponent} from '../../../app/modules/game/components/game/overview/game-table/game-table.component';
 import {of} from 'rxjs';
@@ -15,6 +14,8 @@ import {GridColumnDirective} from '../../../app/modules/shared/directives/grid-c
 import {GridRowDirective} from '../../../app/modules/shared/directives/grid-row.directive';
 import {IconComponent} from '../../../app/modules/shared/modules/icon/icon/icon.component';
 import {PositionDirective} from '../../../app/modules/shared/directives/position.directive';
+import { StoryApi, StoryFn } from '@storybook/addons';
+import { StoryFnAngularReturnType } from '@storybook/angular/dist/client/preview/types';
 
 
 export class GameOverviewStoryFactory {
@@ -24,7 +25,7 @@ export class GameOverviewStoryFactory {
   private actions: Actions[] = [Actions.ADD];
   private readonly module: any;
 
-  constructor(private iApi: IApi) {
+  constructor(private storyApi: StoryApi<StoryFnAngularReturnType>) {    
     this.module = {
       imports: [
         MatTableModule,
@@ -72,7 +73,7 @@ export class GameOverviewStoryFactory {
     });
   }
 
-  private twoGameStory(): IGetStory {
+  private twoGameStory(): StoryFn<StoryFnAngularReturnType> {
     return () => ({
         component: this.component,
         props: {
@@ -97,7 +98,7 @@ export class GameOverviewStoryFactory {
     );
   }
 
-  private sevenGameStory(): IGetStory {
+  private sevenGameStory(): StoryFn<StoryFnAngularReturnType> {
     return () => ({
         component: this.component,
         props: {
@@ -119,7 +120,7 @@ export class GameOverviewStoryFactory {
     );
   }
 
-  private sevenTeenGameStory(): IGetStory {
+  private sevenTeenGameStory(): StoryFn<StoryFnAngularReturnType> {
     return () => ({
         component: this.component,
         props: {
@@ -219,7 +220,7 @@ export class GameOverviewStoryFactory {
     );
   }
 
-  private thirtyFiveGameStory(): IGetStory {
+  private thirtyFiveGameStory(): StoryFn<StoryFnAngularReturnType> {
     return () => ({
         component: this.component,
         props: {
@@ -271,6 +272,6 @@ export class GameOverviewStoryFactory {
 
 
   private appendStories(): void {
-    this.stories.forEach((story: CompleteStory) => this.iApi.add(story.name, story.story));
+    this.stories.forEach((story: CompleteStory) => this.storyApi.add(story.name, story.story));
   }
 }
