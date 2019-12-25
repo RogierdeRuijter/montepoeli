@@ -1,6 +1,7 @@
 {
   "npmClient": "yarn",
   "packages": [
+    ".",
     ".circleci",
     "client",
     "e2e",
