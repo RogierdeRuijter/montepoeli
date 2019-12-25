@@ -12,6 +12,7 @@
     "build:prod": "ng build --configuration=production",
     "build:e2e": "ng build --configuration=e2e",
     "build:local": "ng build --configuration=local",
+    "install-node-modules": "yarn install",
     "test": "ng test --watch=false",
     "test:jestJtes": "jest",
     "lint": "ng lint frontend",
