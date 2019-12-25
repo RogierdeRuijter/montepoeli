@@ -25,10 +25,10 @@ export class IconComponent implements OnInit, AfterViewInit {
   @Input()
   public disabled = false;
 
-  @ViewChild('svgIconElement', {static: false})
+  @ViewChild('svgIconElement')
   public svgIconElementRef: ElementRef;
 
-  @ViewChild('fontAwesomeComponent', {static: false})
+  @ViewChild('fontAwesomeComponent')
   public faIcon: ElementRef;
 
   public iconDefinition: IconDefinition;

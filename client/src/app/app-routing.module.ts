@@ -22,7 +22,7 @@ const appRoutes: Routes = [
   },
   {
     path: 'home',
-    loadChildren: './modules/home/home.module#HomeModule',
+    loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule),
     component: MainContentComponent,
     canActivate: [AuthGuard],
   },
