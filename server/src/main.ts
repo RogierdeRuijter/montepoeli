@@ -8,15 +8,15 @@ async function bootstrap() {
   app.setGlobalPrefix('api');
 
   let origin: boolean | string = true;
+  // TODO: this probably wont work right now
   if (process.env.ENV === 'prod') {
     origin = 'https://www.montepoeli.club'; // TODO: use env variable
+  } else {
+    app.enableCors({
+      credentials: true,
+      origin,
+    });
   }
-
-  // TODO: should be disabled on production
-  app.enableCors({
-    credentials: true,
-    origin,
-  });
 
   await app.listen(3000);
 }

@@ -17,7 +17,7 @@ export class AppPage {
   }
 
   public getSubmitButton(): ElementFinder {
-    return this.helper.findById('submit');
+    return this.helper.selectLastElementWithId('submit');
   }
 
   public getLoginFailedWarning(): ElementFinder {

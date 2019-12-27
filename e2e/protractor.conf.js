@@ -33,7 +33,7 @@ exports.config = {
     chromeOptions: {
       args: [
         '--ignore-certificate-errors',
-        '--unsafely-treat-insecure-origin-as-secure=https://webserver-e2e',
+        '--unsafely-treat-insecure-origin-as-secure=https://webserver-e2e/',
         '--window-size=800x600', 
         'no-sandbox', 
         '--whitelisted-ips'
@@ -42,6 +42,10 @@ exports.config = {
     'goog:chromeOptions': {
       'w3c': false,
     }
+    // 'browserName': 'firefox',
+    // 'moz:firefoxOptions': {
+      // 'args': ['-accept_insecure_certs']
+    // }
   },
   seleniumAddress: 'http://selenium-hub:4444/wd/hub',
   baseUrl: 'https://webserver-e2e',
@@ -49,8 +53,7 @@ exports.config = {
   jasmineNodeOpts: {
     showColors: true,
     defaultTimeoutInterval: 30000,
-    print: function() {
-    },
+    print: function() {},
   },
   beforeLaunch: () => {
     return Promise.all([

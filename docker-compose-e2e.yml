@@ -29,7 +29,6 @@ services:
     networks:
       - e2e
 
-
   client-e2e:
     image: ${CLIENT_BASE_IMAGE_NAME}:${CLIENT_BASE_IMAGE_TAG}
     container_name: montepouli-client-e2e
@@ -46,7 +45,7 @@ services:
     container_name: montepouli-server-e2e
     environment:
       - SERVER_SECRET=secret01
-      - ENV=dev
+      - ENV=prod
       - MONGO_DNS_NAME=mongodb-e2e
     ports:
       - "3000"
@@ -88,17 +87,17 @@ services:
     networks:
       - e2e
 
-#  firefox:
-#    image: selenium/node-firefox:3.141.59-titanium
-#    volumes:
-#      - /dev/shm:/dev/shm
-#    depends_on:
-#      - selenium-hub
-#    environment:
-#      - HUB_HOST=selenium-hub
-#      - HUB_PORT=4444
-#    networks:
-#      - e2e
+  firefox:
+    image: selenium/node-firefox:3.141.59
+    volumes:
+      - /dev/shm:/dev/shm
+    depends_on:
+      - selenium-hub
+    environment:
+      - HUB_HOST=selenium-hub
+      - HUB_PORT=4444
+    networks:
+      - e2e
 
 networks:
   e2e:
