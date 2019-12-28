@@ -13,7 +13,7 @@ services:
       - client-e2e
       - selenium-hub
       - chrome
-    command: sh -c 'sleep 5 && npm run protractor'
+    command: sh -c 'sleep 10 && npm run protractor'
   
   webserver-e2e:
     image: nginx:mainline-alpine
@@ -55,7 +55,7 @@ services:
       - e2e
     depends_on:
       - mongodb-e2e
-    command: sh -c 'npm run start:dev'
+    command: sh -c 'sleep 3 && npm run start:dev'
 
   mongodb-e2e:
     container_name: montepouli-mongodb-e2e

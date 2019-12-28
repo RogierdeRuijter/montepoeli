@@ -30,7 +30,8 @@ exports.config = {
     trustAllSSLCertificates: true,
     acceptInsecureCerts: true,
     acceptSslCerts: true,
-    chromeOptions: {
+    'goog:chromeOptions': {
+      'w3c': false,
       args: [
         '--ignore-certificate-errors',
         '--unsafely-treat-insecure-origin-as-secure=https://webserver-e2e/',
@@ -38,9 +39,6 @@ exports.config = {
         'no-sandbox', 
         '--whitelisted-ips'
       ],
-    },
-    'goog:chromeOptions': {
-      'w3c': false,
     }
     // 'browserName': 'firefox',
     // 'moz:firefoxOptions': {

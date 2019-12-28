@@ -12,6 +12,7 @@ async function bootstrap() {
   if (process.env.ENV === 'prod') {
     origin = 'https://www.montepoeli.club'; // TODO: use env variable
   } else {
+    // TODO: fix this here 401 error when loggin in some error with the cookies.
     app.enableCors({
       credentials: true,
       origin,
