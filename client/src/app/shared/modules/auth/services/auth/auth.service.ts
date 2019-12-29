@@ -31,20 +31,6 @@ export class AuthService {
         username: user.username,
         password: user.pwd,
       }).pipe(
-        tap(jwt => {
-          // Work around for the automation tests
-          // if (!this.cookieService.check(this.environment.authentication.TOKENNAME)) {
-          //   this.cookieService.set(
-          //     this.environment.authentication.TOKENNAME, 
-          //     jwt[this.environment.authentication.TOKENNAME],
-          //     10000,
-          //     '/',
-          //     '',
-          //     false,
-          //     'Lax'
-          //     );
-          // }
-        }),
         tap(() => this.router.navigate([this.environment.frontend.BASIC_ROUTES.HOME]))
       );
   }
@@ -56,11 +42,21 @@ export class AuthService {
   }
 
   public getToken(): string {
-    const temp = this.cookieService.get(this.environment.authentication.TOKENNAME);
-    return temp ? temp : null;
+    return this.cookieService.get(this.environment.authentication.AUTHTOKENNAME);
   }
 
   public clearSession(): void {
-    this.cookieService.delete(this.environment.authentication.TOKENNAME);
+    this.clearHttpCookies();
+
+    this.clearFrontendCookie();
+  }
+
+  private clearHttpCookies(): void {
+    this.httpService.post(this.environment.backend.ENTRY_POINTS.SIGNOUT)
+      .subscribe();
+  }
+
+  private clearFrontendCookie(): void {
+    this.cookieService.delete(this.environment.authentication.AUTHTOKENNAME);
   }
 }

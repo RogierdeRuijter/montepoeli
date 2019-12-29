@@ -34,7 +34,7 @@ export class CustomHttpService {
       );
   }
 
-  public post<T>(url: string, body: T): Observable<T> {
+  public post<T>(url: string, body?: T): Observable<T> {
     if (!this.environment) {
       this.initEnvironment();
     }

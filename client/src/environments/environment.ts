@@ -18,6 +18,7 @@ export class Environment extends DynamicEnvironment {
 
     this.authentication = {
       TOKENNAME: 'montepoeliJwt',
+      AUTHTOKENNAME: 'montepoeliAuthenticated' 
     };
 
     this.frontend = {

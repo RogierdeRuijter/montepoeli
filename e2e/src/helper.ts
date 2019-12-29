@@ -13,6 +13,10 @@ export class Helper {
     return browser.sleep(200);
   }
 
+  public async longSleep(): Promise<any> {
+    return browser.sleep(500);
+  }
+
   public findById(id: string): ElementFinder {
     return element(by.id(id));
   }

@@ -23,37 +23,37 @@ describe('Add a game', () => {
     expect(browser.getCurrentUrl()).toContain('/home');
     
     // TODO: refactor adding a user with the pop up to a method
-    await helper.sleep();
+    helper.sleep();
     page.getMobileAddGameButton().click();
 
-    await helper.sleep();
+    helper.sleep();
     page.getWhiteDropDownList().click();
 
-    await helper.sleep();
+    helper.sleep();
     page.getProtractorUser().click();
 
     expect(page.getWhiteDropDownField().getText()).toEqual('protractor');
 
-    await helper.sleep();
+    helper.sleep();
     page.getWinnerDropDownList().click();
 
-    await helper.sleep();
+    helper.sleep();
     page.getBlackOption().click();
 
     expect(page.getWinnerDropDownField().getText()).toEqual('Black');
 
-    await helper.sleep();
+    helper.sleep();
     page.getBlackDropDownList().click();
 
-    await helper.sleep();
+    helper.sleep();
     page.getProtractorUser1().click();
 
     expect(page.getBlackDropDownField().getText()).toEqual('protractor1');
 
-    await helper.sleep();
+    helper.sleep();
     page.getSaveButton().click();
 
-    await helper.sleep();
+    helper.sleep();
     expect(page.getTableWhiteUserForLastAddedGame().getText()).toEqual('protractor');
     expect(page.getTableWinnerUserForLastAddedGame('black').getText()).toEqual('Black');
     expect(page.getTableBlackUserForLastAddedGame().getText()).toEqual('protractor1');

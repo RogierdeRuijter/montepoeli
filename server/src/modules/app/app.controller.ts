@@ -1,15 +1,19 @@
-import {BadRequestException, Body, Controller, Next, Post, Res} from '@nestjs/common';
+import {BadRequestException, Body, Controller, Next, Post, Res, UseGuards} from '@nestjs/common';
 import {UsersService} from '../users/users.service';
 import {User} from '../../models/interfaces/user.interface';
 import {AuthService} from '../auth/auth.service';
 import {Response} from 'express';
 import {CreateUserDto} from '../../models/create-dtos/create-user.dto';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller()
 export class AppController {
   constructor(private readonly usersService: UsersService,
               private readonly authService: AuthService) {
   }
+
+  private secure: boolean = process.env.ENV === 'prod';
+
   @Post('/signIn')
   public async signIn(@Body() body, @Res() res: Response, @Next() next): Promise<any> {
     return await this.authService.signIn(body).then(jwt => {
@@ -18,17 +22,30 @@ export class AppController {
       jwt.jwt,
       {
         expires: new Date(date.setFullYear(date.getFullYear() + 1)),
-        // httpOnly: true, TODO: make httpOnly true work
-        secure: true,
+        httpOnly: true,
+        secure: this.secure,
         sameSite: 'None' // Should be 'Strict' on production
       });
 
-      // This secure true makes the application give a 401.
-      // I think because you need ssl certificates to make this work.
-      // On production it would probably work.
-      // Maybe good to add ssl ceriticates anyway to have it more 1 on 1 with production
-      res.send({montepoeliJwt: jwt.jwt});
+      res.cookie(
+        'montepoeliAuthenticated',
+        true,
+        {
+          expires: new Date(date.setFullYear(date.getFullYear() + 1)),
+          secure: this.secure,
+          sameSite: 'none'
+        }
+      );
+
+      res.send();
     });
+  }
+
+  @Post('/logout')
+  public async logout(@Res() res: Response): Promise<any> {
+    res.clearCookie('montepoeliJwt');
+
+    res.send();
   }
 
   // @Post('/createUser')

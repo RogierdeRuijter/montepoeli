@@ -6,7 +6,8 @@
                      [games$]="games$">
       </ui-game-table>
     </div>
-    <div [appGridColumn]="[2, 2, 1, 1]">
+    <!-- TODO: move this higher up so it does not have to be loaded on mobile -->
+    <div [appGridColumn]="[2, 2, 1, 1]" class="d-none d-sm-block"> 
       <ui-table-action [ids]="['add-game-button']"
                        (actionClickEvent)="emitActionEvent($event)"
                        [actions]="actions"
