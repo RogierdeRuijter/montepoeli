@@ -5,7 +5,6 @@ import {Observable} from 'rxjs';
 import {CustomHttpService} from '../../../http/services/custom-http/custom-http.service';
 import {Environment} from '../../../../../../environments/environment';
 import {CookieService} from 'ngx-cookie-service';
-import {UtilService} from 'src/app/shared/services/util/util.service';
 
 // TODO: move to shared services
 @Injectable({
@@ -17,12 +16,11 @@ export class AuthService {
 
   constructor(private router: Router,
               private httpService: CustomHttpService,
-              private cookieService: CookieService,
-              private utilService: UtilService) {
+              private cookieService: CookieService) {
   }
 
   public isAuthenticated(): boolean {
-    return !this.utilService.isNullOrUndefined(this.getToken());
+    return this.doesTheUserHaveAValidToken();
   }
 
   public login(user: any): Observable<any> {
@@ -39,6 +37,10 @@ export class AuthService {
     this.clearSession();
 
     this.router.navigate([this.environment.frontend.BASIC_ROUTES.LOGIN]);
+  }
+
+  private doesTheUserHaveAValidToken(): boolean {
+    return !!this.getToken();
   }
 
   public getToken(): string {
