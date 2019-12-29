@@ -4,7 +4,6 @@
 const {SpecReporter} = require('jasmine-spec-reporter');
 const executeOnMongo = require('./start-up-scripts/exec-on-mongo');
 const setUp = require('./start-up-scripts/set-up');
-const tearDown = require('./start-up-scripts/tear-down');
 
 const HtmlScreenshotReporter = require('protractor-jasmine2-screenshot-reporter');
 

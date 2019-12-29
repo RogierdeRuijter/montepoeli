@@ -10,16 +10,15 @@ async function bootstrap() {
   app.use(cookieParser(process.env.COOKIE_SECRET));
   app.setGlobalPrefix('api');
 
-  // if (process.env.ENV === 'dev') {
-  app.enableCors({
-      credentials: true,
-      origin: true,
-    });
-  // }
+  if (process.env.ENV === 'dev') {
+    app.enableCors({
+        credentials: true,
+        origin: true,
+      });
+    }
 
   await app.listen(3000);
 }
-bootstrap();
 
 const checkEnvironmentVariables = () => {
   const env = process.env.ENV.toString();
@@ -46,3 +45,5 @@ const isNullOrUndefined = (value: any) => {
 const throwEnvironmentVariableShouldBeDefinedException = (name: string) => {
   throw new Error('environment variable: ' + name + ' should be defined');
 };
+
+bootstrap();

@@ -1,10 +1,9 @@
-import {BadRequestException, Body, Controller, Next, Post, Res, UseGuards} from '@nestjs/common';
+import {BadRequestException, Body, Controller, Next, Post, Res} from '@nestjs/common';
 import {UsersService} from '../users/users.service';
 import {User} from '../../models/interfaces/user.interface';
 import {AuthService} from '../auth/auth.service';
 import {Response} from 'express';
 import {CreateUserDto} from '../../models/create-dtos/create-user.dto';
-import { AuthGuard } from '@nestjs/passport';
 
 @Controller()
 export class AppController {
