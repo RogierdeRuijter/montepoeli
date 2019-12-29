@@ -8430,13 +8430,6 @@ ngx-cookie-service@2.2.0:
   resolved "https://registry.yarnpkg.com/ngx-cookie-service/-/ngx-cookie-service-2.2.0.tgz#79fe67863b3b93ee226c9ea8d60e1542c7115a58"
   integrity sha512-2kaC1itlEMxiMAPJ320hOpcwU9vhvjbKQCZ1Go6bGhYjJtqG7eYvhNP7mM9IhFz1/afG2tBryJPySWmFUGhRpA==
 
-ngx-skeleton-loader@1.2.2:
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/ngx-skeleton-loader/-/ngx-skeleton-loader-1.2.2.tgz#8a84308e492d42d26681930492146bb2d2ee942c"
-  integrity sha512-Itxl+wUbvV1eMgbxK3qwqQdTpDBIGx/Xa+EPNblH1m5v4UqHG7/s3FBnISBsQEnMnpuPHo+xeflgYhhKGNWvyg==
-  dependencies:
-    tslib "^1.9.0"
-
 ngx-toastr@11.2.1:
   version "11.2.1"
   resolved "https://registry.yarnpkg.com/ngx-toastr/-/ngx-toastr-11.2.1.tgz#130dcb416499f4419b18c39ad9cfea2e7790c7c4"

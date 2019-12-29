@@ -10,7 +10,6 @@
     "webdriver-update": "webdriver-manager clean && webdriver-manager update",
     "webdriver-update:protractor": "./node_modules/protractor/bin/webdriver-manager update"
   },
-  "private": true,
   "dependencies": {
     "@types/jasmine": "3.4.0",
     "@types/jasminewd2": "2.0.6",
