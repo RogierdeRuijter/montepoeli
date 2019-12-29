@@ -40,6 +40,9 @@ export class GameResultComponent {
   @Output()
   public cancelEvent: EventEmitter<void> = new EventEmitter();
 
+  @Output()
+  public saveEvent: EventEmitter<void> = new EventEmitter();
+
   public ButtonType = ButtonType;
   public ButtonFunction = ButtonFunction;
   public GridSizes = GridSizes;
@@ -48,5 +51,9 @@ export class GameResultComponent {
 
   public cancel(): void {
     this.cancelEvent.emit();
+  }
+
+  public save(): void {
+    this.saveEvent.emit();
   }
 }

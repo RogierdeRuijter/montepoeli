@@ -38,7 +38,7 @@ export class DialogDataComponent extends AsyncBaseComponent implements OnInit, O
   }
 
   public onNoClick(): void {
-    this.dialogRef.close();
+    this.dialogRef.close('cancelButton');
   }
 
   public determineAvailableUsersForSelect(selectName: string): User[] {
