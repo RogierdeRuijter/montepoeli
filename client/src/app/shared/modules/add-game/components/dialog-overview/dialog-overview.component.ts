@@ -25,7 +25,7 @@ export class DialogOverviewComponent {
 
   public openDialog(): void {
     this.dialog.closeAll();
-
+    
     const dialogRef = this.dialog.open(DialogDataComponent, {
       data: {
         white: this.game.white,
@@ -35,16 +35,18 @@ export class DialogOverviewComponent {
       closeOnNavigation: true,
     });
 
-    dialogRef.afterClosed().subscribe((game: Game) => {
-      if (this.addEventIsReceived(game)) {
-        this.addEvent.emit(game);
-      } else {
+    dialogRef.afterClosed().subscribe((result: Game | string) => {
+      if (this.addEventIsReceived(result)) {
+        this.addEvent.emit(result as Game);
+      }
+
+      if (result === 'cancelButton') {
         this.cancelEvent.emit();
       }
     });
   }
 
-  private addEventIsReceived(game: Game): boolean {
-    return !this.utilService.isNullOrUndefined(game);
+  private addEventIsReceived(result: any): boolean {
+    return !this.utilService.isNullOrUndefined(result.white);
   }
 }

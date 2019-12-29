@@ -7,6 +7,7 @@ import { Game } from '../../../../../../shared/interfaces/game.interface';
 import { GameService } from '../../../../../home/modules/game/services/game.service';
 import { RemoveLastAddedGameStore } from '../../../../../../shared/stores/remove-last-added-game.store';
 import { DialogOverviewComponent } from '../../../../../../shared/modules/add-game/components/dialog-overview/dialog-overview.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-mobile-content',
@@ -25,7 +26,8 @@ export class MobileContentComponent extends AsyncBaseComponent implements OnInit
   constructor(private newGameStore: NewGameStore,
               private tabChangeGlobalEventEmitter: TabChangeGlobalEventEmitter,
               private gameService: GameService,
-              private removeLastAddedGameStore: RemoveLastAddedGameStore) {
+              private removeLastAddedGameStore: RemoveLastAddedGameStore,
+              private dialog: MatDialog) {
                 super();
   }
 
@@ -42,7 +44,13 @@ export class MobileContentComponent extends AsyncBaseComponent implements OnInit
           this.gameView = false;
           this.selected = Icons.SCROLL;
         }
+
+        this.closeAddGameModalIfOpen();
       });
+  }
+
+  private closeAddGameModalIfOpen(): void {
+    this.dialog.closeAll();
   }
 
   public plusEventHandler(): void {
@@ -84,6 +92,9 @@ export class MobileContentComponent extends AsyncBaseComponent implements OnInit
   }
 
   public cancelHandler(): void {
-    this.changeToGamesView();
+    // TODO: test this logic
+    if (this.dialog.openDialogs.length === 0) {
+      this.changeToGamesView();
+    }
   }
 }
