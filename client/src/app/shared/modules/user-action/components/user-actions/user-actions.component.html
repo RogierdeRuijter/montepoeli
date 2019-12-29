@@ -1,0 +1,12 @@
+<app-button-icon id="user-settings"
+                 [icon]="Icons.USER"
+                 [iconSize]="IconSize.SMALL_MEDIUM"
+                 [iconColor]="settingsIconColor"
+                 (clickEvent)="userIconHandler()">
+</app-button-icon>
+
+<mat-select #userSettingsDropDown class="selector">
+  <mat-option *ngFor="let userAction of userActions" (click)="actionSelected(userAction)" [id]="userAction">
+    {{userAction}}
+  </mat-option>
+</mat-select>

@@ -14,7 +14,7 @@ describe('Add a game', () => {
   it('should add a game and show it in the table', async () => {
     await page.navigateTo();
 
-    browser.waitForAngular();
+    await browser.waitForAngular();
     
     expect(browser.getCurrentUrl()).toContain('/home');
 
@@ -48,15 +48,13 @@ describe('Add a game', () => {
     helper.sleep();
     page.getSaveButton().click();
 
-    expect(page.getTableWhiteUserFirstRowText().getText()).toEqual('protractor');
-    expect(page.getTableWinnerUserFirstRowText().getText()).toEqual('White');
-    expect(page.getTableBlackUserFirstRowText().getText()).toEqual('protractor1');
+    expect(page.getTableWhiteUserForLastAddedGame().getText()).toEqual('protractor');
+    expect(page.getTableWinnerUserForLastAddedGame('white').getText()).toEqual('White');
+    expect(page.getTableBlackUserForLastAddedGame().getText()).toEqual('protractor1');
 
   });
 
   afterEach(() => {
-    browser.manage().logs().get('browser').then((browserLog) => {
-      expect(browserLog.length).toEqual(0);
-    });
+    helper.expectNoErrorsInConsole(browser);
   });
 });

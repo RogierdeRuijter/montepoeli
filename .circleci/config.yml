@@ -54,7 +54,6 @@ jobs:
             IMAGE_CLIENT_NAME=montepouli-client
             cd client
             docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG .
-
       - deploy:
           command: |
             IMAGE_CLIENT_NAME=montepouli-client

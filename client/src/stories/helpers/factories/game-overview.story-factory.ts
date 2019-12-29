@@ -1,21 +1,20 @@
 import {CompleteStory} from '../intefaces/complete-story.interface';
-import {GameTableComponent} from '../../../app/modules/game/components/game/overview/game-table/game-table.component';
+import {GameTableComponent} from '../../../app/modules/home/modules/game/components/game/overview/game-table/game-table.component';
 import {of} from 'rxjs';
 import {MatTableModule} from '@angular/material';
 import {StorybookTranslateModule} from '../../storybook-translate.module';
-import {TranslateDirective} from '../../../app/modules/shared/modules/translate/translate.directive';
-import {OverviewComponent} from '../../../app/modules/game/components/game/overview/overview.component';
-import {Actions} from '../../../app/modules/shared/static-files/enums';
+import {TranslateDirective} from '../../../app/shared/modules/translate/directives/translate.directive';
+import {OverviewComponent} from '../../../app/modules/home/modules/game/components/game/overview/overview.component';
+import {Actions} from '../../../app/shared/static-files/enums';
 import {NgxSkeletonLoaderModule} from 'ngx-skeleton-loader';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-import {GameTableLoaderComponent} from '../../../app/modules/game/components/game/overview/game-table-loader/game-table-loader.component';
-import {TableActionComponent} from '../../../app/modules/game/components/game/overview/table-action/table-action.component';
-import {GridColumnDirective} from '../../../app/modules/shared/directives/grid-column.directive';
-import {GridRowDirective} from '../../../app/modules/shared/directives/grid-row.directive';
-import {IconComponent} from '../../../app/modules/shared/modules/icon/icon/icon.component';
-import {PositionDirective} from '../../../app/modules/shared/directives/position.directive';
 import { StoryApi, StoryFn } from '@storybook/addons';
 import { StoryFnAngularReturnType } from '@storybook/angular/dist/client/preview/types';
+import { TableActionComponent } from 'src/app/modules/home/modules/game/components/game/overview/table-action/table-action.component';
+import { GridColumnDirective } from 'src/app/shared/modules/grid/directives/grid-column.directive';
+import { GridRowDirective } from 'src/app/shared/modules/grid/directives/grid-row.directive';
+import { PositionDirective } from 'src/app/shared/modules/grid/directives/position.directive';
+import { IconComponent } from 'src/app/shared/modules/icon/components/icon/icon.component';
 
 
 export class GameOverviewStoryFactory {
@@ -35,7 +34,6 @@ export class GameOverviewStoryFactory {
       ],
       declarations: [
         TranslateDirective,
-        GameTableLoaderComponent,
         GameTableComponent,
         TableActionComponent,
         GridColumnDirective,

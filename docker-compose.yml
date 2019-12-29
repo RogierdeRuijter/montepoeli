@@ -24,6 +24,7 @@ services:
       - SERVER_SECRET=secret01
       - ENV=dev
       - MONGO_DNS_NAME=mongodb
+      - COOKIE_SECRET=secret
     ports:
       - "3000:3000"
     volumes:

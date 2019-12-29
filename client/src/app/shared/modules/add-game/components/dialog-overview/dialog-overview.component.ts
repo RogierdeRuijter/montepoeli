@@ -1,0 +1,50 @@
+import {Component, EventEmitter, Output} from '@angular/core';
+import {MatDialog} from '@angular/material';
+import {DialogDataComponent} from '../dialog-data/dialog-data.component';
+import {Game} from '../../../../interfaces/game.interface';
+import {GameFactory} from '../../../../../modules/home/modules/game/factories/game.factory';
+import {UtilService} from '../../../../services/util/util.service';
+
+@Component({
+  selector: 'app-dialog-overview',
+  template: ``,
+})
+export class DialogOverviewComponent {
+
+  @Output()
+  public addEvent: EventEmitter<Game> = new EventEmitter();
+
+  @Output()
+  public cancelEvent: EventEmitter<Game> = new EventEmitter();
+
+  public game: Game = new GameFactory().create();
+
+  constructor(public dialog: MatDialog,
+              private utilService: UtilService) {
+  }
+
+  public openDialog(): void {
+    this.dialog.closeAll();
+
+    const dialogRef = this.dialog.open(DialogDataComponent, {
+      data: {
+        white: this.game.white,
+        winner: this.game.winner,
+        black: this.game.black,
+      } as Game,
+      closeOnNavigation: true,
+    });
+
+    dialogRef.afterClosed().subscribe((game: Game) => {
+      if (this.addEventIsReceived(game)) {
+        this.addEvent.emit(game);
+      } else {
+        this.cancelEvent.emit();
+      }
+    });
+  }
+
+  private addEventIsReceived(game: Game): boolean {
+    return !this.utilService.isNullOrUndefined(game);
+  }
+}

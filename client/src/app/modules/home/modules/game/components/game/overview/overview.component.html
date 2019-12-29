@@ -1,0 +1,18 @@
+<div class="container">
+  <div [alignment]="Alignments.BASELINE"
+       [appGridRow]="[GridSizes.EXTRA_SMALL, GridSizes.SMALL, GridSizes.MEDIUM, GridSizes.LARGE]">
+    <div [appGridColumn]="[12, 10, 11, 11]" style="margin-bottom: 30px">
+      <ui-game-table [displayedColumns]="displayedColumns"
+                     [games$]="games$">
+      </ui-game-table>
+    </div>
+    <!-- TODO: move this higher up so it does not have to be loaded on mobile -->
+    <div [appGridColumn]="[2, 2, 1, 1]" class="d-none d-sm-block"> 
+      <ui-table-action [ids]="['add-game-button']"
+                       (actionClickEvent)="emitActionEvent($event)"
+                       [actions]="actions"
+                       [disabled]="disabled">
+      </ui-table-action>
+    </div>
+  </div>
+</div>

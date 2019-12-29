@@ -1,8 +1,8 @@
 import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {catchError, retry} from 'rxjs/operators';
-import {NotificationService} from '../services/notification/notification.service';
 import {Injectable} from '@angular/core';
+import { NotificationService } from 'src/app/shared/modules/notification/services/notification/notification.service';
 
 @Injectable({
   providedIn: 'root',
@@ -19,6 +19,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
         catchError((error: HttpErrorResponse) => {
           const message = error.error.message ? error.error.message : error.message;
           const errorMessage = message;
+
           this.notificationService.warning(errorMessage);
 
           return throwError(error);
