@@ -1,6 +1,6 @@
 {
   "name": "frontend",
-  "version": "2.5.0",
+  "version": "3.0.0",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -31,7 +31,7 @@
     "webdriver-update": "webdriver-manager clean && webdriver-manager update",
     "webdriver-update:protractor": "./node_modules/protractor/bin/webdriver-manager update"
   },
-    "dependencies": {
+  "dependencies": {
     "@angular/animations": "8.2.14",
     "@angular/cdk": "8.2.3",
     "@angular/common": "8.2.14",
