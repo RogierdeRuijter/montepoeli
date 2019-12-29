@@ -9,12 +9,20 @@ export class Helper {
     fun();
   }
 
+  public async shortSleep(): Promise<any> {
+    return this.sleepForSeconds(100);
+  }
+
   public async sleep(): Promise<any> {
-    return browser.sleep(200);
+    return this.sleepForSeconds(200);
   }
 
   public async longSleep(): Promise<any> {
-    return browser.sleep(500);
+    return this.sleepForSeconds(500);
+  }
+
+  private async sleepForSeconds(seconds: number): Promise<any> {
+    return browser.sleep(seconds);
   }
 
   public findById(id: string): ElementFinder {
@@ -38,7 +46,7 @@ export class Helper {
   }
 
   public setBrowserToMobileSize(browser: any): void {
-    browser.driver.manage().window().setSize(this.mobileHeigth, this.mobileWidth);
+    browser.driver.manage().window().setSize(this.mobileWidth, this.mobileHeigth);
   }
 
   public deleteAllCookies(browser: any): void {

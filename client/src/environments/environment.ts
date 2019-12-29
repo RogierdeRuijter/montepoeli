@@ -15,7 +15,7 @@ export class Environment extends DynamicEnvironment {
     super();
 
     this.production = false;
-
+    // TODO: create interface for environments
     this.authentication = {
       TOKENNAME: 'montepoeliJwt',
       AUTHTOKENNAME: 'montepoeliAuthenticated' 

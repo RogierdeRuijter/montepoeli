@@ -12,7 +12,8 @@ export class AppController {
               private readonly authService: AuthService) {
   }
 
-  private secure: boolean = process.env.ENV === 'prod';
+  private secure: boolean = process.env.ENV.toString() === 'prod' ? true : false;
+  private sameSite: string = process.env.ENV.toString() === 'prod' ? 'Strict' : undefined;
 
   @Post('/signIn')
   public async signIn(@Body() body, @Res() res: Response, @Next() next): Promise<any> {
@@ -24,7 +25,7 @@ export class AppController {
         expires: new Date(date.setFullYear(date.getFullYear() + 1)),
         httpOnly: true,
         secure: this.secure,
-        sameSite: 'None' // Should be 'Strict' on production
+        sameSite: this.sameSite
       });
 
       res.cookie(
@@ -32,8 +33,7 @@ export class AppController {
         true,
         {
           expires: new Date(date.setFullYear(date.getFullYear() + 1)),
-          secure: this.secure,
-          sameSite: 'none'
+          sameSite: this.sameSite
         }
       );
 
@@ -48,6 +48,7 @@ export class AppController {
     res.send();
   }
 
+  // TODO: find a remove way to create users
   // @Post('/createUser')
   // @UseGuards(AuthGuard())
   public createUser(@Body() createUserDto: CreateUserDto): Promise<User> {

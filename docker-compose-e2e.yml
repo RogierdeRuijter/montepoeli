@@ -47,6 +47,7 @@ services:
       - SERVER_SECRET=secret01
       - ENV=prod
       - MONGO_DNS_NAME=mongodb-e2e
+      - COOKIE_SECRET=secret
     ports:
       - "3000"
     volumes:

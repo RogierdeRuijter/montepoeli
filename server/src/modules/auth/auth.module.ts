@@ -18,7 +18,7 @@ import {SharedModule} from '../shared/shared.module';
     }),
     MongooseModule.forFeature([{name: 'User', schema: UserSchema}]),
     JwtModule.register({
-      secretOrPrivateKey: process.env.SERVER_SECRET,
+      secret: process.env.SERVER_SECRET,
       signOptions: {
         expiresIn: '365 days',
       },

@@ -22,8 +22,7 @@ describe('montepoeli login', () => {
     helper.sleep();
 
     expect(browser.getCurrentUrl()).toContain('/login');
-    helper.sleep();
-
+    
     expect(page.getLoginFailedWarning().getText()).toEqual('Wrong username or password.');
 
     helper.expectThreeErrorsInConsole(browser);

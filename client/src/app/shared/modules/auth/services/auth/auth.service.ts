@@ -6,7 +6,6 @@ import {CustomHttpService} from '../../../http/services/custom-http/custom-http.
 import {Environment} from '../../../../../../environments/environment';
 import {CookieService} from 'ngx-cookie-service';
 
-// TODO: move to shared services
 @Injectable({
   providedIn: 'root',
 })
@@ -23,6 +22,14 @@ export class AuthService {
     return this.doesTheUserHaveAValidToken();
   }
 
+  private doesTheUserHaveAValidToken(): boolean {
+    return !!this.getToken();
+  }
+
+  public getToken(): string {
+    return this.cookieService.get(this.environment.authentication.AUTHTOKENNAME);
+  }
+
   public login(user: any): Observable<any> {
     return this.httpService.post(
       this.environment.backend.ENTRY_POINTS.SIGNIN, {
@@ -37,14 +44,6 @@ export class AuthService {
     this.clearSession();
 
     this.router.navigate([this.environment.frontend.BASIC_ROUTES.LOGIN]);
-  }
-
-  private doesTheUserHaveAValidToken(): boolean {
-    return !!this.getToken();
-  }
-
-  public getToken(): string {
-    return this.cookieService.get(this.environment.authentication.AUTHTOKENNAME);
   }
 
   public clearSession(): void {

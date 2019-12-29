@@ -6,7 +6,6 @@ import {AuthService} from '../services/auth/auth.service';
 import {NotificationService} from '../../notification/services/notification/notification.service';
 import {Environment} from '../../../../../environments/environment';
 
-// TODO: move to shared services
 @Injectable({
   providedIn: 'root',
 })

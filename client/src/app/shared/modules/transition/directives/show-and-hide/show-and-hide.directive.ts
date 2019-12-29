@@ -12,7 +12,6 @@ export class ShowAndHideDirective implements OnChanges {
 
   public ngOnChanges(): void {
     if (this.show === true) {
-      // TODO: clean this up more
       this.renderer.removeStyle(this.elementRef.nativeElement, 'pointer-events');
 
       this.addShowCss();
