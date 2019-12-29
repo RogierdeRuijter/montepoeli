@@ -1,0 +1,13 @@
+name: Greetings
+
+on: [pull_request, issues]
+
+jobs:
+  greeting:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/first-interaction@v1
+      with:
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        issue-message: 'Hee Ouwe schaker gefelicteerd me je eerste issue'' first issue'
+        pr-message: 'Wow thanks, de schaak wereld is blij met je bijdragen aan het allerbelangrijkste schaak project'' first pr'
