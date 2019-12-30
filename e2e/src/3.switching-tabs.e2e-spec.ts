@@ -29,8 +29,6 @@ describe('Tab navigation', () => {
   });
 
   afterEach(() => {
-    browser.manage().logs().get('browser').then((browserLog) => {
-      expect(browserLog.length).toEqual(0);
-    });
+    helper.expectNoErrorsInConsole(browser);
   });
 });

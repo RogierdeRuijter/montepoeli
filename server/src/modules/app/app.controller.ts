@@ -10,15 +10,44 @@ export class AppController {
   constructor(private readonly usersService: UsersService,
               private readonly authService: AuthService) {
   }
+
+  private secure: boolean = process.env.ENV.toString() === 'prod' ? true : false;
+  private sameSite: string = process.env.ENV.toString() === 'prod' ? 'Strict' : undefined;
+
   @Post('/signIn')
   public async signIn(@Body() body, @Res() res: Response, @Next() next): Promise<any> {
     return await this.authService.signIn(body).then(jwt => {
       const date = new Date();
-      res.cookie('montepoeliJwt', jwt.jwt, {expires: new Date(date.setFullYear(date.getFullYear() + 1))});
-      res.send({montepoeliJwt: jwt.jwt});
+      res.cookie('montepoeliJwt',
+      jwt.jwt,
+      {
+        expires: new Date(date.setFullYear(date.getFullYear() + 1)),
+        httpOnly: true,
+        secure: this.secure,
+        sameSite: this.sameSite
+      });
+
+      res.cookie(
+        'montepoeliAuthenticated',
+        true,
+        {
+          expires: new Date(date.setFullYear(date.getFullYear() + 1)),
+          sameSite: this.sameSite
+        }
+      );
+
+      res.send();
     });
   }
 
+  @Post('/logout')
+  public async logout(@Res() res: Response): Promise<any> {
+    res.clearCookie('montepoeliJwt');
+
+    res.send();
+  }
+
+  // TODO: find a remove way to create users
   // @Post('/createUser')
   // @UseGuards(AuthGuard())
   public createUser(@Body() createUserDto: CreateUserDto): Promise<User> {

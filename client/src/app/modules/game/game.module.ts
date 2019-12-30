@@ -1,3 +1,4 @@
+// TODO: delete
 import {NgModule} from '@angular/core';
 import {SharedModule} from '../shared/shared.module';
 import {GameComponent} from './components/game/game.component';

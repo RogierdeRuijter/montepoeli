@@ -54,7 +54,6 @@ jobs:
             IMAGE_CLIENT_NAME=montepouli-client
             cd client
             docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG .
-
       - deploy:
           command: |
             IMAGE_CLIENT_NAME=montepouli-client
@@ -245,7 +244,7 @@ workflows:
               only: 
                 - master
                 - /depfu.*/
-                - dependabot.*/
+                - /dependabot.*/
       - swap-client-config:
           requires:
             - build-client-base

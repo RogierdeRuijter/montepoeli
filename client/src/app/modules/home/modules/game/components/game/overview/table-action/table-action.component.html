@@ -1,0 +1,8 @@
+<app-button-icon *ngFor="let action of actions; let i = index" 
+                 [idForElement]="ids[i]"
+                 [icon]="iconsMap[action].icon"
+                 [iconSize]="IconSize.MEDIUM"
+                 [iconColor]="iconsMap[action].disabled === true ? IconColor.GRAY : IconColor.BLACK"
+                 (clickEvent)="actionClick(action)">
+</app-button-icon>
+

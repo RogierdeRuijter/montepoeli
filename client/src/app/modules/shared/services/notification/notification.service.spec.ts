@@ -1,8 +1,7 @@
 import {TestBed} from '@angular/core/testing';
-
-import {NotificationService} from './notification.service';
 import {ToastrService} from 'ngx-toastr';
 import {MockLocationStrategy} from '@angular/common/testing';
+import { NotificationService } from 'src/app/shared/modules/notification/services/notification/notification.service';
 
 describe('NotificationService', () => {
   beforeEach(() => TestBed.configureTestingModule({

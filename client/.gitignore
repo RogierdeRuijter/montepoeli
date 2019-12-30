@@ -3,6 +3,7 @@
 # compiled output
 /tmp
 /out-tsc
+/storybook-static
 
 # dependencies
 /node_modules

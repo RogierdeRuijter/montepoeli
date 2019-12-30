@@ -108,7 +108,6 @@
       }
     ],
     "unified-signatures": true,
-    "variable-name": false,
     "whitespace": [
       true,
       "check-branch",

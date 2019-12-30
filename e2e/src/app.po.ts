@@ -1,5 +1,5 @@
-import {browser, ElementFinder, promise as wdpromise} from 'protractor';
-import {Helper} from './helper';
+import { browser, ElementFinder, promise as wdpromise } from 'protractor';
+import { Helper } from './helper';
 
 export class AppPage {
   private helper = new Helper();
@@ -17,7 +17,7 @@ export class AppPage {
   }
 
   public getSubmitButton(): ElementFinder {
-    return this.helper.findById('submit');
+    return this.helper.selectLastElementWithId('submit');
   }
 
   public getLoginFailedWarning(): ElementFinder {
@@ -25,7 +25,7 @@ export class AppPage {
   }
 
   public getAddGameButton(): ElementFinder {
-    return this.helper.findById('add-game-button');
+    return this.helper.selectLastElementWithId('add-game-button');
   }
 
   public getWhiteDropDownList(): ElementFinder {
@@ -48,6 +48,10 @@ export class AppPage {
     return this.helper.findById('White');
   }
 
+  public getBlackOption(): ElementFinder {
+    return this.helper.findById('Black');
+  }
+
   public getWinnerDropDownField(): ElementFinder {
     return this.helper.findByXPath('//*[@id="winner-user"]/div/div[1]/span/span');
   }
@@ -68,15 +72,15 @@ export class AppPage {
     return this.helper.findById('save');
   }
 
-  public getTableWhiteUserFirstRowText(): ElementFinder {
+  public getTableWhiteUserForLastAddedGame(): ElementFinder {
     return this.helper.findById('table-protractor-0');
   }
 
-  public getTableWinnerUserFirstRowText(): ElementFinder {
-    return this.helper.findById('table-white-0');
+  public getTableWinnerUserForLastAddedGame(winner: string): ElementFinder {
+    return this.helper.findById('table-' + winner + '-0');
   }
 
-  public getTableBlackUserFirstRowText(): ElementFinder {
+  public getTableBlackUserForLastAddedGame(): ElementFinder {
     return this.helper.findById('table-protractor1-0');
   }
 
@@ -96,4 +100,23 @@ export class AppPage {
     return this.helper.findById('mat-tab-label-0-1');
   }
 
+  public getMobileNavButtonGames(): ElementFinder {
+    return this.helper.findById('games-tab');
+  }
+
+  public getMobileAddGameButton(): ElementFinder {
+    return this.helper.selectLastElementWithId('add-game-footer');
+  }
+
+  public getMobileNavButtonRules(): ElementFinder {
+    return this.helper.findById('rules-tab');
+  }
+
+  public getUserSettings(): ElementFinder {
+    return this.helper.selectLastElementWithId('user-settings');
+  }
+
+  public getLogout(): ElementFinder {
+    return this.helper.findById('Logout');
+  }
 }

@@ -1,12 +1,12 @@
 import {storiesOf} from '@storybook/angular';
 import {MatButtonModule, MatDialogModule} from '@angular/material';
 import {StorybookTranslateModule} from './storybook-translate.module';
-import {TranslateDirective} from '../app/modules/shared/modules/translate/translate.directive';
-import {GridRowDirective} from '../app/modules/shared/directives/grid-row.directive';
-import {GridColumnDirective} from '../app/modules/shared/directives/grid-column.directive';
+import {TranslateDirective} from '../app/shared/modules/translate/directives/translate.directive';
+import {GridRowDirective} from '../app/shared/modules/grid/directives/grid-row.directive';
+import {GridColumnDirective} from '../app/shared/modules/grid/directives/grid-column.directive';
 import {ButtonComponent} from '../app/modules/shared/components/button/button.component';
 import {MaterialModule} from '../app/modules/material/material.module';
-import {LoginFormComponent} from '../app/components/login/login-form/login-form.component';
+import {LoginFormComponent} from '../app/modules/login/login/login-form/login-form.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 storiesOf('LoginForm', module)
@@ -30,4 +30,3 @@ storiesOf('LoginForm', module)
     },
   }))
 ;
-
