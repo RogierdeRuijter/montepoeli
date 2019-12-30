@@ -6,7 +6,6 @@ import {StorybookTranslateModule} from '../../storybook-translate.module';
 import {TranslateDirective} from '../../../app/shared/modules/translate/directives/translate.directive';
 import {OverviewComponent} from '../../../app/modules/home/modules/game/components/game/overview/overview.component';
 import {Actions} from '../../../app/shared/static-files/enums';
-import {NgxSkeletonLoaderModule} from 'ngx-skeleton-loader';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import { StoryApi, StoryFn } from '@storybook/addons';
 import { StoryFnAngularReturnType } from '@storybook/angular/dist/client/preview/types';
@@ -29,7 +28,6 @@ export class GameOverviewStoryFactory {
       imports: [
         MatTableModule,
         StorybookTranslateModule,
-        NgxSkeletonLoaderModule,
         FontAwesomeModule,
       ],
       declarations: [

@@ -1,5 +1,4 @@
 import {storiesOf} from '@storybook/angular';
-import {ButtonComponent} from '../app/modules/shared/components/button/button.component';
 import {ButtonFunction, ButtonRowType, ButtonType} from '../app/shared/static-files/enums';
 import {MatButtonModule} from '@angular/material/button';
 import {TranslateDirective} from '../app/shared/modules/translate/directives/translate.directive';
@@ -8,6 +7,7 @@ import {MatDialogModule} from '@angular/material';
 import {ButtonRowComponent} from '../app/shared/modules/button/components/button-row/button-row.component';
 import {GridRowDirective} from '../app/shared/modules/grid/directives/grid-row.directive';
 import {GridColumnDirective} from '../app/shared/modules/grid/directives/grid-column.directive';
+import { ButtonComponent } from 'src/app/shared/modules/button/components/button/button.component';
 
 storiesOf('Button row', module)
   .add('2 buttons', () => ({
@@ -27,7 +27,8 @@ storiesOf('Button row', module)
         TranslateDirective,
         GridRowDirective,
         GridColumnDirective,
-        ButtonComponent],
+        ButtonComponent
+      ],
       providers: [],
     },
   }))
