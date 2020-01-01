@@ -1,0 +1,11 @@
+<div id="page-container">
+    <div id="content-wrap">
+        <app-title-bar (gamesSelected)="gamesHandler()"
+                       (rulesSelected)="rulesHandler()">
+        </app-title-bar>
+
+        <router-outlet></router-outlet>
+
+        <app-footer></app-footer>
+    </div>
+</div>
