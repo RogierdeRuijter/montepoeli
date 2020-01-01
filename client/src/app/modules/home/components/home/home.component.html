@@ -1,10 +1,14 @@
-<app-game id="games"
-          *ngIf="showGames"
+<app-game id="games"        
+          *ngIf="showGames"        
           [games$]="games$"
-          [users]="users">
+          [users]="users"
+          (swipeleft)="swipe(0, $event.type)" 
+          (swiperight)="swipe(0, $event.type)">
 </app-game>
 
 <app-rule id="rules"
           *ngIf="showRules"
-          [rules]="rules">
+          [rules]="rules" 
+          (swipeleft)="swipe(1, $event.type)" 
+          (swiperight)="swipe(1, $event.type)">
 </app-rule>

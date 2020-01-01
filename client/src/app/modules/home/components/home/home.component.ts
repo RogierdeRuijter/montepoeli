@@ -37,6 +37,10 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
   public GridSizes = GridSizes;
   public Alignments = Alignments;
 
+  public views = ['games', 'rules'];
+
+  private SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
+
   private destroy$: Subject<void> = new Subject();
 
   constructor(private tabChangeGlobalEventEmitter: TabChangeGlobalEventEmitter,
@@ -77,6 +81,38 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
         }
       });
   }
+
+  public swipe(currentIndex: number, action = this.SWIPE_ACTION.RIGHT): void {
+    // out of range
+    if (currentIndex > this.views.length || currentIndex < 0) return;
+
+    let nextIndex = 0;
+
+    // swipe right, next avatar
+    if (action === this.SWIPE_ACTION.RIGHT) {
+        const isLast = currentIndex === this.views.length - 1;
+        nextIndex = isLast ? 0 : currentIndex + 1;
+    }
+
+    // swipe left, previous avatar
+    if (action === this.SWIPE_ACTION.LEFT) {
+        const isFirst = currentIndex === 0;
+        nextIndex = isFirst ? this.views.length - 1 : currentIndex - 1;
+    }
+
+    console.info('in swipe action');
+    console.log(nextIndex);
+
+    if (nextIndex === 0) {
+      this.showGames = true;
+      this.showRules = false;
+    }
+
+    if (nextIndex === 1) {
+      this.showGames = false;
+      this.showRules = true;
+    }
+}
 
   public ngOnDestroy(): void {
     this.games$.complete();
