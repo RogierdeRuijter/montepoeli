@@ -6,7 +6,13 @@ import { MainContentComponent } from './components/main-content/main-content.com
 const mainContentRoutes: Routes = [
   {
     path: '',
-    loadChildren: () => import('../../modules/home/home.module').then(m => m.HomeModule),
+    loadChildren: () => import('./modules/larger-screen-content/larger-screen-content.module').then(m => m.LargerScreenContentModule),
+    component: MainContentComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: '/mobile',
+    loadChildren: () => import('./modules/mobile-content/mobile-content.module').then(m => m.MobileContentModule),
     component: MainContentComponent,
     canActivate: [AuthGuard],
   },

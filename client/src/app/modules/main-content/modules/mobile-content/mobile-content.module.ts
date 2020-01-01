@@ -12,6 +12,7 @@ import { IconModule } from '../../../../shared/modules/icon/icon.module';
 import { UserActionModule } from '../../../../shared/modules/user-action/user-action.module';
 import { GridModule } from '../../../../shared/modules/grid/grid.module';
 import { AddGameModule } from '../../../../shared/modules/add-game/add-game.module';
+import { MobileContentRoutingModule } from './mobile-content-routing.module';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { AddGameModule } from '../../../../shared/modules/add-game/add-game.modu
     UserActionModule,
     GridModule,
     AddGameModule,
+    MobileContentRoutingModule
   ],
 })
 export class MobileContentModule { }
