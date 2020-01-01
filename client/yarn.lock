@@ -1931,10 +1931,10 @@
   dependencies:
     "@types/jasmine" "*"
 
-"@types/jest@24.0.24":
-  version "24.0.24"
-  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-24.0.24.tgz#0f2f523dc77cc1bc6bef34eaf287ede887a73f05"
-  integrity sha512-vgaG968EDPSJPMunEDdZvZgvxYSmeH8wKqBlHSkBt1pV2XlLEVDzsj1ZhLuI4iG4Pv841tES61txSBF0obh4CQ==
+"@types/jest@24.0.25":
+  version "24.0.25"
+  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-24.0.25.tgz#2aba377824ce040114aa906ad2cac2c85351360f"
+  integrity sha512-hnP1WpjN4KbGEK4dLayul6lgtys6FPz0UfxMeMQCv0M+sTnzN3ConfiO72jHgLxl119guHgI8gLqDOrRLsyp2g==
   dependencies:
     jest-diff "^24.3.0"
 
@@ -1982,10 +1982,10 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-12.7.4.tgz#64db61e0359eb5a8d99b55e05c729f130a678b04"
   integrity sha512-W0+n1Y+gK/8G2P/piTkBBN38Qc5Q1ZSO6B5H3QmPCUewaiXOo2GCAWZ4ElZCcNhjJuBSUSLGFUJnmlCn5+nxOQ==
 
-"@types/node@13.1.0":
-  version "13.1.0"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-13.1.0.tgz#225cbaac5fdb2b9ac651b02c070d8aa3c37cc812"
-  integrity sha512-zwrxviZS08kRX40nqBrmERElF2vpw4IUTd5khkhBTfFH8AOaeoLVx48EC4+ZzS2/Iga7NevncqnsUSYjM4OWYA==
+"@types/node@13.1.2":
+  version "13.1.2"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-13.1.2.tgz#fe94285bf5e0782e1a9e5a8c482b1c34465fa385"
+  integrity sha512-B8emQA1qeKerqd1dmIsQYnXi+mmAzTB7flExjmy5X1aVAKFNNNDubkavwR13kR6JnpeLp3aLoJhwn9trWPAyFQ==
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.0"
@@ -4171,10 +4171,10 @@ core-js@3.2.1, core-js@^3.0.1, core-js@^3.0.4:
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.2.1.tgz#cd41f38534da6cc59f7db050fe67307de9868b09"
   integrity sha512-Qa5XSVefSVPRxy2XfUC13WbvqkxhkwB3ve+pgCQveNgYzbM/UxZeu1dcOX/xr4UmfUd+muuvsaxilQzCyUurMw==
 
-core-js@3.6.0:
-  version "3.6.0"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.6.0.tgz#2b854e451de1967d1e29896025cdc13a2518d9ea"
-  integrity sha512-AHPTNKzyB+YwgDWoSOCaid9PUSEF6781vsfiK8qUz62zRR448/XgK2NtCbpiUGizbep8Lrpt0Du19PpGGZvw3Q==
+core-js@3.6.1:
+  version "3.6.1"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.6.1.tgz#39d5e2e346258cc01eb7d44345b1c3c014ca3f05"
+  integrity sha512-186WjSik2iTGfDjfdCZAxv2ormxtKgemjC3SI6PL31qOA0j5LhTDVjHChccoc7brwLvpvLPiMyRlcO88C4l1QQ==
 
 core-js@^1.0.0:
   version "1.2.7"
@@ -7636,10 +7636,10 @@ karma-coverage-istanbul-reporter@2.1.1:
     istanbul-api "^2.1.6"
     minimatch "^3.0.4"
 
-karma-jasmine-html-reporter@1.4.2:
-  version "1.4.2"
-  resolved "https://registry.yarnpkg.com/karma-jasmine-html-reporter/-/karma-jasmine-html-reporter-1.4.2.tgz#16d100fd701271192d27fd28ddc90b710ad36fff"
-  integrity sha512-7g0gPj8+9JepCNJR9WjDyQ2RkZ375jpdurYQyAYv8PorUCadepl8vrD6LmMqOGcM17cnrynBawQYZHaumgDjBw==
+karma-jasmine-html-reporter@1.5.1:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/karma-jasmine-html-reporter/-/karma-jasmine-html-reporter-1.5.1.tgz#0fad2d2ac416bc04724318aad29b89bd86f7bfbc"
+  integrity sha512-LlLqsoGyxT1981z46BRaC1SaY4pTo4EHCA/qZvJEMQXzTtGMyIlmwtxny6FiLO/N/OmZh69eaoNzvBkbHVVFQA==
 
 karma-jasmine@2.0.1:
   version "2.0.1"
@@ -10490,7 +10490,14 @@ rxjs@6.4.0:
   dependencies:
     tslib "^1.9.0"
 
-rxjs@6.5.3, rxjs@^6.4.0:
+rxjs@6.5.4:
+  version "6.5.4"
+  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.5.4.tgz#e0777fe0d184cec7872df147f303572d414e211c"
+  integrity sha512-naMQXcgEo3csAEGvw/NydRA0fuS2nDZJiw1YUWFKU7aPPAPGZEsD4Iimit96qwCieH6y614MCLYwdkrWx7z/7Q==
+  dependencies:
+    tslib "^1.9.0"
+
+rxjs@^6.4.0:
   version "6.5.3"
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.5.3.tgz#510e26317f4db91a7eb1de77d9dd9ba0a4899a3a"
   integrity sha512-wuYsAYYFdWTAnAaPoKGNhfpWwKZbJW+HgAJ+mImp+Epl7BG8oNWBCTyRM8gba9k4lk8BgWdoYm21Mo/RYhhbgA==
