@@ -12,15 +12,13 @@ async function bootstrap() {
 
   let origin: boolean | string = true;
   if (process.env.ENV === 'prod') {
-    origin = 'https://www.montepoeli.club';
+    origin = 'https://www.montepoeli.club'; // TODO: use env variable that this can also be tested in e2e tests
   }
 
-  if (process.env.ENV === 'dev') {
-    app.enableCors({
-        credentials: true, // TODO: check if the crendtials true is needed in production
-        origin,
-      });
-    }
+  app.enableCors({
+    credentials: true, // TODO: check if the crendtials true is needed in production
+    origin,
+  });
 
   await app.listen(3000);
 }
