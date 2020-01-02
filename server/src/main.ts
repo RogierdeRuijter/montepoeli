@@ -10,10 +10,15 @@ async function bootstrap() {
   app.use(cookieParser(process.env.COOKIE_SECRET));
   app.setGlobalPrefix('api');
 
+  let origin: boolean | string = true;
+  if (process.env.ENV === 'prod') {
+    origin = 'https://www.montepoeli.club';
+  }
+
   if (process.env.ENV === 'dev') {
     app.enableCors({
-        credentials: true,
-        origin: true,
+        credentials: true, // TODO: check if the crendtials true is needed in production
+        origin,
       });
     }
 
