@@ -53,7 +53,7 @@ jobs:
           command: |
             IMAGE_CLIENT_NAME=montepouli-client
             cd client
-            docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG .
+            docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG . -f Dockerfile.prod 
       - deploy:
           command: |
             IMAGE_CLIENT_NAME=montepouli-client
@@ -81,7 +81,7 @@ jobs:
       - run: |
           cd server
           IMAGE_SERVER_NAME=montepouli-server
-          docker build -t $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG .
+          docker build -t $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG . -f Dockerfile.prod
 
       - deploy:
           command: |
