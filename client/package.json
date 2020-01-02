@@ -84,6 +84,7 @@
     "storybook-chrome-screenshot": "1.4.0",
     "ts-node": "8.5.4",
     "tslint": "5.20.1",
+    "karma-phantomjs-launcher": "1.0.4",
     "typescript": "3.5.3"
   },
   "optionalDependencies": {
