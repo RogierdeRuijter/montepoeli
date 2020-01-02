@@ -1,4 +1,9 @@
-FROM node:13
+FROM node:13-slim
+
+#bcrypt dependencies
+RUN apt-get update && apt-get -y upgrade && apt-get -y install python3 make g++
+
+RUN python3 -V
 
 WORKDIR usr/src/app
 

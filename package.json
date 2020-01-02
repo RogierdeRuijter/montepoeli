@@ -1,13 +1,13 @@
 {
   "name": "montepouli",
-  "version": "3.0.1",
+  "version": "3.1.0",
   "license": "MIT",
   "scripts": {
     "install-sub-modules": "lerna run install-node-modules --parallel",
     "install-node-modules": "yarn install",
-    "build:client": "docker build client -t montepouli_client:latest",
+    "build:client": "docker build client -t montepouli_client:latest -f client/Dockerfile.prod",
     "build:e2e-client": "docker build -f client/Dockerfile.configured client -t montepouli_client:e2e --build-arg CLIENT_BASE_IMAGE_NAME=montepouli_client --build-arg CLIENT_BASE_IMAGE_TAG=latest --build-arg CLIENT_TYPE=e2e",
-    "build:server": "docker build server -t montepouli_server:latest",
+    "build:server": "docker build server -t montepouli_server:latest -f server/Dockerfile.prod",
     "build-app": "npm run build:client && npm run build:server",
     "build-e2e-app": "npm run build:client && npm run build:e2e-client && npm run build:server",
     "build:e2e-environment": "docker-compose -f docker-compose-e2e.yml build --parallel",
