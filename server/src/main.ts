@@ -12,7 +12,7 @@ async function bootstrap() {
 
   let origin: boolean | string = true;
   if (process.env.ENV === 'prod') {
-    origin = 'https://www.montepoeli.club'; // TODO: use env variable that this can also be tested in e2e tests
+    origin = process.env.CORS_ORIGIN;
   }
 
   app.enableCors({
