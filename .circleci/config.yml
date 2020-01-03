@@ -4,8 +4,8 @@ jobs:
     docker:
       - image: circleci/node:11
         environment:
-          WORKFLOW_ID: $CIRCLE_WORKFLOW_ID
-          BRANCH_NAME: $CIRCLE_BRANCH
+          WORKFLOW_ID: ${CIRCLE_WORKFLOW_ID}
+          BRANCH_NAME: ${CIRCLE_BRANCH}
 
     working_directory: ~/repo
     steps:
@@ -13,23 +13,23 @@ jobs:
       - run:
           command: |
             cd client
-            if [ "$BRANCH_NAME" = "master" ]; then
+            if [ ${BRANCH_NAME} = "master" ]; then
               grep '"version":' package.json | cut -d\" -f4 > /tmp/client-version.txt
               echo grep '"version":' package.json | cut -d\" -f4
             else
-              echo $WORKFLOW_ID > /tmp/client-version.txt
-              echo $WORKFLOW_ID
+              echo ${WORKFLOW_ID} > /tmp/client-version.txt
+              echo ${WORKFLOW_ID}
             fi
 
       - run:
           command: |
             cd server
-            if [ "$BRANCH_NAME" = "master" ]; then
+            if [ ${BRANCH_NAME} = "master" ]; then
               grep '"version":' package.json | cut -d\" -f4 > /tmp/server-version.txt
               echo grep '"version":' package.json | cut -d\" -f4
             else
-              echo $WORKFLOW_ID > /tmp/server-version.txt
-              echo $WORKFLOW_ID
+              echo ${WORKFLOW_ID} > /tmp/server-version.txt
+              echo ${WORKFLOW_ID}
             fi
             
 
