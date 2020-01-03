@@ -14,8 +14,6 @@ COPY ngsw-config.json ngsw-config.json
 
 RUN npm run build:prod
 
-RUN rm -rf node_modules/
-
 FROM nginx:alpine
 
 COPY nginx.conf /etc/nginx/nginx.conf

@@ -49,6 +49,7 @@ services:
       - MONGO_DNS_NAME=mongodb-e2e
       - COOKIE_SECRET=secret
       - CORS_ORIGIN=https://www.webserver-e2e
+      - DOMAIN=webserver-e2e
     ports:
       - "3000"
     volumes:
