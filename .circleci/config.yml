@@ -13,6 +13,7 @@ jobs:
       - run:
           command: |
             cd client
+            echo ${BRANCH_NAME}
             if [ ${BRANCH_NAME} = "master" ]; then
               grep '"version":' package.json | cut -d\" -f4 > /tmp/client-version.txt
               echo grep '"version":' package.json | cut -d\" -f4
