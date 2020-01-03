@@ -13,6 +13,7 @@ export class AppController {
 
   private secure: boolean = process.env.ENV.toString() === 'prod' ? true : false;
   private sameSite: string = process.env.ENV.toString() === 'prod' ? 'Strict' : undefined;
+  private domain: string = process.env.ENV.toString() === 'prod' ? process.env.DOMAIN : undefined;
 
   @Post('/signIn')
   public async signIn(@Body() body, @Res() res: Response, @Next() next): Promise<any> {
@@ -23,6 +24,7 @@ export class AppController {
       {
         expires: new Date(date.setFullYear(date.getFullYear() + 1)),
         httpOnly: true,
+        domain: this.domain,
         secure: this.secure,
         sameSite: this.sameSite
       });
@@ -32,6 +34,7 @@ export class AppController {
         true,
         {
           expires: new Date(date.setFullYear(date.getFullYear() + 1)),
+          domain: this.domain,
           sameSite: this.sameSite
         }
       );
