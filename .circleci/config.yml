@@ -5,6 +5,7 @@ jobs:
       - image: circleci/node:11
         environment:
           WORKFLOW_ID: $CIRCLE_WORKFLOW_ID
+          BRANCH_NAME: $CIRCLE_BRANCH
 
     working_directory: ~/repo
     steps:
@@ -12,12 +13,23 @@ jobs:
       - run:
           command: |
             cd client
-            grep '"version":' package.json | cut -d\" -f4 > /tmp/client-version.txt
+            if [ $BRANCH_NAME == "master" ]
+            then
+              grep '"version":' package.json | cut -d\" -f4 > /tmp/client-version.txt
+            else
+              echo $WORKFLOW_ID > /tmp/client-version.txt
+            fi
 
       - run:
           command: |
-            cd client
-            grep '"version":' package.json | cut -d\" -f4 > /tmp/server-version.txt
+            cd server
+            if [ $BRANCH_NAME == "master" ]
+            then
+              grep '"version":' package.json | cut -d\" -f4 > /tmp/server-version.txt
+            else
+              echo $WORKFLOW_ID > /tmp/server-version.txt
+            fi
+            
 
       - store_artifacts:
           path: /tmp/client-version.txt
