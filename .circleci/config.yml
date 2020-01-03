@@ -13,7 +13,7 @@ jobs:
       - run:
           command: |
             cd client
-            if [ $BRANCH_NAME = "master" ]
+            if [ "$BRANCH_NAME" = "master" ]
             then
               grep '"version":' package.json | cut -d\" -f4 > /tmp/client-version.txt
             else
@@ -23,7 +23,7 @@ jobs:
       - run:
           command: |
             cd server
-            if [ $BRANCH_NAME = "master" ]
+            if [ "$BRANCH_NAME" = "master" ]
             then
               grep '"version":' package.json | cut -d\" -f4 > /tmp/server-version.txt
             else
