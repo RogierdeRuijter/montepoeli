@@ -57,7 +57,7 @@ services:
       - e2e
     depends_on:
       - mongodb-e2e
-    command: sh -c 'sleep 3 && npm run start:prod'
+    command: sh -c 'sleep 3 && node dist/main.js'
 
   mongodb-e2e:
     container_name: montepouli-mongodb-e2e
