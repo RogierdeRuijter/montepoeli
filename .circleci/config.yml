@@ -13,8 +13,8 @@ jobs:
       - run:
           command: |
             cd client
-            echo ${BRANCH_NAME}
-            if [ ${BRANCH_NAME} = "master" ]; then
+            echo ${CIRCLE_BRANCH}
+            if [ ${CIRCLE_BRANCH} = "master" ]; then
               grep '"version":' package.json | cut -d\" -f4 > /tmp/client-version.txt
               echo grep '"version":' package.json | cut -d\" -f4
             else
@@ -25,7 +25,7 @@ jobs:
       - run:
           command: |
             cd server
-            if [ ${BRANCH_NAME} = "master" ]; then
+            if [ ${CIRCLE_BRANCH} = "master" ]; then
               grep '"version":' package.json | cut -d\" -f4 > /tmp/server-version.txt
               echo grep '"version":' package.json | cut -d\" -f4
             else
