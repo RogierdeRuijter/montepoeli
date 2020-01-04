@@ -53,6 +53,12 @@ export class Helper {
     browser.driver.manage().deleteAllCookies();
   }
 
+  public printAllCookies(browser: any): void {
+    browser.manage().getCookies().then(function(cookies) {
+      console.log(cookies);
+  });
+  }
+
   public expectNoErrorsInConsole(browser: any): void {
     const numberOfExpectedErrors = 0;
     
