@@ -21,8 +21,6 @@ describe('montepoeli login', () => {
     page.getSubmitButton().click();
     helper.sleep();
 
-    helper.printAllCookies(browser);
-
     expect(browser.getCurrentUrl()).toContain('/login');
     
     expect(page.getLoginFailedWarning().getText()).toEqual('Wrong username or password.');
@@ -40,6 +38,8 @@ describe('montepoeli login', () => {
     helper.sleep();
     page.getSubmitButton().click();
     helper.sleep();
+
+    helper.printAllCookies(browser);
 
     expect(browser.getCurrentUrl()).toContain('/home');
 

@@ -72,12 +72,16 @@ export class Helper {
   }
 
   private expectErrorsInConsole(browser: any, numberOfExpectedErrors: number): void {
-    browser.manage().logs().get('browser').then((browserLog) => {
-      const numberOfErrors = browserLog.length;
-      expect(numberOfErrors).toEqual(numberOfExpectedErrors);
-
-      if (numberOfErrors !== numberOfExpectedErrors) {
-        console.log(browserLog);
+    browser.driver.getCapabilities().then((caps) => {
+      if (caps.get('browserName') === 'chrome') { // TODO: find way to access logs in firefox
+        browser.manage().logs().get('browser').then((browserLog) => {
+          const numberOfErrors = browserLog.length;
+          expect(numberOfErrors).toEqual(numberOfExpectedErrors);
+    
+          if (numberOfErrors !== numberOfExpectedErrors) {
+            console.log(browserLog);
+          }
+        });
       }
     });
   }

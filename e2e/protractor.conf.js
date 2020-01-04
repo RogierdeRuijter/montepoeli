@@ -53,7 +53,7 @@ exports.config = {
     }
   ],
   seleniumAddress: 'http://selenium-hub:4444/wd/hub',
-  baseUrl: 'https://www.webserver-e2e',
+  baseUrl: 'https://webserver-e2e',
   framework: 'jasmine',
   jasmineNodeOpts: {
     showColors: true,
