@@ -36,6 +36,12 @@ export class AuthService {
         username: user.username,
         password: user.pwd,
       }).pipe(
+        tap(() => {
+          // Workaround for the authentication in e2e tests to work on firefox
+          if (!this.cookieService.get(this.environment.authentication.AUTHTOKENNAME)) {
+            this.cookieService.set(this.environment.authentication.AUTHTOKENNAME, 'true');
+          }
+        }),
         tap(() => this.router.navigate([this.environment.frontend.BASIC_ROUTES.HOME]))
       );
   }

@@ -19,7 +19,7 @@ describe('montepoeli login', () => {
     page.getPasswordField().sendKeys('test1234');
     helper.sleep();
     page.getSubmitButton().click();
-    helper.sleep();
+    helper.shortSleep();
 
     expect(browser.getCurrentUrl()).toContain('/login');
     
@@ -38,8 +38,6 @@ describe('montepoeli login', () => {
     helper.sleep();
     page.getSubmitButton().click();
     helper.sleep();
-
-    helper.printAllCookies(browser);
 
     expect(browser.getCurrentUrl()).toContain('/home');
 

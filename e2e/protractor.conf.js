@@ -19,7 +19,7 @@ const dbParams = {
 };
 
 exports.config = {
-  allScriptsTimeout: 11000,
+  allScriptsTimeout: 15000,
   specs: [
     './src/**/*.e2e-spec.ts',
   ],
