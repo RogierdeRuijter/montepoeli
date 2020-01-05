@@ -1,13 +1,16 @@
-CIRCLE_BRANCH=feature
+COMMIT_MESSAGE="maintenance/automatically \n maintenance"
 
-if [[ $CIRCLE_BRANCH == *"maintenance"* ]]; then
-  yarn release-patch
+if [[ $COMMIT_MESSAGE == *"maintenance/"* ]]; then
+  yarn release-patch # command is in the main folder
+  echo 'patch released'
 fi
 
-if [[ $CIRCLE_BRANCH == *"feature"* ]]; then
-  yarn release-minor
+if [[ $COMMIT_MESSAGE == *"feature/"* ]]; then
+  yarn release-minor # command is in the main folder
+  echo 'minor released'
 fi
 
-if [[ $CIRCLE_BRANCH == *"major-feature"* ]]; then
-  yarn release-major
+if [[ $COMMIT_MESSAGE == *"major-feature/"* ]]; then
+  yarn release-major # command is in the main folder
+  echo 'major released'
 fi
