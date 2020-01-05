@@ -168,13 +168,10 @@ jobs:
           docker_layer_caching: true
       
       - run:
-          name: Install dependencies
+          name: Bump version based on branch name
           command: |
             yarn install
 
-      - run:
-          name: Bump version based on branch name
-          command: |
             if [[ $CIRCLE_BRANCH == *"maintenance"* ]]; then
               lerna version -y patch --message '[ci skip] bump patch'
             fi
