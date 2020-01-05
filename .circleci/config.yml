@@ -170,7 +170,7 @@ jobs:
       - run:
           name: Bump version based on branch name
           command: |
-            yarn install
+            npm install lerna -g
             echo $CIRCLE_BRANCH
 
             if [[ $CIRCLE_BRANCH == *"maintenance"* ]]; then
