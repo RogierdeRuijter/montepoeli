@@ -1,4 +1,4 @@
-version: 2
+version: 2.1
 jobs:
   save-docker-tags-as-artifacts:
     docker:
