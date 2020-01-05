@@ -170,8 +170,8 @@ jobs:
       - run:
           name: Bump version based on branch name
           command: |
-            yarn install
-
+            yarn global add lerna
+            
             if [[ $CIRCLE_BRANCH == *"maintenance"* ]]; then
               lerna version -y patch --message '[ci skip] bump patch'
             fi
@@ -258,34 +258,34 @@ workflows:
   build_and_test:
     jobs:
       - update-version
-      - save-docker-tags-as-artifacts
-      - build-client-base:
-          requires:
-            - save-docker-tags-as-artifacts
-      - build-server:
-          requires:
-            - save-docker-tags-as-artifacts
-      - swap-client-config-e2e:
-          requires:
-            - build-client-base
-      - e2e-test:
-          requires:
-            - swap-client-config-e2e
-            - build-server
-      # - update-version:
+      # - save-docker-tags-as-artifacts
+      # - build-client-base:
+      #     requires:
+      #       - save-docker-tags-as-artifacts
+      # - build-server:
+      #     requires:
+      #       - save-docker-tags-as-artifacts
+      # - swap-client-config-e2e:
+      #     requires:
+      #       - build-client-base
+      # - e2e-test:
+      #     requires:
+      #       - swap-client-config-e2e
+      #       - build-server
+      # # - update-version:
+      # #     requires:
+      # #       - e2e-test
+
+      # - swap-client-config:
+      #     requires:
+      #       - build-client-base
+      #       - e2e-test
+      #     filters:
+      #       branches:
+      #         only: master
+      # - retag-server-image:
       #     requires:
       #       - e2e-test
-
-      - swap-client-config:
-          requires:
-            - build-client-base
-            - e2e-test
-          filters:
-            branches:
-              only: master
-      - retag-server-image:
-          requires:
-            - e2e-test
-          filters:
-            branches:
-              only: master
+      #     filters:
+      #       branches:
+      #         only: master
