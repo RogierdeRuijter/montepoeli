@@ -168,7 +168,7 @@ jobs:
           docker_layer_caching: true
       
       - run:
-        name: Bump version based on branch name
+        name: Install dependencies
         command: |
           yarn install
 
