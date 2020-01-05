@@ -175,7 +175,6 @@ jobs:
 
             git config --global user.email "rogierderuijter@hotmail.com"
             git config --global user.name "Circle Ci"
-            
 
             if [[ $CIRCLE_BRANCH == *"maintenance"* ]]; then
               yarn release-patch
