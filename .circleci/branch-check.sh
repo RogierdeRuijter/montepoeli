@@ -1,13 +1,10 @@
-BRANCH_NAME=maintenance/
+BRANCH_NAME=master12
 
-if [[ $BRANCH_NAME == *"maintenance"* ]]; then
-  lerna version patch
+if [ $BRANCH_NAME = "master" ]; then
+  grep '"version":' package.json | cut -d\" -f4 > /tmp/client-version.txt
+  echo "in master"
+else
+  echo ${WORKFLOW_ID} > /tmp/client-version.txt
+  echo "in pr"
 fi
 
-if [[ $BRANCH_NAME == *"feature"* ]]; then
-  lerna version minor
-fi
-
-if [[ $BRANCH_NAME == *"major-feature"* ]]; then
-  lerna version major
-fi
