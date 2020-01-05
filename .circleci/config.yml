@@ -183,6 +183,8 @@ jobs:
             
             echo $COMMIT_MESSAGE
 
+            sleep 20
+
             if [[ $CIRCLE_BRANCH == *"maintenance"* ]]; then
               yarn release-patch
             fi
