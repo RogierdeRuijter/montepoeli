@@ -1,6 +1,6 @@
 {
   "name": "montepouli",
-  "version": "3.3.0",
+  "version": "3.4.0",
   "license": "MIT",
   "scripts": {
     "install-sub-modules": "lerna run install-node-modules --parallel",
