@@ -189,7 +189,7 @@ jobs:
           
             if [[ $CIRCLE_BRANCH == *"feature"* ]]; then
               echo 'in feature branch if'
-              yarn release-minor
+              # yarn release-minor
             fi
             
             if [[ $CIRCLE_BRANCH == *"major-feature"* ]]; then
