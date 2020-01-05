@@ -171,12 +171,14 @@ jobs:
           name: Bump version based on branch name
           command: |
             yarn global add lerna
-            
+            echo $CIRCLE_BRANCH
+
             if [[ $CIRCLE_BRANCH == *"maintenance"* ]]; then
               lerna version -y patch --message '[ci skip] bump patch'
             fi
           
             if [[ $CIRCLE_BRANCH == *"feature"* ]]; then
+              echo 'in feature branch if'
               lerna version -y minor --message '[ci skip] bump minor'
             fi
             
