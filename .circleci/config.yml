@@ -164,7 +164,7 @@ jobs:
             git config --global user.email "rogierderuijter@hotmail.com"
             git config --global user.name "Circle Ci"
             
-            COMMIT_MESSAGE=\"$(git log --format=oneline -n 1 $CIRCLE_SHA1)\"
+            COMMIT_MESSAGE=\"$(git log --format=oneline -n 1 $CIRCLE_SHA1)| tr '[:upper:]' '[:lower:]'\"
             
             yarn install
 
