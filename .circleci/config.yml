@@ -166,9 +166,10 @@ jobs:
             
             COMMIT_MESSAGE=\"$(git log --format=oneline -n 1 $CIRCLE_SHA1)\"
             
-            
+
             yarn install
 
+            
             if [[ $COMMIT_MESSAGE == *"maintenance/"* ]]; then
               yarn release-patch
               echo 'patch released'
