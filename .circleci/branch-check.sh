@@ -7,3 +7,4 @@ else
   echo ${WORKFLOW_ID} > /tmp/client-version.txt
   echo "in pr"
 fi
+
