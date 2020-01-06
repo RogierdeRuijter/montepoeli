@@ -24,8 +24,8 @@ exports.config = {
     './src/**/*.e2e-spec.ts',
   ],
 
-  multiCapabilities: [
-    {
+  // multiCapabilities: [
+    capabilities: {
       'browserName': 'chrome',
       trustAllSSLCertificates: true,
       acceptInsecureCerts: true,
@@ -39,19 +39,20 @@ exports.config = {
           'no-sandbox', 
           '--whitelisted-ips'
         ],
-      }
-    },
-    {
-      'browserName': 'firefox',
-      acceptInsecureCerts: true,
-      marionette : true,
-      'moz:firefoxOptions': {
-        args: [
-          '-accept_insecure_certs'
-        ]
-      }
-    }
-  ],
+      } 
+  },
+  //   ,
+  //   {
+  //     'browserName': 'firefox',
+  //     acceptInsecureCerts: true,
+  //     marionette : true,
+  //     'moz:firefoxOptions': {
+  //       args: [
+  //         '-accept_insecure_certs'
+  //       ]
+  //     }
+  //   }
+  // ],
   seleniumAddress: 'http://selenium-hub:4444/wd/hub',
   baseUrl: 'https://webserver-e2e',
   framework: 'jasmine',

@@ -90,17 +90,17 @@ services:
     networks:
       - e2e
 
-  firefox:
-    image: selenium/node-firefox:3.141.59
-    volumes:
-      - /dev/shm:/dev/shm
-    depends_on:
-      - selenium-hub
-    environment:
-      - HUB_HOST=selenium-hub
-      - HUB_PORT=4444
-    networks:
-      - e2e
+  # firefox:
+  #   image: selenium/node-firefox:3.141.59
+  #   volumes:
+  #     - /dev/shm:/dev/shm
+  #   depends_on:
+  #     - selenium-hub
+  #   environment:
+  #     - HUB_HOST=selenium-hub
+  #     - HUB_PORT=4444
+  #   networks:
+  #     - e2e
 
 networks:
   e2e:
