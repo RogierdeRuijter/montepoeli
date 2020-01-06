@@ -168,6 +168,7 @@ jobs:
 
             yarn install
 
+            
             if [[ $COMMIT_MESSAGE == *"maintenance/"* ]]; then
               yarn release-patch
               echo 'patch released'
