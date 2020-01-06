@@ -11,7 +11,6 @@ jobs:
           command: |
             cd client
             echo ${CIRCLE_WORKFLOW_ID} > /tmp/client-version.txt
-          
 
       - run:
           command: |
@@ -165,11 +164,10 @@ jobs:
             git config --global user.name "Circle Ci"
             
             COMMIT_MESSAGE=\"$(git log --format=oneline -n 1 $CIRCLE_SHA1)\"
-            
+            COMMIT_MESSAGE="$( echo $COMMIT_MESSAGE | tr '[:upper:]' '[:lower:]')"
 
             yarn install
 
-            
             if [[ $COMMIT_MESSAGE == *"maintenance/"* ]]; then
               yarn release-patch
               echo 'patch released'
@@ -184,7 +182,7 @@ jobs:
               yarn release-major
               echo 'major released'
             fi
-  
+
   save-new-version:
     docker:
       - image: circleci/node:11
