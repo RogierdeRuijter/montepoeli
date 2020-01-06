@@ -19,9 +19,10 @@ describe('montepoeli login', () => {
     page.getPasswordField().sendKeys('test1234');
     helper.sleep();
     page.getSubmitButton().click();
-    helper.sleep();
+    
+    browser.waitForAngular();
 
-    expect(page.getLoginFailedWarning().getText()).toEqual('Wrong username or password.');
+    expect(await page.getLoginFailedWarning().getText()).toEqual('Wrong username or password.');
 
     expect(browser.getCurrentUrl()).toContain('/login');
     

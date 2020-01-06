@@ -36,12 +36,12 @@ describe('Mobile screen tests', () => {
 
     page.getMobileNavButtonGames().click();
 
+    browser.waitForAngular();
     helper.sleep();
 
     expect(page.getGamesView()).toBeTruthy();
 
-    helper.longSleep();
-    helper.longSleep();
+    browser.waitForAngular();
 
     expect(page.getMobileNavButtonGames()).toBeTruthy();
     expect(page.getMobileAddGameButton().getCssValue('opacity')).toEqual('1');    
