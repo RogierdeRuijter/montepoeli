@@ -272,6 +272,7 @@ jobs:
           command: |
             docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
 
+            
       - run:
           command: |
             IMAGE_CLIENT_NAME=montepouli-client
