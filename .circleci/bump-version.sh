@@ -1,4 +1,5 @@
-COMMIT_MESSAGE="maintenance/automatically \n maintenance"
+COMMIT_MESSAGE="Feature/fix.20 (#315)"
+COMMIT_MESSAGE="$( echo $COMMIT_MESSAGE | tr '[:upper:]' '[:lower:]')"
 
 if [[ $COMMIT_MESSAGE == *"maintenance/"* ]]; then
   yarn release-patch # command is in the main folder
