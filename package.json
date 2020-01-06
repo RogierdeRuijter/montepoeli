@@ -23,9 +23,12 @@
     "restart:e2e": "yarn stop:e2e && sleep 5 && yarn start:e2e",
     "docker-compose-rebuild": "docker-compose build --parallel && docker-compose down && docker-compose up -d",
     "docker-compose-rebuild-no-cache": "docker-compose build --no-cache && docker-compose down && docker-compose up -d",
-    "release-patch": "lerna version -y patch --message '[skip ci] bump patch'",
-    "release-minor": "lerna version -y minor --message '[skip ci] bump minor'",
-    "release-major": "lerna version -y major --message '[skip ci] bump major'"
+    "release-patch": "lerna version -y patch --message '[skip ci] create patch release'",
+    "release-minor": "lerna version -y minor --message '[skip ci] create minor release'",
+    "release-major": "lerna version -y major --message '[skip ci] create major release'",
+    "pre-release-patch": "lerna version -y prepatch --message '[skip ci] create prepatch release'",
+    "pre-release-minor": "lerna version -y preminor --message '[skip ci] create preminor release'",
+    "pre-release-major": "lerna version -y premajor --message '[skip ci] create premajor release'"
   },
   "devDependencies": {
     "husky": "3.0.7",

@@ -86,6 +86,42 @@ jobs:
             IMAGE_SERVER_NAME=montepouli-server
             docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
             docker push $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG
+  
+  create-release-candidate:
+    docker:
+      - image: circleci/node:11
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+
+      - add_ssh_keys:
+          fingerprints:
+            - "d7:e3:8a:3a:84:5f:4b:48:cd:c0:d4:bf:66:59:16:e1"
+      
+      - run:
+          name: Setup environment for creating a release branch
+          command: |
+            git config --global user.email "rogierderuijter@hotmail.com"
+            git config --global user.name "Circle Ci"
+
+            yarn install
+
+            if [[ $CIRCLE_BRANCH == *"maintenance/"* ]]; then
+              yarn pre-release-patch
+              echo 'pre-patch released'
+            fi
+          
+            if [[ $CIRCLE_BRANCH == *"feature/"* ]]; then
+              yarn pre-release-minor
+              echo 'pre-minor released'
+            fi
+            
+            if [[ $CIRCLE_BRANCH == *"major-feature/"* ]]; then
+              yarn pre-release-major
+              echo 'pre-major released'
+            fi
 
   swap-client-config-e2e:
     docker:
@@ -168,7 +204,6 @@ jobs:
 
             yarn install
 
-            
             if [[ $COMMIT_MESSAGE == *"maintenance/"* ]]; then
               yarn release-patch
               echo 'patch released'
@@ -297,6 +332,14 @@ workflows:
       - build-server:
           requires:
             - save-docker-tags-as-artifacts
+        
+      - create-release-candidate:
+          requires:
+            - build-client-base
+            - build-server
+          filters:
+            branches:
+              ignore: master
 
       - swap-client-config-e2e:
           requires:
