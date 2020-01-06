@@ -21,10 +21,10 @@ describe('montepoeli login', () => {
     page.getSubmitButton().click();
     helper.sleep();
 
-    expect(browser.getCurrentUrl()).toContain('/login');
-    
     expect(page.getLoginFailedWarning().getText()).toEqual('Wrong username or password.');
 
+    expect(browser.getCurrentUrl()).toContain('/login');
+    
     helper.expectThreeErrorsInConsole(browser);
   });
 
