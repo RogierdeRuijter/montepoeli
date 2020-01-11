@@ -167,6 +167,7 @@ jobs:
           name: bump version based on last commit message
           command: |
             npx semantic-release
+
   save-new-version:
     docker:
       - image: circleci/node:11
@@ -176,15 +177,12 @@ jobs:
       - checkout
       - run:
           command: |
-            cd client
-            grep '"version":' package.json | cut -d\" -f4 > /tmp/client-version-updated.txt
+            VERSION=$(grep '"version":' package.json | cut -d\" -f4)
+            echo "$VERSION"
 
-      - run:
-          command: |
-            cd server
-            grep '"version":' package.json | cut -d\" -f4 > /tmp/server-version-updated.txt
-    
-            
+            $VERSION > /tmp/client-version-updated.txt
+            $VERISON > /tmp/server-version-updated.txt
+          
       - store_artifacts:
           path: /tmp/client-version-updated.txt
 
@@ -271,61 +269,61 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-      - save-docker-tags-as-artifacts
+      # - save-docker-tags-as-artifacts
 
-      - build-client-base:
-          requires:
-            - save-docker-tags-as-artifacts
+      # - build-client-base:
+      #     requires:
+      #       - save-docker-tags-as-artifacts
 
-      - build-server:
-          requires:
-            - save-docker-tags-as-artifacts
+      # - build-server:
+      #     requires:
+      #       - save-docker-tags-as-artifacts
 
-      - swap-client-config-e2e:
-          requires:
-            - build-client-base
-          filters:
-            branches:
-              only: 
-                - master
-                - /depfu.*/
-                - /dependabot.*/
+      # - swap-client-config-e2e:
+      #     requires:
+      #       - build-client-base
+      #     filters:
+      #       branches:
+      #         only: 
+      #           - master
+      #           - /depfu.*/
+      #           - /dependabot.*/
 
-      - e2e-tests:
-          requires:
-            - swap-client-config-e2e
-            - build-server
-          filters:
-            branches:
-              only: 
-                - master
-                - /depfu.*/
-                - /dependabot.*/
+      # - e2e-tests:
+      #     requires:
+      #       - swap-client-config-e2e
+      #       - build-server
+      #     filters:
+      #       branches:
+      #         only: 
+      #           - master
+      #           - /depfu.*/
+      #           - /dependabot.*/
 
-      - update-version:
-          requires:
-            - e2e-tests
-          filters:
-            branches:
-              only: master
+      # - update-version:
+      #     requires:
+      #       - e2e-tests
+      #     filters:
+      #       branches:
+      #         only: master
 
-      - save-new-version:
-          requires:
-            - update-version
-          filters:
-            branches:
-              only: master
+      - save-new-version
+          # requires:
+          #   - update-version
+          # filters:
+          #   branches:
+          #     only: master
 
-      - swap-client-config:
-          requires:
-            - save-new-version
-          filters:
-            branches:
-              only: master
+      # - swap-client-config:
+      #     requires:
+      #       - save-new-version
+      #     filters:
+      #       branches:
+      #         only: master
 
-      - retag-server-image:
-          requires:
-            - save-new-version
-          filters:
-            branches:
-              only: master
+      # - retag-server-image:
+      #     requires:
+      #       - save-new-version
+      #     filters:
+      #       branches:
+      #         only: master
