@@ -150,40 +150,23 @@ jobs:
     working_directory: ~/repo
     steps:
       - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true
-
+      - setup_remote_docker
       - add_ssh_keys:
           fingerprints:
             - "d7:e3:8a:3a:84:5f:4b:48:cd:c0:d4:bf:66:59:16:e1"
       
       - run:
-          name: Setup environment for version increase and bump version based on last commit message
+          name: Setup environment for version increase
           command: |
             git config --global user.email "rogierderuijter@hotmail.com"
             git config --global user.name "Circle Ci"
             
-            COMMIT_MESSAGE=\"$(git log --format=oneline -n 1 $CIRCLE_SHA1)\"
-            COMMIT_MESSAGE="$( echo $COMMIT_MESSAGE | tr '[:upper:]' '[:lower:]')"
-
             yarn install
 
-            
-            if [[ $COMMIT_MESSAGE == *"maintenance/"* ]]; then
-              yarn release-patch
-              echo 'patch released'
-            fi
-          
-            if [[ $COMMIT_MESSAGE == *"feature/"* ]]; then
-              yarn release-minor
-              echo 'minor released'
-            fi
-            
-            if [[ $COMMIT_MESSAGE == *"major-feature/"* ]]; then
-              yarn release-major
-              echo 'major released'
-            fi
-
+      - run: 
+          name: bump version based on last commit message
+          command: |
+            npx semantic-release -e semantic-release-monorepo
   save-new-version:
     docker:
       - image: circleci/node:11
