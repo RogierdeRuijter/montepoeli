@@ -9,8 +9,5 @@
           }],
         "@semantic-release/github",
         "@semantic-release/git"
-    ],
-    "verifyConditions": [
-        "@semantic-release/github"
     ]
 }
