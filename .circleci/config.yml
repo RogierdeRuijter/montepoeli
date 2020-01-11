@@ -179,8 +179,8 @@ jobs:
           command: |
             VERSION=$(grep '"version":' package.json | cut -d\" -f4)
 
-            $VERSION > /tmp/client-version-updated.txt
-            $VERISON > /tmp/server-version-updated.txt
+            echo $VERSION > /tmp/client-version-updated.txt
+            echo $VERISON > /tmp/server-version-updated.txt
           
       - store_artifacts:
           path: /tmp/client-version-updated.txt
