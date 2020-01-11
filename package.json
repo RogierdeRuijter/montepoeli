@@ -28,6 +28,8 @@
     "release-major": "lerna version -y major --message '[skip ci] bump major'"
   },
   "devDependencies": {
+    "@commitlint/cli": "8.3.4",
+    "@commitlint/config-conventional": "8.3.4",
     "@semantic-release/commit-analyzer": "6.3.3",
     "@semantic-release/git": "7.0.18",
     "@semantic-release/npm": "5.3.5",
@@ -41,7 +43,8 @@
     "hooks": {
       "pre-commit": "lerna run --parallel lint",
       "pre-push": "lerna run --parallel test & lerna run --parallel build:pre-push",
-      "post-merge": "yarn install-sub-modules"
+      "post-merge": "yarn install-sub-modules",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   }
 }

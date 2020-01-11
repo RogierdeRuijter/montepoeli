@@ -166,7 +166,7 @@ jobs:
       - run: 
           name: bump version based on last commit message
           command: |
-            npx semantic-release -e semantic-release-monorepo
+            npx semantic-release
   save-new-version:
     docker:
       - image: circleci/node:11
