@@ -1,10 +1,10 @@
 {
-    "monorepo": {
-        "analyzeCommits": {
-          "format": "atom"
-        },
-        "generateNotes": "myNotesGenerator"
-      },
-      "prepare": ["@semantic-release/npm", "@semantic-release/git"],
-      "verifyConditions": ["@semantic-release/git"]
+      "plugins": [
+        "@semantic-release/commit-analyzer",
+        "@semantic-release/release-notes-generator",
+        "@semantic-release/github",
+        ["@semantic-release/npm", {
+          "npmPublish": false
+        }]
+      ]
   }
