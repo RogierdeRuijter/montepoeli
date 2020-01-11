@@ -1,3 +1,10 @@
+## [3.4.10](https://github.com/RogierdeRuijter/montepoeli/compare/v3.4.9...v3.4.10) (2020-01-11)
+
+
+### Bug Fixes
+
+* finish off pipeline ([b5acecf](https://github.com/RogierdeRuijter/montepoeli/commit/b5acecfb71fd6f9cdc0aeffa1a5f3c5a58d3ad1c))
+
 ## [3.4.9](https://github.com/RogierdeRuijter/montepoeli/compare/v3.4.8...v3.4.9) (2020-01-11)
 
 
