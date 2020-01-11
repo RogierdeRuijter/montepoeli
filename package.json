@@ -28,6 +28,9 @@
     "release-major": "lerna version -y major --message '[skip ci] bump major'"
   },
   "devDependencies": {
+    "@semantic-release/commit-analyzer": "^7.0.0",
+    "@semantic-release/npm": "^6.0.0",
+    "@semantic-release/release-notes-generator": "^7.3.5",
     "husky": "3.0.7",
     "lerna": "3.17.0",
     "semantic-release": "^16.0.1",
