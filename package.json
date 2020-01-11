@@ -48,5 +48,16 @@
       "post-merge": "yarn install-sub-modules",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
-  }
+  },
+    "release": {
+        "repositoryUrl": "https://github.com/RogierdeRuijter/montepoeli.git",
+        "plugins": [
+            "@semantic-release/commit-analyzer",
+            "@semantic-release/release-notes-generator",
+            "@semantic-release/changelog",
+            "@semantic-release/npm",
+            "@semantic-release/git"
+        ]
+    }
+  
 }
