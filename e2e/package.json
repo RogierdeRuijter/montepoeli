@@ -1,6 +1,5 @@
 {
   "name": "e2e",
-  "version": "3.4.0",
   "license": "MIT",
   "scripts": {
     "install-node-modules": "yarn install",
