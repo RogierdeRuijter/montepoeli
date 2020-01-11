@@ -178,7 +178,6 @@ jobs:
       - run:
           command: |
             VERSION=$(grep '"version":' package.json | cut -d\" -f4)
-            echo "$VERSION"
 
             $VERSION > /tmp/client-version-updated.txt
             $VERISON > /tmp/server-version-updated.txt
