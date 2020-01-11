@@ -183,7 +183,7 @@ jobs:
             echo $VERISON > /tmp/server-version-updated.txt
             echo $VERSION > /tmp/client-version-updated.txt
             
-            cat /tmp/client-version-updated.txt
+            cat /tmp/server-version-updated.txt
           
       - store_artifacts:
           path: /tmp/client-version-updated.txt
