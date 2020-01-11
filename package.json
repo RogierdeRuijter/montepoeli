@@ -2,6 +2,7 @@
   "name": "montepouli",
   "version": "3.4.0",
   "license": "MIT",
+  "private": true,
   "scripts": {
     "install-sub-modules": "lerna run install-node-modules --parallel",
     "install-node-modules": "yarn install",
