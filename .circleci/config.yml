@@ -119,7 +119,6 @@ jobs:
           command: |
             IMAGE_CLIENT_NAME=montepouli-client-e2e
             docker push $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG
-
   e2e-tests:
     machine:
       image: circleci/classic:201808-01
