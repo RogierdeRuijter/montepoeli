@@ -1,3 +1,10 @@
+## [3.4.12](https://github.com/RogierdeRuijter/montepoeli/compare/v3.4.11...v3.4.12) (2020-01-12)
+
+
+### Bug Fixes
+
+* add github plugin ([360c6b7](https://github.com/RogierdeRuijter/montepoeli/commit/360c6b7ab0877a9d8484b930fd559ace1c4f4683))
+
 ## [3.4.11](https://github.com/RogierdeRuijter/montepoeli/compare/v3.4.10...v3.4.11) (2020-01-12)
 
 
