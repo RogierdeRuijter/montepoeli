@@ -12,30 +12,39 @@ export class AppController {
   }
 
   private secure: boolean = process.env.ENV.toString() === 'prod' ? true : false;
+
   private sameSite: string = process.env.ENV.toString() === 'prod' ? 'Strict' : undefined;
+  private signed: boolean = process.env.ENV.toString() === 'prod' ? true : undefined;
+
   private domain: string = process.env.ENV.toString() === 'prod' ? process.env.DOMAIN : undefined;
 
   @Post('/signIn')
   public async signIn(@Body() body, @Res() res: Response, @Next() next): Promise<any> {
     return await this.authService.signIn(body).then(jwt => {
       const date = new Date();
-      res.cookie('montepoeliJwt',
-      jwt.jwt,
-      {
-        expires: new Date(date.setFullYear(date.getFullYear() + 1)),
-        httpOnly: true,
-        domain: this.domain,
-        secure: this.secure,
-        sameSite: this.sameSite
-      });
+
+      res.cookie(
+        'montepoeliJwt',
+        jwt.jwt,
+        {
+          expires: new Date(date.setFullYear(date.getFullYear() + 1)),
+          httpOnly: true,
+          signed: true,
+          domain: this.domain,
+          secure: this.secure,
+          sameSite: 'Strict'
+        }
+      );
 
       res.cookie(
         'montepoeliAuthenticated',
         true,
         {
           expires: new Date(date.setFullYear(date.getFullYear() + 1)),
+          signed: true,
           domain: this.domain,
-          sameSite: this.sameSite
+          secure: false,
+          sameSite: 'Strict'
         }
       );
 
@@ -46,6 +55,8 @@ export class AppController {
   @Post('/logout')
   public async logout(@Res() res: Response): Promise<any> {
     res.clearCookie('montepoeliJwt');
+
+    res.clearCookie('montepoeliAuthenticated');
 
     res.send();
   }

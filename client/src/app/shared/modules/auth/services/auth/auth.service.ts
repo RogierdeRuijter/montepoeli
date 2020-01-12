@@ -23,7 +23,7 @@ export class AuthService {
   }
 
   private doesTheUserHaveAValidToken(): boolean {
-    return !!this.getToken();
+    return this.getToken().includes('true');
   }
 
   public getToken(): string {
@@ -36,12 +36,6 @@ export class AuthService {
         username: user.username,
         password: user.pwd,
       }).pipe(
-        tap(() => {
-          // Workaround for the authentication in e2e tests to work on firefox
-          if (!this.cookieService.get(this.environment.authentication.AUTHTOKENNAME)) {
-            this.cookieService.set(this.environment.authentication.AUTHTOKENNAME, 'true');
-          }
-        }),
         tap(() => this.router.navigate([this.environment.frontend.BASIC_ROUTES.HOME]))
       );
   }
@@ -54,16 +48,10 @@ export class AuthService {
 
   public clearSession(): void {
     this.clearHttpCookies();
-
-    this.clearFrontendCookie();
   }
 
   private clearHttpCookies(): void {
     this.httpService.post(this.environment.backend.ENTRY_POINTS.SIGNOUT)
       .subscribe();
-  }
-
-  private clearFrontendCookie(): void {
-    this.cookieService.delete(this.environment.authentication.AUTHTOKENNAME);
   }
 }

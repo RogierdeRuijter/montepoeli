@@ -54,7 +54,7 @@ export class Helper {
   }
 
   public printAllCookies(browser: any): void {
-    browser.manage().getCookies().then(function(cookies) {
+    browser.manage().getCookies().then((cookies) => {
       console.log(cookies);
   });
   }

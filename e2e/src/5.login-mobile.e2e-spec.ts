@@ -20,12 +20,12 @@ describe('montepoeli login', () => {
     expect(browser.getCurrentUrl()).toContain('/login');
 
     page.getLoginField().sendKeys('protractor');
-    browser.sleep(1000);
-    page.getPasswordField().sendKeys('test');
-    browser.sleep(1000);
-    page.getSubmitButton().click();
-    browser.sleep(1000);
 
+    page.getPasswordField().sendKeys('test');
+  
+    page.getSubmitButton().click();
+  
+    browser.waitForAngular();
     expect(browser.getCurrentUrl()).toContain('/home');
 
     helper.expectNoErrorsInConsole(browser);

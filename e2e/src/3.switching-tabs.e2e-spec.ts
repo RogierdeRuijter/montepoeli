@@ -17,14 +17,13 @@ describe('Tab navigation', () => {
     browser.waitForAngular();
 
     page.getNavBarRulesTab().click();
-    helper.sleep();
-
+    
+    browser.waitForAngular();
     expect(page.getRulesView()).toBeTruthy();
-    helper.sleep();
-
+    
     page.getNavBarGamesTab().click();
-    helper.sleep();
-
+    
+    browser.waitForAngular();
     expect(page.getGamesView()).toBeTruthy();
   });
 

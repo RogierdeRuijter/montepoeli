@@ -3,16 +3,21 @@ import {AuthService} from './modules/auth/auth.service';
 import {PassportStrategy} from '@nestjs/passport';
 import {Injectable, UnauthorizedException} from '@nestjs/common';
 import {JwtPayload} from './models/interfaces/jwt-payload.interface';
+import * as cookieParser from 'cookie-parser';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
+  private cookieSecret: string = process.env.COOKIE_SECRET;
+
   constructor(private readonly authService: AuthService) {
     super({
       jwtFromRequest: ExtractJwt.fromExtractors([(req) => {
         let token = null;
-        if (req && req.cookies) {
-          token = req.cookies.montepoeliJwt;
+
+        if (req && req.signedCookies) {
+          token = req.signedCookies.montepoeliJwt;
         }
+
         return token;
       }]),
       secretOrKey: process.env.SERVER_SECRET,
