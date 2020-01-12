@@ -1,3 +1,10 @@
+## [3.4.11](https://github.com/RogierdeRuijter/montepoeli/compare/v3.4.10...v3.4.11) (2020-01-12)
+
+
+### Bug Fixes
+
+* release commit ([3ad7d94](https://github.com/RogierdeRuijter/montepoeli/commit/3ad7d949f9e72c1e12b2320889c264bfe86acbf2))
+
 ## [3.4.10](https://github.com/RogierdeRuijter/montepoeli/compare/v3.4.9...v3.4.10) (2020-01-11)
 
 
