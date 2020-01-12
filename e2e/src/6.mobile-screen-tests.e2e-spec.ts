@@ -20,6 +20,8 @@ describe('Mobile screen tests', () => {
 
     browser.waitForAngular();
 
+    helper.sleep();
+
     page.getMobileNavButtonRules().click();
   
     helper.longSleep();
@@ -31,8 +33,10 @@ describe('Mobile screen tests', () => {
     expect(page.getMobileAddGameButton().getCssValue('pointer-events')).toEqual('none');
     expect(page.getMobileNavButtonRules()).toBeTruthy();
 
+    helper.sleep();
+
     page.getMobileNavButtonGames().click();
-    
+
     helper.longSleep();
     
     expect(page.getGamesView()).toBeTruthy();

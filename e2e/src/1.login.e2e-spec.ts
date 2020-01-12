@@ -10,7 +10,7 @@ describe('montepoeli login', () => {
     page = new AppPage();
   });
 
-  it('should fail login to montepouli', async () => {
+  it('should fail login into montepouli', async () => {
     await page.navigateTo();
     expect(browser.getCurrentUrl()).toContain('/login');
 

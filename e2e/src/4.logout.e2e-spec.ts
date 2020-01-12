@@ -11,7 +11,7 @@ describe('montepoeli', () => {
     page = new AppPage();
   });
 
-  it('should logout to montepouli', async () => {
+  it('should logout from montepouli', async () => {
     await page.navigateTo();
     expect(browser.getCurrentUrl()).toContain('/home');
 
