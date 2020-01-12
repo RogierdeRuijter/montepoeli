@@ -15,9 +15,9 @@ describe('montepoeli login', () => {
     expect(browser.getCurrentUrl()).toContain('/login');
 
     page.getLoginField().sendKeys('protractor');
-    helper.sleep();
+
     page.getPasswordField().sendKeys('test1234');
-    helper.sleep();
+
     page.getSubmitButton().click();
     
     browser.waitForAngular();
@@ -34,12 +34,13 @@ describe('montepoeli login', () => {
     expect(browser.getCurrentUrl()).toContain('/login');
 
     page.getLoginField().sendKeys('protractor');
-    helper.sleep();
-    page.getPasswordField().sendKeys('test');
-    helper.sleep();
-    page.getSubmitButton().click();
-    helper.sleep();
 
+    page.getPasswordField().sendKeys('test');
+    
+    page.getSubmitButton().click();
+    
+    browser.waitForAngular();
+    
     expect(browser.getCurrentUrl()).toContain('/home');
 
     helper.expectNoErrorsInConsole(browser);

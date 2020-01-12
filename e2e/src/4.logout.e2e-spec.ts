@@ -17,10 +17,11 @@ describe('montepoeli', () => {
 
     page.getUserSettings().click();
     page.getLogout().click();
-    helper.sleep();
+    
+    browser.waitForAngular();
 
     expect(browser.getCurrentUrl()).toContain('/login');
-
+    
     helper.expectNoErrorsInConsole(browser);
   });
 });
