@@ -433,10 +433,10 @@
     "@types/express-serve-static-core" "*"
     "@types/serve-static" "*"
 
-"@types/faker@4.1.8":
-  version "4.1.8"
-  resolved "https://registry.yarnpkg.com/@types/faker/-/faker-4.1.8.tgz#95240361f1379addae0a005ced7c5c77b0b1e1d8"
-  integrity sha512-9ARxZRyXXCMMf8KjYhnD+GHE789HGwIqa1dolCRl/C6ExwvBIUmnIktLeY71TPmFOQiU3DQwrbQEX0pkyqX1tQ==
+"@types/faker@4.1.9":
+  version "4.1.9"
+  resolved "https://registry.yarnpkg.com/@types/faker/-/faker-4.1.9.tgz#5539f331eb66fc40f06ad307e52ed83f2a3fe1bb"
+  integrity sha512-4ZFqA3CEXB6MgT8sDV8E5LhW+O9ndONsHeQXMbEwfOsjoQ4UXKqTJKru+BjDBUfobYEpQz1WYF9/uzQsvbY2wA==
 
 "@types/istanbul-lib-coverage@*", "@types/istanbul-lib-coverage@^2.0.0":
   version "2.0.1"
@@ -487,10 +487,10 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-12.7.4.tgz#64db61e0359eb5a8d99b55e05c729f130a678b04"
   integrity sha512-W0+n1Y+gK/8G2P/piTkBBN38Qc5Q1ZSO6B5H3QmPCUewaiXOo2GCAWZ4ElZCcNhjJuBSUSLGFUJnmlCn5+nxOQ==
 
-"@types/node@13.1.4":
-  version "13.1.4"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-13.1.4.tgz#4cfd90175a200ee9b02bd6b1cd19bc349741607e"
-  integrity sha512-Lue/mlp2egZJoHXZr4LndxDAd7i/7SQYhV0EjWfb/a4/OZ6tuVwMCVPiwkU5nsEipxEf7hmkSU7Em5VQ8P5NGA==
+"@types/node@13.1.6":
+  version "13.1.6"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-13.1.6.tgz#076028d0b0400be8105b89a0a55550c86684ffec"
+  integrity sha512-Jg1F+bmxcpENHP23sVKkNuU3uaxPnsBMW0cLjleiikFKomJQbsn0Cqk2yDvQArqzZN6ABfBkZ0To7pQ8sLdWDg==
 
 "@types/range-parser@*":
   version "1.2.3"
@@ -3388,10 +3388,10 @@ mongoose-legacy-pluralize@1.0.2:
   resolved "https://registry.yarnpkg.com/mongoose-legacy-pluralize/-/mongoose-legacy-pluralize-1.0.2.tgz#3ba9f91fa507b5186d399fb40854bff18fb563e4"
   integrity sha512-Yo/7qQU4/EyIS8YDFSeenIvXxZN+ld7YdV9LqFVQJzTLye8unujAWPZ4NWKfFA+RNjh+wvTWKY9Z3E5XM6ZZiQ==
 
-mongoose@5.8.5:
-  version "5.8.5"
-  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-5.8.5.tgz#a917ad0a17c4c382193de943bc389519874fbe92"
-  integrity sha512-Ek73KYUVpD9+O0tK//C6I69akmVfhJLdSX7RwpyIhfBlVEyi9tW+255A+BUXvOKNS0e6SX8e7C42+WD5kcylCg==
+mongoose@5.8.7:
+  version "5.8.7"
+  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-5.8.7.tgz#d175f8ac4c8ed7bf57b71aa4980aaa3525b923b2"
+  integrity sha512-PCCuTrdxpUmO86L1geXWE+9AvJRFuneIrMUT2hB/LXZ+5HIGOIfE6OSMU7cd8wFU7JRINP9V73zZ9YsmAbt+Iw==
   dependencies:
     bson "~1.1.1"
     kareem "2.3.1"
@@ -4932,10 +4932,10 @@ trim-right@^1.0.1:
   resolved "https://registry.yarnpkg.com/trim-right/-/trim-right-1.0.1.tgz#cb2e1203067e0c8de1f614094b9fe45704ea6003"
   integrity sha1-yy4SAwZ+DI3h9hQJS5/kVwTqYAM=
 
-ts-jest@24.2.0:
-  version "24.2.0"
-  resolved "https://registry.yarnpkg.com/ts-jest/-/ts-jest-24.2.0.tgz#7abca28c2b4b0a1fdd715cd667d65d047ea4e768"
-  integrity sha512-Yc+HLyldlIC9iIK8xEN7tV960Or56N49MDP7hubCZUeI7EbIOTsas6rXCMB4kQjLACJ7eDOF4xWEO5qumpKsag==
+ts-jest@24.3.0:
+  version "24.3.0"
+  resolved "https://registry.yarnpkg.com/ts-jest/-/ts-jest-24.3.0.tgz#b97814e3eab359ea840a1ac112deae68aa440869"
+  integrity sha512-Hb94C/+QRIgjVZlJyiWwouYUF+siNJHJHknyspaOcZ+OQAIdFG/UrdQVXw/0B8Z3No34xkUXZJpOTy9alOWdVQ==
   dependencies:
     bs-logger "0.x"
     buffer-from "1.x"
@@ -4948,16 +4948,16 @@ ts-jest@24.2.0:
     semver "^5.5"
     yargs-parser "10.x"
 
-ts-node@8.5.4:
-  version "8.5.4"
-  resolved "https://registry.yarnpkg.com/ts-node/-/ts-node-8.5.4.tgz#a152add11fa19c221d0b48962c210cf467262ab2"
-  integrity sha512-izbVCRV68EasEPQ8MSIGBNK9dc/4sYJJKYA+IarMQct1RtEot6Xp0bXuClsbUSnKpg50ho+aOAx8en5c+y4OFw==
+ts-node@8.6.2:
+  version "8.6.2"
+  resolved "https://registry.yarnpkg.com/ts-node/-/ts-node-8.6.2.tgz#7419a01391a818fbafa6f826a33c1a13e9464e35"
+  integrity sha512-4mZEbofxGqLL2RImpe3zMJukvEvcO1XP8bj8ozBPySdCUXEcU5cIRwR0aM3R+VoZq7iXc8N86NC0FspGRqP4gg==
   dependencies:
     arg "^4.1.0"
     diff "^4.0.1"
     make-error "^1.1.1"
     source-map-support "^0.5.6"
-    yn "^3.0.0"
+    yn "3.1.1"
 
 tsconfig-paths@3.9.0:
   version "3.9.0"
@@ -5396,7 +5396,7 @@ yargs@^13.0.0, yargs@^13.2.1, yargs@^13.3.0:
     y18n "^4.0.0"
     yargs-parser "^13.1.1"
 
-yn@^3.0.0:
+yn@3.1.1:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/yn/-/yn-3.1.1.tgz#1e87401a09d767c1d5eab26a6e4c185182d2eb50"
   integrity sha512-Ux4ygGWsu2c7isFWe8Yu1YluJmqVhxqK2cLXNQA5AcC3QfbGNpM7fu0Y8b/z16pXLnFxZYvWhd3fhBY9DLmC6Q==
