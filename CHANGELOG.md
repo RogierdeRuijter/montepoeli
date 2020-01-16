@@ -1,3 +1,10 @@
+## [3.4.15](https://github.com/RogierdeRuijter/montepoeli/compare/v3.4.14...v3.4.15) (2020-01-16)
+
+
+### Bug Fixes
+
+* Update all Yarn dependencies (2020-01-16) ([dd5c7f8](https://github.com/RogierdeRuijter/montepoeli/commit/dd5c7f89ec8012838acaf74ea79f9848f8ac2b4a))
+
 ## [3.4.14](https://github.com/RogierdeRuijter/montepoeli/compare/v3.4.13...v3.4.14) (2020-01-15)
 
 
