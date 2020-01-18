@@ -262,61 +262,61 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-      - save-docker-tags-as-artifacts
+      # - save-docker-tags-as-artifacts
 
-      - build-client-base:
-          requires:
-            - save-docker-tags-as-artifacts
+      # - build-client-base:
+      #     requires:
+      #       - save-docker-tags-as-artifacts
 
-      - build-server:
-          requires:
-            - save-docker-tags-as-artifacts
+      # - build-server:
+      #     requires:
+      #       - save-docker-tags-as-artifacts
 
-      - swap-client-config-e2e:
-          requires:
-            - build-client-base
-          filters:
-            branches:
-              only: 
-                - master
-                - /depfu.*/
-                - /dependabot.*/
+      # - swap-client-config-e2e:
+      #     requires:
+      #       - build-client-base
+      #     filters:
+      #       branches:
+      #         only: 
+      #           - master
+      #           - /depfu.*/
+      #           - /dependabot.*/
 
-      - e2e-tests:
-          requires:
-            - swap-client-config-e2e
-            - build-server
-          filters:
-            branches:
-              only: 
-                - master
-                - /depfu.*/
-                - /dependabot.*/
+      # - e2e-tests:
+      #     requires:
+      #       - swap-client-config-e2e
+      #       - build-server
+      #     filters:
+      #       branches:
+      #         only: 
+      #           - master
+      #           - /depfu.*/
+      #           - /dependabot.*/
 
-      - update-version:
-          requires:
-            - e2e-tests
-          filters:
-            branches:
-              only: master
+      - update-version
+          # requires:
+          #   - e2e-tests
+          # filters:
+          #   branches:
+          #     only: master
 
-      - save-new-version:
-          requires:
-            - update-version
-          filters:
-            branches:
-              only: master
+      # - save-new-version:
+      #     requires:
+      #       - update-version
+      #     filters:
+      #       branches:
+      #         only: master
 
-      - swap-client-config:
-          requires:
-            - save-new-version
-          filters:
-            branches:
-              only: master
+      # - swap-client-config:
+      #     requires:
+      #       - save-new-version
+      #     filters:
+      #       branches:
+      #         only: master
 
-      - retag-server-image:
-          requires:
-            - save-new-version
-          filters:
-            branches:
-              only: master
+      # - retag-server-image:
+      #     requires:
+      #       - save-new-version
+      #     filters:
+      #       branches:
+      #         only: master

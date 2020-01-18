@@ -1,7 +1,12 @@
 {
     "repositoryUrl": "https://github.com/RogierdeRuijter/montepoeli.git",
     "plugins": [
-        "@semantic-release/commit-analyzer",
+        ["@semantic-release/commit-analyzer", {
+          "preset": "angular",
+          "releaseRules": [
+            {"type": "dependencies", "release": "patch"}
+          ]
+        }],
         "@semantic-release/release-notes-generator",
         "@semantic-release/changelog",
         "@semantic-release/npm",
