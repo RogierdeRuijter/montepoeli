@@ -1,3 +1,5 @@
+## [3.4.18](https://github.com/RogierdeRuijter/montepoeli/compare/v3.4.17...v3.4.18) (2020-01-18)
+
 ## [3.4.17](https://github.com/RogierdeRuijter/montepoeli/compare/v3.4.16...v3.4.17) (2020-01-17)
 
 
