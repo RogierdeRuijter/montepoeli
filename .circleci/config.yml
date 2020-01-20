@@ -75,8 +75,7 @@ jobs:
       - run:
           name: Setup Environment Variables
           command: |
-            echo "export SERVER_TAG=$(cat /tmp/server-version.txt)" >> $BASH_ENV      
-            echo "export COVERALLS_REPO_TOKEN=$(cat $COVERALLS_TOKEN)" >> $BASH_ENV
+            echo "export SERVER_TAG=$(cat /tmp/server-version.txt)" >> $BASH_ENV
       
       - restore_cache:
           keys:
