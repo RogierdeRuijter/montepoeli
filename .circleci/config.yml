@@ -97,7 +97,7 @@ jobs:
           name: Run tests with coverage
           environment:
             COVERALLS_SERVICE_NAME: "CIRCLE_CI"
-            COVERALLS_REPO_TOKEN: $COVERALLS_TOKEN
+            COVERALLS_REPO_TOKEN: "gcukngaOUvfuvzu1tmfn6v9Po8qZOrsJB"
             COVERALLS_GIT_BRANCH: $CIRCLE_BRANCH
           
           command: |
