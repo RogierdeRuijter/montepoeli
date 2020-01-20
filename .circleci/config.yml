@@ -64,7 +64,8 @@ jobs:
 
     working_directory: ~/repo/server
     steps:
-      - checkout
+      - checkout:
+          path: ~/repo
       - setup_remote_docker:
           docker_layer_caching: true
     
