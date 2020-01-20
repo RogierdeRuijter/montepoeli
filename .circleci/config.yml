@@ -76,6 +76,7 @@ jobs:
           name: Setup Environment Variables
           command: |
             echo "export SERVER_TAG=$(cat /tmp/server-version.txt)" >> $BASH_ENV      
+            echo "export COVERALLS_REPO_TOKEN=$(cat $COVERALLS_TOKEN)
       
       - restore_cache:
           keys:
@@ -97,7 +98,6 @@ jobs:
           name: Run tests with coverage
           environment:
             COVERALLS_SERVICE_NAME: "CIRCLE_CI"
-            COVERALLS_REPO_TOKEN: $COVERALLS_TOKEN
             COVERALLS_GIT_BRANCH: $CIRCLE_BRANCH
           
           command: |
