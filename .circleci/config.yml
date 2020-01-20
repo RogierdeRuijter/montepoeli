@@ -51,9 +51,9 @@ jobs:
 
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "package.json" }}
+          - v1-dependencies-client-{{ checksum "package.json" }}
           # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
+          - v1-dependencies-client
 
       - run:
           name: Install node modules
@@ -63,7 +63,7 @@ jobs:
       - save_cache:
           paths:
           - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
+          key: v1-dependencies-client-{{ checksum "package.json" }}
 
       - run: 
           name: Run tests with coverage
@@ -106,9 +106,9 @@ jobs:
       
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "package.json" }}
+          - v1-dependencies-server-{{ checksum "package.json" }}
           # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
+          - v1-dependencies-server
 
       - run:
           name: Install node modules
@@ -118,7 +118,7 @@ jobs:
       - save_cache:
           paths:
           - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
+          key: v1-dependencies-server-{{ checksum "package.json" }}
 
       - run: 
           name: Run tests with coverage
