@@ -15,7 +15,7 @@
     "build:local": "ng build --configuration=local",
     "install-node-modules": "yarn install",
     "test": "ng test --watch=false --browsers=ChromeHeadless",
-    "test:coveralls": "ng test --browsers=ChromeHeadless --code-coverage true --watch false && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+    "test:coveralls": "ng test --code-coverage true --watch false && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
     "test:jestJtes": "jest",
     "lint": "ng lint frontend",
     "lint:fix": "ng lint frontend --fix",
