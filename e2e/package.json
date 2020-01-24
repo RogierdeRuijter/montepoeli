@@ -10,18 +10,18 @@
     "webdriver-update:protractor": "./node_modules/protractor/bin/webdriver-manager update"
   },
   "dependencies": {
-    "@types/jasmine": "3.5.0",
+    "@types/jasmine": "3.5.1",
     "@types/jasminewd2": "2.0.8",
-    "@types/node": "13.1.7",
+    "@types/node": "13.1.8",
     "jasmine": "3.5.0",
     "jasmine-spec-reporter": "4.2.1",
     "moment": "2.24.0",
-    "mongodb": "3.5.0",
-    "mongoose": "5.8.7",
+    "mongodb": "3.5.2",
+    "mongoose": "5.8.9",
     "path": "0.12.7",
     "protractor": "5.4.2",
     "ts-node": "8.6.2",
-    "typescript": "3.7.4",
+    "typescript": "3.7.5",
     "webdriver-manager": "12.1.7"
   },
   "devDependencies": {
