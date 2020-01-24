@@ -85,6 +85,7 @@ jobs:
             docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
             docker push $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG
 
+
   build-server:
     docker:
       - image: circleci/node:11
