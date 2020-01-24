@@ -1,0 +1,75 @@
+table {
+  text-align: center !important;
+  table-layout: fixed;
+  width: 100%;
+}
+//
+.mat-header-cell {
+ text-align: center;
+ padding: 0 !important;
+}
+
+.mat-cell {
+  padding: 0 !important;
+}
+
+
+// .mat-row {
+  // height: auto;
+// }
+
+// .mat-cell {
+//   padding: 8px 8px 8px 0;
+// }
+
+//:host ::ng-deep .mat-sort-header-container {
+//  display: flex;
+//  justify-content: center;
+//}
+//
+//.mat-table {
+//  mat-row, mat-header-row, mat-footer-row {
+//    padding-left: 24px;
+//    padding-right: 24px;
+//  }
+//
+//  mat-cell:first-child, mat-footer-cell:first-child, mat-header-cell:first-child {
+//    padding-left: 0;
+//  }
+//
+//  mat-cell:last-child, mat-footer-cell:last-child, mat-header-cell:last-child {
+//    padding-right: 0;
+//  }
+//}
+
+// .mat-column-white {
+//   flex: 0 0 25% !important;
+//   min-width: 104px !important;
+// }
+
+// .mat-column-winner {
+//   flex: 0 0 25% !important;
+//   min-width: 104px !important;
+// }
+
+// .mat-column-black {
+//   flex: 0 0 25% !important;
+//   min-width: 104px !important;
+// }
+
+// @mixin mat-table-columns($columns)
+// {
+//     .mat-column-
+//     {
+//         @each $colName, $props in $columns {
+
+//             $width: map-get($props, 'width');
+
+//             &#{$colName} 
+//             {
+//               flex: 0 0 25% !important;
+//               min-width: 104px !important;
+//             }  
+//         }
+//     }
+// }

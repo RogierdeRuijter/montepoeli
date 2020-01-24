@@ -1,32 +1,24 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {AuthGuard} from './modules/shared/guards/auth-guard.service';
-import {LoginComponent} from './components/login/login.component';
-import {MainContentComponent} from './components/main-content/main-content.component';
-import {LandingComponent} from './components/landing/landing.component';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './shared/modules/auth/guards/auth-guard.service';
+import { LandingComponent } from './components/landing/landing.component';
 
 // TODO: figure out how to use the environment here for the environment routes
 const appRoutes: Routes = [
   {
     path: '',
-    redirectTo: '/landing',
-    pathMatch: 'full',
-  },
-  {
-    path: 'landing',
     component: LandingComponent
   },
   {
     path: 'login',
-    component: LoginComponent,
+    loadChildren: () => import('./modules/login/login.module').then(m => m.LoginModule)
   },
   {
     path: 'home',
-    loadChildren: './modules/home/home.module#HomeModule',
-    component: MainContentComponent,
+    loadChildren: () => import('./modules/main-content/main-content.module').then(m => m.MainContentModule),
     canActivate: [AuthGuard],
   },
-  { path: '**', redirectTo: '/landing' }
+  { path: '**', redirectTo: '' }
 ];
 @NgModule({
   imports: [RouterModule.forRoot(appRoutes)],

@@ -16,7 +16,9 @@ services:
     command: bash -c 'npm run start:dev-no-host'
 
   server:
-    build: server
+    build:
+      context: server
+      dockerfile: Dockerfile.local
     container_name: montepouli-server
     environment:
       - MONGO_USERNAME=root
@@ -24,6 +26,7 @@ services:
       - SERVER_SECRET=secret01
       - ENV=dev
       - MONGO_DNS_NAME=mongodb
+      - COOKIE_SECRET=secret
     ports:
       - "3000:3000"
     volumes:

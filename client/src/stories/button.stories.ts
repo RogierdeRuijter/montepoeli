@@ -1,8 +1,8 @@
 import {storiesOf} from '@storybook/angular';
 import {ButtonComponent} from '../app/modules/shared/components/button/button.component';
-import {ButtonFunction, ButtonType} from '../app/modules/shared/static-files/enums';
+import {ButtonFunction, ButtonType} from '../app/shared/static-files/enums';
 import {MatButtonModule} from '@angular/material/button';
-import {TranslateDirective} from '../app/modules/shared/modules/translate/translate.directive';
+import {TranslateDirective} from '../app/shared/modules/translate/directives/translate.directive';
 import {StorybookTranslateModule} from './storybook-translate.module';
 import {MatDialogModule} from '@angular/material';
 import {withScreenshot} from 'storybook-chrome-screenshot';

@@ -1,0 +1,7 @@
+{
+  "name": "mergify",
+  "license": "MIT",
+  "scripts": {
+    "lint": "./lint-mergify.sh"
+  }
+}

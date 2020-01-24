@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {Environment} from '../../../environments/environment';
 import {ActivatedRoute, Router} from '@angular/router';
-import {AuthService} from '../../services/auth/auth.service';
+import {AuthService} from '../../shared/modules/auth/services/auth/auth.service';
 
 @Component({
   template: ``,

@@ -1,6 +1,7 @@
-import {IGetStory} from '@storybook/angular';
+import { StoryFn } from "@storybook/addons";
+import { StoryFnAngularReturnType } from "@storybook/angular/dist/client/preview/types";
 
 export interface CompleteStory {
   name: string;
-  story: IGetStory;
+  story: StoryFn<StoryFnAngularReturnType>;
 }

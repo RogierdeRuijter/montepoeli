@@ -19,25 +19,47 @@ const dbParams = {
 };
 
 exports.config = {
-  allScriptsTimeout: 11000,
+  allScriptsTimeout: 15000,
   specs: [
     './src/**/*.e2e-spec.ts',
   ],
 
-  capabilities: {
-    'browserName': 'chrome',
-    chromeOptions: {
-      args: ['--window-size=800x600', 'no-sandbox', '--whitelisted-ips'],
-    },
+  // multiCapabilities: [
+    capabilities: {
+      'browserName': 'chrome',
+      trustAllSSLCertificates: true,
+      acceptInsecureCerts: true,
+      acceptSslCerts: true,
+      'goog:chromeOptions': {
+       'w3c': false,
+        args: [
+          '--ignore-certificate-errors',
+          '--unsafely-treat-insecure-origin-as-secure=https://webserver-e2e/',
+          '--window-size=800x600', 
+          'no-sandbox', 
+          '--whitelisted-ips'
+        ],
+      } 
   },
+  //   ,
+  //   {
+  //     'browserName': 'firefox',
+  //     acceptInsecureCerts: true,
+  //     marionette : true,
+  //     'moz:firefoxOptions': {
+  //       args: [
+  //         '-accept_insecure_certs'
+  //       ]
+  //     }
+  //   }
+  // ],
   seleniumAddress: 'http://selenium-hub:4444/wd/hub',
-  baseUrl: 'http://client-e2e:80/',
+  baseUrl: 'https://webserver-e2e',
   framework: 'jasmine',
   jasmineNodeOpts: {
     showColors: true,
     defaultTimeoutInterval: 30000,
-    print: function() {
-    },
+    print: function() {},
   },
   beforeLaunch: () => {
     return Promise.all([
@@ -56,9 +78,7 @@ exports.config = {
     jasmine.getEnv().addReporter(new SpecReporter({spec: {displayStacktrace: true}}));
   },
   afterLaunch: function(exitCode) {
-    return new Promise(function(resolve){
-      reporter.afterLaunch(resolve.bind(this, exitCode));
-    });
+      return new Promise((resolve) => reporter.afterLaunch(resolve.bind(this, exitCode)));
   }
 };
 

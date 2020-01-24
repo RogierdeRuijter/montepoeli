@@ -9,14 +9,13 @@ export class AppInitService {
 
   // This is the method you want to call at bootstrap
   // Important: It should return a Promise
-  public init() {
+  public init(): Promise<any> {
     return from(
-      fetch('assets/app-config.json').then(function(response) {
+      fetch('assets/app-config.json').then((response: any) => {
         return response.json();
       }),
     ).pipe(
       map((config) => {
-        console.log(config);
         window.config = config;
         return;
       })).toPromise();

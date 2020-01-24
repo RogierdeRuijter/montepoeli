@@ -1,14 +1,14 @@
 import {storiesOf} from '@storybook/angular';
-import {GameResultComponent} from '../../app/modules/game/components/game/dialog-data/game-result/game-result.component';
+import {GameResultComponent} from '../../app/shared/modules/add-game/components/dialog-data/game-result/game-result.component';
 import {StorybookTranslateModule} from '../storybook-translate.module';
 import {MaterialModule} from '../../app/modules/material/material.module';
-import {GridRowDirective} from '../../app/modules/shared/directives/grid-row.directive';
-import {GridColumnDirective} from '../../app/modules/shared/directives/grid-column.directive';
+import {GridRowDirective} from '../../app/shared/modules/grid/directives/grid-row.directive';
+import {GridColumnDirective} from '../../app/shared/modules/grid/directives/grid-column.directive';
 import {ButtonComponent} from '../../app/modules/shared/components/button/button.component';
-import {Winners} from '../../app/modules/shared/static-files/enums';
+import {Winners} from '../../app/shared/static-files/enums';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {FormModule} from '../../app/modules/shared/modules/form/form.module';
-import {CustomTranslateModule} from '../../app/modules/shared/modules/translate/custom-translate.module';
+import {FormModule} from '../../app/shared/modules/form/form.module';
+import {CustomTranslateModule} from '../../app/shared/modules/translate/custom-translate.module';
 
 const winners: Winners[] = [Winners.WHITE, Winners.BLACK, Winners.DRAW];
 

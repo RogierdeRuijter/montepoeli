@@ -1,0 +1,17 @@
+pull_request_rules:
+  - name: automatic merge depfu on successfull e2e tests
+    conditions:
+      - 'status-success=ci/circleci: e2e-tests'
+      - 'head~=depfu*'
+    actions:
+      merge:
+        method: merge
+  
+  - name: automatic merge dependabot on successfull e2e tests
+    conditions:
+      - 'status-success=ci/circleci: e2e-tests'
+      - 'head~=dependabot*'
+    actions:
+      merge:
+        method: merge
+    

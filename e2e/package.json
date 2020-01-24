@@ -1,27 +1,28 @@
 {
   "name": "e2e",
-  "version": "2.5.0",
+  "license": "MIT",
   "scripts": {
+    "install-node-modules": "yarn install",
     "protractor": "protractor",
-    "protractor:local": "npm run webdriver-update && protractor protractor-local.conf.js ",
+    "protractor:local-with-webdriver": "yarn webdriver-update:protractor && protractor protractor-local.conf.js",
+    "protractor:local": "protractor protractor-local.conf.js",
     "webdriver-update": "webdriver-manager clean && webdriver-manager update",
     "webdriver-update:protractor": "./node_modules/protractor/bin/webdriver-manager update"
   },
-  "private": true,
   "dependencies": {
-    "@types/jasmine": "3.4.0",
-    "@types/jasminewd2": "2.0.6",
-    "@types/node": "12.7.2",
-    "jasmine": "3.4.0",
+    "@types/jasmine": "3.5.1",
+    "@types/jasminewd2": "2.0.8",
+    "@types/node": "13.1.8",
+    "jasmine": "3.5.0",
     "jasmine-spec-reporter": "4.2.1",
     "moment": "2.24.0",
-    "mongodb": "3.3.2",
-    "mongoose": "5.7.7",
+    "mongodb": "3.5.2",
+    "mongoose": "5.8.9",
     "path": "0.12.7",
     "protractor": "5.4.2",
-    "ts-node": "8.3.0",
-    "typescript": "3.6.2",
-    "webdriver-manager": "12.1.6"
+    "ts-node": "8.6.2",
+    "typescript": "3.7.5",
+    "webdriver-manager": "12.1.7"
   },
   "devDependencies": {
     "protractor-jasmine2-screenshot-reporter": "0.5.0"
