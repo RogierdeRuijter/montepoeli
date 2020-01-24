@@ -66,20 +66,18 @@ jobs:
           key: v1-dependencies-client-{{ checksum "package.json" }}
 
       - run: 
-          name: Run tests with coverage
-          environment:
-            COVERALLS_SERVICE_NAME: "CIRCLE_CI"
-            COVERALLS_GIT_BRANCH: $CIRCLE_BRANCH
+          name: Run tests with coverage and store coverage on server
           
           command: |
-            yarn test:coveralls
+            yarn test:cov
+
+            bash <(curl -s https://codecov.io/bash)
 
       - run:
           command: |
             IMAGE_CLIENT_NAME=montepouli-client
-            ci_env=`bash <(curl -s https://codecov.io/env)`
 
-            docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG . -f Dockerfile.prod --build-arg ci_env=${ci_env}
+            docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG . -f Dockerfile.prod
             
       - deploy:
           command: |
@@ -123,19 +121,18 @@ jobs:
           key: v1-dependencies-server-{{ checksum "package.json" }}
 
       - run: 
-          name: Run tests with coverage
-          environment:
-            COVERALLS_SERVICE_NAME: "CIRCLE_CI"
-            COVERALLS_GIT_BRANCH: $CIRCLE_BRANCH
-          
+          name: Run tests with coverage and store results on server
+
           command: |
-            yarn test:coveralls
-    
+            yarn test:cov
+
+            bash <(curl -s https://codecov.io/bash)
+
+
       - run: |
           IMAGE_SERVER_NAME=montepouli-server
-          ci_env=`bash <(curl -s https://codecov.io/env)`
 
-          docker build -t $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG . -f Dockerfile.prod --build-arg ci_env=${ci_env}
+          docker build -t $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG . -f Dockerfile.prod
 
       - deploy:
           command: |

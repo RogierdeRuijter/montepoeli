@@ -1,9 +1,7 @@
 FROM node:12-slim as builder
 
-ci_env=`bash <(curl -s https://codecov.io/env)`
-docker run $ci_env
-
-RUN apt-get update && apt-get -y upgrade && apt-get -y install python3 make g++ # bcrypt dependencies
+# bcrypt dependencies
+RUN apt-get update && apt-get -y upgrade && apt-get -y install python3 make g++
 
 WORKDIR /usr/src/app
 
@@ -15,10 +13,6 @@ RUN yarn install --frozen-lockfile --prod
 COPY src src
 COPY tsconfig.json tsconfig.json
 COPY tsconfig.build.json tsconfig.build.json
-
-RUN npm run test:cov
-
-RUN bash <(curl -s https://codecov.io/bash) # upload coverage information to server
 
 RUN npm run build
 
