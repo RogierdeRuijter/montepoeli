@@ -1,3 +1,10 @@
+# [3.5.0](https://github.com/RogierdeRuijter/montepoeli/compare/v3.4.21...v3.5.0) (2020-01-25)
+
+
+### Features
+
+* add gzip to production build ([91b6477](https://github.com/RogierdeRuijter/montepoeli/commit/91b64774a5c9b1fc2815632ab7547931fa572c29))
+
 ## [3.4.21](https://github.com/RogierdeRuijter/montepoeli/compare/v3.4.20...v3.4.21) (2020-01-24)
 
 
