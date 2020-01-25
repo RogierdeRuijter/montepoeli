@@ -38,6 +38,7 @@ describe('Mobile screen tests', () => {
     page.getMobileNavButtonGames().click();
 
     helper.longSleep();
+    browser.waitForAngular();
     
     expect(page.getGamesView()).toBeTruthy();
 
