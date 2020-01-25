@@ -33,7 +33,7 @@ services:
     image: ${CLIENT_BASE_IMAGE_NAME}:${CLIENT_BASE_IMAGE_TAG}
     container_name: montepouli-client-e2e
     ports:
-      - "80"
+      - "80:80"
     networks:
       - e2e
     depends_on:
