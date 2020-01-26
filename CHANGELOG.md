@@ -1,3 +1,10 @@
+# [3.6.0](https://github.com/RogierdeRuijter/montepoeli/compare/v3.5.0...v3.6.0) (2020-01-26)
+
+
+### Features
+
+* gzip compression for nodejs ([78e38aa](https://github.com/RogierdeRuijter/montepoeli/commit/78e38aa496672373295f32ebbae1c878c629047a))
+
 # [3.5.0](https://github.com/RogierdeRuijter/montepoeli/compare/v3.4.21...v3.5.0) (2020-01-25)
 
 
