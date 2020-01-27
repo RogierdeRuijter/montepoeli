@@ -1,3 +1,15 @@
+# [3.7.0](https://github.com/RogierdeRuijter/montepoeli/compare/v3.6.0...v3.7.0) (2020-01-27)
+
+
+### Bug Fixes
+
+* don't lazy load prebuild theme and toastr ([9648b88](https://github.com/RogierdeRuijter/montepoeli/commit/9648b88f148a9c53f48d419bb8af5e7373ab3f63))
+
+
+### Features
+
+* less bootstrap as critical css and lazy load other css ([e62b5eb](https://github.com/RogierdeRuijter/montepoeli/commit/e62b5eb3c5533e985b1592799d0f7e6c3a709a2c))
+
 # [3.6.0](https://github.com/RogierdeRuijter/montepoeli/compare/v3.5.0...v3.6.0) (2020-01-26)
 
 
