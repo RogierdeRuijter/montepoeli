@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output, Renderer2, ViewChild, AfterViewInit } from '@angular/core';
 import { IconColor, Icons, IconSize } from '../../../../static-files/enums';
-import { MatButton } from '@angular/material';
+import { MatButton } from '@angular/material/button';
 
 @Component({
   selector: 'app-button-icon',

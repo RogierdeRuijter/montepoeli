@@ -7,7 +7,7 @@ import { CustomTranslateModule } from '../../../../shared/modules/translate/cust
 import { TransitionModule } from '../../../../shared/modules/transition/transition.module';
 import { ButtonModule } from '../../../../shared/modules/button/button.module';
 import { RouterModule } from '@angular/router';
-import { MatToolbarModule } from '@angular/material';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { IconModule } from '../../../../shared/modules/icon/icon.module';
 import { UserActionModule } from '../../../../shared/modules/user-action/user-action.module';
 import { GridModule } from '../../../../shared/modules/grid/grid.module';

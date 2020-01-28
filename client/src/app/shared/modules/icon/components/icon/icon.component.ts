@@ -26,10 +26,10 @@ export class IconComponent implements OnInit, AfterViewInit, OnChanges {
   @Input()
   public iconColor: IconColor;
 
-  @ViewChild('svgIconElement', {static: false})
+  @ViewChild('svgIconElement')
   public svgIconElementRef: ElementRef;
 
-  @ViewChild('fontAwesomeComponent', {static: false})
+  @ViewChild('fontAwesomeComponent')
   public faIcon: ElementRef;
 
   public iconDefinition: IconDefinition;

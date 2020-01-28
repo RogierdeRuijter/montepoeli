@@ -23,6 +23,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "aot": true,
             "outputPath": "dist/frontend",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -36,8 +37,14 @@
             "styles": [
               "./node_modules/bootstrap/dist/css/bootstrap-grid.min.css",
               "./src/styles.scss",
-              { "input": "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css", "inject": true },
-              { "input": "./node_modules/ngx-toastr/toastr.css", "inject": true }
+              {
+                "input": "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+                "inject": true
+              },
+              {
+                "input": "./node_modules/ngx-toastr/toastr.css",
+                "inject": true
+              }
             ],
             "scripts": []
           },
@@ -54,7 +61,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -63,6 +69,10 @@
                   "type": "initial",
                   "maximumWarning": "2mb",
                   "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
                 }
               ],
               "serviceWorker": true,
@@ -80,7 +90,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -89,6 +98,10 @@
                   "type": "initial",
                   "maximumWarning": "2mb",
                   "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
                 }
               ]
             },
@@ -104,7 +117,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -113,6 +125,10 @@
                   "type": "initial",
                   "maximumWarning": "2mb",
                   "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
                 }
               ],
               "serviceWorker": true,
@@ -202,5 +218,8 @@
       }
     }
   },
-  "defaultProject": "frontend"
+  "defaultProject": "frontend",
+  "cli": {
+    "analytics": "1eab42fb-ba78-4a34-a971-a1fcfa177fe7"
+  }
 }

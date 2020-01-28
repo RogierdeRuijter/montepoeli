@@ -11,7 +11,7 @@ describe('CustomHttpService', () => {
   }));
 
   it('should be created', () => {
-    const service: CustomHttpService = TestBed.get(CustomHttpService);
+    const service: CustomHttpService = TestBed.inject(CustomHttpService);
     expect(service).toBeTruthy();
   });
 });

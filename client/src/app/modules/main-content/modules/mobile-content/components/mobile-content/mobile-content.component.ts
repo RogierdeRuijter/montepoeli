@@ -7,7 +7,7 @@ import { Game } from '../../../../../../shared/interfaces/game.interface';
 import { GameService } from '../../../../../home/modules/game/services/game.service';
 import { RemoveLastAddedGameStore } from '../../../../../../shared/stores/remove-last-added-game.store';
 import { DialogOverviewComponent } from '../../../../../../shared/modules/add-game/components/dialog-overview/dialog-overview.component';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-mobile-content',

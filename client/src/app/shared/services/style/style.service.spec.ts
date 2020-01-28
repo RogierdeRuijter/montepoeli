@@ -11,7 +11,7 @@ describe('StyleService', () => {
   }));
 
   it('should be created', () => {
-    const service: StyleService = TestBed.get(StyleService);
+    const service: StyleService = TestBed.inject(StyleService);
     expect(service).toBeTruthy();
   });
 });

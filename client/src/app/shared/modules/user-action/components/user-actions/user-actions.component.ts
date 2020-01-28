@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, ViewChild } from '@angular/core';
 import { IconColor, Icons, IconSize } from 'src/app/shared/static-files/enums';
-import { MatSelect } from '@angular/material';
+import { MatSelect } from '@angular/material/select';
 import { AuthService } from 'src/app/shared/modules/auth/services/auth/auth.service';
 
 @Component({

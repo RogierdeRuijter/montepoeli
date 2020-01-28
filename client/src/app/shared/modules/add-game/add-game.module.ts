@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule} from '@angular/material';
+import { MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule } from '@angular/material/dialog';
 import {DialogDataComponent} from './components/dialog-data/dialog-data.component';
 import {DialogOverviewComponent} from './components/dialog-overview/dialog-overview.component';
 import {CustomTranslateModule} from '../translate/custom-translate.module';

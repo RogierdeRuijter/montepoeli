@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { ThemePalette } from '@angular/material';
+import { ThemePalette } from '@angular/material/core';
 import { Alignments, GridSizes, IconColor, Icons, IconSize } from '../../../../../../shared/static-files/enums';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { UnknownCaseException } from '../../../../../../shared/exceptions/UnknownCaseException';
