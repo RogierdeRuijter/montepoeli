@@ -27,6 +27,7 @@
     "build-storybook-web-app": "build-storybook -c .storybook -o .out",
     "install-start": "npm install && npm start",
     "update-angular": "ng update @angular/cli @angular/core @angular/material",
+    "update-angular-next": "ng update --next @angular/cli @angular/core @angular/material",
     "screenshot": "storybook-chrome-screenshot -p 9001 -c .storybook",
     "webdriver-update": "webdriver-manager clean && webdriver-manager update",
     "webdriver-update:protractor": "./node_modules/protractor/bin/webdriver-manager update"
