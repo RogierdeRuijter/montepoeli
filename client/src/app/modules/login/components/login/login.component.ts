@@ -21,15 +21,15 @@ export class LoginComponent {
     user['username'] = userInfo.username;
     user['pwd'] = userInfo.password;
 
-    this.authService.login(user).subscribe(
-      () => {
-      }, (error) => {
+    this.authService.login(user)
+      .subscribe(() => {},
+        (error) => {
         this.isSubmitting = false;
       });
   }
 
- public doExplicitChangeDetectionForAutofill(): void {
-   this.changeDetectorRef.detectChanges();
- }
+  public doExplicitChangeDetectionForAutofill(): void {
+    this.changeDetectorRef.detectChanges();
+  }
 
 }
