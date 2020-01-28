@@ -20,12 +20,13 @@ describe('Mobile screen tests', () => {
 
     browser.waitForAngular();
 
-    page.getMobileNavButtonRules().click();
     helper.sleep();
 
-    expect(page.getRulesView()).toBeTruthy();
-
+    page.getMobileNavButtonRules().click();
+  
     helper.longSleep();
+    
+    expect(page.getRulesView()).toBeTruthy();
     
     expect(page.getMobileNavButtonGames()).toBeTruthy();
     expect(page.getMobileAddGameButton().getCssValue('opacity')).toEqual('0');
@@ -36,12 +37,11 @@ describe('Mobile screen tests', () => {
 
     page.getMobileNavButtonGames().click();
 
-    helper.sleep();
-
+    helper.longSleep();
+    browser.waitForAngular();
+    
     expect(page.getGamesView()).toBeTruthy();
 
-    helper.longSleep();
-  
     expect(page.getMobileNavButtonGames()).toBeTruthy();
     expect(page.getMobileAddGameButton().getCssValue('opacity')).toEqual('1');    
     expect(page.getMobileNavButtonRules()).toBeTruthy();

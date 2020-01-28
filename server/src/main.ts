@@ -1,6 +1,7 @@
 import {NestFactory} from '@nestjs/core';
 import {AppModule} from './modules/app/app.module';
 import * as cookieParser from 'cookie-parser';
+import * as compression from 'compression';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -8,14 +9,18 @@ async function bootstrap() {
   checkEnvironmentVariables();
 
   app.use(cookieParser(process.env.COOKIE_SECRET));
+  app.use(compression({threshold: 500}));
   app.setGlobalPrefix('api');
 
-  if (process.env.ENV === 'dev') {
-    app.enableCors({
-        credentials: true,
-        origin: true,
-      });
-    }
+  let origin: boolean | string = true;
+  if (process.env.ENV === 'prod') {
+    origin = process.env.CORS_ORIGIN;
+  }
+
+  app.enableCors({
+    credentials: true, // TODO: check if the crendtials true is needed in production
+    origin,
+  });
 
   await app.listen(3000);
 }

@@ -1,10 +1,8 @@
-version: 2
+version: 2.1
 jobs:
-  save-version:
+  save-docker-tags-as-artifacts:
     docker:
       - image: circleci/node:11
-        environment:
-          WORKFLOW_ID: $CIRCLE_WORKFLOW_ID
 
     working_directory: ~/repo
     steps:
@@ -12,13 +10,13 @@ jobs:
       - run:
           command: |
             cd client
-            grep '"version":' package.json | cut -d\" -f4 > /tmp/client-version.txt
+            echo ${CIRCLE_WORKFLOW_ID} > /tmp/client-version.txt
 
       - run:
           command: |
-            cd client
-            grep '"version":' package.json | cut -d\" -f4 > /tmp/server-version.txt
-
+            cd server
+            echo ${CIRCLE_WORKFLOW_ID} > /tmp/server-version.txt
+            
       - store_artifacts:
           path: /tmp/client-version.txt
 
@@ -35,9 +33,11 @@ jobs:
     docker:
       - image: circleci/node:11
 
-    working_directory: ~/repo
+    working_directory: ~/repo/client
     steps:
-      - checkout
+      - checkout:
+          path: ~/repo
+
       - setup_remote_docker:
           docker_layer_caching: true
 
@@ -49,11 +49,36 @@ jobs:
           command: |
             echo "export CLIENT_TAG=$(cat /tmp/client-version.txt)" >> $BASH_ENV
 
+      - restore_cache:
+          keys:
+          - v1-dependencies-client-{{ checksum "package.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-client
+
+      - run:
+          name: Install node modules
+          command: |
+            yarn install --ignore-optional
+
+      - save_cache:
+          paths:
+          - node_modules
+          key: v1-dependencies-client-{{ checksum "package.json" }}
+
+      - run: 
+          name: Run tests with coverage and store coverage on server
+          
+          command: |
+            yarn test:cov
+
+            bash <(curl -s https://codecov.io/bash)
+
       - run:
           command: |
             IMAGE_CLIENT_NAME=montepouli-client
-            cd client
-            docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG .
+
+            docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG . -f Dockerfile.prod
+            
       - deploy:
           command: |
             IMAGE_CLIENT_NAME=montepouli-client
@@ -64,24 +89,50 @@ jobs:
     docker:
       - image: circleci/node:11
 
-    working_directory: ~/repo
+    working_directory: ~/repo/server
     steps:
-      - checkout
+      - checkout:
+          path: ~/repo
       - setup_remote_docker:
           docker_layer_caching: true
-
+    
       - attach_workspace:
           at: /tmp
-
+      
       - run:
           name: Setup Environment Variables
           command: |
             echo "export SERVER_TAG=$(cat /tmp/server-version.txt)" >> $BASH_ENV
+      
+      - restore_cache:
+          keys:
+          - v1-dependencies-server-{{ checksum "package.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-server
+
+      - run:
+          name: Install node modules
+          command: |
+            yarn install
+
+      - save_cache:
+          paths:
+          - node_modules
+          key: v1-dependencies-server-{{ checksum "package.json" }}
+
+      - run: 
+          name: Run tests with coverage and store results on server
+
+          command: |
+            yarn test:cov
+
+            bash <(curl -s https://codecov.io/bash)
+
 
       - run: |
-          cd server
           IMAGE_SERVER_NAME=montepouli-server
-          docker build -t $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG .
+
+          docker build -t $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG . -f Dockerfile.prod
 
       - deploy:
           command: |
@@ -121,8 +172,7 @@ jobs:
           command: |
             IMAGE_CLIENT_NAME=montepouli-client-e2e
             docker push $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG
-
-  e2e-test:
+  e2e-tests:
     machine:
       image: circleci/classic:201808-01
     working_directory: ~/repo
@@ -145,6 +195,51 @@ jobs:
       - run: sudo chmod +x /usr/local/bin/docker-compose
       - run: docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
       - run: npm run start:e2e-environment-build-server
+  
+  update-version:
+    docker:
+      - image: circleci/node:11
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - setup_remote_docker
+      - add_ssh_keys:
+          fingerprints:
+            - "d7:e3:8a:3a:84:5f:4b:48:cd:c0:d4:bf:66:59:16:e1"
+      
+      - run:
+          name: Setup environment for version increase
+          command: |
+            git config --global user.email "rogierderuijter@hotmail.com"
+            git config --global user.name "Circle Ci"
+            
+            yarn install
+
+      - run: 
+          name: bump version based on last commit message
+          command: |
+            npx semantic-release
+
+  save-new-version:
+    docker:
+      - image: circleci/node:11
+
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run:
+          command: |
+            VERSION=$(grep '"version":' package.json | cut -d\" -f4)
+            
+            echo $VERSION > /tmp/version-updated.txt
+                    
+      - store_artifacts:
+          path: /tmp/version-updated.txt
+
+      - persist_to_workspace:
+          root: /tmp
+          paths:
+            - version-updated.txt
 
   swap-client-config:
     docker:
@@ -163,6 +258,7 @@ jobs:
           name: Setup Environment Variables
           command: |
             echo "export CLIENT_TAG=$(cat /tmp/client-version.txt)" >> $BASH_ENV
+            echo "export CLIENT_TAG_UPDATED=$(cat /tmp/version-updated.txt)" >> $BASH_ENV
 
       - run:
           command: |
@@ -171,13 +267,13 @@ jobs:
       - run:
           command: |
             IMAGE_CLIENT_NAME=montepouli-client
-            TESTED_CLIENT_TAG=$CLIENT_TAG-e2e
+            TESTED_CLIENT_TAG=$CLIENT_TAG_UPDATED-e2e
             cd client
             docker build -f Dockerfile.configured -t $DOMAIN/$IMAGE_CLIENT_NAME:$TESTED_CLIENT_TAG . --build-arg CLIENT_BASE_IMAGE_NAME=montepoeli.club/montepouli-client-e2e --build-arg CLIENT_BASE_IMAGE_TAG=$CLIENT_TAG --build-arg CLIENT_TYPE=server
 
       - deploy:
           command: |
-            TESTED_CLIENT_TAG=$CLIENT_TAG-e2e
+            TESTED_CLIENT_TAG=$CLIENT_TAG_UPDATED-e2e
             IMAGE_CLIENT_NAME=montepouli-client
             docker push $DOMAIN/$IMAGE_CLIENT_NAME:$TESTED_CLIENT_TAG
 
@@ -193,24 +289,24 @@ jobs:
       - attach_workspace:
           at: /tmp
           
-
       - run:
           name: Setup Environment Variables
           command: |
             echo "export SERVER_TAG=$(cat /tmp/server-version.txt)" >> $BASH_ENV
+            echo "export SERVER_TAG_UPDATED=$(cat /tmp/version-updated.txt)" >> $BASH_ENV
 
       - run: docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
 
       - run: |
           IMAGE_SERVER_NAME=montepouli-server
-          TESTED_SERVER_TAG=$SERVER_TAG-e2e
+          TESTED_SERVER_TAG=$SERVER_TAG_UPDATED-e2e
 
           docker pull $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG
           docker tag $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG $DOMAIN/$IMAGE_SERVER_NAME:$TESTED_SERVER_TAG
 
       - deploy:
           command: |
-            TESTED_SERVER_TAG=$SERVER_TAG-e2e
+            TESTED_SERVER_TAG=$SERVER_TAG_UPDATED-e2e
             IMAGE_SERVER_NAME=montepouli-server
 
             docker push $DOMAIN/$IMAGE_SERVER_NAME:$TESTED_SERVER_TAG
@@ -219,13 +315,16 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-      - save-version
+      - save-docker-tags-as-artifacts
+
       - build-client-base:
           requires:
-            - save-version
+            - save-docker-tags-as-artifacts
+
       - build-server:
           requires:
-            - save-version
+            - save-docker-tags-as-artifacts
+
       - swap-client-config-e2e:
           requires:
             - build-client-base
@@ -235,7 +334,8 @@ workflows:
                 - master
                 - /depfu.*/
                 - /dependabot.*/
-      - e2e-test:
+
+      - e2e-tests:
           requires:
             - swap-client-config-e2e
             - build-server
@@ -245,16 +345,31 @@ workflows:
                 - master
                 - /depfu.*/
                 - /dependabot.*/
-      - swap-client-config:
+
+      - update-version:
           requires:
-            - build-client-base
-            - e2e-test
+            - e2e-tests
           filters:
             branches:
               only: master
+
+      - save-new-version:
+          requires:
+            - update-version
+          filters:
+            branches:
+              only: master
+
+      - swap-client-config:
+          requires:
+            - save-new-version
+          filters:
+            branches:
+              only: master
+
       - retag-server-image:
           requires:
-            - e2e-test
+            - save-new-version
           filters:
             branches:
               only: master

@@ -1,17 +1,18 @@
 {
   "name": "montepouli",
-  "version": "3.0.1",
+  "version": "3.7.1",
   "license": "MIT",
+  "private": true,
   "scripts": {
     "install-sub-modules": "lerna run install-node-modules --parallel",
     "install-node-modules": "yarn install",
-    "build:client": "docker build client -t montepouli_client:latest",
+    "build:client": "docker build client -t montepouli_client:latest -f client/Dockerfile.prod",
     "build:e2e-client": "docker build -f client/Dockerfile.configured client -t montepouli_client:e2e --build-arg CLIENT_BASE_IMAGE_NAME=montepouli_client --build-arg CLIENT_BASE_IMAGE_TAG=latest --build-arg CLIENT_TYPE=e2e",
-    "build:server": "docker build server -t montepouli_server:latest",
+    "build:server": "docker build server -t montepouli_server:latest -f server/Dockerfile.prod",
     "build-app": "npm run build:client && npm run build:server",
     "build-e2e-app": "npm run build:client && npm run build:e2e-client && npm run build:server",
     "build:e2e-environment": "docker-compose -f docker-compose-e2e.yml build --parallel",
-    "pull:e2e-environment": "docker-compose -f docker-compose-e2e.yml pull --ignore-pull-failures",
+    "pull:e2e-environment": "docker-compose -f docker-compose-e2e.yml pull --ignore-pull-failures || true",
     "restart:e2e-db": "docker-compose -f docker-compose-e2e.yml up --force-recreate -d mongodb-e2e",
     "start": "npm run docker-compose-rebuild",
     "start:e2e-environment-base": "(npm run build:e2e-environment & npm run pull:e2e-environment) && npm run restart:e2e-db && docker-compose -f docker-compose-e2e.yml up",
@@ -22,14 +23,26 @@
     "stop:e2e": "docker-compose -f docker-compose-e2e.yml down",
     "restart:e2e": "yarn stop:e2e && sleep 5 && yarn start:e2e",
     "docker-compose-rebuild": "docker-compose build --parallel && docker-compose down && docker-compose up -d",
-    "docker-compose-rebuild-no-cache": "docker-compose build --no-cache && docker-compose down && docker-compose up -d"
+    "docker-compose-rebuild-no-cache": "docker-compose build --no-cache && docker-compose down && docker-compose up -d",
+    "release-patch": "lerna version -y patch --message '[skip ci] bump patch'",
+    "release-minor": "lerna version -y minor --message '[skip ci] bump minor'",
+    "release-major": "lerna version -y major --message '[skip ci] bump major'"
   },
   "devDependencies": {
-    "husky": "3.0.7",
-    "lerna": "3.17.0"
+    "@commitlint/cli": "8.3.5",
+    "@commitlint/config-conventional": "8.3.4",
+    "@semantic-release/changelog": "3.0.6",
+    "@semantic-release/commit-analyzer": "7.0.0",
+    "@semantic-release/git": "8.0.0",
+    "@semantic-release/npm": "6.0.0",
+    "@semantic-release/release-notes-generator": "7.3.5",
+    "husky": "4.2.0",
+    "lerna": "3.20.2",
+    "semantic-release": "16.0.2"
   },
   "husky": {
     "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
       "pre-commit": "lerna run --parallel lint",
       "pre-push": "lerna run --parallel test & lerna run --parallel build:pre-push",
       "post-merge": "yarn install-sub-modules"

@@ -1,6 +1,5 @@
 {
   "name": "circlci-config",
-  "version": "3.0.0",
   "license": "MIT",
   "scripts": {
     "lint": "circleci config validate config.yml",

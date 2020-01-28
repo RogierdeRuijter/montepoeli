@@ -10,21 +10,22 @@ describe('montepoeli login', () => {
     page = new AppPage();
   });
 
-  it('should fail login to montepouli', async () => {
+  it('should fail login into montepouli', async () => {
     await page.navigateTo();
     expect(browser.getCurrentUrl()).toContain('/login');
 
     page.getLoginField().sendKeys('protractor');
-    helper.sleep();
+
     page.getPasswordField().sendKeys('test1234');
-    helper.sleep();
+
     page.getSubmitButton().click();
-    helper.sleep();
+    
+    browser.waitForAngular();
+
+    expect(await page.getLoginFailedWarning().getText()).toEqual('Wrong username or password.');
 
     expect(browser.getCurrentUrl()).toContain('/login');
     
-    expect(page.getLoginFailedWarning().getText()).toEqual('Wrong username or password.');
-
     helper.expectThreeErrorsInConsole(browser);
   });
 
@@ -33,12 +34,13 @@ describe('montepoeli login', () => {
     expect(browser.getCurrentUrl()).toContain('/login');
 
     page.getLoginField().sendKeys('protractor');
-    helper.sleep();
-    page.getPasswordField().sendKeys('test');
-    helper.sleep();
-    page.getSubmitButton().click();
-    helper.sleep();
 
+    page.getPasswordField().sendKeys('test');
+    
+    page.getSubmitButton().click();
+    
+    browser.waitForAngular();
+    
     expect(browser.getCurrentUrl()).toContain('/home');
 
     helper.expectNoErrorsInConsole(browser);

@@ -1,6 +1,5 @@
 {
   "name": "mergify",
-  "version": "3.0.0",
   "license": "MIT",
   "scripts": {
     "lint": "./lint-mergify.sh"

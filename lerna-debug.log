@@ -1,11 +1,12 @@
 0 silly argv {
 0 silly argv   _: [ 'run' ],
+0 silly argv   parallel: true,
 0 silly argv   lernaVersion: '3.17.0',
-0 silly argv   '$0': '/usr/local/bin/lerna',
-0 silly argv   script: 'install-node-modules'
+0 silly argv   '$0': '/Users/rogierderuijter/Documents/Projects/Sandbox/montepoeli/node_modules/.bin/lerna',
+0 silly argv   script: 'test'
 0 silly argv }
 1 notice cli v3.17.0
-2 verbose rootPath /Users/rogierderuijter/Documents/Projects/Sandbox/montepouli
-3 error JSONError: Unexpected token < in JSON at position 696 while parsing near '...s": "yarn install",<<<<<<< HEAD    "te...' in client/package.json
-3 error     at module.exports (/Users/rogierderuijter/Documents/Projects/Sandbox/montepouli/node_modules/parse-json/index.js:26:19)
-3 error     at parse (/Users/rogierderuijter/Documents/Projects/Sandbox/montepouli/node_modules/load-json-file/index.js:15:9)
+2 verbose rootPath /Users/rogierderuijter/Documents/Projects/Sandbox/montepoeli
+3 error JSONError: Unexpected token < in JSON at position 3238 while parsing near '..."mongodb": "3.4.1",<<<<<<< HEAD    "mo...' in client/package.json
+3 error     at module.exports (/Users/rogierderuijter/Documents/Projects/Sandbox/montepoeli/node_modules/parse-json/index.js:26:19)
+3 error     at parse (/Users/rogierderuijter/Documents/Projects/Sandbox/montepoeli/node_modules/@lerna/project/node_modules/load-json-file/index.js:15:9)
