@@ -6,6 +6,7 @@ import { NotificationService } from 'src/app/shared/modules/notification/service
 describe('NotificationService', () => {
   beforeEach(() => TestBed.configureTestingModule({
     providers: [
+      NotificationService,
       {provide: ToastrService, useClass: MockLocationStrategy}
       ]
   }));

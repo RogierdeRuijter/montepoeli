@@ -37,8 +37,14 @@
             "styles": [
               "./node_modules/bootstrap/dist/css/bootstrap-grid.min.css",
               "./src/styles.scss",
-              { "input": "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css", "inject": true },
-              { "input": "./node_modules/ngx-toastr/toastr.css", "inject": true }
+              {
+                "input": "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+                "inject": true
+              },
+              {
+                "input": "./node_modules/ngx-toastr/toastr.css",
+                "inject": true
+              }
             ],
             "scripts": []
           },
@@ -212,5 +218,8 @@
       }
     }
   },
-  "defaultProject": "frontend"
+  "defaultProject": "frontend",
+  "cli": {
+    "analytics": "1eab42fb-ba78-4a34-a971-a1fcfa177fe7"
+  }
 }
