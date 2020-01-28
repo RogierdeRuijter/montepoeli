@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {MatOptionModule, MatSelectModule} from '@angular/material';
+import { MatOptionModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
 import {IconModule} from '../icon/icon.module';
 import {ButtonModule} from '../button/button.module';
 import {UserActionsComponent} from './components/user-actions/user-actions.component';
