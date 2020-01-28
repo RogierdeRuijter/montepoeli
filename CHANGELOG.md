@@ -1,3 +1,16 @@
+# [3.8.0](https://github.com/RogierdeRuijter/montepoeli/compare/v3.7.1...v3.8.0) (2020-01-28)
+
+
+### Bug Fixes
+
+* alignment of montepoeli icon ([98701c9](https://github.com/RogierdeRuijter/montepoeli/commit/98701c9eec0805dfd6cd8caeda7679e07f779cf5))
+* angular 9 stuff ([83060be](https://github.com/RogierdeRuijter/montepoeli/commit/83060bed75786c8201cdb83cb106e516ac78b055))
+
+
+### Features
+
+* fix deps ([889be4c](https://github.com/RogierdeRuijter/montepoeli/commit/889be4cc3da703f7ce615ea86cabfeb3bb5e8e64))
+
 ## [3.7.1](https://github.com/RogierdeRuijter/montepoeli/compare/v3.7.0...v3.7.1) (2020-01-27)
 
 
