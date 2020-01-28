@@ -12,6 +12,7 @@ describe('montepoeli login', () => {
 
   it('should fail login into montepouli', async () => {
     await page.navigateTo();
+    
     expect(browser.getCurrentUrl()).toContain('/login');
 
     page.getLoginField().sendKeys('protractor');
