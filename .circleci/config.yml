@@ -279,6 +279,10 @@ jobs:
             TESTED_CLIENT_TAG=$CLIENT_TAG_UPDATED-e2e
             IMAGE_CLIENT_NAME=montepouli-client
             docker push $DOMAIN/$IMAGE_CLIENT_NAME:$TESTED_CLIENT_TAG
+      
+      - deploy:
+          command: |
+            docker tag $DOMAIN/$IMAGE_CLIENT_NAME:$TESTED_CLIENT_TAG $DOMAIN/$IMAGE_CLIENT_NAME:latest
             docker push $DOMAIN/$IMAGE_CLIENT_NAME:latest
 
   retag-server-image:
@@ -314,7 +318,11 @@ jobs:
             IMAGE_SERVER_NAME=montepouli-server
 
             docker push $DOMAIN/$IMAGE_SERVER_NAME:$TESTED_SERVER_TAG
-            docker push $DOMAIN/$IMAGE_SERVER_NAME:$latest
+            
+      - deploy:
+          command: |
+            docker tag $DOMAIN/$IMAGE_SERVER_NAME:$TESTED_SERVER_TAG $DOMAIN/$IMAGE_SERVER_NAME:latest
+            docker push $DOMAIN/$IMAGE_SERVER_NAME:latest
 
 workflows:
   version: 2
