@@ -72,13 +72,6 @@ jobs:
             yarn test:cov
 
             bash <(curl -s https://codecov.io/bash)
-      
-      - run:
-          command: |
-            IMAGE_CLIENT_NAME=montepouli-client
-
-            docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
-            docker pull $DOMAIN/$IMAGE_CLIENT_NAME:3.8.0-e2e
 
       - run:
           command: |
@@ -288,6 +281,9 @@ jobs:
       
       - deploy:
           command: |
+            TESTED_CLIENT_TAG=$CLIENT_TAG_UPDATED-e2e
+            IMAGE_CLIENT_NAME=montepouli-client
+
             docker tag $DOMAIN/$IMAGE_CLIENT_NAME:$TESTED_CLIENT_TAG $DOMAIN/$IMAGE_CLIENT_NAME:latest
             docker push $DOMAIN/$IMAGE_CLIENT_NAME:latest
 
@@ -327,6 +323,9 @@ jobs:
             
       - deploy:
           command: |
+            TESTED_SERVER_TAG=$SERVER_TAG_UPDATED-e2e
+            IMAGE_SERVER_NAME=montepouli-server
+            
             docker tag $DOMAIN/$IMAGE_SERVER_NAME:$TESTED_SERVER_TAG $DOMAIN/$IMAGE_SERVER_NAME:latest
             docker push $DOMAIN/$IMAGE_SERVER_NAME:latest
 
