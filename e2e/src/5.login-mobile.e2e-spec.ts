@@ -16,17 +16,17 @@ describe('montepoeli login', () => {
   });
 
   it('should login to montepouli', async () => {
-    await page.navigateTo();
-    expect(browser.getCurrentUrl()).toContain('/login');
+    await page.navigateToBase();
+    expect(await browser.getCurrentUrl()).toContain('/login');
 
-    page.getLoginField().sendKeys('protractor');
+    await page.getLoginField().sendKeys('protractor');
 
-    page.getPasswordField().sendKeys('test');
+    await page.getPasswordField().sendKeys('test');
   
-    page.getSubmitButton().click();
+    await page.getSubmitButton().click();
   
-    browser.waitForAngular();
-    expect(browser.getCurrentUrl()).toContain('/home');
+    await browser.waitForAngular();
+    expect(await browser.getCurrentUrl()).toContain('/home');
 
     helper.expectNoErrorsInConsole(browser);
   });

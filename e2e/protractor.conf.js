@@ -56,6 +56,7 @@ exports.config = {
   seleniumAddress: 'http://selenium-hub:4444/wd/hub',
   baseUrl: 'https://webserver-e2e',
   framework: 'jasmine',
+  SELENIUM_PROMISE_MANAGER: false,
   jasmineNodeOpts: {
     showColors: true,
     defaultTimeoutInterval: 30000,

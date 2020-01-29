@@ -11,38 +11,38 @@ describe('montepoeli login', () => {
   });
 
   it('should fail login into montepouli', async () => {
-    await page.navigateTo();
+    await page.navigateToBase();
     
-    expect(browser.getCurrentUrl()).toContain('/login');
+    expect(await browser.getCurrentUrl()).toContain('/login');
 
-    page.getLoginField().sendKeys('protractor');
+    await page.getLoginField().sendKeys('protractor');
 
-    page.getPasswordField().sendKeys('test1234');
+    await page.getPasswordField().sendKeys('test1234');
 
-    page.getSubmitButton().click();
+    await page.getSubmitButton().click();
     
-    browser.waitForAngular();
+    await helper.sleep();
 
     expect(await page.getLoginFailedWarning().getText()).toEqual('Wrong username or password.');
 
-    expect(browser.getCurrentUrl()).toContain('/login');
+    expect(await browser.getCurrentUrl()).toContain('/login');
     
     helper.expectThreeErrorsInConsole(browser);
   });
 
   it('should login to montepouli', async () => {
-    await page.navigateTo();
-    expect(browser.getCurrentUrl()).toContain('/login');
+    await page.navigateToBase();
+    expect(await browser.getCurrentUrl()).toContain('/login');
 
-    page.getLoginField().sendKeys('protractor');
+    await page.getLoginField().sendKeys('protractor');
 
-    page.getPasswordField().sendKeys('test');
+    await page.getPasswordField().sendKeys('test');
     
-    page.getSubmitButton().click();
+    await page.getSubmitButton().click();
     
-    browser.waitForAngular();
+    await browser.waitForAngular();
     
-    expect(browser.getCurrentUrl()).toContain('/home');
+    expect(await browser.getCurrentUrl()).toContain('/home');
 
     helper.expectNoErrorsInConsole(browser);
   });

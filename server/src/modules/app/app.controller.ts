@@ -54,9 +54,9 @@ export class AppController {
 
   @Post('/logout')
   public async logout(@Res() res: Response): Promise<any> {
-    res.clearCookie('montepoeliJwt');
+    res.clearCookie('montepoeliJwt', {domain: this.domain});
 
-    res.clearCookie('montepoeliAuthenticated');
+    res.clearCookie('montepoeliAuthenticated', {domain: this.domain});
 
     res.send();
   }

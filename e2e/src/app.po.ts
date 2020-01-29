@@ -4,8 +4,12 @@ import { Helper } from './helper';
 export class AppPage {
   private helper = new Helper();
 
-  public navigateTo(): wdpromise.Promise<any> {
+  public navigateToBase(): wdpromise.Promise<any> {
     return browser.get('/');
+  }
+
+  public navigateToHome(): wdpromise.Promise<any> {
+    return browser.get('/home');
   }
 
   public getLoginField(): ElementFinder {

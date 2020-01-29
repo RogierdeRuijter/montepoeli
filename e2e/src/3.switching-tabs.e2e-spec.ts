@@ -12,22 +12,20 @@ describe('Tab navigation', () => {
   });
 
   it('should switch to the rules tab and back to the games tab', async () => {
-    await page.navigateTo();
+    await page.navigateToBase();
 
-    browser.waitForAngular();
+    await browser.waitForAngular();
 
-    page.getNavBarRulesTab().click();
+    await page.getNavBarRulesTab().click();
     
-    browser.waitForAngular();
-    expect(page.getRulesView()).toBeTruthy();
+    await browser.waitForAngular();
+    expect(await page.getRulesView()).toBeTruthy();
     
-    page.getNavBarGamesTab().click();
+    await page.getNavBarGamesTab().click();
     
-    browser.waitForAngular();
-    expect(page.getGamesView()).toBeTruthy();
+    await browser.waitForAngular();
+    expect(await page.getGamesView()).toBeTruthy();
   });
 
-  afterEach(() => {
-    helper.expectNoErrorsInConsole(browser);
-  });
+  afterEach(() => helper.expectNoErrorsInConsole(browser));
 });
