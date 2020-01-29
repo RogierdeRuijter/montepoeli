@@ -1,3 +1,12 @@
+## [3.8.1](https://github.com/RogierdeRuijter/montepoeli/compare/v3.8.0...v3.8.1) (2020-01-29)
+
+
+### Bug Fixes
+
+* the ability to logout ([81ea14d](https://github.com/RogierdeRuijter/montepoeli/commit/81ea14d86d05d2f84c79ec7427473129db6fbc04))
+* Update all Yarn dependencies (2020-01-29) ([244ad65](https://github.com/RogierdeRuijter/montepoeli/commit/244ad65276b2c8e7848f8b5821c8ab992695f0f9))
+* Update all Yarn dependencies (2020-01-29) ([2eb3f8b](https://github.com/RogierdeRuijter/montepoeli/commit/2eb3f8b2d89cc1f8e068c8dc202bc6a8d4e55b73))
+
 # [3.8.0](https://github.com/RogierdeRuijter/montepoeli/compare/v3.7.1...v3.8.0) (2020-01-28)
 
 
