@@ -1,3 +1,10 @@
+## [3.8.2](https://github.com/RogierdeRuijter/montepoeli/compare/v3.8.1...v3.8.2) (2020-01-29)
+
+
+### Bug Fixes
+
+* test version update ([085cadd](https://github.com/RogierdeRuijter/montepoeli/commit/085cadd5adb488c3b93e1c323fad2c77de8a1707))
+
 ## [3.8.1](https://github.com/RogierdeRuijter/montepoeli/compare/v3.8.0...v3.8.1) (2020-01-29)
 
 
