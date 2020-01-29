@@ -212,9 +212,7 @@ jobs:
           command: |
             git config --global user.email "rogierderuijter@hotmail.com"
             git config --global user.name "Circle Ci"
-            
-            git pull
-            
+                        
             yarn install
 
       - run: 
@@ -231,6 +229,8 @@ jobs:
       - checkout
       - run:
           command: |
+            git pull
+
             VERSION=$(grep '"version":' package.json | cut -d\" -f4)
             
             echo $VERSION > /tmp/version-updated.txt
