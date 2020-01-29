@@ -270,9 +270,7 @@ jobs:
       - run:
           command: |
             IMAGE_CLIENT_NAME=montepouli-client
-            # TESTED_CLIENT_TAG=$CLIENT_TAG_UPDATED-e2e
-            TESTED_CLIENT_TAG=3.8.0-e2e
-
+            TESTED_CLIENT_TAG=$CLIENT_TAG_UPDATED-e2e
             cd client
             docker build -f Dockerfile.configured -t $DOMAIN/$IMAGE_CLIENT_NAME:$TESTED_CLIENT_TAG . --build-arg CLIENT_BASE_IMAGE_NAME=montepoeli.club/montepouli-client-e2e --build-arg CLIENT_BASE_IMAGE_TAG=$CLIENT_TAG --build-arg CLIENT_TYPE=server
 
@@ -302,15 +300,16 @@ jobs:
       - run:
           name: Setup Environment Variables
           command: |
-            echo "export SERVER_TAG=$(cat /tmp/server-version.txt)" >> $BASH_ENV
-            echo "export SERVER_TAG_UPDATED=$(cat /tmp/version-updated.txt)" >> $BASH_ENV
+            # echo "export SERVER_TAG=$(cat /tmp/server-version.txt)" >> $BASH_ENV
+            # echo "export SERVER_TAG_UPDATED=$(cat /tmp/version-updated.txt)" >> $BASH_ENV
+            export SERVER_TAG="3.8.0"
+            export SERVER_TAG_UPDATED="3.8.0"
 
       - run: docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
 
       - run: |
           IMAGE_SERVER_NAME=montepouli-server
-          # TESTED_SERVER_TAG=$SERVER_TAG_UPDATED-e2e
-          TESTED_SERVER_TAG="3.8.0-e2e"
+          TESTED_SERVER_TAG=$SERVER_TAG_UPDATED-e2e
 
           docker pull $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG
           docker tag $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG $DOMAIN/$IMAGE_SERVER_NAME:$TESTED_SERVER_TAG
