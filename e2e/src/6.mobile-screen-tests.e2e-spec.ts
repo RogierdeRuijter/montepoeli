@@ -15,33 +15,33 @@ describe('Mobile screen tests', () => {
     page = new AppPage();
   });
 
-  it('should switch to the rules tab and back to the games tab', async () => {
-    await page.navigateToBase();
+  it('should switch to the rules tab and back to the games tab', () => {
+    page.navigateToBase();
 
-    await helper.sleep();
+    helper.sleep();
 
-    await page.getMobileNavButtonRules().click();
+    page.getMobileNavButtonRules().click();
   
-    await helper.longSleep();
+    helper.longSleep();
 
-    await expect(await page.getRulesView()).toBeTruthy();
+    expect(page.getRulesView()).toBeTruthy();
     
-    await expect(await page.getMobileNavButtonGames()).toBeTruthy();
-    await expect(await page.getMobileAddGameButton().getCssValue('opacity')).toEqual('0');
-    await expect(await page.getMobileAddGameButton().getCssValue('pointer-events')).toEqual('none');
-    await expect(await page.getMobileNavButtonRules()).toBeTruthy();
+    expect(page.getMobileNavButtonGames()).toBeTruthy();
+    expect(page.getMobileAddGameButton().getCssValue('opacity')).toEqual('0');
+    expect(page.getMobileAddGameButton().getCssValue('pointer-events')).toEqual('none');
+    expect(page.getMobileNavButtonRules()).toBeTruthy();
 
-    await helper.sleep();
+    helper.sleep();
 
-    await page.getMobileNavButtonGames().click();
+    page.getMobileNavButtonGames().click();
 
-    await helper.longSleep();
+    helper.longSleep();
     
-    await expect(await page.getGamesView()).toBeTruthy();
+    expect(page.getGamesView()).toBeTruthy();
 
-    await expect(await page.getMobileNavButtonGames()).toBeTruthy();
-    await expect(await page.getMobileAddGameButton().getCssValue('opacity')).toEqual('1');    
-    await expect(await page.getMobileNavButtonRules()).toBeTruthy();
+    expect(page.getMobileNavButtonGames()).toBeTruthy();
+    expect(page.getMobileAddGameButton().getCssValue('opacity')).toEqual('1');    
+    expect(page.getMobileNavButtonRules()).toBeTruthy();
   });
 
   afterEach(() => {

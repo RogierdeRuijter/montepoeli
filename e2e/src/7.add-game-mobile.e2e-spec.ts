@@ -15,45 +15,45 @@ describe('Add a game', () => {
     page = new AppPage();
   });
 
-  it('should add a game and show it in the table', async () => {
-    await page.navigateToBase();
+  it('should add a game and show it in the table', () => {
+    page.navigateToBase();
 
-    await browser.waitForAngular();
+    browser.waitForAngular();
     
-    await expect(await browser.getCurrentUrl()).toContain('/home');
+    expect(browser.getCurrentUrl()).toContain('/home');
     
     // TODO: refactor adding a user with the pop up to a method
 
-    await page.getMobileAddGameButton().click();
+    page.getMobileAddGameButton().click();
 
-    await page.getWhiteDropDownList().click();
+    page.getWhiteDropDownList().click();
 
-    await page.getProtractorUser().click();
+    page.getProtractorUser().click();
 
-    await browser.waitForAngular();
+    browser.waitForAngular();
     
-    await expect(await page.getWhiteDropDownField().getText()).toEqual('protractor');
+    expect(page.getWhiteDropDownField().getText()).toEqual('protractor');
 
-    await page.getWinnerDropDownList().click();
+    page.getWinnerDropDownList().click();
 
-    await page.getBlackOption().click();
+    page.getBlackOption().click();
     
-    await browser.waitForAngular();
-    await expect(await page.getWinnerDropDownField().getText()).toEqual('Black');
+    browser.waitForAngular();
+    expect(page.getWinnerDropDownField().getText()).toEqual('Black');
 
-    await page.getBlackDropDownList().click();
+    page.getBlackDropDownList().click();
 
-    await page.getProtractorUser1().click();
+    page.getProtractorUser1().click();
     
-    await browser.waitForAngular();
-    await expect(await page.getBlackDropDownField().getText()).toEqual('protractor1');
+    browser.waitForAngular();
+    expect(page.getBlackDropDownField().getText()).toEqual('protractor1');
 
-    await page.getSaveButton().click();
+    page.getSaveButton().click();
 
-    await browser.waitForAngular();
-    await expect(await page.getTableWhiteUserForLastAddedGame().getText()).toEqual('protractor');
-    await expect(await page.getTableWinnerUserForLastAddedGame('black').getText()).toEqual('Black');
-    await expect(await page.getTableBlackUserForLastAddedGame().getText()).toEqual('protractor1');
+    browser.waitForAngular();
+    expect(page.getTableWhiteUserForLastAddedGame().getText()).toEqual('protractor');
+    expect(page.getTableWinnerUserForLastAddedGame('black').getText()).toEqual('Black');
+    expect(page.getTableBlackUserForLastAddedGame().getText()).toEqual('protractor1');
 
   });
 

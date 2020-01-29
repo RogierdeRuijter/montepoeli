@@ -11,20 +11,20 @@ describe('Tab navigation', () => {
     page = new AppPage();
   });
 
-  it('should switch to the rules tab and back to the games tab', async () => {
-    await page.navigateToBase();
+  it('should switch to the rules tab and back to the games tab', () => {
+    page.navigateToBase();
 
-    await browser.waitForAngular();
+    browser.waitForAngular();
 
-    await page.getNavBarRulesTab().click();
+    page.getNavBarRulesTab().click();
     
-    await browser.waitForAngular();
-    await expect(await page.getRulesView()).toBeTruthy();
+    browser.waitForAngular();
+    expect(page.getRulesView()).toBeTruthy();
     
-    await page.getNavBarGamesTab().click();
+    page.getNavBarGamesTab().click();
     
-    await browser.waitForAngular();
-    await expect(await page.getGamesView()).toBeTruthy();
+    browser.waitForAngular();
+    expect(page.getGamesView()).toBeTruthy();
   });
 
   afterEach(() => helper.expectNoErrorsInConsole(browser));

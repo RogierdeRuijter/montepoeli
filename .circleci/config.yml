@@ -213,6 +213,8 @@ jobs:
             git config --global user.email "rogierderuijter@hotmail.com"
             git config --global user.name "Circle Ci"
             
+            git pull
+            
             yarn install
 
       - run: 

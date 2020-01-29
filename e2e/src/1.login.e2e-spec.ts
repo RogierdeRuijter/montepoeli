@@ -10,40 +10,40 @@ describe('montepoeli login', () => {
     page = new AppPage();
   });
 
-  it('should fail login into montepouli', async () => {
-    await page.navigateToBase();
+  it('should fail login into montepouli', () => {
+    page.navigateToBase();
     
-    await expect(await browser.getCurrentUrl()).toContain('/login');
+    expect(browser.getCurrentUrl()).toContain('/login');
 
-    await page.getLoginField().sendKeys('protractor');
+    page.getLoginField().sendKeys('protractor');
 
-    await page.getPasswordField().sendKeys('test1234');
+    page.getPasswordField().sendKeys('test1234');
 
-    await page.getSubmitButton().click();
+    page.getSubmitButton().click();
     
-    await helper.sleep();
-    const loginFailedWarning = await page.getLoginFailedWarning().getText();
+    helper.sleep();
+    const loginFailedWarning = page.getLoginFailedWarning().getText();
 
-    await expect(loginFailedWarning).toEqual('Wrong username or password.');
+    expect(loginFailedWarning).toEqual('Wrong username or password.');
 
-    await expect(await browser.getCurrentUrl()).toContain('/login');
+    expect(browser.getCurrentUrl()).toContain('/login');
     
     helper.expectThreeErrorsInConsole(browser);
   });
 
-  it('should login to montepouli', async () => {
-    await page.navigateToBase();
-    await expect(await browser.getCurrentUrl()).toContain('/login');
+  it('should login to montepouli', () => {
+    page.navigateToBase();
+    expect(browser.getCurrentUrl()).toContain('/login');
 
-    await page.getLoginField().sendKeys('protractor');
+    page.getLoginField().sendKeys('protractor');
 
-    await page.getPasswordField().sendKeys('test');
+    page.getPasswordField().sendKeys('test');
     
-    await page.getSubmitButton().click();
+    page.getSubmitButton().click();
     
-    await browser.waitForAngular();
+    browser.waitForAngular();
     
-    await expect(await browser.getCurrentUrl()).toContain('/home');
+    expect(browser.getCurrentUrl()).toContain('/home');
 
     helper.expectNoErrorsInConsole(browser);
   });

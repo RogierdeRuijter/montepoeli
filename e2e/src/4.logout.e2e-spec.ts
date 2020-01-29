@@ -11,21 +11,21 @@ describe('montepoeli', () => {
     page = new AppPage();
   });
 
-  it('should logout from montepouli', async () => {
-    await page.navigateToBase();
+  it('should logout from montepouli', () => {
+    page.navigateToBase();
 
-    await expect(await browser.getCurrentUrl()).toContain('/home');
+    expect(browser.getCurrentUrl()).toContain('/home');
 
-    await page.getUserSettings().click();
-    await page.getLogout().click();
+    page.getUserSettings().click();
+    page.getLogout().click();
     
-    await browser.waitForAngular();
+    browser.waitForAngular();
 
-    await expect(await browser.getCurrentUrl()).toContain('/login');
+    expect(browser.getCurrentUrl()).toContain('/login');
     
-    await page.navigateToHome();
+    page.navigateToHome();
     
-    await expect(await browser.getCurrentUrl()).toContain('/login');
+    expect(browser.getCurrentUrl()).toContain('/login');
 
     helper.expectNoErrorsInConsole(browser);
   });
