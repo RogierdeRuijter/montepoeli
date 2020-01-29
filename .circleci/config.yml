@@ -351,30 +351,30 @@ workflows:
       #           - /depfu.*/
       #           - /dependabot.*/
 
-      - update-version
-          # requires:
-          #   - e2e-tests
-          # filters:
-          #   branches:
-          #     only: master
+      # - update-version:
+      #     requires:
+      #       - e2e-tests
+      #     filters:
+      #       branches:
+      #         only: master
 
-      - save-new-version:
-          requires:
-            - update-version
+      # - save-new-version:
+      #     requires:
+      #       - update-version
+      #     filters:
+      #       branches:
+      #         only: master
+
+      - swap-client-config:
+          # requires:
+          #   - save-new-version
           filters:
             branches:
               only: master
 
-      # - swap-client-config:
-      #     requires:
-      #       - save-new-version
-      #     filters:
-      #       branches:
-      #         only: master
-
-      # - retag-server-image:
-      #     requires:
-      #       - save-new-version
-      #     filters:
-      #       branches:
-      #         only: master
+      - retag-server-image:
+          # requires:
+          #   - save-new-version
+          filters:
+            branches:
+              only: master
