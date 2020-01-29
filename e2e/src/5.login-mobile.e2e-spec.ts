@@ -17,7 +17,7 @@ describe('montepoeli login', () => {
 
   it('should login to montepouli', async () => {
     await page.navigateToBase();
-    expect(await browser.getCurrentUrl()).toContain('/login');
+    await expect(await browser.getCurrentUrl()).toContain('/login');
 
     await page.getLoginField().sendKeys('protractor');
 
@@ -26,7 +26,7 @@ describe('montepoeli login', () => {
     await page.getSubmitButton().click();
   
     await browser.waitForAngular();
-    expect(await browser.getCurrentUrl()).toContain('/home');
+    await expect(await browser.getCurrentUrl()).toContain('/home');
 
     helper.expectNoErrorsInConsole(browser);
   });

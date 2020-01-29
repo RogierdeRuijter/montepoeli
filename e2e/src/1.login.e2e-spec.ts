@@ -13,7 +13,7 @@ describe('montepoeli login', () => {
   it('should fail login into montepouli', async () => {
     await page.navigateToBase();
     
-    expect(await browser.getCurrentUrl()).toContain('/login');
+    await expect(await browser.getCurrentUrl()).toContain('/login');
 
     await page.getLoginField().sendKeys('protractor');
 
@@ -22,17 +22,18 @@ describe('montepoeli login', () => {
     await page.getSubmitButton().click();
     
     await helper.sleep();
+    const loginFailedWarning = await page.getLoginFailedWarning().getText();
 
-    expect(await page.getLoginFailedWarning().getText()).toEqual('Wrong username or password.');
+    await expect(loginFailedWarning).toEqual('Wrong username or password.');
 
-    expect(await browser.getCurrentUrl()).toContain('/login');
+    await expect(await browser.getCurrentUrl()).toContain('/login');
     
     helper.expectThreeErrorsInConsole(browser);
   });
 
   it('should login to montepouli', async () => {
     await page.navigateToBase();
-    expect(await browser.getCurrentUrl()).toContain('/login');
+    await expect(await browser.getCurrentUrl()).toContain('/login');
 
     await page.getLoginField().sendKeys('protractor');
 
@@ -42,7 +43,7 @@ describe('montepoeli login', () => {
     
     await browser.waitForAngular();
     
-    expect(await browser.getCurrentUrl()).toContain('/home');
+    await expect(await browser.getCurrentUrl()).toContain('/home');
 
     helper.expectNoErrorsInConsole(browser);
   });

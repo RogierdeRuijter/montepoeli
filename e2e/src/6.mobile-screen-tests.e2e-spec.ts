@@ -24,12 +24,12 @@ describe('Mobile screen tests', () => {
   
     await helper.longSleep();
 
-    expect(await page.getRulesView()).toBeTruthy();
+    await expect(await page.getRulesView()).toBeTruthy();
     
-    expect(await page.getMobileNavButtonGames()).toBeTruthy();
-    expect(await page.getMobileAddGameButton().getCssValue('opacity')).toEqual('0');
-    expect(await page.getMobileAddGameButton().getCssValue('pointer-events')).toEqual('none');
-    expect(await page.getMobileNavButtonRules()).toBeTruthy();
+    await expect(await page.getMobileNavButtonGames()).toBeTruthy();
+    await expect(await page.getMobileAddGameButton().getCssValue('opacity')).toEqual('0');
+    await expect(await page.getMobileAddGameButton().getCssValue('pointer-events')).toEqual('none');
+    await expect(await page.getMobileNavButtonRules()).toBeTruthy();
 
     await helper.sleep();
 
@@ -37,11 +37,11 @@ describe('Mobile screen tests', () => {
 
     await helper.longSleep();
     
-    expect(await page.getGamesView()).toBeTruthy();
+    await expect(await page.getGamesView()).toBeTruthy();
 
-    expect(await page.getMobileNavButtonGames()).toBeTruthy();
-    expect(await page.getMobileAddGameButton().getCssValue('opacity')).toEqual('1');    
-    expect(await page.getMobileNavButtonRules()).toBeTruthy();
+    await expect(await page.getMobileNavButtonGames()).toBeTruthy();
+    await expect(await page.getMobileAddGameButton().getCssValue('opacity')).toEqual('1');    
+    await expect(await page.getMobileNavButtonRules()).toBeTruthy();
   });
 
   afterEach(() => {

@@ -19,12 +19,12 @@ describe('Tab navigation', () => {
     await page.getNavBarRulesTab().click();
     
     await browser.waitForAngular();
-    expect(await page.getRulesView()).toBeTruthy();
+    await expect(await page.getRulesView()).toBeTruthy();
     
     await page.getNavBarGamesTab().click();
     
     await browser.waitForAngular();
-    expect(await page.getGamesView()).toBeTruthy();
+    await expect(await page.getGamesView()).toBeTruthy();
   });
 
   afterEach(() => helper.expectNoErrorsInConsole(browser));
