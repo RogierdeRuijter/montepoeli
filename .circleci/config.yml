@@ -72,12 +72,16 @@ jobs:
             yarn test:cov
 
             bash <(curl -s https://codecov.io/bash)
-
+      
+      - run:
+          command: |
+            docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
+            docker pull $DOMAIN/$IMAGE_CLIENT_NAME:3.8.0-e2e
+            
       - run:
           command: |
             IMAGE_CLIENT_NAME=montepouli-client
             
-            docker pull $DOMAIN/$IMAGE_CLIENT_NAME:3.8.0-e2e
             docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG . -f Dockerfile.prod
             
       - deploy:
