@@ -76,7 +76,8 @@ jobs:
       - run:
           command: |
             IMAGE_CLIENT_NAME=montepouli-client
-
+            
+            docker pull $DOMAIN/$IMAGE_CLIENT_NAME:latest
             docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG . -f Dockerfile.prod
             
       - deploy:
@@ -278,6 +279,7 @@ jobs:
             TESTED_CLIENT_TAG=$CLIENT_TAG_UPDATED-e2e
             IMAGE_CLIENT_NAME=montepouli-client
             docker push $DOMAIN/$IMAGE_CLIENT_NAME:$TESTED_CLIENT_TAG
+            docker push $DOMAIN/$IMAGE_CLIENT_NAME:latest
 
   retag-server-image:
     docker:
@@ -312,48 +314,49 @@ jobs:
             IMAGE_SERVER_NAME=montepouli-server
 
             docker push $DOMAIN/$IMAGE_SERVER_NAME:$TESTED_SERVER_TAG
+            docker push $DOMAIN/$IMAGE_SERVER_NAME:$latest
 
 workflows:
   version: 2
   build_and_test:
     jobs:
-      - save-docker-tags-as-artifacts
+      # - save-docker-tags-as-artifacts
 
-      - build-client-base:
-          requires:
-            - save-docker-tags-as-artifacts
+      # - build-client-base:
+      #     requires:
+      #       - save-docker-tags-as-artifacts
 
-      - build-server:
-          requires:
-            - save-docker-tags-as-artifacts
+      # - build-server:
+      #     requires:
+      #       - save-docker-tags-as-artifacts
 
-      - swap-client-config-e2e:
-          requires:
-            - build-client-base
-          filters:
-            branches:
-              only: 
-                - master
-                - /depfu.*/
-                - /dependabot.*/
+      # - swap-client-config-e2e:
+      #     requires:
+      #       - build-client-base
+      #     filters:
+      #       branches:
+      #         only: 
+      #           - master
+      #           - /depfu.*/
+      #           - /dependabot.*/
 
-      - e2e-tests:
-          requires:
-            - swap-client-config-e2e
-            - build-server
-          filters:
-            branches:
-              only: 
-                - master
-                - /depfu.*/
-                - /dependabot.*/
+      # - e2e-tests:
+      #     requires:
+      #       - swap-client-config-e2e
+      #       - build-server
+      #     filters:
+      #       branches:
+      #         only: 
+      #           - master
+      #           - /depfu.*/
+      #           - /dependabot.*/
 
-      - update-version:
-          requires:
-            - e2e-tests
-          filters:
-            branches:
-              only: master
+      - update-version
+          # requires:
+          #   - e2e-tests
+          # filters:
+          #   branches:
+          #     only: master
 
       - save-new-version:
           requires:
@@ -362,16 +365,16 @@ workflows:
             branches:
               only: master
 
-      - swap-client-config:
-          requires:
-            - save-new-version
-          filters:
-            branches:
-              only: master
+      # - swap-client-config:
+      #     requires:
+      #       - save-new-version
+      #     filters:
+      #       branches:
+      #         only: master
 
-      - retag-server-image:
-          requires:
-            - save-new-version
-          filters:
-            branches:
-              only: master
+      # - retag-server-image:
+      #     requires:
+      #       - save-new-version
+      #     filters:
+      #       branches:
+      #         only: master
