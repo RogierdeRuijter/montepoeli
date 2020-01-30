@@ -5,6 +5,11 @@ import {
   Component,
   OnDestroy,
   OnInit,
+  ViewChild,
+  ViewContainerRef,
+  ComponentFactoryResolver,
+  Injector,
+  ComponentRef,
 } from '@angular/core';
 import {Alignments, GridSizes, Icons, IconSize, Tabs} from '../../../../shared/static-files/enums';
 import {TabChangeGlobalEventEmitter} from '../../../../services/tab-change.global-event-emitter';
@@ -15,6 +20,8 @@ import {Game} from '../../../../shared/interfaces/game.interface';
 import {BehaviorSubject, Subject} from 'rxjs';
 import {Rule} from '../../../../shared/interfaces/rule.interface';
 import {ActivatedRoute} from '@angular/router';
+import { GameComponent } from '../../modules/game/components/game/game.component';
+import { RuleComponent } from '../../modules/rule/components/rule/rule.component';
 
 // TODO: add hammerjs for swiping left and right between games and rules
 @Component({
@@ -24,6 +31,14 @@ import {ActivatedRoute} from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
+
+  @ViewChild('games', { read: ViewContainerRef, static: false}) 
+  public gamesContainer: ViewContainerRef;
+  public gamesComponentRef: ComponentRef<GameComponent>;
+
+  @ViewChild('rules', { read: ViewContainerRef, static: false }) 
+  public rulesContainer: ViewContainerRef;
+  public rulesComponentRef: ComponentRef<RuleComponent>;
 
   public showGames = true;
   public showRules = false;
@@ -43,6 +58,8 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
               private userService: UserService,
               private userStore: UserStore,
               private changeDetectorRef: ChangeDetectorRef,
+              private componentFactoryResolver: ComponentFactoryResolver,
+              private injector: Injector,
               private activatedRoute: ActivatedRoute) {
 
   }
@@ -67,15 +84,42 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
         if (tab === Tabs.GAMES) {
           this.showRules = false;
           this.showGames = true;
+
+          if (this.gamesContainer.length === 0) {
+            this.createGamesComponent().then(() => {
+              this.gamesComponentRef.instance.games$ = this.games$;
+              this.gamesComponentRef.instance.users = this.users;
+            });
+          }
+
           this.changeDetectorRef.detectChanges();
         }
 
         if (tab === Tabs.RULES) {
           this.showGames = false;
           this.showRules = true;
+          
+          if (this.rulesContainer?.length === 0) {
+            this.createRulesComponent();
+          }
+
           this.changeDetectorRef.detectChanges();
         }
       });
+  }
+
+  public async createGamesComponent(): Promise<void> {
+    // tslint:disable-next-line
+    const { GameComponent } = await import('../../modules/game/components/game/game.component');
+    const gamesFactory = this.componentFactoryResolver.resolveComponentFactory(GameComponent);
+    this.gamesComponentRef = this.gamesContainer.createComponent(gamesFactory, null, this.injector);
+  }
+
+  public async createRulesComponent(): Promise<void> {
+    // tslint:disable-next-line
+    const { RuleComponent } = await import('../../modules/rule/components/rule/rule.component');
+    const rulesFactory = this.componentFactoryResolver.resolveComponentFactory(RuleComponent);
+    this.rulesComponentRef = this.rulesContainer.createComponent(rulesFactory, null, this.injector);
   }
 
   public ngOnDestroy(): void {

@@ -1,10 +1,9 @@
-<app-game id="games"
-          *ngIf="showGames"
-          [games$]="games$"
-          [users]="users">
-</app-game>
+<div [hidden]="showGames === false">
+    <ng-container #games></ng-container>
+    <!-- <app-game id="games" [games$]="games$" [users]="users"></app-game> -->
+</div>
 
-<app-rule id="rules"
-          *ngIf="showRules"
-          [rules]="rules">
-</app-rule>
+<div [hidden]="showRules === false">
+    <ng-container #rules></ng-container>
+    <!-- <app-rule id="rules" [rules]="rules"></app-rule> -->
+</div>
