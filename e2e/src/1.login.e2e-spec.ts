@@ -21,7 +21,7 @@ describe('montepoeli login', () => {
 
     page.getSubmitButton().click();
     
-    helper.sleep();
+    helper.shortSleep();
     
     expect(page.getLoginFailedWarning()).toBeTruthy();
 
