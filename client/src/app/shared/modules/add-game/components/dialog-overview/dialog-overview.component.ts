@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, Output, OnInit} from '@angular/core';
 import {DialogDataComponent} from '../dialog-data/dialog-data.component';
 import {Game} from '../../../../interfaces/game.interface';
 import {GameFactory} from '../../../../../modules/home/modules/game/factories/game.factory';
@@ -9,7 +9,7 @@ import {MatDialog} from '@angular/material/dialog';
   selector: 'app-dialog-overview',
   template: ``,
 })
-export class DialogOverviewComponent {
+export class DialogOverviewComponent implements OnInit {
 
   @Output()
   public addEvent: EventEmitter<Game> = new EventEmitter();
@@ -23,6 +23,9 @@ export class DialogOverviewComponent {
               private utilService: UtilService) {
   }
 
+  public ngOnInit(): void {
+  }
+
   public openDialog(): void {
     this.dialog.closeAll();
     
@@ -32,7 +35,7 @@ export class DialogOverviewComponent {
         winner: this.game.winner,
         black: this.game.black,
       } as Game,
-      closeOnNavigation: true,
+      closeOnNavigation: true
     });
 
     dialogRef.afterClosed().subscribe((result: Game | string) => {
@@ -47,6 +50,6 @@ export class DialogOverviewComponent {
   }
 
   private addEventIsReceived(result: any): boolean {
-    return !this.utilService.isNullOrUndefined(result.white);
+    return !this.utilService.isNullOrUndefined(result?.white);
   }
 }
