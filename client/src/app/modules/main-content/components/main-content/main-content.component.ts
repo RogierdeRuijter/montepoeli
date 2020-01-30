@@ -27,7 +27,7 @@ export class MainContentComponent implements OnInit {
       .pipe(
         filter((activeGridSize: GridSizes) => activeGridSize !== GridSizes.EXTRA_SMALL && this.activeView !== 'large-screen'),
         tap(() => this.activeView = 'large-screen'),
-        filter(() => !this.largeScreenContentContainer || this.largeScreenContentContainer?.length === 0),
+        filter(() => !this.largeScreenContentContainer || this.largeScreenContentContainer.length === 0),
         tap(() => this.createLargeScreenConent())
     ).subscribe();
 
@@ -35,7 +35,7 @@ export class MainContentComponent implements OnInit {
       .pipe(
         filter((activeGridSize: GridSizes) => activeGridSize === GridSizes.EXTRA_SMALL),
         tap(() => this.activeView = 'mobile'),
-        filter(() => !this.mobileContentContainer || this.mobileContentContainer?.length === 0),
+        filter(() => !this.mobileContentContainer || this.mobileContentContainer.length === 0),
         tap(() => this.createMobileConent())
       ).subscribe();
   }
