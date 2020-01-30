@@ -27,22 +27,6 @@ export class GridService {
 
       constructor(private breakpointObserver: BreakpointObserver) {}
 
-  public getBootstrapClassFor(gridSize: GridSizes): string {
-    switch (gridSize) {
-      case GridSizes.EXTRA_SMALL:
-        return 'col';
-      case GridSizes.SMALL:
-        return 'col-sm';
-      case GridSizes.MEDIUM:
-        return 'col-md';
-      case GridSizes.LARGE:
-        return 'col-lg';
-      case GridSizes.ALL:
-        return 'col';
-      default: 
-        return '';
-    }
-  }
   // TODO: write a unit test for this
   public gridChangeObservable(): Observable<GridSizes> {
         return this.breakpointObserver
