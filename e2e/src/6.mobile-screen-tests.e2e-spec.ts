@@ -18,11 +18,10 @@ describe('Mobile screen tests', () => {
   it('should switch to the rules tab and back to the games tab', () => {
     page.navigateToBase();
 
-    helper.sleep();
-
     page.getMobileNavButtonRules().click();
   
-    helper.longSleep();
+    browser.waitForAngular();
+    helper.sleep();
 
     expect(page.getRulesView()).toBeTruthy();
     
@@ -31,11 +30,10 @@ describe('Mobile screen tests', () => {
     expect(page.getMobileAddGameButton().getCssValue('pointer-events')).toEqual('none');
     expect(page.getMobileNavButtonRules()).toBeTruthy();
 
-    helper.sleep();
-
     page.getMobileNavButtonGames().click();
 
-    helper.longSleep();
+    browser.waitForAngular();
+    helper.sleep();
     
     expect(page.getGamesView()).toBeTruthy();
 
