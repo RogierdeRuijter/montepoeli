@@ -18,6 +18,9 @@ import {MatTooltipModule} from '@angular/material/tooltip';
   ],
   declarations: [
     HomeComponent
+  ],
+  exports: [
+    HomeComponent
   ]
 })
 export class HomeModule { }

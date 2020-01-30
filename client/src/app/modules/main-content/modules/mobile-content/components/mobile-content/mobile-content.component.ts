@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewChild, NgModule } from '@angular/core';
 import { NewGameStore } from 'src/app/shared/stores/new-game.store';
 import { Icons, Tabs } from '../../../../../../shared/static-files/enums';
 import { TabChangeGlobalEventEmitter } from '../../../../../../services/tab-change.global-event-emitter';
@@ -8,6 +8,10 @@ import { GameService } from '../../../../../home/modules/game/services/game.serv
 import { RemoveLastAddedGameStore } from '../../../../../../shared/stores/remove-last-added-game.store';
 import { DialogOverviewComponent } from '../../../../../../shared/modules/add-game/components/dialog-overview/dialog-overview.component';
 import { MatDialog } from '@angular/material/dialog';
+import { CommonModule } from '@angular/common';
+import { MobileContentModule } from '../../mobile-content.module';
+import { RouterModule } from '@angular/router';
+import { AddGameModule } from 'src/app/shared/modules/add-game/add-game.module';
 
 @Component({
   selector: 'app-mobile-content',
@@ -98,3 +102,16 @@ export class MobileContentComponent extends AsyncBaseComponent implements OnInit
     }
   }
 }
+
+@NgModule({
+  declarations: [
+    MobileContentComponent
+  ],
+  imports: [
+    CommonModule,
+    MobileContentModule,
+    RouterModule,
+    AddGameModule
+  ],
+})
+export class NotNeedForAName { }
