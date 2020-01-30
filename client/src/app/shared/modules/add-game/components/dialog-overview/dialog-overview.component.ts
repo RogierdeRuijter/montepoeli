@@ -1,15 +1,18 @@
-import {Component, EventEmitter, Output, OnInit} from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {DialogDataComponent} from '../dialog-data/dialog-data.component';
 import {Game} from '../../../../interfaces/game.interface';
 import {GameFactory} from '../../../../../modules/home/modules/game/factories/game.factory';
 import {UtilService} from '../../../../services/util/util.service';
 import {MatDialog} from '@angular/material/dialog';
+import { Router, RouterEvent, NavigationStart } from '@angular/router';
+import { filter, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-dialog-overview',
   template: ``,
 })
-export class DialogOverviewComponent implements OnInit {
+export class DialogOverviewComponent {
 
   @Output()
   public addEvent: EventEmitter<Game> = new EventEmitter();
@@ -19,14 +22,16 @@ export class DialogOverviewComponent implements OnInit {
 
   public game: Game = new GameFactory().create();
 
-  constructor(public dialog: MatDialog,
-              private utilService: UtilService) {
-  }
+  public unsubscriber$: Subject<void>;
 
-  public ngOnInit(): void {
+  constructor(public dialog: MatDialog,
+              private utilService: UtilService,
+              private router: Router) {
   }
 
   public openDialog(): void {
+    this.unsubscriber$ = new Subject();
+
     this.dialog.closeAll();
     
     const dialogRef = this.dialog.open(DialogDataComponent, {
@@ -34,10 +39,10 @@ export class DialogOverviewComponent implements OnInit {
         white: this.game.white,
         winner: this.game.winner,
         black: this.game.black,
-      } as Game,
-      closeOnNavigation: true
+      } as Game
     });
-
+    
+    // No need to unsubscribe since it is a one off observable
     dialogRef.afterClosed().subscribe((result: Game | string) => {
       if (this.addEventIsReceived(result)) {
         this.addEvent.emit(result as Game);
@@ -46,7 +51,20 @@ export class DialogOverviewComponent implements OnInit {
       if (result === 'cancelButton') {
         this.cancelEvent.emit();
       }
+
+      this.unsubscriber$.next();
     });
+
+    this.closeDialogWhenTheUrlChanges();
+  }
+
+  private closeDialogWhenTheUrlChanges(): void {
+    this.router.events
+      .pipe(
+        filter((event: RouterEvent) => event instanceof NavigationStart),
+        takeUntil(this.unsubscriber$)
+      )
+      .subscribe(() => this.dialog?.closeAll());
   }
 
   private addEventIsReceived(result: any): boolean {
