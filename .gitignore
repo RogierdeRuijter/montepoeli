@@ -7,12 +7,15 @@ client/dist
 server/dist
 e2e/reports
 
-
 # dependencies
 /node_modules
 client/node_modules
 e2e/node_modules
 server/node_modules
+
+#coverage
+client/coverage
+server/coverage
 
 # IDEs and editors
 /.idea
