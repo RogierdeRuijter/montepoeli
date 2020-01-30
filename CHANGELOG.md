@@ -1,3 +1,11 @@
+## [3.8.4](https://github.com/RogierdeRuijter/montepoeli/compare/v3.8.3...v3.8.4) (2020-01-30)
+
+
+### Bug Fixes
+
+* dialog closes when route changes ([ab6719d](https://github.com/RogierdeRuijter/montepoeli/commit/ab6719d5423ff25fe908d123121b32ac24896d4d))
+* white of undefined exception ([134598f](https://github.com/RogierdeRuijter/montepoeli/commit/134598f0c2bcc914523c2a91ba3b442aaa594b49))
+
 ## [3.8.3](https://github.com/RogierdeRuijter/montepoeli/compare/v3.8.2...v3.8.3) (2020-01-30)
 
 
