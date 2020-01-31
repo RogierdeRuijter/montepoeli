@@ -14,7 +14,8 @@ import {UserStore} from '../../modules/game/stores/user.store';
 import {Game} from '../../../../shared/interfaces/game.interface';
 import {BehaviorSubject, Subject} from 'rxjs';
 import {Rule} from '../../../../shared/interfaces/rule.interface';
-import {ActivatedRoute} from '@angular/router';
+import { GameService } from '../../modules/game/services/game.service';
+import { RuleService } from '../../modules/rule/services/rule.service';
 
 // TODO: add hammerjs for swiping left and right between games and rules
 @Component({
@@ -43,15 +44,17 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
               private userService: UserService,
               private userStore: UserStore,
               private changeDetectorRef: ChangeDetectorRef,
-              private activatedRoute: ActivatedRoute) {
+              private gameService: GameService,
+              private ruleService: RuleService) {
 
   }
 
   public ngOnInit(): void {
-    this.activatedRoute.data.subscribe(data => {
-      this.rules = data.rules;
-      this.games$.next(data.games);
-    });
+    this.gameService.getAll()
+      .subscribe((games: Game[]) => this.games$.next(games));
+    
+    this.ruleService.getAll()
+      .subscribe((rules: Rule[]) => this.rules = rules);
 
     this.userService.getAll()
       .subscribe((users: User[]) => {
