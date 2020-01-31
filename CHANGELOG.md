@@ -1,3 +1,10 @@
+# [3.9.0](https://github.com/RogierdeRuijter/montepoeli/compare/v3.8.5...v3.9.0) (2020-01-31)
+
+
+### Features
+
+* do not wait for the games to come back from the backend before we paint the header and footer ([e8e427c](https://github.com/RogierdeRuijter/montepoeli/commit/e8e427c7561beabd76ca53c006a410c05267f73e))
+
 ## [3.8.5](https://github.com/RogierdeRuijter/montepoeli/compare/v3.8.4...v3.8.5) (2020-01-31)
 
 
