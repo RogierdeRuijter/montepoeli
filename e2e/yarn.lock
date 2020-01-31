@@ -7,10 +7,10 @@
   resolved "https://registry.yarnpkg.com/@types/jasmine/-/jasmine-3.4.6.tgz#afcb210af0fa751b85a96b2034eedada65390be1"
   integrity sha512-hpQHs+lmZ0uuCrGyqypdI1Ho7jRFolOBT6OkNdZPFziLSSEKvWu+VxWU6bGdNEA/hoV4jV8pdDeNx8EWlmfNAw==
 
-"@types/jasmine@3.5.1":
-  version "3.5.1"
-  resolved "https://registry.yarnpkg.com/@types/jasmine/-/jasmine-3.5.1.tgz#e417aa74738aa9e9285016abbfcae68d5be0f827"
-  integrity sha512-5ZxOWKc0AgTeMcYCnV4RxTZZAClWaHKPR6n14LvUj8ywKDhOfI+YgdtNLXiW4kQmtxS3i1HXVbfAot+pqpJE2A==
+"@types/jasmine@3.5.2":
+  version "3.5.2"
+  resolved "https://registry.yarnpkg.com/@types/jasmine/-/jasmine-3.5.2.tgz#9ff982e0ddca82f65e5d85a3f0584e9e6b92c47b"
+  integrity sha512-7hrdBDFWlTb4EhrXYRyC7i3L2kKCV0TqYbzuV+gwyPNF2V4SSHw2Vs223ai26W4tEg+t4e9Wfi1vW6JLubYPiw==
 
 "@types/jasminewd2@2.0.8":
   version "2.0.8"
@@ -19,10 +19,10 @@
   dependencies:
     "@types/jasmine" "*"
 
-"@types/node@13.1.8":
-  version "13.1.8"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-13.1.8.tgz#1d590429fe8187a02707720ecf38a6fe46ce294b"
-  integrity sha512-6XzyyNM9EKQW4HKuzbo/CkOIjn/evtCmsU+MUM1xDfJ+3/rNjBttM1NgN7AOQvN6tP1Sl1D1PIKMreTArnxM9A==
+"@types/node@13.5.1":
+  version "13.5.1"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-13.5.1.tgz#6fae50892d1841f4b38b298e2f78fb68c5960cb9"
+  integrity sha512-Jj2W7VWQ2uM83f8Ls5ON9adxN98MvyJsMSASYFuSvrov8RMRY64Ayay7KV35ph1TSGIJ2gG9ZVDdEq3c3zaydA==
 
 "@types/q@^0.0.32":
   version "0.0.32"
@@ -722,10 +722,10 @@ mongoose-legacy-pluralize@1.0.2:
   resolved "https://registry.yarnpkg.com/mongoose-legacy-pluralize/-/mongoose-legacy-pluralize-1.0.2.tgz#3ba9f91fa507b5186d399fb40854bff18fb563e4"
   integrity sha512-Yo/7qQU4/EyIS8YDFSeenIvXxZN+ld7YdV9LqFVQJzTLye8unujAWPZ4NWKfFA+RNjh+wvTWKY9Z3E5XM6ZZiQ==
 
-mongoose@5.8.9:
-  version "5.8.9"
-  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-5.8.9.tgz#616ae9df4cd7f41f7d2d77d037ad94784485bd74"
-  integrity sha512-gRazoLTQ0yuv4bk2z+nZEarKCyJ7WilFBkgrRqpOczUZUhk3i/FCe0rp8Mjc87dGXaHx54j8AjPJ0UKqJDXWMA==
+mongoose@5.8.10:
+  version "5.8.10"
+  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-5.8.10.tgz#c06c6a7e171c8b0706bf85da7f98e478fa6f9822"
+  integrity sha512-3sRiZhtMIB4egqxWbry23C+xX87kQ0aTvPtMXxWXCBGfCRkXMJl/CLiftYcle/JPy09Lv5u+ZCBpIJUgwDMtxw==
   dependencies:
     bson "~1.1.1"
     kareem "2.3.1"
@@ -880,10 +880,10 @@ protractor-jasmine2-screenshot-reporter@0.5.0:
     string.prototype.startswith "^0.2.0"
     uuid "^2.0.0"
 
-protractor@5.4.2:
-  version "5.4.2"
-  resolved "https://registry.yarnpkg.com/protractor/-/protractor-5.4.2.tgz#329efe37f48b2141ab9467799be2d4d12eb48c13"
-  integrity sha512-zlIj64Cr6IOWP7RwxVeD8O4UskLYPoyIcg0HboWJL9T79F1F0VWtKkGTr/9GN6BKL+/Q/GmM7C9kFVCfDbP5sA==
+protractor@5.4.3:
+  version "5.4.3"
+  resolved "https://registry.yarnpkg.com/protractor/-/protractor-5.4.3.tgz#35f050741e404a45868618ea648745d89af31683"
+  integrity sha512-7pMAolv8Ah1yJIqaorDTzACtn3gk7BamVKPTeO5lqIGOrfosjPgXFx/z1dqSI+m5EeZc2GMJHPr5DYlodujDNA==
   dependencies:
     "@types/q" "^0.0.32"
     "@types/selenium-webdriver" "^3.0.0"
