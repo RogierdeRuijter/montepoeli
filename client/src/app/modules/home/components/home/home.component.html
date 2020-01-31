@@ -1,5 +1,5 @@
 <app-game id="games"
-          *ngIf="showGames"
+          *ngIf="showGames && games$ | async"
           [games$]="games$"
           [users]="users">
 </app-game>
