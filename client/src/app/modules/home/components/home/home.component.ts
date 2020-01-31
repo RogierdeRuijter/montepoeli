@@ -7,8 +7,6 @@ import {
   OnInit,
   ViewChild,
   ViewContainerRef,
-  ComponentFactoryResolver,
-  Injector,
   ComponentRef,
 } from '@angular/core';
 import {Alignments, GridSizes, Icons, IconSize, Tabs} from '../../../../shared/static-files/enums';
@@ -22,6 +20,7 @@ import {Rule} from '../../../../shared/interfaces/rule.interface';
 import {ActivatedRoute} from '@angular/router';
 import { GameComponent } from '../../modules/game/components/game/game.component';
 import { RuleComponent } from '../../modules/rule/components/rule/rule.component';
+import { ComponentCreationService } from 'src/app/shared/services/component-creation/component-creation.service';
 
 // TODO: add hammerjs for swiping left and right between games and rules
 @Component({
@@ -58,9 +57,8 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
               private userService: UserService,
               private userStore: UserStore,
               private changeDetectorRef: ChangeDetectorRef,
-              private componentFactoryResolver: ComponentFactoryResolver,
-              private injector: Injector,
-              private activatedRoute: ActivatedRoute) {
+              private activatedRoute: ActivatedRoute,
+              private componentCreationService: ComponentCreationService) {
 
   }
 
@@ -109,10 +107,7 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
   }
 
   public async createGamesComponent(): Promise<void> {
-    // tslint:disable-next-line
-    const { GameComponent } = await import('../../modules/game/components/game/game.component');
-    const gamesFactory = this.componentFactoryResolver.resolveComponentFactory(GameComponent);
-    this.gamesComponentRef = this.gamesContainer.createComponent(gamesFactory, null, this.injector);
+    this.gamesComponentRef = await this.componentCreationService.create<GameComponent>('../../', this.gamesContainer);
   }
 
   public async createRulesComponent(): Promise<void> {
