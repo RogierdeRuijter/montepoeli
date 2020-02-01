@@ -12,7 +12,7 @@ export class GlobalErrorHandlerService implements ErrorHandler {
        window.location.reload();
      } else {
        // tslint:disable-next-line
-       console.log(error);
+       console.error(error);
      }
    }
 }
