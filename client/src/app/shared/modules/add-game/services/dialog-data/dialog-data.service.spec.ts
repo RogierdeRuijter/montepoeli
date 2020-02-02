@@ -2,6 +2,7 @@ import {TestBed} from '@angular/core/testing';
 
 import {DialogDataService} from './dialog-data.service';
 import { Game } from 'src/app/shared/interfaces/game.interface';
+import { User } from 'src/app/shared/interfaces/user.interface';
 
 describe('DialogDataService', () => {
   beforeEach(() => TestBed.configureTestingModule({
@@ -75,6 +76,35 @@ describe('DialogDataService', () => {
       const expected = false;
 
       expect(output).toBe(expected);
+    });
+  });
+
+  describe('determineAvailableUsersForSelect', () => {
+    it('should return partial user list if the white user is already selected', () => {
+      const service: DialogDataService = TestBed.inject(DialogDataService);
+
+      const users: User[] = [
+        {name: 'Meneer'},
+        {name: 'Sjonnie'},
+        {name: 'Annie'},
+      ];
+
+      const game: Game = {
+        white: 'Sjonnie',
+        black: undefined,
+        winner: undefined
+      };
+      
+      const selectedName = 'black';
+
+      const output = service.determineAvailableUsersForSelect(users, game, selectedName);
+
+      const expected: User[] = [
+        {name: 'Meneer'}, 
+        {name: 'Annie'}
+      ];
+
+      expect(output).toEqual(expected);
     });
   });
 });
