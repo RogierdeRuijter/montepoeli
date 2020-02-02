@@ -1,3 +1,10 @@
+## [3.9.1](https://github.com/RogierdeRuijter/montepoeli/compare/v3.9.0...v3.9.1) (2020-02-02)
+
+
+### Bug Fixes
+
+* handle loading dhunck failed exception ([afec934](https://github.com/RogierdeRuijter/montepoeli/commit/afec9344b795d5f1f49e07deb9a0ddee3e6acd7f))
+
 # [3.9.0](https://github.com/RogierdeRuijter/montepoeli/compare/v3.8.5...v3.9.0) (2020-01-31)
 
 
