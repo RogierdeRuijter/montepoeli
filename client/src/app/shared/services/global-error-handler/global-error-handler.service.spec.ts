@@ -13,4 +13,31 @@ describe('GlobalErrorHandlerService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  describe('handleError', () => {
+    it('should reload the window', () => {
+      const error = {
+        message: 'ChunkLoadError: Loading chunk 5 failed'
+      };
+
+      spyOn(window.location, 'reload');
+
+      service.handleError(error);
+      
+      expect(window.location.reload).toHaveBeenCalled();
+    });
+    
+    it('should log any other error message to the console', () => {
+      const error = {
+        message: 'type of undefinded'
+      };
+
+      spyOn(console, 'error');
+
+      service.handleError(error);
+
+      // tslint:disable-next-line
+      expect(console.error).toHaveBeenCalled();
+    });
+  });
 });

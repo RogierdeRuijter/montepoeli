@@ -9,7 +9,7 @@ export class GlobalErrorHandlerService implements ErrorHandler {
     const chunkFailedMessage = /Loading chunk [\d]+ failed/;
  
      if (chunkFailedMessage.test(error.message)) {
-       window.location.reload();
+       window.location.reload(true);
      } else {
        // tslint:disable-next-line
        console.error(error);
