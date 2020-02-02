@@ -29,7 +29,7 @@ export class GameComponent extends AsyncBaseComponent implements OnInit, OnDestr
   public actions: Actions[] = [Actions.ADD];
   public disabled: boolean[];
 
-  public displayedColumns: string[] = ['white', 'winner', 'black'];
+  public displayedColumns: string[] = ['white', 'black', 'winner'];
 
   public standalone = true;
 

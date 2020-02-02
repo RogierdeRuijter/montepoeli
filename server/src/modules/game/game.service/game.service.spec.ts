@@ -52,7 +52,7 @@ describe('GameService', () => {
       const result = await service.getGames();
 
       const output = [{
-        winner: 'black',
+        winner: 'Isabelle',
         black: 'Isabelle',
         white: 'Rogier',
       }] as Game[];

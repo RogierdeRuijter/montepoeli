@@ -30,10 +30,24 @@ export class GameMapperService {
         return {
           black: userBlack ? userBlack.name : null,
           white: userWhite ? userWhite.name : null,
-          winner: this.getWinnerColor(userBlack, userWhite, game),
+          winner: this.getWinnerUser(userBlack, userWhite, game),
         } as GameDto;
       },
     );
+  }
+
+  private getWinnerUser(userBlack: User, userWhite: User, game: Game): string {
+    if (game.winner === null) {
+      return Outcomes.DRAW;
+    }
+
+    if (userWhite && userWhite.id === game.winner) {
+      return userWhite.name;
+    }
+
+    if (userBlack && userBlack.id === game.winner) {
+      return userBlack.name;
+    }
   }
 
   public convertCreateDto(createGameDto: CreateGameDto): Promise<Game> {
@@ -65,20 +79,6 @@ export class GameMapperService {
         });
       }),
     );
-  }
-
-  private getWinnerColor(userBlack: User, userWhite: User, game: Game): string {
-    if (game.winner === null) {
-      return Outcomes.DRAW;
-    }
-
-    if (userWhite && userWhite.id === game.winner) {
-      return Outcomes.WHITE;
-    }
-
-    if (userBlack && userBlack.id === game.winner) {
-      return Outcomes.BLACK;
-    }
   }
 
   private getWinnerName(createGameDto: CreateGameDto): string {
