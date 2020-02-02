@@ -27,8 +27,12 @@ export class DialogDataService {
 
   public allFieldsAreDefined(game: Game): boolean {
     return !this.utilService.isNullOrUndefined(game.white)
-      && !this.utilService.isNullOrUndefined(game.winner)
-      && !this.utilService.isNullOrUndefined(game.black);
+      && !this.utilService.isNullOrUndefined(game.black)
+      && !this.utilService.isNullOrUndefined(game.winner);
   }
 
+  public userAreDefined(game: Game): boolean {
+    return !this.utilService.isNullOrUndefined(game.white)
+    && !this.utilService.isNullOrUndefined(game.black);
+  }
 }

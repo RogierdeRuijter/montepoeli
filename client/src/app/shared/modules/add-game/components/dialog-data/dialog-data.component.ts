@@ -33,11 +33,9 @@ export class DialogDataComponent extends AsyncBaseComponent implements OnInit, O
     this.userStore
       .get(this.destroy$)
       .subscribe((users: User[]) => this.users = users);
-
-    this.winners.forEach(winner => this.winnerOptions.push(this.translateService.instant('pages.home.games.cell.winner.' + winner)));
   }
 
-  public onNoClick(): void {
+  public cancelEventHandler(): void {
     this.dialogRef.close('cancelButton');
   }
 
@@ -47,5 +45,18 @@ export class DialogDataComponent extends AsyncBaseComponent implements OnInit, O
 
   public ifAllFieldsAreNotField(): boolean {
     return !this.dialogDataService.allFieldsAreDefined(this.data);
+  }
+
+  public usersAreNotDefined(): boolean {
+    return !this.dialogDataService.userAreDefined(this.data);
+  }
+
+  public fieldUpdateHandler(game: Partial<Game>): void {
+    this.winnerOptions = [];
+    
+    this.winnerOptions.push(game?.black);
+    this.winnerOptions.push(game?.white);
+
+    this.winnerOptions.push(this.translateService.instant('pages.home.games.cell.winner.' + Winners.DRAW));
   }
 }

@@ -38,7 +38,7 @@ export class GameMapperService {
 
   private getWinnerUser(userBlack: User, userWhite: User, game: Game): string {
     if (game.winner === null) {
-      return Outcomes.DRAW;
+      return '-';
     }
 
     if (userWhite && userWhite.id === game.winner) {
@@ -51,6 +51,9 @@ export class GameMapperService {
   }
 
   public convertCreateDto(createGameDto: CreateGameDto): Promise<Game> {
+    // TODO: write unit test
+
+    // TODO: to lowercase the createGameDto
     return new Promise((resolve) =>
       this.userRepositoryService.find().then((users: User[]) => {
         const blackUser: User = users.find((user: User) => user.name.toLowerCase() === createGameDto.black.toLowerCase());
@@ -60,15 +63,14 @@ export class GameMapperService {
           throw new NotFoundException('user not found');
         }
 
-        const winnerName: string = this.getWinnerName(createGameDto);
+        const winner = createGameDto.winner.toLowerCase();
 
         let winnerUser: User;
-        if (winnerName === blackUser.name) {
-          winnerUser = blackUser;
-        } else if (winnerName === whiteUser.name) {
-          winnerUser = whiteUser;
-        } else {
+        // TODO: create constant
+        if (winner === 'draw') {
           winnerUser = null;
+        } else {
+          winnerUser = users.find((user: User) => user.name.toLowerCase() === winner);
         }
 
         // @ts-ignore
@@ -79,9 +81,5 @@ export class GameMapperService {
         });
       }),
     );
-  }
-
-  private getWinnerName(createGameDto: CreateGameDto): string {
-    return createGameDto[createGameDto.winner.toLowerCase()];
   }
 }

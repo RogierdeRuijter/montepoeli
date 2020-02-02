@@ -4,26 +4,28 @@
     <div>
       <app-drop-down id='white-user'
                      [(value)]="data.white"
+                     (valueChange)="fieldUpdated()"
                      [options]="usersWhite"
                      labelKey="pages.home.games.labels.white"
                      optionDisplayField="name">
       </app-drop-down>
     </div>
-    <!-- TODO: make this none special dropdown-->
-    <div>
-      <app-drop-down id='winner-user'
-                     [(value)]="data.winner"
-                     [options]="winnerOptions"
-                     labelKey="pages.home.games.labels.winner">
-      </app-drop-down>
-    </div>
-
     <div>
       <app-drop-down id='black-user'
                      [(value)]="data.black"
+                     (valueChange)="fieldUpdated()"
                      [options]="usersBlack"
                      labelKey="pages.home.games.labels.black"
                      optionDisplayField="name">
+      </app-drop-down>
+    </div>
+    <!-- TODO: make this none special dropdown-->
+    <div [hidden]="winnerFieldHidden">
+      <app-drop-down id='winner-user'
+                     [(value)]="data.winner"
+                     (valueChange)="fieldUpdated()"
+                     [options]="winnerOptions"
+                     labelKey="pages.home.games.labels.winner">
       </app-drop-down>
     </div>
   </form>
