@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule, ErrorHandler } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,6 +14,7 @@ import { MobileContentModule } from './modules/main-content/modules/mobile-conte
 import { LargerScreenContentModule } from './modules/main-content/modules/larger-screen-content/larger-screen-content.module';
 import { AuthModule } from './shared/modules/auth/auth.module';
 import { InterceptorModule } from './shared/modules/interceptor/interceptor.module';
+import { GlobalErrorHandlerService } from './shared/services/global-error-handler/global-error-handler.service';
 
 export function init_app(appLoadService: AppInitService): () => Promise<any> {
   return () => appLoadService.init();
@@ -33,6 +34,7 @@ export function init_app(appLoadService: AppInitService): () => Promise<any> {
       deps: [AppInitService],
       multi: true,
     },
+    {provide: ErrorHandler, useClass: GlobalErrorHandlerService}
   ],
   imports: [
     AppRoutingModule,
