@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Tabs } from '../../../../../../shared/static-files/enums';
-import { TabChangeGlobalEventEmitter } from '../../../../../../services/tab-change.global-event-emitter';
+import { TabChangeGlobalEventEmitter } from 'src/app/shared/services/tab-change.global-event-emitter';
 
 @Component({
   selector: 'app-large-screen-content',
