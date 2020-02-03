@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import {GridSizes} from '../../shared/static-files/enums';
 import { Observable } from 'rxjs';
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { map } from 'rxjs/operators';
+import { GridSizes } from '../../static-files/enums';
 
 @Injectable({
   providedIn: 'root'

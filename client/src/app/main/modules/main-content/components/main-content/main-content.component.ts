@@ -1,7 +1,7 @@
 import { Component, ViewChild, ViewContainerRef, ComponentFactoryResolver, Injector, OnInit } from '@angular/core';
-import { GridService } from 'src/app/services/grid/grid.service';
 import { tap, filter } from 'rxjs/operators';
 import { GridSizes } from 'src/app/shared/static-files/enums';
+import { GridService } from 'src/app/shared/services/grid/grid.service';
 
 @Component({
   selector: 'app-main-content',
