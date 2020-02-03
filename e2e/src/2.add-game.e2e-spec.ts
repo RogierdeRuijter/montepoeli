@@ -17,7 +17,6 @@ describe('Add a game', () => {
     browser.waitForAngular();
     
     expect(browser.getCurrentUrl()).toContain('/home');
-
     page.getAddGameButton().click();
 
     const game: any = {
