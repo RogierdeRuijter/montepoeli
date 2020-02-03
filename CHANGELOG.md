@@ -1,3 +1,15 @@
+# [4.0.0](https://github.com/RogierdeRuijter/montepoeli/compare/v3.10.0...v4.0.0) (2020-02-03)
+
+
+### chore
+
+* breaking change commit value ([062df8f](https://github.com/RogierdeRuijter/montepoeli/commit/062df8fb187d3cd975a2df8bff44a77c8fede4c9))
+
+
+### BREAKING CHANGES
+
+* breaking change is in release 3.10
+
 # [3.10.0](https://github.com/RogierdeRuijter/montepoeli/compare/v3.9.2...v3.10.0) (2020-02-03)
 
 
