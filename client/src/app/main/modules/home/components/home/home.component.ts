@@ -6,12 +6,12 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import {Alignments, GridSizes, Icons, IconSize, Tabs} from '../../../../shared/static-files/enums';
-import {User} from '../../../../shared/interfaces/user.interface';
+import {Alignments, GridSizes, Icons, IconSize, Tabs} from '../../../../../shared/static-files/enums';
+import {User} from '../../../../../shared/interfaces/user.interface';
 import {UserStore} from '../../modules/game/stores/user.store';
-import {Game} from '../../../../shared/interfaces/game.interface';
+import {Game} from '../../../../../shared/interfaces/game.interface';
 import {BehaviorSubject, Subject} from 'rxjs';
-import {Rule} from '../../../../shared/interfaces/rule.interface';
+import {Rule} from '../../../../../shared/interfaces/rule.interface';
 import { GameService } from '../../modules/game/services/game.service';
 import { RuleService } from '../../modules/rule/services/rule.service';
 import { TabChangeGlobalEventEmitter } from 'src/app/shared/services/tab-change.global-event-emitter';

@@ -1,12 +1,12 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 import {DialogDataComponent} from '../dialog-data/dialog-data.component';
 import {Game} from '../../../../interfaces/game.interface';
-import {GameFactory} from '../../../../../modules/home/modules/game/factories/game.factory';
 import {UtilService} from '../../../../services/util/util.service';
 import {MatDialog} from '@angular/material/dialog';
 import { Router, RouterEvent, NavigationStart } from '@angular/router';
 import { filter, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { GameFactory } from 'src/app/main/modules/home/modules/game/factories/game.factory';
 
 @Component({
   selector: 'app-dialog-overview',
