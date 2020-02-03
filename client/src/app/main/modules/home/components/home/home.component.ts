@@ -13,8 +13,7 @@ import {Alignments, GridSizes, Icons, IconSize, Tabs} from '../../../../../share
 import {User} from '../../../../../shared/interfaces/user.interface';
 import {UserStore} from '../../modules/game/stores/user.store';
 import {Game} from '../../../../../shared/interfaces/game.interface';
-import {BehaviorSubject, Subject} from 'rxjs';
-import { GameComponent } from '../../modules/game/components/game/game.component';
+import {BehaviorSubject, Subject, Observable, combineLatest} from 'rxjs';
 import { RuleComponent } from '../../modules/rule/components/rule/rule.component';
 import { ComponentCreationService } from 'src/app/shared/services/component-creation/component-creation.service';
 import { Rule } from '../../../../../shared/interfaces/rule.interface';
@@ -22,6 +21,7 @@ import { GameService } from '../../modules/game/services/game.service';
 import { RuleService } from '../../modules/rule/services/rule.service';
 import { TabChangeGlobalEventEmitter } from 'src/app/shared/services/tab-change.global-event-emitter';
 import { UserService } from 'src/app/shared/services/users/user.service';
+import { filter } from 'rxjs/operators';
 
 // TODO: add hammerjs for swiping left and right between games and rules
 @Component({
@@ -32,20 +32,18 @@ import { UserService } from 'src/app/shared/services/users/user.service';
 })
 export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
 
-  @ViewChild('games', { read: ViewContainerRef, static: false}) 
-  public gamesContainer: ViewContainerRef;
-  public gamesComponentRef: ComponentRef<GameComponent>;
-
   @ViewChild('rules', { read: ViewContainerRef, static: false }) 
   public rulesContainer: ViewContainerRef;
-  public rulesComponentRef: ComponentRef<RuleComponent>;
+  public rulesComponentRef$: BehaviorSubject<ComponentRef<RuleComponent>> = new BehaviorSubject(null);
 
   public showGames = true;
   public showRules = false;
 
   public users: User[];
   public games$: BehaviorSubject<Game[]> = new BehaviorSubject<Game[]>(null);
+  
   public rules: Rule[];
+  public hotRules$: Observable<Rule[]>;
 
   public Icons = Icons;
   public IconSize = IconSize;
@@ -67,15 +65,23 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
   public ngOnInit(): void {
     this.gameService.getAll()
       .subscribe((games: Game[]) => this.games$.next(games));
-    
-    this.ruleService.getAll()
-      .subscribe((rules: Rule[]) => this.rules = rules);
 
     this.userService.getAll()
       .subscribe((users: User[]) => {
         this.users = users;
+        
         this.userStore.set(users);
       });
+
+      this.userStore.get(this.destroy$)
+        .subscribe((users: User[]) => this.users = users);
+      // FIND
+      combineLatest([this.ruleService.getAll(), this.rulesComponentRef$.pipe(filter(value => value === null))])
+        .subscribe(([rules, rulesComponentRef]: [Rule[], ComponentRef<RuleComponent>]) => {
+          // console.log(rulesComponentRef);
+          rulesComponentRef.instance.rules = rules;
+          
+        });
   }
 
   public ngAfterContentInit(): void {
@@ -85,36 +91,27 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
         if (tab === Tabs.GAMES) {
           this.showRules = false;
           this.showGames = true;
-
-          if (this.gamesContainer.length === 0) {
-            this.createGamesComponent().then(() => {
-              this.gamesComponentRef.instance.games$ = this.games$;
-              this.gamesComponentRef.instance.users = this.users;
-            });
-          }
-
-          this.changeDetectorRef.detectChanges();
         }
 
         if (tab === Tabs.RULES) {
           this.showGames = false;
           this.showRules = true;
-          
-          if (this.rulesContainer?.length === 0) {
-            this.createRulesComponent();
-          }
 
-          this.changeDetectorRef.detectChanges();
+          // console.log(this.rulesContainer);
+
+          if (this.rulesComponentRef$.getValue()) {
+            this.createRulesComponent()
+              .then((ruleComponentRef: ComponentRef<RuleComponent>) => {
+                this.rulesComponentRef$ = new BehaviorSubject(ruleComponentRef);
+              
+              });
+          }
         }
       });
   }
 
-  public async createGamesComponent(): Promise<void> {
-    this.gamesComponentRef = await this.componentCreationService.create<GameComponent>(GameComponent, this.gamesContainer);
-  }
-
-  public async createRulesComponent(): Promise<void> {
-    this.rulesComponentRef = await this.componentCreationService.create<RuleComponent>(RuleComponent, this.rulesContainer);
+  public createRulesComponent(): Promise<ComponentRef<RuleComponent>> {
+    return this.componentCreationService.create<RuleComponent>(RuleComponent, this.rulesContainer);
   }
 
   public ngOnDestroy(): void {
