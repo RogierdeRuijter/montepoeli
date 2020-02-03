@@ -80,6 +80,34 @@ describe('DialogDataService', () => {
   });
 
   describe('determineAvailableUsersForSelect', () => {
+    it('should return all users if no users are assigned to a game', () => {
+      const service: DialogDataService = TestBed.inject(DialogDataService);
+
+      const users: User[] = [
+        {name: 'Meneer'},
+        {name: 'Sjonnie'},
+        {name: 'Annie'},
+      ];
+
+      const game: Game = {
+        white: undefined,
+        black: undefined,
+        winner: undefined
+      };
+      
+      const selectedName = undefined;
+
+      const output = service.determineAvailableUsersForSelect(users, game, selectedName);
+
+      const expected: User[] = [
+        {name: 'Meneer'},
+        {name: 'Sjonnie'},
+        {name: 'Annie'}
+      ];
+
+      expect(output).toEqual(expected);
+    });
+
     it('should return partial user list if the white user is already selected', () => {
       const service: DialogDataService = TestBed.inject(DialogDataService);
 
@@ -102,6 +130,88 @@ describe('DialogDataService', () => {
       const expected: User[] = [
         {name: 'Meneer'}, 
         {name: 'Annie'}
+      ];
+
+      expect(output).toEqual(expected);
+    });
+
+    it('should return partial user list if the black user is already selected', () => {
+      const service: DialogDataService = TestBed.inject(DialogDataService);
+
+      const users: User[] = [
+        {name: 'Meneer'},
+        {name: 'Sjonnie'},
+        {name: 'Annie'},
+      ];
+
+      const game: Game = {
+        white: undefined,
+        black: 'Annie',
+        winner: undefined
+      };
+      
+      const selectedName = 'white';
+
+      const output = service.determineAvailableUsersForSelect(users, game, selectedName);
+
+      const expected: User[] = [
+        {name: 'Meneer'},
+        {name: 'Sjonnie'},
+      ];
+
+      expect(output).toEqual(expected);
+    });
+
+    it('should return all users if the black user is filled in and the black user is selected again', () => {
+      const service: DialogDataService = TestBed.inject(DialogDataService);
+
+      const users: User[] = [
+        {name: 'Meneer'},
+        {name: 'Sjonnie'},
+        {name: 'Annie'},
+      ];
+
+      const game: Game = {
+        white: undefined,
+        black: 'Annie',
+        winner: undefined
+      };
+      
+      const selectedName = 'black';
+
+      const output = service.determineAvailableUsersForSelect(users, game, selectedName);
+
+      const expected: User[] = [
+        {name: 'Meneer'},
+        {name: 'Sjonnie'},
+        {name: 'Annie'},
+      ];
+
+      expect(output).toEqual(expected);
+    });
+
+    it('should return first two users if the white user is already filled with the last user and the black user option list is requested again', () => {
+      const service: DialogDataService = TestBed.inject(DialogDataService);
+
+      const users: User[] = [
+        {name: 'Meneer'},
+        {name: 'Sjonnie'},
+        {name: 'Annie'},
+      ];
+
+      const game: Game = {
+        white: 'Annie',
+        black: 'Sjonnie',
+        winner: undefined
+      };
+      
+      const selectedName = 'black';
+
+      const output = service.determineAvailableUsersForSelect(users, game, selectedName);
+
+      const expected: User[] = [
+        {name: 'Meneer'},
+        {name: 'Sjonnie'}
       ];
 
       expect(output).toEqual(expected);

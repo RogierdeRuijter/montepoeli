@@ -2,7 +2,7 @@ import {TestBed} from '@angular/core/testing';
 
 import {UserService} from './user.service';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {EnvironmentService} from '../../shared/services/environment/environment.service';
+import { EnvironmentService } from '../environment/environment.service';
 
 describe('UserService', () => {
   beforeEach(() => TestBed.configureTestingModule({

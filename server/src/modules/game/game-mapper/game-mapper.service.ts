@@ -3,7 +3,6 @@ import {UtilService} from '../../shared/services/util/util.service';
 import {User} from '../../../models/interfaces/user.interface';
 import {GameDto} from '../../../models/dtos/game.dto';
 import {Game} from '../../../models/interfaces/game.interface';
-import {Outcomes} from '../../../constants/enums';
 import {CreateGameDto} from '../../../models/create-dtos/create-game.dto';
 import {UserRepositoryService} from '../../users/user-repository/user-repository.service';
 
@@ -52,8 +51,6 @@ export class GameMapperService {
 
   public convertCreateDto(createGameDto: CreateGameDto): Promise<Game> {
     // TODO: write unit test
-
-    // TODO: to lowercase the createGameDto
     return new Promise((resolve) =>
       this.userRepositoryService.find().then((users: User[]) => {
         const blackUser: User = users.find((user: User) => user.name.toLowerCase() === createGameDto.black.toLowerCase());

@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {User} from '../../shared/interfaces/user.interface';
-import {CustomHttpService} from '../../shared/modules/http/services/custom-http/custom-http.service';
-import {Environment} from '../../../environments/environment';
+import { User } from '../../interfaces/user.interface';
+import { CustomHttpService } from '../../modules/http/services/custom-http/custom-http.service';
+import { Environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
