@@ -3,10 +3,14 @@ import {TestBed} from '@angular/core/testing';
 import {GameService} from './game.service';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {EnvironmentService} from '../../../../../../shared/services/environment/environment.service';
+import { Game } from 'src/app/shared/interfaces/game.interface';
 
 describe('GameService', () => {
   beforeEach(() => TestBed.configureTestingModule({
-    imports: [HttpClientTestingModule],
+    imports: [
+      HttpClientTestingModule,
+      TranslateTestingModule
+    ],
     providers: [
       EnvironmentService
     ]
@@ -15,5 +19,45 @@ describe('GameService', () => {
   it('should be created', () => {
     const service: GameService = TestBed.inject(GameService);
     expect(service).toBeTruthy();
+  });
+
+  describe('postProcessGame', () => {
+    it('should swap draw for a -', () => {
+      const service: GameService = TestBed.inject(GameService);
+
+      const input: Game = {
+        white: 'Rogier',
+        black: 'Jefrey Bossers',
+        winner: 'Draw'
+      };
+      const result = service.postProcessGame(input);
+
+      const expectedResult: Game = {
+        white: 'Rogier',
+        black: 'Jefrey Bossers',
+        winner: '-'
+      };
+      
+      expect(result).toEqual(expectedResult);
+    });
+
+    it('should be an identify funtion if the winner field does not contain draw', () => {
+      const service: GameService = TestBed.inject(GameService);
+
+      const input: Game = {
+        white: 'Rogier',
+        black: 'Jefrey Bossers',
+        winner: 'Rogier'
+      };
+      const result = service.postProcessGame(input);
+
+      const expectedResult: Game = {
+        white: 'Rogier',
+        black: 'Jefrey Bossers',
+        winner: 'Rogier'
+      };
+      
+      expect(result).toEqual(expectedResult);
+    });
   });
 });

@@ -31,6 +31,9 @@ export class DropDownComponent implements ControlValueAccessor {
   @Input()
   public labelKey: string;
 
+  @Input()
+  public disabled = false;
+
   @Output()
   public removeOptionEvent: EventEmitter<void> = new EventEmitter();
 

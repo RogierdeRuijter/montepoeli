@@ -20,8 +20,9 @@
       </app-drop-down>
     </div>
     <!-- TODO: make this none special dropdown-->
-    <div [appShowAndHide]="winnerFieldHidden">
+    <div>
       <app-drop-down id='winner-user'
+                     [disabled]="winnerFieldHidden"
                      [(value)]="data.winner"
                      (valueChange)="fieldUpdated()"
                      [options]="winnerOptions"

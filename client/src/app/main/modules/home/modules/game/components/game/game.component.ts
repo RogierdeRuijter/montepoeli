@@ -71,7 +71,8 @@ export class GameComponent extends AsyncBaseComponent implements OnInit, OnDestr
   }
 
   private addGameToView(game: Game): void {
-    // TODO: transform game to change draw to -
+    game = this.gameService.postProcessGame(game);
+    
     const games: Game[] = this.games$.getValue();
     games.unshift(game);
     this.games$.next(games);
