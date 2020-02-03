@@ -20,33 +20,17 @@ describe('Add a game', () => {
 
     page.getAddGameButton().click();
 
-    page.getWhiteDropDownList().click();
+    const game: any = {
+      white: 'protractor',
+      black: 'protractor1',
+      winner: 'protractor'
+    }
 
-    page.getProtractorUser().click();
-
-    browser.waitForAngular();
-    expect(page.getWhiteDropDownField().getText()).toEqual('protractor');
-
-    page.getWinnerDropDownList().click();
-
-    page.getWhiteOption().click();
-
-    browser.waitForAngular();
-    expect(page.getWinnerDropDownField().getText()).toEqual('White');
-
-    page.getBlackDropDownList().click();
-
-    page.getProtractorUser1().click();
+    helper.addGame(page, browser, game);
     
     browser.waitForAngular();
-    expect(page.getBlackDropDownField().getText()).toEqual('protractor1');
-
-    page.getSaveButton().click();
     
-    browser.waitForAngular();
-    expect(page.getTableWhiteUserForLastAddedGame().getText()).toEqual('protractor');
-    expect(page.getTableWinnerUserForLastAddedGame('white').getText()).toEqual('White');
-    expect(page.getTableBlackUserForLastAddedGame().getText()).toEqual('protractor1');
+    helper.checkIfGameIsAddedSuccesfully(page, game);
 
   });
 
