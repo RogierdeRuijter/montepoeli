@@ -7,14 +7,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CookieService } from 'ngx-cookie-service';
 import { TranslateStore } from '@ngx-translate/core';
-import { AppInitService } from './services/app.init';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { LandingComponent } from './components/landing/landing.component';
-import { MobileContentModule } from './modules/main-content/modules/mobile-content/mobile-content.module';
-import { LargerScreenContentModule } from './modules/main-content/modules/larger-screen-content/larger-screen-content.module';
+import { LandingComponent } from './main/components/landing/landing.component';
+import { MobileContentModule } from './main/modules/main-content/modules/mobile-content/mobile-content.module';
+import { LargerScreenContentModule } from './main/modules/main-content/modules/larger-screen-content/larger-screen-content.module';
 import { AuthModule } from './shared/modules/auth/auth.module';
 import { InterceptorModule } from './shared/modules/interceptor/interceptor.module';
 import { GlobalErrorHandlerService } from './shared/services/global-error-handler/global-error-handler.service';
+import { AppInitService } from './shared/services/app.init';
 
 export function init_app(appLoadService: AppInitService): () => Promise<any> {
   return () => appLoadService.init();

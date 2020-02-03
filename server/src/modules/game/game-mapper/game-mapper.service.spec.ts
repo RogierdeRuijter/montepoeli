@@ -50,12 +50,12 @@ describe('GameMapperService', () => {
       const result = service.swapUsersIdsWithNames(games, [black, white]);
 
       const output: GameDto[] = [
-        gameDtoFactory.create(black.name, white.name, factoryUtilService.getWinnerColor(games[0].winner, black.id)),
-        gameDtoFactory.create(black.name, white.name, factoryUtilService.getWinnerColor(games[1].winner, black.id)),
-        gameDtoFactory.create(black.name, white.name, factoryUtilService.getWinnerColor(games[2].winner, black.id)),
-        gameDtoFactory.create(black.name, white.name, factoryUtilService.getWinnerColor(games[3].winner, black.id)),
-        gameDtoFactory.create(black.name, white.name, factoryUtilService.getWinnerColor(games[4].winner, black.id)),
-        gameDtoFactory.create(black.name, white.name, factoryUtilService.getWinnerColor(games[5].winner, black.id)),
+        gameDtoFactory.create(black.name, white.name, factoryUtilService.getWinnerName(games[0], black, white)),
+        gameDtoFactory.create(black.name, white.name, factoryUtilService.getWinnerName(games[1], black, white)),
+        gameDtoFactory.create(black.name, white.name, factoryUtilService.getWinnerName(games[2], black, white)),
+        gameDtoFactory.create(black.name, white.name, factoryUtilService.getWinnerName(games[3], black, white)),
+        gameDtoFactory.create(black.name, white.name, factoryUtilService.getWinnerName(games[4], black, white)),
+        gameDtoFactory.create(black.name, white.name, factoryUtilService.getWinnerName(games[5], black, white)),
       ];
 
       expect(result).toEqual(output);

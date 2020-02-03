@@ -40,6 +40,10 @@ export class AppPage {
     return this.helper.findByXPath('//*[@id="white-user"]/div/div[1]/span/span');
   }
 
+  public getUser(id: string): ElementFinder {
+    return this.helper.findById(id);
+  }
+
   public getProtractorUser(): ElementFinder {
     return this.helper.findById('protractor');
   }
