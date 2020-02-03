@@ -21,7 +21,6 @@ import { GameService } from '../../modules/game/services/game.service';
 import { RuleService } from '../../modules/rule/services/rule.service';
 import { TabChangeGlobalEventEmitter } from 'src/app/shared/services/tab-change.global-event-emitter';
 import { UserService } from 'src/app/shared/services/users/user.service';
-import { filter } from 'rxjs/operators';
 
 // TODO: add hammerjs for swiping left and right between games and rules
 @Component({
@@ -34,7 +33,7 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
 
   @ViewChild('rules', { read: ViewContainerRef, static: false }) 
   public rulesContainer: ViewContainerRef;
-  public rulesComponentRef$: BehaviorSubject<ComponentRef<RuleComponent>> = new BehaviorSubject(null);
+  public rulesComponentRef$: Subject<ComponentRef<RuleComponent>> = new Subject();
 
   public showGames = true;
   public showRules = false;
@@ -76,11 +75,10 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
       this.userStore.get(this.destroy$)
         .subscribe((users: User[]) => this.users = users);
       // FIND
-      combineLatest([this.ruleService.getAll(), this.rulesComponentRef$.pipe(filter(value => value === null))])
+      combineLatest([this.ruleService.getAll(), this.rulesComponentRef$])
         .subscribe(([rules, rulesComponentRef]: [Rule[], ComponentRef<RuleComponent>]) => {
-          // console.log(rulesComponentRef);
           rulesComponentRef.instance.rules = rules;
-          
+          this.changeDetectorRef.detectChanges();
         });
   }
 
@@ -97,16 +95,17 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
           this.showGames = false;
           this.showRules = true;
 
-          // console.log(this.rulesContainer);
-
-          if (this.rulesComponentRef$.getValue()) {
+          if (this.rulesContainer.length === 0) {
             this.createRulesComponent()
               .then((ruleComponentRef: ComponentRef<RuleComponent>) => {
-                this.rulesComponentRef$ = new BehaviorSubject(ruleComponentRef);
-              
+                this.rulesComponentRef$.next(ruleComponentRef);
+                this.changeDetectorRef.detectChanges();
               });
+            return;
           }
         }
+
+        this.changeDetectorRef.detectChanges();
       });
   }
 

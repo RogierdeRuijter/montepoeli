@@ -8,7 +8,7 @@ import {Rule} from '../../../../../../../shared/interfaces/rule.interface';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RuleComponent {
-
+  // FIND: make this load lazy
   @Input()
   public rules: Rule[];
 }
