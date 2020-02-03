@@ -4,6 +4,7 @@ import {GameService} from './game.service';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {EnvironmentService} from '../../../../../../shared/services/environment/environment.service';
 import { Game } from 'src/app/shared/interfaces/game.interface';
+import { TranslateTestingModule } from 'src/app/testing/translate-testing.module';
 
 describe('GameService', () => {
   beforeEach(() => TestBed.configureTestingModule({
@@ -28,14 +29,14 @@ describe('GameService', () => {
       const input: Game = {
         white: 'Rogier',
         black: 'Jefrey Bossers',
-        winner: 'Draw'
+        winner: null
       };
       const result = service.postProcessGame(input);
 
       const expectedResult: Game = {
         white: 'Rogier',
         black: 'Jefrey Bossers',
-        winner: '-'
+        winner: 'Draw'
       };
       
       expect(result).toEqual(expectedResult);

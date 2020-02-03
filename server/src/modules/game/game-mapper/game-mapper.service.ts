@@ -37,7 +37,7 @@ export class GameMapperService {
 
   private getWinnerUser(userBlack: User, userWhite: User, game: Game): string {
     if (game.winner === null) {
-      return '-';
+      return null;
     }
 
     if (userWhite && userWhite.id === game.winner) {

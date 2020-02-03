@@ -5,6 +5,7 @@ import {CustomHttpService} from '../../../../../../shared/modules/http/services/
 import {Environment} from '../../../../../../../environments/environment';
 import { TranslateService } from '@ngx-translate/core';
 import { Winners } from 'src/app/shared/static-files/enums';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +17,10 @@ export class GameService {
   }
 
   public getAll(): Observable<Game[]> {
-    return this.httpService.get<Game[]>(this.environment.backend.ENTRY_POINTS.GAME);
+    return this.httpService.get<Game[]>(this.environment.backend.ENTRY_POINTS.GAME)
+            .pipe(
+              map((games: Game[]) => games.map((game: Game) => this.postProcessGame(game)))
+            );
   }
 
   public save(game: Game): Observable<Game> {
@@ -24,8 +28,8 @@ export class GameService {
   }
 
   public postProcessGame(game: Game): Game {
-    if (game.winner === this.translateService.instant('pages.home.games.cell.winner.' + Winners.DRAW)) {
-      game.winner = '-';
+    if (game.winner === null) {
+      game.winner = this.translateService.instant('pages.home.games.cell.winner.' + Winners.DRAW);
     }
     return game;
   }
