@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {Tabs} from '../shared/static-files/enums';
 import {takeUntil} from 'rxjs/operators';
+import { Tabs } from '../static-files/enums';
 
 @Injectable({
   providedIn: 'root'
