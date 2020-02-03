@@ -1,3 +1,11 @@
+# [3.10.0](https://github.com/RogierdeRuijter/montepoeli/compare/v3.9.2...v3.10.0) (2020-02-03)
+
+
+### Features
+
+* change adding a game process BREAKING CHANGE ([c935049](https://github.com/RogierdeRuijter/montepoeli/commit/c935049c3a01314d013ffc25e1068ad50f88a3c5))
+* show winner with username and swap columns around BREAKING CHANGE ([79b507e](https://github.com/RogierdeRuijter/montepoeli/commit/79b507ef6dabe02dcd1e53efaee71b1ac7d6022d))
+
 ## [3.9.2](https://github.com/RogierdeRuijter/montepoeli/compare/v3.9.1...v3.9.2) (2020-02-03)
 
 
