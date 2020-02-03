@@ -2,7 +2,7 @@ import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {Sides, Winners} from '../../../../static-files/enums';
 import {Game} from '../../../../interfaces/game.interface';
-import {UserStore} from '../../../../../modules/home/modules/game/stores/user.store';
+import {UserStore} from '../../../../../../modules/home/modules/game/stores/user.store';
 import {DialogDataService} from '../../services/dialog-data/dialog-data.service';
 import {User} from '../../../../interfaces/user.interface';
 import {TranslateService} from '@ngx-translate/core';
