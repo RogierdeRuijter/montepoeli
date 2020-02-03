@@ -1,3 +1,10 @@
+## [3.9.2](https://github.com/RogierdeRuijter/montepoeli/compare/v3.9.1...v3.9.2) (2020-02-03)
+
+
+### Bug Fixes
+
+* Update all Yarn dependencies (2020-02-03) ([9424378](https://github.com/RogierdeRuijter/montepoeli/commit/9424378556c41be3aa55c87ddce84cf3ea9571bf))
+
 ## [3.9.1](https://github.com/RogierdeRuijter/montepoeli/compare/v3.9.0...v3.9.1) (2020-02-02)
 
 
