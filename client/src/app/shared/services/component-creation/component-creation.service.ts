@@ -1,4 +1,4 @@
-import { Injectable, ComponentFactoryResolver, Injector, ComponentRef, ViewContainerRef } from '@angular/core';
+import { Injectable, ComponentFactoryResolver, Injector, ComponentRef, ViewContainerRef, Type } from '@angular/core';
 import { of } from 'rxjs';
 
 @Injectable({
@@ -9,8 +9,7 @@ export class ComponentCreationService {
   constructor(private componentFactoryResolver: ComponentFactoryResolver,
               private injector: Injector) { }
 
-  public async create<T>(importPath: string, container: ViewContainerRef): Promise<ComponentRef<T>> {
-    const { ComponentType } = await import(importPath);
+  public async create<T>(ComponentType: Type<T>, container: ViewContainerRef): Promise<ComponentRef<T>> {
     const factory = this.componentFactoryResolver.resolveComponentFactory<T>(ComponentType);
     return of(container.createComponent<T>(factory, null, this.injector)).toPromise();
   }

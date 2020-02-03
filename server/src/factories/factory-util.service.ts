@@ -1,4 +1,6 @@
 import * as faker from 'faker';
+import { User } from 'src/models/interfaces/user.interface';
+import { Game } from 'src/models/interfaces/game.interface';
 
 export class FactoryUtilService {
   public id(): string {
@@ -31,15 +33,15 @@ export class FactoryUtilService {
     return undefined;
   }
 
-  public getWinnerColor(winnerId: string, blackId: string): string {
-    if (!winnerId) {
+  public getWinnerName(game: Game, blackUser: User, whiteUser: User): string {
+    if (!game.winner) {
       return undefined;
     }
 
-    if (winnerId === blackId) {
-      return 'black';
+    if (game.winner === blackUser.id) {
+      return blackUser.name;
     } else {
-      return 'white';
+      return whiteUser.name;
     }
   }
 }

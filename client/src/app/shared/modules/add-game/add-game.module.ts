@@ -9,6 +9,7 @@ import {FormsModule} from '@angular/forms';
 import {GameResultComponent} from './components/dialog-data/game-result/game-result.component';
 import {FormModule} from '../form/form.module';
 import {GridModule} from '../grid/grid.module';
+import { TransitionModule } from '../transition/transition.module';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import {GridModule} from '../grid/grid.module';
     FormsModule,
     FormModule,
     GridModule,
+    TransitionModule
   ],
 })
 export class AddGameModule { }

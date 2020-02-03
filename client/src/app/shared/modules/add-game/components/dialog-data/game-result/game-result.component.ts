@@ -37,6 +37,12 @@ export class GameResultComponent {
   @Input()
   public winnerOptions: string[];
 
+  @Input()
+  public winnerFieldHidden: boolean;
+
+  @Output()
+  public fieldUpdateEvent: EventEmitter<Game> = new EventEmitter();
+
   @Output()
   public cancelEvent: EventEmitter<void> = new EventEmitter();
 
@@ -55,5 +61,9 @@ export class GameResultComponent {
 
   public save(): void {
     this.saveEvent.emit();
+  }
+
+  public fieldUpdated(): void {
+    this.fieldUpdateEvent.emit(this.data);
   }
 }

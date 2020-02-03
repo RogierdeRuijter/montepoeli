@@ -85,4 +85,35 @@ export class Helper {
       }
     });
   }
+
+  public addGame(page: any, browser: any, game: any): void {
+    page.getWhiteDropDownList().click();
+
+    page.getUser(game.white).click();
+
+    browser.waitForAngular();
+    expect(page.getWhiteDropDownField().getText()).toEqual(game.white);
+
+    page.getBlackDropDownList().click();
+
+    page.getUser(game.black).click();
+    
+    browser.waitForAngular();
+    expect(page.getBlackDropDownField().getText()).toEqual(game.black);
+
+    page.getWinnerDropDownList().click();
+
+    page.getUser(game.winner).click();
+
+    browser.waitForAngular();
+    expect(page.getWinnerDropDownField().getText()).toEqual(game.winner);
+
+    page.getSaveButton().click();
+  }
+
+  public checkIfGameIsAddedSuccesfully(page: any, game: any): void {
+    expect(page.getTableWhiteUserForLastAddedGame().getText()).toEqual(game.white);
+    expect(page.getTableBlackUserForLastAddedGame().getText()).toEqual(game.black);
+    expect(page.getTableWinnerUserForLastAddedGame(game.winner).getText()).toEqual(game.winner);
+  }
 }

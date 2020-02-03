@@ -1,3 +1,51 @@
+# [4.0.0](https://github.com/RogierdeRuijter/montepoeli/compare/v3.10.0...v4.0.0) (2020-02-03)
+
+
+### chore
+
+* breaking change commit value ([062df8f](https://github.com/RogierdeRuijter/montepoeli/commit/062df8fb187d3cd975a2df8bff44a77c8fede4c9))
+
+
+### BREAKING CHANGES
+
+* breaking change is in release 3.10
+
+# [3.10.0](https://github.com/RogierdeRuijter/montepoeli/compare/v3.9.2...v3.10.0) (2020-02-03)
+
+
+### Features
+
+* change adding a game process BREAKING CHANGE ([c935049](https://github.com/RogierdeRuijter/montepoeli/commit/c935049c3a01314d013ffc25e1068ad50f88a3c5))
+* show winner with username and swap columns around BREAKING CHANGE ([79b507e](https://github.com/RogierdeRuijter/montepoeli/commit/79b507ef6dabe02dcd1e53efaee71b1ac7d6022d))
+
+## [3.9.2](https://github.com/RogierdeRuijter/montepoeli/compare/v3.9.1...v3.9.2) (2020-02-03)
+
+
+### Bug Fixes
+
+* Update all Yarn dependencies (2020-02-03) ([9424378](https://github.com/RogierdeRuijter/montepoeli/commit/9424378556c41be3aa55c87ddce84cf3ea9571bf))
+
+## [3.9.1](https://github.com/RogierdeRuijter/montepoeli/compare/v3.9.0...v3.9.1) (2020-02-02)
+
+
+### Bug Fixes
+
+* handle loading dhunck failed exception ([afec934](https://github.com/RogierdeRuijter/montepoeli/commit/afec9344b795d5f1f49e07deb9a0ddee3e6acd7f))
+
+# [3.9.0](https://github.com/RogierdeRuijter/montepoeli/compare/v3.8.5...v3.9.0) (2020-01-31)
+
+
+### Features
+
+* do not wait for the games to come back from the backend before we paint the header and footer ([e8e427c](https://github.com/RogierdeRuijter/montepoeli/commit/e8e427c7561beabd76ca53c006a410c05267f73e))
+
+## [3.8.5](https://github.com/RogierdeRuijter/montepoeli/compare/v3.8.4...v3.8.5) (2020-01-31)
+
+
+### Bug Fixes
+
+* Update all Yarn dependencies (2020-01-31) ([b566133](https://github.com/RogierdeRuijter/montepoeli/commit/b566133ac657cc29da9384c65a18a993b637b4a2))
+
 ## [3.8.4](https://github.com/RogierdeRuijter/montepoeli/compare/v3.8.3...v3.8.4) (2020-01-30)
 
 
