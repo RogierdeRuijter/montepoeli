@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Tabs } from '../../../../../../../shared/static-files/enums';
+import { Tabs } from '../../../../../shared/static-files/enums';
 import { TabChangeGlobalEventEmitter } from 'src/app/shared/services/tab-change.global-event-emitter';
 
 @Component({

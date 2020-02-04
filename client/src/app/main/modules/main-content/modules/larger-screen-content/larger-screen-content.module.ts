@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LargeScreenContentComponent } from './components/large-sreen-content/large-screen-content.component';
+import { LargeScreenContentComponent } from './large-screen-content.component';
 import { CustomTranslateModule } from '../../../../../shared/modules/translate/custom-translate.module';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
