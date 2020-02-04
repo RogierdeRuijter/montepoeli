@@ -103,6 +103,7 @@ export class MobileContentComponent extends AsyncBaseComponent implements OnInit
   }
 }
 
+/* tslint:disable */
 @NgModule({
   declarations: [
     MobileContentComponent
@@ -114,4 +115,4 @@ export class MobileContentComponent extends AsyncBaseComponent implements OnInit
     AddGameModule
   ],
 })
-export class NotNeedForAName { }
+class NotNeedForAName { }

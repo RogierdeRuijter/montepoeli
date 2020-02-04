@@ -1,11 +1,11 @@
 <div [hidden]="showGames === false">
-    <app-game id="games" 
-              [games$]="games$" 
+    <app-game id="games"
+              [games$]="games$"
               [users]="users">
     </app-game>
 </div>
 
 <div [hidden]="showRules === false">
+<!--  TODO: find out if this is properly loaded lazy-->
     <ng-container #rules></ng-container>
-    <!-- <app-rule id="rules" [rules]="rules"></app-rule> -->
 </div>

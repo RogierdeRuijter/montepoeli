@@ -31,7 +31,7 @@ import { UserService } from 'src/app/shared/services/users/user.service';
 })
 export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
 
-  @ViewChild('rules', { read: ViewContainerRef, static: false }) 
+  @ViewChild('rules', { read: ViewContainerRef, static: false })
   public rulesContainer: ViewContainerRef;
   public rulesComponentRef$: Subject<ComponentRef<RuleComponent>> = new Subject();
 
@@ -40,9 +40,8 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
 
   public users: User[];
   public games$: BehaviorSubject<Game[]> = new BehaviorSubject<Game[]>(null);
-  
+
   public rules: Rule[];
-  public hotRules$: Observable<Rule[]>;
 
   public Icons = Icons;
   public IconSize = IconSize;
@@ -68,13 +67,13 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
     this.userService.getAll()
       .subscribe((users: User[]) => {
         this.users = users;
-        
+
         this.userStore.set(users);
       });
 
       this.userStore.get(this.destroy$)
         .subscribe((users: User[]) => this.users = users);
-      // FIND
+
       combineLatest([this.ruleService.getAll(), this.rulesComponentRef$])
         .subscribe(([rules, rulesComponentRef]: [Rule[], ComponentRef<RuleComponent>]) => {
           rulesComponentRef.instance.rules = rules;

@@ -31,8 +31,6 @@ export class GameComponent extends AsyncBaseComponent implements OnInit, OnDestr
 
   public displayedColumns: string[] = ['white', 'black', 'winner'];
 
-  public standalone = true;
-
   public GridSizes = GridSizes;
 
   constructor(private gameService: GameService,
@@ -72,7 +70,7 @@ export class GameComponent extends AsyncBaseComponent implements OnInit, OnDestr
 
   private addGameToView(game: Game): void {
     game = this.gameService.postProcessGame(game);
-    
+
     const games: Game[] = this.games$.getValue();
     games.unshift(game);
     this.games$.next(games);

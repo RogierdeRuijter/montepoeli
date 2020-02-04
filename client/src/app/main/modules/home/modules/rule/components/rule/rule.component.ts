@@ -1,5 +1,7 @@
-import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
-import {Rule} from '../../../../../../../shared/interfaces/rule.interface';
+import { ChangeDetectionStrategy, Component, Input, NgModule } from '@angular/core';
+import { Rule } from '../../../../../../../shared/interfaces/rule.interface';
+import { CommonModule } from '@angular/common';
+import { MatListModule } from '@angular/material/list';
 
 @Component({
   selector: 'app-rule',
@@ -8,7 +10,18 @@ import {Rule} from '../../../../../../../shared/interfaces/rule.interface';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RuleComponent {
-  // FIND: make this load lazy
   @Input()
   public rules: Rule[];
 }
+
+/* tslint:disable */
+@NgModule({
+  declarations: [
+    RuleComponent
+  ],
+  imports: [
+    CommonModule,
+    MatListModule
+  ]
+})
+class NotNeedForAName { }
