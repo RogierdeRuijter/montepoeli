@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
-import { GameComponent } from './components/game/game.component';
-import { GameTableComponent } from './components/game/overview/game-table/game-table.component';
-import { TableActionComponent } from './components/game/overview/table-action/table-action.component';
-import { OverviewComponent } from './components/game/overview/overview.component';
+import { GameComponent } from './game.component';
+import { GameTableComponent } from './components/overview/game-table/game-table.component';
+import { TableActionComponent } from './components/overview/table-action/table-action.component';
+import { OverviewComponent } from './components/overview/overview.component';
 import { RuleModule } from '../rule/rule.module';
 import { ButtonModule } from 'src/app/shared/modules/button/button.module';
 import { MatTableModule } from '@angular/material/table';
