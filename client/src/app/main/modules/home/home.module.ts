@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {HomeComponent} from './components/home/home.component';
+import {HomeComponent} from './home.component';
 import {HomeRoutingModule} from './home-routing.module';
 import {MatTabsModule} from '@angular/material/tabs';
 import {GameModule} from './modules/game/game.module';

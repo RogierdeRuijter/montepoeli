@@ -1,13 +1,13 @@
 import {ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {Game} from '../../../../../../../shared/interfaces/game.interface';
-import {GameService} from '../../services/game.service';
-import {Actions, GridSizes} from '../../../../../../../shared/static-files/enums';
+import {Game} from '../../../../../shared/interfaces/game.interface';
+import {GameService} from './services/game.service';
+import {Actions, GridSizes} from '../../../../../shared/static-files/enums';
 import {BehaviorSubject} from 'rxjs';
-import {DialogOverviewComponent} from '../../../../../../../shared/modules/add-game/components/dialog-overview/dialog-overview.component';
-import {User} from '../../../../../../../shared/interfaces/user.interface';
+import {DialogOverviewComponent} from '../../../../../shared/modules/add-game/components/dialog-overview/dialog-overview.component';
+import {User} from '../../../../../shared/interfaces/user.interface';
 import {NewGameStore} from 'src/app/shared/stores/new-game.store';
-import {RemoveLastAddedGameStore} from '../../../../../../../shared/stores/remove-last-added-game.store';
-import {AsyncBaseComponent} from '../../../../../../../shared/modules/async/components/async-base-component/async-base.component';
+import {RemoveLastAddedGameStore} from '../../../../../shared/stores/remove-last-added-game.store';
+import {AsyncBaseComponent} from '../../../../../shared/modules/async/components/async-base-component/async-base.component';
 
 @Component({
   selector: 'app-game',

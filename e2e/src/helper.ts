@@ -92,6 +92,7 @@ export class Helper {
     page.getUser(game.white).click();
 
     browser.waitForAngular();
+    this.sleep();
     expect(page.getWhiteDropDownField().getText()).toEqual(game.white);
 
     page.getBlackDropDownList().click();
@@ -99,6 +100,7 @@ export class Helper {
     page.getUser(game.black).click();
     
     browser.waitForAngular();
+    this.sleep();
     expect(page.getBlackDropDownField().getText()).toEqual(game.black);
 
     page.getWinnerDropDownList().click();
@@ -106,6 +108,7 @@ export class Helper {
     page.getUser(game.winner).click();
 
     browser.waitForAngular();
+    this.sleep();
     expect(page.getWinnerDropDownField().getText()).toEqual(game.winner);
 
     page.getSaveButton().click();

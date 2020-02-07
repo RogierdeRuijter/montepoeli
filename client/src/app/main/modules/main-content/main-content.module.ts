@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MainContentComponent } from './components/main-content/main-content.component';
+import { MainContentComponent } from './main-content.component';
 import { MainContentRoutingModule } from './main-content-routing.module';
 
 @NgModule({

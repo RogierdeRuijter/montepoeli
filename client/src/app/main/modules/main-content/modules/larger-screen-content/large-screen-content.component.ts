@@ -1,9 +1,5 @@
 import { Component } from '@angular/core';
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { LargerScreenContentModule } from '../../larger-screen-content.module';
-import { RouterModule } from '@angular/router';
-import { Tabs } from '../../../../../../../shared/static-files/enums';
+import { Tabs } from '../../../../../shared/static-files/enums';
 import { TabChangeGlobalEventEmitter } from 'src/app/shared/services/tab-change.global-event-emitter';
 import { HomeModule } from 'src/app/main/modules/home/home.module';
 

@@ -1,3 +1,25 @@
+## [4.0.3](https://github.com/RogierdeRuijter/montepoeli/compare/v4.0.2...v4.0.3) (2020-02-07)
+
+
+### Bug Fixes
+
+* Update all Yarn dependencies (2020-02-07) ([19de748](https://github.com/RogierdeRuijter/montepoeli/commit/19de7480a423195577699d7b3c667f75a9c70a5b))
+
+## [4.0.2](https://github.com/RogierdeRuijter/montepoeli/compare/v4.0.1...v4.0.2) (2020-02-06)
+
+
+### Bug Fixes
+
+* Update all Yarn dependencies (2020-02-06) ([2df1966](https://github.com/RogierdeRuijter/montepoeli/commit/2df196671bc38e2775f87412bb10b0d8c7ab1bd2))
+
+## [4.0.1](https://github.com/RogierdeRuijter/montepoeli/compare/v4.0.0...v4.0.1) (2020-02-05)
+
+
+### Bug Fixes
+
+* move main component of modules to base folder for better folder structure ([5a399ec](https://github.com/RogierdeRuijter/montepoeli/commit/5a399eca71959703e4cc22cd874a915a736cacd2))
+* Update all Yarn dependencies (2020-02-05) ([c46d3ac](https://github.com/RogierdeRuijter/montepoeli/commit/c46d3acedf7d3bb678776332780a1b2fb5053642))
+
 # [4.0.0](https://github.com/RogierdeRuijter/montepoeli/compare/v3.10.0...v4.0.0) (2020-02-03)
 
 

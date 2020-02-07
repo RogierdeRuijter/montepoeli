@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewChild, NgModule } from '@angular/core';
 import { NewGameStore } from 'src/app/shared/stores/new-game.store';
-import { Icons, Tabs } from '../../../../../../../shared/static-files/enums';
+import { Icons, Tabs } from '../../../../../shared/static-files/enums';
 import { AsyncBaseComponent } from 'src/app/shared/modules/async/components/async-base-component/async-base.component';
-import { Game } from '../../../../../../../shared/interfaces/game.interface';
-import { GameService } from '../../../../../home/modules/game/services/game.service';
-import { RemoveLastAddedGameStore } from '../../../../../../../shared/stores/remove-last-added-game.store';
-import { DialogOverviewComponent } from '../../../../../../../shared/modules/add-game/components/dialog-overview/dialog-overview.component';
+import { Game } from '../../../../../shared/interfaces/game.interface';
+import { GameService } from '../../../home/modules/game/services/game.service';
+import { RemoveLastAddedGameStore } from '../../../../../shared/stores/remove-last-added-game.store';
+import { DialogOverviewComponent } from '../../../../../shared/modules/add-game/components/dialog-overview/dialog-overview.component';
 import { MatDialog } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
 import { MobileContentModule } from '../../mobile-content.module';

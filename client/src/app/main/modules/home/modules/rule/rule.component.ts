@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, NgModule } from '@angular/core';
-import { Rule } from '../../../../../../../shared/interfaces/rule.interface';
+import { Rule } from '../../../../../shared/interfaces/rule.interface';
 import { CommonModule } from '@angular/common';
 import { MatListModule } from '@angular/material/list';
 
