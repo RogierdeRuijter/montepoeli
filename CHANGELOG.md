@@ -1,3 +1,10 @@
+## [4.0.4](https://github.com/RogierdeRuijter/montepoeli/compare/v4.0.3...v4.0.4) (2020-02-07)
+
+
+### Bug Fixes
+
+* update angular to version 9 🚀 ([3e1ab8d](https://github.com/RogierdeRuijter/montepoeli/commit/3e1ab8dc0d62683f8fe4492b4168f11d185e0498))
+
 ## [4.0.3](https://github.com/RogierdeRuijter/montepoeli/compare/v4.0.2...v4.0.3) (2020-02-07)
 
 
