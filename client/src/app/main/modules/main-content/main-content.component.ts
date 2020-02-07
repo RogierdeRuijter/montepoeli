@@ -41,13 +41,13 @@ export class MainContentComponent implements OnInit {
   }
 
   public async createMobileConent(): Promise<void> {
-    const { MobileContentComponent } = await import('../../modules/mobile-content/components/mobile-content/mobile-content.component');
+    const { MobileContentComponent } = await import('./modules/mobile-content/mobile-content.component');
     const mobileContentFactory = this.componentFactoryResolver.resolveComponentFactory(MobileContentComponent);
     this.mobileContentContainer.createComponent(mobileContentFactory, null, this.injector);
   }
 
   public async createLargeScreenConent(): Promise<void> {
-    const { LargeScreenContentComponent } = await import('../../modules/larger-screen-content/components/large-sreen-content/large-screen-content.component');
+    const { LargeScreenContentComponent } = await import('./modules/larger-screen-content/large-screen-content.component');
     const largeScreenContentFactory = this.componentFactoryResolver.resolveComponentFactory(LargeScreenContentComponent);
     this.largeScreenContentContainer.createComponent(largeScreenContentFactory, null, this.injector);
   }

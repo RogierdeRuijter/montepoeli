@@ -8,10 +8,10 @@ import { RemoveLastAddedGameStore } from '../../../../../shared/stores/remove-la
 import { DialogOverviewComponent } from '../../../../../shared/modules/add-game/components/dialog-overview/dialog-overview.component';
 import { MatDialog } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
-import { MobileContentModule } from '../../mobile-content.module';
 import { RouterModule } from '@angular/router';
 import { AddGameModule } from 'src/app/shared/modules/add-game/add-game.module';
 import { TabChangeGlobalEventEmitter } from 'src/app/shared/services/tab-change.global-event-emitter';
+import { MobileContentModule } from './mobile-content.module';
 
 @Component({
   selector: 'app-mobile-content',
