@@ -13,7 +13,7 @@ import {Alignments, GridSizes, Icons, IconSize, Tabs} from '../../../../../share
 import {User} from '../../../../../shared/interfaces/user.interface';
 import {UserStore} from '../../modules/game/stores/user.store';
 import {Game} from '../../../../../shared/interfaces/game.interface';
-import {BehaviorSubject, Subject, Observable, combineLatest} from 'rxjs';
+import {BehaviorSubject, Subject, combineLatest} from 'rxjs';
 import { RuleComponent } from '../../modules/rule/components/rule/rule.component';
 import { ComponentCreationService } from 'src/app/shared/services/component-creation/component-creation.service';
 import { Rule } from '../../../../../shared/interfaces/rule.interface';
@@ -67,7 +67,6 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
     this.userService.getAll()
       .subscribe((users: User[]) => {
         this.users = users;
-
         this.userStore.set(users);
       });
 
@@ -96,10 +95,7 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
 
           if (this.rulesContainer.length === 0) {
             this.createRulesComponent()
-              .then((ruleComponentRef: ComponentRef<RuleComponent>) => {
-                this.rulesComponentRef$.next(ruleComponentRef);
-                this.changeDetectorRef.detectChanges();
-              });
+              .then((ruleComponentRef: ComponentRef<RuleComponent>) => this.rulesComponentRef$.next(ruleComponentRef));
             return;
           }
         }

@@ -10,6 +10,7 @@ import { MatListModule } from '@angular/material/list';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RuleComponent {
+
   @Input()
   public rules: Rule[];
 }
