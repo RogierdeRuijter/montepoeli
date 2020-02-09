@@ -6,7 +6,7 @@ import { MainContentComponent } from './main-content.component';
 const mainContentRoutes: Routes = [
   {
     path: '',
-    loadChildren: () => import('../../modules/home/home.module').then(m => m.HomeModule),
+    loadChildren: () => import('../../../shared/modules/home/home.module').then(m => m.HomeModule),
     component: MainContentComponent,
     canActivate: [AuthGuard],
   },

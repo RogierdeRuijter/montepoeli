@@ -1,7 +1,5 @@
 import {CompleteStory} from '../intefaces/complete-story.interface';
-import {GameTableComponent} from '../../../app/modules/home/modules/game/components/game/overview/game-table/game-table.component';
 import {of} from 'rxjs';
-import {MatTableModule} from '@angular/material';
 import {StorybookTranslateModule} from '../../storybook-translate.module';
 import {TranslateDirective} from '../../../app/shared/modules/translate/directives/translate.directive';
 import { StoryApi, StoryFn } from '@storybook/addons';
@@ -9,7 +7,7 @@ import { StoryFnAngularReturnType } from '@storybook/angular/dist/client/preview
 
 
 export class GameTableStoryFactory {
-  private component = GameTableComponent;
+  // private component = GameTableComponent;
   private readonly displayedColumns: string[] = ['white', 'winner', 'black'];
   private stories: CompleteStory[] = [];
 

@@ -14,22 +14,22 @@ export class MainContentComponent implements OnInit {
               private injector: Injector,
               private gridService: GridService) {}
 
-  @ViewChild('mobileContent', { read: ViewContainerRef, static: false}) 
+  @ViewChild('mobileContent', { read: ViewContainerRef}) 
   public mobileContentContainer: ViewContainerRef;
 
-  @ViewChild('largeScreenContent', { read: ViewContainerRef, static: false }) 
+  @ViewChild('largeScreenContent', { read: ViewContainerRef }) 
   public largeScreenContentContainer: ViewContainerRef;
 
   public activeView: string;
 
   public ngOnInit(): void {
-    this.gridService.gridChangeObservable()
-      .pipe(
-        filter((activeGridSize: GridSizes) => activeGridSize !== GridSizes.EXTRA_SMALL && this.activeView !== 'large-screen'),
-        tap(() => this.activeView = 'large-screen'),
-        filter(() => !this.largeScreenContentContainer || this.largeScreenContentContainer.length === 0),
-        tap(() => this.createLargeScreenConent())
-    ).subscribe();
+    // this.gridService.gridChangeObservable()
+    //   .pipe(
+    //     filter((activeGridSize: GridSizes) => activeGridSize !== GridSizes.EXTRA_SMALL && this.activeView !== 'large-screen'),
+    //     tap(() => this.activeView = 'large-screen'),
+    //     filter(() => !this.largeScreenContentContainer || this.largeScreenContentContainer.length === 0),
+    //     tap(() => this.createLargeScreenConent())
+    // ).subscribe();
 
     this.gridService.gridChangeObservable()
       .pipe(

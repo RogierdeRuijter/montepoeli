@@ -1,10 +1,10 @@
 import { Component, NgModule } from '@angular/core';
 import { Tabs } from '../../../../../shared/static-files/enums';
 import { TabChangeGlobalEventEmitter } from 'src/app/shared/services/tab-change.global-event-emitter';
-import { HomeModule } from 'src/app/main/modules/home/home.module';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { LargerScreenContentModule } from './larger-screen-content.module';
+import { HomeModule } from 'src/app/shared/modules/home/home.module';
 
 @Component({
   selector: 'app-large-screen-content',
@@ -34,6 +34,6 @@ export class LargeScreenContentComponent {
     RouterModule,
     LargerScreenContentModule,
     HomeModule
-  ]
+    ]
 })
 class NotNeedForAName { }
