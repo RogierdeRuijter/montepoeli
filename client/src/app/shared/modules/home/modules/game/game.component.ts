@@ -59,9 +59,11 @@ export class GameComponent extends AsyncBaseComponent implements OnInit, OnDestr
 
   }
 
-  public async handleActionEvent(): Promise<void> {
-    // this.addDialog.openDialog();
+  public handleActionEvent(): void {
+    this.createAddGameComponent();
+  }
 
+  private async createAddGameComponent(): Promise<void> {
     const { DialogOverviewComponent } = await import('../../../../../shared/modules/add-game/components/dialog-overview/dialog-overview.component');
     const { AddGameModule } = await import('../../../../../shared/modules/add-game/add-game.module');
     

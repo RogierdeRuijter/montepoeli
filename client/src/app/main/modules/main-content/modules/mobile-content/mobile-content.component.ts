@@ -61,9 +61,13 @@ export class MobileContentComponent extends AsyncBaseComponent implements OnInit
     this.dialog.closeAll();
   }
 
-  public async plusEventHandler(): Promise<void> {
+  public plusEventHandler(): void {
     this.selected = Icons.PLUS;
+    
+    this.createAddGameComponent();
+  }
 
+  private async createAddGameComponent(): Promise<void> {
     const { DialogOverviewComponent } = await import('../../../../../shared/modules/add-game/components/dialog-overview/dialog-overview.component');
     const { AddGameModule } = await import('../../../../../shared/modules/add-game/add-game.module');
     
