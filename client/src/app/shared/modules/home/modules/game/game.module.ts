@@ -9,7 +9,6 @@ import { IconModule } from '../../../../../shared/modules/icon/icon.module';
 import { GridModule } from '../../../../../shared/modules/grid/grid.module';
 import { CustomTranslateModule } from '../../../../../shared/modules/translate/custom-translate.module';
 import { CommonModule } from '@angular/common';
-import { AddGameModule } from 'src/app/shared/modules/add-game/add-game.module';
 import { CdkTableModule } from '@angular/cdk/table';
 
 @NgModule({
@@ -29,7 +28,6 @@ import { CdkTableModule } from '@angular/cdk/table';
     GridModule,
     CustomTranslateModule,
     CommonModule,
-    AddGameModule,
     CdkTableModule,
   ],
 })

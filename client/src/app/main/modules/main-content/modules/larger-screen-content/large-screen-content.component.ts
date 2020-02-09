@@ -36,4 +36,4 @@ export class LargeScreenContentComponent {
     HomeModule
     ]
 })
-class NotNeedForAName { }
+export class InternalLargeScreenContentModule { }

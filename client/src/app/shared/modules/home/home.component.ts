@@ -8,9 +8,11 @@ import {
   ViewChild,
   ViewContainerRef,
   ComponentRef,
+  ComponentFactoryResolver,
+  Injector,
+  Compiler,
 } from '@angular/core';
-import {BehaviorSubject, Subject, combineLatest} from 'rxjs';
-import { ComponentCreationService } from 'src/app/shared/services/component-creation/component-creation.service';
+import {BehaviorSubject, Subject, combineLatest, of} from 'rxjs';
 import {Alignments, GridSizes, Icons, IconSize, Tabs} from '../../../shared/static-files/enums';
 import {User} from '../../../shared/interfaces/user.interface';
 import {UserStore} from './modules/game/stores/user.store';
@@ -20,7 +22,6 @@ import { GameService } from './modules/game/services/game.service';
 import { RuleService } from './modules/rule/services/rule.service';
 import { TabChangeGlobalEventEmitter } from 'src/app/shared/services/tab-change.global-event-emitter';
 import { UserService } from 'src/app/shared/services/users/user.service';
-import { RuleComponent } from './modules/rule/rule.component';
 
 // TODO: add hammerjs for swiping left and right between games and rules
 @Component({
@@ -33,7 +34,7 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
 
   @ViewChild('rules', { read: ViewContainerRef, static: false })
   public rulesContainer: ViewContainerRef;
-  public rulesComponentRef$: Subject<ComponentRef<RuleComponent>> = new Subject();
+  public rulesComponentRef$: Subject<ComponentRef<any>> = new Subject();
 
   public showGames = true;
   public showRules = false;
@@ -54,9 +55,11 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
               private userService: UserService,
               private userStore: UserStore,
               private changeDetectorRef: ChangeDetectorRef,
-              private componentCreationService: ComponentCreationService,
               private gameService: GameService,
-              private ruleService: RuleService) {
+              private ruleService: RuleService,
+              private componentFactoryResolver: ComponentFactoryResolver,
+              private injector: Injector,
+              private compiler: Compiler) {
 
   }
 
@@ -74,7 +77,7 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
         .subscribe((users: User[]) => this.users = users);
 
       combineLatest([this.ruleService.getAll(), this.rulesComponentRef$])
-        .subscribe(([rules, rulesComponentRef]: [Rule[], ComponentRef<RuleComponent>]) => {
+        .subscribe(([rules, rulesComponentRef]: [Rule[], ComponentRef<any>]) => {
           rulesComponentRef.instance.rules = rules;
           this.changeDetectorRef.detectChanges();
         });
@@ -95,7 +98,7 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
 
           if (this.rulesContainer.length === 0) {
             this.createRulesComponent()
-              .then((ruleComponentRef: ComponentRef<RuleComponent>) => this.rulesComponentRef$.next(ruleComponentRef));
+              .then((ruleComponentRef: ComponentRef<any>) => this.rulesComponentRef$.next(ruleComponentRef));
             return;
           }
         }
@@ -104,8 +107,15 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
       });
   }
 
-  public createRulesComponent(): Promise<ComponentRef<RuleComponent>> {
-    return this.componentCreationService.create<RuleComponent>(RuleComponent, this.rulesContainer);
+  public async createRulesComponent(): Promise<ComponentRef<any>> {
+    const { RuleComponent, InternalRuleComponentModule } = await import('./modules/rule/rule.component');
+    
+    const compFactory = this.componentFactoryResolver.resolveComponentFactory(RuleComponent);
+    
+    const factory = await this.compiler.compileModuleAsync(InternalRuleComponentModule);
+    const ref = factory.create(this.injector);
+
+    return of(this.rulesContainer.createComponent(compFactory, null, this.injector, [], ref)).toPromise();
   }
 
   public ngOnDestroy(): void {

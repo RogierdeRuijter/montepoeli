@@ -8,6 +8,7 @@ import {ButtonRowComponent} from './components/button-row/button-row.component';
 import {CustomTranslateModule} from '../translate/custom-translate.module';
 import {GridModule} from '../grid/grid.module';
 import { ButtonIconActiveStateComponent } from './components/button-icon-active-state/button-icon-active-state.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ButtonIconActiveStateComponent } from './components/button-icon-active-
     IconModule,
     MatButtonModule,
     CustomTranslateModule,
-    GridModule
+    GridModule,
+    MatDialogModule
   ]
 })
 export class ButtonModule { }

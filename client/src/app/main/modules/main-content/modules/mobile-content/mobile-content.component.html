@@ -11,8 +11,7 @@
   </app-action-bar-footer>
 </div>
 
-<!-- <app-dialog-overview #addDialog
-                     (addEvent)="addHandler($event)"
-                     (cancelEvent)="cancelHandler()">
-</app-dialog-overview> -->
-
+<ng-container #addDialog
+              (addEvent)="addHandler($event)"
+              (cancelEvent)="cancelHandler()">
+</ng-container>

@@ -42,8 +42,6 @@ export function init_app(appLoadService: AppInitService): () => Promise<any> {
     BrowserAnimationsModule,
     CustomTranslateModule,
     ServiceWorkerModule.register('ngsw-worker.js', {enabled: true}),
-    // MobileContentModule,
-    // LargerScreenContentModule,
     AuthModule,
     InterceptorModule
   ],

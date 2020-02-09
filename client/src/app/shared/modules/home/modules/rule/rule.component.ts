@@ -25,4 +25,4 @@ export class RuleComponent {
     MatListModule
   ]
 })
-class NotNeedForAName { }
+export class InternalRuleComponentModule { }

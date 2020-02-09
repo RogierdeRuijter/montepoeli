@@ -3,7 +3,7 @@ import {Game} from '../../../../../shared/interfaces/game.interface';
 import {GameService} from './services/game.service';
 import {Actions, GridSizes} from '../../../../../shared/static-files/enums';
 import {BehaviorSubject} from 'rxjs';
-import {DialogOverviewComponent} from '../../../../../shared/modules/add-game/components/dialog-overview/dialog-overview.component';
+// import {DialogOverviewComponent} from '../../../../../shared/modules/add-game/components/dialog-overview/dialog-overview.component';
 import {User} from '../../../../../shared/interfaces/user.interface';
 import {NewGameStore} from 'src/app/shared/stores/new-game.store';
 import {RemoveLastAddedGameStore} from '../../../../../shared/stores/remove-last-added-game.store';
@@ -23,8 +23,8 @@ export class GameComponent extends AsyncBaseComponent implements OnInit, OnDestr
   @Input()
   public users: User[];
 
-  @ViewChild('addDialog', {read: DialogOverviewComponent, static: true})
-  public addDialog: DialogOverviewComponent;
+  @ViewChild('addDialog', { static: true})
+  public addDialog: any; // Can't type
 
   public actions: Actions[] = [Actions.ADD];
   public disabled: boolean[];

@@ -1,4 +1,4 @@
-import { Component, ViewChild, ViewContainerRef, ComponentFactoryResolver, Injector, OnInit } from '@angular/core';
+import { Component, ViewChild, ViewContainerRef, ComponentFactoryResolver, Injector, OnInit, Compiler } from '@angular/core';
 import { tap, filter } from 'rxjs/operators';
 import { GridSizes } from 'src/app/shared/static-files/enums';
 import { GridService } from 'src/app/shared/services/grid/grid.service';
@@ -12,7 +12,8 @@ export class MainContentComponent implements OnInit {
 
   constructor(private componentFactoryResolver: ComponentFactoryResolver, 
               private injector: Injector,
-              private gridService: GridService) {}
+              private gridService: GridService,
+              private compiler: Compiler) {}
 
   @ViewChild('mobileContent', { read: ViewContainerRef}) 
   public mobileContentContainer: ViewContainerRef;
@@ -23,13 +24,13 @@ export class MainContentComponent implements OnInit {
   public activeView: string;
 
   public ngOnInit(): void {
-    // this.gridService.gridChangeObservable()
-    //   .pipe(
-    //     filter((activeGridSize: GridSizes) => activeGridSize !== GridSizes.EXTRA_SMALL && this.activeView !== 'large-screen'),
-    //     tap(() => this.activeView = 'large-screen'),
-    //     filter(() => !this.largeScreenContentContainer || this.largeScreenContentContainer.length === 0),
-    //     tap(() => this.createLargeScreenConent())
-    // ).subscribe();
+    this.gridService.gridChangeObservable()
+      .pipe(
+        filter((activeGridSize: GridSizes) => activeGridSize !== GridSizes.EXTRA_SMALL && this.activeView !== 'large-screen'),
+        tap(() => this.activeView = 'large-screen'),
+        filter(() => !this.largeScreenContentContainer || this.largeScreenContentContainer.length === 0),
+        tap(() => this.createLargeScreenConent())
+    ).subscribe();
 
     this.gridService.gridChangeObservable()
       .pipe(
@@ -41,14 +42,22 @@ export class MainContentComponent implements OnInit {
   }
 
   public async createMobileConent(): Promise<void> {
-    const { MobileContentComponent } = await import('./modules/mobile-content/mobile-content.component');
+    const { MobileContentComponent, InternalMobileContentComponent } = await import('./modules/mobile-content/mobile-content.component');
+    
+    const factory = await this.compiler.compileModuleAsync(InternalMobileContentComponent);
+    const ref = factory.create(this.injector);
+    
     const mobileContentFactory = this.componentFactoryResolver.resolveComponentFactory(MobileContentComponent);
-    this.mobileContentContainer.createComponent(mobileContentFactory, null, this.injector);
+    this.mobileContentContainer.createComponent(mobileContentFactory, null, this.injector, [], ref);
   }
 
   public async createLargeScreenConent(): Promise<void> {
-    const { LargeScreenContentComponent } = await import('./modules/larger-screen-content/large-screen-content.component');
+    const { LargeScreenContentComponent, InternalLargeScreenContentModule } = await import('./modules/larger-screen-content/large-screen-content.component');
+
+    const factory = await this.compiler.compileModuleAsync(InternalLargeScreenContentModule);
+    const ref = factory.create(this.injector);
+
     const largeScreenContentFactory = this.componentFactoryResolver.resolveComponentFactory(LargeScreenContentComponent);
-    this.largeScreenContentContainer.createComponent(largeScreenContentFactory, null, this.injector);
+    this.largeScreenContentContainer.createComponent(largeScreenContentFactory, null, this.injector, [], ref);
   }
 }
