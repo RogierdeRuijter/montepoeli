@@ -33,7 +33,7 @@ export class AppPage {
   }
 
   public getWhiteDropDownList(): ElementFinder {
-    return this.helper.findById('white-user');
+    return this.helper.selectLastElementWithId('white-user');
   }
 
   public getWhiteDropDownField(): ElementFinder {
@@ -49,7 +49,7 @@ export class AppPage {
   }
 
   public getWinnerDropDownList(): ElementFinder {
-    return this.helper.findById('winner-user');
+    return this.helper.selectLastElementWithId('winner-user');
   }
 
   public getWhiteOption(): ElementFinder {
@@ -65,7 +65,7 @@ export class AppPage {
   }
 
   public getBlackDropDownList(): ElementFinder {
-    return this.helper.findById('black-user');
+    return this.helper.selectLastElementWithId('black-user');
   }
 
   public getBlackDropDownField(): ElementFinder {

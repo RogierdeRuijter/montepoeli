@@ -89,32 +89,19 @@ export class Helper {
   public addGame(page: any, browser: any, game: any): void {
     page.getWhiteDropDownList().click();
     
-    browser.waitForAngular();
-    this.sleep();
-    
     page.getUser(game.white).click();
-    
-    browser.waitForAngular();
+
     expect(page.getWhiteDropDownField().getText()).toEqual(game.white);
 
     page.getBlackDropDownList().click();
 
-    browser.waitForAngular();
-    this.sleep();
-
     page.getUser(game.black).click();
     
-    browser.waitForAngular();
     expect(page.getBlackDropDownField().getText()).toEqual(game.black);
     
     page.getWinnerDropDownList().click();
 
-    browser.waitForAngular();
-    this.sleep();
-
     page.getUser(game.winner).click();
-
-    browser.waitForAngular();
     
     expect(page.getWinnerDropDownField().getText()).toEqual(game.winner);
 
