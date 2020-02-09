@@ -1,9 +1,8 @@
-import {ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit, ViewChild, ComponentFactoryResolver, Compiler, Injector, ViewContainerRef, ChangeDetectorRef} from '@angular/core';
 import {Game} from '../../../../../shared/interfaces/game.interface';
 import {GameService} from './services/game.service';
 import {Actions, GridSizes} from '../../../../../shared/static-files/enums';
 import {BehaviorSubject} from 'rxjs';
-// import {DialogOverviewComponent} from '../../../../../shared/modules/add-game/components/dialog-overview/dialog-overview.component';
 import {User} from '../../../../../shared/interfaces/user.interface';
 import {NewGameStore} from 'src/app/shared/stores/new-game.store';
 import {RemoveLastAddedGameStore} from '../../../../../shared/stores/remove-last-added-game.store';
@@ -23,9 +22,10 @@ export class GameComponent extends AsyncBaseComponent implements OnInit, OnDestr
   @Input()
   public users: User[];
 
-  @ViewChild('addDialog', { static: true})
-  public addDialog: any; // Can't type
-
+  @ViewChild('addDialogContainer', { read: ViewContainerRef })
+  public addDialogContainer: ViewContainerRef;
+  public addDialogContainerRef: any;
+  
   public actions: Actions[] = [Actions.ADD];
   public disabled: boolean[];
 
@@ -35,7 +35,12 @@ export class GameComponent extends AsyncBaseComponent implements OnInit, OnDestr
 
   constructor(private gameService: GameService,
               private newGameStore: NewGameStore,
-              private removeLastAddedGameStore: RemoveLastAddedGameStore) {
+              private removeLastAddedGameStore: RemoveLastAddedGameStore,
+              private componentFactoryResolver: ComponentFactoryResolver,
+              private compiler: Compiler,
+              private injector: Injector,
+              private changeDetectorRef: ChangeDetectorRef
+              ) {
     super();
   }
 
@@ -54,8 +59,21 @@ export class GameComponent extends AsyncBaseComponent implements OnInit, OnDestr
 
   }
 
-  public handleActionEvent(): void {
-    this.addDialog.openDialog();
+  public async handleActionEvent(): Promise<void> {
+    // this.addDialog.openDialog();
+
+    const { DialogOverviewComponent } = await import('../../../../../shared/modules/add-game/components/dialog-overview/dialog-overview.component');
+    const { AddGameModule } = await import('../../../../../shared/modules/add-game/add-game.module');
+    
+    const compFactory = this.componentFactoryResolver.resolveComponentFactory(DialogOverviewComponent);
+
+    const factory = await this.compiler.compileModuleAsync(AddGameModule);
+    const ref = factory.create(this.injector);
+
+    this.addDialogContainerRef = this.addDialogContainer.createComponent(compFactory, null, this.injector, [], ref);
+    this.changeDetectorRef.detectChanges();
+    
+    this.addDialogContainerRef.instance.addEvent.subscribe((game: Game) => this.handleAddEvent(game));
   }
 
   public handleAddEvent(game: Game): void {
@@ -66,6 +84,8 @@ export class GameComponent extends AsyncBaseComponent implements OnInit, OnDestr
         () => {},
         () => this.removeAddedGame(game),
       );
+
+    this.addDialogContainerRef.instance.addEvent.unsubscribe();
   }
 
   private addGameToView(game: Game): void {
