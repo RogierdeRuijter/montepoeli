@@ -1,13 +1,15 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewChild, NgModule, ViewContainerRef, ComponentFactoryResolver, Injector, ChangeDetectorRef, ComponentRef, Compiler } from '@angular/core';
 import { NewGameStore } from 'src/app/shared/stores/new-game.store';
 import { Icons, Tabs } from '../../../../../shared/static-files/enums';
 import { AsyncBaseComponent } from 'src/app/shared/modules/async/components/async-base-component/async-base.component';
 import { Game } from '../../../../../shared/interfaces/game.interface';
-import { GameService } from '../../../home/modules/game/services/game.service';
 import { RemoveLastAddedGameStore } from '../../../../../shared/stores/remove-last-added-game.store';
-import { DialogOverviewComponent } from '../../../../../shared/modules/add-game/components/dialog-overview/dialog-overview.component';
-import { MatDialog } from '@angular/material/dialog';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { TabChangeGlobalEventEmitter } from 'src/app/shared/services/tab-change.global-event-emitter';
+import { MobileContentModule } from './mobile-content.module';
+import { GameService } from 'src/app/shared/modules/home/modules/game/services/game.service';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-mobile-content',
@@ -17,9 +19,11 @@ import { TabChangeGlobalEventEmitter } from 'src/app/shared/services/tab-change.
 })
 export class MobileContentComponent extends AsyncBaseComponent implements OnInit, OnDestroy {
 
-  @ViewChild('addDialog', {read: DialogOverviewComponent, static: true})
-  public addDialog: DialogOverviewComponent;
-
+  @ViewChild('addDialog', { read: ViewContainerRef}) 
+  public addDialogContainer: ViewContainerRef;
+  
+  public addDialogContainerRef: ComponentRef<any>; // TODO: type
+  
   public gameView: boolean;
   public selected = Icons.CHESS_PIECES;
 
@@ -27,11 +31,15 @@ export class MobileContentComponent extends AsyncBaseComponent implements OnInit
               private tabChangeGlobalEventEmitter: TabChangeGlobalEventEmitter,
               private gameService: GameService,
               private removeLastAddedGameStore: RemoveLastAddedGameStore,
-              private dialog: MatDialog) {
+              private dialog: MatDialog,
+              private componentFactoryResolver: ComponentFactoryResolver,
+              private injector: Injector,
+              private changeDetectorRef: ChangeDetectorRef,
+              private compiler: Compiler) {
                 super();
-  }
-
-  public ngOnInit(): void {
+              }
+  
+              public ngOnInit(): void {
     this.tabChangeGlobalEventEmitter
       .get(this.destroy$)
       .subscribe((tab: Tabs) => {
@@ -55,8 +63,24 @@ export class MobileContentComponent extends AsyncBaseComponent implements OnInit
 
   public plusEventHandler(): void {
     this.selected = Icons.PLUS;
+    
+    this.createAddGameComponent();
+  }
 
-    this.addDialog.openDialog();
+  private async createAddGameComponent(): Promise<void> {
+    const { DialogOverviewComponent } = await import('../../../../../shared/modules/add-game/components/dialog-overview/dialog-overview.component');
+    const { AddGameModule } = await import('../../../../../shared/modules/add-game/add-game.module');
+    
+    const compFactory = this.componentFactoryResolver.resolveComponentFactory(DialogOverviewComponent);
+
+    const factory = await this.compiler.compileModuleAsync(AddGameModule);
+    const ref = factory.create(this.injector);
+
+    this.addDialogContainerRef = this.addDialogContainer.createComponent(compFactory, null, this.injector, [], ref);
+    this.changeDetectorRef.detectChanges();
+    
+    this.addDialogContainerRef.instance.addEvent.subscribe((game: Game) => this.addHandler(game));
+    this.addDialogContainerRef.instance.cancelEvent.subscribe(() => this.cancelHandler());
   }
 
   public gamesHandler(): void {
@@ -81,6 +105,8 @@ export class MobileContentComponent extends AsyncBaseComponent implements OnInit
         () => {},
         () => this.removeAddedGameFromView(game),
       );
+
+    this.addDialogContainerRef.instance.addEvent.unsubscribe();
   }
 
   public updateViewWithNewGame(game: Game): void {
@@ -92,9 +118,23 @@ export class MobileContentComponent extends AsyncBaseComponent implements OnInit
   }
 
   public cancelHandler(): void {
-    // TODO: test this logic
-    if (this.dialog.openDialogs.length === 0) {
-      this.changeToGamesView();
-    }
+    this.changeToGamesView();
+    this.changeDetectorRef.detectChanges();
+    
+    this.addDialogContainerRef.instance.cancelEvent.unsubscribe();
   }
 }
+
+/* tslint:disable */
+@NgModule({
+  declarations: [
+    MobileContentComponent
+  ],
+  imports: [
+    CommonModule,
+    MobileContentModule,
+    RouterModule,
+    MatDialogModule
+  ]
+})
+export class InternalMobileContentComponent { }

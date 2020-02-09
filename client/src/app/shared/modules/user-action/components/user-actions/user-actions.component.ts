@@ -11,7 +11,7 @@ import { AuthService } from 'src/app/shared/modules/auth/services/auth/auth.serv
 })
 export class UserActionsComponent {
 
-  @ViewChild('userSettingsDropDown', {static: true})
+  @ViewChild('userSettingsDropDown')
   public userSettingsDropDown: MatSelect;
 
   @Input()

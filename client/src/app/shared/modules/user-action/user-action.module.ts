@@ -14,7 +14,7 @@ import {UserActionsComponent} from './components/user-actions/user-actions.compo
     MatSelectModule,
     MatOptionModule,
     IconModule,
-    ButtonModule
+    ButtonModule,
   ]
 })
 export class UserActionModule { }
