@@ -1,3 +1,12 @@
+# [4.1.0](https://github.com/RogierdeRuijter/montepoeli/compare/v4.0.4...v4.1.0) (2020-02-09)
+
+
+### Features
+
+* add lazy loading for add game on desktop view ([dc3e546](https://github.com/RogierdeRuijter/montepoeli/commit/dc3e5469a0b8f87aedbb27e67de84b62e9de9c93))
+* add lazy loading for add game on mobile view ([289d92d](https://github.com/RogierdeRuijter/montepoeli/commit/289d92d85c599d7482763ab13636e739783af765))
+* more lazy loading components ([63c28a0](https://github.com/RogierdeRuijter/montepoeli/commit/63c28a0e154b2b1f8a945187ac202e5f15e99fea))
+
 ## [4.0.4](https://github.com/RogierdeRuijter/montepoeli/compare/v4.0.3...v4.0.4) (2020-02-07)
 
 
