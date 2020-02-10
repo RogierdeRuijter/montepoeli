@@ -73,7 +73,7 @@ export class AppPage {
   }
 
   public getTableBlackUserForLastAddedGame(): ElementFinder {
-    return this.helper.findById('table-protractor1-0');
+    return this.helper.selectLastElementWithId('table-protractor1-0');
   }
 
   public getGamesView(): ElementFinder {
