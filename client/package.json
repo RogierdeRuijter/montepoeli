@@ -32,7 +32,8 @@
     "screenshot": "storybook-chrome-screenshot -p 9001 -c .storybook",
     "webdriver-update": "webdriver-manager clean && webdriver-manager update",
     "webdriver-update:protractor": "./node_modules/protractor/bin/webdriver-manager update",
-    "compile-ivy-dependencies": "ngcc -p es2015, es2015 -l info"
+    "compile-ivy-dependencies": "ngcc -p es2015, es2015 -l info",
+    "g c": " ng generate component -c OnPush --skip-tests "
   },
   "dependencies": {
     "@angular-devkit/build-angular": "0.900.1",

@@ -9,19 +9,22 @@ import {CustomTranslateModule} from '../translate/custom-translate.module';
 import {GridModule} from '../grid/grid.module';
 import { ButtonIconActiveStateComponent } from './components/button-icon-active-state/button-icon-active-state.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ButtonNoElevationComponent } from './components/button-no-elevation/button-no-elevation.component';
 
 @NgModule({
   declarations: [
     ButtonComponent,
     ButtonRowComponent,
     ButtonIconComponent,
-    ButtonIconActiveStateComponent
+    ButtonIconActiveStateComponent,
+    ButtonNoElevationComponent
   ],
   exports: [
     ButtonComponent,
     ButtonRowComponent,
     ButtonIconComponent,
-    ButtonIconActiveStateComponent
+    ButtonIconActiveStateComponent,
+    ButtonNoElevationComponent
   ],
   imports: [
     CommonModule,
