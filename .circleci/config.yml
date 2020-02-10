@@ -58,12 +58,18 @@ jobs:
       - run:
           name: Install node modules
           command: |
-            yarn install --ignore-optional
+            yarn install
 
       - save_cache:
           paths:
           - node_modules
           key: v1-dependencies-client-{{ checksum "package.json" }}
+
+      - run: 
+          name: Run render only test on storybook stories
+          
+          command: |
+            yarn jest
 
       - run: 
           name: Run tests with coverage and store coverage on server
