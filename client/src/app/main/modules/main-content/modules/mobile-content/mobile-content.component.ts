@@ -95,6 +95,10 @@ export class MobileContentComponent extends AsyncBaseComponent implements OnInit
     this.tabChangeGlobalEventEmitter.emit(Tabs.RULES);
   }
 
+  public iconClickedHandler(): void {
+    this.changeToGamesView();
+  }
+
   public addHandler(game: Game): void {
     this.changeToGamesView();
 

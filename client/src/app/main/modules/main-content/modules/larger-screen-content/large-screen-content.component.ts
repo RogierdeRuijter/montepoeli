@@ -22,6 +22,10 @@ export class LargeScreenContentComponent {
   public rulesHandler(): void {
     this.tabChangeGlobalEventEmitter.emit(Tabs.RULES);
   }
+
+  public iconClickedHandler(): void {
+    this.gamesHandler();
+  }
 }
 
 /* tslint:disable */
