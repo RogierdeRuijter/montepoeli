@@ -1,3 +1,16 @@
+# [4.2.0](https://github.com/RogierdeRuijter/montepoeli/compare/v4.1.1...v4.2.0) (2020-02-10)
+
+
+### Bug Fixes
+
+* fix subscription leak for mobile content ([22fdaf5](https://github.com/RogierdeRuijter/montepoeli/commit/22fdaf5c292c6052a22091cecc8e7bda04e28c11))
+
+
+### Features
+
+* clicking icon brings you back to the games tab ([2f4f7ab](https://github.com/RogierdeRuijter/montepoeli/commit/2f4f7abff0c96935bf9fcf0d57c6496f4e4cf137))
+* clicking on icon brings you to games in larger screen size ([32ede37](https://github.com/RogierdeRuijter/montepoeli/commit/32ede374093b641ba2b47f092f5c74b56485e287))
+
 ## [4.1.1](https://github.com/RogierdeRuijter/montepoeli/compare/v4.1.0...v4.1.1) (2020-02-10)
 
 
