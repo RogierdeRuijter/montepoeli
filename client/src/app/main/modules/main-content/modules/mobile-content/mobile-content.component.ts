@@ -95,6 +95,10 @@ export class MobileContentComponent extends AsyncBaseComponent implements OnInit
     this.tabChangeGlobalEventEmitter.emit(Tabs.RULES);
   }
 
+  public iconClickedHandler(): void {
+    this.changeToGamesView();
+  }
+
   public addHandler(game: Game): void {
     this.changeToGamesView();
 
@@ -106,7 +110,7 @@ export class MobileContentComponent extends AsyncBaseComponent implements OnInit
         () => this.removeAddedGameFromView(game),
       );
 
-    this.addDialogContainerRef.instance.addEvent.unsubscribe();
+    this.unsubsribeFromRunningObservablesOfAddGame();
   }
 
   public updateViewWithNewGame(game: Game): void {
@@ -121,6 +125,11 @@ export class MobileContentComponent extends AsyncBaseComponent implements OnInit
     this.changeToGamesView();
     this.changeDetectorRef.detectChanges();
     
+    this.unsubsribeFromRunningObservablesOfAddGame();
+  }
+
+  private unsubsribeFromRunningObservablesOfAddGame(): void {
+    this.addDialogContainerRef.instance.addEvent.unsubscribe();
     this.addDialogContainerRef.instance.cancelEvent.unsubscribe();
   }
 }

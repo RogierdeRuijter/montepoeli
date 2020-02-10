@@ -1,9 +1,12 @@
 <mat-toolbar>
-    <span class="margin-right-10">
-    <app-icon [icon]="Icons.MONTEPOELI" [iconSize]="IconSize.SMALL"></app-icon>
-    </span>
-    <span style="color: darkslategray;">Montepoeli</span> <!-- TODO: make title component -->
-    
+    <app-button-no-elevation [noPaddingLeft]="true" (clickEvent)="handleButtonClicked()" style="height: 45px;">
+        <div style="display: flex; align-items: center;">
+            <span style="height: 45px;">
+                <app-icon [icon]="Icons.MONTEPOELI" [iconSize]="IconSize.SMALL"></app-icon>
+            </span>
+            <span style="color: darkslategray; margin-left: 10px;">Montepoeli</span> <!-- TODO: make title component -->
+        </div>
+    </app-button-no-elevation>
     <div class="spacer"></div>
     
     <app-user-actions></app-user-actions>

@@ -17,6 +17,9 @@ export class TitleBarComponent {
   @Output()
   public rulesSelected: EventEmitter<void> = new EventEmitter();
 
+  @Output()
+  public iconClicked: EventEmitter<void> = new EventEmitter();
+
   public color: ThemePalette = 'primary';
 
   public Icons = Icons;
@@ -44,5 +47,9 @@ export class TitleBarComponent {
 
   public emitRulesSelected(): void {
     this.rulesSelected.emit();
+  }
+  
+  public handleButtonClicked(): void {
+    this.iconClicked.emit();
   }
 }

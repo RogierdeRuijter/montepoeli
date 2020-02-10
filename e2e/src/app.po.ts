@@ -41,23 +41,11 @@ export class AppPage {
   }
 
   public getUser(id: string): ElementFinder {
-    return this.helper.findById(id);
-  }
-
-  public getProtractorUser(): ElementFinder {
-    return this.helper.findById('protractor');
+    return this.helper.selectLastElementWithId(id);
   }
 
   public getWinnerDropDownList(): ElementFinder {
     return this.helper.selectLastElementWithId('winner-user');
-  }
-
-  public getWhiteOption(): ElementFinder {
-    return this.helper.findById('White');
-  }
-
-  public getBlackOption(): ElementFinder {
-    return this.helper.findById('Black');
   }
 
   public getWinnerDropDownField(): ElementFinder {
@@ -72,16 +60,12 @@ export class AppPage {
     return this.helper.findByXPath('//*[@id="black-user"]/div/div[1]/span');
   }
 
-  public getProtractorUser1(): ElementFinder {
-    return this.helper.findById('protractor1');
-  }
-
   public getSaveButton(): ElementFinder {
-    return this.helper.findById('save');
+    return this.helper.selectLastElementWithId('save');
   }
 
   public getTableWhiteUserForLastAddedGame(): ElementFinder {
-    return this.helper.findById('table-protractor-0');
+    return this.helper.selectLastElementWithId('table-protractor-0');
   }
 
   public getTableWinnerUserForLastAddedGame(winner: string): ElementFinder {
@@ -89,7 +73,7 @@ export class AppPage {
   }
 
   public getTableBlackUserForLastAddedGame(): ElementFinder {
-    return this.helper.findById('table-protractor1-0');
+    return this.helper.selectLastElementWithId('table-protractor1-0');
   }
 
   public getGamesView(): ElementFinder {
