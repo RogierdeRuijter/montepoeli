@@ -1,3 +1,10 @@
+## [4.2.1](https://github.com/RogierdeRuijter/montepoeli/compare/v4.2.0...v4.2.1) (2020-02-10)
+
+
+### Bug Fixes
+
+* increase size of the montepoeli text ([eeb3e51](https://github.com/RogierdeRuijter/montepoeli/commit/eeb3e519b3722d3fb2e25d62f2f34805c7f87914))
+
 # [4.2.0](https://github.com/RogierdeRuijter/montepoeli/compare/v4.1.1...v4.2.0) (2020-02-10)
 
 
