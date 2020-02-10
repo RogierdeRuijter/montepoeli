@@ -5,8 +5,7 @@ import { LoginFormComponent } from 'src/app/main/modules/login/components/login-
 import { ButtonModule } from 'src/app/shared/modules/button/button.module';
 import { FormModule } from 'src/app/shared/modules/form/form.module';
 import { GridModule } from 'src/app/shared/modules/grid/grid.module';
-import { FormsModule } from '@angular/forms';
-import { MatInput, MatInputModule } from '@angular/material/input';
+import { MatInputModule } from '@angular/material/input';
 import { CustomTranslateModule } from 'src/app/shared/modules/translate/custom-translate.module';
 import { AuthModule } from 'src/app/shared/modules/auth/auth.module';
 

@@ -1,4 +1,3 @@
-import {storiesOf} from '@storybook/angular';
 import {Actions} from '../app/shared/static-files/enums';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {IconComponent} from '../app/shared/modules/icon/components/icon/icon.component';
