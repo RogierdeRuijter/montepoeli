@@ -1,4 +1,3 @@
-import {storiesOf} from '@storybook/angular';
 import {ButtonFunction, ButtonType} from '../app/shared/static-files/enums';
 import {MatButtonModule} from '@angular/material/button';
 import {TranslateDirective} from '../app/shared/modules/translate/directives/translate.directive';
@@ -10,7 +9,7 @@ export default {
   title: 'Button Component',
 };
 
-export const PrimaryButton = () => ({
+export const primaryButton = () => ({
   component: ButtonComponent,
   props: {
     buttonFunction: ButtonFunction.LOGIN,
@@ -20,7 +19,11 @@ export const PrimaryButton = () => ({
 });
 
 
-export const SecondaryButton = () => ({
+primaryButton.story = {
+  name: 'Primary Button'
+};
+
+export const secondaryButton = () => ({
   component: ButtonComponent,
   props: {
     buttonFunction: ButtonFunction.LOGIN,
