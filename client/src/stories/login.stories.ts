@@ -10,7 +10,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ButtonComponent } from 'src/app/shared/modules/button/components/button/button.component';
 
 storiesOf('LoginForm', module)
-  .addDecorator(wTests('app.component'))
   .add('Landing', () => ({
     component: LoginFormComponent,
     props: {},
