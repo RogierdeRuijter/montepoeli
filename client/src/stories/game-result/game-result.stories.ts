@@ -8,6 +8,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormModule} from '../../app/shared/modules/form/form.module';
 import {CustomTranslateModule} from '../../app/shared/modules/translate/custom-translate.module';
 import { ButtonComponent } from 'src/app/shared/modules/button/components/button/button.component';
+import { ButtonModule } from 'src/app/shared/modules/button/button.module';
+import { GridModule } from 'src/app/shared/modules/grid/grid.module';
 
 const winners: Winners[] = [Winners.WHITE, Winners.BLACK, Winners.DRAW];
 
@@ -27,11 +29,8 @@ storiesOf('GameResult', module)
         BrowserAnimationsModule,
         FormModule,
         CustomTranslateModule,
+        ButtonModule,
+        GridModule
       ],
-      declarations: [
-        ButtonComponent,
-        GridRowDirective,
-        GridColumnDirective,
-      ]
     },
   }));

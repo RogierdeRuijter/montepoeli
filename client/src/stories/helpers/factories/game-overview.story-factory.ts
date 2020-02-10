@@ -14,6 +14,7 @@ import { MatTableModule } from '@angular/material/table';
 import { OverviewComponent } from 'src/app/shared/modules/home/modules/game/components/overview/overview.component';
 import { GameTableComponent } from 'src/app/shared/modules/home/modules/game/components/overview/game-table/game-table.component';
 import { TableActionComponent } from 'src/app/shared/modules/home/modules/game/components/overview/table-action/table-action.component';
+import { ButtonIconComponent } from 'src/app/shared/modules/button/components/button-icon/button-icon.component';
 
 export class GameOverviewStoryFactory {
   private readonly displayedColumns: string[] = ['white', 'winner', 'black'];
@@ -36,6 +37,7 @@ export class GameOverviewStoryFactory {
         GridRowDirective,
         PositionDirective,
         IconComponent,
+        ButtonIconComponent
       ],
     };
   }

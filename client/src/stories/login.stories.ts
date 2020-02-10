@@ -1,13 +1,15 @@
 import {storiesOf} from '@storybook/angular';
 import {StorybookTranslateModule} from './storybook-translate.module';
-import {TranslateDirective} from '../app/shared/modules/translate/directives/translate.directive';
-import {GridRowDirective} from '../app/shared/modules/grid/directives/grid-row.directive';
-import {GridColumnDirective} from '../app/shared/modules/grid/directives/grid-column.directive';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { LoginFormComponent } from 'src/app/main/modules/login/components/login-form/login-form.component';
-import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule } from '@angular/material/dialog';
-import { ButtonComponent } from 'src/app/shared/modules/button/components/button/button.component';
+import { ButtonModule } from 'src/app/shared/modules/button/button.module';
+import { FormModule } from 'src/app/shared/modules/form/form.module';
+import { GridModule } from 'src/app/shared/modules/grid/grid.module';
+import { FormsModule } from '@angular/forms';
+import { MatInput, MatInputModule } from '@angular/material/input';
+import { CustomTranslateModule } from 'src/app/shared/modules/translate/custom-translate.module';
+import { AuthModule } from 'src/app/shared/modules/auth/auth.module';
+
 
 storiesOf('LoginForm', module)
   .add('Landing', () => ({
@@ -15,18 +17,16 @@ storiesOf('LoginForm', module)
     props: {},
     moduleMetadata: {
       imports: [
-        MatButtonModule,
-        MatDialogModule,
         StorybookTranslateModule,
         BrowserAnimationsModule,
-      ],
-      declarations: [
-        TranslateDirective,
-        GridRowDirective,
-        GridColumnDirective,
-        ButtonComponent
-      ],
-      providers: [],
+        ButtonModule,
+        FormModule,
+        GridModule,
+        FormModule,
+        MatInputModule,
+        CustomTranslateModule,
+        AuthModule
+      ]
     },
   }))
 ;
