@@ -110,7 +110,7 @@ export class MobileContentComponent extends AsyncBaseComponent implements OnInit
         () => this.removeAddedGameFromView(game),
       );
 
-    this.unsubsribeFromRunningObservables();
+    this.unsubsribeFromRunningObservablesOfAddGame();
   }
 
   public updateViewWithNewGame(game: Game): void {
@@ -125,10 +125,10 @@ export class MobileContentComponent extends AsyncBaseComponent implements OnInit
     this.changeToGamesView();
     this.changeDetectorRef.detectChanges();
     
-    this.unsubsribeFromRunningObservables();
+    this.unsubsribeFromRunningObservablesOfAddGame();
   }
 
-  private unsubsribeFromRunningObservables(): void {
+  private unsubsribeFromRunningObservablesOfAddGame(): void {
     this.addDialogContainerRef.instance.addEvent.unsubscribe();
     this.addDialogContainerRef.instance.cancelEvent.unsubscribe();
   }
