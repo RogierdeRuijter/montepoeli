@@ -225,7 +225,6 @@ jobs:
           paths:
           - node_modules
           key: v1-dependencies-root-{{ checksum "package.json" }}
-          
       - run: 
           name: bump version based on last commit message
           command: |
