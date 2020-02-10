@@ -14,9 +14,8 @@ import { MatTableModule } from '@angular/material/table';
 import { GameTableComponent } from 'src/app/main/modules/home/modules/game/components/overview/game-table/game-table.component';
 import { TableActionComponent } from 'src/app/main/modules/home/modules/game/components/overview/table-action/table-action.component';
 
-
 export class GameOverviewStoryFactory {
-  // private component = OverviewComponent;
+  private component = OverviewC;
   private readonly displayedColumns: string[] = ['white', 'winner', 'black'];
   private stories: CompleteStory[] = [];
   private actions: Actions[] = [Actions.ADD];

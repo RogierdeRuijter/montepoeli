@@ -8,6 +8,6 @@ function loadStories() {
   req.keys().forEach(filename => req(filename));
 }
 
-addDecorator(initScreenshot());
+// addDecorator(initScreenshot());
 
 configure(loadStories, module);
