@@ -41,3 +41,4 @@ const moduleMeta = {
   declarations: [IconComponent],
   providers: [],
 };
+
