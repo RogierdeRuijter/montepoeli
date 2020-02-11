@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, Input, OnInit, ViewChild } from '@a
 import { IconColor, Icons, IconSize } from 'src/app/shared/static-files/enums';
 import { MatSelect } from '@angular/material/select';
 import { AuthService } from 'src/app/shared/modules/auth/services/auth/auth.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-user-actions',
@@ -17,18 +18,19 @@ export class UserActionsComponent implements OnInit {
   @Input()
   public settingsIconColor: IconColor;
 
-  @Input()
-  public altLanguage: string;
-
   public Icons = Icons;
   public IconSize = IconSize;
 
   public userActions = ['Logout']; // TODO: move to language file
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService,
+              private translateService: TranslateService) { }
 
   public ngOnInit(): void {
-    this.userActions.push(this.altLanguage); // TODO: use an icon
+    const currentLang = this.translateService.getBrowserCultureLang();
+    const alternativeLanguage = this.translateService.getLangs().find(lang => lang !== currentLang);
+
+    this.userActions.push(alternativeLanguage); // TODO: use an icon
   }
 
   public userIconHandler(): void {
@@ -40,12 +42,12 @@ export class UserActionsComponent implements OnInit {
       this.authService.logout();
     }
 
-    if (userAction === 'Dutch') { // TODO: move to language file
-
+    if (userAction === 'en') { // TODO: move to language file
+      this.translateService.use('en');
     }
 
-    if (userAction === 'English') { // TODO: move to language file
-
+    if (userAction === 'nl') { // TODO: move to language file
+      this.translateService.use('nl');
     }
   }
 }
