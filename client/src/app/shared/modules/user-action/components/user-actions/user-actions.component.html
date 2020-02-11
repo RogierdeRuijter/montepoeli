@@ -6,7 +6,10 @@
 </app-button-icon>
 
 <mat-select #userSettingsDropDown class="selector">
-  <mat-option *ngFor="let userAction of userActions" (click)="actionSelected(userAction)" [id]="userAction">
-    {{userAction}}
+  <mat-option (click)="logoutHandler()" [id]="logout">
+    {{ logout }}
+  </mat-option>
+  <mat-option (click)="switchLanguageHandler()" [id]="alternativeLanguage">
+    {{ alternativeLanguage }}
   </mat-option>
 </mat-select>

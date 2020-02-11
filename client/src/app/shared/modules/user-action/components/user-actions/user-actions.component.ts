@@ -21,33 +21,36 @@ export class UserActionsComponent implements OnInit {
   public Icons = Icons;
   public IconSize = IconSize;
 
-  public userActions = ['Logout']; // TODO: move to language file
+  public logout = 'Logout'; // TODO: move to language file
+  public alternativeLanguage: string;
 
   constructor(private authService: AuthService,
               private translateService: TranslateService) { }
 
   public ngOnInit(): void {
-    const currentLang = this.translateService.getBrowserCultureLang();
-    const alternativeLanguage = this.translateService.getLangs().find(lang => lang !== currentLang);
+    this.setAlternativeLanguage();
+  }
 
-    this.userActions.push(alternativeLanguage); // TODO: use an icon
+  private setAlternativeLanguage(): void {
+    const currentLang = this.translateService.getBrowserCultureLang();
+    this.alternativeLanguage = this.translateService.getLangs().find(lang => lang !== currentLang);
   }
 
   public userIconHandler(): void {
     this.userSettingsDropDown.open();
   }
 
-  public actionSelected(userAction: string): void {
-    if (userAction === 'Logout') { // TODO: move to language file
-      this.authService.logout();
-    }
-
-    if (userAction === 'en') { // TODO: move to language file
+  public switchLanguageHandler(): void {
+    if (this.alternativeLanguage === 'en') {
       this.translateService.use('en');
-    }
-
-    if (userAction === 'nl') { // TODO: move to language file
+    } else if (this.alternativeLanguage === 'nl') {
       this.translateService.use('nl');
     }
+
+    this.setAlternativeLanguage();
+  }
+
+  private logoutHandler(): void {
+    this.authService.logout();
   }
 }
