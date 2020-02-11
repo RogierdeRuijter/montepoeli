@@ -53,10 +53,10 @@ export class DialogDataComponent extends AsyncBaseComponent implements OnInit, O
 
   public fieldUpdateHandler(game: Partial<Game>): void {
     this.winnerOptions = [];
-    
+
     this.winnerOptions.push(game?.black);
     this.winnerOptions.push(game?.white);
 
-    this.winnerOptions.push(this.translateService.instant('pages.home.games.cell.winner.' + Winners.DRAW));
+    this.winnerOptions.push(this.translateService.instant('pages.home.games.labels.winner.' + Winners.DRAW));
   }
 }

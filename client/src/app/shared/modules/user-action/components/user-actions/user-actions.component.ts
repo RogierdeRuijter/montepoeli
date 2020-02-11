@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { IconColor, Icons, IconSize } from 'src/app/shared/static-files/enums';
 import { MatSelect } from '@angular/material/select';
 import { AuthService } from 'src/app/shared/modules/auth/services/auth/auth.service';
@@ -9,13 +9,16 @@ import { AuthService } from 'src/app/shared/modules/auth/services/auth/auth.serv
   styleUrls: ['./user-actions.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class UserActionsComponent {
+export class UserActionsComponent implements OnInit {
 
   @ViewChild('userSettingsDropDown', {static: true})
   public userSettingsDropDown: MatSelect;
 
   @Input()
   public settingsIconColor: IconColor;
+
+  @Input()
+  public altLanguage: string;
 
   public Icons = Icons;
   public IconSize = IconSize;
@@ -24,13 +27,25 @@ export class UserActionsComponent {
 
   constructor(private authService: AuthService) { }
 
+  public ngOnInit(): void {
+    this.userActions.push(this.altLanguage); // TODO: use an icon
+  }
+
   public userIconHandler(): void {
     this.userSettingsDropDown.open();
   }
 
   public actionSelected(userAction: string): void {
-    if (userAction === 'Logout') {
+    if (userAction === 'Logout') { // TODO: move to language file
       this.authService.logout();
+    }
+
+    if (userAction === 'Dutch') { // TODO: move to language file
+
+    }
+
+    if (userAction === 'English') { // TODO: move to language file
+
     }
   }
 }

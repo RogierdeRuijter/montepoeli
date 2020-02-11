@@ -12,7 +12,7 @@ import { map } from 'rxjs/operators';
 })
 export class GameService {
   public environment = new Environment();
-  public constructor(private httpService: CustomHttpService, 
+  public constructor(private httpService: CustomHttpService,
                      private translateService: TranslateService) {
   }
 
@@ -29,7 +29,7 @@ export class GameService {
 
   public postProcessGame(game: Game): Game {
     if (game.winner === null) {
-      game.winner = this.translateService.instant('pages.home.games.cell.winner.' + Winners.DRAW);
+      game.winner = this.translateService.instant('pages.home.games.labels.winner.' + Winners.DRAW);
     }
     return game;
   }

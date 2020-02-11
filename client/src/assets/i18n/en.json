@@ -1,7 +1,6 @@
 {
   "app": {
     "title": "Montepoeli",
-    "alternativeTitle": "ngular Starter Kit",
     "footer": {
       "part1": "Powered with",
       "part2": "by Dacia"
@@ -9,17 +8,9 @@
   },
   "pages": {
     "login": {
-      "user": "User",
       "username": "Username",
       "password": "Password",
-      "do_login": "Login",
-      "login": "Login",
-      "login_title": "Sign in"
-    },
-    "dashboard": {
-      "menuTitle": "Dashboard",
-      "title": "Sales",
-      "chartTitle": "Sales of Samsung & iPhone"
+      "do_login": "Login"
     },
     "home": {
       "games": {
@@ -31,45 +22,16 @@
           "white": "White",
           "black": "Black",
           "winner": "Winner"
-        },
-        "cell": {
-          "winner": {
-            "white": "White",
-            "black": "Black",
-            "draw": "Draw"
-          }
         }
       },
       "rules": {
         "tooltip": "Rules"
       }
-    },
-    "users": {
-      "menuTitle": "Users",
-      "title": "Users",
-      "name": "Name",
-      "surname": "Surname",
-      "address": "Address",
-      "gender": "Gender",
-      "email": "Email",
-      "filter": {
-        "do_filter": "Filter",
-        "male": "Male",
-        "female": "Female",
-        "both": "Both"
-      }
-    },
-    "invoices": {
-      "menuTitle": "Invoices"
     }
   },
   "buttons": {
     "cancel": "Cancel",
     "save": "Save"
-  },
-  "general": {
-    "filter": "Filter",
-    "filters": "Filters"
   },
   "warnings": {
     "incorrect_credentials": {

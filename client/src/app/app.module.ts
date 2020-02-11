@@ -28,12 +28,7 @@ export function init_app(appLoadService: AppInitService): () => Promise<any> {
     CookieService,
     TranslateStore,
     AppInitService,
-    {
-      provide: APP_INITIALIZER,
-      useFactory: init_app,
-      deps: [AppInitService],
-      multi: true,
-    },
+    { provide: APP_INITIALIZER, useFactory: init_app, deps: [AppInitService], multi: true },
     {provide: ErrorHandler, useClass: GlobalErrorHandlerService}
   ],
   imports: [

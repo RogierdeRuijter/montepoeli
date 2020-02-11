@@ -29,8 +29,8 @@ import {HttpModule} from '../http/http.module';
 })
 export class CustomTranslateModule {
   constructor(private translate: TranslateService) {
-    translate.setDefaultLang('en');
-    this.translate.use('en');
+    translate.setDefaultLang('nl');
+    this.translate.use('nl');
   }
 }
 
