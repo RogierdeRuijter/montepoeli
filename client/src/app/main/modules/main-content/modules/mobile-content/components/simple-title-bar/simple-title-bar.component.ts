@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Output, EventEmitter } from '@angular/core';
 import { Icons, IconSize } from '../../../../../../../shared/static-files/enums';
 
 @Component({
@@ -8,6 +8,13 @@ import { Icons, IconSize } from '../../../../../../../shared/static-files/enums'
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SimpleTitleBarComponent {
+  @Output()
+  public iconClicked: EventEmitter<void> = new EventEmitter();
+
   public Icons = Icons;
   public IconSize = IconSize;
+
+  public handleButtonClicked(): void {
+    this.iconClicked.emit();
+  }
 }

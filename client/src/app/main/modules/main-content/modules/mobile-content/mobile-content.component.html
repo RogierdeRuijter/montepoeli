@@ -1,0 +1,15 @@
+<div>
+  <app-simple-title-bar (iconClicked)="iconClickedHandler()">
+  </app-simple-title-bar>
+
+  <router-outlet></router-outlet>
+
+  <app-action-bar-footer [showPlusIcon]="gameView"
+                         [selected]="selected"
+                         (chessSetSelected)="gamesHandler()"
+                         (scrollSelected)="rulesHandler()"
+                         (plusSelected)="plusEventHandler()">
+  </app-action-bar-footer>
+</div>
+
+<ng-container #addDialog></ng-container>

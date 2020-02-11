@@ -1,0 +1,10 @@
+<div id="page-container">
+  <div id="content-wrap">
+    <div [hidden]="activeView === 'large-screen'">
+      <ng-container #mobileContent></ng-container>
+    </div>
+    <div [hidden]="activeView === 'mobile'">
+      <ng-container #largeScreenContent></ng-container>
+    </div>
+  </div>
+</div>

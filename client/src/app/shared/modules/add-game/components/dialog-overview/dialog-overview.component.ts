@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, Output, OnInit} from '@angular/core';
 import {DialogDataComponent} from '../dialog-data/dialog-data.component';
 import {Game} from '../../../../interfaces/game.interface';
 import {UtilService} from '../../../../services/util/util.service';
@@ -6,13 +6,13 @@ import {MatDialog} from '@angular/material/dialog';
 import { Router, RouterEvent, NavigationStart } from '@angular/router';
 import { filter, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { GameFactory } from 'src/app/main/modules/home/modules/game/factories/game.factory';
+import { GameFactory } from '../../../home/modules/game/factories/game.factory';
 
 @Component({
   selector: 'app-dialog-overview',
   template: ``,
 })
-export class DialogOverviewComponent {
+export class DialogOverviewComponent implements OnInit {
 
   @Output()
   public addEvent: EventEmitter<Game> = new EventEmitter();
@@ -27,6 +27,10 @@ export class DialogOverviewComponent {
   constructor(public dialog: MatDialog,
               private utilService: UtilService,
               private router: Router) {
+  }
+  
+  public ngOnInit(): void {
+    this.openDialog();
   }
 
   public openDialog(): void {

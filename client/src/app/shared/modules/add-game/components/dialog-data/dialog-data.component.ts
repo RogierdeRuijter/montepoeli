@@ -6,7 +6,7 @@ import {DialogDataService} from '../../services/dialog-data/dialog-data.service'
 import {User} from '../../../../interfaces/user.interface';
 import {TranslateService} from '@ngx-translate/core';
 import {AsyncBaseComponent} from '../../../async/components/async-base-component/async-base.component';
-import { UserStore } from 'src/app/main/modules/home/modules/game/stores/user.store';
+import { UserStore } from '../../../home/modules/game/stores/user.store';
 
 @Component({
   selector: 'app-dialog-data',

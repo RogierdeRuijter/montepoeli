@@ -27,7 +27,8 @@ import { TransitionModule } from '../transition/transition.module';
     DialogDataComponent,
   ],
   exports: [
-    DialogOverviewComponent
+    DialogOverviewComponent,
+    MatDialogModule
   ],
   imports: [
     CommonModule,

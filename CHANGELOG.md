@@ -1,3 +1,68 @@
+## [4.2.1](https://github.com/RogierdeRuijter/montepoeli/compare/v4.2.0...v4.2.1) (2020-02-10)
+
+
+### Bug Fixes
+
+* increase size of the montepoeli text ([eeb3e51](https://github.com/RogierdeRuijter/montepoeli/commit/eeb3e519b3722d3fb2e25d62f2f34805c7f87914))
+
+# [4.2.0](https://github.com/RogierdeRuijter/montepoeli/compare/v4.1.1...v4.2.0) (2020-02-10)
+
+
+### Bug Fixes
+
+* fix subscription leak for mobile content ([22fdaf5](https://github.com/RogierdeRuijter/montepoeli/commit/22fdaf5c292c6052a22091cecc8e7bda04e28c11))
+
+
+### Features
+
+* clicking icon brings you back to the games tab ([2f4f7ab](https://github.com/RogierdeRuijter/montepoeli/commit/2f4f7abff0c96935bf9fcf0d57c6496f4e4cf137))
+* clicking on icon brings you to games in larger screen size ([32ede37](https://github.com/RogierdeRuijter/montepoeli/commit/32ede374093b641ba2b47f092f5c74b56485e287))
+
+## [4.1.1](https://github.com/RogierdeRuijter/montepoeli/compare/v4.1.0...v4.1.1) (2020-02-10)
+
+
+### Bug Fixes
+
+* **package:** Update client dependencies ([2119935](https://github.com/RogierdeRuijter/montepoeli/commit/2119935cd2fc2ca05181a80d1289daf0d8cdfb59))
+
+# [4.1.0](https://github.com/RogierdeRuijter/montepoeli/compare/v4.0.4...v4.1.0) (2020-02-09)
+
+
+### Features
+
+* add lazy loading for add game on desktop view ([dc3e546](https://github.com/RogierdeRuijter/montepoeli/commit/dc3e5469a0b8f87aedbb27e67de84b62e9de9c93))
+* add lazy loading for add game on mobile view ([289d92d](https://github.com/RogierdeRuijter/montepoeli/commit/289d92d85c599d7482763ab13636e739783af765))
+* more lazy loading components ([63c28a0](https://github.com/RogierdeRuijter/montepoeli/commit/63c28a0e154b2b1f8a945187ac202e5f15e99fea))
+
+## [4.0.4](https://github.com/RogierdeRuijter/montepoeli/compare/v4.0.3...v4.0.4) (2020-02-07)
+
+
+### Bug Fixes
+
+* update angular to version 9 🚀 ([3e1ab8d](https://github.com/RogierdeRuijter/montepoeli/commit/3e1ab8dc0d62683f8fe4492b4168f11d185e0498))
+
+## [4.0.3](https://github.com/RogierdeRuijter/montepoeli/compare/v4.0.2...v4.0.3) (2020-02-07)
+
+
+### Bug Fixes
+
+* Update all Yarn dependencies (2020-02-07) ([19de748](https://github.com/RogierdeRuijter/montepoeli/commit/19de7480a423195577699d7b3c667f75a9c70a5b))
+
+## [4.0.2](https://github.com/RogierdeRuijter/montepoeli/compare/v4.0.1...v4.0.2) (2020-02-06)
+
+
+### Bug Fixes
+
+* Update all Yarn dependencies (2020-02-06) ([2df1966](https://github.com/RogierdeRuijter/montepoeli/commit/2df196671bc38e2775f87412bb10b0d8c7ab1bd2))
+
+## [4.0.1](https://github.com/RogierdeRuijter/montepoeli/compare/v4.0.0...v4.0.1) (2020-02-05)
+
+
+### Bug Fixes
+
+* move main component of modules to base folder for better folder structure ([5a399ec](https://github.com/RogierdeRuijter/montepoeli/commit/5a399eca71959703e4cc22cd874a915a736cacd2))
+* Update all Yarn dependencies (2020-02-05) ([c46d3ac](https://github.com/RogierdeRuijter/montepoeli/commit/c46d3acedf7d3bb678776332780a1b2fb5053642))
+
 # [4.0.0](https://github.com/RogierdeRuijter/montepoeli/compare/v3.10.0...v4.0.0) (2020-02-03)
 
 

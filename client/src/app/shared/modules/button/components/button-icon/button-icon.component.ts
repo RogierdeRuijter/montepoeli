@@ -29,7 +29,7 @@ export class ButtonIconComponent implements AfterViewInit {
 
   @ViewChild(MatButton, {static: true})
   public buttonOne: MatButton;
-
+  
   constructor(private renderer: Renderer2) {}
 
   public clicked(): void {

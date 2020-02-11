@@ -1,0 +1,9 @@
+<app-title-bar (gamesSelected)="gamesHandler()"
+               (rulesSelected)="rulesHandler()" 
+               (iconClicked)="iconClickedHandler()">
+</app-title-bar>
+
+<router-outlet></router-outlet>
+
+<app-footer></app-footer>
+<!-- TODO: move the component module to a different folder -->

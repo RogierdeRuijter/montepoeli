@@ -1,10 +1,12 @@
 <mat-toolbar [color]="color">
-  <div style="display: flex; align-items: center;">
-    <span class="margin-right-10" style="margin-top: 7px;">
-      <app-icon [icon]="Icons.MONTEPOELI"></app-icon>
-    </span>
-    <span>Montepoeli</span>
-  </div>
+  <app-button-no-elevation (clickEvent)="handleButtonClicked()" style="height: 56px;">
+    <div style="display: flex; align-items: center;">
+      <span class="margin-right-10" style="height: 56px;">
+        <app-icon [icon]="Icons.MONTEPOELI"></app-icon>
+      </span>
+      <h5>Montepoeli</h5>
+    </div>
+  </app-button-no-elevation>
   <div class="left-spacer"></div>
 
   <mat-tab-group animationDuration="0ms" (selectedTabChange)="handleChangeEvent($event)">
