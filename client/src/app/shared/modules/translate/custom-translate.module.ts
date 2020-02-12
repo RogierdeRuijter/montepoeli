@@ -22,13 +22,15 @@ import {HttpModule} from '../http/http.module';
         useFactory: HttpLoaderFactory,
         deps: [HttpClient],
       },
-      isolate: true,
+      extend: true
     }),
     HttpModule
   ]
 })
 export class CustomTranslateModule {
   constructor(private translate: TranslateService) {
+    translate.addLangs(['nl', 'en']);
+
     translate.setDefaultLang('nl');
     this.translate.use('nl');
   }
