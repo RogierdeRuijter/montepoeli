@@ -1,3 +1,10 @@
+## [4.2.2](https://github.com/RogierdeRuijter/montepoeli/compare/v4.2.1...v4.2.2) (2020-02-12)
+
+
+### Bug Fixes
+
+* **package:** update server dependencies ([14a25e7](https://github.com/RogierdeRuijter/montepoeli/commit/14a25e72c429af1724283ef0272fed9bcf911840))
+
 ## [4.2.1](https://github.com/RogierdeRuijter/montepoeli/compare/v4.2.0...v4.2.1) (2020-02-10)
 
 
