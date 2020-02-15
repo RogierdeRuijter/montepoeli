@@ -3,8 +3,6 @@ import { UserService } from 'src/app/shared/services/users/user.service';
 import { UtilService } from 'src/app/shared/services/util/util.service';
 import { User } from 'src/app/shared/interfaces/user.interface';
 import { TranslateService } from '@ngx-translate/core';
-import { CustomHttpService } from '../../http/services/custom-http/custom-http.service';
-import { Environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +10,6 @@ import { Environment } from 'src/environments/environment';
 export class LanguagePreferenceService {
   private defaultLanguage = 'en';
   
-  private environment = new Environment();
-
   constructor(private utilService: UtilService,
               private translateService: TranslateService,
               private userService: UserService) { }
@@ -81,13 +77,5 @@ export class LanguagePreferenceService {
     }
 
     return englishPerferedLanguage;    
-  }
-
-  private translatePreferedLanguageToEnglish(preferedLangauge: string): string {
-    if (preferedLangauge.toLowerCase() === 'nederlands') {
-      return 'dutch';
-    }
-
-    return preferedLangauge.toLowerCase();
   }
 }

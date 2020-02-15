@@ -22,7 +22,7 @@ export class AppController {
   public async signIn(@Body() body, @Res() res: Response, @Next() next): Promise<any> {
     return await this.authService.signIn(body).then(reponse => {
       const date = new Date();
-      
+
       res.cookie(
         'montepoeliJwt',
         reponse.jwt,

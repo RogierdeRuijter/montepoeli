@@ -41,7 +41,7 @@ export class UsersController {
       throw new BadRequestException('username or languagePreference is not defined');
     }
 
-    if (languagePreference !== 'dutch' && languagePreference !== 'english') { 
+    if (languagePreference !== 'dutch' && languagePreference !== 'english') {
       throw new BadRequestException('language preference should be dutch or english');
     }
 

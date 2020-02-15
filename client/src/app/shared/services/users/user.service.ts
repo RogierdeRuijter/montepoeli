@@ -26,7 +26,7 @@ export class UserService {
     const body: any = {
       username,
       languagePreference
-    }
+    };
     
     return this.customHttpService.post(this.base + this.environment.backend.ENTRY_POINTS.UPDATE_LANGUAGE_PREFERENCE, body);
   }

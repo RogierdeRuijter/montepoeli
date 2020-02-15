@@ -29,7 +29,7 @@ export class UsersService {
         reject('user not found');
         return;
       }
-      
+
       bcrypt.compare(payload.password, user.password, (err, res) => {
         if (res === true) {
           resolve(user);
@@ -62,12 +62,10 @@ export class UsersService {
   }
 
   public async getUserWithJwt(jwt: string): Promise<UserDto> {
-    const username: string = this.jwtService.decode(jwt)['username'];
-    console.log(username);
-    
+    const username: string = this.jwtService.decode(jwt).username;
+
     const user = await this.userRepositoryService.findByUsername(username);
 
-    console.log(user);
     return this.userMapper.convert(user);
   }
 }

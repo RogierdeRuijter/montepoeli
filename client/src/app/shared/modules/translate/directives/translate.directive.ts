@@ -1,7 +1,6 @@
-import {Directive, ElementRef, Input, OnInit, Renderer2, ChangeDetectorRef} from '@angular/core';
+import {Directive, ElementRef, Input, OnInit, Renderer2} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {debounceTime, retry, switchMap} from 'rxjs/operators';
-
 
 @Directive({
   selector: '[appTranslate]',
