@@ -35,7 +35,6 @@ export class UserActionsComponent implements OnInit {
   private setAlternativeLanguage(): void {
     const currentLang = this.translateService.currentLang;
     this.alternativeLanguage = this.translateService.getLangs().find(lang => lang !== currentLang);
-    console.log(this.alternativeLanguage);
   }
 
   public userIconHandler(): void {
@@ -49,7 +48,6 @@ export class UserActionsComponent implements OnInit {
           this.translateService.setDefaultLang('en');
           this.translateService.use('en').subscribe(() => {
             this.setAlternativeLanguage();
-            console.log(this.translateService.currentLang);
             this.changeDetectorRef.detectChanges();
           });
       });

@@ -20,12 +20,15 @@ export class AppController {
 
   @Post('/signIn')
   public async signIn(@Body() body, @Res() res: Response, @Next() next): Promise<any> {
-    return await this.authService.signIn(body).then(jwt => {
+    return await this.authService.signIn(body).then(reponse => {
       const date = new Date();
+      const userDto = reponse.userDto;
+
+      console.log(userDto);
 
       res.cookie(
         'montepoeliJwt',
-        jwt.jwt,
+        reponse.jwt,
         {
           expires: new Date(date.setFullYear(date.getFullYear() + 1)),
           httpOnly: true,
@@ -48,7 +51,7 @@ export class AppController {
         }
       );
 
-      res.send();
+      res.send(userDto);
     });
   }
 

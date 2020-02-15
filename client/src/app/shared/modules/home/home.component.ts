@@ -15,7 +15,7 @@ import {
 import {BehaviorSubject, Subject, combineLatest, of} from 'rxjs';
 import {Alignments, GridSizes, Icons, IconSize, Tabs} from '../../../shared/static-files/enums';
 import {User} from '../../../shared/interfaces/user.interface';
-import {UserStore} from './modules/game/stores/user.store';
+import {UsersStore} from './modules/game/stores/user.store';
 import {Game} from '../../../shared/interfaces/game.interface';
 import {Rule} from '../../../shared/interfaces/rule.interface';
 import { GameService } from './modules/game/services/game.service';
@@ -53,7 +53,7 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
 
   constructor(private tabChangeGlobalEventEmitter: TabChangeGlobalEventEmitter,
               private userService: UserService,
-              private userStore: UserStore,
+              private userStore: UsersStore,
               private changeDetectorRef: ChangeDetectorRef,
               private gameService: GameService,
               private ruleService: RuleService,
