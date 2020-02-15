@@ -44,6 +44,10 @@
               {
                 "input": "./node_modules/ngx-toastr/toastr.css",
                 "inject": true
+              },
+              { 
+                "input": "node_modules/flag-icon-css/css/flag-icon.min.css",
+                "inject": true
               }
             ],
             "scripts": []

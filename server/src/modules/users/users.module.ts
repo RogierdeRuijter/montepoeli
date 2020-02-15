@@ -7,12 +7,13 @@ import {UsersController} from './users.controller';
 import {AuthModule} from '../auth/auth.module';
 import {UserRepositoryService} from './user-repository/user-repository.service';
 import {SharedModule} from '../shared/shared.module';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
     MongooseModule.forFeature([{name: 'User', schema: UserSchema}]),
     AuthModule,
-    SharedModule,
+    SharedModule
   ],
   controllers: [UsersController],
   providers: [UsersService, UserMapper, UserRepositoryService],

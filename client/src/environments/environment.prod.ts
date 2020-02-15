@@ -43,6 +43,8 @@ export class Environment extends DynamicEnvironment {
         GAME: '/game',
         RULE: '/rule',
         CREATE: '/create',
+        UPDATE_LANGUAGE_PREFERENCE: '/language-preference',
+        CURRENT: '/current'
       },
     };
   }

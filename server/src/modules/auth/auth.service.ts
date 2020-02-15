@@ -15,16 +15,12 @@ export class AuthService {
   ) {
   }
 
-  async signIn(body): Promise<any> {
+  async signIn(body: any): Promise<any> {
     return new Promise<any>((resolve, reject) => this.usersService.verifyUser(body)
       .then((user: User) => {
-        const userDto = this.userMapper.convert(user);
-        console.log(userDto);
         const jwtPayload: JwtPayload = {username: user.username};
         resolve(
-          { jwt: this.jwtService.sign(jwtPayload), 
-            userDto
-          }
+          { jwt: this.jwtService.sign(jwtPayload) }
         );
       }).catch((err) => {
         reject(new UnauthorizedException('Wrong username or password.'));

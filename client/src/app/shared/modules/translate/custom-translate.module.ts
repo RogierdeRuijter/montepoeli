@@ -34,9 +34,7 @@ export class CustomTranslateModule {
     translate.addLangs(['nl', 'en']);
 
     const preferedLanguage = languagePreferenceService.get();
-    console.log('preferedLanguage');
-    console.log(preferedLanguage);
-    
+
     translate.setDefaultLang(preferedLanguage);
     translate.use(preferedLanguage);
   }

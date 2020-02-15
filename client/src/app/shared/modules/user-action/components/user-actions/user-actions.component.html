@@ -6,10 +6,10 @@
 </app-button-icon>
 
 <mat-select #userSettingsDropDown class="selector">
-  <mat-option (click)="logoutHandler()" [id]="logout">
-    {{ logout }}
-  </mat-option>
   <mat-option (click)="switchLanguageHandler()" [id]="alternativeLanguage">
-    {{ alternativeLanguage }}
+    <span [class]="'flag-icon flag-icon-' + setIconLanguage"></span>
+  </mat-option>
+  <mat-option (click)="logoutHandler()" id="logout">
+    <span [appTranslate]="'user-actions.logout'"></span>
   </mat-option>
 </mat-select>

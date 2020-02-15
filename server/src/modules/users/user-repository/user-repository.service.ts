@@ -26,4 +26,10 @@ export class UserRepositoryService {
   public save(user: User): Promise<User> {
     return new this.userModel(user).save();
   }
+
+  public async updateLanguagePreferance(username: string, languagePreferance: string): Promise<User> {
+    return this.userModel.updateOne({username}, {
+      preferedLanguage: languagePreferance
+    });
+  }
 }

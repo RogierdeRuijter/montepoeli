@@ -13,8 +13,8 @@ export class AppController {
 
   private secure: boolean = process.env.ENV.toString() === 'prod' ? true : false;
 
-  private sameSite: string = process.env.ENV.toString() === 'prod' ? 'Strict' : undefined;
-  private signed: boolean = process.env.ENV.toString() === 'prod' ? true : undefined;
+  // private sameSite: string = process.env.ENV.toString() === 'prod' ? 'Strict' : undefined;
+  // private signed: boolean = process.env.ENV.toString() === 'prod' ? true : undefined;
 
   private domain: string = process.env.ENV.toString() === 'prod' ? process.env.DOMAIN : undefined;
 
@@ -22,10 +22,7 @@ export class AppController {
   public async signIn(@Body() body, @Res() res: Response, @Next() next): Promise<any> {
     return await this.authService.signIn(body).then(reponse => {
       const date = new Date();
-      const userDto = reponse.userDto;
-
-      console.log(userDto);
-
+      
       res.cookie(
         'montepoeliJwt',
         reponse.jwt,
@@ -51,7 +48,7 @@ export class AppController {
         }
       );
 
-      res.send(userDto);
+      res.send();
     });
   }
 

@@ -1,7 +1,6 @@
 import {ChangeDetectorRef, Component} from '@angular/core';
 import { AuthService } from 'src/app/shared/modules/auth/services/auth/auth.service';
 import { tap } from 'rxjs/operators';
-import { UserStoreService } from 'src/app/shared/modules/user/store/user-store.service';
 import { LanguagePreferenceService } from 'src/app/shared/modules/translate/services/language-preference.service';
 import { User } from 'src/app/shared/interfaces/user.interface';
 
@@ -28,11 +27,7 @@ export class LoginComponent {
 
     this.authService.login(potentialUser)
       .pipe(
-        tap((user: User) => {
-          console.log(user);
-          this.languagePreferenceService.setWithUser(user);
-
-        })
+        tap((user: User) => this.languagePreferenceService.setWithUser(user))
       ).subscribe(() => {},
         (error) => this.isSubmitting = false);
   }

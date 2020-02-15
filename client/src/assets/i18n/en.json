@@ -47,5 +47,8 @@
     "no-valid-session": {
       "body": "You have to login again"
     }
+  },
+  "user-actions": {
+    "logout": "Logout"
   }
 }

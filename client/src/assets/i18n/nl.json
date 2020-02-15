@@ -47,5 +47,8 @@
     "no-valid-session": {
       "body": "Probeer opnieuw in te loggen"
     }
+  },
+  "user-actions": {
+    "logout": "Uitloggen"
   }
 }
