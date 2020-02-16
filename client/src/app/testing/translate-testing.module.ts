@@ -7,11 +7,9 @@ const translations: any = {
   'pages': {
     'home': {
       'games': {
-        'cell': {
-          'winner': {
+        'labels': {
             'draw': 'Draw'
           }
-        }
       }
     }
   }

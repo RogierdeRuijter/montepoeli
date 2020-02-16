@@ -84,9 +84,9 @@ describe('DialogDataService', () => {
       const service: DialogDataService = TestBed.inject(DialogDataService);
 
       const users: User[] = [
-        {name: 'Meneer'},
-        {name: 'Sjonnie'},
-        {name: 'Annie'},
+        {name: 'Meneer', preferedLanguage: 'dutch'},
+        {name: 'Sjonnie', preferedLanguage: 'dutch'},
+        {name: 'Annie', preferedLanguage: 'dutch'},
       ];
 
       const game: Game = {
@@ -100,9 +100,9 @@ describe('DialogDataService', () => {
       const output = service.determineAvailableUsersForSelect(users, game, selectedName);
 
       const expected: User[] = [
-        {name: 'Meneer'},
-        {name: 'Sjonnie'},
-        {name: 'Annie'}
+        {name: 'Meneer', preferedLanguage: 'dutch'},
+        {name: 'Sjonnie', preferedLanguage: 'dutch'},
+        {name: 'Annie', preferedLanguage: 'dutch'}
       ];
 
       expect(output).toEqual(expected);
@@ -112,9 +112,9 @@ describe('DialogDataService', () => {
       const service: DialogDataService = TestBed.inject(DialogDataService);
 
       const users: User[] = [
-        {name: 'Meneer'},
-        {name: 'Sjonnie'},
-        {name: 'Annie'},
+        {name: 'Meneer', preferedLanguage: 'dutch'},
+        {name: 'Sjonnie', preferedLanguage: 'dutch'},
+        {name: 'Annie', preferedLanguage: 'dutch'},
       ];
 
       const game: Game = {
@@ -128,8 +128,8 @@ describe('DialogDataService', () => {
       const output = service.determineAvailableUsersForSelect(users, game, selectedName);
 
       const expected: User[] = [
-        {name: 'Meneer'}, 
-        {name: 'Annie'}
+        {name: 'Meneer', preferedLanguage: 'dutch'}, 
+        {name: 'Annie', preferedLanguage: 'dutch'}
       ];
 
       expect(output).toEqual(expected);
@@ -139,9 +139,9 @@ describe('DialogDataService', () => {
       const service: DialogDataService = TestBed.inject(DialogDataService);
 
       const users: User[] = [
-        {name: 'Meneer'},
-        {name: 'Sjonnie'},
-        {name: 'Annie'},
+        {name: 'Meneer', preferedLanguage: 'dutch'},
+        {name: 'Sjonnie', preferedLanguage: 'dutch'},
+        {name: 'Annie', preferedLanguage: 'dutch'},
       ];
 
       const game: Game = {
@@ -155,8 +155,8 @@ describe('DialogDataService', () => {
       const output = service.determineAvailableUsersForSelect(users, game, selectedName);
 
       const expected: User[] = [
-        {name: 'Meneer'},
-        {name: 'Sjonnie'},
+        {name: 'Meneer', preferedLanguage: 'dutch'},
+        {name: 'Sjonnie', preferedLanguage: 'dutch'},
       ];
 
       expect(output).toEqual(expected);
@@ -166,9 +166,9 @@ describe('DialogDataService', () => {
       const service: DialogDataService = TestBed.inject(DialogDataService);
 
       const users: User[] = [
-        {name: 'Meneer'},
-        {name: 'Sjonnie'},
-        {name: 'Annie'},
+        {name: 'Meneer', preferedLanguage: 'dutch'},
+        {name: 'Sjonnie', preferedLanguage: 'dutch'},
+        {name: 'Annie', preferedLanguage: 'dutch'},
       ];
 
       const game: Game = {
@@ -182,9 +182,9 @@ describe('DialogDataService', () => {
       const output = service.determineAvailableUsersForSelect(users, game, selectedName);
 
       const expected: User[] = [
-        {name: 'Meneer'},
-        {name: 'Sjonnie'},
-        {name: 'Annie'},
+        {name: 'Meneer', preferedLanguage: 'dutch'},
+        {name: 'Sjonnie', preferedLanguage: 'dutch'},
+        {name: 'Annie', preferedLanguage: 'dutch'},
       ];
 
       expect(output).toEqual(expected);
@@ -194,9 +194,9 @@ describe('DialogDataService', () => {
       const service: DialogDataService = TestBed.inject(DialogDataService);
 
       const users: User[] = [
-        {name: 'Meneer'},
-        {name: 'Sjonnie'},
-        {name: 'Annie'},
+        {name: 'Meneer', preferedLanguage: 'dutch'},
+        {name: 'Sjonnie', preferedLanguage: 'dutch'},
+        {name: 'Annie', preferedLanguage: 'dutch'},
       ];
 
       const game: Game = {
@@ -210,8 +210,8 @@ describe('DialogDataService', () => {
       const output = service.determineAvailableUsersForSelect(users, game, selectedName);
 
       const expected: User[] = [
-        {name: 'Meneer'},
-        {name: 'Sjonnie'}
+        {name: 'Meneer', preferedLanguage: 'dutch'},
+        {name: 'Sjonnie', preferedLanguage: 'dutch'}
       ];
 
       expect(output).toEqual(expected);
