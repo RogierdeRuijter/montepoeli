@@ -1,8 +1,5 @@
 import {ChangeDetectorRef, Component} from '@angular/core';
 import { AuthService } from 'src/app/shared/modules/auth/services/auth/auth.service';
-import { tap } from 'rxjs/operators';
-import { LanguagePreferenceService } from 'src/app/shared/modules/translate/services/language-preference.service';
-import { User } from 'src/app/shared/interfaces/user.interface';
 
 @Component({
   selector: 'app-login',
@@ -14,8 +11,7 @@ export class LoginComponent {
   public isSubmitting = false;
 
   constructor(private authService: AuthService,
-              private changeDetectorRef: ChangeDetectorRef,
-              private languagePreferenceService: LanguagePreferenceService) {
+              private changeDetectorRef: ChangeDetectorRef) {
   }
 
   public onLogin(userInfo: any): void {
@@ -26,9 +22,7 @@ export class LoginComponent {
     potentialUser['pwd'] = userInfo.password;
 
     this.authService.login(potentialUser)
-      .pipe(
-        tap((user: User) => this.languagePreferenceService.setWithUser(user))
-      ).subscribe(() => {},
+      .subscribe(() => {},
         (error) => this.isSubmitting = false);
   }
 

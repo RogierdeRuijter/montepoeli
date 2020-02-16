@@ -63,7 +63,7 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
 
   }
 
-  public ngOnInit(): void {
+  public ngOnInit(): void {    
     this.gameService.getAll()
       .subscribe((games: Game[]) => this.games$.next(games));
 
