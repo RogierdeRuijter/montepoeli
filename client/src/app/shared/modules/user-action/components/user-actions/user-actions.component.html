@@ -7,9 +7,17 @@
 
 <mat-select #userSettingsDropDown class="selector">
   <mat-option (click)="switchLanguageHandler()" [id]="alternativeLanguage">
-    <span [class]="'flag-icon flag-icon-' + setIconLanguage"></span>
+    <div style="display: flex;">
+      <div style="flex-grow: 1;"></div>
+      <span [class]="'flag-icon flag-icon-' + setIconLanguage"></span>
+      <div style="flex-grow: 1;"></div>
+    </div>
   </mat-option>
   <mat-option (click)="logoutHandler()" id="logout">
-    <span [appTranslate]="'user-actions.logout'"></span>
+    <div style="display: flex;">
+      <div style="flex-grow: 1;"></div>
+      <span [appTranslate]="'user-actions.logout'"></span>      
+      <div style="flex-grow: 1;"></div>
+    </div>
   </mat-option>
 </mat-select>

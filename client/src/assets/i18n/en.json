@@ -1,4 +1,4 @@
-{
+{ 
   "app": {
     "title": "Montepoeli",
     "footer": {
@@ -21,7 +21,8 @@
         "labels": {
           "white": "White",
           "black": "Black",
-          "winner": "Winner"
+          "winner": "Winner",
+          "draw": "Draw"
         }
       },
       "rules": {
@@ -46,6 +47,9 @@
   "info": {
     "no-valid-session": {
       "body": "You have to login again"
+    },
+    "language-changed": {
+      "english": "Language changed to English."
     }
   },
   "user-actions": {

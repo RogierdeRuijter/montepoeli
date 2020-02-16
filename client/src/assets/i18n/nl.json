@@ -1,4 +1,4 @@
-{
+{ 
   "app": {
     "title": "Montepoeli",
     "footer": {
@@ -21,7 +21,8 @@
         "labels": {
           "white": "Wit",
           "black": "Zwart",
-          "winner": "Winaar"
+          "winner": "Winaar",
+          "draw": "Remise"
         }
       },
       "rules": {
@@ -46,6 +47,9 @@
   "info": {
     "no-valid-session": {
       "body": "Probeer opnieuw in te loggen"
+    },
+    "language-changed": {
+      "dutch": "De taal is veranderd naar het Nederlands."
     }
   },
   "user-actions": {

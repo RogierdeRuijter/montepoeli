@@ -13,8 +13,7 @@
 
   <ng-container matColumnDef="winner">
     <th mat-header-cell *matHeaderCellDef appTranslate="pages.home.games.labels.winner"></th>
-    <td mat-cell *matCellDef="let element; let i = index"
-        [id]="'table-' + element?.winner + '-' + i">
+    <td mat-cell *matCellDef="let element; let i = index" [id]="'table-' + element?.winner + '-' + i">
         {{ element?.winner }}
     </td>
   </ng-container>

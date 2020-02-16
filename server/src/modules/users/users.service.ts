@@ -62,6 +62,7 @@ export class UsersService {
   }
 
   public async getUserWithJwt(jwt: string): Promise<UserDto> {
+    // @ts-ignore
     const username: string = this.jwtService.decode(jwt).username;
 
     const user = await this.userRepositoryService.findByUsername(username);

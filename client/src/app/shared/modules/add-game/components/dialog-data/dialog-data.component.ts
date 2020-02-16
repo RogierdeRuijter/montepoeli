@@ -57,6 +57,6 @@ export class DialogDataComponent extends AsyncBaseComponent implements OnInit, O
     this.winnerOptions.push(game?.black);
     this.winnerOptions.push(game?.white);
 
-    this.winnerOptions.push(this.translateService.instant('pages.home.games.labels.winner.' + Winners.DRAW));
+    this.winnerOptions.push(this.translateService.instant('pages.home.games.labels.' + Winners.DRAW));
   }
 }

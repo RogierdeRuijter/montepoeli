@@ -7,6 +7,7 @@ import { LanguagePreferenceService } from '../../../translate/services/language-
 import { timer, Subject } from 'rxjs';
 import { UserStoreService } from '../../../user/store/user-store.service';
 import { User } from 'src/app/shared/interfaces/user.interface';
+import { NotificationService } from '../../../notification/services/notification/notification.service';
 
 @Component({
   selector: 'app-user-actions',
@@ -35,7 +36,8 @@ export class UserActionsComponent implements OnInit, OnDestroy {
               private translateService: TranslateService,
               private languagePreferenceService: LanguagePreferenceService,
               private userStoreService: UserStoreService,
-              private changeDetectorRef: ChangeDetectorRef) { }
+              private changeDetectorRef: ChangeDetectorRef,
+              private notificationService: NotificationService) { }
 
   public ngOnInit(): void {
     this.setAlternativeLanguage();
@@ -65,9 +67,20 @@ export class UserActionsComponent implements OnInit, OnDestroy {
   }
 
   public switchLanguageHandler(): void {
-    this.languagePreferenceService.setWithLanguageCode(this.user, this.alternativeLanguage);
+    timer(300)
+      .subscribe(() => {
+        this.languagePreferenceService.setWithLanguageCode(this.user, this.alternativeLanguage);
+
+        if (this.translateService.currentLang === 'en') {
+          this.notificationService.info(this.translateService.instant('info.language-changed.english'));
+        }
     
-    timer(100).subscribe(() => this.setAlternativeLanguage());
+        if (this.translateService.currentLang === 'nl') {
+          this.notificationService.info(this.translateService.instant('info.language-changed.dutch'));
+        }
+
+        this.setAlternativeLanguage();
+      });
   }
 
   public logoutHandler(): void {
