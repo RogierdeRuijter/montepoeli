@@ -31,7 +31,6 @@ export class TableActionComponent implements OnInit {
     if (this.disabled && this.disabled.length !== this.actions.length) {
       throw new IllegalInputException('disabled and actions should be the same length');
     }
-
     this.actions.forEach((action: Actions, index) => this.iconsMap[action] = {
       icon: this.fetchIconForAction(action),
       disabled: this.disabled ? this.disabled[index] : false,

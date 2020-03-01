@@ -9,23 +9,25 @@ import { MatInputModule } from '@angular/material/input';
 import { CustomTranslateModule } from 'src/app/shared/modules/translate/custom-translate.module';
 import { AuthModule } from 'src/app/shared/modules/auth/auth.module';
 
+export default {
+  title: 'Login form',
+};
 
-storiesOf('LoginForm', module)
-  .add('Landing', () => ({
-    component: LoginFormComponent,
-    props: {},
-    moduleMetadata: {
-      imports: [
-        StorybookTranslateModule,
-        BrowserAnimationsModule,
-        ButtonModule,
-        FormModule,
-        GridModule,
-        FormModule,
-        MatInputModule,
-        CustomTranslateModule,
-        AuthModule
-      ]
-    },
-  }))
-;
+export const Login = () => ({
+  component: LoginFormComponent,
+  moduleMetadata: moduleMeta
+});
+
+const moduleMeta = {
+  imports: [
+    StorybookTranslateModule,
+    BrowserAnimationsModule,
+    ButtonModule,
+    FormModule,
+    GridModule,
+    FormModule,
+    MatInputModule,
+    CustomTranslateModule,
+    AuthModule
+  ]
+}

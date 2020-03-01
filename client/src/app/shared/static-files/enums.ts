@@ -1,44 +1,44 @@
 export enum ButtonType {
-  PRIMARY,
-  SECONDARY
+  PRIMARY = 1,
+  SECONDARY = 2
 }
 
 export enum ButtonFunction {
-  LOGIN,
-  CANCEL,
-  SAVE
+  LOGIN = 1,
+  CANCEL = 2,
+  SAVE = 3
 }
 
 export enum Icons {
-  CHECK,
-  CROSS,
-  PLUS,
-  DELETE,
-  ROOK,
-  COFFEE,
-  GREEN_HEART,
-  CHESS_PIECES,
-  SCROLL,
-  MONTEPOELI,
-  USER,
-  PLUS_WITH_BOX
+  CROSS = 1,
+  PLUS = 2,
+  DELETE = 3,
+  ROOK = 4,
+  COFFEE = 5,
+  CHECK = 6,
+  GREEN_HEART = 7,
+  CHESS_PIECES = 8,
+  SCROLL = 9,
+  MONTEPOELI = 10,
+  USER = 11,
+  PLUS_WITH_BOX = 12
 }
 
 export enum IconSize {
-  SMALL,
-  SMALL_MEDIUM,
-  MEDIUM,
-  LARGE
+  SMALL = 1,
+  SMALL_MEDIUM = 2,
+  MEDIUM = 3,
+  LARGE = 4
 }
 
 export enum IconColor {
-  GRAY,
-  BLACK
+  GRAY = 1,
+  BLACK = 2
 }
 
 export enum Actions {
-  ADD,
-  ACCEPT
+  ADD = 1,
+  ACCEPT = 2
 }
 
 export enum Winners {
@@ -53,29 +53,29 @@ export enum Sides {
 }
 
 export enum GridSizes {
-  EXTRA_SMALL,
-  SMALL,
-  MEDIUM,
-  LARGE,
-  EXTRA_LARGE,
-  ALL
+  EXTRA_SMALL = 1,
+  SMALL = 2,
+  MEDIUM = 3,
+  LARGE = 4,
+  EXTRA_LARGE = 5,
+  ALL = 6
 }
 
 export enum ButtonRowType {
-  TWO
+  TWO = 1
 }
 
 export enum Alignments {
-  RIGHT,
-  CENTER,
-  VERTICAL,
-  BASELINE,
-  END
+  RIGHT = 1,
+  CENTER = 2,
+  VERTICAL = 3,
+  BASELINE = 4,
+  END = 5
 }
 
 export enum Directions {
-  ROW,
-  COLUMN
+  ROW = 1,
+  COLUMN = 2
 }
 
 export enum Positions {

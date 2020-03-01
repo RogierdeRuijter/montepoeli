@@ -17,7 +17,7 @@
     "test": "ng test --watch=false",
     "test:watch": "ng test",
     "test:cov": "ng test --code-coverage true --watch false",
-    "test:jestJtes": "jest",
+    "jest": "jest",
     "clear_jest": "jest --clearCache",
     "jest-without-cache": "jest --no-cache",
     "test:visual": "jest --no-cache",

@@ -9,27 +9,31 @@ import {GridColumnDirective} from '../app/shared/modules/grid/directives/grid-co
 import { MatDialogModule } from '@angular/material/dialog';
 import { ButtonComponent } from 'src/app/shared/modules/button/components/button/button.component';
 
-storiesOf('Button row', module)
-  .add('2 buttons', () => ({
-    component: ButtonRowComponent,
-    props: {
-      buttonRowType: ButtonRowType.TWO,
-      buttonFunctions: [ButtonFunction.CANCEL, ButtonFunction.SAVE],
-      buttonTypes: [ButtonType.PRIMARY, ButtonType.PRIMARY],
-    },
-    moduleMetadata: {
-      imports: [
-        MatButtonModule,
-        MatDialogModule,
-        StorybookTranslateModule,
-      ],
-      declarations: [
-        TranslateDirective,
-        GridRowDirective,
-        GridColumnDirective,
-        ButtonComponent
-      ],
-      providers: [],
-    },
-  }))
-;
+export default {
+  title: 'Button Row',
+};
+
+export const primaryButton = () => ({
+  component: ButtonRowComponent,
+  props: {
+    buttonRowType: ButtonRowType.TWO,
+    buttonFunctions: [ButtonFunction.CANCEL, ButtonFunction.SAVE],
+    buttonTypes: [ButtonType.PRIMARY, ButtonType.PRIMARY]
+  },
+  moduleMetadata: moduleMeta
+});
+
+const moduleMeta = {
+  imports: [
+    MatButtonModule,
+    MatDialogModule,
+    StorybookTranslateModule,
+  ],
+  declarations: [
+    TranslateDirective,
+    GridRowDirective,
+    GridColumnDirective,
+    ButtonComponent
+  ],
+  providers: [],
+}
