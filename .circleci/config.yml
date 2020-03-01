@@ -385,25 +385,34 @@ workflows:
             - e2e-tests
           filters:
             branches:
-              only: master
+              only: 
+                - master
+                - +([0-9])?(.{+([0-9]),x}).x
+
 
       - save-new-version:
           requires:
             - update-version
           filters:
             branches:
-              only: master
+              only: 
+                - master
+                - +([0-9])?(.{+([0-9]),x}).x
 
       - swap-client-config:
           requires:
             - save-new-version
           filters:
             branches:
-              only: master
+              only: 
+                - master
+                - +([0-9])?(.{+([0-9]),x}).x
 
       - retag-server-image:
           requires:
             - save-new-version
           filters:
             branches:
-              only: master
+              only: 
+                - master
+                - +([0-9])?(.{+([0-9]),x}).x
