@@ -11,12 +11,12 @@ import { GridRowDirective } from 'src/app/shared/modules/grid/directives/grid-ro
 import { PositionDirective } from 'src/app/shared/modules/grid/directives/position.directive';
 import { IconComponent } from 'src/app/shared/modules/icon/components/icon/icon.component';
 import { MatTableModule } from '@angular/material/table';
-import { GameTableComponent } from 'src/app/main/modules/home/modules/game/components/overview/game-table/game-table.component';
-import { TableActionComponent } from 'src/app/main/modules/home/modules/game/components/overview/table-action/table-action.component';
-
+import { OverviewComponent } from 'src/app/shared/modules/home/modules/game/components/overview/overview.component';
+import { GameTableComponent } from 'src/app/shared/modules/home/modules/game/components/overview/game-table/game-table.component';
+import { TableActionComponent } from 'src/app/shared/modules/home/modules/game/components/overview/table-action/table-action.component';
+import { ButtonIconComponent } from 'src/app/shared/modules/button/components/button-icon/button-icon.component';
 
 export class GameOverviewStoryFactory {
-  // private component = OverviewComponent;
   private readonly displayedColumns: string[] = ['white', 'winner', 'black'];
   private stories: CompleteStory[] = [];
   private actions: Actions[] = [Actions.ADD];
@@ -37,6 +37,7 @@ export class GameOverviewStoryFactory {
         GridRowDirective,
         PositionDirective,
         IconComponent,
+        ButtonIconComponent
       ],
     };
   }
@@ -70,7 +71,7 @@ export class GameOverviewStoryFactory {
 
   private twoGameStory(): StoryFn<StoryFnAngularReturnType> {
     return () => ({
-        component: this.component,
+        component: OverviewComponent,
         props: {
           actions: this.actions,
           displayedColumns: this.displayedColumns,
@@ -95,7 +96,7 @@ export class GameOverviewStoryFactory {
 
   private sevenGameStory(): StoryFn<StoryFnAngularReturnType> {
     return () => ({
-        component: this.component,
+        component: OverviewComponent,
         props: {
           actions: this.actions,
           displayedColumns: this.displayedColumns,
@@ -117,7 +118,7 @@ export class GameOverviewStoryFactory {
 
   private sevenTeenGameStory(): StoryFn<StoryFnAngularReturnType> {
     return () => ({
-        component: this.component,
+        component: OverviewComponent,
         props: {
           actions: this.actions,
           displayedColumns: this.displayedColumns,
@@ -217,7 +218,7 @@ export class GameOverviewStoryFactory {
 
   private thirtyFiveGameStory(): StoryFn<StoryFnAngularReturnType> {
     return () => ({
-        component: this.component,
+        component: OverviewComponent,
         props: {
           actions: this.actions,
           displayedColumns: this.displayedColumns,

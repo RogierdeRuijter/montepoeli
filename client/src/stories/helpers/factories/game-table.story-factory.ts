@@ -4,10 +4,12 @@ import {StorybookTranslateModule} from '../../storybook-translate.module';
 import {TranslateDirective} from '../../../app/shared/modules/translate/directives/translate.directive';
 import { StoryApi, StoryFn } from '@storybook/addons';
 import { StoryFnAngularReturnType } from '@storybook/angular/dist/client/preview/types';
+import { MatTableModule } from '@angular/material/table';
+import { GameTableComponent } from 'src/app/shared/modules/home/modules/game/components/overview/game-table/game-table.component';
 
 
 export class GameTableStoryFactory {
-  // private component = GameTableComponent;
+  private component = GameTableComponent;
   private readonly displayedColumns: string[] = ['white', 'winner', 'black'];
   private stories: CompleteStory[] = [];
 

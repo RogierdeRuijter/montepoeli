@@ -1,0 +1,20 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+      "outDir": "./out-tsc/spec",
+      "module": "commonjs",
+      "allowJs": true,
+      "types": [
+        "jest",
+        "jquery",
+        "jsdom",
+        "node"
+      ]
+    },
+    "files": [
+      "src/polyfills.ts"
+    ],
+    "include": [
+      "src/Storyshots.test.js"
+    ]
+  }
