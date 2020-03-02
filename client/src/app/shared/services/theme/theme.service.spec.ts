@@ -14,7 +14,7 @@ describe('ThemeService', () => {
     expect(service).toBeTruthy();
   });
 
-  fdescribe('getThemeBasedOnSystemPreference', () => {
+  describe('getThemeBasedOnSystemPreference', () => {
     it('should return black theme when prefers-color-scheme: dark is set to true', () => {
       const darkTheme = true;
   
@@ -51,7 +51,7 @@ describe('ThemeService', () => {
     });
   });
 
-  fdescribe('getThemeForColorScheme', () => {
+  describe('getThemeForColorScheme', () => {
     it('should return black-theme if the input is true', () => {
       const input = true;
       
