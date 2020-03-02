@@ -86,7 +86,8 @@
     "karma-phantomjs-launcher": "1.0.4",
     "ts-node": "8.6.2",
     "tslint": "6.0.0",
-    "typescript": "3.7.5"
+    "typescript": "3.7.5",
+    "webpack-bundle-analyzer": "^3.6.0"
   },
   "optionalDependencies": {
     "@angular/language-service": "8.2.14",
