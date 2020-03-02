@@ -1,7 +1,6 @@
 $anms-black-primary: mat-palette($mat-grey, 700, 300, 900);
 $anms-black-accent: mat-palette($mat-blue-grey, 400);
 $anms-black-warn: mat-palette($mat-red, 500);
-$background-color: map_get($mat-blue-grey, 50);
 
 $anms-black-theme: mat-dark-theme(
   $anms-black-primary,
@@ -9,7 +8,5 @@ $anms-black-theme: mat-dark-theme(
   $anms-black-warn
 );
 
-// Insert custom background color
-$background: map-get($anms-black-theme, background);
-$background: map_merge($background, (background: $background-color));
-$anms-black-theme: map_merge($anms-black-theme, (background: $background));
+$custom-variables: (background-of-main: #48494d, text-color: white);
+$anms-black-theme: map_merge($anms-black-theme, $custom-variables);

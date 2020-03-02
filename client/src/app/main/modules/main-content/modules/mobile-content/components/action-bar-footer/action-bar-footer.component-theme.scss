@@ -1,0 +1,12 @@
+@import '~@angular/material/theming';
+
+@mixin action-bar-footer-component-theme($theme) {
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+  
+  .action-bar-footer {
+    border-top: 1px solid mat-color($accent);
+    background-color: mat-color($primary);
+  }
+}
