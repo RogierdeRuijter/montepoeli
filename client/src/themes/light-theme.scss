@@ -7,3 +7,14 @@ $anms-light-theme: mat-light-theme(
   $anms-light-accent,
   $anms-light-warn
 );
+
+$custom-variables: (
+  background-of-main: white, 
+  text-color: black,
+  action-bar-top-border: white,
+  action-bar-border-background: white,
+  button-icon-active-color: black,
+  button-icon-inactive-color: gray
+  );
+
+$anms-light-theme: map_merge($anms-light-theme, $custom-variables);
