@@ -3,7 +3,7 @@
 @mixin action-bar-footer-component-theme($theme) {
     $border-color: map-get($theme, action-bar-top-border);
     $border-background: map-get($theme, action-bar-border-background);
-  
+
   .action-bar-footer {
     border-top: 1px solid $border-color;
     background-color: $border-background;

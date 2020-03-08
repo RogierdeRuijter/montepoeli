@@ -20,11 +20,19 @@
 .light-theme {
   @include angular-material-theme($anms-light-theme);
   @include custom-components-theme($anms-light-theme);
+
+  // span {
+  //   color: black;
+  // }
 }
 
 .black-theme {
   @include angular-material-theme($anms-black-theme);
   @include custom-components-theme($anms-black-theme);
+  
+  // span {
+  //   color: white;
+  // }
 }
 
 html, body {

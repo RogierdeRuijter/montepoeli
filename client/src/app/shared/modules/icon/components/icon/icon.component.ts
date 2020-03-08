@@ -2,7 +2,6 @@ import {AfterViewInit, Component, ElementRef, Input, OnChanges, OnInit, Renderer
 import {IconColor, Icons, IconSize} from '../../../../static-files/enums';
 import {IconDefinition, SizeProp} from '@fortawesome/fontawesome-svg-core';
 import {faCheck, faChessRook, faCoffee, faPlus, faPlusSquare, faTimes, faUser} from '@fortawesome/free-solid-svg-icons';
-import {faHeart} from '@fortawesome/free-solid-svg-icons/faHeart';
 import {faChess} from '@fortawesome/free-solid-svg-icons/faChess';
 import {faScroll} from '@fortawesome/free-solid-svg-icons/faScroll';
 import {UnknownCaseException} from '../../../../exceptions/UnknownCaseException';
@@ -37,6 +36,7 @@ export class IconComponent implements OnInit, AfterViewInit, OnChanges {
   public color: string;
 
   public svgIcon: string;
+  public matIcon: string;
 
   constructor(private renderer: Renderer2) {}
 
@@ -60,8 +60,8 @@ export class IconComponent implements OnInit, AfterViewInit, OnChanges {
       case Icons.COFFEE:
         this.iconDefinition = faCoffee;
         break;
-      case Icons.GREEN_HEART:
-        this.iconDefinition = faHeart;
+      case Icons.HEART:
+        this.matIcon = 'heart';
         break;
       case Icons.CHESS_PIECES:
         this.iconDefinition = faChess;
@@ -78,7 +78,7 @@ export class IconComponent implements OnInit, AfterViewInit, OnChanges {
       case Icons.MONTEPOELI:
         this.svgIcon = '../../../../../../assets/images/florance_logo.png';
         break;
-      default: throw new UnknownCaseException('unkown');
+      default: throw new UnknownCaseException('unkown icon: ' + this.icon);
     }
 
     switch (this.iconSize) {
@@ -94,7 +94,7 @@ export class IconComponent implements OnInit, AfterViewInit, OnChanges {
       case IconSize.LARGE:
         this.size = '3x';
         break;
-      default: throw new UnknownCaseException('unkown');
+      default: throw new UnknownCaseException('unkown icon size: ' + this.iconSize);
     }
   }
 
@@ -107,7 +107,10 @@ export class IconComponent implements OnInit, AfterViewInit, OnChanges {
         case IconColor.GRAY:
           this.color = 'dark-grey';
           break;
-        default: throw new UnknownCaseException(this.iconColor);
+        case IconColor.ACCENT:
+          this.color = 'accent';
+          break;
+        default: throw new UnknownCaseException('unkown icon color: ' + this.iconColor);
       }
     }
   }
@@ -122,10 +125,6 @@ export class IconComponent implements OnInit, AfterViewInit, OnChanges {
         this.renderer.setStyle(this.svgIconElementRef.nativeElement, 'height', '56px');
         this.renderer.setStyle(this.svgIconElementRef.nativeElement, 'width', '41px');
       }
-    }
-    // TODO: refactor this to use colorIcon green
-    if (this.icon === Icons.GREEN_HEART) {
-      this.renderer.setStyle(this.faIcon.nativeElement, 'color', 'green');
     }
   }
 }

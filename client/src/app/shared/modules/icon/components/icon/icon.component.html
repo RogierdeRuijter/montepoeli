@@ -1,12 +1,16 @@
-<ng-container *ngIf="!svgIcon">
-  <span #fontAwesomeComponent>
-    <fa-icon class="{{color}}"
-             [icon]="iconDefinition"
-             [size]="size">
-    </fa-icon>
-  </span>
+<ng-container *ngIf="matIcon">
+  <app-icon> {{matIcon}} </app-icon>
 </ng-container>
 
 <ng-container *ngIf="svgIcon">
   <img #svgIconElement [src]="svgIcon">
+</ng-container>
+
+<ng-container *ngIf="!svgIcon || !matIcon">
+  <span #fontAwesomeComponent>
+    <!-- <fa-icon class="{{color}}" -->
+             <!-- [icon]="iconDefinition" -->
+             <!-- [size]="size"> -->
+    <!-- </fa-icon> -->
+  </span>
 </ng-container>
