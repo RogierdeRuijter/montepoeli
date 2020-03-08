@@ -38,14 +38,14 @@
   <app-button (clickEvent)="cancel()"
               [appGridColumn]="[6]"
               [buttonFunction]="ButtonFunction.CANCEL"
-              [buttonType]="ButtonType.PRIMARY">
+              [buttonType]="ButtonType.SECONDARY">
   </app-button>
 
   <app-button id="save"
               (clickEvent)="save()"
               [appGridColumn]="[6]"
               [buttonFunction]="ButtonFunction.SAVE"
-              [buttonType]="ButtonType.SECONDARY"
+              [buttonType]="ButtonType.PRIMARY"
               [dialogDataToSubmit]="data"
               [disabled]="disabled">
   </app-button>
