@@ -94,7 +94,7 @@ jobs:
             IMAGE_CLIENT_NAME=montepouli-client
             BASE_IMAGE_CLIENT_NAME=montepouli-client-base
 
-            docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG . -f Dockerfile.prod --cache-from=$DOMAIN/$BASE_IMAGE_CLIENT_NAME:$CLIENT_BASE_MODULES_TAG
+            docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG . -f Dockerfile.prod --cache-from=$DOMAIN/$BASE_IMAGE_CLIENT_NAME:latest
             
       - deploy:
           command: |
