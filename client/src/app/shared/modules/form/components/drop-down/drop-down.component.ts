@@ -1,4 +1,4 @@
-import {Component, EventEmitter, forwardRef, Input, Output, ViewChild, ViewEncapsulation} from '@angular/core';
+import {Component, EventEmitter, forwardRef, Input, Output, ViewChild} from '@angular/core';
 import {ControlValueAccessor, DefaultValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {MatSelect} from '@angular/material/select';
 
@@ -12,8 +12,7 @@ import {MatSelect} from '@angular/material/select';
       useExisting: forwardRef(() => DropDownComponent),
       multi: true,
     },
-  ],
-  encapsulation: ViewEncapsulation.None
+  ]
 })
 export class DropDownComponent implements ControlValueAccessor {
 
