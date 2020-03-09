@@ -90,22 +90,19 @@ jobs:
           command: |
               BASE_IMAGE_CLIENT_NAME=montepouli-client-base
               
-              docker pull $DOMAIN/$BASE_IMAGE_CLIENT_NAME:$CLIENT_BASE_MODULES_TAG || true
-
-      - run:
-          command: |
-            BASE_IMAGE_CLIENT_NAME=montepouli-client-base
-            
-            docker build -t $DOMAIN/$BASE_IMAGE_CLIENT_NAME:latest . -f Dockerfile.base-prod
-            docker push $DOMAIN/$BASE_IMAGE_CLIENT_NAME:latest
+              if docker pull $DOMAIN/$BASE_IMAGE_CLIENT_NAME:$CLIENT_BASE_MODULES_TAG; then
+                echo "Image available"
+              else            
+                docker build -t $DOMAIN/$BASE_IMAGE_CLIENT_NAME:$CLIENT_BASE_MODULES_TAG . -f Dockerfile.base-prod
+                docker push $DOMAIN/$BASE_IMAGE_CLIENT_NAME:$CLIENT_BASE_MODULES_TAG
+              fi
 
       - run:
           command: |
             IMAGE_CLIENT_NAME=montepouli-client
             BASE_IMAGE_CLIENT_NAME=montepouli-client-base
 
-            docker pull $DOMAIN/$BASE_IMAGE_CLIENT_NAME:latest
-            docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG . -f Dockerfile.prod
+            docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG . -f Dockerfile.prod --cache-from=$DOMAIN/$BASE_IMAGE_CLIENT_NAME:$CLIENT_BASE_MODULES_TAG
             
       - deploy:
           command: |
