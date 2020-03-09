@@ -1,7 +1,18 @@
-ARG CLIENT_MODULES_BASE_IMAGE_NAME
-ARG CLIENT_MODULES_BASE_IMAGE_TAG
+FROM node:13-slim AS builder
 
-FROM $CLIENT_MODULES_BASE_IMAGE_NAME:$CLIENT_MODULES_BASE_IMAGE_TAG
+WORKDIR /usr/src/app
+
+COPY package.json package.json
+COPY yarn.lock yarn.lock
+
+RUN yarn install --frozen-lockfile --prod
+
+COPY src src
+COPY angular.json angular.json
+COPY tsconfig.json tsconfig.json
+COPY ngsw-config.json ngsw-config.json
+
+RUN yarn compile-ivy-dependencies
 
 RUN npm run build:prod
 
