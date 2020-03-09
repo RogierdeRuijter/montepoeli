@@ -11,7 +11,8 @@ jobs:
           command: |
             cd client
             echo ${CIRCLE_WORKFLOW_ID} > /tmp/client-version.txt
-
+            
+            cd ..
             VERSION=$(grep '"version":' package.json | cut -d\" -f4)
             
             echo $VERSION > /tmp/client-base-version.txt
@@ -87,6 +88,7 @@ jobs:
             docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
       
       - run:
+          name: Pull an image with the node modules and ngcc compiled modules
           command: |
               BASE_IMAGE_CLIENT_NAME=montepouli-client-base
               
