@@ -33,6 +33,7 @@
     "webdriver-update": "webdriver-manager clean && webdriver-manager update",
     "webdriver-update:protractor": "./node_modules/protractor/bin/webdriver-manager update",
     "compile-ivy-dependencies": "ngcc -p es2015, es2015 -l info",
+    "compile-ivy-dependencies-test": "ngcc -p module, esm5 -l info",
     "g c": " ng generate component -c OnPush --skip-tests",
     "bundle-report": "webpack-bundle-analyzer dist/frontend/stats-es2015.json"
   },
