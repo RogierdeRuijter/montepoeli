@@ -59,6 +59,7 @@ jobs:
           name: Install node modules
           command: |
             yarn install --ignore-optional
+            yarn compile-ivy-dependencies
 
       - save_cache:
           paths:
