@@ -24,6 +24,9 @@ export class ButtonIconComponent implements AfterViewInit {
   @Input()
   public squareButton = false;
 
+  @Input()
+  public accentColor = false;
+
   @Output()
   public clickEvent: EventEmitter<void> = new EventEmitter();
 

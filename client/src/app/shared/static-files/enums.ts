@@ -16,12 +16,12 @@ export enum Icons {
   DELETE,
   ROOK,
   COFFEE,
-  GREEN_HEART,
   CHESS_PIECES,
   SCROLL,
   MONTEPOELI,
   USER,
-  PLUS_WITH_BOX
+  PLUS_WITH_BOX,
+  HEART
 }
 
 export enum IconSize {
@@ -33,7 +33,8 @@ export enum IconSize {
 
 export enum IconColor {
   GRAY,
-  BLACK
+  BLACK,
+  ACCENT
 }
 
 export enum Actions {
