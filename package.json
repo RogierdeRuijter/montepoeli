@@ -43,7 +43,7 @@
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD) && git checkout master && git pull && git checkout $CURRENT_BRANCH && lerna run --parallel lint",
+      "pre-commit": "CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD) && git checkout master && git pull && git checkout $CURRENT_BRANCH && git merge master && git add . && lerna run --parallel lint",
       "pre-push": "lerna run --parallel test && lerna run --parallel build:pre-push",
       "post-merge": "yarn install-sub-modules"
     }
