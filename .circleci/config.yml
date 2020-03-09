@@ -11,11 +11,6 @@ jobs:
           command: |
             cd client
             echo ${CIRCLE_WORKFLOW_ID} > /tmp/client-version.txt
-            
-            cd ..
-            VERSION=$(grep '"version":' package.json | cut -d\" -f4)
-            
-            echo $VERSION > /tmp/client-base-version.txt
 
       - run:
           command: |
@@ -26,15 +21,11 @@ jobs:
           path: /tmp/client-version.txt
       
       - store_artifacts:
-          path: /tmp/client-base-version.txt
-
-      - store_artifacts:
           path: /tmp/server-version.txt
 
       - persist_to_workspace:
           root: /tmp
           paths:
-            - client-base-version.txt
             - client-version.txt
             - server-version.txt
             
@@ -57,7 +48,6 @@ jobs:
           name: Setup Environment Variables
           command: |
             echo "export CLIENT_TAG=$(cat /tmp/client-version.txt)" >> $BASH_ENV
-             echo "export CLIENT_BASE_MODULES_TAG=$(cat /tmp/client-base-version.txt)" >> $BASH_ENV
 
       - restore_cache:
           keys:
@@ -93,12 +83,11 @@ jobs:
           command: |
               BASE_IMAGE_CLIENT_NAME=montepouli-client-base
               
-              if docker pull $DOMAIN/$BASE_IMAGE_CLIENT_NAME:$CLIENT_BASE_MODULES_TAG; then
-                echo "Image available"
-              else            
-                docker build -t $DOMAIN/$BASE_IMAGE_CLIENT_NAME:$CLIENT_BASE_MODULES_TAG . -f Dockerfile.base-prod
-                docker push $DOMAIN/$BASE_IMAGE_CLIENT_NAME:$CLIENT_BASE_MODULES_TAG
-              fi
+              docker pull $DOMAIN/$BASE_IMAGE_CLIENT_NAME:latest
+                
+              docker build -t $DOMAIN/$BASE_IMAGE_CLIENT_NAME:latest . -f Dockerfile.base-prod --cache-from=$DOMAIN/$BASE_IMAGE_CLIENT_NAME:latest
+              docker push $DOMAIN/$BASE_IMAGE_CLIENT_NAME:latest
+              
 
       - run:
           command: |
