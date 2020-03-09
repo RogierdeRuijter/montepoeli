@@ -89,7 +89,7 @@ jobs:
             docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
       
       - run:
-          name: Pull an image with the node modules and ngcc compiled modules
+          name: Pull or create an image with the node modules and ngcc compiled modules to speed up consequitive builds
           command: |
               BASE_IMAGE_CLIENT_NAME=montepouli-client-base
               
