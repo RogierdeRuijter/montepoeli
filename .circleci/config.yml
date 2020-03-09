@@ -19,7 +19,7 @@ jobs:
             
       - store_artifacts:
           path: /tmp/client-version.txt
-
+      
       - store_artifacts:
           path: /tmp/server-version.txt
 
@@ -59,7 +59,7 @@ jobs:
           name: Install node modules
           command: |
             yarn install --ignore-optional
-            yarn compile-ivy-dependencies
+            yarn compile-ivy-dependencies-test
 
       - save_cache:
           paths:
@@ -74,33 +74,26 @@ jobs:
 
             bash <(curl -s https://codecov.io/bash)
       
-      # - run:
-      #     command: |
-      #       docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
+      - run:
+          command: |
+            docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
       
-      # - run:
-      #     command: |
-      #         BASE_IMAGE_CLIENT_NAME=montepouli-client-base
+      - run:
+          name: Pull or create an image with the node modules and ngcc compiled modules to speed up consequitive builds
+          command: |
+              BASE_IMAGE_CLIENT_NAME=montepouli-client-base
               
-      #         docker pull $DOMAIN/$BASE_IMAGE_CLIENT_NAME:latest || true
-
-      # - run:
-      #     command: |
-      #       BASE_IMAGE_CLIENT_NAME=montepouli-client-base
-            
-      #       docker build -t $DOMAIN/$BASE_IMAGE_CLIENT_NAME:latest . -f Dockerfile.base-prod
-      #       docker push $DOMAIN/$BASE_IMAGE_CLIENT_NAME:latest
-      
-      #       should be in the run command below
-      #       docker pull $DOMAIN/$BASE_IMAGE_CLIENT_NAME:latest
-
+              docker pull $DOMAIN/$BASE_IMAGE_CLIENT_NAME:latest
+              
+              docker build -t $DOMAIN/$BASE_IMAGE_CLIENT_NAME:latest . -f Dockerfile.base-prod --cache-from=$DOMAIN/$BASE_IMAGE_CLIENT_NAME:latest              
+              docker push $DOMAIN/$BASE_IMAGE_CLIENT_NAME:latest
 
       - run:
           command: |
             IMAGE_CLIENT_NAME=montepouli-client
             BASE_IMAGE_CLIENT_NAME=montepouli-client-base
 
-            docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG . -f Dockerfile.prod
+             docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG . -f Dockerfile.prod --cache-from=$DOMAIN/$BASE_IMAGE_CLIENT_NAME:latest
             
       - deploy:
           command: |
