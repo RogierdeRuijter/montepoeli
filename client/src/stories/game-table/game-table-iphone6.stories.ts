@@ -1,15 +1,15 @@
-import {storiesOf} from '@storybook/angular';
-import {GameTableStoryFactory} from '../helpers/factories/game-table.story-factory';
+// import {storiesOf} from '@storybook/angular';
+// import {GameTableStoryFactory} from '../helpers/factories/game-table.story-factory';
 
-export default {
-  title: 'GameTable/Iphone6',
-};
+// export default {
+//   title: 'GameTable/Iphone6',
+// };
 
-const storyDefinition = storiesOf('GameTable/Iphone6', module)
-  .addParameters({viewport: {
-    defaultViewport: 'iphonex'
-  }
-});
+// const storyDefinition = storiesOf('GameTable/Iphone6', module)
+//   .addParameters({viewport: {
+//     defaultViewport: 'iphonex'
+//   }
+// });
 
-new GameTableStoryFactory(storyDefinition).create();
+// new GameTableStoryFactory(storyDefinition).create();
 
