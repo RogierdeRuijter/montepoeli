@@ -1,0 +1,20 @@
+$anms-black-primary: mat-palette($mat-grey, 700, 300, 900);
+$anms-black-accent: mat-palette($mat-yellow, 800);
+$anms-black-warn: mat-palette($mat-red, 500);
+
+$anms-black-theme: mat-dark-theme(
+  $anms-black-primary,
+  $anms-black-accent,
+  $anms-black-warn
+);
+
+$custom-variables: (
+  background-of-main: #48494d, 
+  text-color: white,
+  action-bar-top-border: black,
+  action-bar-border-background: mat-color($anms-black-primary),
+  button-icon-active-color: white,
+  button-icon-inactive-color: gray
+);
+
+$anms-black-theme: map_merge($anms-black-theme, $custom-variables);

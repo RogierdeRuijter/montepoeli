@@ -1,3 +1,31 @@
+# [4.3.0](https://github.com/RogierdeRuijter/montepoeli/compare/v4.2.9...v4.3.0) (2020-03-09)
+
+
+### Features
+
+* dark theme ([3f1a47b](https://github.com/RogierdeRuijter/montepoeli/commit/3f1a47b2981fe85ba6c43e429eaa7867ccba4b16))
+
+## [4.2.9](https://github.com/RogierdeRuijter/montepoeli/compare/v4.2.8...v4.2.9) (2020-03-09)
+
+
+### Bug Fixes
+
+* **package:** Update client dependencies ([46692c7](https://github.com/RogierdeRuijter/montepoeli/commit/46692c74d2780e65deadb5f23f5f2b66c07aa51c))
+
+## [4.2.8](https://github.com/RogierdeRuijter/montepoeli/compare/v4.2.7...v4.2.8) (2020-03-04)
+
+
+### Bug Fixes
+
+* **package:** update server dependencies ([7c14803](https://github.com/RogierdeRuijter/montepoeli/commit/7c14803c0c393a8fffb8669b45a92b8d6fbab951))
+
+## [4.2.7](https://github.com/RogierdeRuijter/montepoeli/compare/v4.2.6...v4.2.7) (2020-03-02)
+
+
+### Bug Fixes
+
+* **package:** Update client dependencies ([bb2f645](https://github.com/RogierdeRuijter/montepoeli/commit/bb2f6459411a1095d829648c5e444af58568be12))
+
 ## [4.2.6](https://github.com/RogierdeRuijter/montepoeli/compare/v4.2.5...v4.2.6) (2020-02-29)
 
 

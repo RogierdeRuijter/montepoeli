@@ -14,6 +14,7 @@ import { InterceptorModule } from './shared/modules/interceptor/interceptor.modu
 import { GlobalErrorHandlerService } from './shared/services/global-error-handler/global-error-handler.service';
 import { AppInitService } from './shared/services/app.init';
 import { CustomTranslateModule } from './shared/modules/translate/custom-translate.module';
+import { MatButtonModule } from '@angular/material/button';
 
 export function init_app(appLoadService: AppInitService): () => Promise<any> {
   return () => appLoadService.init();
@@ -43,7 +44,8 @@ export function init_app(appLoadService: AppInitService): () => Promise<any> {
     CustomTranslateModule,
     ServiceWorkerModule.register('ngsw-worker.js', {enabled: true}),
     AuthModule,
-    InterceptorModule
+    InterceptorModule,
+    MatButtonModule
   ],
   bootstrap: [AppComponent],
 })

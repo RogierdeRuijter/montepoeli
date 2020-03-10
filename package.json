@@ -1,6 +1,6 @@
 {
   "name": "montepouli",
-  "version": "4.2.6",
+  "version": "4.3.0",
   "license": "MIT",
   "private": true,
   "scripts": {
@@ -26,7 +26,8 @@
     "docker-compose-rebuild-no-cache": "docker-compose build --no-cache && docker-compose down && docker-compose up -d",
     "release-patch": "lerna version -y patch --message '[skip ci] bump patch'",
     "release-minor": "lerna version -y minor --message '[skip ci] bump minor'",
-    "release-major": "lerna version -y major --message '[skip ci] bump major'"
+    "release-major": "lerna version -y major --message '[skip ci] bump major'",
+    "update-with-master": "CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD) && git checkout master && git pull && git checkout $CURRENT_BRANCH && git merge master"
   },
   "devDependencies": {
     "@commitlint/cli": "8.3.5",
@@ -44,7 +45,8 @@
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
       "pre-commit": "lerna run --parallel lint",
-      "pre-push": "lerna run --parallel test:visual & lerna run --parallel test && lerna run --parallel build:pre-push",
+      "post-commit": "yarn update-with-master",
+      "pre-push": "lerna run --parallel test && lerna run --parallel build:pre-push",
       "post-merge": "yarn install-sub-modules"
     }
   }

@@ -1,4 +1,5 @@
 module.exports = {
-    stories: ['../src/**/*.stories.[tj]s'],
-    addons: ['@storybook/addon-viewport/register']
-};
+    stories: ['../src/**/*.stories.ts'],
+    addons: ['@storybook/addon-actions', '@storybook/addon-links', '@storybook/addon-notes'],
+  };
+  

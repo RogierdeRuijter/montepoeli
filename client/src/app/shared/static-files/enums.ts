@@ -21,7 +21,9 @@ export enum Icons {
   SCROLL = 9,
   MONTEPOELI = 10,
   USER = 11,
-  PLUS_WITH_BOX = 12
+  PLUS_WITH_BOX = 12,
+  HEART = 13
+
 }
 
 export enum IconSize {
@@ -33,7 +35,8 @@ export enum IconSize {
 
 export enum IconColor {
   GRAY = 1,
-  BLACK = 2
+  BLACK = 2,
+  ACCENT = 3
 }
 
 export enum Actions {

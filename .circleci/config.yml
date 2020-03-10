@@ -19,7 +19,7 @@ jobs:
             
       - store_artifacts:
           path: /tmp/client-version.txt
-
+      
       - store_artifacts:
           path: /tmp/server-version.txt
 
@@ -59,6 +59,7 @@ jobs:
           name: Install node modules
           command: |
             yarn install
+            yarn compile-ivy-dependencies-test
 
       - save_cache:
           paths:
@@ -69,7 +70,7 @@ jobs:
           name: Run render only test on storybook stories
           
           command: |
-            yarn jest
+            yarn test:visual
 
       - run: 
           name: Run tests with coverage and store coverage on server
@@ -78,12 +79,27 @@ jobs:
             yarn test:cov
 
             bash <(curl -s https://codecov.io/bash)
+      
+      - run:
+          command: |
+            docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
+      
+      - run:
+          name: Pull or create an image with the node modules and ngcc compiled modules to speed up consequitive builds
+          command: |
+              BASE_IMAGE_CLIENT_NAME=montepouli-client-base
+              
+              docker pull $DOMAIN/$BASE_IMAGE_CLIENT_NAME:latest
+              
+              docker build -t $DOMAIN/$BASE_IMAGE_CLIENT_NAME:latest . -f Dockerfile.base-prod --cache-from=$DOMAIN/$BASE_IMAGE_CLIENT_NAME:latest              
+              docker push $DOMAIN/$BASE_IMAGE_CLIENT_NAME:latest
 
       - run:
           command: |
             IMAGE_CLIENT_NAME=montepouli-client
-            
-            docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG . -f Dockerfile.prod
+            BASE_IMAGE_CLIENT_NAME=montepouli-client-base
+
+             docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG . -f Dockerfile.prod --cache-from=$DOMAIN/$BASE_IMAGE_CLIENT_NAME:latest
             
       - deploy:
           command: |

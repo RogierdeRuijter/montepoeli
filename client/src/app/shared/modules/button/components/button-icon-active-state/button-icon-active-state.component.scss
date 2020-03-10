@@ -1,5 +1,4 @@
-.color-black {
-    color: black;
+.button-icon-active-color {
     -webkit-transition:  'color 1s ease';
     -moz-transition: 'color 1s ease';
     -ms-transition: 'color 1s ease';
@@ -7,8 +6,7 @@
     transition: 'color 1s ease';
 }
 
-.color-gray {
-    color: gray;
+.button-icon-inactive-color {
     -webkit-transition:  'color 1s ease';
     -moz-transition: 'color 1s ease';
     -ms-transition: 'color 1s ease';

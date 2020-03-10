@@ -35,6 +35,7 @@ services:
       - dev
     command: sh -c 'npm run start:dev'
 
+    
   mongodb:
     container_name: montepouli-mongo-db
     image: mongo:4.1
