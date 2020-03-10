@@ -1,4 +1,3 @@
-import {storiesOf} from '@storybook/angular';
 import {StorybookTranslateModule} from './storybook-translate.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { LoginFormComponent } from 'src/app/main/modules/login/components/login-form/login-form.component';

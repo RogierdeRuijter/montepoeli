@@ -1,4 +1,3 @@
-import {storiesOf} from '@storybook/angular';
 import {ButtonFunction, ButtonRowType, ButtonType} from '../app/shared/static-files/enums';
 import {MatButtonModule} from '@angular/material/button';
 import {TranslateDirective} from '../app/shared/modules/translate/directives/translate.directive';
