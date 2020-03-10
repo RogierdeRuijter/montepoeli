@@ -14,7 +14,7 @@
     "build:e2e": "ng build --configuration=e2e",
     "build:local": "ng build --configuration=local",
     "install-node-modules": "yarn install",
-    "test": "ng test --watch=false",
+    "test": "ng test --watch=false && yarn test:visual",
     "test:watch": "ng test",
     "test:cov": "ng test --code-coverage true --watch false",
     "jest": "jest",
