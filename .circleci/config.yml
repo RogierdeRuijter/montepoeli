@@ -67,7 +67,7 @@ jobs:
           key: v1-dependencies-client-{{ checksum "package.json" }}
 
       - run: 
-          name: Run render only test on storybook stories
+          name: Run visual regression test shots, but not saving it.
           
           command: |
             yarn test:visual --updateSnapshot
