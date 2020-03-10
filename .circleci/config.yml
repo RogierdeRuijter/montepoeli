@@ -70,7 +70,7 @@ jobs:
           name: Run render only test on storybook stories
           
           command: |
-            yarn test:visual
+            yarn test:visual --updateSnapshot
 
       - run: 
           name: Run tests with coverage and store coverage on server
