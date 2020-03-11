@@ -93,7 +93,7 @@ jobs:
               
               docker pull $DOMAIN/$BASE_IMAGE_CLIENT_NAME:latest
               
-              docker build -t $DOMAIN/$BASE_IMAGE_CLIENT_NAME:latest . -f Dockerfile.base-prod --cache-from=$DOMAIN/$BASE_IMAGE_CLIENT_NAME:latest              
+              docker build -t $DOMAIN/$BASE_IMAGE_CLIENT_NAME:$DOCKER_TAG_PACKAGE_HASH . -f Dockerfile.base-prod --cache-from=$DOMAIN/$BASE_IMAGE_CLIENT_NAME:latest              
               docker push $DOMAIN/$BASE_IMAGE_CLIENT_NAME:$DOCKER_TAG_PACKAGE_HASH
 
       - run:
