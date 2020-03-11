@@ -19,7 +19,7 @@ jobs:
             
       - store_artifacts:
           path: /tmp/client-version.txt
-
+      
       - store_artifacts:
           path: /tmp/server-version.txt
 
@@ -58,13 +58,19 @@ jobs:
       - run:
           name: Install node modules
           command: |
-            yarn install --ignore-optional
-            yarn compile-ivy-dependencies
+            yarn install
+            yarn compile-ivy-dependencies-test
 
       - save_cache:
           paths:
           - node_modules
           key: v1-dependencies-client-{{ checksum "package.json" }}
+
+      - run: 
+          name: Run visual regression test shots, but not saving it.
+          
+          command: |
+            yarn test:visual --updateSnapshot
 
       - run: 
           name: Run tests with coverage and store coverage on server
@@ -73,12 +79,35 @@ jobs:
             yarn test:cov
 
             bash <(curl -s https://codecov.io/bash)
+      
+      - run:
+          command: |
+            docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
+      
+      - run:
+          name: Pull or create an image with the node modules and ngcc compiled modules to speed up consequitive builds
+          command: |
+              BASE_IMAGE_CLIENT_NAME=montepouli-client-base
+              DOCKER_TAG_PACKAGE_HASH=$(shasum package.json | awk '{print $1;}')
+              
+              docker pull $DOMAIN/$BASE_IMAGE_CLIENT_NAME:$DOCKER_TAG_PACKAGE_HASH || true
+              
+              docker build -t $DOMAIN/$BASE_IMAGE_CLIENT_NAME:$DOCKER_TAG_PACKAGE_HASH . -f Dockerfile.base-prod --cache-from=$DOMAIN/$BASE_IMAGE_CLIENT_NAME:$DOCKER_TAG_PACKAGE_HASH              
+      - run:
+          name: Push created base image
+          command: |
+              BASE_IMAGE_CLIENT_NAME=montepouli-client-base
+              DOCKER_TAG_PACKAGE_HASH=$(shasum package.json | awk '{print $1;}')
+
+              docker push $DOMAIN/$BASE_IMAGE_CLIENT_NAME:$DOCKER_TAG_PACKAGE_HASH
 
       - run:
           command: |
-            IMAGE_CLIENT_NAME=montepouli-client
-            
-            docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG . -f Dockerfile.prod
+              IMAGE_CLIENT_NAME=montepouli-client
+              BASE_IMAGE_CLIENT_NAME=montepouli-client-base
+              DOCKER_TAG_PACKAGE_HASH=$(shasum package.json | awk '{print $1;}')
+
+              docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG . -f Dockerfile.prod --cache-from=$DOMAIN/$BASE_IMAGE_CLIENT_NAME:$DOCKER_TAG_PACKAGE_HASH
             
       - deploy:
           command: |
@@ -380,25 +409,34 @@ workflows:
             - e2e-tests
           filters:
             branches:
-              only: master
+              only: 
+                - master
+                - /([0-9])+?(\.([0-9])+)\.x/
+
 
       - save-new-version:
           requires:
             - update-version
           filters:
             branches:
-              only: master
+              only: 
+                - master
+                - /([0-9])+?(\.([0-9])+)\.x/
 
       - swap-client-config:
           requires:
             - save-new-version
           filters:
             branches:
-              only: master
+              only: 
+                - master
+                - /([0-9])+?(\.([0-9])+)\.x/
 
       - retag-server-image:
           requires:
             - save-new-version
           filters:
             branches:
-              only: master
+              only: 
+                - master
+                - /([0-9])+?(\.([0-9])+)\.x/

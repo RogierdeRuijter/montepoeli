@@ -1,0 +1,697 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Button Component Primary Button 1`] = `
+<storybook-dynamic-app-root
+  cfr={[Function CodegenComponentFactoryResolver]}
+  data={[Function Object]}
+  target={[Function ViewContainerRef_]}
+>
+  <app-button>
+    
+    <button
+      class="full-width mat-focus-indicator mat-raised-button mat-button-base mat-accent"
+      id="undefined"
+      mat-raised-button=""
+      ng-reflect-color="accent"
+      ng-reflect-key="pages.login.do_login"
+      type="submit"
+    >
+      <span
+        class="mat-button-wrapper"
+      />
+      <div
+        class="mat-button-ripple mat-ripple"
+        matripple=""
+        ng-reflect-centered="false"
+        ng-reflect-disabled="false"
+        ng-reflect-trigger="[object HTMLButtonElement]"
+      />
+      <div
+        class="mat-button-focus-overlay"
+      />
+    </button>
+    
+  </app-button>
+</storybook-dynamic-app-root>
+`;
+
+exports[`Storyshots Button Component Secondary Button 1`] = `
+<storybook-dynamic-app-root
+  cfr={[Function CodegenComponentFactoryResolver]}
+  data={[Function Object]}
+  target={[Function ViewContainerRef_]}
+>
+  <app-button>
+    
+    <button
+      class="full-width mat-focus-indicator mat-raised-button mat-button-base"
+      id="undefined"
+      mat-raised-button=""
+      ng-reflect-color=""
+      ng-reflect-key="pages.login.do_login"
+      type="submit"
+    >
+      <span
+        class="mat-button-wrapper"
+      />
+      <div
+        class="mat-button-ripple mat-ripple"
+        matripple=""
+        ng-reflect-centered="false"
+        ng-reflect-disabled="false"
+        ng-reflect-trigger="[object HTMLButtonElement]"
+      />
+      <div
+        class="mat-button-focus-overlay"
+      />
+    </button>
+    
+  </app-button>
+</storybook-dynamic-app-root>
+`;
+
+exports[`Storyshots Button Row Primary Button 1`] = `
+<storybook-dynamic-app-root
+  cfr={[Function CodegenComponentFactoryResolver]}
+  data={[Function Object]}
+  target={[Function ViewContainerRef_]}
+>
+  <app-button-row>
+    
+    <div>
+      <div
+        class="row"
+        ng-reflect-grid-sizes="6"
+      >
+        <div
+          class="col-1"
+          ng-reflect-amount-of-columns="1"
+        >
+          <app-button
+            ng-reflect-button-function="2"
+            ng-reflect-button-type="1"
+          >
+            
+            <button
+              class="full-width mat-focus-indicator mat-raised-button mat-button-base mat-accent"
+              id="undefined"
+              mat-raised-button=""
+              ng-reflect-color="accent"
+              ng-reflect-key="buttons.cancel"
+              type="submit"
+            >
+              <span
+                class="mat-button-wrapper"
+              />
+              <div
+                class="mat-button-ripple mat-ripple"
+                matripple=""
+                ng-reflect-centered="false"
+                ng-reflect-disabled="false"
+                ng-reflect-trigger="[object HTMLButtonElement]"
+              />
+              <div
+                class="mat-button-focus-overlay"
+              />
+            </button>
+            
+          </app-button>
+        </div>
+        <div
+          class="col-1"
+          ng-reflect-amount-of-columns="1"
+        >
+          <app-button
+            ng-reflect-button-function="2"
+            ng-reflect-button-type="1"
+            ng-reflect-disabled="false"
+          >
+            
+            <button
+              class="full-width mat-focus-indicator mat-raised-button mat-button-base mat-accent"
+              id="undefined"
+              mat-raised-button=""
+              ng-reflect-color="accent"
+              ng-reflect-disabled="false"
+              ng-reflect-key="buttons.cancel"
+              type="submit"
+            >
+              <span
+                class="mat-button-wrapper"
+              />
+              <div
+                class="mat-button-ripple mat-ripple"
+                matripple=""
+                ng-reflect-centered="false"
+                ng-reflect-disabled="false"
+                ng-reflect-trigger="[object HTMLButtonElement]"
+              />
+              <div
+                class="mat-button-focus-overlay"
+              />
+            </button>
+            
+          </app-button>
+        </div>
+      </div>
+    </div>
+  </app-button-row>
+</storybook-dynamic-app-root>
+`;
+
+exports[`Storyshots Icons Check Large 1`] = `
+<storybook-dynamic-app-root
+  cfr={[Function CodegenComponentFactoryResolver]}
+  data={[Function Object]}
+  target={[Function ViewContainerRef_]}
+>
+  <app-icon>
+    
+    
+    
+    
+    <span>
+      <fa-icon
+        class=""
+        ng-reflect-icon="[object Object]"
+        ng-reflect-size="3x"
+      >
+        <svg
+          aria-hidden="true"
+          class="svg-inline--fa fa-check fa-w-16 fa-3x"
+          data-icon="check"
+          data-prefix="fas"
+          focusable="false"
+          role="img"
+          viewBox="0 0 512 512"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
+            fill="currentColor"
+          />
+        </svg>
+      </fa-icon>
+    </span>
+  </app-icon>
+</storybook-dynamic-app-root>
+`;
+
+exports[`Storyshots Icons Check Medium 1`] = `
+<storybook-dynamic-app-root
+  cfr={[Function CodegenComponentFactoryResolver]}
+  data={[Function Object]}
+  target={[Function ViewContainerRef_]}
+>
+  <app-icon>
+    
+    
+    
+    
+    <span>
+      <fa-icon
+        class=""
+        ng-reflect-icon="[object Object]"
+        ng-reflect-size="2x"
+      >
+        <svg
+          aria-hidden="true"
+          class="svg-inline--fa fa-check fa-w-16 fa-2x"
+          data-icon="check"
+          data-prefix="fas"
+          focusable="false"
+          role="img"
+          viewBox="0 0 512 512"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
+            fill="currentColor"
+          />
+        </svg>
+      </fa-icon>
+    </span>
+  </app-icon>
+</storybook-dynamic-app-root>
+`;
+
+exports[`Storyshots Icons Check No Size 1`] = `
+<storybook-dynamic-app-root
+  cfr={[Function CodegenComponentFactoryResolver]}
+  data={[Function Object]}
+  target={[Function ViewContainerRef_]}
+>
+  <app-icon>
+    
+    
+    
+    
+    <span>
+      <fa-icon
+        class=""
+        ng-reflect-icon="[object Object]"
+        ng-reflect-size="2x"
+      >
+        <svg
+          aria-hidden="true"
+          class="svg-inline--fa fa-check fa-w-16 fa-2x"
+          data-icon="check"
+          data-prefix="fas"
+          focusable="false"
+          role="img"
+          viewBox="0 0 512 512"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
+            fill="currentColor"
+          />
+        </svg>
+      </fa-icon>
+    </span>
+  </app-icon>
+</storybook-dynamic-app-root>
+`;
+
+exports[`Storyshots Icons Check Small 1`] = `
+<storybook-dynamic-app-root
+  cfr={[Function CodegenComponentFactoryResolver]}
+  data={[Function Object]}
+  target={[Function ViewContainerRef_]}
+>
+  <app-icon>
+    
+    
+    
+    
+    <span>
+      <fa-icon
+        class=""
+        ng-reflect-icon="[object Object]"
+        ng-reflect-size="1x"
+      >
+        <svg
+          aria-hidden="true"
+          class="svg-inline--fa fa-check fa-w-16 fa-1x"
+          data-icon="check"
+          data-prefix="fas"
+          focusable="false"
+          role="img"
+          viewBox="0 0 512 512"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
+            fill="currentColor"
+          />
+        </svg>
+      </fa-icon>
+    </span>
+  </app-icon>
+</storybook-dynamic-app-root>
+`;
+
+exports[`Storyshots Icons Cross Large 1`] = `
+<storybook-dynamic-app-root
+  cfr={[Function CodegenComponentFactoryResolver]}
+  data={[Function Object]}
+  target={[Function ViewContainerRef_]}
+>
+  <app-icon>
+    
+    
+    
+    
+    <span>
+      <fa-icon
+        class=""
+        ng-reflect-icon="[object Object]"
+        ng-reflect-size="3x"
+      >
+        <svg
+          aria-hidden="true"
+          class="svg-inline--fa fa-times fa-w-11 fa-3x"
+          data-icon="times"
+          data-prefix="fas"
+          focusable="false"
+          role="img"
+          viewBox="0 0 352 512"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"
+            fill="currentColor"
+          />
+        </svg>
+      </fa-icon>
+    </span>
+  </app-icon>
+</storybook-dynamic-app-root>
+`;
+
+exports[`Storyshots Icons Cross Medium 1`] = `
+<storybook-dynamic-app-root
+  cfr={[Function CodegenComponentFactoryResolver]}
+  data={[Function Object]}
+  target={[Function ViewContainerRef_]}
+>
+  <app-icon>
+    
+    
+    
+    
+    <span>
+      <fa-icon
+        class=""
+        ng-reflect-icon="[object Object]"
+        ng-reflect-size="2x"
+      >
+        <svg
+          aria-hidden="true"
+          class="svg-inline--fa fa-times fa-w-11 fa-2x"
+          data-icon="times"
+          data-prefix="fas"
+          focusable="false"
+          role="img"
+          viewBox="0 0 352 512"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"
+            fill="currentColor"
+          />
+        </svg>
+      </fa-icon>
+    </span>
+  </app-icon>
+</storybook-dynamic-app-root>
+`;
+
+exports[`Storyshots Icons Plus No Size Specified 1`] = `
+<storybook-dynamic-app-root
+  cfr={[Function CodegenComponentFactoryResolver]}
+  data={[Function Object]}
+  target={[Function ViewContainerRef_]}
+>
+  <app-icon>
+    
+    
+    
+    
+    <span>
+      <fa-icon
+        class=""
+        ng-reflect-icon="[object Object]"
+        ng-reflect-size="2x"
+      >
+        <svg
+          aria-hidden="true"
+          class="svg-inline--fa fa-plus fa-w-14 fa-2x"
+          data-icon="plus"
+          data-prefix="fas"
+          focusable="false"
+          role="img"
+          viewBox="0 0 448 512"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
+            fill="currentColor"
+          />
+        </svg>
+      </fa-icon>
+    </span>
+  </app-icon>
+</storybook-dynamic-app-root>
+`;
+
+exports[`Storyshots Login form Login 1`] = `
+<storybook-dynamic-app-root
+  cfr={[Function CodegenComponentFactoryResolver]}
+  data={[Function Object]}
+  target={[Function ViewContainerRef_]}
+>
+  <ui-login-form
+    class="ng-star-inserted"
+  >
+    <div
+      class="content"
+      id="loginPage"
+    >
+      <div
+        class="pull-up row d-flex flex-column align-items-center"
+        ng-reflect-alignment="3,2"
+        ng-reflect-grid-sizes="6"
+      >
+        <div
+          class="image-container col-3"
+          ng-reflect-amount-of-columns="3"
+        >
+          <img
+            class="image"
+            src="../../../../assets/images/logo_transparent.png"
+          />
+        </div>
+        <form
+          class="row d-flex flex-column align-items-center col-3 ng-untouched ng-pristine ng-valid"
+          ng-reflect-alignment="3,2"
+          ng-reflect-amount-of-columns="3"
+          ng-reflect-grid-sizes="6"
+          novalidate=""
+        >
+          <div
+            class="form-group"
+          >
+            <mat-form-field
+              class="full-width mat-form-field ng-tns-c3-0 mat-primary mat-form-field-type-mat-input mat-form-field-appearance-legacy mat-form-field-can-float mat-form-field-has-label mat-form-field-hide-placeholder ng-untouched ng-pristine ng-valid"
+            >
+              <div
+                class="mat-form-field-wrapper"
+              >
+                <div
+                  class="mat-form-field-flex"
+                >
+                  
+                  
+                  <div
+                    class="mat-form-field-infix"
+                  >
+                    <input
+                      aria-invalid="false"
+                      aria-required="true"
+                      autofocus=""
+                      class="mat-input-element mat-form-field-autofill-control cdk-text-field-autofill-monitored ng-untouched ng-pristine ng-valid"
+                      id="username"
+                      matinput=""
+                      name="username"
+                      ng-reflect-id="username"
+                      ng-reflect-model=""
+                      ng-reflect-name="username"
+                      ng-reflect-required=""
+                      ngmodel=""
+                      required=""
+                    />
+                    <span
+                      class="mat-form-field-label-wrapper"
+                    >
+                      
+                      <label
+                        aria-owns="username"
+                        class="mat-form-field-label ng-tns-c3-0 mat-empty mat-form-field-empty ng-star-inserted"
+                        for="username"
+                        id="mat-form-field-label-1"
+                        ng-reflect-disabled="true"
+                        ng-reflect-ng-switch="false"
+                      >
+                        
+                        
+                        <mat-placeholder
+                          class="ng-star-inserted"
+                        >
+                          <span
+                            apptranslate="pages.login.username"
+                            ng-reflect-key="pages.login.username"
+                          />
+                        </mat-placeholder>
+                        <span
+                          class="ng-tns-c3-0 ng-star-inserted"
+                        >
+                          
+                        </span>
+                        
+                        
+                        <span
+                          aria-hidden="true"
+                          class="mat-placeholder-required mat-form-field-required-marker ng-tns-c3-0 ng-star-inserted"
+                        >
+                           *
+                        </span>
+                      </label>
+                    </span>
+                  </div>
+                  
+                </div>
+                
+                <div
+                  class="mat-form-field-underline ng-tns-c3-0 ng-star-inserted"
+                >
+                  <span
+                    class="mat-form-field-ripple"
+                  />
+                </div>
+                <div
+                  class="mat-form-field-subscript-wrapper"
+                  ng-reflect-ng-switch="hint"
+                >
+                  
+                  
+                  <div
+                    class="mat-form-field-hint-wrapper ng-tns-c3-0 ng-trigger ng-trigger-transitionMessages ng-star-inserted"
+                    style="opacity:1;transform:translateY(0%);0:opacity;1:transform;"
+                  >
+                    
+                    <div
+                      class="mat-form-field-hint-spacer"
+                    />
+                  </div>
+                </div>
+              </div>
+            </mat-form-field>
+          </div>
+          <div
+            class="form-group"
+          >
+            <mat-form-field
+              class="full-width mat-form-field ng-tns-c3-1 mat-primary mat-form-field-type-mat-input mat-form-field-appearance-legacy mat-form-field-can-float mat-form-field-has-label mat-form-field-hide-placeholder ng-untouched ng-pristine ng-valid"
+            >
+              <div
+                class="mat-form-field-wrapper"
+              >
+                <div
+                  class="mat-form-field-flex"
+                >
+                  
+                  
+                  <div
+                    class="mat-form-field-infix"
+                  >
+                    <input
+                      aria-invalid="false"
+                      aria-required="true"
+                      class="mat-input-element mat-form-field-autofill-control cdk-text-field-autofill-monitored ng-untouched ng-pristine ng-valid"
+                      id="password"
+                      matinput=""
+                      name="password"
+                      ng-reflect-id="password"
+                      ng-reflect-model=""
+                      ng-reflect-name="password"
+                      ng-reflect-required=""
+                      ng-reflect-type="password"
+                      ngmodel=""
+                      required=""
+                      type="password"
+                    />
+                    <span
+                      class="mat-form-field-label-wrapper"
+                    >
+                      
+                      <label
+                        aria-owns="password"
+                        class="mat-form-field-label ng-tns-c3-1 mat-empty mat-form-field-empty ng-star-inserted"
+                        for="password"
+                        id="mat-form-field-label-3"
+                        ng-reflect-disabled="true"
+                        ng-reflect-ng-switch="false"
+                      >
+                        
+                        
+                        <mat-placeholder
+                          class="ng-star-inserted"
+                        >
+                          <span
+                            apptranslate="pages.login.password"
+                            ng-reflect-key="pages.login.password"
+                          />
+                        </mat-placeholder>
+                        <span
+                          class="ng-tns-c3-1 ng-star-inserted"
+                        >
+                          
+                        </span>
+                        
+                        
+                        <span
+                          aria-hidden="true"
+                          class="mat-placeholder-required mat-form-field-required-marker ng-tns-c3-1 ng-star-inserted"
+                        >
+                           *
+                        </span>
+                      </label>
+                    </span>
+                  </div>
+                  
+                </div>
+                
+                <div
+                  class="mat-form-field-underline ng-tns-c3-1 ng-star-inserted"
+                >
+                  <span
+                    class="mat-form-field-ripple"
+                  />
+                </div>
+                <div
+                  class="mat-form-field-subscript-wrapper"
+                  ng-reflect-ng-switch="hint"
+                >
+                  
+                  
+                  <div
+                    class="mat-form-field-hint-wrapper ng-tns-c3-1 ng-trigger ng-trigger-transitionMessages ng-star-inserted"
+                    style="opacity:1;transform:translateY(0%);0:opacity;1:transform;"
+                  >
+                    
+                    <div
+                      class="mat-form-field-hint-spacer"
+                    />
+                  </div>
+                </div>
+              </div>
+            </mat-form-field>
+          </div>
+          <app-button
+            id="submit"
+            ng-reflect-button-function="1"
+            ng-reflect-button-type="1"
+            ng-reflect-id="submit"
+          >
+            
+            <button
+              class="full-width mat-focus-indicator mat-raised-button mat-button-base mat-accent ng-star-inserted"
+              id="submit"
+              mat-raised-button=""
+              ng-reflect-color="accent"
+              ng-reflect-key="pages.login.do_login"
+              type="submit"
+            >
+              <span
+                class="mat-button-wrapper"
+              />
+              <div
+                class="mat-button-ripple mat-ripple"
+                matripple=""
+                ng-reflect-centered="false"
+                ng-reflect-disabled="false"
+                ng-reflect-trigger="[object HTMLButtonElement]"
+              />
+              <div
+                class="mat-button-focus-overlay"
+              />
+            </button>
+            
+          </app-button>
+        </form>
+      </div>
+    </div>
+  </ui-login-form>
+</storybook-dynamic-app-root>
+`;

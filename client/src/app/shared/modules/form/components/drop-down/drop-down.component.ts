@@ -12,7 +12,7 @@ import {MatSelect} from '@angular/material/select';
       useExisting: forwardRef(() => DropDownComponent),
       multi: true,
     },
-  ],
+  ]
 })
 export class DropDownComponent implements ControlValueAccessor {
 

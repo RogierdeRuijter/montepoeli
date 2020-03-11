@@ -33,10 +33,10 @@ export class ButtonComponent implements OnInit {
   public ngOnInit(): void {
     switch (this.buttonType) {
       case ButtonType.PRIMARY:
-        this.buttonColor = 'primary';
+        this.buttonColor = 'accent';
         break;
       case ButtonType.SECONDARY:
-        this.buttonColor = 'accent';
+        this.buttonColor = '';
         break;
       default:
         throw new UnknownCaseException('unkown');

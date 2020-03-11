@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { SPACER } from '../../../../../../../shared/static-files/contants';
-import { Icons, IconSize } from '../../../../../../../shared/static-files/enums';
+import { Icons, IconSize, IconColor } from '../../../../../../../shared/static-files/enums';
 
 @Component({
   selector: 'app-footer',
@@ -13,4 +13,5 @@ export class FooterComponent {
 
   public IconSize = IconSize;
   public Icons = Icons;
+  public IconColor = IconColor;
 }

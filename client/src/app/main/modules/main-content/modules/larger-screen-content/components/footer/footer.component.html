@@ -1,11 +1,16 @@
 <!--TODO: write test for footer, maybe a component test could be enough for this e2e might be a bit of an overkill-->
 <!--TODO: Fix footer -->
 <footer class="footer">
-  <p>
-    <span appTranslate="app.footer.part1"></span>
-    {{ SPACER }}
-    <app-icon [icon]="Icons.GREEN_HEART" [iconSize]="IconSize.SMALL"></app-icon>
-    {{ SPACER }}
-    <span appTranslate="app.footer.part2"></span>
-  </p> 
+  <p class="d-flex align-items-center">
+    <span appTranslate="app.footer.part1">
+      <span>{{ SPACER }}</span>
+    </span>
+    <app-icon [icon]="Icons.HEART" 
+              [iconColor]="IconColor.ACCENT" 
+              [iconSize]="IconSize.SMALL">
+    </app-icon>
+    <span appTranslate="app.footer.part2">
+      <span>{{ SPACER }}</span>
+    </span>
+  </p>
 </footer>

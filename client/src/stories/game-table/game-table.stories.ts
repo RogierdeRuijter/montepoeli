@@ -1,7 +1,7 @@
-import {storiesOf} from '@storybook/angular';
-import {GameTableStoryFactory} from '../helpers/factories/game-table.story-factory';
+// import {storiesOf} from '@storybook/angular';
+// import {GameTableStoryFactory} from '../helpers/factories/game-table.story-factory';
 
-const storyDefinition = storiesOf('GameTable/Laptop', module);
+// const storyDefinition = storiesOf('GameTable/Laptop', module);
 
-new GameTableStoryFactory(storyDefinition).create();
+// new GameTableStoryFactory(storyDefinition).create();
 

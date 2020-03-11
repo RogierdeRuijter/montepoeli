@@ -1,4 +1,4 @@
-import { Component, ViewChild, ViewContainerRef, ComponentFactoryResolver, Injector, OnInit, Compiler } from '@angular/core';
+import { Component, ViewChild, ViewContainerRef, ComponentFactoryResolver, Injector, OnInit, Compiler, OnDestroy } from '@angular/core';
 import { tap, filter } from 'rxjs/operators';
 import { GridSizes } from 'src/app/shared/static-files/enums';
 import { GridService } from 'src/app/shared/services/grid/grid.service';
@@ -8,7 +8,7 @@ import { GridService } from 'src/app/shared/services/grid/grid.service';
   templateUrl: './main-content.component.html',
   styleUrls: ['main-content.component.scss']
 })
-export class MainContentComponent implements OnInit {
+export class MainContentComponent implements OnInit, OnDestroy {
 
   constructor(private componentFactoryResolver: ComponentFactoryResolver, 
               private injector: Injector,
@@ -59,5 +59,10 @@ export class MainContentComponent implements OnInit {
 
     const largeScreenContentFactory = this.componentFactoryResolver.resolveComponentFactory(LargeScreenContentComponent);
     this.largeScreenContentContainer.createComponent(largeScreenContentFactory, null, this.injector, [], ref);
+  }
+
+  public ngOnDestroy(): void {
+    this.mobileContentContainer.clear();
+    this.largeScreenContentContainer.clear();
   }
 }
