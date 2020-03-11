@@ -88,8 +88,8 @@ jobs:
           name: Pull or create an image with the node modules and ngcc compiled modules to speed up consequitive builds
           command: |
               BASE_IMAGE_CLIENT_NAME=montepouli-client-base
-              DOCKER_TAG_PACKAGE_HASH=$({{ checksum "package.json"}})
-
+              DOCKER_TAG_PACKAGE_HASH=$(checksum "package.json")
+              echo $DOCKER_TAG_PACKAGE_HASH
               echo {{ checksum "package.json" }}
               
               docker pull $DOMAIN/$BASE_IMAGE_CLIENT_NAME:latest
