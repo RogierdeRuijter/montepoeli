@@ -38,7 +38,6 @@
     "compile-ivy-dependencies": "ngcc -p es2015, es2015 -l info",
     "generate-component": "ng generate component -c OnPush --skip-tests",
     "compile-ivy-dependencies-test": "ngcc --properties browser module main --first-only --create-ivy-entry-points",
-    "g c": " ng generate component -c OnPush --skip-tests",
     "bundle-report": "webpack-bundle-analyzer dist/frontend/stats-es2015.json"
   },
   "dependencies": {
