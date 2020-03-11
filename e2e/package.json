@@ -2,7 +2,6 @@
   "name": "e2e",
   "license": "MIT",
   "scripts": {
-    "install-node-modules": "yarn install",
     "protractor": "protractor",
     "protractor:local-with-webdriver": "yarn webdriver-update:protractor && protractor protractor-local.conf.js",
     "protractor:local": "protractor protractor-local.conf.js",
