@@ -93,6 +93,12 @@ jobs:
               docker pull $DOMAIN/$BASE_IMAGE_CLIENT_NAME:$DOCKER_TAG_PACKAGE_HASH || true
               
               docker build -t $DOMAIN/$BASE_IMAGE_CLIENT_NAME:$DOCKER_TAG_PACKAGE_HASH . -f Dockerfile.base-prod --cache-from=$DOMAIN/$BASE_IMAGE_CLIENT_NAME:$DOCKER_TAG_PACKAGE_HASH              
+      - run:
+          name: Push created base image
+          command: |
+              BASE_IMAGE_CLIENT_NAME=montepouli-client-base
+              DOCKER_TAG_PACKAGE_HASH=$(shasum package.json | awk '{print $1;}')
+
               docker push $DOMAIN/$BASE_IMAGE_CLIENT_NAME:$DOCKER_TAG_PACKAGE_HASH
 
       - run:
