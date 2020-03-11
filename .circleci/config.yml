@@ -89,7 +89,7 @@ jobs:
           command: |
               BASE_IMAGE_CLIENT_NAME=montepouli-client-base
               
-              docker pull $DOMAIN/$BASE_IMAGE_CLIENT_NAME:{{ checksum "package.json" }}
+              # docker pull $DOMAIN/$BASE_IMAGE_CLIENT_NAME:{{ checksum "package.json" }}
               docker pull $DOMAIN/$BASE_IMAGE_CLIENT_NAME:latest
               
               docker build -t $DOMAIN/$BASE_IMAGE_CLIENT_NAME:latest . -f Dockerfile.base-prod --cache-from=$DOMAIN/$BASE_IMAGE_CLIENT_NAME:{{ checksum "package.json" }}              
