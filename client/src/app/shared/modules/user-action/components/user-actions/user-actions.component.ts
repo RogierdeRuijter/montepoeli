@@ -50,9 +50,11 @@ export class UserActionsComponent implements OnInit, OnDestroy {
     const currentLang = this.translateService.currentLang;
     
     this.alternativeLanguage = this.translateService.getLangs().find(lang => lang !== currentLang);
+
+    console.log(this.alternativeLanguage);
     
     if (this.alternativeLanguage === 'en') {
-      this.setIconLanguage = 'ie';
+      this.setIconLanguage = 'en';
     }
 
     if (this.alternativeLanguage === 'nl') {

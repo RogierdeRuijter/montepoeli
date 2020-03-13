@@ -5,7 +5,8 @@ import {Model} from 'mongoose';
 
 @Injectable()
 export class GameRepositoryService {
-  constructor(@InjectModel('Game') private readonly gameModel: Model<Game>) {
+  // TODO: find a way to type model
+  constructor(@InjectModel('Game') private readonly gameModel: Model<any>) {
   }
 
   public find(): Promise<Game[]> {
