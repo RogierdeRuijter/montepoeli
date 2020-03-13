@@ -4,10 +4,11 @@ import { MatSelect } from '@angular/material/select';
 import { AuthService } from 'src/app/shared/modules/auth/services/auth/auth.service';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguagePreferenceService } from '../../../translate/services/language-preference.service';
-import { timer, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { UserStoreService } from '../../../user/store/user-store.service';
 import { User } from 'src/app/shared/interfaces/user.interface';
 import { NotificationService } from '../../../notification/services/notification/notification.service';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-user-actions',
@@ -44,17 +45,31 @@ export class UserActionsComponent implements OnInit, OnDestroy {
 
     this.userStoreService.get(this.destory$)
       .subscribe((user: User) => this.user = user);
+
+    this.translateService.onLangChange
+      .pipe(takeUntil(this.destory$))
+      .subscribe((langObject: any) => {
+        const lang = langObject.lang;
+
+        if (lang === 'en') {
+          this.notificationService.info(this.translateService.instant('info.language-changed.english'));
+        }
+    
+        if (lang === 'nl') {
+          this.notificationService.info(this.translateService.instant('info.language-changed.dutch'));
+        }
+
+        this.setAlternativeLanguage(lang);
+    });
   }
 
-  private setAlternativeLanguage(): void {
-    const currentLang = this.translateService.currentLang;
+  private setAlternativeLanguage(lang?: string): void {
+    const currentLang = lang ? lang : this.translateService.currentLang;
     
-    this.alternativeLanguage = this.translateService.getLangs().find(lang => lang !== currentLang);
-
-    console.log(this.alternativeLanguage);
+    this.alternativeLanguage = this.translateService.getLangs().find(lang1 => lang1 !== currentLang);
     
     if (this.alternativeLanguage === 'en') {
-      this.setIconLanguage = 'en';
+      this.setIconLanguage = 'gb';
     }
 
     if (this.alternativeLanguage === 'nl') {
@@ -69,20 +84,7 @@ export class UserActionsComponent implements OnInit, OnDestroy {
   }
 
   public switchLanguageHandler(): void {
-    timer(300)
-      .subscribe(() => {
-        this.languagePreferenceService.setWithLanguageCode(this.user, this.alternativeLanguage);
-
-        if (this.translateService.currentLang === 'en') {
-          this.notificationService.info(this.translateService.instant('info.language-changed.english'));
-        }
-    
-        if (this.translateService.currentLang === 'nl') {
-          this.notificationService.info(this.translateService.instant('info.language-changed.dutch'));
-        }
-
-        this.setAlternativeLanguage();
-      });
+    this.languagePreferenceService.setWithLanguageCode(this.user, this.alternativeLanguage);
   }
 
   public logoutHandler(): void {
