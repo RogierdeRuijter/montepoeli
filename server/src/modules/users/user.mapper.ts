@@ -1,4 +1,4 @@
-import {Injectable, Logger} from '@nestjs/common';
+import {Injectable} from '@nestjs/common';
 import {User} from '../../models/interfaces/user.interface';
 import {Mapper} from '../../models/interfaces/mapper.interface';
 import {UserDto} from '../../models/dtos/user.dto';

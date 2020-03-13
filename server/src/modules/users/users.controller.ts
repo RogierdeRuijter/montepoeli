@@ -1,4 +1,4 @@
-import {BadRequestException, Body, Controller, Get, UseGuards, Post, Res, Req} from '@nestjs/common';
+import {BadRequestException, Body, Controller, Get, UseGuards, Post, Req} from '@nestjs/common';
 import {UsersService} from './users.service';
 import {User} from '../../models/interfaces/user.interface';
 import {CreateUserDto} from '../../models/create-dtos/create-user.dto';

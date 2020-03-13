@@ -1,4 +1,4 @@
-import {Injectable, Logger, Res} from '@nestjs/common';
+import {Injectable} from '@nestjs/common';
 import {User} from '../../models/interfaces/user.interface';
 import {CreateUserDto} from '../../models/create-dtos/create-user.dto';
 import {JwtPayload} from '../../models/interfaces/jwt-payload.interface';
@@ -7,7 +7,6 @@ import {UserDto} from '../../models/dtos/user.dto';
 import {UserMapper} from './user.mapper';
 import {UserRepositoryService} from './user-repository/user-repository.service';
 import {UtilService} from '../shared/services/util/util.service';
-import { Response } from 'express';
 import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
@@ -17,8 +16,6 @@ export class UsersService {
               private readonly utilService: UtilService,
               private readonly jwtService: JwtService) {
   }
-  private logger = new Logger('UsersService');
-
   public findByUsername(payload: JwtPayload): Promise<User> {
     return this.userRepositoryService.findByUsername(payload.username);
   }
