@@ -8,8 +8,7 @@
       "user": "Utente",
       "password": "Password",
       "do_login": "Entra",
-      "login": "login",
-      "login_title": "Accedi"
+      "login": "login"
     },
     "dashboard": {
       "menuTitle": "Dashboard",

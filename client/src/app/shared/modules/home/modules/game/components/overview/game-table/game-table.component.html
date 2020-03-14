@@ -4,7 +4,7 @@
     <th mat-header-cell *matHeaderCellDef appTranslate="pages.home.games.labels.white"></th>
     <td mat-cell *matCellDef="let element; let i = index" mat-cell [id]="'table-' + element.white + '-' + i"> {{element?.white}} </td>
   </ng-container>
-
+  <span appTranslate="pages.home.games.labels.white"></span>
   <ng-container matColumnDef="black">
     <th mat-header-cell *matHeaderCellDef appTranslate="pages.home.games.labels.black"></th>
     <td mat-cell *matCellDef="let element; let i = index"
@@ -13,8 +13,7 @@
 
   <ng-container matColumnDef="winner">
     <th mat-header-cell *matHeaderCellDef appTranslate="pages.home.games.labels.winner"></th>
-    <td mat-cell *matCellDef="let element; let i = index"
-        [id]="'table-' + element?.winner + '-' + i">
+    <td mat-cell *matCellDef="let element; let i = index" [id]="'table-' + element?.winner + '-' + i">
         {{ element?.winner }}
     </td>
   </ng-container>

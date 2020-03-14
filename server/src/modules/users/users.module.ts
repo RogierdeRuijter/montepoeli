@@ -12,7 +12,7 @@ import {SharedModule} from '../shared/shared.module';
   imports: [
     MongooseModule.forFeature([{name: 'User', schema: UserSchema}]),
     AuthModule,
-    SharedModule,
+    SharedModule
   ],
   controllers: [UsersController],
   providers: [UsersService, UserMapper, UserRepositoryService],

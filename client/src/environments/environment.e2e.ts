@@ -42,6 +42,8 @@ export class Environment extends DynamicEnvironment {
         CATS: '/cats',
         GAME: '/game',
         CREATE: '/create',
+        UPDATE_LANGUAGE_PREFERENCE: '/language-preference',
+        CURRENT: '/current'
       },
     };
   }

@@ -16,16 +16,14 @@ export class LoginComponent {
 
   public onLogin(userInfo: any): void {
     this.isSubmitting = true;
-    const user = {};
+    const potentialUser = {};
 
-    user['username'] = userInfo.username;
-    user['pwd'] = userInfo.password;
+    potentialUser['username'] = userInfo.username;
+    potentialUser['pwd'] = userInfo.password;
 
-    this.authService.login(user)
+    this.authService.login(potentialUser)
       .subscribe(() => {},
-        (error) => {
-        this.isSubmitting = false;
-      });
+        (error) => this.isSubmitting = false);
   }
 
   public doExplicitChangeDetectionForAutofill(): void {

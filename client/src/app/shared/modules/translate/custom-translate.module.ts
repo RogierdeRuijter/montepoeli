@@ -5,6 +5,7 @@ import {HttpClient} from '@angular/common/http';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {TranslateDirective} from './directives/translate.directive';
 import {HttpModule} from '../http/http.module';
+import { LanguagePreferenceService } from './services/language-preference.service';
 
 @NgModule({
   declarations: [
@@ -22,15 +23,20 @@ import {HttpModule} from '../http/http.module';
         useFactory: HttpLoaderFactory,
         deps: [HttpClient],
       },
-      isolate: true,
+      extend: true
     }),
     HttpModule
   ]
 })
 export class CustomTranslateModule {
-  constructor(private translate: TranslateService) {
-    translate.setDefaultLang('en');
-    this.translate.use('en');
+  constructor(languagePreferenceService: LanguagePreferenceService, 
+              translate: TranslateService) {
+    translate.addLangs(['nl', 'en']);
+
+    const preferedLanguage = languagePreferenceService.get();
+
+    translate.setDefaultLang(preferedLanguage);
+    translate.use(preferedLanguage);
   }
 }
 

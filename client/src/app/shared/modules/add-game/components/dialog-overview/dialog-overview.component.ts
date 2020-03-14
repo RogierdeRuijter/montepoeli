@@ -43,7 +43,8 @@ export class DialogOverviewComponent implements OnInit {
         white: this.game.white,
         winner: this.game.winner,
         black: this.game.black,
-      } as Game
+      } as Game,
+      maxWidth: '250px'
     });
     
     // No need to unsubscribe since it is a one off observable

@@ -1,9 +1,9 @@
 <div id="page-container">
   <div id="content-wrap">
-    <div [hidden]="activeView === 'large-screen'">
+    <div *ngIf="activeView === 'mobile'">
       <ng-container #mobileContent></ng-container>
     </div>
-    <div [hidden]="activeView === 'mobile'">
+    <div *ngIf="activeView === 'large-screen'">
       <ng-container #largeScreenContent></ng-container>
     </div>
   </div>

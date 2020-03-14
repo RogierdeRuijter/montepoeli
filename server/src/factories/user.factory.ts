@@ -11,6 +11,7 @@ export class UserFactory implements Factory<User> {
       name: this.factoryUtilService.name(),
       username: this.factoryUtilService.name(),
       password: this.factoryUtilService.passwordHash(),
+      preferedLanguage: 'en'
     };
   }
 

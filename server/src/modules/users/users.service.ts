@@ -7,14 +7,15 @@ import {UserDto} from '../../models/dtos/user.dto';
 import {UserMapper} from './user.mapper';
 import {UserRepositoryService} from './user-repository/user-repository.service';
 import {UtilService} from '../shared/services/util/util.service';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class UsersService {
   constructor(private readonly userRepositoryService: UserRepositoryService,
               private readonly userMapper: UserMapper,
-              private readonly utilService: UtilService) {
+              private readonly utilService: UtilService,
+              private readonly jwtService: JwtService) {
   }
-
   public findByUsername(payload: JwtPayload): Promise<User> {
     return this.userRepositoryService.findByUsername(payload.username);
   }
@@ -50,5 +51,19 @@ export class UsersService {
       this.userRepositoryService.find().then((users: User[]) =>
         resolve(this.userMapper.convertUsers(users)));
     });
+  }
+
+  // TODO: write unit test
+  public setLanguagePreference(username: string, languagePreferance: string): Promise<User> {
+      return this.userRepositoryService.updateLanguagePreferance(username, languagePreferance);
+  }
+
+  public async getUserWithJwt(jwt: string): Promise<UserDto> {
+    // @ts-ignore
+    const username: string = this.jwtService.decode(jwt).username;
+
+    const user = await this.userRepositoryService.findByUsername(username);
+
+    return this.userMapper.convert(user);
   }
 }

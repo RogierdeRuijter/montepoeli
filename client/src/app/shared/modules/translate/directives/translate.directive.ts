@@ -1,6 +1,6 @@
 import {Directive, ElementRef, Input, OnInit, Renderer2} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
-import {debounceTime, retry} from 'rxjs/operators';
+import {debounceTime, retry, switchMap} from 'rxjs/operators';
 
 @Directive({
   selector: '[appTranslate]',
@@ -19,10 +19,19 @@ export class TranslateDirective implements OnInit {
   }
 
   public ngOnInit(): void {
-      this.translateService.get(this.key)
+    this.translateService.get(this.key)
+    .pipe(
+      debounceTime(200),
+      retry(5)
+    ).subscribe((translation) => this.setProperty(translation));
+
+    this.translateService.onLangChange
         .pipe(
-          debounceTime(200),
-          retry(5)
+          switchMap(() => this.translateService.get(this.key)
+          .pipe(
+            debounceTime(200),
+            retry(5)
+          ))
         ).subscribe((translation) => this.setProperty(translation));
   }
 

@@ -30,6 +30,6 @@ import {SharedModule} from '../shared/shared.module';
     UsersService,
     UserMapper,
     UserRepositoryService],
-  exports: [PassportModule, AuthService],
+  exports: [PassportModule, AuthService, JwtModule],
 })
 export class AuthModule {}

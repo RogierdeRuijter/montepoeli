@@ -5,7 +5,6 @@ import {UserDto} from '../../models/dtos/user.dto';
 
 @Injectable()
 export class UserMapper implements Mapper<UserDto> {
-
   public convertUsers(users: User[]): UserDto[] {
     return users.map((user: User) => this.convert(user));
   }
@@ -13,6 +12,7 @@ export class UserMapper implements Mapper<UserDto> {
   public convert(user: User): UserDto {
     return {
       name: user.name,
+      preferedLanguage: user.preferedLanguage
     };
   }
 }

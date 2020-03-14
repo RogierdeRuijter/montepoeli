@@ -1,7 +1,8 @@
-import { Component, ViewChild, ViewContainerRef, ComponentFactoryResolver, Injector, OnInit, Compiler, OnDestroy } from '@angular/core';
-import { tap, filter } from 'rxjs/operators';
+import { Component, ViewChild, ViewContainerRef, ComponentFactoryResolver, Injector, OnInit, Compiler, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { tap, filter, takeUntil } from 'rxjs/operators';
 import { GridSizes } from 'src/app/shared/static-files/enums';
 import { GridService } from 'src/app/shared/services/grid/grid.service';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-main-content',
@@ -13,31 +14,38 @@ export class MainContentComponent implements OnInit, OnDestroy {
   constructor(private componentFactoryResolver: ComponentFactoryResolver, 
               private injector: Injector,
               private gridService: GridService,
-              private compiler: Compiler) {}
+              private compiler: Compiler,
+              private changeDetectorRef: ChangeDetectorRef) {}
 
-  @ViewChild('mobileContent', { read: ViewContainerRef}) 
+  @ViewChild('mobileContent', { read: ViewContainerRef, static: false}) 
   public mobileContentContainer: ViewContainerRef;
 
-  @ViewChild('largeScreenContent', { read: ViewContainerRef }) 
+  @ViewChild('largeScreenContent', { read: ViewContainerRef, static: false}) 
   public largeScreenContentContainer: ViewContainerRef;
 
   public activeView: string;
+
+  private destory$: Subject<void> = new Subject();
 
   public ngOnInit(): void {
     this.gridService.gridChangeObservable()
       .pipe(
         filter((activeGridSize: GridSizes) => activeGridSize !== GridSizes.EXTRA_SMALL && this.activeView !== 'large-screen'),
         tap(() => this.activeView = 'large-screen'),
+        tap(() => this.changeDetectorRef.detectChanges()),
         filter(() => !this.largeScreenContentContainer || this.largeScreenContentContainer.length === 0),
-        tap(() => this.createLargeScreenConent())
+        tap(() => this.createLargeScreenConent()),
+        takeUntil(this.destory$)
     ).subscribe();
 
     this.gridService.gridChangeObservable()
       .pipe(
         filter((activeGridSize: GridSizes) => activeGridSize === GridSizes.EXTRA_SMALL),
         tap(() => this.activeView = 'mobile'),
+        tap(() => this.changeDetectorRef.detectChanges()),
         filter(() => !this.mobileContentContainer || this.mobileContentContainer.length === 0),
-        tap(() => this.createMobileConent())
+        tap(() => this.createMobileConent()),
+        takeUntil(this.destory$)
       ).subscribe();
   }
 
@@ -58,10 +66,14 @@ export class MainContentComponent implements OnInit, OnDestroy {
     const ref = factory.create(this.injector);
 
     const largeScreenContentFactory = this.componentFactoryResolver.resolveComponentFactory(LargeScreenContentComponent);
+
     this.largeScreenContentContainer.createComponent(largeScreenContentFactory, null, this.injector, [], ref);
   }
 
   public ngOnDestroy(): void {
+    this.destory$.next();
+    this.destory$.complete();
+
     this.mobileContentContainer.clear();
     this.largeScreenContentContainer.clear();
   }

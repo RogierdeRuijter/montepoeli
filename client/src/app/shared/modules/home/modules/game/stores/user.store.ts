@@ -5,5 +5,5 @@ import {User} from '../../../../../../shared/interfaces/user.interface';
 @Injectable({
   providedIn: 'root',
 })
-export class UserStore extends Store<User[]> {
+export class UsersStore extends Store<User[]> {
 }

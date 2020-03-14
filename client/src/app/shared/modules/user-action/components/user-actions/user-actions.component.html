@@ -5,7 +5,14 @@
 </app-button-icon>
 
 <mat-select #userSettingsDropDown class="selector">
-  <mat-option *ngFor="let userAction of userActions" (click)="actionSelected(userAction)" [id]="userAction">
-    {{userAction}}
+  <mat-option (click)="switchLanguageHandler()" [id]="alternativeLanguage">
+    <div class="d-flex justify-content-center">
+      <!-- [class]="setIconLanguage === 'ie' ? 'ie' : 'nl'" -->
+      <img *ngIf="setIconLanguage === 'ie'" style="width: 35px;" src="../../../../../../assets/images/ie.svg">
+      <img *ngIf="setIconLanguage === 'nl'" style="width: 35px;" src="../../../../../../assets/images/nl.svg">
+    </div>
+  </mat-option>
+  <mat-option (click)="logoutHandler()" id="logout">
+      <span [appTranslate]="'user-actions.logout'"></span>
   </mat-option>
 </mat-select>

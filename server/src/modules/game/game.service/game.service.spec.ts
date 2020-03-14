@@ -5,7 +5,6 @@ import {GameService} from './game.service';
 import {GameMapperService} from '../game-mapper/game-mapper.service';
 import {SortService} from '../../shared/services/sort/sort.service';
 import {UtilService} from '../../shared/services/util/util.service';
-import {User} from '../../../models/interfaces/user.interface';
 import {GameRepositoryService} from '../game-repository/game-repository.service';
 import {UserRepositoryService} from '../../users/user-repository/user-repository.service';
 

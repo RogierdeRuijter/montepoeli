@@ -6,7 +6,7 @@ import {DialogDataService} from '../../services/dialog-data/dialog-data.service'
 import {User} from '../../../../interfaces/user.interface';
 import {TranslateService} from '@ngx-translate/core';
 import {AsyncBaseComponent} from '../../../async/components/async-base-component/async-base.component';
-import { UserStore } from '../../../home/modules/game/stores/user.store';
+import { UsersStore } from '../../../home/modules/game/stores/user.store';
 
 @Component({
   selector: 'app-dialog-data',
@@ -23,7 +23,7 @@ export class DialogDataComponent extends AsyncBaseComponent implements OnInit, O
 
   constructor(public dialogRef: MatDialogRef<DialogDataComponent>,
               @Inject(MAT_DIALOG_DATA) public data: Game,
-              private userStore: UserStore,
+              private userStore: UsersStore,
               private dialogDataService: DialogDataService,
               private translateService: TranslateService) {
     super();
@@ -53,10 +53,10 @@ export class DialogDataComponent extends AsyncBaseComponent implements OnInit, O
 
   public fieldUpdateHandler(game: Partial<Game>): void {
     this.winnerOptions = [];
-    
+
     this.winnerOptions.push(game?.black);
     this.winnerOptions.push(game?.white);
 
-    this.winnerOptions.push(this.translateService.instant('pages.home.games.cell.winner.' + Winners.DRAW));
+    this.winnerOptions.push(this.translateService.instant('pages.home.games.labels.' + Winners.DRAW));
   }
 }

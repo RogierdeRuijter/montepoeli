@@ -1,11 +1,17 @@
-import {BadRequestException, Body, Controller, Get, UseGuards} from '@nestjs/common';
+import {BadRequestException, Body, Controller, Get, UseGuards, Post, Req} from '@nestjs/common';
 import {UsersService} from './users.service';
 import {User} from '../../models/interfaces/user.interface';
 import {CreateUserDto} from '../../models/create-dtos/create-user.dto';
 import {AuthGuard} from '@nestjs/passport';
+import { Request } from 'express';
+import { UserDto } from 'src/models/dtos/user.dto';
 
 @Controller('/users')
+@UseGuards(AuthGuard())
 export class UsersController {
+
+  private domain: string = process.env.ENV.toString() === 'prod' ? process.env.DOMAIN : undefined;
+
   constructor(private readonly usersService: UsersService) {
   }
 
@@ -15,7 +21,6 @@ export class UsersController {
   }
 
   // @Post('/create')
-  @UseGuards(AuthGuard())
   public createUser(@Body() createUserDto: CreateUserDto): Promise<User> {
     const username = createUserDto.username;
     const password = createUserDto.password;
@@ -25,5 +30,28 @@ export class UsersController {
     }
 
     return this.usersService.create(createUserDto);
+  }
+
+  @Post('/language-preference')
+  public async setLanguagePreference(@Body() body: any): Promise<any> {
+    const username: string = body.username;
+    const languagePreference: string = body.languagePreference;
+
+    if (!username || !languagePreference) {
+      throw new BadRequestException('username or languagePreference is not defined');
+    }
+
+    if (languagePreference !== 'dutch' && languagePreference !== 'english') {
+      throw new BadRequestException('language preference should be dutch or english');
+    }
+
+    return this.usersService.setLanguagePreference(username, languagePreference);
+  }
+
+  @Get('/current')
+  public async getCurrentUser(@Req() req: Request): Promise<UserDto> {
+    const jwt = req?.signedCookies?.montepoeliJwt;
+
+    return this.usersService.getUserWithJwt(jwt);
   }
 }
