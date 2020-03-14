@@ -70,12 +70,4 @@ export class LanguagePreferenceService {
       return 'english';
     }
   }
-
-  public translateEnglishLanguageNameToNativeLanguageName(englishPerferedLanguage: string): string {
-    if (englishPerferedLanguage === 'dutch') {
-      return 'nederlands';
-    }
-
-    return englishPerferedLanguage;    
-  }
 }
