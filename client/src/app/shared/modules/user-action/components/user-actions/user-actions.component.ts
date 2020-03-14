@@ -4,7 +4,7 @@ import { MatSelect } from '@angular/material/select';
 import { AuthService } from 'src/app/shared/modules/auth/services/auth/auth.service';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguagePreferenceService } from '../../../translate/services/language-preference.service';
-import { Subject } from 'rxjs';
+import { Subject, timer, Observable } from 'rxjs';
 import { UserStoreService } from '../../../user/store/user-store.service';
 import { User } from 'src/app/shared/interfaces/user.interface';
 import { NotificationService } from '../../../notification/services/notification/notification.service';
@@ -47,7 +47,9 @@ export class UserActionsComponent implements OnInit, OnDestroy {
       .subscribe((user: User) => this.user = user);
 
     this.translateService.onLangChange
-      .pipe(takeUntil(this.destory$))
+      .pipe(
+        takeUntil(this.destory$)
+      )
       .subscribe((langObject: any) => {
         const lang = langObject.lang;
 
@@ -69,7 +71,7 @@ export class UserActionsComponent implements OnInit, OnDestroy {
     this.alternativeLanguage = this.translateService.getLangs().find(lang1 => lang1 !== currentLang);
     
     if (this.alternativeLanguage === 'en') {
-      this.setIconLanguage = 'gb';
+      this.setIconLanguage = 'ie';
     }
 
     if (this.alternativeLanguage === 'nl') {
@@ -84,7 +86,12 @@ export class UserActionsComponent implements OnInit, OnDestroy {
   }
 
   public switchLanguageHandler(): void {
-    this.languagePreferenceService.setWithLanguageCode(this.user, this.alternativeLanguage);
+    this.waitForDropDownToClose()
+      .subscribe(() => this.languagePreferenceService.setWithLanguageCode(this.user, this.alternativeLanguage));
+  }
+
+  private waitForDropDownToClose(): Observable<any> {
+    return timer(300);
   }
 
   public logoutHandler(): void {
