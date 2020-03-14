@@ -5,7 +5,7 @@ import {Rule} from '../../../models/interfaces/rule.interface';
 
 @Injectable()
 export class RuleRepositoryService {
-  constructor(@InjectModel('Rule') private readonly ruleModel: Model<Rule>) {
+  constructor(@InjectModel('Rule') private readonly ruleModel: Model<any>) {
   }
 
   public find(): Promise<Rule[]> {
