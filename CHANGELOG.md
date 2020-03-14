@@ -1,3 +1,10 @@
+## [4.3.1](https://github.com/RogierdeRuijter/montepoeli/compare/v4.3.0...v4.3.1) (2020-03-14)
+
+
+### Bug Fixes
+
+* **login page:** fix background page ([#383](https://github.com/RogierdeRuijter/montepoeli/issues/383)) ([acc0dd0](https://github.com/RogierdeRuijter/montepoeli/commit/acc0dd0439885f9704a5894612ee23c6139e6909))
+
 # [4.3.0](https://github.com/RogierdeRuijter/montepoeli/compare/v4.2.9...v4.3.0) (2020-03-09)
 
 
