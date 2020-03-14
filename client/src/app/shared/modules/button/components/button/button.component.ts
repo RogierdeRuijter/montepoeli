@@ -38,6 +38,9 @@ export class ButtonComponent implements OnInit {
       case ButtonType.SECONDARY:
         this.buttonColor = '';
         break;
+      case ButtonType.NORMAL:
+        this.buttonColor = 'primary';
+        break;
       default:
         throw new UnknownCaseException('unkown');
     }

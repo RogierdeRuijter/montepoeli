@@ -6,7 +6,7 @@ import {Model} from 'mongoose';
 @Injectable()
 export class UserRepositoryService {
 
-  constructor(@InjectModel('User') private readonly userModel: Model<User>) {
+  constructor(@InjectModel('User') private readonly userModel: Model<any>) {
   }
 
   public find(): Promise<User[]> {
