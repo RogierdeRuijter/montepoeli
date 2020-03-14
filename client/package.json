@@ -60,6 +60,7 @@
     "@fortawesome/free-solid-svg-icons": "5.12.1",
     "@ngx-translate/core": "12.1.2",
     "@ngx-translate/http-loader": "4.0.0",
+    "@types/node": "13.7.7",
     "bootstrap": "4.4.1",
     "bootstrap-material-design": "4.1.2",
     "core-js": "3.6.4",
@@ -73,7 +74,6 @@
     "zone.js": "0.10.2"
   },
   "devDependencies": {
-    "@types/node": "13.7.7",
     "codelyzer": "5.1.2",
     "jasmine-core": "3.5.0",
     "jasmine-spec-reporter": "4.2.1",
