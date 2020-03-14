@@ -67,7 +67,7 @@ jobs:
           key: v1-dependencies-client-{{ checksum "package.json" }}
 
       - run: 
-          name: Run visual regression test shots, but not saving it.
+          name: Run visual regression test shots compared to shots file in the repo
           
           command: |
             yarn test:visual --updateSnapshot
