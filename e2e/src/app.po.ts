@@ -109,6 +109,6 @@ export class AppPage {
   }
 
   public getLogout(): ElementFinder {
-    return this.helper.findById('Logout');
+    return this.helper.findById('logout');
   }
 }
