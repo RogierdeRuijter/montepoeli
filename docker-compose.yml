@@ -1,9 +1,10 @@
-version: "2"
+version: "3.7"
 services:
   client:
     build:
       context: client
       dockerfile: Dockerfile.local
+    image: montepoeli-client:$DOCKER_CLIENT_TAG
     container_name: montepouli-client
     ports:
       - "4200:4200"

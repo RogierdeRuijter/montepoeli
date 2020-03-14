@@ -1,12 +1,13 @@
 {
   "name": "montepouli",
-  "version": "4.3.0",
+  "version": "4.3.1",
   "license": "MIT",
   "private": true,
   "scripts": {
     "install-sub-modules": "lerna run install-node-modules --parallel",
     "install-node-modules": "yarn install",
-    "build:client": "docker build client -t montepouli_client:latest -f client/Dockerfile.prod",
+    "get-base-image": "docker pull montepoeli.club/montepouli-client-base:$DOCKER_CLIENT_TAG || true",
+    "build:client": "npm run get-base-image && docker build client -t montepouli_client:latest -f client/Dockerfile.prod",
     "build:e2e-client": "docker build -f client/Dockerfile.configured client -t montepouli_client:e2e --build-arg CLIENT_BASE_IMAGE_NAME=montepouli_client --build-arg CLIENT_BASE_IMAGE_TAG=latest --build-arg CLIENT_TYPE=e2e",
     "build:server": "docker build server -t montepouli_server:latest -f server/Dockerfile.prod",
     "build-app": "npm run build:client && npm run build:server",
@@ -24,9 +25,6 @@
     "restart:e2e": "yarn stop:e2e && sleep 5 && yarn start:e2e",
     "docker-compose-rebuild": "docker-compose build --parallel && docker-compose down && docker-compose up -d",
     "docker-compose-rebuild-no-cache": "docker-compose build --no-cache && docker-compose down && docker-compose up -d",
-    "release-patch": "lerna version -y patch --message '[skip ci] bump patch'",
-    "release-minor": "lerna version -y minor --message '[skip ci] bump minor'",
-    "release-major": "lerna version -y major --message '[skip ci] bump major'",
     "update-with-master": "CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD) && git checkout master && git pull && git checkout $CURRENT_BRANCH && git merge master"
   },
   "devDependencies": {

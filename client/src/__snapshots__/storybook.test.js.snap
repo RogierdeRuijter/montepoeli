@@ -661,15 +661,15 @@ exports[`Storyshots Login form Login 1`] = `
           <app-button
             id="submit"
             ng-reflect-button-function="1"
-            ng-reflect-button-type="1"
+            ng-reflect-button-type="3"
             ng-reflect-id="submit"
           >
             
             <button
-              class="full-width mat-focus-indicator mat-raised-button mat-button-base mat-accent ng-star-inserted"
+              class="full-width mat-focus-indicator mat-raised-button mat-button-base mat-primary ng-star-inserted"
               id="submit"
               mat-raised-button=""
-              ng-reflect-color="accent"
+              ng-reflect-color="primary"
               ng-reflect-key="pages.login.do_login"
               type="submit"
             >
