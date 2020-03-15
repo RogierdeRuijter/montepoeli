@@ -1,3 +1,10 @@
+# [4.4.0](https://github.com/RogierdeRuijter/montepoeli/compare/v4.3.1...v4.4.0) (2020-03-15)
+
+
+### Features
+
+* Switch between Dutch and English language ([ba20a01](https://github.com/RogierdeRuijter/montepoeli/commit/ba20a01c2925f858a90f9098686072c2a513fd4f))
+
 ## [4.3.1](https://github.com/RogierdeRuijter/montepoeli/compare/v4.3.0...v4.3.1) (2020-03-14)
 
 
