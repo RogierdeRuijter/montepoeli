@@ -14,3 +14,4 @@ COPY ngsw-config.json ngsw-config.json
 RUN yarn compile-ivy-dependencies
 
 COPY src src
+

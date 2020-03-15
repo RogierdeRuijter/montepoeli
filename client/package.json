@@ -35,10 +35,11 @@
     "screenshot": "storybook-chrome-screenshot -p 9001 -c .storybook",
     "webdriver-update": "webdriver-manager clean && webdriver-manager update",
     "webdriver-update:protractor": "./node_modules/protractor/bin/webdriver-manager update",
-    "compile-ivy-dependencies": "ngcc -p es2015, es2015 -l info",
+    "compile-ivy-dependencies": "ngcc -p es2015, es2015 -l info --create-ivy-entry-points",
     "generate-component": "ng generate component -c OnPush --skip-tests",
     "compile-ivy-dependencies-test": "ngcc --properties browser module main --first-only --create-ivy-entry-points",
-    "bundle-report": "webpack-bundle-analyzer dist/frontend/stats-es2015.json"
+    "bundle-report": "webpack-bundle-analyzer dist/frontend/stats-es2015.json",
+    "compile": "ngcc --properties es2015 browser module main"
   },
   "dependencies": {
     "@angular-devkit/build-angular": "0.900.5",
@@ -70,8 +71,10 @@
     "ngx-toastr": "12.0.0",
     "rxjs": "6.5.4",
     "tslib": "1.11.1",
+    "typescript": "3.7.5",
     "webdriver-manager": "12.1.7",
     "zone.js": "0.10.2"
+    
   },
   "devDependencies": {
     "codelyzer": "5.1.2",
@@ -84,8 +87,7 @@
     "karma-jasmine-html-reporter": "1.5.2",
     "karma-phantomjs-launcher": "1.0.4",
     "ts-node": "8.6.2",
-    "tslint": "6.0.0",
-    "typescript": "3.7.5"
+    "tslint": "6.0.0"
   },
   "optionalDependencies": {
     "@babel/core": "7.8.4",

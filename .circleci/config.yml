@@ -83,31 +83,13 @@ jobs:
       - run:
           command: |
             docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
-      
-      - run:
-          name: Pull or create an image with the node modules and ngcc compiled modules to speed up consequitive builds
-          command: |
-              BASE_IMAGE_CLIENT_NAME=montepouli-client-base
-              DOCKER_TAG_PACKAGE_HASH=$(shasum yarn.lock | awk '{print $1;}')
-              
-              docker pull $DOMAIN/$BASE_IMAGE_CLIENT_NAME:$DOCKER_TAG_PACKAGE_HASH || true
-              
-              docker build -t $DOMAIN/$BASE_IMAGE_CLIENT_NAME:$DOCKER_TAG_PACKAGE_HASH . -f Dockerfile.base-prod --cache-from=$DOMAIN/$BASE_IMAGE_CLIENT_NAME:$DOCKER_TAG_PACKAGE_HASH              
-      - run:
-          name: Push created base image
-          command: |
-              BASE_IMAGE_CLIENT_NAME=montepouli-client-base
-              DOCKER_TAG_PACKAGE_HASH=$(shasum yarn.lock | awk '{print $1;}')
-
-              docker push $DOMAIN/$BASE_IMAGE_CLIENT_NAME:$DOCKER_TAG_PACKAGE_HASH
 
       - run:
           command: |
               IMAGE_CLIENT_NAME=montepouli-client
               BASE_IMAGE_CLIENT_NAME=montepouli-client-base
-              DOCKER_TAG_PACKAGE_HASH=$(shasum yarn.lock | awk '{print $1;}')
 
-              docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG . -f Dockerfile.prod --cache-from=$DOMAIN/$BASE_IMAGE_CLIENT_NAME:$DOCKER_TAG_PACKAGE_HASH
+              docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG . -f Dockerfile.prod
             
       - deploy:
           command: |
