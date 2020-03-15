@@ -74,7 +74,7 @@ export class MainContentComponent implements OnInit, OnDestroy {
     this.destory$.next();
     this.destory$.complete();
 
-    this.mobileContentContainer.clear();
-    this.largeScreenContentContainer.clear();
+    this.mobileContentContainer?.clear();
+    this.largeScreenContentContainer?.clear();
   }
 }
