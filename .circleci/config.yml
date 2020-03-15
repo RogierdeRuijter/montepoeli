@@ -184,6 +184,7 @@ jobs:
           command: |
             IMAGE_CLIENT_NAME=montepouli-client-e2e
             docker push $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG
+
   e2e-tests:
     machine:
       image: circleci/classic:201808-01
@@ -207,7 +208,29 @@ jobs:
       - run: sudo chmod +x /usr/local/bin/docker-compose
       - run: docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
       - run: npm run start:e2e-environment-build-server
-  
+    
+
+  rebuild-client-base:
+    docker:
+      - image: circleci/node:12
+
+    working_directory: ~/repo/client
+    steps:
+      - checkout:
+          path: ~/repo
+
+      - run:
+          command: |
+            docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
+
+      - run:
+          command: |
+            docker build -f Dockerfile.node_modules -t montepoeli.club/montepoeli-client-base-node-modules:latest .
+
+      - run:
+          command : |
+            docker push montepoeli.club/montepoeli-client-base-node-modules:latest
+           
   update-version:
     docker:
       - image: circleci/node:11
@@ -364,7 +387,7 @@ workflows:
       - build-server:
           requires:
             - save-docker-tags-as-artifacts
-
+      
       - swap-client-config-e2e:
           requires:
             - build-client-base
@@ -385,6 +408,14 @@ workflows:
                 - master
                 - /depfu.*/
                 - /dependabot.*/
+
+      - rebuild-client-base:
+            requires:
+              - e2e-tests
+            filters:
+                branches:
+                  only: 
+                    - /depfu/batch_all/client.*/
 
       - update-version:
           requires:
