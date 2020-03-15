@@ -13,8 +13,8 @@
     "build:prod": "ng build --configuration=production && gzipper --verbose ./dist",
     "build:e2e": "ng build --configuration=e2e",
     "build:local": "ng build --configuration=local",
-    "install-node-modules": "yarn install",
-    "test": "ng test --watch=false && yarn test:visual",
+    "install-node-modules": "npm install",
+    "test": "ng test --watch=false && npm run test:visual",
     "test:watch": "ng test",
     "test:cov": "ng test --code-coverage true --watch false",
     "jest": "jest",
@@ -73,7 +73,6 @@
     "typescript": "3.7.5",
     "webdriver-manager": "12.1.7",
     "zone.js": "0.10.2"
-    
   },
   "devDependencies": {
     "codelyzer": "5.1.2",
