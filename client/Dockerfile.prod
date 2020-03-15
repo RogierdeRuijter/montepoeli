@@ -3,7 +3,7 @@ FROM montepoeli.club/montepoeli-client-base-node-modules:latest AS builder
 WORKDIR /usr/src/app
 
 COPY package.json package.json
-COPY yarn.lock yarn.lock
+COPY package-lock.json package-lock.json
 
 RUN npm install --prod
 
