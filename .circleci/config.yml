@@ -218,6 +218,8 @@ jobs:
     steps:
       - checkout:
           path: ~/repo
+      
+      - setup_remote_docker
 
       - run:
           command: |
