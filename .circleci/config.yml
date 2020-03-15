@@ -51,63 +51,45 @@ jobs:
 
       - restore_cache:
           keys:
-          - v1-dependencies-client-{{ checksum "yarn.lock" }}
+          - v1-dependencies-client-{{ checksum "package-lock.json" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-client
 
       - run:
           name: Install node modules
           command: |
-            yarn install
-            yarn compile-ivy-dependencies-test
+            npm install
+            npm run compile-ivy-dependencies-test
 
       - save_cache:
           paths:
           - node_modules
-          key: v1-dependencies-client-{{ checksum "yarn.lock" }}
+          key: v1-dependencies-client-{{ checksum "package-lock.json" }}
 
       - run: 
           name: Run visual regression test shots compared to shots file in the repo
           
           command: |
-            yarn test:visual --updateSnapshot
+            npm run test:visual --updateSnapshot
 
       - run: 
           name: Run tests with coverage and store coverage on server
           
           command: |
-            yarn test:cov
+            npm run test:cov
 
             bash <(curl -s https://codecov.io/bash)
       
       - run:
           command: |
             docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
-      
-      - run:
-          name: Pull or create an image with the node modules and ngcc compiled modules to speed up consequitive builds
-          command: |
-              BASE_IMAGE_CLIENT_NAME=montepouli-client-base
-              DOCKER_TAG_PACKAGE_HASH=$(shasum yarn.lock | awk '{print $1;}')
-              
-              docker pull $DOMAIN/$BASE_IMAGE_CLIENT_NAME:$DOCKER_TAG_PACKAGE_HASH || true
-              
-              docker build -t $DOMAIN/$BASE_IMAGE_CLIENT_NAME:$DOCKER_TAG_PACKAGE_HASH . -f Dockerfile.base-prod --cache-from=$DOMAIN/$BASE_IMAGE_CLIENT_NAME:$DOCKER_TAG_PACKAGE_HASH              
-      - run:
-          name: Push created base image
-          command: |
-              BASE_IMAGE_CLIENT_NAME=montepouli-client-base
-              DOCKER_TAG_PACKAGE_HASH=$(shasum yarn.lock | awk '{print $1;}')
-
-              docker push $DOMAIN/$BASE_IMAGE_CLIENT_NAME:$DOCKER_TAG_PACKAGE_HASH
 
       - run:
           command: |
               IMAGE_CLIENT_NAME=montepouli-client
               BASE_IMAGE_CLIENT_NAME=montepouli-client-base
-              DOCKER_TAG_PACKAGE_HASH=$(shasum yarn.lock | awk '{print $1;}')
 
-              docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG . -f Dockerfile.prod --cache-from=$DOMAIN/$BASE_IMAGE_CLIENT_NAME:$DOCKER_TAG_PACKAGE_HASH
+              docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG . -f Dockerfile.prod
             
       - deploy:
           command: |
@@ -202,6 +184,7 @@ jobs:
           command: |
             IMAGE_CLIENT_NAME=montepouli-client-e2e
             docker push $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG
+
   e2e-tests:
     machine:
       image: circleci/classic:201808-01
@@ -225,7 +208,29 @@ jobs:
       - run: sudo chmod +x /usr/local/bin/docker-compose
       - run: docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
       - run: npm run start:e2e-environment-build-server
-  
+    
+
+  rebuild-client-base:
+    docker:
+      - image: circleci/node:12
+
+    working_directory: ~/repo/client
+    steps:
+      - checkout:
+          path: ~/repo
+
+      - run:
+          command: |
+            docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
+
+      - run:
+          command: |
+            docker build -f Dockerfile.node_modules -t montepoeli.club/montepoeli-client-base-node-modules:latest .
+
+      - run:
+          command : |
+            docker push montepoeli.club/montepoeli-client-base-node-modules:latest
+           
   update-version:
     docker:
       - image: circleci/node:11
@@ -382,7 +387,7 @@ workflows:
       - build-server:
           requires:
             - save-docker-tags-as-artifacts
-
+      
       - swap-client-config-e2e:
           requires:
             - build-client-base
@@ -403,6 +408,14 @@ workflows:
                 - master
                 - /depfu.*/
                 - /dependabot.*/
+
+      - rebuild-client-base:
+            requires:
+              - e2e-tests
+            filters:
+                branches:
+                  only: 
+                    - /depfu/batch_all/client.*/
 
       - update-version:
           requires:

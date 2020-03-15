@@ -3,13 +3,13 @@ FROM node:12
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
-RUN yarn global add @angular/cli
+RUN npm instal -g @angular/cli
 
 COPY package.json package.json
 COPY ngsw-config.json ngsw-config.json
-RUN cd /usr/src/app/ && yarn install --ignore-optional
+RUN cd /usr/src/app/ && npm install --ignore-optional
 
-RUN yarn compile-ivy-dependencies
+RUN npm run compile-ivy-dependencies
 
 ADD . /usr/src/app
 
