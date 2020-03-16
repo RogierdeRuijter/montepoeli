@@ -50,16 +50,18 @@ jobs:
             echo "export CLIENT_TAG=$(cat /tmp/client-version.txt)" >> $BASH_ENV
       
       - run:
+          name: Login to montepoeli.club docker
           command: |
             docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
 
       - run:
+          name: Test and build client image
           command: |
               IMAGE_CLIENT_NAME=montepouli-client
 
               docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG . -f Dockerfile.prod  --compress
       - run:
-          name: Fetch coverage from the container and upload coverage to codecov
+          name: Fetch coverage from the image and upload coverage to codecov
           command: |
             IMAGE_CLIENT_NAME=montepouli-client
             
@@ -70,6 +72,7 @@ jobs:
             bash <(curl -s https://codecov.io/bash)
 
       - deploy:
+          name: Push client image to montepoeli.club registry
           command: |
             IMAGE_CLIENT_NAME=montepouli-client
             docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
