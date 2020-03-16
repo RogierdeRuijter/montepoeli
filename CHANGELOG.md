@@ -1,3 +1,10 @@
+# [4.6.0](https://github.com/RogierdeRuijter/montepoeli/compare/v4.5.4...v4.6.0) (2020-03-16)
+
+
+### Features
+
+* spinner before angular loads ([#391](https://github.com/RogierdeRuijter/montepoeli/issues/391)) ([72262d9](https://github.com/RogierdeRuijter/montepoeli/commit/72262d9e96b2aa55c909d4f8d06127607376bdc7))
+
 ## [4.5.4](https://github.com/RogierdeRuijter/montepoeli/compare/v4.5.3...v4.5.4) (2020-03-16)
 
 
