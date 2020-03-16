@@ -65,8 +65,8 @@ export class MobileContentComponent extends AsyncBaseComponent implements OnInit
 
   // TODO: move to service and test the method
   private isIPhoneXVariant(): boolean {
-    const iPhoneX = (screen.availHeight === 812) && (screen.availWidth === 375);
-    const iPhone11 = (screen.availHeight === 1792) && (screen.availWidth === 828);
+    const iPhoneX = (document.documentElement.clientHeight === 812) && (document.documentElement.clientWidth === 375);
+    const iPhone11 = (document.documentElement.clientHeight === 1792) && (document.documentElement.clientWidth === 828);
 
     return navigator.userAgent.match(/(iPhone)/) && (iPhoneX || iPhone11);
 }
