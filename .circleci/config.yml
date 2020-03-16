@@ -61,6 +61,8 @@ jobs:
       - run:
           name: Fetch coverage from the container and upload coverage to codecov
           command: |
+            IMAGE_CLIENT_NAME=montepouli-client
+            
             docker create -ti --name dummy $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG sh
             docker cp dummy:/usr/coverage .
             docker rm -f dummy
