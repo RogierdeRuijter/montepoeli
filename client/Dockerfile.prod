@@ -24,9 +24,6 @@ COPY .storybook .storybook
 
 RUN npm run test:cov
 
-# TODO: move this out of the image, but currently cant be dont because the coverage artifact cant be stored outside of the image at build time
-# RUN curl -s https://codecov.io/bash
-
 RUN npm run build:prod
 
 FROM nginx:alpine
@@ -35,3 +32,5 @@ COPY nginx.conf /etc/nginx/nginx.conf
 COPY dynamic-environments usr/dynamic-environments
 
 COPY --from=builder /usr/src/app/dist/* /usr/share/nginx/html/
+COPY --from=builder /usr/src/app/coverage/* /usr/coverage/
+

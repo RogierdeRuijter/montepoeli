@@ -56,12 +56,17 @@ jobs:
       - run:
           command: |
               IMAGE_CLIENT_NAME=montepouli-client
-              # ci_env=$(curl -s https://codecov.io/env)
 
-              # echo $ci_env
-
-              docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG . -f Dockerfile.prod  --compress --build-arg ci_env=$ci_env
+              docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG . -f Dockerfile.prod  --compress
+      - run:
+          name: Fetch coverage from the container and upload coverage to codecov
+          command: |
+            docker create -ti --name dummy $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG sh
+            docker cp dummy:/usr/coverage .
+            docker rm -f dummy
             
+            bash <(curl -s https://codecov.io/bash)
+
       - deploy:
           command: |
             IMAGE_CLIENT_NAME=montepouli-client
