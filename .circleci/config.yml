@@ -48,37 +48,6 @@ jobs:
           name: Setup Environment Variables
           command: |
             echo "export CLIENT_TAG=$(cat /tmp/client-version.txt)" >> $BASH_ENV
-
-      - restore_cache:
-          keys:
-          - v1-dependencies-client-{{ checksum "package-lock.json" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-client
-
-      - run:
-          name: Install node modules
-          command: |
-            npm install
-            npm run compile-ivy-dependencies-test
-
-      - save_cache:
-          paths:
-          - node_modules
-          key: v1-dependencies-client-{{ checksum "package-lock.json" }}
-
-      - run: 
-          name: Run visual regression test shots compared to shots file in the repo
-          
-          command: |
-            npm run test:visual --updateSnapshot
-
-      - run: 
-          name: Run tests with coverage and store coverage on server
-          
-          command: |
-            npm run test:cov
-
-            bash <(curl -s https://codecov.io/bash)
       
       - run:
           command: |
@@ -88,8 +57,9 @@ jobs:
           command: |
               IMAGE_CLIENT_NAME=montepouli-client
               BASE_IMAGE_CLIENT_NAME=montepouli-client-base
+              CI_ENV=`bash <(curl -s https://codecov.io/env)` 
 
-              docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG . -f Dockerfile.prod
+              docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG . -f Dockerfile.prod --build-arg ci_env=$CI_ENV  --compress
             
       - deploy:
           command: |
@@ -144,7 +114,7 @@ jobs:
       - run: |
           IMAGE_SERVER_NAME=montepouli-server
 
-          docker build -t $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG . -f Dockerfile.prod
+          docker build -t $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG . -f Dockerfile.prod  --compress
 
       - deploy:
           command: |
