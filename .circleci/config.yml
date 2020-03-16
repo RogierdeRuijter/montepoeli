@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   save-docker-tags-as-artifacts:
     docker:
-      - image: circleci/node:11
+      - image: circleci/node:12
 
     working_directory: ~/repo
     steps:
@@ -80,7 +80,7 @@ jobs:
 
   build-server:
     docker:
-      - image: circleci/node:11
+      - image: circleci/node:12
 
     working_directory: ~/repo/server
     steps:
@@ -135,7 +135,7 @@ jobs:
 
   swap-client-config-e2e:
     docker:
-      - image: circleci/node:11
+      - image: circleci/node:12
 
     working_directory: ~/repo
     steps:
@@ -216,7 +216,7 @@ jobs:
            
   update-version:
     docker:
-      - image: circleci/node:11
+      - image: circleci/node:12
     working_directory: ~/repo
     steps:
       - checkout
@@ -250,7 +250,7 @@ jobs:
 
   save-new-version:
     docker:
-      - image: circleci/node:11
+      - image: circleci/node:12
 
     working_directory: ~/repo
     steps:
@@ -273,7 +273,7 @@ jobs:
 
   swap-client-config:
     docker:
-      - image: circleci/node:11
+      - image: circleci/node:12
 
     working_directory: ~/repo
     steps:
@@ -317,7 +317,7 @@ jobs:
 
   retag-server-image:
     docker:
-      - image: circleci/node:11
+      - image: circleci/node:12
 
     working_directory: ~/repo
     steps:
