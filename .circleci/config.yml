@@ -56,9 +56,9 @@ jobs:
       - run:
           command: |
               IMAGE_CLIENT_NAME=montepouli-client
-              CI_ENV=`bash <(curl -s https://codecov.io/env)` 
+              $ci_env=`bash <(curl -s https://codecov.io/env)` 
 
-              docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG . -f Dockerfile.prod --build-arg ci_env=$CI_ENV --compress
+              docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG . -f Dockerfile.prod --build-arg $ci_env --compress
             
       - deploy:
           command: |
