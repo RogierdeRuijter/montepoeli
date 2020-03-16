@@ -1,3 +1,10 @@
+## [4.5.2](https://github.com/RogierdeRuijter/montepoeli/compare/v4.5.1...v4.5.2) (2020-03-16)
+
+
+### Bug Fixes
+
+* more hero fix the iphone detection ([99dad30](https://github.com/RogierdeRuijter/montepoeli/commit/99dad30df1f44124d93eed72d2b348cc8c2c1cba))
+
 ## [4.5.1](https://github.com/RogierdeRuijter/montepoeli/compare/v4.5.0...v4.5.1) (2020-03-16)
 
 
