@@ -168,7 +168,7 @@ jobs:
 
   e2e-tests:
     machine:
-      image: circleci/classic:201808-01-browsers
+      image: circleci/classic:201808-01
     working_directory: ~/repo
     environment:
       - CLIENT_BASE_IMAGE_NAME: montepoeli.club/montepouli-client-e2e
