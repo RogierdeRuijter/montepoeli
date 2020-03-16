@@ -31,7 +31,7 @@ jobs:
             
   build-client-base:
     docker:
-      - image: circleci/node:12-browsers
+      - image: circleci/node:12
 
     working_directory: ~/repo/client
     steps:
@@ -58,7 +58,7 @@ jobs:
               IMAGE_CLIENT_NAME=montepouli-client
               $ci_env=`bash <(curl -s https://codecov.io/env)` 
 
-              docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG . -f Dockerfile.prod --build-arg $ci_env --compress
+              docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG . -f Dockerfile.prod  --compress --build-arg $ci_env
             
       - deploy:
           command: |
