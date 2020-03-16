@@ -25,7 +25,7 @@ COPY .storybook .storybook
 RUN npm run test:cov
 
 # TODO: move this out of the image, but currently cant be dont because the coverage artifact cant be stored outside of the image at build time
-RUN curl -s https://codecov.io/bash
+# RUN curl -s https://codecov.io/bash
 
 RUN npm run build:prod
 
