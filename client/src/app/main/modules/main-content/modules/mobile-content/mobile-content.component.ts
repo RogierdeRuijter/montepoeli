@@ -65,11 +65,10 @@ export class MobileContentComponent extends AsyncBaseComponent implements OnInit
 
   // TODO: move to service and test the method
   private isIPhoneXVariant(): boolean {
-    const iPhoneX = (document.documentElement.clientHeight === 812) && (document.documentElement.clientWidth === 375);
-    const iPhone11 = (document.documentElement.clientHeight === 896) && (document.documentElement.clientWidth === 414);
-
-    return navigator.userAgent.match(/(iPhone)/) && (iPhoneX || iPhone11);
-}
+    let aspect = window.screen.width / window.screen.height;
+    
+    return navigator.userAgent.match(/(iPhone)/) && aspect.toFixed(3) === '0.462';
+  }
 
   private closeAddGameModalIfOpen(): void {
     this.dialog.closeAll();
