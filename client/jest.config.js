@@ -1,5 +1,4 @@
 module.exports = {
-
   "preset": "jest-preset-angular",
     "setupFilesAfterEnv": [
       "<rootDir>/src/jest-config/setup.ts"
@@ -12,8 +11,7 @@ module.exports = {
       "<rootDir>/node_modules/",
       "<rootDir>/dist/",
       "<rootDir>/storybook-static/",
-      "<rootDir>/src/test.ts",
-      "<rootDir>/src/app/*"
+      "<rootDir>/src/test.ts"
     ],
     "coveragePathIgnorePatterns": [
       "/jest-config/",

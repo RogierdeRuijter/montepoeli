@@ -4,11 +4,20 @@ import { ThemeService } from './theme.service';
 
 describe('ThemeService', () => {
   let service: ThemeService;
+  beforeAll(() => {
+    Object.defineProperty(window, 'matchMedia', {
+      value: jest.fn().mockImplementation(query => ({
+        matches: undefined
+      })),
+    });
 
+  });
   beforeEach(() => {
     TestBed.configureTestingModule({});
     service = TestBed.inject(ThemeService);
   });
+
+  afterEach(() => jest.resetAllMocks());
 
   it('should be created', () => {
     expect(service).toBeTruthy();
@@ -17,8 +26,7 @@ describe('ThemeService', () => {
   describe('getThemeBasedOnSystemPreference', () => {
     it('should return black theme when prefers-color-scheme: dark is set to true', () => {
       const darkTheme = true;
-  
-      spyOn(window, 'matchMedia').withArgs('(prefers-color-scheme: dark)').and.returnValue({matches: darkTheme} as any);
+      jest.spyOn(window, 'matchMedia').mockReturnValue({matches: darkTheme} as any);
   
       const result = service.getThemeBasedOnSystemPreference();
   
@@ -29,19 +37,16 @@ describe('ThemeService', () => {
 
     it('should return light theme when prefers-color-scheme: dark is set to false', () => {
       const darkTheme = false;
-  
-      spyOn(window, 'matchMedia').withArgs('(prefers-color-scheme: dark)').and.returnValue({matches: darkTheme} as any);
-  
+      jest.spyOn(window, 'matchMedia').mockReturnValue({matches: darkTheme} as any);
+
       const result = service.getThemeBasedOnSystemPreference();
   
       const expectedResult = 'light-theme';
 
-      expect(result).toBe(expectedResult);
+      expect(result).toBe(expectedResult);  
     });
 
     it('should return light theme when prefers-color-scheme: dark is undefined', () => {
-
-      spyOn(window, 'matchMedia').withArgs('(prefers-color-scheme: dark)').and.returnValue(undefined);
   
       const result = service.getThemeBasedOnSystemPreference();
   

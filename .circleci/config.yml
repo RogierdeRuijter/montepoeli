@@ -31,7 +31,7 @@ jobs:
             
   build-client-base:
     docker:
-      - image: circleci/node:12-browsers
+      - image: circleci/node:12
 
     working_directory: ~/repo/client
     steps:
@@ -48,50 +48,31 @@ jobs:
           name: Setup Environment Variables
           command: |
             echo "export CLIENT_TAG=$(cat /tmp/client-version.txt)" >> $BASH_ENV
-
-      - restore_cache:
-          keys:
-          - v1-dependencies-client-{{ checksum "package-lock.json" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-client
-
-      - run:
-          name: Install node modules
-          command: |
-            npm install
-            npm run compile-ivy-dependencies-test
-
-      - save_cache:
-          paths:
-          - node_modules
-          key: v1-dependencies-client-{{ checksum "package-lock.json" }}
-
-      - run: 
-          name: Run visual regression test shots compared to shots file in the repo
-          
-          command: |
-            npm run test:visual --updateSnapshot
-
-      - run: 
-          name: Run tests with coverage and store coverage on server
-          
-          command: |
-            npm run test:cov
-
-            bash <(curl -s https://codecov.io/bash)
       
       - run:
+          name: Login to montepoeli.club docker
           command: |
             docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
 
       - run:
+          name: Test and build client image
           command: |
               IMAGE_CLIENT_NAME=montepouli-client
-              BASE_IMAGE_CLIENT_NAME=montepouli-client-base
 
-              docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG . -f Dockerfile.prod
+              docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG . -f Dockerfile.prod  --compress
+      - run:
+          name: Fetch coverage from the image and upload coverage to codecov
+          command: |
+            IMAGE_CLIENT_NAME=montepouli-client
             
+            docker create -ti --name dummy $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG sh
+            docker cp dummy:/usr/coverage .
+            docker rm -f dummy
+            
+            bash <(curl -s https://codecov.io/bash)
+
       - deploy:
+          name: Push client image to montepoeli.club registry
           command: |
             IMAGE_CLIENT_NAME=montepouli-client
             docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
@@ -144,7 +125,7 @@ jobs:
       - run: |
           IMAGE_SERVER_NAME=montepouli-server
 
-          docker build -t $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG . -f Dockerfile.prod
+          docker build -t $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG . -f Dockerfile.prod  --compress
 
       - deploy:
           command: |
@@ -227,7 +208,7 @@ jobs:
 
       - run:
           command: |
-            docker build -f Dockerfile.node_modules -t montepoeli.club/montepoeli-client-base-node-modules:latest .
+            docker build -f Dockerfile.node_modules -t montepoeli.club/montepoeli-client-base-node-modules:latest . --compress
 
       - run:
           command : |

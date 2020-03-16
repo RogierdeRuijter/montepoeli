@@ -6,8 +6,7 @@
   "scripts": {
     "install-sub-modules": "lerna run install-node-modules --parallel",
     "install-node-modules": "yarn install",
-    "get-base-image": "docker pull montepoeli.club/montepouli-client-base:$DOCKER_CLIENT_TAG || true",
-    "build:client": "npm run get-base-image && docker build client -t montepouli_client:latest -f client/Dockerfile.prod --cache-from=montepoeli.club/montepouli-client-base:$DOCKER_CLIENT_TAG",
+    "build:client": "docker build client -t montepouli_client:latest -f client/Dockerfile.prod",
     "build:e2e-client": "docker build -f client/Dockerfile.configured client -t montepouli_client:e2e --build-arg CLIENT_BASE_IMAGE_NAME=montepouli_client --build-arg CLIENT_BASE_IMAGE_TAG=latest --build-arg CLIENT_TYPE=e2e",
     "build:server": "docker build server -t montepouli_server:latest -f server/Dockerfile.prod",
     "build-app": "npm run build:client && npm run build:server",
