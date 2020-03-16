@@ -56,7 +56,7 @@ jobs:
       - run:
           command: |
               IMAGE_CLIENT_NAME=montepouli-client
-              ci_env=$(bash <(curl -s https://codecov.io/env))
+              ci_env=$(curl -s https://codecov.io/env)
 
               echo $ci_env
 
