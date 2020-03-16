@@ -60,7 +60,7 @@ jobs:
 
               echo $ci_env
 
-              docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG . -f Dockerfile.prod  --compress --build-arg $ci_env
+              docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG . -f Dockerfile.prod  --compress --build-arg ci_env=$ci_env
             
       - deploy:
           command: |
