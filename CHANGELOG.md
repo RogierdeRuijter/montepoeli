@@ -1,3 +1,10 @@
+## [4.5.1](https://github.com/RogierdeRuijter/montepoeli/compare/v4.5.0...v4.5.1) (2020-03-16)
+
+
+### Bug Fixes
+
+* hero fix footer ([4a37734](https://github.com/RogierdeRuijter/montepoeli/commit/4a37734199c4992a70d6322390e782989f9909db))
+
 # [4.5.0](https://github.com/RogierdeRuijter/montepoeli/compare/v4.4.2...v4.5.0) (2020-03-16)
 
 
