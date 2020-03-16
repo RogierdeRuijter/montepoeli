@@ -6,6 +6,7 @@
 
   <app-action-bar-footer [showPlusIcon]="gameView"
                          [selected]="selected"
+                         [raised]="raisedFooter"
                          (chessSetSelected)="gamesHandler()"
                          (scrollSelected)="rulesHandler()"
                          (plusSelected)="plusEventHandler()">

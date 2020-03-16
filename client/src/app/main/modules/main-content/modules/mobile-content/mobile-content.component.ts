@@ -27,6 +27,8 @@ export class MobileContentComponent extends AsyncBaseComponent implements OnInit
   public gameView: boolean;
   public selected = Icons.CHESS_PIECES;
 
+  public raisedFooter: boolean;
+
   constructor(private newGameStore: NewGameStore,
               private tabChangeGlobalEventEmitter: TabChangeGlobalEventEmitter,
               private gameService: GameService,
@@ -37,9 +39,13 @@ export class MobileContentComponent extends AsyncBaseComponent implements OnInit
               private changeDetectorRef: ChangeDetectorRef,
               private compiler: Compiler) {
                 super();
-              }
+  }
   
-              public ngOnInit(): void {
+  public ngOnInit(): void {
+    if (window.matchMedia('(display-mode: standalone)').matches && this.isIPhoneXVariant()) {
+      this.raisedFooter = true;
+    }
+
     this.tabChangeGlobalEventEmitter
       .get(this.destroy$)
       .subscribe((tab: Tabs) => {
@@ -56,6 +62,14 @@ export class MobileContentComponent extends AsyncBaseComponent implements OnInit
         this.closeAddGameModalIfOpen();
       });
   }
+
+  // TODO: move to service and test the method
+  private isIPhoneXVariant(): boolean {
+    const iPhoneX = (screen.availHeight === 812) && (screen.availWidth === 375);
+    const iPhone11 = (screen.availHeight === 1792) && (screen.availWidth === 828);
+
+    return navigator.userAgent.match(/(iPhone)/) && (iPhoneX || iPhone11);
+}
 
   private closeAddGameModalIfOpen(): void {
     this.dialog.closeAll();

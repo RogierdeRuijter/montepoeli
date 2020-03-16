@@ -14,6 +14,9 @@ export class ActionBarFooterComponent {
   @Input()
   public selected: Icons;
 
+  @Input()
+  public raised: boolean;
+
   @Output()
   public chessSetSelected: EventEmitter<void> = new EventEmitter();
 
