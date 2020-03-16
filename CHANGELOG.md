@@ -1,3 +1,10 @@
+## [4.5.4](https://github.com/RogierdeRuijter/montepoeli/compare/v4.5.3...v4.5.4) (2020-03-16)
+
+
+### Bug Fixes
+
+* increase raise ([dec8c1c](https://github.com/RogierdeRuijter/montepoeli/commit/dec8c1c6be3181c46cc8299e4ff367d28baba2bd))
+
 ## [4.5.3](https://github.com/RogierdeRuijter/montepoeli/compare/v4.5.2...v4.5.3) (2020-03-16)
 
 
