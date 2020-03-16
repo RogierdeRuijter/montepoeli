@@ -56,7 +56,6 @@ jobs:
       - run:
           command: |
               IMAGE_CLIENT_NAME=montepouli-client
-              BASE_IMAGE_CLIENT_NAME=montepouli-client-base
               CI_ENV=`bash <(curl -s https://codecov.io/env)` 
 
               docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG . -f Dockerfile.prod --build-arg ci_env=$CI_ENV  --compress
@@ -197,7 +196,7 @@ jobs:
 
       - run:
           command: |
-            docker build -f Dockerfile.node_modules -t montepoeli.club/montepoeli-client-base-node-modules:latest .
+            docker build -f Dockerfile.node_modules -t montepoeli.club/montepoeli-client-base-node-modules:latest . --compress
 
       - run:
           command : |
