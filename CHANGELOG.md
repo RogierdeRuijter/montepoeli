@@ -1,3 +1,10 @@
+# [4.5.0](https://github.com/RogierdeRuijter/montepoeli/compare/v4.4.2...v4.5.0) (2020-03-16)
+
+
+### Features
+
+* raise footer on iphoneX and iphone11 in pwa mode ([#390](https://github.com/RogierdeRuijter/montepoeli/issues/390)) ([2f59669](https://github.com/RogierdeRuijter/montepoeli/commit/2f596695b0a288cf0f07169ca81c6cbc127e00d1))
+
 ## [4.4.2](https://github.com/RogierdeRuijter/montepoeli/compare/v4.4.1...v4.4.2) (2020-03-16)
 
 
