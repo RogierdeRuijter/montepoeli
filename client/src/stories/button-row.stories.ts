@@ -7,13 +7,17 @@ import {GridRowDirective} from '../app/shared/modules/grid/directives/grid-row.d
 import {GridColumnDirective} from '../app/shared/modules/grid/directives/grid-column.directive';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ButtonComponent } from 'src/app/shared/modules/button/components/button/button.component';
+import { moduleMetadata } from '@storybook/angular/dist/client/preview/types';
 
 export default {
-  title: 'Button Row',
+  title: 'Button Row'
 };
-
-export const primaryButton = () => ({
-  component: ButtonRowComponent,
+export const primaryButtonsLightTheme = () => ({
+  template: `
+  <div class="light-theme">
+    <app-button-row [buttonRowType]="buttonRowType" [buttonFunctions]="buttonFunctions" [buttonTypes]="buttonTypes"></app-button-row>
+  </div>
+  `,
   props: {
     buttonRowType: ButtonRowType.TWO,
     buttonFunctions: [ButtonFunction.CANCEL, ButtonFunction.SAVE],
@@ -21,6 +25,21 @@ export const primaryButton = () => ({
   },
   moduleMetadata: moduleMeta
 });
+
+export const primaryButtonsDarkTheme = () => ({
+  template: `
+  <div class="dark-theme">
+    <app-button-row [buttonRowType]="buttonRowType" [buttonFunctions]="buttonFunctions" [buttonTypes]="buttonTypes"></app-button-row>
+  </div>
+  `,
+  props: {
+    buttonRowType: ButtonRowType.TWO,
+    buttonFunctions: [ButtonFunction.CANCEL, ButtonFunction.SAVE],
+    buttonTypes: [ButtonType.PRIMARY, ButtonType.PRIMARY]
+  },
+  moduleMetadata: moduleMeta
+});
+
 
 const moduleMeta = {
   imports: [
@@ -32,7 +51,8 @@ const moduleMeta = {
     TranslateDirective,
     GridRowDirective,
     GridColumnDirective,
-    ButtonComponent
+    ButtonComponent,
+    ButtonRowComponent
   ],
   providers: [],
 }
