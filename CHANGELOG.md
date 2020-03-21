@@ -1,3 +1,10 @@
+# [4.9.0](https://github.com/RogierdeRuijter/montepoeli/compare/v4.8.0...v4.9.0) (2020-03-21)
+
+
+### Features
+
+* add animation for login page ([c78d29e](https://github.com/RogierdeRuijter/montepoeli/commit/c78d29e6cca49028f273bd118bdbd90d16f9ccc3))
+
 # [4.8.0](https://github.com/RogierdeRuijter/montepoeli/compare/v4.7.0...v4.8.0) (2020-03-21)
 
 
