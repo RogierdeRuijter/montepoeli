@@ -124,30 +124,6 @@ jobs:
           name: Setup Environment Variables
           command: |
             echo "export SERVER_TAG=$(cat /tmp/server-version.txt)" >> $BASH_ENV
-      
-      - restore_cache:
-          keys:
-          - v1-dependencies-server-{{ checksum "yarn.lock" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-server
-
-      - run:
-          name: Install node modules
-          command: |
-            yarn install
-
-      - save_cache:
-          paths:
-          - node_modules
-          key: v1-dependencies-server-{{ checksum "yarn.lock" }}
-
-      - run: 
-          name: Run tests with coverage and store results on server
-
-          command: |
-            yarn test:cov
-
-            bash <(curl -s https://codecov.io/bash)
 
       - run:
           name: Login to montepoeli.club docker
@@ -169,6 +145,17 @@ jobs:
             if [[ "$(docker images -q $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG  2> /dev/null)" == "" ]]; then
               docker build -t $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG . -f Dockerfile.prod  --compress --cache-from=$DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG
             fi
+
+      - run:
+          name: Fetch coverage from the image and upload coverage to codecov
+          command: |
+            IMAGE_SERVER_NAME=montepouli-server
+            
+            docker create -ti --name dummy $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG sh
+            docker cp dummy:/usr/coverage .
+            docker rm -f dummy
+            
+            bash <(curl -s https://codecov.io/bash)
 
       - deploy:
           command: |
