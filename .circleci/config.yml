@@ -12,6 +12,7 @@ jobs:
           command: |
             cd client
             
+            echo ${CIRCLE_BRANCH}
             if [[ ${CIRCLE_BRANCH} = "master" ]]
             then
               echo 'master'
