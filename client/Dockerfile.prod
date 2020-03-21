@@ -12,6 +12,7 @@ RUN npm install
 COPY angular.json angular.json
 COPY tsconfig.json tsconfig.json
 COPY ngsw-config.json ngsw-config.json
+COPY tslint.json tslint.json
 
 RUN npm run compile-ivy-dependencies
 
@@ -21,6 +22,8 @@ COPY jest.config.js jest.config.js
 COPY tsconfig.spec.json tsconfig.spec.json
 COPY babel.config.js babel.config.js
 COPY .storybook .storybook
+
+RUN npm run lint
 
 RUN npm run test:cov
 

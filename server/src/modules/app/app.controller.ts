@@ -32,7 +32,7 @@ export class AppController {
           signed: true,
           domain: this.domain,
           secure: this.secure,
-          sameSite: 'Strict'
+          sameSite: 'strict'
         }
       );
 
@@ -44,7 +44,7 @@ export class AppController {
           signed: true,
           domain: this.domain,
           secure: false,
-          sameSite: 'Strict'
+          sameSite: 'strict'
         }
       );
 
