@@ -22,7 +22,7 @@ jobs:
             if [[ ${CIRCLE_BRANCH} = "master" ]]
             then
               echo 'master'
-              CLIENT_TAG=$(git rev-parse @~)
+              CLIENT_TAG=$(git log -n 1 --skip 1 --pretty=format:"%H")
             else
               echo 'not master'
               CLIENT_TAG=${CIRCLE_SHA1}
