@@ -17,6 +17,8 @@ jobs:
           command: |
             cd client
             
+            echo ${CIRCLE_SHA1}
+
             if [[ ${CIRCLE_BRANCH} = "master" ]]
             then
               echo 'master'
