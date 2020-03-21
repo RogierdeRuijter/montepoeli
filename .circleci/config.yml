@@ -12,13 +12,17 @@ jobs:
           command: |
             cd client
             
+            echo ${CIRCLE_BRANCH}
             if [[ ${CIRCLE_BRANCH} = "master" ]]
             then
+              echo 'master'
               CLIENT_TAG=$(git rev-parse @~)
-            else 
+            else
+              echo 'not master'
               CLIENT_TAG=${CIRCLE_SHA1}
             fi
             
+            echo ${CLIENT_TAG}
             echo ${CLIENT_TAG} > /tmp/client-version.txt
 
       - run:
