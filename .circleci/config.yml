@@ -290,6 +290,11 @@ jobs:
           command: |
             npx semantic-release
 
+            # stop workflow if version is not updated
+            # if [ "$CIRCLE_BRANCH" = "develop" ]; then
+            #  circleci-agent step halt
+            # fi
+
   save-new-version:
     docker:
       - image: circleci/node:12
