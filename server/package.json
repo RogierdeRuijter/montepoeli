@@ -6,9 +6,9 @@
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "get-v": "grep '\"version\":' package.json | cut -d\\\" -f4",
-    "build:pre-push": "yarn build && rm -r dist",
+    "build:pre-push": "npm run build && rm -r dist",
     "format": "prettier --write \"src/**/*.ts\"",
-    "install-node-modules": "yarn install",
+    "install-node-modules": "npm install",
     "start": "ts-node -r tsconfig-paths/register src/main.ts",
     "start:dev": "nodemon",
     "start:debug": "nodemon --config nodemon-debug.json",
