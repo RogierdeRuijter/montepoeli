@@ -11,11 +11,6 @@ import { trigger, transition, query, style, animate } from '@angular/animations'
     trigger('fadeInAnimation', [
     transition('* => *', [
     query(':enter', style({ opacity: 0 }), { optional: true }),
-    //  query(':enter', stagger('300ms', [
-    //   animate('500ms', style({ opacity: 1 }))
-    // ]))
-    // query(':enter', stagger(100, [ animate('1.5s', style({opacity: 1})), ]))
-    
     query(':enter', animate('2000ms', style({ opacity: 1 })), { optional: true })
     ])
   ])
