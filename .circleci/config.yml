@@ -161,7 +161,6 @@ jobs:
 
             docker pull $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG || true
 
-
       - run: 
           name: Test and build image, if it is not available in context
           command: |
