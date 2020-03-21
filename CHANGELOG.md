@@ -1,3 +1,10 @@
+# [4.8.0](https://github.com/RogierdeRuijter/montepoeli/compare/v4.7.0...v4.8.0) (2020-03-21)
+
+
+### Features
+
+* set color of the pwa header to color of header ([d98e2aa](https://github.com/RogierdeRuijter/montepoeli/commit/d98e2aac322f3e1fd343faf6a07bd5e6ab93c639))
+
 # [4.7.0](https://github.com/RogierdeRuijter/montepoeli/compare/v4.6.0...v4.7.0) (2020-03-21)
 
 
