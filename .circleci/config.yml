@@ -7,28 +7,18 @@ jobs:
     working_directory: ~/repo
     steps:
       - checkout
-      # - add_ssh_keys:
-      #     fingerprints:
-      #       - "d7:e3:8a:3a:84:5f:4b:48:cd:c0:d4:bf:66:59:16:e1"
-      
-      # - run: git pull
       
       - run:
           command: |
             cd client
             
-            echo ${CIRCLE_SHA1}
-
             if [[ ${CIRCLE_BRANCH} = "master" ]]
             then
-              echo 'master'
               CLIENT_TAG=$(git log -n 1 --skip 1 --pretty=format:"%H")
             else
-              echo 'not master'
               CLIENT_TAG=${CIRCLE_SHA1}
             fi
             
-            echo ${CLIENT_TAG}
             echo ${CLIENT_TAG} > /tmp/client-version.txt
 
       - run:
