@@ -432,7 +432,7 @@ exports[`Storyshots Login form Login 1`] = `
   target={[Function ViewContainerRef_]}
 >
   <ui-login-form
-    class="ng-star-inserted"
+    class="ng-tns-c10-0 ng-star-inserted"
   >
     <div
       class="content"
@@ -447,23 +447,28 @@ exports[`Storyshots Login form Login 1`] = `
           class="image-container col-3"
           ng-reflect-amount-of-columns="3"
         >
-          <img
-            class="image"
-            src="../../../../assets/images/logo_transparent.png"
-          />
+          <div
+            class="ng-tns-c10-0"
+          >
+            <img
+              class="image"
+              src="../../../../assets/images/logo_transparent.png"
+            />
+          </div>
         </div>
         <form
-          class="row d-flex flex-column align-items-center col-3 ng-untouched ng-pristine ng-valid"
+          class="ng-tns-c10-0 row d-flex flex-column align-items-center col-3 ng-trigger ng-trigger-fadeInAnimation ng-untouched ng-pristine ng-valid"
           ng-reflect-alignment="3,2"
           ng-reflect-amount-of-columns="3"
           ng-reflect-grid-sizes="6"
           novalidate=""
+          style=""
         >
           <div
             class="form-group"
           >
             <mat-form-field
-              class="full-width mat-form-field ng-tns-c10-0 mat-primary mat-form-field-type-mat-input mat-form-field-appearance-legacy mat-form-field-can-float mat-form-field-has-label mat-form-field-hide-placeholder ng-untouched ng-pristine ng-valid"
+              class="full-width mat-form-field ng-tns-c11-1 mat-primary mat-form-field-type-mat-input mat-form-field-appearance-legacy mat-form-field-can-float mat-form-field-has-label mat-form-field-hide-placeholder ng-untouched ng-pristine ng-valid"
             >
               <div
                 class="mat-form-field-wrapper"
@@ -480,7 +485,7 @@ exports[`Storyshots Login form Login 1`] = `
                       aria-invalid="false"
                       aria-required="true"
                       autofocus=""
-                      class="mat-input-element mat-form-field-autofill-control cdk-text-field-autofill-monitored ng-untouched ng-pristine ng-valid"
+                      class="mat-input-element mat-form-field-autofill-control ng-tns-c10-0 cdk-text-field-autofill-monitored ng-untouched ng-pristine ng-valid"
                       id="username"
                       matinput=""
                       name="username"
@@ -497,24 +502,26 @@ exports[`Storyshots Login form Login 1`] = `
                       
                       <label
                         aria-owns="username"
-                        class="mat-form-field-label ng-tns-c10-0 mat-empty mat-form-field-empty ng-star-inserted"
+                        class="mat-form-field-label ng-tns-c11-1 mat-empty mat-form-field-empty ng-star-inserted ng-animating"
                         for="username"
                         id="mat-form-field-label-1"
                         ng-reflect-disabled="true"
                         ng-reflect-ng-switch="false"
+                        style="animation: 2000ms linear 0ms 1 normal forwards gen_css_kf_0; opacity: 0; animation-play-state: running;"
                       >
                         
                         
                         <mat-placeholder
-                          class="ng-star-inserted"
+                          class="ng-tns-c10-0 ng-star-inserted"
                         >
                           <span
                             apptranslate="pages.login.username"
+                            class="ng-tns-c10-0"
                             ng-reflect-key="pages.login.username"
                           />
                         </mat-placeholder>
                         <span
-                          class="ng-tns-c10-0 ng-star-inserted"
+                          class="ng-tns-c11-1 ng-star-inserted"
                         >
                           
                         </span>
@@ -522,7 +529,7 @@ exports[`Storyshots Login form Login 1`] = `
                         
                         <span
                           aria-hidden="true"
-                          class="mat-placeholder-required mat-form-field-required-marker ng-tns-c10-0 ng-star-inserted"
+                          class="mat-placeholder-required mat-form-field-required-marker ng-tns-c11-1 ng-star-inserted"
                         >
                            *
                         </span>
@@ -533,7 +540,8 @@ exports[`Storyshots Login form Login 1`] = `
                 </div>
                 
                 <div
-                  class="mat-form-field-underline ng-tns-c10-0 ng-star-inserted"
+                  class="mat-form-field-underline ng-tns-c11-1 ng-star-inserted ng-animating"
+                  style="animation: 2000ms linear 0ms 1 normal forwards gen_css_kf_1; opacity: 0; animation-play-state: running;"
                 >
                   <span
                     class="mat-form-field-ripple"
@@ -546,8 +554,8 @@ exports[`Storyshots Login form Login 1`] = `
                   
                   
                   <div
-                    class="mat-form-field-hint-wrapper ng-tns-c10-0 ng-trigger ng-trigger-transitionMessages ng-star-inserted"
-                    style="opacity:1;transform:translateY(0%);0:opacity;1:transform;"
+                    class="mat-form-field-hint-wrapper ng-tns-c11-1 ng-trigger ng-trigger-transitionMessages ng-star-inserted ng-animating"
+                    style="opacity: 0; transform: translateY(0%); animation: 2000ms linear 0ms 1 normal forwards gen_css_kf_2; animation-play-state: running;"
                   >
                     
                     <div
@@ -562,7 +570,7 @@ exports[`Storyshots Login form Login 1`] = `
             class="form-group"
           >
             <mat-form-field
-              class="full-width mat-form-field ng-tns-c10-1 mat-primary mat-form-field-type-mat-input mat-form-field-appearance-legacy mat-form-field-can-float mat-form-field-has-label mat-form-field-hide-placeholder ng-untouched ng-pristine ng-valid"
+              class="full-width mat-form-field ng-tns-c11-2 mat-primary mat-form-field-type-mat-input mat-form-field-appearance-legacy mat-form-field-can-float mat-form-field-has-label mat-form-field-hide-placeholder ng-untouched ng-pristine ng-valid"
             >
               <div
                 class="mat-form-field-wrapper"
@@ -578,7 +586,7 @@ exports[`Storyshots Login form Login 1`] = `
                     <input
                       aria-invalid="false"
                       aria-required="true"
-                      class="mat-input-element mat-form-field-autofill-control cdk-text-field-autofill-monitored ng-untouched ng-pristine ng-valid"
+                      class="mat-input-element mat-form-field-autofill-control ng-tns-c10-0 cdk-text-field-autofill-monitored ng-untouched ng-pristine ng-valid"
                       id="password"
                       matinput=""
                       name="password"
@@ -597,24 +605,26 @@ exports[`Storyshots Login form Login 1`] = `
                       
                       <label
                         aria-owns="password"
-                        class="mat-form-field-label ng-tns-c10-1 mat-empty mat-form-field-empty ng-star-inserted"
+                        class="mat-form-field-label ng-tns-c11-2 mat-empty mat-form-field-empty ng-star-inserted ng-animating"
                         for="password"
                         id="mat-form-field-label-3"
                         ng-reflect-disabled="true"
                         ng-reflect-ng-switch="false"
+                        style="animation: 2000ms linear 0ms 1 normal forwards gen_css_kf_3; opacity: 0; animation-play-state: running;"
                       >
                         
                         
                         <mat-placeholder
-                          class="ng-star-inserted"
+                          class="ng-tns-c10-0 ng-star-inserted"
                         >
                           <span
                             apptranslate="pages.login.password"
+                            class="ng-tns-c10-0"
                             ng-reflect-key="pages.login.password"
                           />
                         </mat-placeholder>
                         <span
-                          class="ng-tns-c10-1 ng-star-inserted"
+                          class="ng-tns-c11-2 ng-star-inserted"
                         >
                           
                         </span>
@@ -622,7 +632,7 @@ exports[`Storyshots Login form Login 1`] = `
                         
                         <span
                           aria-hidden="true"
-                          class="mat-placeholder-required mat-form-field-required-marker ng-tns-c10-1 ng-star-inserted"
+                          class="mat-placeholder-required mat-form-field-required-marker ng-tns-c11-2 ng-star-inserted"
                         >
                            *
                         </span>
@@ -633,7 +643,8 @@ exports[`Storyshots Login form Login 1`] = `
                 </div>
                 
                 <div
-                  class="mat-form-field-underline ng-tns-c10-1 ng-star-inserted"
+                  class="mat-form-field-underline ng-tns-c11-2 ng-star-inserted ng-animating"
+                  style="animation: 2000ms linear 0ms 1 normal forwards gen_css_kf_4; opacity: 0; animation-play-state: running;"
                 >
                   <span
                     class="mat-form-field-ripple"
@@ -646,8 +657,8 @@ exports[`Storyshots Login form Login 1`] = `
                   
                   
                   <div
-                    class="mat-form-field-hint-wrapper ng-tns-c10-1 ng-trigger ng-trigger-transitionMessages ng-star-inserted"
-                    style="opacity:1;transform:translateY(0%);0:opacity;1:transform;"
+                    class="mat-form-field-hint-wrapper ng-tns-c11-2 ng-trigger ng-trigger-transitionMessages ng-star-inserted ng-animating"
+                    style="opacity: 0; transform: translateY(0%); animation: 2000ms linear 0ms 1 normal forwards gen_css_kf_5; animation-play-state: running;"
                   >
                     
                     <div
@@ -659,6 +670,7 @@ exports[`Storyshots Login form Login 1`] = `
             </mat-form-field>
           </div>
           <app-button
+            class="ng-tns-c10-0"
             id="submit"
             ng-reflect-button-function="1"
             ng-reflect-button-type="3"
@@ -666,11 +678,12 @@ exports[`Storyshots Login form Login 1`] = `
           >
             
             <button
-              class="full-width mat-focus-indicator mat-raised-button mat-button-base mat-primary ng-star-inserted"
+              class="full-width mat-focus-indicator mat-raised-button mat-button-base mat-primary ng-star-inserted ng-animating"
               id="submit"
               mat-raised-button=""
               ng-reflect-color="primary"
               ng-reflect-key="pages.login.do_login"
+              style="animation: 2000ms linear 0ms 1 normal forwards gen_css_kf_6; opacity: 0; animation-play-state: running;"
               type="submit"
             >
               <span
