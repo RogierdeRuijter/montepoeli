@@ -1,3 +1,10 @@
+# [4.7.0](https://github.com/RogierdeRuijter/montepoeli/compare/v4.6.0...v4.7.0) (2020-03-21)
+
+
+### Features
+
+* add fade in anmiation to game table and montepoeli logo ([c4ea11b](https://github.com/RogierdeRuijter/montepoeli/commit/c4ea11b0a49ca405cb9e04c48b6623a55f9119f4))
+
 # [4.6.0](https://github.com/RogierdeRuijter/montepoeli/compare/v4.5.4...v4.6.0) (2020-03-16)
 
 
