@@ -80,11 +80,14 @@ jobs:
             docker pull $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG || true
       
       - run:
-          name: Test and build client image
+          name: Test and build client image, if it not available in context
           command: |
             IMAGE_CLIENT_NAME=montepouli-client
-
-            docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG . -f Dockerfile.prod  --compress --cache-from=$DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG
+            
+            if [[ "$(docker images -q $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG 2> /dev/null)" == "" ]]; then
+              docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG . -f Dockerfile.prod  --compress
+            fi
+            
       - run:
           name: Fetch coverage from the image and upload coverage to codecov
           command: |
@@ -154,15 +157,19 @@ jobs:
       - run:
           name: See if the docker image is avaialbe current client tag
           command: |
-              IMAGE_SERVER_NAME=montepouli-server
+            IMAGE_SERVER_NAME=montepouli-server
 
-              docker pull $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG || true
+            docker pull $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG || true
 
 
-      - run: |
-          IMAGE_SERVER_NAME=montepouli-server
+      - run: 
+          name: Test and build image, if it is not available in context
+          command: |
+            IMAGE_SERVER_NAME=montepouli-server
 
-          docker build -t $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG . -f Dockerfile.prod  --compress --cache-from=$DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG
+            if [[ "$(docker images -q $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG  2> /dev/null)" == "" ]]; then
+              docker build -t $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG . -f Dockerfile.prod  --compress --cache-from=$DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG
+            fi
 
       - deploy:
           command: |
