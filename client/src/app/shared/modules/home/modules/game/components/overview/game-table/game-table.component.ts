@@ -10,8 +10,8 @@ import { trigger, transition, query, style, animate } from '@angular/animations'
   animations: [
     trigger('rowAnimation', [
     transition('* => *', [
-    query(':enter', style({ opacity: 0 })),
-    query(':enter', animate('600ms', style({ opacity: 1 })))
+    query(':enter', style({ opacity: 0 }), { optional: true }),
+    query(':enter', animate('600ms', style({ opacity: 1 })), { optional: true })
   ])
 ])
   ]
