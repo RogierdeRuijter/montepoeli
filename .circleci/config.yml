@@ -12,7 +12,6 @@ jobs:
             cd client
             echo ${CIRCLE_SHA1} > /tmp/client-version.txt
 
-
       - run:
           command: |
             cd server
