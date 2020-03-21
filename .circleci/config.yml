@@ -17,6 +17,7 @@ jobs:
             cd server
             echo ${CIRCLE_SHA1} > /tmp/server-version.txt
             
+            
       - store_artifacts:
           path: /tmp/client-version.txt
       
