@@ -15,7 +15,7 @@ async function bootstrap() {
     // tslint:disable-next-line
     console.info('Cant read key or certificate');
     // tslint:disable-next-line
-    console.info('This does not have to be an issue if you handle https another way');
+    console.info('This does not have to be an issue if you handle https another way or http is good enough for now');
   }
 
   const httpsOptions = {
