@@ -5,9 +5,22 @@ import * as compression from 'compression';
 import * as fs from 'fs';
 
 async function bootstrap() {
+  let key: any;
+  let cert: any;
+
+  try {
+    key = fs.readFileSync('./secrets/server.key');
+    cert = fs.readFileSync('./secrets/server.crt');
+  } catch {
+    // tslint:disable-next-line
+    console.info('Cant read key or certificate');
+    // tslint:disable-next-line
+    console.info('This does not have to be an issue if you handle https another way');
+  }
+
   const httpsOptions = {
-    key: fs.readFileSync('./secrets/server.key'),
-    cert: fs.readFileSync('./secrets/server.crt'),
+    key,
+    cert,
   };
 
   let app;
