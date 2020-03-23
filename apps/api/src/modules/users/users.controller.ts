@@ -4,7 +4,7 @@ import {User} from '../../models/interfaces/user.interface';
 import {CreateUserDto} from '../../models/create-dtos/create-user.dto';
 import {AuthGuard} from '@nestjs/passport';
 import { Request } from 'express';
-import { UserDto } from 'src/models/dtos/user.dto';
+import { UserDto } from '../../models/dtos/user.dto';
 
 @Controller('/users')
 @UseGuards(AuthGuard())

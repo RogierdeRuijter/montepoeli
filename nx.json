@@ -1,5 +1,5 @@
 {
-  "npmScope": "clark-dent",
+  "npmScope": "montepoeli",
   "implicitDependencies": {
     "angular.json": "*",
     "package.json": {
@@ -11,12 +11,12 @@
     "nx.json": "*"
   },
   "projects": {
-    "montepoeli": {
+    "client": {
       "tags": []
     },
-    "montepoeli-e2e": {
+    "client-e2e": {
       "tags": [],
-      "implicitDependencies": ["montepoeli"]
+      "implicitDependencies": ["client"]
     },
     "api": {
       "tags": []

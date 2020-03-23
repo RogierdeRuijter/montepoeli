@@ -1,39 +1,39 @@
 {
   "version": 1,
   "projects": {
-    "montepoeli": {
+    "client": {
       "projectType": "application",
       "schematics": {
         "@nrwl/angular:component": {
           "style": "scss"
         }
       },
-      "root": "apps/montepoeli",
-      "sourceRoot": "apps/montepoeli/src",
+      "root": "apps/client",
+      "sourceRoot": "apps/client/src",
       "prefix": "clark-dent",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/apps/montepoeli",
-            "index": "apps/montepoeli/src/index.html",
-            "main": "apps/montepoeli/src/main.ts",
-            "polyfills": "apps/montepoeli/src/polyfills.ts",
-            "tsConfig": "apps/montepoeli/tsconfig.app.json",
+            "outputPath": "dist/apps/client",
+            "index": "apps/client/src/index.html",
+            "main": "apps/client/src/main.ts",
+            "polyfills": "apps/client/src/polyfills.ts",
+            "tsConfig": "apps/client/tsconfig.app.json",
             "aot": true,
             "assets": [
-              "apps/montepoeli/src/favicon.ico",
-              "apps/montepoeli/src/assets"
+              "apps/client/src/favicon.ico",
+              "apps/client/src/assets"
             ],
-            "styles": ["apps/montepoeli/src/styles.scss"],
+            "styles": ["apps/client/src/styles.scss"],
             "scripts": []
           },
           "configurations": {
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "apps/montepoeli/src/environments/environment.ts",
-                  "with": "apps/montepoeli/src/environments/environment.prod.ts"
+                  "replace": "apps/client/src/environments/environment.ts",
+                  "with": "apps/client/src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -62,65 +62,65 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "montepoeli:build",
-            "proxyConfig": "apps/montepoeli/proxy.conf.json"
+            "browserTarget": "client:build",
+            "proxyConfig": "apps/client/proxy.conf.json"
           },
           "configurations": {
             "production": {
-              "browserTarget": "montepoeli:build:production"
+              "browserTarget": "client:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "montepoeli:build"
+            "browserTarget": "client:build"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "apps/montepoeli/tsconfig.app.json",
-              "apps/montepoeli/tsconfig.spec.json"
+              "apps/client/tsconfig.app.json",
+              "apps/client/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/montepoeli/**"]
+            "exclude": ["**/node_modules/**", "!apps/client/**"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "apps/montepoeli/jest.config.js",
-            "tsConfig": "apps/montepoeli/tsconfig.spec.json",
+            "jestConfig": "apps/client/jest.config.js",
+            "tsConfig": "apps/client/tsconfig.spec.json",
             "passWithNoTests": true,
-            "setupFile": "apps/montepoeli/src/test-setup.ts"
+            "setupFile": "apps/client/src/test-setup.ts"
           }
         }
       }
     },
-    "montepoeli-e2e": {
-      "root": "apps/montepoeli-e2e",
-      "sourceRoot": "apps/montepoeli-e2e/src",
+    "client-e2e": {
+      "root": "apps/client-e2e",
+      "sourceRoot": "apps/client-e2e/src",
       "projectType": "application",
       "architect": {
         "e2e": {
           "builder": "@nrwl/cypress:cypress",
           "options": {
-            "cypressConfig": "apps/montepoeli-e2e/cypress.json",
-            "tsConfig": "apps/montepoeli-e2e/tsconfig.e2e.json",
-            "devServerTarget": "montepoeli:serve"
+            "cypressConfig": "apps/client-e2e/cypress.json",
+            "tsConfig": "apps/client-e2e/tsconfig.e2e.json",
+            "devServerTarget": "client:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "montepoeli:serve:production"
+              "devServerTarget": "client:serve:production"
             }
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["apps/montepoeli-e2e/tsconfig.e2e.json"],
-            "exclude": ["**/node_modules/**", "!apps/montepoeli-e2e/**"]
+            "tsConfig": ["apps/client-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/client-e2e/**"]
           }
         }
       }
@@ -137,8 +137,7 @@
           "options": {
             "outputPath": "dist/apps/api",
             "main": "apps/api/src/main.ts",
-            "tsConfig": "apps/api/tsconfig.app.json",
-            "assets": ["apps/api/src/assets"]
+            "tsConfig": "apps/api/tsconfig.app.json"
           },
           "configurations": {
             "production": {
@@ -220,5 +219,5 @@
       "unitTestRunner": "jest"
     }
   },
-  "defaultProject": "montepoeli"
+  "defaultProject": "client"
 }

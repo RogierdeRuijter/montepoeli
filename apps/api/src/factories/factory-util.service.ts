@@ -1,6 +1,6 @@
 import * as faker from 'faker';
-import { User } from 'src/models/interfaces/user.interface';
-import { Game } from 'src/models/interfaces/game.interface';
+import { User } from '../models/interfaces/user.interface';
+import { Game } from '../models/interfaces/game.interface';
 
 export class FactoryUtilService {
   public id(): string {
