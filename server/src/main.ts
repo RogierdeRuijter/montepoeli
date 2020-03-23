@@ -2,9 +2,20 @@ import {NestFactory} from '@nestjs/core';
 import {AppModule} from './modules/app/app.module';
 import * as cookieParser from 'cookie-parser';
 import * as compression from 'compression';
+import * as fs from 'fs';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const httpsOptions = {
+    key: fs.readFileSync('./secrets/server.key'),
+    cert: fs.readFileSync('./secrets/server.crt'),
+  };
+
+  let app;
+  if (httpsOptions.key && httpsOptions.cert) {
+    app = await NestFactory.create(AppModule, { httpsOptions });
+  } else {
+    app = await NestFactory.create(AppModule);
+  }
 
   checkEnvironmentVariables();
 
