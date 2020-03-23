@@ -187,7 +187,6 @@
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
       "pre-commit": "npm run pre-commit",
-      "post-commit": "yarn update-with-master",
       "pre-push": "lerna run --parallel test && lerna run --parallel build:pre-push",
       "post-merge": "yarn install-sub-modules"
     }
