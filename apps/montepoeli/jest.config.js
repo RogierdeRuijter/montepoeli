@@ -1,16 +1,13 @@
 module.exports = {
-  "preset": "jest-preset-angular",
     "setupFilesAfterEnv": [
-      "<rootDir>/src/jest-config/setup.ts"
+      "./src/jest-config/setup.ts"
     ],
+    "preset": '../../jest.config.js',
+    "coverageDirectory": '../../coverage/apps/montepoeli',
     "transformIgnorePatterns":[
       "node_modules/(?!@storybook/*)"
     ],
     "testPathIgnorePatterns": [
-      "<rootDir>/old/",
-      "<rootDir>/node_modules/",
-      "<rootDir>/dist/",
-      "<rootDir>/storybook-static/",
       "<rootDir>/src/test.ts"
     ],
     "coveragePathIgnorePatterns": [
@@ -18,23 +15,23 @@ module.exports = {
       "/node_modules/"
     ],
     "snapshotSerializers": [
-      "<rootDir>/node_modules/jest-preset-angular/AngularSnapshotSerializer.js",
-      "<rootDir>/node_modules/jest-preset-angular/HTMLCommentSerializer.js"
+      "jest-preset-angular/AngularSnapshotSerializer.js",
+      "jest-preset-angular/HTMLCommentSerializer.js"
     ],
     "globals": {
       "ts-jest": {
-        "tsConfig": "<rootDir>/tsconfig.spec.json",
+        "tsConfig": "./tsconfig.spec.json",
         "stringifyContentPathRegex": "\\.html$",
         "diagnostics": false,
         "isolatedModules": true,
         "astTransformers": [
-          "<rootDir>/node_modules/jest-preset-angular/InlineHtmlStripStylesTransformer"
+          "../../node_modules/jest-preset-angular/InlineHtmlStripStylesTransformer"
         ]
       }
     },
     "moduleNameMapper": {
-      "\\.(css|less)$": "<rootDir>/src/jest-config/styleMock.js",
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/src/jest-config/fileMock.js"
+      "\\.(css|less)$": "./src/jest-config/styleMock.js",
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "./src/jest-config/fileMock.js"
     },
     "transform": {
       "^.+\\.(ts|html)$": "ts-jest",

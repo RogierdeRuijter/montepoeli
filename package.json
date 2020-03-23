@@ -37,7 +37,7 @@
     "affected:libs": "nx affected:libs",
     "affected:build": "nx affected:build",
     "affected:e2e": "nx affected:e2e",
-    "affected:test": "nx affected:test",
+    "affected:test": "nx affected:test --runInBand",
     "affected:lint": "nx affected:lint",
     "affected:dep-graph": "nx affected:dep-graph",
     "affected": "nx affected",
@@ -58,7 +58,8 @@
     "build-storybook-web-app": "build-storybook -c .storybook -o .out",
     "update-angular": "ng update @angular/cli @angular/core @angular/material",
     "update-angular-next": "ng update --next @angular/cli @angular/core @angular/material",
-    "iPhone-simulator": "/Applications/Xcode.app/Contents/Developer/Applications/Simulator.app/Contents/MacOS/Simulator -CurrentDeviceID 8528838E-4B47-4F0E-B415-E87F8C8A6163"
+    "iPhone-simulator": "/Applications/Xcode.app/Contents/Developer/Applications/Simulator.app/Contents/MacOS/Simulator -CurrentDeviceID 8528838E-4B47-4F0E-B415-E87F8C8A6163",
+    "pre-commit": "npm run affected:lint"
   },
   "dependencies": {
     "@nestjs/common": "6.11.8",
@@ -74,7 +75,6 @@
     "@types/faker": "4.1.10",
     "@types/jest": "25.1.3",
     "@types/mongoose": "^5.7.6",
-    "@types/node": "13.7.7",
     "@types/supertest": "2.0.8",
     "bcrypt": "4.0.1",
     "compression": "^1.7.4",
@@ -89,7 +89,6 @@
     "rimraf": "3.0.2",
     "rxjs": "6.5.4",
     "typeorm": "0.2.24",
-    "typescript": "3.8.3",
     "@angular-devkit/build-angular": "0.900.6",
     "@angular/animations": "9.0.6",
     "@angular/cdk": "9.1.2",
@@ -117,21 +116,23 @@
     "intl": "1.2.5",
     "ngx-cookie-service": "3.0.2",
     "ngx-toastr": "12.0.0",
-    "rxjs": "6.5.4",
     "tslib": "1.11.1",
     "typescript": "3.7.5",
     "webdriver-manager": "12.1.7",
     "zone.js": "0.10.2"
   },
   "devDependencies": {
-    "jest": "25.1.0",
+    "@nrwl/workspace": "9.1.2",
+    "@nrwl/nest": "9.1.2",
+    "@nrwl/jest": "9.1.2",
+    "@nrwl/cypress": "9.1.2",
+    "@nrwl/node": "9.1.2",
+    "dotenv": "6.2.0",
     "nodemon": "2.0.2",
     "prettier": "1.19.1",
     "supertest": "4.0.2",
     "ts-jest": "25.2.1",
-    "ts-node": "8.6.2",
     "tsconfig-paths": "3.9.0",
-    "tslint": "6.0.0",
     "@commitlint/cli": "8.3.5",
     "@commitlint/config-conventional": "8.3.4",
     "@semantic-release/changelog": "5.0.0",
@@ -142,8 +143,6 @@
     "husky": "4.2.3",
     "lerna": "3.20.2",
     "semantic-release": "17.0.4",
-    "@types/jasmine": "3.5.9",
-    "@types/jasminewd2": "2.0.8",
     "@types/node": "13.9.2",
     "jasmine": "3.5.0",
     "jasmine-spec-reporter": "4.2.1",
@@ -152,7 +151,6 @@
     "mongoose": "5.9.5",
     "path": "0.12.7",
     "protractor": "5.4.3",
-    "ts-node": "8.7.0",
     "typescript": "3.8.3",
     "webdriver-manager": "12.1.7",
     "protractor-jasmine2-screenshot-reporter": "0.5.0",
@@ -188,30 +186,10 @@
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "lerna run --parallel lint",
+      "pre-commit": "npm run pre-commit",
       "post-commit": "yarn update-with-master",
       "pre-push": "lerna run --parallel test && lerna run --parallel build:pre-push",
       "post-merge": "yarn install-sub-modules"
     }
-  },
-  "jest": {
-    "jest": {
-      "preset": "jest-preset-angular",
-      "setupFilesAfterEnv": [
-        "./src/setupJest.ts"
-      ]
-    },
-    "moduleFileExtensions": [
-      "js",
-      "json",
-      "ts"
-    ],
-    "rootDir": "src",
-    "testRegex": ".spec.ts$",
-    "transform": {
-      "^.+\\.(t|j)s$": "ts-jest"
-    },
-    "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
   }
 }
