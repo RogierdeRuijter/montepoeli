@@ -1,0 +1,28 @@
+{
+  "npmScope": "clark-dent",
+  "implicitDependencies": {
+    "angular.json": "*",
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
+    },
+    "tsconfig.json": "*",
+    "tslint.json": "*",
+    "nx.json": "*"
+  },
+  "projects": {
+    "montepoeli": {
+      "tags": []
+    },
+    "montepoeli-e2e": {
+      "tags": [],
+      "implicitDependencies": ["montepoeli"]
+    },
+    "api": {
+      "tags": []
+    },
+    "api-interfaces": {
+      "tags": []
+    }
+  }
+}

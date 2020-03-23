@@ -1,0 +1,255 @@
+<html><head><meta charset="utf-8"><style>body { font-family: Arial; }ul { list-style-position: inside; }li img { max-width: 100%; }span.passed { padding: 0 1em; color: green; }span.failed { padding: 0 1em; color: red; }span.pending { padding: 0 1em; color: orange; }span.stacktrace { white-space: pre; border: 1px solid rgb(0, 0, 0); font-size: 9pt; padding: 4px; background-color: rgb(204, 204, 204); }</style><script type="text/javascript">function showhide(id) {var e = document.getElementById(id);e.style.display = (e.style.display === "block") ? "none" : "block";}function buildQuickLinks() {var failedSpecs = document.querySelectorAll("li.failed");var quickLinksContainer = document.getElementById("quickLinks");if (!quickLinksContainer) return;if (failedSpecs.length > 0) { document.getElementById("quickLinksHeader").textContent = "Quicklink of Failure"}for (var i = 0; i < failedSpecs.length; ++i) {var li = document.createElement("li");var a = document.createElement("a");a.href = "#" + failedSpecs[i].id;a.textContent = failedSpecs[i].dataset.name + "  (" + failedSpecs[i].dataset.browser + ")";li.appendChild(a);quickLinksContainer.appendChild(li);}}function updatePassCount() {var totalPassed = document.querySelectorAll("li.passed").length;var totalFailed = document.querySelectorAll("li.failed").length;var totalSpecs = totalFailed + totalPassed;console.log("passed: %s, failed: %s, total: %s", totalPassed, totalFailed, totalSpecs);document.getElementById("summaryTotalSpecs").textContent = document.getElementById("summaryTotalSpecs").textContent + totalSpecs;document.getElementById("summaryTotalFailed").textContent = document.getElementById("summaryTotalFailed").textContent + totalFailed;if (totalFailed) {document.getElementById("summary").className = "failed";}}function start() {updatePassCount();buildQuickLinks();}window.onload = start;</script></head><body><h1>Report</h1><div id="summary" class="passed"><h4>Summary</h4><ul><li id="summaryTotalSpecs">Total specs tested: </li><li id="summaryTotalFailed">Total failed: </li></ul></div><ul style="list-style-type:none"><h4>montepoeli login (5 s)</h4><li id="664ec5c0-6640-11ea-9d18-85d26600c554" class="passed" data-spec="spec0" data-name="should fail login into montepouli" data-browser="chrome"><span class="passed">&#10003;</span><a href="38173a0b23e4d821ac82a72536891197.png">should fail login into montepouli</a>(2 s)</li><li id="664eecd0-6640-11ea-9d18-85d26600c554" class="failed" data-spec="spec1" data-name="should login to montepouli" data-browser="chrome"><span class="failed">&#10007;</span><a href="c79f397a51d403acc99d4407ff6987ac.png">should login to montepouli</a>(3 s)<ul><li>Expected &#39;https://webserver-e2e/login&#39; to contain &#39;/home&#39;. [<a href="javascript:showhide('spec1-Linux-chrome-80.0.3987.1060')">stack</a>]<br/><span style="display: none" id="spec1-Linux-chrome-80.0.3987.1060" class="stacktrace">Error: Failed expectation
+    at UserContext.&lt;anonymous&gt; (/usr/src/app/src/1.login.e2e-spec.ts:50:37)
+    at /usr/src/app/node_modules/jasminewd2/index.js:112:25
+    at new ManagedPromise (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:1077:7)
+    at ControlFlow.promise (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:2505:12)
+    at schedulerExecute (/usr/src/app/node_modules/jasminewd2/index.js:95:18)
+    at TaskQueue.execute_ (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:3084:14)
+    at TaskQueue.executeNext_ (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:3067:27)
+    at /usr/src/app/node_modules/selenium-webdriver/lib/promise.js:2974:25
+    at /usr/src/app/node_modules/selenium-webdriver/lib/promise.js:668:7</span></li><li>Expected 3 to equal 0. [<a href="javascript:showhide('spec1-Linux-chrome-80.0.3987.1061')">stack</a>]<br/><span style="display: none" id="spec1-Linux-chrome-80.0.3987.1061" class="stacktrace">Error: Failed expectation
+    at /usr/src/app/src/helper.ts:79:34
+    at ManagedPromise.invokeCallback_ (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:1376:14)
+    at TaskQueue.execute_ (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:3084:14)
+    at TaskQueue.executeNext_ (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:3067:27)
+    at /usr/src/app/node_modules/selenium-webdriver/lib/promise.js:2927:27
+    at /usr/src/app/node_modules/selenium-webdriver/lib/promise.js:668:7
+    at processTicksAndRejections (internal/process/task_queues.js:97:5)</span></li></ul></li></ul><ul style="list-style-type:none"><h4>Add a game (2 s)</h4><li id="664f13e0-6640-11ea-9d18-85d26600c554" class="failed" data-spec="spec2" data-name="should add a game and show it in the table" data-browser="chrome"><span class="failed">&#10007;</span><a href="9b28fb2820737086a4e6a99ec3dfb56d.png">should add a game and show it in the table</a>(2 s)<ul><li>Expected &#39;https://webserver-e2e/login&#39; to contain &#39;/home&#39;. [<a href="javascript:showhide('spec2-Linux-chrome-80.0.3987.1060')">stack</a>]<br/><span style="display: none" id="spec2-Linux-chrome-80.0.3987.1060" class="stacktrace">Error: Failed expectation
+    at UserContext.&lt;anonymous&gt; (/usr/src/app/src/2.add-game.e2e-spec.ts:19:37)
+    at /usr/src/app/node_modules/jasminewd2/index.js:112:25
+    at new ManagedPromise (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:1077:7)
+    at ControlFlow.promise (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:2505:12)
+    at schedulerExecute (/usr/src/app/node_modules/jasminewd2/index.js:95:18)
+    at TaskQueue.execute_ (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:3084:14)
+    at TaskQueue.executeNext_ (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:3067:27)
+    at /usr/src/app/node_modules/selenium-webdriver/lib/promise.js:2974:25
+    at /usr/src/app/node_modules/selenium-webdriver/lib/promise.js:668:7</span></li><li>Failed: Index out of bound. Trying to access element at index: -1, but there are only 0 elements that match locator By(css selector, *[id=&quot;add-game-button&quot;]) [<a href="javascript:showhide('spec2-Linux-chrome-80.0.3987.1061')">stack</a>]<br/><span style="display: none" id="spec2-Linux-chrome-80.0.3987.1061" class="stacktrace">NoSuchElementError: Index out of bound. Trying to access element at index: -1, but there are only 0 elements that match locator By(css selector, *[id=&quot;add-game-button&quot;])
+    at /usr/src/app/node_modules/protractor/built/element.js:274:27
+    at ManagedPromise.invokeCallback_ (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:1376:14)
+    at TaskQueue.execute_ (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:3084:14)
+    at TaskQueue.executeNext_ (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:3067:27)
+    at /usr/src/app/node_modules/selenium-webdriver/lib/promise.js:2927:27
+    at /usr/src/app/node_modules/selenium-webdriver/lib/promise.js:668:7
+    at processTicksAndRejections (internal/process/task_queues.js:97:5)Error: 
+    at ElementArrayFinder.applyAction_ (/usr/src/app/node_modules/protractor/built/element.js:459:27)
+    at ElementArrayFinder.&lt;computed&gt; [as click] (/usr/src/app/node_modules/protractor/built/element.js:91:29)
+    at ElementFinder.&lt;computed&gt; [as click] (/usr/src/app/node_modules/protractor/built/element.js:831:22)
+    at UserContext.&lt;anonymous&gt; (/usr/src/app/src/2.add-game.e2e-spec.ts:20:29)
+    at /usr/src/app/node_modules/jasminewd2/index.js:112:25
+    at new ManagedPromise (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:1077:7)
+    at ControlFlow.promise (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:2505:12)
+    at schedulerExecute (/usr/src/app/node_modules/jasminewd2/index.js:95:18)
+    at TaskQueue.execute_ (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:3084:14)
+    at TaskQueue.executeNext_ (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:3067:27)
+From: Task: Run it(&quot;should add a game and show it in the table&quot;) in control flow
+    at UserContext.&lt;anonymous&gt; (/usr/src/app/node_modules/jasminewd2/index.js:94:19)
+    at attempt (/usr/src/app/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:4297:26)
+    at QueueRunner.run (/usr/src/app/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:4217:20)
+    at runNext (/usr/src/app/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:4257:20)
+    at /usr/src/app/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:4264:13
+    at /usr/src/app/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:4172:9
+    at /usr/src/app/node_modules/jasminewd2/index.js:64:48
+    at ControlFlow.emit (/usr/src/app/node_modules/selenium-webdriver/lib/events.js:62:21)
+    at ControlFlow.shutdown_ (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:2674:10)
+    at /usr/src/app/node_modules/selenium-webdriver/lib/promise.js:2599:53
+From asynchronous test: 
+Error: 
+    at Suite.&lt;anonymous&gt; (/usr/src/app/src/2.add-game.e2e-spec.ts:14:3)
+    at addSpecsToSuite (/usr/src/app/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:1107:25)
+    at Env.describe (/usr/src/app/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:1074:7)
+    at describe (/usr/src/app/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:4399:18)
+    at Object.&lt;anonymous&gt; (/usr/src/app/src/2.add-game.e2e-spec.ts:7:1)
+    at Module._compile (internal/modules/cjs/loader.js:1147:30)
+    at Module.m._compile (/usr/src/app/node_modules/ts-node/src/index.ts:814:23)
+    at Module._extensions..js (internal/modules/cjs/loader.js:1167:10)
+    at Object.require.extensions.&lt;computed&gt; [as .ts] (/usr/src/app/node_modules/ts-node/src/index.ts:817:12)</span></li></ul></li></ul><ul style="list-style-type:none"><h4>Tab navigation (2 s)</h4><li id="664f13e1-6640-11ea-9d18-85d26600c554" class="failed" data-spec="spec3" data-name="should switch to the rules tab and back to the games tab" data-browser="chrome"><span class="failed">&#10007;</span><a href="bd2f5c420b9398192efa2acc446ea33e.png">should switch to the rules tab and back to the games tab</a>(2 s)<ul><li>Failed: No element found using locator: By(css selector, *[id=&quot;mat-tab-label-0-1&quot;]) [<a href="javascript:showhide('spec3-Linux-chrome-80.0.3987.1060')">stack</a>]<br/><span style="display: none" id="spec3-Linux-chrome-80.0.3987.1060" class="stacktrace">NoSuchElementError: No element found using locator: By(css selector, *[id=&quot;mat-tab-label-0-1&quot;])
+    at /usr/src/app/node_modules/protractor/built/element.js:814:27
+    at ManagedPromise.invokeCallback_ (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:1376:14)
+    at TaskQueue.execute_ (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:3084:14)
+    at TaskQueue.executeNext_ (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:3067:27)
+    at /usr/src/app/node_modules/selenium-webdriver/lib/promise.js:2927:27
+    at /usr/src/app/node_modules/selenium-webdriver/lib/promise.js:668:7
+    at processTicksAndRejections (internal/process/task_queues.js:97:5)Error: 
+    at ElementArrayFinder.applyAction_ (/usr/src/app/node_modules/protractor/built/element.js:459:27)
+    at ElementArrayFinder.&lt;computed&gt; [as click] (/usr/src/app/node_modules/protractor/built/element.js:91:29)
+    at ElementFinder.&lt;computed&gt; [as click] (/usr/src/app/node_modules/protractor/built/element.js:831:22)
+    at UserContext.&lt;anonymous&gt; (/usr/src/app/src/3.switching-tabs.e2e-spec.ts:19:30)
+    at /usr/src/app/node_modules/jasminewd2/index.js:112:25
+    at new ManagedPromise (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:1077:7)
+    at ControlFlow.promise (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:2505:12)
+    at schedulerExecute (/usr/src/app/node_modules/jasminewd2/index.js:95:18)
+    at TaskQueue.execute_ (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:3084:14)
+    at TaskQueue.executeNext_ (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:3067:27)
+From: Task: Run it(&quot;should switch to the rules tab and back to the games tab&quot;) in control flow
+    at UserContext.&lt;anonymous&gt; (/usr/src/app/node_modules/jasminewd2/index.js:94:19)
+    at attempt (/usr/src/app/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:4297:26)
+    at QueueRunner.run (/usr/src/app/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:4217:20)
+    at runNext (/usr/src/app/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:4257:20)
+    at /usr/src/app/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:4264:13
+    at /usr/src/app/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:4172:9
+    at /usr/src/app/node_modules/jasminewd2/index.js:64:48
+    at ControlFlow.emit (/usr/src/app/node_modules/selenium-webdriver/lib/events.js:62:21)
+    at ControlFlow.shutdown_ (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:2674:10)
+    at /usr/src/app/node_modules/selenium-webdriver/lib/promise.js:2599:53
+From asynchronous test: 
+Error: 
+    at Suite.&lt;anonymous&gt; (/usr/src/app/src/3.switching-tabs.e2e-spec.ts:14:3)
+    at addSpecsToSuite (/usr/src/app/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:1107:25)
+    at Env.describe (/usr/src/app/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:1074:7)
+    at describe (/usr/src/app/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:4399:18)
+    at Object.&lt;anonymous&gt; (/usr/src/app/src/3.switching-tabs.e2e-spec.ts:7:1)
+    at Module._compile (internal/modules/cjs/loader.js:1147:30)
+    at Module.m._compile (/usr/src/app/node_modules/ts-node/src/index.ts:814:23)
+    at Module._extensions..js (internal/modules/cjs/loader.js:1167:10)
+    at Object.require.extensions.&lt;computed&gt; [as .ts] (/usr/src/app/node_modules/ts-node/src/index.ts:817:12)</span></li></ul></li></ul><ul style="list-style-type:none"><h4>montepoeli (2 s)</h4><li id="664f13e2-6640-11ea-9d18-85d26600c554" class="failed" data-spec="spec4" data-name="should logout from montepouli" data-browser="chrome"><span class="failed">&#10007;</span><a href="70109b235bf676875ae6673fd192808b.png">should logout from montepouli</a>(2 s)<ul><li>Expected &#39;https://webserver-e2e/login&#39; to contain &#39;/home&#39;. [<a href="javascript:showhide('spec4-Linux-chrome-80.0.3987.1060')">stack</a>]<br/><span style="display: none" id="spec4-Linux-chrome-80.0.3987.1060" class="stacktrace">Error: Failed expectation
+    at UserContext.&lt;anonymous&gt; (/usr/src/app/src/4.logout.e2e-spec.ts:17:37)
+    at /usr/src/app/node_modules/jasminewd2/index.js:112:25
+    at new ManagedPromise (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:1077:7)
+    at ControlFlow.promise (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:2505:12)
+    at schedulerExecute (/usr/src/app/node_modules/jasminewd2/index.js:95:18)
+    at TaskQueue.execute_ (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:3084:14)
+    at TaskQueue.executeNext_ (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:3067:27)
+    at /usr/src/app/node_modules/selenium-webdriver/lib/promise.js:2974:25
+    at /usr/src/app/node_modules/selenium-webdriver/lib/promise.js:668:7</span></li><li>Failed: Index out of bound. Trying to access element at index: -1, but there are only 0 elements that match locator By(css selector, *[id=&quot;user-settings&quot;]) [<a href="javascript:showhide('spec4-Linux-chrome-80.0.3987.1061')">stack</a>]<br/><span style="display: none" id="spec4-Linux-chrome-80.0.3987.1061" class="stacktrace">NoSuchElementError: Index out of bound. Trying to access element at index: -1, but there are only 0 elements that match locator By(css selector, *[id=&quot;user-settings&quot;])
+    at /usr/src/app/node_modules/protractor/built/element.js:274:27
+    at ManagedPromise.invokeCallback_ (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:1376:14)
+    at TaskQueue.execute_ (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:3084:14)
+    at TaskQueue.executeNext_ (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:3067:27)
+    at /usr/src/app/node_modules/selenium-webdriver/lib/promise.js:2927:27
+    at /usr/src/app/node_modules/selenium-webdriver/lib/promise.js:668:7
+    at processTicksAndRejections (internal/process/task_queues.js:97:5)Error: 
+    at ElementArrayFinder.applyAction_ (/usr/src/app/node_modules/protractor/built/element.js:459:27)
+    at ElementArrayFinder.&lt;computed&gt; [as click] (/usr/src/app/node_modules/protractor/built/element.js:91:29)
+    at ElementFinder.&lt;computed&gt; [as click] (/usr/src/app/node_modules/protractor/built/element.js:831:22)
+    at UserContext.&lt;anonymous&gt; (/usr/src/app/src/4.logout.e2e-spec.ts:19:28)
+    at /usr/src/app/node_modules/jasminewd2/index.js:112:25
+    at new ManagedPromise (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:1077:7)
+    at ControlFlow.promise (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:2505:12)
+    at schedulerExecute (/usr/src/app/node_modules/jasminewd2/index.js:95:18)
+    at TaskQueue.execute_ (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:3084:14)
+    at TaskQueue.executeNext_ (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:3067:27)
+From: Task: Run it(&quot;should logout from montepouli&quot;) in control flow
+    at UserContext.&lt;anonymous&gt; (/usr/src/app/node_modules/jasminewd2/index.js:94:19)
+    at attempt (/usr/src/app/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:4297:26)
+    at QueueRunner.run (/usr/src/app/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:4217:20)
+    at runNext (/usr/src/app/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:4257:20)
+    at /usr/src/app/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:4264:13
+    at /usr/src/app/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:4172:9
+    at /usr/src/app/node_modules/jasminewd2/index.js:64:48
+    at ControlFlow.emit (/usr/src/app/node_modules/selenium-webdriver/lib/events.js:62:21)
+    at ControlFlow.shutdown_ (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:2674:10)
+    at /usr/src/app/node_modules/selenium-webdriver/lib/promise.js:2599:53
+From asynchronous test: 
+Error: 
+    at Suite.&lt;anonymous&gt; (/usr/src/app/src/4.logout.e2e-spec.ts:14:3)
+    at addSpecsToSuite (/usr/src/app/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:1107:25)
+    at Env.describe (/usr/src/app/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:1074:7)
+    at describe (/usr/src/app/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:4399:18)
+    at Object.&lt;anonymous&gt; (/usr/src/app/src/4.logout.e2e-spec.ts:7:1)
+    at Module._compile (internal/modules/cjs/loader.js:1147:30)
+    at Module.m._compile (/usr/src/app/node_modules/ts-node/src/index.ts:814:23)
+    at Module._extensions..js (internal/modules/cjs/loader.js:1167:10)
+    at Object.require.extensions.&lt;computed&gt; [as .ts] (/usr/src/app/node_modules/ts-node/src/index.ts:817:12)</span></li></ul></li></ul><ul style="list-style-type:none"><h4>montepoeli login (2 s)</h4><li id="664f3af0-6640-11ea-9d18-85d26600c554" class="failed" data-spec="spec5" data-name="should login to montepouli" data-browser="chrome"><span class="failed">&#10007;</span><a href="cc88a16f283b61fe3d3ba953fd6485eb.png">should login to montepouli</a>(1 s)<ul><li>Expected &#39;https://webserver-e2e/login&#39; to contain &#39;/home&#39;. [<a href="javascript:showhide('spec5-Linux-chrome-80.0.3987.1060')">stack</a>]<br/><span style="display: none" id="spec5-Linux-chrome-80.0.3987.1060" class="stacktrace">Error: Failed expectation
+    at UserContext.&lt;anonymous&gt; (/usr/src/app/src/5.login-mobile.e2e-spec.ts:29:37)
+    at /usr/src/app/node_modules/jasminewd2/index.js:112:25
+    at new ManagedPromise (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:1077:7)
+    at ControlFlow.promise (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:2505:12)
+    at schedulerExecute (/usr/src/app/node_modules/jasminewd2/index.js:95:18)
+    at TaskQueue.execute_ (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:3084:14)
+    at TaskQueue.executeNext_ (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:3067:27)
+    at /usr/src/app/node_modules/selenium-webdriver/lib/promise.js:2974:25
+    at /usr/src/app/node_modules/selenium-webdriver/lib/promise.js:668:7</span></li><li>Expected 3 to equal 0. [<a href="javascript:showhide('spec5-Linux-chrome-80.0.3987.1061')">stack</a>]<br/><span style="display: none" id="spec5-Linux-chrome-80.0.3987.1061" class="stacktrace">Error: Failed expectation
+    at /usr/src/app/src/helper.ts:79:34
+    at ManagedPromise.invokeCallback_ (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:1376:14)
+    at TaskQueue.execute_ (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:3084:14)
+    at TaskQueue.executeNext_ (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:3067:27)
+    at /usr/src/app/node_modules/selenium-webdriver/lib/promise.js:2927:27
+    at /usr/src/app/node_modules/selenium-webdriver/lib/promise.js:668:7
+    at processTicksAndRejections (internal/process/task_queues.js:97:5)</span></li></ul></li></ul><ul style="list-style-type:none"><h4>Mobile screen tests (1 s)</h4><li id="664f3af1-6640-11ea-9d18-85d26600c554" class="failed" data-spec="spec6" data-name="should switch to the rules tab and back to the games tab" data-browser="chrome"><span class="failed">&#10007;</span><a href="9ff4a453764491de8b49f9a32e7c18fa.png">should switch to the rules tab and back to the games tab</a>(0.722 s)<ul><li>Failed: No element found using locator: By(css selector, *[id=&quot;rules-tab&quot;]) [<a href="javascript:showhide('spec6-Linux-chrome-80.0.3987.1060')">stack</a>]<br/><span style="display: none" id="spec6-Linux-chrome-80.0.3987.1060" class="stacktrace">NoSuchElementError: No element found using locator: By(css selector, *[id=&quot;rules-tab&quot;])
+    at /usr/src/app/node_modules/protractor/built/element.js:814:27
+    at ManagedPromise.invokeCallback_ (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:1376:14)
+    at TaskQueue.execute_ (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:3084:14)
+    at TaskQueue.executeNext_ (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:3067:27)
+    at /usr/src/app/node_modules/selenium-webdriver/lib/promise.js:2927:27
+    at /usr/src/app/node_modules/selenium-webdriver/lib/promise.js:668:7
+    at processTicksAndRejections (internal/process/task_queues.js:97:5)Error: 
+    at ElementArrayFinder.applyAction_ (/usr/src/app/node_modules/protractor/built/element.js:459:27)
+    at ElementArrayFinder.&lt;computed&gt; [as click] (/usr/src/app/node_modules/protractor/built/element.js:91:29)
+    at ElementFinder.&lt;computed&gt; [as click] (/usr/src/app/node_modules/protractor/built/element.js:831:22)
+    at UserContext.&lt;anonymous&gt; (/usr/src/app/src/6.mobile-screen-tests.e2e-spec.ts:23:36)
+    at /usr/src/app/node_modules/jasminewd2/index.js:112:25
+    at new ManagedPromise (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:1077:7)
+    at ControlFlow.promise (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:2505:12)
+    at schedulerExecute (/usr/src/app/node_modules/jasminewd2/index.js:95:18)
+    at TaskQueue.execute_ (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:3084:14)
+    at TaskQueue.executeNext_ (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:3067:27)
+From: Task: Run it(&quot;should switch to the rules tab and back to the games tab&quot;) in control flow
+    at UserContext.&lt;anonymous&gt; (/usr/src/app/node_modules/jasminewd2/index.js:94:19)
+    at attempt (/usr/src/app/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:4297:26)
+    at QueueRunner.run (/usr/src/app/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:4217:20)
+    at runNext (/usr/src/app/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:4257:20)
+    at /usr/src/app/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:4264:13
+    at /usr/src/app/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:4172:9
+    at /usr/src/app/node_modules/jasminewd2/index.js:64:48
+    at ControlFlow.emit (/usr/src/app/node_modules/selenium-webdriver/lib/events.js:62:21)
+    at ControlFlow.shutdown_ (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:2674:10)
+    at /usr/src/app/node_modules/selenium-webdriver/lib/promise.js:2599:53
+From asynchronous test: 
+Error: 
+    at Suite.&lt;anonymous&gt; (/usr/src/app/src/6.mobile-screen-tests.e2e-spec.ts:18:3)
+    at addSpecsToSuite (/usr/src/app/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:1107:25)
+    at Env.describe (/usr/src/app/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:1074:7)
+    at describe (/usr/src/app/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:4399:18)
+    at Object.&lt;anonymous&gt; (/usr/src/app/src/6.mobile-screen-tests.e2e-spec.ts:7:1)
+    at Module._compile (internal/modules/cjs/loader.js:1147:30)
+    at Module.m._compile (/usr/src/app/node_modules/ts-node/src/index.ts:814:23)
+    at Module._extensions..js (internal/modules/cjs/loader.js:1167:10)
+    at Object.require.extensions.&lt;computed&gt; [as .ts] (/usr/src/app/node_modules/ts-node/src/index.ts:817:12)</span></li></ul></li></ul><ul style="list-style-type:none"><h4>Add a game (1 s)</h4><li id="664f3af2-6640-11ea-9d18-85d26600c554" class="failed" data-spec="spec7" data-name="should add a game and show it in the table" data-browser="chrome"><span class="failed">&#10007;</span><a href="274bfe4af368ed0bcfe29ff1c48a623a.png">should add a game and show it in the table</a>(0.816 s)<ul><li>Expected &#39;https://webserver-e2e/login&#39; to contain &#39;/home&#39;. [<a href="javascript:showhide('spec7-Linux-chrome-80.0.3987.1060')">stack</a>]<br/><span style="display: none" id="spec7-Linux-chrome-80.0.3987.1060" class="stacktrace">Error: Failed expectation
+    at UserContext.&lt;anonymous&gt; (/usr/src/app/src/7.add-game-mobile.e2e-spec.ts:23:37)
+    at /usr/src/app/node_modules/jasminewd2/index.js:112:25
+    at new ManagedPromise (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:1077:7)
+    at ControlFlow.promise (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:2505:12)
+    at schedulerExecute (/usr/src/app/node_modules/jasminewd2/index.js:95:18)
+    at TaskQueue.execute_ (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:3084:14)
+    at TaskQueue.executeNext_ (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:3067:27)
+    at /usr/src/app/node_modules/selenium-webdriver/lib/promise.js:2974:25
+    at /usr/src/app/node_modules/selenium-webdriver/lib/promise.js:668:7</span></li><li>Failed: Index out of bound. Trying to access element at index: -1, but there are only 0 elements that match locator By(css selector, *[id=&quot;add-game-footer&quot;]) [<a href="javascript:showhide('spec7-Linux-chrome-80.0.3987.1061')">stack</a>]<br/><span style="display: none" id="spec7-Linux-chrome-80.0.3987.1061" class="stacktrace">NoSuchElementError: Index out of bound. Trying to access element at index: -1, but there are only 0 elements that match locator By(css selector, *[id=&quot;add-game-footer&quot;])
+    at /usr/src/app/node_modules/protractor/built/element.js:274:27
+    at ManagedPromise.invokeCallback_ (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:1376:14)
+    at TaskQueue.execute_ (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:3084:14)
+    at TaskQueue.executeNext_ (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:3067:27)
+    at /usr/src/app/node_modules/selenium-webdriver/lib/promise.js:2927:27
+    at /usr/src/app/node_modules/selenium-webdriver/lib/promise.js:668:7
+    at processTicksAndRejections (internal/process/task_queues.js:97:5)Error: 
+    at ElementArrayFinder.applyAction_ (/usr/src/app/node_modules/protractor/built/element.js:459:27)
+    at ElementArrayFinder.&lt;computed&gt; [as click] (/usr/src/app/node_modules/protractor/built/element.js:91:29)
+    at ElementFinder.&lt;computed&gt; [as click] (/usr/src/app/node_modules/protractor/built/element.js:831:22)
+    at UserContext.&lt;anonymous&gt; (/usr/src/app/src/7.add-game-mobile.e2e-spec.ts:25:35)
+    at /usr/src/app/node_modules/jasminewd2/index.js:112:25
+    at new ManagedPromise (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:1077:7)
+    at ControlFlow.promise (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:2505:12)
+    at schedulerExecute (/usr/src/app/node_modules/jasminewd2/index.js:95:18)
+    at TaskQueue.execute_ (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:3084:14)
+    at TaskQueue.executeNext_ (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:3067:27)
+From: Task: Run it(&quot;should add a game and show it in the table&quot;) in control flow
+    at UserContext.&lt;anonymous&gt; (/usr/src/app/node_modules/jasminewd2/index.js:94:19)
+    at attempt (/usr/src/app/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:4297:26)
+    at QueueRunner.run (/usr/src/app/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:4217:20)
+    at runNext (/usr/src/app/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:4257:20)
+    at /usr/src/app/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:4264:13
+    at /usr/src/app/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:4172:9
+    at /usr/src/app/node_modules/jasminewd2/index.js:64:48
+    at ControlFlow.emit (/usr/src/app/node_modules/selenium-webdriver/lib/events.js:62:21)
+    at ControlFlow.shutdown_ (/usr/src/app/node_modules/selenium-webdriver/lib/promise.js:2674:10)
+    at /usr/src/app/node_modules/selenium-webdriver/lib/promise.js:2599:53
+From asynchronous test: 
+Error: 
+    at Suite.&lt;anonymous&gt; (/usr/src/app/src/7.add-game-mobile.e2e-spec.ts:18:3)
+    at addSpecsToSuite (/usr/src/app/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:1107:25)
+    at Env.describe (/usr/src/app/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:1074:7)
+    at describe (/usr/src/app/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:4399:18)
+    at Object.&lt;anonymous&gt; (/usr/src/app/src/7.add-game-mobile.e2e-spec.ts:7:1)
+    at Module._compile (internal/modules/cjs/loader.js:1147:30)
+    at Module.m._compile (/usr/src/app/node_modules/ts-node/src/index.ts:814:23)
+    at Module._extensions..js (internal/modules/cjs/loader.js:1167:10)
+    at Object.require.extensions.&lt;computed&gt; [as .ts] (/usr/src/app/node_modules/ts-node/src/index.ts:817:12)</span></li></ul></li></ul><a href="javascript:showhide('664f6200-6640-11ea-9d18-85d26600c554')">Toggle Configuration</a><div class="config" id="664f6200-6640-11ea-9d18-85d26600c554" style="display: none"><h4>Configuration</h4><li>Jasmine version:  2.8.0</li><li>Browser name:  chrome</li><li>Browser version:  80.0.3987.106</li><li>Platform:  Linux</li><li>Javascript enabled:  true</li><li>Css selectors enabled:  true</li></div></body></html>
