@@ -22,7 +22,7 @@
     "stop": "docker-compose down",
     "stop:e2e": "docker-compose -f docker-compose-e2e.yml down",
     "restart:e2e": "yarn stop:e2e && sleep 5 && yarn start:e2e",
-    "docker-compose-rebuild": "docker-compose build --parallel && docker-compose down && docker-compose up -d",
+    "docker-compose-rebuild": "docker-compose build --parallel --pull && docker-compose down && docker-compose up -d",
     "docker-compose-rebuild-no-cache": "docker-compose build --no-cache && docker-compose down && docker-compose up -d",
     "update-with-master": "CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD) && git checkout master && git pull && git checkout $CURRENT_BRANCH && git merge master"
   },

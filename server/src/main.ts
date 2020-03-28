@@ -9,8 +9,8 @@ async function bootstrap() {
   let cert: any;
 
   try {
-    key = fs.readFileSync('./secrets/server.key');
-    cert = fs.readFileSync('./secrets/server.crt');
+    key = fs.readFileSync('./secrets/localhost.key');
+    cert = fs.readFileSync('./secrets/localhost.crt');
   } catch {
     // tslint:disable-next-line
     console.info('Cant read key or certificate');
