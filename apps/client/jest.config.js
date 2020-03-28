@@ -5,7 +5,7 @@ module.exports = {
     "preset": '../../jest.config.js',
     "coverageDirectory": '../../coverage/apps/montepoeli',
     "transformIgnorePatterns":[
-      "node_modules/(?!@storybook/*)"
+      "../../node_modules/(?!@storybook/*)"
     ],
     "testPathIgnorePatterns": [
       "<rootDir>/src/test.ts"
@@ -15,8 +15,8 @@ module.exports = {
       "/node_modules/"
     ],
     "snapshotSerializers": [
-      "jest-preset-angular/AngularSnapshotSerializer.js",
-      "jest-preset-angular/HTMLCommentSerializer.js"
+      "../../node_modules/jest-preset-angular/AngularSnapshotSerializer.js",
+      "../../node_modules/jest-preset-angular/HTMLCommentSerializer.js"
     ],
     "globals": {
       "ts-jest": {
@@ -37,14 +37,5 @@ module.exports = {
       "^.+\\.(ts|html)$": "ts-jest",
       "^.+\\.js$": "babel-jest",
       "^.+\\.stories\\.[jt]sx?$": "@storybook/addon-storyshots/injectFileName"
-    },
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json",
-      "node",
-      ".html"
-    ]
+    }
   }
