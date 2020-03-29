@@ -10,6 +10,7 @@ export class GameFactory implements Factory<Game> {
     const white = whiteId ? whiteId : this.factoryUtilService.id();
 
     return {
+      id: this.factoryUtilService.id(),
       black,
       white,
       winner: this.factoryUtilService.randomWinner(black, white),

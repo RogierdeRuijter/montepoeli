@@ -4,7 +4,6 @@ services:
     build:
       context: client
       dockerfile: Dockerfile.local
-    image: montepoeli-client:$DOCKER_CLIENT_TAG
     container_name: montepouli-client
     ports:
       - "4200:4200"

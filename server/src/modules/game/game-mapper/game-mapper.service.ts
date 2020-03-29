@@ -27,6 +27,7 @@ export class GameMapperService {
         const userWhite = users.find((user: User) => user.id === game.white);
 
         return {
+          id: game.id,
           black: userBlack ? userBlack.name : null,
           white: userWhite ? userWhite.name : null,
           winner: this.getWinnerUser(userBlack, userWhite, game),

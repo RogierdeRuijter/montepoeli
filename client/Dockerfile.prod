@@ -1,7 +1,5 @@
 FROM montepoeli.club/montepoeli-client-base-node-modules:latest AS builder
 
-# RUN apt-get -y update && apt-get -y install curl
-
 WORKDIR /usr/src/app
 
 COPY package.json package.json

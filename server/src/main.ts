@@ -2,9 +2,33 @@ import {NestFactory} from '@nestjs/core';
 import {AppModule} from './modules/app/app.module';
 import * as cookieParser from 'cookie-parser';
 import * as compression from 'compression';
+import * as fs from 'fs';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  let key: any;
+  let cert: any;
+
+  try {
+    key = fs.readFileSync('./secrets/localhost.key');
+    cert = fs.readFileSync('./secrets/localhost.crt');
+  } catch {
+    // tslint:disable-next-line
+    console.info('Cant read key or certificate');
+    // tslint:disable-next-line
+    console.info('This does not have to be an issue if you handle https another way or http is good enough for now');
+  }
+
+  const httpsOptions = {
+    key,
+    cert,
+  };
+
+  let app;
+  if (httpsOptions.key && httpsOptions.cert) {
+    app = await NestFactory.create(AppModule, { httpsOptions });
+  } else {
+    app = await NestFactory.create(AppModule);
+  }
 
   checkEnvironmentVariables();
 
