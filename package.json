@@ -15,6 +15,7 @@
     "pull:e2e-environment": "docker-compose -f docker-compose-e2e.yml pull --ignore-pull-failures || true",
     "restart:e2e-db": "docker-compose -f docker-compose-e2e.yml up --force-recreate -d mongodb-e2e",
     "start": "npm run docker-compose-rebuild",
+    "start:server": "docker-compose build server && docker-compose up -d server",
     "start:e2e-environment-base": "(npm run build:e2e-environment && npm run pull:e2e-environment) && npm run restart:e2e-db && docker-compose -f docker-compose-e2e.yml up",
     "start:e2e": "npm run build-e2e-app && (npm run start:e2e-environment-base -- -d)",
     "start:e2e-environment-build-server": "npm run start:e2e-environment-base -- --abort-on-container-exit",
