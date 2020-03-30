@@ -1,8 +1,31 @@
 version: 2.1
+parameters:
+  client-image-name:
+    type: string
+    default: "montepouli-client"
+  server-image-name:
+    type: string
+    default: "montepouli-server"
+  image-repository:
+    type: string
+    default: "https://montepoeli.club"
+  image-repository-url:
+    type: string
+    default: "montepoeli.club"
+  tag-to-be-e2e:
+    type: string
+    default: "to_be_e2e"  
+  tag-e2e:
+    type: string
+    default: "e2e"  
+  default-build-context:
+    type: string
+    default: "circleci/node:12"
+    # TODO: create enum for different config types client
 jobs:
   save-docker-tags-as-artifacts:
     docker:
-      - image: circleci/node:12
+      - image: << pipeline.parameters.default-build-context >>
 
     working_directory: ~/repo
     steps:
@@ -34,7 +57,6 @@ jobs:
             
             echo ${SERVER_TAG} > /tmp/server-version.txt
             
-            
       - store_artifacts:
           path: /tmp/client-version.txt
       
@@ -49,15 +71,19 @@ jobs:
             
   build-client-base:
     docker:
-      - image: circleci/node:12
+      - image: << pipeline.parameters.default-build-context >>
+    
+    environment:
+      - IMAGE_CLIENT_NAME: << pipeline.parameters.client-image-name >>
+      - IMAGE_REPOSITORY: << pipeline.parameters.image-repository >>
+      - IMAGE_REPOSITORY-URL: << pipeline.parameters.image-repository-url >>
 
     working_directory: ~/repo/client
     steps:
       - checkout:
           path: ~/repo
 
-      - setup_remote_docker:
-          docker_layer_caching: true
+      - setup_remote_docker
 
       - attach_workspace:
           at: /tmp
@@ -70,30 +96,19 @@ jobs:
       - run:
           name: Login to montepoeli.club docker
           command: |
-            docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
-      
-      - run:
-          name: See if the docker image is avaialbe current client tag
-          command: |
-            IMAGE_CLIENT_NAME=montepouli-client
-
-            docker pull $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG || true
+            docker login $IMAGE_REPOSITORY-URL -u $DOCKER_USER -p $DOCKER_PASSWORD
       
       - run:
           name: Test and build client image, if it not available in context
-          command: |
-            IMAGE_CLIENT_NAME=montepouli-client
-            
-            if [[ "$(docker images -q $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG 2> /dev/null)" == "" ]]; then
-              docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG . -f Dockerfile.prod  --compress
+          command: |            
+            if [[ "$(docker images -q $IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME:$CLIENT_TAG 2> /dev/null)" == "" ]]; then
+              docker build -t $IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME:$CLIENT_TAG . -f Dockerfile.prod  --compress
             fi
             
       - run:
           name: Fetch coverage from the image and upload coverage to codecov
-          command: |
-            IMAGE_CLIENT_NAME=montepouli-client
-            
-            docker create -ti --name dummy $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG sh
+          command: |            
+            docker create -ti --name dummy $IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME:$CLIENT_TAG sh
             docker cp dummy:/usr/coverage .
             docker rm -f dummy
             
@@ -101,21 +116,23 @@ jobs:
 
       - deploy:
           name: Push client image to montepoeli.club registry
-          command: |
-            IMAGE_CLIENT_NAME=montepouli-client
-            docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
-            docker push $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG
+          command: docker push $IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME:$CLIENT_TAG
 
   build-server:
     docker:
-      - image: circleci/node:12
+      - image: << pipeline.parameters.default-build-context >>
+
+    environment:
+      - IMAGE_REPOSITORY: << pipeline.parameters.image-repository >>
+      - IMAGE_SERVER_NAME: << pipeline.parameters.server-image-name >>
+      - IMAGE_REPOSITORY-URL: << pipeline.parameters.image-repository-url >>
 
     working_directory: ~/repo/server
     steps:
       - checkout:
           path: ~/repo
-      - setup_remote_docker:
-          docker_layer_caching: true
+
+      - setup_remote_docker
     
       - attach_workspace:
           at: /tmp
@@ -128,30 +145,24 @@ jobs:
       - run:
           name: Login to montepoeli.club docker
           command: |
-            docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
+            docker login $IMAGE_REPOSITORY-URL -u $DOCKER_USER -p $DOCKER_PASSWORD
       
       - run:
           name: See if the docker image is avaialbe current client tag
           command: |
-            IMAGE_SERVER_NAME=montepouli-server
-
-            docker pull $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG || true
+            docker pull $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG || true
 
       - run: 
           name: Test and build image, if it is not available in context
           command: |
-            IMAGE_SERVER_NAME=montepouli-server
-
-            if [[ "$(docker images -q $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG  2> /dev/null)" == "" ]]; then
-              docker build -t $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG . -f Dockerfile.prod  --compress --cache-from=$DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG
+            if [[ "$(docker images -q $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG  2> /dev/null)" == "" ]]; then
+              docker build -t $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG . -f Dockerfile.prod  --compress --cache-from=$IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG
             fi
 
       - run:
           name: Fetch coverage from the image and upload coverage to codecov
-          command: |
-            IMAGE_SERVER_NAME=montepouli-server
-            
-            docker create -ti --name dummy $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG sh
+          command: |            
+            docker create -ti --name dummy $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG sh
             docker cp dummy:/usr/coverage .
             docker rm -f dummy
             
@@ -159,18 +170,23 @@ jobs:
 
       - deploy:
           command: |
-            IMAGE_SERVER_NAME=montepouli-server
-            docker push $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG
+            docker push $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG
 
   swap-client-config-e2e:
     docker:
-      - image: circleci/node:12
+      - image: << pipeline.parameters.default-build-context >>
 
-    working_directory: ~/repo
+    environment:
+      - IMAGE_REPOSITORY: << pipeline.parameters.image-repository >>
+      - IMAGE_REPOSITORY-URL: << pipeline.parameters.image-repository-url >>
+      - IMAGE_CLIENT_NAME: << pipeline.parameters.client-image-name >>
+      - TAG_TO_BE_E2E: << pipeline.parameters.tag-to-be-e2e >>
+
+    working_directory: ~/repo/client
     steps:
-      - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true
+      - checkout:
+          path: ~/repo
+      - setup_remote_docker
 
       - attach_workspace:
           at: /tmp
@@ -178,31 +194,29 @@ jobs:
       - run:
           name: Setup Environment Variables
           command: |
-            echo "export CLIENT_TAG=$(cat /tmp/client-version.txt)" >> $BASH_ENV
+            echo "export CLIENT_TAG_E2E=$(cat /tmp/client-version.txt)-$TAG_TO_BE_E2E" >> $BASH_ENV
 
       - run:
           command: |
-            docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
+            docker login $IMAGE_REPOSITORY-URL -u $DOCKER_USER -p $DOCKER_PASSWORD
 
       - run:
           command: |
-            cd client
-            IMAGE_CLIENT_NAME=montepouli-client-e2e
-            docker build -f Dockerfile.configured . -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG --build-arg CLIENT_BASE_IMAGE_NAME=montepoeli.club/montepouli-client --build-arg CLIENT_BASE_IMAGE_TAG=$CLIENT_TAG --build-arg CLIENT_TYPE=e2e
+            docker build -f Dockerfile.configured . -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG_E2E --build-arg CLIENT_BASE_IMAGE_NAME=montepoeli.club/montepouli-client --build-arg CLIENT_BASE_IMAGE_TAG=$CLIENT_TAG --build-arg CLIENT_TYPE=e2e
 
       - deploy:
           command: |
-            IMAGE_CLIENT_NAME=montepouli-client-e2e
-            docker push $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG
+            docker push $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG_E2E
 
   e2e-tests:
     machine:
       image: circleci/classic:201808-01
     working_directory: ~/repo
     environment:
-      - CLIENT_BASE_IMAGE_NAME: montepoeli.club/montepouli-client-e2e
-      - SERVER_IMAGE_NAME: montepoeli.club/montepouli-server
-      - CLIENT_TYPE: e2e
+      - IMAGE_REPOSITORY: << pipeline.parameters.image-repository >>
+      - CLIENT_BASE_IMAGE_NAME: montepoeli.club/<< pipeline.parameters.client-image-name >>
+      - SERVER_IMAGE_NAME: montepoeli.club/<< pipeline.parameters.server-image-name >>
+      - TAG_TO_BE_E2E: << pipeline.parameters.tag-to-be-e2e >>
     steps:
       - checkout
 
@@ -212,18 +226,22 @@ jobs:
       - run:
           name: Setup Environment Variables
           command: |
-            echo "export CLIENT_BASE_IMAGE_TAG=$(cat /tmp/client-version.txt)" >> $BASH_ENV
+            echo "export CLIENT_BASE_IMAGE_TAG=$(cat /tmp/client-version.txt)-$TAG_TO_BE_E2E" >> $BASH_ENV
             echo "export SERVER_IMAGE_TAG=$(cat /tmp/server-version.txt)" >> $BASH_ENV
       - run: sudo curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
       - run: sudo chmod +x /usr/local/bin/docker-compose
-      - run: docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
+      - run: docker login $IMAGE_REPOSITORY -u $DOCKER_USER -p $DOCKER_PASSWORD
       - run: npm run start:e2e-environment-build-server
     
-
   rebuild-client-base:
     docker:
-      - image: circleci/node:12
-
+      - image: << pipeline.parameters.default-build-context >>
+    
+    environment:
+      - IMAGE_REPOSITORY: << pipeline.parameters.image-repository >>
+      - IMAGE_REPOSITORY_URL: << pipeline.parameters.image-repository-url >>
+      - CLIENT_BASE_IMAGE: montepoeli-client-base-node-modules
+    
     working_directory: ~/repo/client
     steps:
       - checkout:
@@ -232,20 +250,21 @@ jobs:
       - setup_remote_docker
 
       - run:
-          command: |
-            docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
+          name: Login to image repository
+          command: docker login $IMAGE_REPOSITORY_URL -u $DOCKER_USER -p $DOCKER_PASSWORD
 
       - run:
-          command: |
-            docker build -f Dockerfile.node_modules -t montepoeli.club/montepoeli-client-base-node-modules:latest . --compress
+          name: Build docker image with node modules
+          command: docker build -f Dockerfile.node_modules -t $IMAGE_REPOSITORY/$CLIENT_BASE_IMAGE:latest . --compress
 
       - run:
-          command : |
-            docker push montepoeli.club/montepoeli-client-base-node-modules:latest
+          name: Push image
+          command: docker push $IMAGE_REPOSITORY/$CLIENT_BASE_IMAGE:latest
            
   update-version:
     docker:
-      - image: circleci/node:12
+      - image: << pipeline.parameters.default-build-context >>
+
     working_directory: ~/repo
     steps:
       - checkout
@@ -277,14 +296,9 @@ jobs:
           command: |
             npx semantic-release
 
-            # stop workflow if version is not updated
-            # if [ "$CIRCLE_BRANCH" = "develop" ]; then
-            #  circleci-agent step halt
-            # fi
-
   save-new-version:
     docker:
-      - image: circleci/node:12
+      - image: << pipeline.parameters.default-build-context >>
 
     working_directory: ~/repo
     steps:
@@ -307,13 +321,20 @@ jobs:
 
   swap-client-config:
     docker:
-      - image: circleci/node:12
+      - image: << pipeline.parameters.default-build-context >>
+    
+    environment:
+      - IMAGE_REPOSITORY: << pipeline.parameters.image-repository >>
+      - IMAGE_REPOSITORY_URL: << pipeline.parameters.image-repository-url >>
+      - IMAGE_CLIENT_NAME: << pipeline.parameters.client-image-name >>
+      - TAG_TO_BE_E2E: << pipeline.parameters.tag-to-be-e2e >>
+      - TAG_E2E: << pipeline.parameters.tag-e2e >>
 
-    working_directory: ~/repo
+    working_directory: ~/repo/client
     steps:
-      - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true
+      - checkout:
+          path: ~/repo
+      - setup_remote_docker
 
       - attach_workspace:
           at: /tmp
@@ -321,19 +342,17 @@ jobs:
       - run:
           name: Setup Environment Variables
           command: |
-            echo "export CLIENT_TAG=$(cat /tmp/client-version.txt)" >> $BASH_ENV
+            echo "export CLIENT_TAG_TO_BE_E2E=$(cat /tmp/client-version.txt)-$TAG_TO_BE_E2E" >> $BASH_ENV
+            echo "export CLIENT_TAG_E2E_TESTED=$(cat /tmp/client-version.txt)-$TAG_E2E" >> $BASH_ENV
             echo "export CLIENT_TAG_UPDATED=$(cat /tmp/version-updated.txt)" >> $BASH_ENV
 
       - run:
           command: |
-            docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
+            docker login $IMAGE_REPOSITORY_URL -u $DOCKER_USER -p $DOCKER_PASSWORD
 
       - run:
           command: |
-            IMAGE_CLIENT_NAME=montepouli-client
-            TESTED_CLIENT_TAG=$CLIENT_TAG_UPDATED-e2e
-            cd client
-            docker build -f Dockerfile.configured -t $DOMAIN/$IMAGE_CLIENT_NAME:$TESTED_CLIENT_TAG . --build-arg CLIENT_BASE_IMAGE_NAME=montepoeli.club/montepouli-client-e2e --build-arg CLIENT_BASE_IMAGE_TAG=$CLIENT_TAG --build-arg CLIENT_TYPE=server
+            docker build -f Dockerfile.configured -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG_E2E . --build-arg CLIENT_BASE_IMAGE_NAME=$IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME --build-arg CLIENT_BASE_IMAGE_TAG=$CLIENT_TAG_TO_BE_E2E --build-arg CLIENT_TYPE=server
 
       - deploy:
           command: |
@@ -351,12 +370,11 @@ jobs:
 
   retag-server-image:
     docker:
-      - image: circleci/node:12
+      - image: << pipeline.parameters.default-build-context >>
 
     working_directory: ~/repo
     steps:
-      - setup_remote_docker:
-          docker_layer_caching: true
+      - setup_remote_docker
 
       - attach_workspace:
           at: /tmp
