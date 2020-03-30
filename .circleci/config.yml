@@ -1,17 +1,17 @@
 version: 2.1
 parameters:
-  client-image-name:
-    type: string
-    default: "montepouli-client"
-  server-image-name:
-    type: string
-    default: "montepouli-server"
   image-repository:
     type: string
     default: "https://montepoeli.club"
   image-repository-url:
     type: string
     default: "montepoeli.club"
+  client-image-name:
+    type: string
+    default: "montepouli-client"
+  server-image-name:
+    type: string
+    default: "montepouli-server"
   tag-to-be-e2e:
     type: string
     default: "to_be_e2e"  
@@ -21,7 +21,20 @@ parameters:
   default-build-context:
     type: string
     default: "circleci/node:12"
-    # TODO: create enum for different config types client
+  # client-dynamic-variable:
+  #   default: "e2e"
+  #   description: Configuration options for the Dockerfile.configured image of the client
+  #   type: enum
+  #   enum: ["e2e", "server"]
+  e2e-client-environment-variables:
+    type: string
+    default: "e2e"
+
+  production-client-environment-variables:
+    type: string
+    default: "server"
+  
+      
 jobs:
   save-docker-tags-as-artifacts:
     docker:
@@ -172,7 +185,7 @@ jobs:
           command: |
             docker push $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG
 
-  swap-client-config-e2e:
+  make-images-e2e-test-ready:
     docker:
       - image: << pipeline.parameters.default-build-context >>
 
@@ -180,7 +193,9 @@ jobs:
       - IMAGE_REPOSITORY: << pipeline.parameters.image-repository >>
       - IMAGE_REPOSITORY-URL: << pipeline.parameters.image-repository-url >>
       - IMAGE_CLIENT_NAME: << pipeline.parameters.client-image-name >>
+      - IMAGE_SERVER_NAME: << pipeline.parameters.server-image-name >>
       - TAG_TO_BE_E2E: << pipeline.parameters.tag-to-be-e2e >>
+      - CLIENT_TYPE: << pipeline.parameters.e2e-client-environment-variables >>
 
     working_directory: ~/repo/client
     steps:
@@ -194,19 +209,32 @@ jobs:
       - run:
           name: Setup Environment Variables
           command: |
-            echo "export CLIENT_TAG_E2E=$(cat /tmp/client-version.txt)-$TAG_TO_BE_E2E" >> $BASH_ENV
+            echo "export CLIENT_TAG=$(cat /tmp/client-version.txt)" >> $BASH_ENV
+            echo "export SERVER_TAG=$(cat /tmp/server-version.txt)" >> $BASH_ENV
+            echo "export CLIENT_TAG_TO_BE_E2E=$CLIENT_TAG-$TAG_TO_BE_E2E" >> $BASH_ENV
+            echo "export SERVER_TAG_TO_BE_E2E=$SERVER_TAG-$TAG_TO_BE_E2E" >> $BASH_ENV
 
       - run:
+          name: Log into the image repository
           command: |
             docker login $IMAGE_REPOSITORY-URL -u $DOCKER_USER -p $DOCKER_PASSWORD
 
       - run:
+          name: Insert e2e dynamic environment varibles in client image
           command: |
-            docker build -f Dockerfile.configured . -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG_E2E --build-arg CLIENT_BASE_IMAGE_NAME=montepoeli.club/montepouli-client --build-arg CLIENT_BASE_IMAGE_TAG=$CLIENT_TAG --build-arg CLIENT_TYPE=e2e
+            docker build -f Dockerfile.configured . -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG_TO_BE_E2E --build-arg CLIENT_BASE_IMAGE_NAME=$IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME --build-arg CLIENT_BASE_IMAGE_TAG=$CLIENT_TAG --build-arg CLIENT_TYPE=$CLIENT_TYPE
 
-      - deploy:
+      - run:
+          name: Fetch and Retag server image with to be e2e tag
           command: |
-            docker push $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG_E2E
+            docker pull $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG
+            docker tag $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG_TO_BE_E2E
+
+      - deploy: 
+          name: Push e2e ready client and server images  
+          command: |
+            docker push $IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME:$CLIENT_TAG_TO_BE_E2E
+            docker push $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG_TO_BE_E2E
 
   e2e-tests:
     machine:
@@ -216,7 +244,10 @@ jobs:
       - IMAGE_REPOSITORY: << pipeline.parameters.image-repository >>
       - CLIENT_BASE_IMAGE_NAME: montepoeli.club/<< pipeline.parameters.client-image-name >>
       - SERVER_IMAGE_NAME: montepoeli.club/<< pipeline.parameters.server-image-name >>
+      - IMAGE_CLIENT_NAME: << pipeline.parameters.client-image-name >>
+      - IMAGE_SERVER_NAME: << pipeline.parameters.server-image-name >>
       - TAG_TO_BE_E2E: << pipeline.parameters.tag-to-be-e2e >>
+      - TAG_E2E_TESTED: << pipeline.parameters.tag-e2e >>
     steps:
       - checkout
 
@@ -226,13 +257,31 @@ jobs:
       - run:
           name: Setup Environment Variables
           command: |
-            echo "export CLIENT_BASE_IMAGE_TAG=$(cat /tmp/client-version.txt)-$TAG_TO_BE_E2E" >> $BASH_ENV
-            echo "export SERVER_IMAGE_TAG=$(cat /tmp/server-version.txt)" >> $BASH_ENV
+            CLIENT_TAG=$(cat /tmp/client-version.txt)
+            SERVER_TAG=$(cat /tmp/server-version.txt)
+
+            echo "export CLIENT_BASE_IMAGE_TAG=$CLIENT_TAG-$TAG_TO_BE_E2E" >> $BASH_ENV
+            echo "export SERVER_IMAGE_TAG=$SERVER_TAG-$TAG_TO_BE_E2E" >> $BASH_ENV
+
+            echo "export CLIENT_TAG_E2E_TESTED=$CLIENT_TAG-$TAG_E2E_TESTED" >> $BASH_ENV
+            echo "export SERVER_TAG_E2E_TESTED=$SERVER_TAG-$TAG_E2E_TESTED" >> $BASH_ENV
+            
       - run: sudo curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
       - run: sudo chmod +x /usr/local/bin/docker-compose
       - run: docker login $IMAGE_REPOSITORY -u $DOCKER_USER -p $DOCKER_PASSWORD
       - run: npm run start:e2e-environment-build-server
-    
+      - run: 
+          name: Retag tested images
+          command: | 
+            docker tag $CLIENT_BASE_IMAGE_NAME:$CLIENT_BASE_IMAGE_TAG $IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME:$CLIENT_TAG_E2E_TESTED
+            docker tag $SERVER_IMAGE_NAME:$SERVER_IMAGE_TAG $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG_E2E_TESTED
+           
+      - run: 
+          name: Push retagged images
+          command: | 
+            docker push $IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME:$CLIENT_TAG_E2E_TESTED
+            docker push $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG_E2E_TESTED
+
   rebuild-client-base:
     docker:
       - image: << pipeline.parameters.default-build-context >>
@@ -241,6 +290,7 @@ jobs:
       - IMAGE_REPOSITORY: << pipeline.parameters.image-repository >>
       - IMAGE_REPOSITORY_URL: << pipeline.parameters.image-repository-url >>
       - CLIENT_BASE_IMAGE: montepoeli-client-base-node-modules
+      - TAG: "latest"
     
     working_directory: ~/repo/client
     steps:
@@ -255,11 +305,11 @@ jobs:
 
       - run:
           name: Build docker image with node modules
-          command: docker build -f Dockerfile.node_modules -t $IMAGE_REPOSITORY/$CLIENT_BASE_IMAGE:latest . --compress
+          command: docker build -f Dockerfile.node_modules -t $IMAGE_REPOSITORY/$CLIENT_BASE_IMAGE:$TAG . --compress
 
       - run:
           name: Push image
-          command: docker push $IMAGE_REPOSITORY/$CLIENT_BASE_IMAGE:latest
+          command: docker push $IMAGE_REPOSITORY/$CLIENT_BASE_IMAGE:$TAG
            
   update-version:
     docker:
@@ -319,7 +369,7 @@ jobs:
           paths:
             - version-updated.txt
 
-  swap-client-config:
+  make-client-image-production-ready:
     docker:
       - image: << pipeline.parameters.default-build-context >>
     
@@ -327,8 +377,8 @@ jobs:
       - IMAGE_REPOSITORY: << pipeline.parameters.image-repository >>
       - IMAGE_REPOSITORY_URL: << pipeline.parameters.image-repository-url >>
       - IMAGE_CLIENT_NAME: << pipeline.parameters.client-image-name >>
-      - TAG_TO_BE_E2E: << pipeline.parameters.tag-to-be-e2e >>
-      - TAG_E2E: << pipeline.parameters.tag-e2e >>
+      - TAG_E2E_TESTED: << pipeline.parameters.tag-e2e >>
+      - CLIENT_TYPE: << pipeline.parameters.production-client-environment-variables >> 
 
     working_directory: ~/repo/client
     steps:
@@ -342,9 +392,8 @@ jobs:
       - run:
           name: Setup Environment Variables
           command: |
-            echo "export CLIENT_TAG_TO_BE_E2E=$(cat /tmp/client-version.txt)-$TAG_TO_BE_E2E" >> $BASH_ENV
-            echo "export CLIENT_TAG_E2E_TESTED=$(cat /tmp/client-version.txt)-$TAG_E2E" >> $BASH_ENV
-            echo "export CLIENT_TAG_UPDATED=$(cat /tmp/version-updated.txt)" >> $BASH_ENV
+            echo "export CLIENT_TAG_E2E_TESTED=$(cat /tmp/client-version.txt)-$TAG_E2E_TESTED" >> $BASH_ENV
+            echo "export CLIENT_TAG_PRODUCTION=$(cat /tmp/version-updated.txt)" >> $BASH_ENV
 
       - run:
           command: |
@@ -352,25 +401,26 @@ jobs:
 
       - run:
           command: |
-            docker build -f Dockerfile.configured -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG_E2E . --build-arg CLIENT_BASE_IMAGE_NAME=$IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME --build-arg CLIENT_BASE_IMAGE_TAG=$CLIENT_TAG_TO_BE_E2E --build-arg CLIENT_TYPE=server
+            docker build -f Dockerfile.configured -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG_PRODUCTION . --build-arg CLIENT_BASE_IMAGE_NAME=$IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME --build-arg CLIENT_BASE_IMAGE_TAG=$CLIENT_TAG_E2E_TESTED --build-arg CLIENT_TYPE=$CLIENT_TYPE
 
       - deploy:
           command: |
-            TESTED_CLIENT_TAG=$CLIENT_TAG_UPDATED-e2e
-            IMAGE_CLIENT_NAME=montepouli-client
-            docker push $DOMAIN/$IMAGE_CLIENT_NAME:$TESTED_CLIENT_TAG
+            docker push $IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME:$CLIENT_TAG_PRODUCTION
       
       - deploy:
           command: |
-            TESTED_CLIENT_TAG=$CLIENT_TAG_UPDATED-e2e
-            IMAGE_CLIENT_NAME=montepouli-client
-
-            docker tag $DOMAIN/$IMAGE_CLIENT_NAME:$TESTED_CLIENT_TAG $DOMAIN/$IMAGE_CLIENT_NAME:latest
+            docker tag $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG_PRODUCTION $DOMAIN/$IMAGE_CLIENT_NAME:latest
             docker push $DOMAIN/$IMAGE_CLIENT_NAME:latest
 
-  retag-server-image:
+  make-server-image-production-ready:
     docker:
       - image: << pipeline.parameters.default-build-context >>
+    
+    environment:
+      - IMAGE_REPOSITORY: << pipeline.parameters.image-repository >>
+      - IMAGE_REPOSITORY_URL: << pipeline.parameters.image-repository-url >>
+      - IMAGE_SERVER_NAME: << pipeline.parameters.server-image-name >>
+      - TAG_E2E_TESTED: << pipeline.parameters.tag-e2e >>
 
     working_directory: ~/repo
     steps:
@@ -382,32 +432,22 @@ jobs:
       - run:
           name: Setup Environment Variables
           command: |
-            echo "export SERVER_TAG=$(cat /tmp/server-version.txt)" >> $BASH_ENV
-            echo "export SERVER_TAG_UPDATED=$(cat /tmp/version-updated.txt)" >> $BASH_ENV
+            echo "export SERVER_TAG_E2E_TESTED=$(cat /tmp/server-version.txt)-$TAG_E2E_TESTED" >> $BASH_ENV
+            echo "export SERVER_TAG_PRODUCTION=$(cat /tmp/version-updated.txt)" >> $BASH_ENV
 
-      - run: docker login https://montepoeli.club -u $DOCKER_USER -p $DOCKER_PASSWORD
+      - run: docker login $IMAGE_REPOSITORY_URL -u $DOCKER_USER -p $DOCKER_PASSWORD
 
       - run: |
-          IMAGE_SERVER_NAME=montepouli-server
-          TESTED_SERVER_TAG=$SERVER_TAG_UPDATED-e2e
-
-          docker pull $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG
-          docker tag $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG $DOMAIN/$IMAGE_SERVER_NAME:$TESTED_SERVER_TAG
+          docker pull $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG_E2E_TESTED
+          docker tag $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG_E2E_TESTED $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG_PRODUCTION
 
       - deploy:
-          command: |
-            TESTED_SERVER_TAG=$SERVER_TAG_UPDATED-e2e
-            IMAGE_SERVER_NAME=montepouli-server
-
-            docker push $DOMAIN/$IMAGE_SERVER_NAME:$TESTED_SERVER_TAG
+          command: docker push $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG_PRODUCTION
             
       - deploy:
           command: |
-            TESTED_SERVER_TAG=$SERVER_TAG_UPDATED-e2e
-            IMAGE_SERVER_NAME=montepouli-server
-            
-            docker tag $DOMAIN/$IMAGE_SERVER_NAME:$TESTED_SERVER_TAG $DOMAIN/$IMAGE_SERVER_NAME:latest
-            docker push $DOMAIN/$IMAGE_SERVER_NAME:latest
+            docker tag $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG_PRODUCTION $DOMAIN/$IMAGE_SERVER_NAME:latest
+            docker push $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:latest
 
 workflows:
   version: 2
@@ -423,7 +463,7 @@ workflows:
           requires:
             - save-docker-tags-as-artifacts
       
-      - swap-client-config-e2e:
+      - make-images-e2e-test-ready:
           requires:
             - build-client-base
           filters:
@@ -435,7 +475,7 @@ workflows:
 
       - e2e-tests:
           requires:
-            - swap-client-config-e2e
+            - make-images-e2e-test-ready
             - build-server
           filters:
             branches:
@@ -471,7 +511,7 @@ workflows:
                 - master
                 - /([0-9])+?(\.([0-9])+)\.x/
 
-      - swap-client-config:
+      - make-client-image-production-ready:
           requires:
             - save-new-version
           filters:
@@ -480,7 +520,7 @@ workflows:
                 - master
                 - /([0-9])+?(\.([0-9])+)\.x/
 
-      - retag-server-image:
+      - make-server-image-production-ready:
           requires:
             - save-new-version
           filters:
