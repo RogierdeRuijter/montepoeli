@@ -2,10 +2,10 @@ version: 2.1
 parameters:
   image-repository:
     type: string
-    default: "https://montepoeli.club"
+    default: "montepoeli.club"
   image-repository-url:
     type: string
-    default: "montepoeli.club"
+    default: "https://montepoeli.club"
   client-image-name:
     type: string
     default: "montepouli-client"
@@ -21,11 +21,6 @@ parameters:
   default-build-context:
     type: string
     default: "circleci/node:12"
-  # client-dynamic-variable:
-  #   default: "e2e"
-  #   description: Configuration options for the Dockerfile.configured image of the client
-  #   type: enum
-  #   enum: ["e2e", "server"]
   e2e-client-environment-variables:
     type: string
     default: "e2e"
@@ -33,7 +28,6 @@ parameters:
   production-client-environment-variables:
     type: string
     default: "server"
-  
       
 jobs:
   save-docker-tags-as-artifacts:
