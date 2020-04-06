@@ -198,6 +198,9 @@ jobs:
           command: |
             echo "export CLIENT_TAG=$(cat /tmp/client-version.txt)" >> $BASH_ENV
             echo "export SERVER_TAG=$(cat /tmp/server-version.txt)" >> $BASH_ENV
+
+            CLIENT_TAG=$(cat /tmp/client-version.txt)
+            SERVER_TAG=$(cat /tmp/server-version.txt)
             echo "export CLIENT_TAG_TO_BE_E2E=$CLIENT_TAG-$TAG_TO_BE_E2E" >> $BASH_ENV
             echo "export SERVER_TAG_TO_BE_E2E=$SERVER_TAG-$TAG_TO_BE_E2E" >> $BASH_ENV
 
