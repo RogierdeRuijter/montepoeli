@@ -3,9 +3,6 @@ parameters:
   image-repository:
     type: string
     default: "montepoeli.club"
-  image-repository-url:
-    type: string
-    default: "https://montepoeli.club"
   client-image-name:
     type: string
     default: "montepouli-client"
@@ -24,7 +21,6 @@ parameters:
   e2e-client-environment-variables:
     type: string
     default: "e2e"
-
   production-client-environment-variables:
     type: string
     default: "server"
@@ -83,7 +79,6 @@ jobs:
     environment:
       - IMAGE_CLIENT_NAME: << pipeline.parameters.client-image-name >>
       - IMAGE_REPOSITORY: << pipeline.parameters.image-repository >>
-      - IMAGE_REPOSITORY_URL: << pipeline.parameters.image-repository-url >>
 
     working_directory: ~/repo/client
     steps:
@@ -103,7 +98,7 @@ jobs:
       - run:
           name: Login to montepoeli.club docker
           command: |
-            docker login $IMAGE_REPOSITORY_URL -u $DOCKER_USER -p $DOCKER_PASSWORD
+            docker login $IMAGE_REPOSITORY -u $DOCKER_USER -p $DOCKER_PASSWORD
       
       - run:
           name: Test and build client image, if it not available in context
@@ -132,8 +127,7 @@ jobs:
     environment:
       - IMAGE_REPOSITORY: << pipeline.parameters.image-repository >>
       - IMAGE_SERVER_NAME: << pipeline.parameters.server-image-name >>
-      - IMAGE_REPOSITORY_URL: << pipeline.parameters.image-repository-url >>
-
+      
     working_directory: ~/repo/server
     steps:
       - checkout:
@@ -152,7 +146,7 @@ jobs:
       - run:
           name: Login to montepoeli.club docker
           command: |
-            docker login $IMAGE_REPOSITORY_URL -u $DOCKER_USER -p $DOCKER_PASSWORD
+            docker login $IMAGE_REPOSITORY -u $DOCKER_USER -p $DOCKER_PASSWORD
       
       - run:
           name: See if the docker image is avaialbe current client tag
@@ -185,7 +179,6 @@ jobs:
 
     environment:
       - IMAGE_REPOSITORY: << pipeline.parameters.image-repository >>
-      - IMAGE_REPOSITORY_URL: << pipeline.parameters.image-repository-url >>
       - IMAGE_CLIENT_NAME: << pipeline.parameters.client-image-name >>
       - IMAGE_SERVER_NAME: << pipeline.parameters.server-image-name >>
       - TAG_TO_BE_E2E: << pipeline.parameters.tag-to-be-e2e >>
@@ -211,7 +204,7 @@ jobs:
       - run:
           name: Log into the image repository
           command: |
-            docker login $IMAGE_REPOSITORY_URL -u $DOCKER_USER -p $DOCKER_PASSWORD
+            docker login $IMAGE_REPOSITORY -u $DOCKER_USER -p $DOCKER_PASSWORD
 
       - run:
           name: Insert e2e dynamic environment varibles in client image
@@ -282,7 +275,6 @@ jobs:
     
     environment:
       - IMAGE_REPOSITORY: << pipeline.parameters.image-repository >>
-      - IMAGE_REPOSITORY_URL: << pipeline.parameters.image-repository-url >>
       - CLIENT_BASE_IMAGE: montepoeli-client-base-node-modules
       - TAG: "latest"
     
@@ -295,7 +287,7 @@ jobs:
 
       - run:
           name: Login to image repository
-          command: docker login $IMAGE_REPOSITORY_URL -u $DOCKER_USER -p $DOCKER_PASSWORD
+          command: docker login $IMAGE_REPOSITORY -u $DOCKER_USER -p $DOCKER_PASSWORD
 
       - run:
           name: Build docker image with node modules
@@ -369,7 +361,6 @@ jobs:
     
     environment:
       - IMAGE_REPOSITORY: << pipeline.parameters.image-repository >>
-      - IMAGE_REPOSITORY_URL: << pipeline.parameters.image-repository-url >>
       - IMAGE_CLIENT_NAME: << pipeline.parameters.client-image-name >>
       - TAG_E2E_TESTED: << pipeline.parameters.tag-e2e >>
       - CLIENT_TYPE: << pipeline.parameters.production-client-environment-variables >> 
@@ -391,7 +382,7 @@ jobs:
 
       - run:
           command: |
-            docker login $IMAGE_REPOSITORY_URL -u $DOCKER_USER -p $DOCKER_PASSWORD
+            docker login $IMAGE_REPOSITORY -u $DOCKER_USER -p $DOCKER_PASSWORD
 
       - run:
           command: |
@@ -412,7 +403,6 @@ jobs:
     
     environment:
       - IMAGE_REPOSITORY: << pipeline.parameters.image-repository >>
-      - IMAGE_REPOSITORY_URL: << pipeline.parameters.image-repository-url >>
       - IMAGE_SERVER_NAME: << pipeline.parameters.server-image-name >>
       - TAG_E2E_TESTED: << pipeline.parameters.tag-e2e >>
 
@@ -429,7 +419,7 @@ jobs:
             echo "export SERVER_TAG_E2E_TESTED=$(cat /tmp/server-version.txt)-$TAG_E2E_TESTED" >> $BASH_ENV
             echo "export SERVER_TAG_PRODUCTION=$(cat /tmp/version-updated.txt)" >> $BASH_ENV
 
-      - run: docker login $IMAGE_REPOSITORY_URL -u $DOCKER_USER -p $DOCKER_PASSWORD
+      - run: docker login $IMAGE_REPOSITORY -u $DOCKER_USER -p $DOCKER_PASSWORD
 
       - run: |
           docker pull $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG_E2E_TESTED
