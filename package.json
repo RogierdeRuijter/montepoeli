@@ -62,6 +62,7 @@
     "update-angular-next": "ng update --next @angular/cli @angular/core @angular/material",
     "iPhone-simulator": "/Applications/Xcode.app/Contents/Developer/Applications/Simulator.app/Contents/MacOS/Simulator -CurrentDeviceID 8528838E-4B47-4F0E-B415-E87F8C8A6163",
     "pre-commit": "npm run affected:lint",
+    "pre-push": "npm run affected:test && npm run affected:build",
     "build:node_modules": "docker build . -f Dockerfile.node_modules -t montepoeli-node_modules:latest"
   },
   "dependencies": {
@@ -176,7 +177,7 @@
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
       "pre-commit": "npm run pre-commit",
-      "pre-push": "lerna run --parallel test && lerna run --parallel build:pre-push",
+      "pre-push": "npm run pre-push",
       "post-merge": "yarn install-sub-modules"
     }
   }
