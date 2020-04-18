@@ -6,15 +6,15 @@ import {Actions} from '../../../app/shared/static-files/enums';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import { StoryApi, StoryFn } from '@storybook/addons';
 import { StoryFnAngularReturnType } from '@storybook/angular/dist/client/preview/types';
-import { GridColumnDirective } from 'src/app/shared/modules/grid/directives/grid-column.directive';
-import { GridRowDirective } from 'src/app/shared/modules/grid/directives/grid-row.directive';
-import { PositionDirective } from 'src/app/shared/modules/grid/directives/position.directive';
-import { IconComponent } from 'src/app/shared/modules/icon/components/icon/icon.component';
+import { GridColumnDirective } from '../../../app/shared/modules/grid/directives/grid-column.directive';
+import { GridRowDirective } from '../../../app/shared/modules/grid/directives/grid-row.directive';
+import { PositionDirective } from '../../../app/shared/modules/grid/directives/position.directive';
+import { IconComponent } from '../../../app/shared/modules/icon/components/icon/icon.component';
 import { MatTableModule } from '@angular/material/table';
-import { OverviewComponent } from 'src/app/shared/modules/home/modules/game/components/overview/overview.component';
-import { GameTableComponent } from 'src/app/shared/modules/home/modules/game/components/overview/game-table/game-table.component';
-import { TableActionComponent } from 'src/app/shared/modules/home/modules/game/components/overview/table-action/table-action.component';
-import { ButtonIconComponent } from 'src/app/shared/modules/button/components/button-icon/button-icon.component';
+import { OverviewComponent } from '../../../app/shared/modules/home/modules/game/components/overview/overview.component';
+import { GameTableComponent } from '../../../app/shared/modules/home/modules/game/components/overview/game-table/game-table.component';
+import { TableActionComponent } from '../../../app/shared/modules/home/modules/game/components/overview/table-action/table-action.component';
+import { ButtonIconComponent } from '../../../app/shared/modules/button/components/button-icon/button-icon.component';
 
 export class GameOverviewStoryFactory {
   private readonly displayedColumns: string[] = ['white', 'winner', 'black'];

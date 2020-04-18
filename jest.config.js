@@ -1,5 +1,5 @@
 module.exports = {
-  testMatch: ['**/+(*.)+(spec|test).+(ts|js)?(x)'],
+  testMatch: ['**/+(*.)+(spec|test).+(ts|js|cjs)?(x)'],
   transform: {
     '^.+\\.(ts|js|html)$': 'ts-jest'
   },
@@ -7,14 +7,15 @@ module.exports = {
   moduleFileExtensions: [
     "ts",
     "tsx",
+    "cjs",
     "js",
     "jsx",
     "json",
     "node",
-    ".html"
+    "html"
   ],
   coverageReporters: ['html'],
   transformIgnorePatterns: [
-    "node_modules/(?!(jest-)?react-native|react-(native|universal|navigation)-(.*)|@react-native-community/(.*)|@react-navigation/(.*)|bs-platform)"
-  ]
+    "node_modules/(?!(jest-)?react-native|react-(native|universal|navigation)-(.*)|@react-native-community/(.*)|@react-navigation/(.*)|bs-platform|babel-plugin-require-context-hook|@storybook/addon-storyshots)",
+  ],
 };

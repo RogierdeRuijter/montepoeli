@@ -1,8 +1,8 @@
 import {TestBed} from '@angular/core/testing';
 
 import {DialogDataService} from './dialog-data.service';
-import { Game } from 'src/app/shared/interfaces/game.interface';
-import { User } from 'src/app/shared/interfaces/user.interface';
+import { Game } from '../../../../interfaces/game.interface';
+import { User } from '../../../../interfaces/user.interface';
 
 describe('DialogDataService', () => {
   beforeEach(() => TestBed.configureTestingModule({

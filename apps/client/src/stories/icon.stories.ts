@@ -1,6 +1,6 @@
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-import { IconComponent } from 'src/app/shared/modules/icon/components/icon/icon.component';
-import { Icons, IconSize } from 'src/app/shared/static-files/enums';
+import { IconComponent } from '../app/shared/modules/icon/components/icon/icon.component';
+import { Icons, IconSize } from '../app/shared/static-files/enums';
 import { TranslateDirective } from '@ngx-translate/core';
 import { MatIconModule } from '@angular/material/icon';
 

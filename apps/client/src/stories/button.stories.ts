@@ -3,7 +3,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {TranslateDirective} from '../app/shared/modules/translate/directives/translate.directive';
 import {StorybookTranslateModule} from './storybook-translate.module';
 import { MatDialogModule } from '@angular/material/dialog';
-import { ButtonComponent } from 'src/app/shared/modules/button/components/button/button.component';
+import { ButtonComponent } from '../app/shared/modules/button/components/button/button.component';
 
 export default {
   title: 'Button Component',

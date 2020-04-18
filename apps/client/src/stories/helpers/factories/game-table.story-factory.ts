@@ -5,7 +5,7 @@ import {TranslateDirective} from '../../../app/shared/modules/translate/directiv
 import { StoryApi, StoryFn } from '@storybook/addons';
 import { StoryFnAngularReturnType } from '@storybook/angular/dist/client/preview/types';
 import { MatTableModule } from '@angular/material/table';
-import { GameTableComponent } from 'src/app/shared/modules/home/modules/game/components/overview/game-table/game-table.component';
+import { GameTableComponent } from '../../../app/shared/modules/home/modules/game/components/overview/game-table/game-table.component';
 
 
 export class GameTableStoryFactory {

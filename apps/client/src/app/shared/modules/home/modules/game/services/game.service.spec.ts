@@ -3,8 +3,8 @@ import {TestBed} from '@angular/core/testing';
 import {GameService} from './game.service';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {EnvironmentService} from '../../../../../../shared/services/environment/environment.service';
-import { Game } from 'src/app/shared/interfaces/game.interface';
-import { TranslateTestingModule } from 'src/app/testing/translate-testing.module';
+import { TranslateTestingModule } from '../../../../../../testing/translate-testing.module';
+import { Game } from '../../../../../interfaces/game.interface';
 
 describe('GameService', () => {
   beforeEach(() => TestBed.configureTestingModule({

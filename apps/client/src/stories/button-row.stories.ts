@@ -6,7 +6,7 @@ import {ButtonRowComponent} from '../app/shared/modules/button/components/button
 import {GridRowDirective} from '../app/shared/modules/grid/directives/grid-row.directive';
 import {GridColumnDirective} from '../app/shared/modules/grid/directives/grid-column.directive';
 import { MatDialogModule } from '@angular/material/dialog';
-import { ButtonComponent } from 'src/app/shared/modules/button/components/button/button.component';
+import { ButtonComponent } from '../app/shared/modules/button/components/button/button.component';
 
 export default {
   title: 'Button Row',
