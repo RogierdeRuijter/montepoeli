@@ -29,6 +29,13 @@ RUN npm run test:api:cov
 
 RUN npm run build:api
 
+RUN npm install -g depcheck
+
+COPY remove-unused-deps.sh remove-unused-deps.sh
+COPY .depcheckrc .depcheckrc
+RUN ./remove-unused-deps.sh
+RUN depcheck
+
 RUN npm prune --production
 
 FROM node:12-slim

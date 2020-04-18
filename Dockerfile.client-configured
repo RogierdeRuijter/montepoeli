@@ -5,6 +5,8 @@ FROM $CLIENT_BASE_IMAGE_NAME:$CLIENT_BASE_IMAGE_TAG
 
 ARG CLIENT_TYPE
 
+RUN ls /usr/share/nginx/html
+
 RUN rm /usr/share/nginx/html/assets/app-config.json
 
 RUN cp usr/dynamic-environments/app-config-$CLIENT_TYPE.json /usr/share/nginx/html/assets/app-config.json
