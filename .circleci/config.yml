@@ -9,9 +9,7 @@ jobs:
       - checkout
       
       - run:
-          command: |
-            cd client
-            
+          command: |            
             if [[ ${CIRCLE_BRANCH} = "master" ]]
             then
               CLIENT_TAG=$(git log -n 1 --skip 1 --pretty=format:"%H")
@@ -23,8 +21,6 @@ jobs:
 
       - run:
           command: |
-            cd server
-
             if [[ ${CIRCLE_BRANCH} = "master" ]]
             then
               SERVER_TAG=$(git log -n 1 --skip 1 --pretty=format:"%H")
@@ -51,7 +47,7 @@ jobs:
     docker:
       - image: circleci/node:12
 
-    working_directory: ~/repo/client
+    working_directory: ~/repo
     steps:
       - checkout:
           path: ~/repo
@@ -85,7 +81,7 @@ jobs:
             IMAGE_CLIENT_NAME=montepouli-client
             
             if [[ "$(docker images -q $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG 2> /dev/null)" == "" ]]; then
-              docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG . -f Dockerfile.prod  --compress
+              docker build -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG . -f Dockerfile.client-prod  --compress
             fi
             
       - run:
@@ -110,7 +106,7 @@ jobs:
     docker:
       - image: circleci/node:12
 
-    working_directory: ~/repo/server
+    working_directory: ~/repo
     steps:
       - checkout:
           path: ~/repo
@@ -143,7 +139,7 @@ jobs:
             IMAGE_SERVER_NAME=montepouli-server
 
             if [[ "$(docker images -q $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG  2> /dev/null)" == "" ]]; then
-              docker build -t $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG . -f Dockerfile.prod  --compress --cache-from=$DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG
+              docker build -t $DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG . -f Dockerfile.server-prod  --compress --cache-from=$DOMAIN/$IMAGE_SERVER_NAME:$SERVER_TAG
             fi
 
       - run:
