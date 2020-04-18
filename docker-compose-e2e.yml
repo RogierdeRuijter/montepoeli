@@ -1,8 +1,9 @@
 version: "3.7"
 services:
   e2e-tests:
-    build: .
-    dockerfile: Dockerfile.e2e
+    build: 
+      context: .
+      dockerfile: Dockerfile.e2e
     container_name: montepouli-e2e-tests
     volumes:
       - ./e2e/reports/images:/root/target/screenshots
