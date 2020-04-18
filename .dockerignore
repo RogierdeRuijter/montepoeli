@@ -1,4 +1,4 @@
-**/node_modules
-**/dist
-**/.gitignore
-**/README.md
+dist
+node_modules
+.gitignore
+README.md

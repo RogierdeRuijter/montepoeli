@@ -10,23 +10,31 @@ COPY package-lock.json package-lock.json
 
 RUN npm install
 
-COPY src src
+COPY apps/api/tsconfig.json apps/api/tsconfig.json
+COPY apps/api/tsconfig.app.json apps/api/tsconfig.app.json
+COPY apps/api/tsconfig.build.json apps/api/tsconfig.build.json
+COPY apps/api/tsconfig.spec.json apps/api/tsconfig.spec.json
+COPY apps/api/jest.config.js apps/api/jest.config.js
+
 COPY tsconfig.json tsconfig.json
-COPY tsconfig.build.json tsconfig.build.json
+COPY jest.config.js jest.config.js
 COPY tslint.json tslint.json
+COPY nx.json nx.json
 
-RUN npm run lint
+COPY apps/api/src apps/api/src
 
-RUN npm run test:cov
+RUN npm run lint:api
+
+RUN npm run test:api:cov
+
+RUN npm run build:api
 
 RUN npm prune --production
-
-RUN npm run build
 
 FROM node:12-slim
 
 COPY --from=builder /usr/src/app/node_modules /node_modules
-COPY --from=builder /usr/src/app/dist /dist
-COPY --from=builder /usr/src/app/coverage/* /usr/coverage/
+COPY --from=builder /usr/src/app/dist/apps/api/* /dist/
+COPY --from=builder /usr/src/app/coverage/apps/api/* /usr/coverage/
 
 EXPOSE 3000
