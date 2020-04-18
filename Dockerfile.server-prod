@@ -1,4 +1,4 @@
-FROM node:12-slim as builder
+FROM montepoeli.club/montepoeli-base-node-modules:latest as builder
 
 # bcrypt dependencies
 RUN apt-get update && apt-get -y upgrade && apt-get -y install python3 make g++

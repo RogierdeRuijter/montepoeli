@@ -184,7 +184,7 @@ jobs:
           command: |
             cd client
             IMAGE_CLIENT_NAME=montepouli-client-e2e
-            docker build -f Dockerfile.configured . -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG --build-arg CLIENT_BASE_IMAGE_NAME=montepoeli.club/montepouli-client --build-arg CLIENT_BASE_IMAGE_TAG=$CLIENT_TAG --build-arg CLIENT_TYPE=e2e
+            docker build -f Dockerfile.client-configured . -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG --build-arg CLIENT_BASE_IMAGE_NAME=montepoeli.club/montepouli-client --build-arg CLIENT_BASE_IMAGE_TAG=$CLIENT_TAG --build-arg CLIENT_TYPE=e2e
 
       - deploy:
           command: |
@@ -233,7 +233,7 @@ jobs:
 
       - run:
           command: |
-            docker build -f Dockerfile.node_modules -t montepoeli.club/montepoeli-client-base-node-modules:latest . --compress
+            docker build -f Dockerfile.node_modules -t montepoeli.club/montepoeli-base-node-modules:latest . --compress
 
       - run:
           command : |
@@ -329,7 +329,7 @@ jobs:
             IMAGE_CLIENT_NAME=montepouli-client
             TESTED_CLIENT_TAG=$CLIENT_TAG_UPDATED-e2e
             cd client
-            docker build -f Dockerfile.configured -t $DOMAIN/$IMAGE_CLIENT_NAME:$TESTED_CLIENT_TAG . --build-arg CLIENT_BASE_IMAGE_NAME=montepoeli.club/montepouli-client-e2e --build-arg CLIENT_BASE_IMAGE_TAG=$CLIENT_TAG --build-arg CLIENT_TYPE=server
+            docker build -f Dockerfile.client-configured -t $DOMAIN/$IMAGE_CLIENT_NAME:$TESTED_CLIENT_TAG . --build-arg CLIENT_BASE_IMAGE_NAME=montepoeli.club/montepouli-client-e2e --build-arg CLIENT_BASE_IMAGE_TAG=$CLIENT_TAG --build-arg CLIENT_TYPE=server
 
       - deploy:
           command: |
