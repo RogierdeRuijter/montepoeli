@@ -42,7 +42,7 @@ jobs:
           paths:
             - client-version.txt
             - server-version.txt
-            
+
   build-client-base:
     docker:
       - image: circleci/node:12
