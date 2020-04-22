@@ -1,2 +1,8 @@
 skip-missing: true
-ignores: ["@nestjs/platform-express", "@nestjs/typeorm"]
+ignores: [
+    "@nestjs/platform-express", 
+    "@nestjs/typeorm", 
+    "passport-http-bearer", 
+    "rimraf", 
+    "typeorm"
+    ]

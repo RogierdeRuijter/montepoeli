@@ -22,7 +22,7 @@
     "docker:start:e2e-tests": "docker-compose -f docker-compose-e2e.yml build e2e-tests && docker-compose -f docker-compose-e2e.yml up -d e2e-tests",
     "docker:stop": "docker-compose down",
     "docker:stop:e2e": "docker-compose -f docker-compose-e2e.yml down",
-    "docker:restart:e2e": "yarn stop:e2e && sleep 5 && yarn start:e2e",
+    "docker:restart:e2e": "yarn docker:stop:e2e && sleep 5 && yarn docker:start:e2e",
     "compile-ivy-dependencies": "ngcc -p es2015, es2015 -l info --create-ivy-entry-points",
     "compile-ivy-dependencies-test": "ngcc --properties browser module main --first-only --create-ivy-entry-points",
     "docker-compose-rebuild": "docker-compose build --parallel && docker-compose down && docker-compose up -d",

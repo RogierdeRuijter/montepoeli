@@ -1,4 +1,4 @@
-FROM montepoeli-node_modules:latest
+FROM montepoeli.club/montepoeli-base-node-modules:latest
 
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app

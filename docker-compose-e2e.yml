@@ -6,7 +6,7 @@ services:
       dockerfile: Dockerfile.e2e
     container_name: montepouli-e2e-tests
     volumes:
-      - ./e2e/reports/images:/root/target/screenshots
+      - ./apps/client-e2e/reports/images:/root/target/screenshots
     networks:
       - e2e
     depends_on:
@@ -23,7 +23,7 @@ services:
     ports:
       - "443:443"
     volumes:
-      - ./e2e/nginx-conf:/etc/nginx/conf.d
+      - ./apps/client-e2e/nginx-conf:/etc/nginx/conf.d
     depends_on:
       - server-e2e
       - mongodb-e2e
