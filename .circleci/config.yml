@@ -68,6 +68,42 @@ jobs:
             - client-version.txt
             - server-version.txt
 
+  save-affected-apps-as-artifacts:
+    docker:
+      - image: << pipeline.parameters.default-build-context >>
+
+    working_directory: ~/repo
+    steps:
+      - checkout
+            
+      - restore_cache:
+        keys:
+        - v1-dependencies-root-{{ checksum "package-lock.json" }}
+        # fallback to using the latest cache if no exact match is found
+        - v1-dependencies-root
+
+      - run:
+          name: Setup environment for version increase
+          command: |            
+            npm install
+    
+      - save_cache:
+          paths:
+          - node_modules
+          key: v1-dependencies-root-{{ checksum "package-lock.json" }}
+
+      - run:
+          name: Save to the environment if the client is affected
+          command: |
+            FILENAME="/tmp/client-affected.txt"
+            if [[ $( npm run affected:apps | grep client) != "" ]]; then
+              echo true > $FILENAME
+            else
+              echo false > $FILENAME
+            fi
+           
+ 
+
   build-client-base:
     docker:
       - image: << pipeline.parameters.default-build-context >>
@@ -310,7 +346,7 @@ jobs:
       
       - restore_cache:
           keys:
-          - v1-dependencies-root-{{ checksum "yarn.lock" }}
+          - v1-dependencies-root-{{ checksum "package-lock.json" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-root
 
@@ -320,12 +356,12 @@ jobs:
             git config --global user.email "rogierderuijter@hotmail.com"
             git config --global user.name "Circle Ci"
                         
-            yarn install
+            npm install
     
       - save_cache:
           paths:
           - node_modules
-          key: v1-dependencies-root-{{ checksum "yarn.lock" }}
+          key: v1-dependencies-root-{{ checksum "package-lock.json" }}
       - run: 
           name: bump version based on last commit message
           command: |
@@ -437,14 +473,17 @@ workflows:
   build_and_test:
     jobs:
       - save-docker-tags-as-artifacts
+      - save-affected-apps-as-artifacts
 
       - build-client-base:
           requires:
             - save-docker-tags-as-artifacts
+            - save-affected-apps-as-artifacts
 
       - build-server:
           requires:
             - save-docker-tags-as-artifacts
+            - save-affected-apps-as-artifacts
       
       - make-images-e2e-test-ready:
           requires:
@@ -483,7 +522,6 @@ workflows:
               only: 
                 - master
                 - /([0-9])+?(\.([0-9])+)\.x/
-
 
       - save-new-version:
           requires:
