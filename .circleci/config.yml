@@ -244,7 +244,7 @@ jobs:
           name: Test and build image, if it is not available in context
           command: |
             if [[ "$(docker images -q $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG  2> /dev/null)" == "" ]]; then
-              docker build -t $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG . -f Dockerfile.client-prod  --compress --cache-from=$IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG
+              docker build -t $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG . -f Dockerfile.server-prod  --compress --cache-from=$IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG
             fi
 
       - run:
