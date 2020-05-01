@@ -73,7 +73,8 @@
     "pre-commit": "npm run lint:circleci && npm run lint:mergify && npm run affected:lint:parallel",
     "lint:circleci": "cd .circleci && npm run lint",
     "lint:mergify": "cd .mergify && npm run lint",
-    "pre-push": "npm run affected:test:parallel && npm run affected:build:parallel",
+    "pre-push": "npm run test:circleci && npm run affected:test:parallel && npm run affected:build:parallel",
+    "test:circlci": "cd .circleci && npm run test",
     "build:node_modules": "docker build . -f Dockerfile.node_modules -t montepoeli-node_modules:latest",
     "protractor": "protractor apps/client-e2e/protractor.conf.js"
   },
