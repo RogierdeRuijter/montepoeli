@@ -70,7 +70,7 @@ jobs:
 
   save-affected-apps-as-artifacts:
     docker:
-      - image: node:13-slim
+      - image: node:13
 
     working_directory: ~/repo
     steps:
