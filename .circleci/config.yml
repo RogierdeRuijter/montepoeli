@@ -76,21 +76,21 @@ jobs:
     steps:
       - checkout
             
-      - restore_cache:
-          keys:
-          - v1-dependencies-root-{{ checksum "package-lock.json" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-root
+      # - restore_cache:
+      #     keys:
+      #     - v1-dependencies-root-{{ checksum "package-lock.json" }}
+      #     # fallback to using the latest cache if no exact match is found
+      #     - v1-dependencies-root
 
       - run:
           name: Install node modules
           command: |            
             npm install
     
-      - save_cache:
-          paths:
-          - node_modules
-          key: v1-dependencies-root-{{ checksum "package-lock.json" }}
+      # - save_cache:
+      #     paths:
+      #     - node_modules
+      #     key: v1-dependencies-root-{{ checksum "package-lock.json" }}
 
       - run:
           name: Save to the environment if the client is affected
