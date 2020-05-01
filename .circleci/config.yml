@@ -83,7 +83,7 @@ jobs:
           - v1-dependencies-root
 
       - run:
-          name: Setup environment for version increase
+          name: install node modules
           command: |            
             npm install
     
