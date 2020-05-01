@@ -99,6 +99,7 @@ jobs:
 
             # npm run lint:api
             git branch --show-current
+            git version
             npm run affected -- --target=apps --base=master --head=HEAD
             npm run affected:apps -- --base=master --head=HEAD
             npm run affected:apps | grep client
