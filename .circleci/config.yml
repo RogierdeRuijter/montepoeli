@@ -98,9 +98,12 @@ jobs:
             FILENAME="/tmp/client-affected.txt"
             if [[ $( npm run affected:apps | grep client) != "" ]]; then
               echo true > $FILENAME
+              echo true
             else
               echo false > $FILENAME
+              echo false
             fi
+
             
       - run:
           name: Save to the environment if the server is affected
@@ -108,8 +111,10 @@ jobs:
             FILENAME="/tmp/server-affected.txt"
             if [[ $( npm run affected:apps | grep api) != "" ]]; then
               echo true > $FILENAME
+              echo true
             else
               echo false > $FILENAME
+              echo false
             fi
 
       - store_artifacts:
