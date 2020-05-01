@@ -96,9 +96,7 @@ jobs:
           name: Save to the environment if the client is affected
           command: |
             FILENAME="/tmp/client-affected.txt"
-            
-            apt-get update && apt-get install git -y
-            
+
             # npm run lint:api
             # git branch --show-current
             git version
