@@ -97,7 +97,7 @@ jobs:
           command: |
             FILENAME="/tmp/client-affected.txt"
             
-            npm install -g @nrwl/cli
+            npm install @nrwl/cli
             
             # npm run lint:api
             # git branch --show-current
