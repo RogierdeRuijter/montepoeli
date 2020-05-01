@@ -1,4 +1,4 @@
-FROM node:13
+FROM damilolasodiq/docker-node-ssh:latest
 
 WORKDIR /usr/src/app
 
