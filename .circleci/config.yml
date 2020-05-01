@@ -98,6 +98,7 @@ jobs:
             FILENAME="/tmp/client-affected.txt"
 
             # npm run lint:api
+            npm run affected
             npm run affected:apps -- --base=master --head=HEAD
             # npm run affected:apps | grep client
             if [[ $( npm run affected:apps | grep client) != "" ]]; then
