@@ -102,6 +102,7 @@ jobs:
             git version
 
             git log -n 1
+            git branch --show-current
             
             # npm run affected:lint
             npm run affected:apps
