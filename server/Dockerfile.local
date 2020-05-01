@@ -1,4 +1,4 @@
-FROM node:13-slim
+FROM node:14-slim
 
 #bcrypt dependencies
 RUN apt-get update && apt-get -y upgrade && apt-get -y install python3 make g++

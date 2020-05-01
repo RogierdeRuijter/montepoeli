@@ -1,4 +1,4 @@
-FROM node:12-slim as builder
+FROM node:14-slim as builder
 
 # bcrypt dependencies
 RUN apt-get update && apt-get -y upgrade && apt-get -y install python3 make g++
@@ -23,7 +23,7 @@ RUN npm prune --production
 
 RUN npm run build
 
-FROM node:12-slim
+FROM node:14-slim
 
 COPY --from=builder /usr/src/app/node_modules /node_modules
 COPY --from=builder /usr/src/app/dist /dist
