@@ -96,6 +96,8 @@ jobs:
           name: Save to the environment if the client is affected
           command: |
             FILENAME="/tmp/client-affected.txt"
+
+            npm run lint:api
             npm run affected:apps
             npm run affected:apps | grep client
             if [[ $( npm run affected:apps | grep client) != "" ]]; then
