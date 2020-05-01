@@ -1,0 +1,9 @@
+FROM montepoeli.club/montepoeli-base-node-modules:latest AS builder
+
+COPY . .
+
+RUN npm install
+
+RUN apt-get update && apt-get install git -y
+
+RUN npm run affected:apps
