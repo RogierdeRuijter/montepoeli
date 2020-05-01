@@ -97,7 +97,6 @@ jobs:
           command: |
             FILENAME="/tmp/client-affected.txt"
             
-            add-apt-repository ppa:git-core/ppa -y
             apt-get update
             apt-get install git -y
             
