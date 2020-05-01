@@ -83,7 +83,7 @@ jobs:
           - v1-dependencies-root
 
       - run:
-          name: install node modules
+          name: Install node modules
           command: |            
             npm install
     
@@ -98,9 +98,10 @@ jobs:
             FILENAME="/tmp/client-affected.txt"
 
             # npm run lint:api
+            git branch --show-current
             npm run affected -- --target=apps --base=master --head=HEAD
             npm run affected:apps -- --base=master --head=HEAD
-            # npm run affected:apps | grep client
+            npm run affected:apps | grep client
             if [[ $( npm run affected:apps | grep client) != "" ]]; then
               echo true > $FILENAME
               echo true
