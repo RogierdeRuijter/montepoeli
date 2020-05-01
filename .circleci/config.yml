@@ -96,8 +96,8 @@ jobs:
           name: Save to the environment if the client is affected
           command: |
             FILENAME="/tmp/client-affected.txt"
-            echo $( npm run affected:apps)
-            echo $( npm run affected:apps | grep client)
+            npm run affected:apps
+            npm run affected:apps | grep client
             if [[ $( npm run affected:apps | grep client) != "" ]]; then
               echo true > $FILENAME
               echo true
