@@ -76,33 +76,35 @@ jobs:
     steps:
       - checkout
             
-      - restore_cache:
-          keys:
-          - v1-dependencies-root-{{ checksum "package-lock.json" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-root
+      # - restore_cache:
+      #     keys:
+      #     - v1-dependencies-root-{{ checksum "package-lock.json" }}
+      #     # fallback to using the latest cache if no exact match is found
+      #     - v1-dependencies-root
 
-      - run:
-          name: Install node modules
-          command: |            
-            npm install
+      # - run:
+      #     name: Install node modules
+      #     command: |            
+      #       npm install
     
-      - save_cache:
-          paths:
-          - node_modules
-          key: v1-dependencies-root-{{ checksum "package-lock.json" }}
+      # - save_cache:
+      #     paths:
+      #     - node_modules
+      #     key: v1-dependencies-root-{{ checksum "package-lock.json" }}
 
       - run:
           name: Save to the environment if the client is affected
           command: |
             FILENAME="/tmp/client-affected.txt"
-
+            
+            npm install -g @nrwl/cli
+            
             # npm run lint:api
             # git branch --show-current
             git version
-            npm run affected:lint
-            npm run affected:apps -- --base=master --head=HEAD
-            npm run affected:apps | grep client
+            # npm run affected:lint
+            # npm run affected:apps -- --base=master --head=HEAD
+            nx affected:apps | grep client
             if [[ $( npm run affected:apps | grep client) != "" ]]; then
               echo true > $FILENAME
               echo true
