@@ -17,7 +17,7 @@ parameters:
     default: "e2e"  
   default-build-context:
     type: string
-    default: "circleci/node:13-stretch"
+    default: "circleci/node:13"
   e2e-client-environment-variables:
     type: string
     default: "e2e"
@@ -70,7 +70,7 @@ jobs:
 
   save-affected-apps-as-artifacts:
     docker:
-      - image: << pipeline.parameters.default-build-context >>
+      - image: circleci/node:13-buster
 
     working_directory: ~/repo
     steps:
