@@ -17,7 +17,7 @@ parameters:
     default: "e2e"  
   default-build-context:
     type: string
-    default: "circleci/node:12"
+    default: "circleci/node:13"
   e2e-client-environment-variables:
     type: string
     default: "e2e"
@@ -100,7 +100,6 @@ jobs:
             # npm run lint:api
             # git branch --show-current
             git version
-            npm run affected -- --target=apps --base=master --head=HEAD
             npm run affected:apps -- --base=master --head=HEAD
             npm run affected:apps | grep client
             if [[ $( npm run affected:apps | grep client) != "" ]]; then
