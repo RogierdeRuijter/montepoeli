@@ -70,7 +70,9 @@
     "update-angular": "ng update @angular/cli @angular/core @angular/material",
     "update-angular-next": "ng update --next @angular/cli @angular/core @angular/material",
     "iPhone-simulator": "/Applications/Xcode.app/Contents/Developer/Applications/Simulator.app/Contents/MacOS/Simulator -CurrentDeviceID 8528838E-4B47-4F0E-B415-E87F8C8A6163",
-    "pre-commit": "npm run affected:lint:parallel",
+    "pre-commit": "npm run lint:circleci && npm run lint:mergify && npm run affected:lint:parallel",
+    "lint:circleci": "cd .circleci && npm run lint",
+    "lint:mergify": "cd .mergify && npm run lint",
     "pre-push": "npm run affected:test:parallel && npm run affected:build:parallel",
     "build:node_modules": "docker build . -f Dockerfile.node_modules -t montepoeli-node_modules:latest",
     "protractor": "protractor apps/client-e2e/protractor.conf.js"
