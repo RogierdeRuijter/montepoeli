@@ -97,12 +97,11 @@ jobs:
           command: |
             FILENAME="/tmp/client-affected.txt"
           
-            
             # npm run lint:api
             # git branch --show-current
             git version
             # npm run affected:lint
-            npm run affected:apps -- --base=master --head=HEAD
+            npm run affected:apps
             # nx affected:apps 
             # nx affected:apps | grep client
             if [[ $( npm run affected:apps | grep client) != "" ]]; then
