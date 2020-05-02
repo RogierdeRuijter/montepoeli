@@ -365,33 +365,65 @@ jobs:
 
       - attach_workspace:
           at: /tmp
+      - run:
+          name: Setup affected environment variables
+          command: |
+            echo "export CLIENT_AFFECTED=$(cat /tmp/client-affected.txt)" >> $BASH_ENV
+            echo "export SERVER_AFFECTED=$(cat /tmp/server-affected.txt)" >> $BASH_ENV
+
 
       - run:
-          name: Setup Environment Variables
+          name: Setup docker-compose environment variables
+          command: |
+
+            if [ "$CLIENT_AFFECTED" = "false" ]; then
+              echo "export CLIENT_BASE_IMAGE_TAG="latest" >> $BASH_ENV            
+            else 
+              CLIENT_TAG=$(cat /tmp/client-version.txt)
+
+              echo "export CLIENT_BASE_IMAGE_TAG=$CLIENT_TAG-$TAG_TO_BE_E2E" >> $BASH_ENV            
+            fi
+
+            if [ "$SERVER_AFFECTED" = "false" ]; then
+              echo "export SERVER_IMAGE_TAG=$SERVER_TAG-$TAG_TO_BE_E2E" >> $BASH_ENV
+            else 
+              SERVER_TAG=$(cat /tmp/server-version.txt)
+
+              echo "export SERVER_IMAGE_TAG=$SERVER_TAG-$TAG_TO_BE_E2E" >> $BASH_ENV
+            fi
+
+      - run:
+          name: Setup job environment variables
           command: |
             CLIENT_TAG=$(cat /tmp/client-version.txt)
-            SERVER_TAG=$(cat /tmp/server-version.txt)
-
-            echo "export CLIENT_BASE_IMAGE_TAG=$CLIENT_TAG-$TAG_TO_BE_E2E" >> $BASH_ENV
-            echo "export SERVER_IMAGE_TAG=$SERVER_TAG-$TAG_TO_BE_E2E" >> $BASH_ENV
-
             echo "export CLIENT_TAG_E2E_TESTED=$CLIENT_TAG-$TAG_E2E_TESTED" >> $BASH_ENV
+            
+            SERVER_TAG=$(cat /tmp/server-version.txt)
             echo "export SERVER_TAG_E2E_TESTED=$SERVER_TAG-$TAG_E2E_TESTED" >> $BASH_ENV
             
       - run: sudo curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
       - run: sudo chmod +x /usr/local/bin/docker-compose
       - run: docker login $IMAGE_REPOSITORY -u $DOCKER_USER -p $DOCKER_PASSWORD
       - run: npm run start:e2e-environment-build-server
+      
       - run: 
-          name: Retag tested images
+          name: Retag tested client image
           command: | 
             docker tag $CLIENT_BASE_IMAGE_NAME:$CLIENT_BASE_IMAGE_TAG $IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME:$CLIENT_TAG_E2E_TESTED
-            docker tag $SERVER_IMAGE_NAME:$SERVER_IMAGE_TAG $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG_E2E_TESTED
-           
+
       - run: 
-          name: Push retagged images
+          name: Retag tested server image
+          command: | 
+            docker tag $SERVER_IMAGE_NAME:$SERVER_IMAGE_TAG $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG_E2E_TESTED
+            
+      - run: 
+          name: Push retagged client image
           command: | 
             docker push $IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME:$CLIENT_TAG_E2E_TESTED
+      
+      - run: 
+          name: Push retagged server image
+          command: | 
             docker push $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG_E2E_TESTED
 
   rebuild-client-base:
