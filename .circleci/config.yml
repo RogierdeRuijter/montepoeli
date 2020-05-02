@@ -70,7 +70,7 @@ jobs:
 
   save-affected-apps-as-artifacts:
     docker:
-      - image: node:13-slim
+      - image: tjokvol/node:13-luna
 
     working_directory: ~/repo
     steps:
@@ -85,7 +85,7 @@ jobs:
       - run:
           name: Install node modules
           command: |            
-            npm install
+            npm install @nrwl/workspace
     
       # - save_cache:
       #     paths:
@@ -97,7 +97,7 @@ jobs:
           command: |
             FILENAME="/tmp/client-affected.txt"
             
-            apt-get update && apt-get install git -y
+            # apt-get update && apt-get install git -y
 
             # npm run lint:api
             # git branch --show-current
