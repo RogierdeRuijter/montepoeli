@@ -97,7 +97,7 @@ jobs:
           command: |
             FILENAME="/tmp/client-affected.txt"
             
-            apt-get update && apt-get install git -y
+            # apt-get update && apt-get install git -y
 
             # npm run lint:api
             # git branch --show-current
