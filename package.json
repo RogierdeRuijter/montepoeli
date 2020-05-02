@@ -28,7 +28,6 @@
     "docker-compose-rebuild": "docker-compose build --parallel && docker-compose down && docker-compose up -d",
     "docker-compose-rebuild-no-cache": "docker-compose build --no-cache && docker-compose down && docker-compose up -d",
     "update-with-master": "CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD) && git checkout master && git pull && git checkout $CURRENT_BRANCH && git merge master",
-    "nx": "nx",
     "build": "ng build",
     "build:client": "ng build client",
     "build:client:prod": "ng build client --configuration=production && gzipper --verbose ./dist",
