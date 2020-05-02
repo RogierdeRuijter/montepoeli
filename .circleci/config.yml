@@ -95,19 +95,6 @@ jobs:
           command: |
             FILENAME="/tmp/client-affected.txt"
             
-            # apt-get update && apt-get install git -y
-
-            # npm run lint:api
-            # git branch --show-current
-            git version
-
-            # git log -n 1
-            # git branch --show-current
-
-            # npm run affected:lint
-            npm run affected:apps
-            # nx affected:apps 
-            # nx affected:apps | grep client
             if [[ $( npm run affected:apps | grep client) != "" ]]; then
               echo true > $FILENAME
               echo true
