@@ -70,7 +70,7 @@ jobs:
 
   save-affected-apps-as-artifacts:
     docker:
-      - image: tjokvol/node:13-luna
+      - image: node:13-slim
 
     working_directory: ~/repo
     steps:
