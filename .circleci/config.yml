@@ -94,15 +94,15 @@ jobs:
               CLIENT_AND_SERVER_AFFECTED=false
             fi
             
-            curl -u $CIRCLECI_TOKEN: -X POST --header "Content-Type: application/json" -d '{
-              "branch": "'"$CIRCLE_BRANCH"'",
-              "parameters": {
-                "affected-undetermined": false,
-                "client-and-server-affected": \"$CLIENT_AND_SERVER_AFFECTED\",
-                "client-affected": \"$CLIENT_AFFECTED\",
-                "server-affected": \"$SERVER_AFFECTED\"
+            curl -u $CIRCLECI_TOKEN: -X POST --header "Content-Type: application/json" -d "{
+              \"branch\": \"$CIRCLE_BRANCH\",
+              \"parameters\": {
+                \"affected-undetermined\": false,
+                \"client-and-server-affected\": \"$CLIENT_AND_SERVER_AFFECTED\",
+                \"client-affected\": \"$CLIENT_AFFECTED\",
+                \"server-affected\": \"$SERVER_AFFECTED\"
               }
-            }' https://circleci.com/api/v2/project/github/RogierdeRuijter/montepoeli/pipeline
+            }" https://circleci.com/api/v2/project/github/RogierdeRuijter/montepoeli/pipeline
 
             # curl -u $CIRCLECI_TOKEN: -X POST --header "Content-Type: application/json"  -d '{
             #   "branch": "feature/nx-setup" 
