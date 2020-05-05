@@ -9,6 +9,9 @@ parameters:
   server-image-name:
     type: string
     default: "montepouli-server"
+  project-slug:
+    type: string
+    default: "github/RogierdeRuijter/montepoeli"
   tag-to-be-e2e:
     type: string
     default: "to_be_e2e"  
@@ -24,8 +27,83 @@ parameters:
   production-client-environment-variables:
     type: string
     default: "server"
+  affected-undetermined:
+    type: boolean
+    default: true
+  client-affected:
+    type: boolean
+    default: false
+  server-affected:
+    type: boolean
+    default: false
+  client-and-server-affected:
+    type: boolean
+    default: false
       
 jobs:
+  determine-affected-apps:
+    docker:
+      - image: tjokvol/node:13-luna
+
+    working_directory: ~/repo
+    steps:
+      - checkout
+            
+      - restore_cache:
+          keys:
+          - v2-nrwl-workspace-9.2.2
+
+      - run:
+          name: Install node modules
+          command: |            
+            npm install @nrwl/workspace@9.2.2
+    
+      - save_cache:
+          paths:
+          - node_modules
+          key: v2-nrwl-workspace-9.2.2
+
+      - run:
+          name: Save to the environment variable if the client is affected
+          command: |
+            FILENAME="/tmp/client-affected.txt"
+            
+            if [[ $( npm run affected:apps | grep client) != "" ]]; then
+              echo "export CLIENT_AFFECTED=true" >> $BASH_ENV
+            else
+              echo "export CLIENT_AFFECTED=false" >> $BASH_ENV
+            fi
+         
+      - run:
+          name: Save to the environment variable if the server is affected
+          command: |
+            if [[ $( npm run affected:apps | grep api) != "" ]]; then
+              echo "export SERVER_AFFECTED=true" >> $BASH_ENV
+            else
+              echo "export SERVER_AFFECTED=false" >> $BASH_ENV
+            fi
+      
+      - run:
+          name: Determine which data to use to call the endpoint
+          command: |            
+            if [ $CLIENT_AFFECTED == true ] && [ $SERVER_AFFECTED == true ]; then
+              CLIENT_AND_SERVER_AFFECTED=true
+              CLIENT_AFFECTED=false
+              SERVER_AFFECTED=false
+            else
+              CLIENT_AND_SERVER_AFFECTED=false
+            fi
+
+            curl -u $CIRCLECI_TOKEN: -X POST --header "Content-Type: application/json" -d '{
+              "branch": "$CIRCLE_BRANCH",
+              "parameters": {
+                "affected-undetermined": "false",
+                "client-and-server-affected": "$CLIENT_AND_SERVER_AFFECTED",
+                "client-affected": "$CLIENT_AFFECTED",
+                "server-affected": "$SERVER_AFFECTED"
+              }
+            }' https://circleci.com/api/v2/project/${project-slug}/pipeline
+
   save-docker-tags-as-artifacts:
     docker:
       - image: << pipeline.parameters.default-build-context >>
@@ -67,65 +145,6 @@ jobs:
           paths:
             - client-version.txt
             - server-version.txt
-
-  save-affected-apps-as-artifacts:
-    docker:
-      - image: tjokvol/node:13-luna
-
-    working_directory: ~/repo
-    steps:
-      - checkout
-            
-      - restore_cache:
-          keys:
-          - v2-nrwl-workspace-9.2.2
-
-      - run:
-          name: Install node modules
-          command: |            
-            npm install @nrwl/workspace@9.2.2
-    
-      - save_cache:
-          paths:
-          - node_modules
-          key: v2-nrwl-workspace-9.2.2
-
-      - run:
-          name: Save to the environment if the client is affected
-          command: |
-            FILENAME="/tmp/client-affected.txt"
-            
-            if [[ $( npm run affected:apps | grep client) != "" ]]; then
-              echo true > $FILENAME
-              echo true
-            else
-              echo false > $FILENAME
-              echo false
-            fi
-         
-      - run:
-          name: Save to the environment if the server is affected
-          command: |
-            FILENAME="/tmp/server-affected.txt"
-            if [[ $( npm run affected:apps | grep api) != "" ]]; then
-              echo true > $FILENAME
-              echo true
-            else
-              echo false > $FILENAME
-              echo false
-            fi
-
-      - store_artifacts:
-          path: /tmp/client-affected.txt
-          
-      - store_artifacts:
-          path: /tmp/server-affected.txt
-
-      - persist_to_workspace:
-          root: /tmp
-          paths:
-            - client-affected.txt
-            - server-affected.txt
 
   build-client-base:
     docker:
@@ -592,20 +611,29 @@ jobs:
 
 workflows:
   version: 2
-  build_and_test:
+  determine:
+    when: << pipeline.parameters.affected-undetermined >>
+    jobs:
+      - determine-affected-apps
+
+  # client:
+  #   when: << pipeline.parameters.client_affected >>
+
+  # server:
+  #   when: << pipeline.parameters.server_affected >>
+  
+  client_and_server:
+    when: << pipeline.parameters.client-and-server-affected >>
     jobs:
       - save-docker-tags-as-artifacts
-      - save-affected-apps-as-artifacts
 
       - build-client-base:
           requires:
             - save-docker-tags-as-artifacts
-            - save-affected-apps-as-artifacts
 
       - build-server:
           requires:
             - save-docker-tags-as-artifacts
-            - save-affected-apps-as-artifacts
       
       - make-client-image-e2e-test-ready:
           requires:
