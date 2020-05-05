@@ -598,7 +598,7 @@ jobs:
 
 workflows:
   version: 2
-  determine:
+  determine_workflow:
     when: << pipeline.parameters.affected-undetermined >>
     jobs:
       - determine-affected-apps
