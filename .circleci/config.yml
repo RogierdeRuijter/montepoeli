@@ -271,15 +271,6 @@ jobs:
           at: /tmp
 
       - run:
-          name: Silently cancel step if client is not affected
-          command: |
-            CLIENT_AFFECTED=$(cat /tmp/client-affected.txt)
-            
-            if [ "$CLIENT_AFFECTED" = "false" ]; then
-              circleci-agent step halt
-            fi 
-
-      - run:
           name: Setup Tag Environment Variables
           command: |
             echo "export CLIENT_TAG=$(cat /tmp/client-version.txt)" >> $BASH_ENV
@@ -320,15 +311,6 @@ jobs:
 
       - attach_workspace:
           at: /tmp
-  
-      - run:
-          name: Silently cancel step if server is not affected
-          command: |
-            SERVER_AFFECTED=$(cat /tmp/server-affected.txt)
-            
-            if [ "$SERVER_AFFECTED" = "false" ]; then
-              circleci-agent step halt
-            fi 
     
       - run:
           name: Setup tag Environment Variables
