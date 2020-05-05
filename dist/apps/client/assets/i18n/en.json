@@ -1,0 +1,58 @@
+{ 
+  "app": {
+    "title": "Montepoeli",
+    "footer": {
+      "part1": "Powered with",
+      "part2": "by Dacia"
+    }
+  },
+  "pages": {
+    "login": {
+      "username": "Username",
+      "password": "Password",
+      "do_login": "Login"
+    },
+    "home": {
+      "games": {
+        "tooltip": "Games",
+        "pop-up": {
+          "title": "Enter match result"
+        },
+        "labels": {
+          "white": "White",
+          "black": "Black",
+          "winner": "Winner",
+          "draw": "Draw"
+        }
+      },
+      "rules": {
+        "tooltip": "Rules"
+      }
+    }
+  },
+  "buttons": {
+    "cancel": "Cancel",
+    "save": "Save"
+  },
+  "warnings": {
+    "incorrect_credentials": {
+      "title": "Login Error",
+      "body": "Your username or password is incorrect"
+    },
+    "not_authorized": {
+      "title": "Navigation error",
+      "body": "You're not allowed to see this route"
+    }
+  },
+  "info": {
+    "no-valid-session": {
+      "body": "You have to login again"
+    },
+    "language-changed": {
+      "english": "Language changed to English."
+    }
+  },
+  "user-actions": {
+    "logout": "Logout"
+  }
+}

@@ -172,8 +172,8 @@ jobs:
       - deploy:
           command: |
             docker push $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG
-
-  make-images-e2e-test-ready:
+  
+  make-client-image-e2e-test-ready:
     docker:
       - image: << pipeline.parameters.default-build-context >>
 
@@ -188,6 +188,7 @@ jobs:
     steps:
       - checkout:
           path: ~/repo
+      
       - setup_remote_docker
 
       - attach_workspace:
@@ -197,12 +198,9 @@ jobs:
           name: Setup Environment Variables
           command: |
             echo "export CLIENT_TAG=$(cat /tmp/client-version.txt)" >> $BASH_ENV
-            echo "export SERVER_TAG=$(cat /tmp/server-version.txt)" >> $BASH_ENV
 
             CLIENT_TAG=$(cat /tmp/client-version.txt)
-            SERVER_TAG=$(cat /tmp/server-version.txt)
             echo "export CLIENT_TAG_TO_BE_E2E=$CLIENT_TAG-$TAG_TO_BE_E2E" >> $BASH_ENV
-            echo "export SERVER_TAG_TO_BE_E2E=$SERVER_TAG-$TAG_TO_BE_E2E" >> $BASH_ENV
 
       - run:
           name: Log into the image repository
@@ -214,6 +212,45 @@ jobs:
           command: |
             docker build -f Dockerfile.configured . -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG_TO_BE_E2E --build-arg CLIENT_BASE_IMAGE_NAME=$IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME --build-arg CLIENT_BASE_IMAGE_TAG=$CLIENT_TAG --build-arg CLIENT_TYPE=$CLIENT_TYPE
 
+      - deploy: 
+          name: Push e2e ready client image  
+          command: |
+            docker push $IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME:$CLIENT_TAG_TO_BE_E2E
+
+  make-server-image-e2e-test-ready:  
+    docker:
+      - image: << pipeline.parameters.default-build-context >>
+
+    environment:
+      - IMAGE_REPOSITORY: << pipeline.parameters.image-repository >>
+      - IMAGE_CLIENT_NAME: << pipeline.parameters.client-image-name >>
+      - IMAGE_SERVER_NAME: << pipeline.parameters.server-image-name >>
+      - TAG_TO_BE_E2E: << pipeline.parameters.tag-to-be-e2e >>
+      - CLIENT_TYPE: << pipeline.parameters.e2e-client-environment-variables >>
+
+    working_directory: ~/repo/client
+    steps:
+      - checkout:
+          path: ~/repo
+
+      - setup_remote_docker
+
+      - attach_workspace:
+          at: /tmp
+
+      - run:
+          name: Setup Environment Variables
+          command: |
+            echo "export SERVER_TAG=$(cat /tmp/server-version.txt)" >> $BASH_ENV
+
+            SERVER_TAG=$(cat /tmp/server-version.txt)
+            echo "export SERVER_TAG_TO_BE_E2E=$SERVER_TAG-$TAG_TO_BE_E2E" >> $BASH_ENV
+
+      - run:
+          name: Log into the image repository
+          command: |
+            docker login $IMAGE_REPOSITORY -u $DOCKER_USER -p $DOCKER_PASSWORD
+
       - run:
           name: Fetch and Retag server image with to be e2e tag
           command: |
@@ -221,9 +258,8 @@ jobs:
             docker tag $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG_TO_BE_E2E
 
       - deploy: 
-          name: Push e2e ready client and server images  
+          name: Push e2e ready server image
           command: |
-            docker push $IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME:$CLIENT_TAG_TO_BE_E2E
             docker push $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG_TO_BE_E2E
 
   e2e-tests:
@@ -438,7 +474,7 @@ jobs:
 
 workflows:
   version: 2
-  build_and_test:
+  client_and_server:
     jobs:
       - save-docker-tags-as-artifacts
 
@@ -449,8 +485,8 @@ workflows:
       - build-server:
           requires:
             - save-docker-tags-as-artifacts
-      
-      - make-images-e2e-test-ready:
+
+      - make-client-image-e2e-test-ready:
           requires:
             - build-client-base
           filters:
@@ -460,10 +496,20 @@ workflows:
                 - /depfu.*/
                 - /dependabot.*/
 
+      - make-server-image-e2e-test-ready:
+          requires:
+            - build-server
+          filters:
+            branches:
+              only: 
+                - master
+                - /depfu.*/
+                - /dependabot.*/
+
       - e2e-tests:
           requires:
-            - make-images-e2e-test-ready
-            - build-server
+            - make-client-image-e2e-test-ready
+            - make-server-image-e2e-test-ready
           filters:
             branches:
               only: 
@@ -475,9 +521,9 @@ workflows:
             requires:
               - e2e-tests
             filters:
-                branches:
-                  only: 
-                    - /depfu/batch_all/client.*/
+              branches:
+                only: 
+                  - /depfu/batch_all/client.*/
 
       - update-version:
           requires:
@@ -487,7 +533,6 @@ workflows:
               only: 
                 - master
                 - /([0-9])+?(\.([0-9])+)\.x/
-
 
       - save-new-version:
           requires:
