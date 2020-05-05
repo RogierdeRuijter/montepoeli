@@ -43,25 +43,25 @@ parameters:
 jobs:
   determine-affected-apps:
     docker:
-      - image: tjokvol/node:13-luna
+      - image: tjokvol/node:13-luna-nx
 
     working_directory: ~/repo
     steps:
       - checkout
             
-      - restore_cache:
-          keys:
-          - v2-nrwl-workspace-9.2.2
+      # - restore_cache:
+      #     keys:
+      #     - v2-nrwl-workspace-9.2.2
 
-      - run:
-          name: Install node modules
-          command: |            
-            npm install @nrwl/workspace@9.2.2
+      # - run:
+      #     name: Install node modules
+      #     command: |            
+      #       npm install @nrwl/workspace@9.2.2
     
-      - save_cache:
-          paths:
-          - node_modules
-          key: v2-nrwl-workspace-9.2.2
+      # - save_cache:
+      #     paths:
+      #     - node_modules
+      #     key: v2-nrwl-workspace-9.2.2
 
       - run:
           name: Save to the environment variable if the client is affected
@@ -94,15 +94,19 @@ jobs:
               CLIENT_AND_SERVER_AFFECTED=false
             fi
 
-            curl -u $CIRCLECI_TOKEN: -X POST --header "Content-Type: application/json" -d '{
-              "branch": "$CIRCLE_BRANCH",
-              "parameters": {
-                "affected-undetermined": "false",
-                "client-and-server-affected": "$CLIENT_AND_SERVER_AFFECTED",
-                "client-affected": "$CLIENT_AFFECTED",
-                "server-affected": "$SERVER_AFFECTED"
-              }
-            }' https://circleci.com/api/v2/project/${project-slug}/pipeline
+            # curl -u $CIRCLECI_TOKEN: -X POST --header "Content-Type: application/json" -d '{
+            #   "branch": "$CIRCLE_BRANCH",
+            #   "parameters": {
+            #     "affected-undetermined": "false",
+            #     "client-and-server-affected": "$CLIENT_AND_SERVER_AFFECTED",
+            #     "client-affected": "$CLIENT_AFFECTED",
+            #     "server-affected": "$SERVER_AFFECTED"
+            #   }
+            # }' https://circleci.com/api/v2/project/${project-slug}/pipeline
+
+            curl -u $CIRCLECI_TOKEN: -X POST --header "Content-Type: application/json"  -d '{
+              "branch": "feature/nx-setup" 
+            }' https://circleci.com/api/v2/project/github/RogierdeRuijter/montepoeli/pipeline
 
   save-docker-tags-as-artifacts:
     docker:
