@@ -43,25 +43,25 @@ parameters:
 jobs:
   determine-affected-apps:
     docker:
-      - image: tjokvol/node:13-luna-nx
+      - image: tjokvol/node:13-luna
 
     working_directory: ~/repo
     steps:
       - checkout
             
-      # - restore_cache:
-      #     keys:
-      #     - v2-nrwl-workspace-9.2.2
+      - restore_cache:
+          keys:
+          - v2-nrwl-workspace-9.2.2
 
-      # - run:
-      #     name: Install node modules
-      #     command: |            
-      #       npm install @nrwl/workspace@9.2.2
+      - run:
+          name: Install node modules
+          command: |            
+            npm install @nrwl/workspace@9.2.2
     
-      # - save_cache:
-      #     paths:
-      #     - node_modules
-      #     key: v2-nrwl-workspace-9.2.2
+      - save_cache:
+          paths:
+          - node_modules
+          key: v2-nrwl-workspace-9.2.2
 
       - run:
           name: Save to the environment variable if the client is affected
