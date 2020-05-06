@@ -164,10 +164,6 @@ jobs:
               }
             }' https://circleci.com/api/v2/project/github/RogierdeRuijter/montepoeli/pipeline
 
-            # curl -u $CIRCLECI_TOKEN: -X POST --header "Content-Type: application/json"  -d '{
-            #   "branch": "feature/nx-setup" 
-            # }' https://circleci.com/api/v2/project/github/RogierdeRuijter/montepoeli/pipeline
-
   build-client-base:
     docker:
       - image: << pipeline.parameters.default-build-context >>
