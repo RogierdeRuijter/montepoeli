@@ -30,6 +30,12 @@ parameters:
   server-image-tag:
     type: string
     default: ""
+  client-tag-to-be-e2e-tested:
+    type: string
+    default: ""
+  server-tag-to-be-e2e-tested:
+    type: string
+    default: ""
   client-tag-e2e-tested:
     type: string
     default: ""
@@ -159,6 +165,8 @@ jobs:
                 "server-tag": "'"$SERVER_TAG"'",
                 "client-base-image-tag": "'"$CLIENT_BASE_IMAGE_TAG"'",
                 "server-image-tag": "'"$SERVER_IMAGE_TAG"'",
+                "client-tag-to-be-e2e-tested": "'"$CLIENT_BASE_IMAGE_TAG"'",
+                "server-tag-to-be-e2e-tested": "'"$SERVER_IMAGE_TAG"'",
                 "client-tag-e2e-tested": "'"$CLIENT_TAG_E2E_TESTED"'",
                 "server-tag-e2e-tested": "'"$SERVER_TAG_E2E_TESTED"'"
               }
@@ -266,6 +274,9 @@ jobs:
       - IMAGE_CLIENT_NAME: << pipeline.parameters.client-image-name >>
       - TAG_TO_BE_E2E: << pipeline.parameters.tag-to-be-e2e >>
       - CLIENT_TYPE: << pipeline.parameters.e2e-client-environment-variables >>
+      - CLIENT_TAG: << pipeline.parameters.client-tag >>
+      - CLIENT_TAG_TO_BE_E2E: << pipeline.parameters.client-tag-to-be-e2e-tested >> 
+
 
     working_directory: ~/repo/client
     steps:
@@ -275,15 +286,6 @@ jobs:
 
       - attach_workspace:
           at: /tmp
-
-      - run:
-          name: Setup Tag Environment Variables
-          command: |
-            echo "export CLIENT_TAG=$(cat /tmp/client-version.txt)" >> $BASH_ENV
-
-            CLIENT_TAG=$(cat /tmp/client-version.txt)
-
-            echo "export CLIENT_TAG_TO_BE_E2E=$CLIENT_TAG-$TAG_TO_BE_E2E" >> $BASH_ENV
 
       - run:
           name: Log into the image repository
@@ -308,6 +310,8 @@ jobs:
       - IMAGE_REPOSITORY: << pipeline.parameters.image-repository >>
       - IMAGE_SERVER_NAME: << pipeline.parameters.server-image-name >>
       - TAG_TO_BE_E2E: << pipeline.parameters.tag-to-be-e2e >>
+      - SERVER_TAG: << pipeline.parameters.client-tag >>
+      - SERVER_TAG_TO_BE_E2E: << pipeline.parameters.client-tag-to-be-e2e-tested >>
 
     working_directory: ~/repo/client
     steps:
@@ -318,14 +322,6 @@ jobs:
       - attach_workspace:
           at: /tmp
     
-      - run:
-          name: Setup tag Environment Variables
-          command: |
-            echo "export SERVER_TAG=$(cat /tmp/server-version.txt)" >> $BASH_ENV
-
-            SERVER_TAG=$(cat /tmp/server-version.txt)
-            echo "export SERVER_TAG_TO_BE_E2E=$SERVER_TAG-$TAG_TO_BE_E2E" >> $BASH_ENV
-
       - run:
           name: Log into the image repository
           command: |
@@ -352,6 +348,10 @@ jobs:
       - SERVER_IMAGE_NAME: montepoeli.club/<< pipeline.parameters.server-image-name >>
       - IMAGE_CLIENT_NAME: << pipeline.parameters.client-image-name >>
       - IMAGE_SERVER_NAME: << pipeline.parameters.server-image-name >>
+      - CLIENT_BASE_IMAGE_TAG: << pipeline.parameters.client-base-image-tag >>
+      - SERVER_IMAGE_TAG: << pipeline.parameters.server-image-tag >>
+      - CLIENT_TAG_E2E_TESTED: << pipeline.parameters.client-tag-e2e-tested >>
+      - SERVER_TAG_E2E_TESTED: << pipeline.parameters.server-tag-e2e-tested >>
 
     steps:
       - checkout
@@ -384,8 +384,7 @@ jobs:
                 name: Retag tested server image
                 command: | 
                   docker tag $SERVER_IMAGE_NAME:$SERVER_IMAGE_TAG $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG_E2E_TESTED
-                  
-            
+
             - run: 
                 name: Push retagged server image
                 command: | 
@@ -679,33 +678,33 @@ workflows:
       - make-client-image-e2e-test-ready:
           requires:
             - build-client-base
-          filters:
-            branches:
-              only: 
-                - master
-                - /depfu.*/
-                - /dependabot.*/
+          # filters:
+          #   branches:
+          #     only: 
+          #       - master
+          #       - /depfu.*/
+          #       - /dependabot.*/
 
       - make-server-image-e2e-test-ready:
           requires:
             - build-server
-          filters:
-            branches:
-              only: 
-                - master
-                - /depfu.*/
-                - /dependabot.*/
+          # filters:
+          #   branches:
+          #     only: 
+          #       - master
+          #       - /depfu.*/
+          #       - /dependabot.*/
 
       - e2e-tests:
           requires:
             - make-client-image-e2e-test-ready
             - make-server-image-e2e-test-ready
-          filters:
-            branches:
-              only: 
-                - master
-                - /depfu.*/
-                - /dependabot.*/
+          # filters:
+          #   branches:
+          #     only: 
+          #       - master
+          #       - /depfu.*/
+          #       - /dependabot.*/
 
       - rebuild-client-base:
             requires:
