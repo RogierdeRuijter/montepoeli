@@ -1,16 +1,7 @@
-FROM damilolasodiq/docker-node-ssh:latest
+FROM tjokvol/node:13-luna
 
 WORKDIR /usr/src/app
 
-COPY . .
+COPY package.json package.json
 
-RUN npm install
-
-# RUN apt-get update && apt-get -y upgrade && apt-get -y install python3 make g++
-
-RUN apt-get update && apt-get install git -y
-
-RUN npm run affected:apps
-
-RUN npm run affected:apps
-
+RUN npm install @nrwl/workspace@9.2.2
