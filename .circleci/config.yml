@@ -67,7 +67,7 @@ parameters:
 jobs:
   determine-affected-apps:
     docker:
-      - image: tjokvol/node-nx
+      - image: tjokvol/node:13-luna
     environment:
       - TAG_TO_BE_E2E: << pipeline.parameters.tag-to-be-e2e >>
       - TAG_E2E_TESTED: << pipeline.parameters.tag-e2e >>
@@ -76,19 +76,19 @@ jobs:
     steps:
       - checkout
             
-      # - restore_cache:
-      #     keys:
-      #     - v2-nrwl-workspace-9.2.2
+      - restore_cache:
+          keys:
+          - v2-nrwl-workspace-9.2.2
 
-      # - run:
-      #     name: Install node modules
-      #     command: |            
-      #       npm install @nrwl/workspace@9.2.2
+      - run:
+          name: Install node modules
+          command: |            
+            npm install @nrwl/workspace@9.2.2
     
-      # - save_cache:
-      #     paths:
-      #     - node_modules
-      #     key: v2-nrwl-workspace-9.2.2
+      - save_cache:
+          paths:
+          - node_modules
+          key: v2-nrwl-workspace-9.2.2
 
       - run:
           name: Save to the environment variable if the client is affected
@@ -378,7 +378,7 @@ jobs:
             # - SERVER_IMAGE_NAME
             # - CLIENT_BASE_IMAGE_TAG
             # - SERVER_IMAGE_TAG
-
+            
             npm run docker:start:e2e-environment-build-server
       
       - when:
