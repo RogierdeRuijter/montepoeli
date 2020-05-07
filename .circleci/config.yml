@@ -278,7 +278,7 @@ jobs:
       - CLIENT_TAG_TO_BE_E2E: << pipeline.parameters.client-tag-to-be-e2e-tested >> 
 
 
-    working_directory: ~/repo/client
+    working_directory: ~/repo
     steps:
       - checkout:
           path: ~/repo
@@ -295,7 +295,7 @@ jobs:
       - run:
           name: Insert e2e dynamic environment varibles in client image
           command: |
-            docker build -f Dockerfile.configured . -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG_TO_BE_E2E --build-arg CLIENT_BASE_IMAGE_NAME=$IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME --build-arg CLIENT_BASE_IMAGE_TAG=$CLIENT_TAG --build-arg CLIENT_TYPE=$CLIENT_TYPE
+            docker build -f Dockerfile.client-configured . -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG_TO_BE_E2E --build-arg CLIENT_BASE_IMAGE_NAME=$IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME --build-arg CLIENT_BASE_IMAGE_TAG=$CLIENT_TAG --build-arg CLIENT_TYPE=$CLIENT_TYPE
 
       - deploy: 
           name: Push e2e ready client image
@@ -313,7 +313,7 @@ jobs:
       - SERVER_TAG: << pipeline.parameters.client-tag >>
       - SERVER_TAG_TO_BE_E2E: << pipeline.parameters.client-tag-to-be-e2e-tested >>
 
-    working_directory: ~/repo/client
+    working_directory: ~/repo
     steps:
       - checkout:
           path: ~/repo
@@ -399,7 +399,7 @@ jobs:
       - CLIENT_BASE_IMAGE: montepoeli-client-base-node-modules
       - TAG: "latest"
     
-    working_directory: ~/repo/client
+    working_directory: ~/repo
     steps:
       - checkout:
           path: ~/repo
