@@ -376,8 +376,9 @@ jobs:
             
             npm run docker:start:e2e-environment-build-server
       
+      # TODO: these steps are not run 
       - when:
-          condition: <<pipeline.parameters.client-affected>>
+          condition: << pipeline.parameters.client-affected >>
           steps:
             - run: 
                 name: Retag and push tested client image
@@ -390,7 +391,7 @@ jobs:
                 docker push $IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME:$CLIENT_TAG_E2E_TESTED
 
       - when:
-          condition: <<pipeline.parameters.server-affected>>
+          condition: << pipeline.parameters.server-affected >>
           steps:        
             - run: 
                 name: Retag tested server image
@@ -522,7 +523,7 @@ jobs:
       - run:
           name: Insert production environment configurations
           command: |
-            docker build -f Dockerfile.configured -t $IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME:$CLIENT_TAG_PRODUCTION . --build-arg CLIENT_BASE_IMAGE_NAME=$IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME --build-arg CLIENT_BASE_IMAGE_TAG=$CLIENT_TAG_E2E_TESTED --build-arg CLIENT_TYPE=$CLIENT_TYPE
+            docker build -f Dockerfile.client-configured -t $IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME:$CLIENT_TAG_PRODUCTION . --build-arg CLIENT_BASE_IMAGE_NAME=$IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME --build-arg CLIENT_BASE_IMAGE_TAG=$CLIENT_TAG_E2E_TESTED --build-arg CLIENT_TYPE=$CLIENT_TYPE
 
       - deploy:
           name: Push configured image to registry
