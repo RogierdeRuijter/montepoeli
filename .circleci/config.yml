@@ -384,6 +384,7 @@ jobs:
       - run: 
           name: Install docker compose
           command: sudo curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+      
       - run: 
           name: Make docker compose executable ?
           command: sudo chmod +x /usr/local/bin/docker-compose
@@ -391,6 +392,10 @@ jobs:
       - run: 
           name: Log into docker registry
           command: docker login $IMAGE_REPOSITORY -u $DOCKER_USER -p $DOCKER_PASSWORD
+
+      - run: 
+          name: Install npm run all
+          command: npm install npm-run-all
       
       - run: 
           name: Run e2e tests
