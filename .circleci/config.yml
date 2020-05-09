@@ -106,7 +106,6 @@ jobs:
                 echo "export CLIENT_AFFECTED=false" >> $BASH_ENV
               fi
             fi
-
             echo $CLIENT_AFFECTED
          
       - run:
