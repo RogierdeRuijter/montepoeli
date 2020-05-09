@@ -520,18 +520,22 @@ jobs:
             echo "export CLIENT_TAG_PRODUCTION=$(cat /tmp/version-updated.txt)" >> $BASH_ENV
 
       - run:
+          name: Login to docker registry
           command: |
             docker login $IMAGE_REPOSITORY -u $DOCKER_USER -p $DOCKER_PASSWORD
 
       - run:
+          name: Insert production environment configurations
           command: |
             docker build -f Dockerfile.configured -t $IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME:$CLIENT_TAG_PRODUCTION . --build-arg CLIENT_BASE_IMAGE_NAME=$IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME --build-arg CLIENT_BASE_IMAGE_TAG=$CLIENT_TAG_E2E_TESTED --build-arg CLIENT_TYPE=$CLIENT_TYPE
 
       - deploy:
+          name: Push configured image to registry
           command: |
             docker push $IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME:$CLIENT_TAG_PRODUCTION
       
       - deploy:
+          name: Tag image with latest and push to registry
           command: |
             docker tag $IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME:$CLIENT_TAG_PRODUCTION $IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME:latest
             docker push $IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME:latest
