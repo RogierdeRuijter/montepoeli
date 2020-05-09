@@ -6,7 +6,7 @@
   "scripts": {
     "get-v": "grep '\"version\":' package.json | cut -d\\\" -f4",
     "install-sub-modules": "lerna run install-node-modules --parallel",
-    "install-node-modules": "yarn install",
+    "install-node-modules": "npm install",
     "docker:build:client": "docker build . -t montepouli_client:latest -f Dockerfile.client-prod --pull",
     "docker:build:e2e-client": "docker build -f Dockerfile.client-configured . -t montepouli_client:e2e --build-arg CLIENT_BASE_IMAGE_NAME=montepouli_client --build-arg CLIENT_BASE_IMAGE_TAG=latest --build-arg CLIENT_TYPE=e2e",
     "docker:build:server": "docker build . -t montepouli_server:latest -f Dockerfile.server-prod --pull",
