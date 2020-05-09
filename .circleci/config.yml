@@ -352,7 +352,7 @@ jobs:
 
   e2e-tests:
     machine:
-      image: circleci/classic:201808-01
+      image: ubuntu-1604:201903-01
     working_directory: ~/repo
     parameters:
       client-affected:
@@ -381,13 +381,13 @@ jobs:
       - attach_workspace:
           at: /tmp
 
-      - run: 
-          name: Install docker compose
-          command: sudo curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+      # - run: 
+      #     name: Install docker compose
+      #     command: sudo curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
       
-      - run: 
-          name: Make docker compose executable ?
-          command: sudo chmod +x /usr/local/bin/docker-compose
+      # - run: 
+      #     name: Make docker compose executable ?
+      #     command: sudo chmod +x /usr/local/bin/docker-compose
       
       - run: 
           name: Log into docker registry
@@ -395,7 +395,7 @@ jobs:
 
       - run: 
           name: Install npm run all
-          command: npm install npm-run-all
+          command: npm install npm-run-all -g
       
       - run: 
           name: Run e2e tests
