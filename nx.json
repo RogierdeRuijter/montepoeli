@@ -9,7 +9,7 @@
     "tsconfig.json": "*",
     "tslint.json": "*",
     "nx.json": "*",
-    "./circleci/config.yml": "*"
+    ".circleci/config.yml": "*"
   },
   "projects": {
     "client": {
