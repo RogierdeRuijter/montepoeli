@@ -372,6 +372,8 @@ jobs:
       - SERVER_IMAGE_TAG: << pipeline.parameters.server-image-tag >>
       - CLIENT_TAG_E2E_TESTED: << pipeline.parameters.client-tag-e2e-tested >>
       - SERVER_TAG_E2E_TESTED: << pipeline.parameters.server-tag-e2e-tested >>
+      - CLIENT_AFFECTED: << pipeline.parameters.client-affected >>
+      - SERVER_AFFECTED: << pipeline.parameters.server-affected >>
 
     steps:
       - checkout
@@ -402,31 +404,21 @@ jobs:
             npm run docker:start:e2e-environment-build-server
       
       # TODO: these steps are not run 
-      - when:
-          condition: << parameters.client-affected >>
-          steps:
-            - run: 
-                name: Retag and push tested client image
-                command: | 
-                  docker tag $CLIENT_BASE_IMAGE_NAME:$CLIENT_BASE_IMAGE_TAG $IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME:$CLIENT_TAG_E2E_TESTED
-            
-            - run: 
-              name: Push retagged client image
-              command: | 
-                docker push $IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME:$CLIENT_TAG_E2E_TESTED
+      - run: 
+          name: Retag and push tested client image
+          command: |
+            if [[ ${CLIENT_AFFECTED} = true ]]; then
+              docker tag $CLIENT_BASE_IMAGE_NAME:$CLIENT_BASE_IMAGE_TAG $IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME:$CLIENT_TAG_E2E_TESTED
+              docker push $IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME:$CLIENT_TAG_E2E_TESTED
+            fi
 
-      - when:
-          condition: << parameters.server-affected >>
-          steps:        
-            - run: 
-                name: Retag tested server image
-                command: | 
-                  docker tag $SERVER_IMAGE_NAME:$SERVER_IMAGE_TAG $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG_E2E_TESTED
-
-            - run: 
-                name: Push retagged server image
-                command: | 
-                  docker push $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG_E2E_TESTED
+      - run: 
+          name: Retag tested server image
+          command: | 
+            if [[ ${SERVER_AFFECTED} = true ]]; then
+              docker tag $SERVER_IMAGE_NAME:$SERVER_IMAGE_TAG $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG_E2E_TESTED
+              docker push $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG_E2E_TESTED
+            fi
 
   rebuild-client-base:
     docker:
