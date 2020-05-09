@@ -302,46 +302,32 @@ jobs:
           command: |
             docker push $IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME:$CLIENT_TAG_TO_BE_E2E
 
-  make-server-image-e2e-test-ready:  
+  make-server-image-e2e-test-ready:
     docker:
       - image: << pipeline.parameters.default-build-context >>
-
     environment:
       - IMAGE_REPOSITORY: << pipeline.parameters.image-repository >>
-      - IMAGE_CLIENT_NAME: << pipeline.parameters.client-image-name >>
       - IMAGE_SERVER_NAME: << pipeline.parameters.server-image-name >>
       - TAG_TO_BE_E2E: << pipeline.parameters.tag-to-be-e2e >>
-      - CLIENT_TYPE: << pipeline.parameters.e2e-client-environment-variables >>
-
-    working_directory: ~/repo/client
+      - SERVER_TAG: << pipeline.parameters.client-tag >>
+      - SERVER_TAG_TO_BE_E2E: << pipeline.parameters.client-tag-to-be-e2e-tested >>
+      
+    working_directory: ~/repo
     steps:
       - checkout:
           path: ~/repo
-
       - setup_remote_docker
-
       - attach_workspace:
           at: /tmp
-
-      - run:
-          name: Setup Environment Variables
-          command: |
-            echo "export SERVER_TAG=$(cat /tmp/server-version.txt)" >> $BASH_ENV
-
-            SERVER_TAG=$(cat /tmp/server-version.txt)
-            echo "export SERVER_TAG_TO_BE_E2E=$SERVER_TAG-$TAG_TO_BE_E2E" >> $BASH_ENV
-
       - run:
           name: Log into the image repository
           command: |
             docker login $IMAGE_REPOSITORY -u $DOCKER_USER -p $DOCKER_PASSWORD
-
       - run:
           name: Fetch and Retag server image with to be e2e tag
           command: |
             docker pull $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG
             docker tag $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG_TO_BE_E2E
-
       - deploy: 
           name: Push e2e ready server image
           command: |
