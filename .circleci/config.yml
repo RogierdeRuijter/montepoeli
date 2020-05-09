@@ -113,21 +113,20 @@ jobs:
           name: Save to the environment variable if the server is affected
           command: |
 
-          if [[ ${CIRCLE_BRANCH} = "master" ]]; then
-            if [[ $( npm run affected:apps:master | grep api) != "" ]]; then
-              echo "export SERVER_AFFECTED=true" >> $BASH_ENV
+            if [[ ${CIRCLE_BRANCH} = "master" ]]; then
+              if [[ $( npm run affected:apps:master | grep api) != "" ]]; then
+                echo "export SERVER_AFFECTED=true" >> $BASH_ENV
+              else
+                echo "export SERVER_AFFECTED=false" >> $BASH_ENV
+              fi
             else
-              echo "export SERVER_AFFECTED=false" >> $BASH_ENV
-            fi
-          else
-            if [[ $( npm run affected:apps | grep api) != "" ]]; then
-              echo "export SERVER_AFFECTED=true" >> $BASH_ENV
-            else
-              echo "export SERVER_AFFECTED=false" >> $BASH_ENV
-            fi
-          fi
+              if [[ $( npm run affected:apps | grep api) != "" ]]; then
+                echo "export SERVER_AFFECTED=true" >> $BASH_ENV
+              else
+                echo "export SERVER_AFFECTED=false" >> $BASH_ENV
+              fi
 
-          echo $SERVER_AFFECTED
+            echo $SERVER_AFFECTED
 
       - run:
           name: Create client tag and save to environment variable
