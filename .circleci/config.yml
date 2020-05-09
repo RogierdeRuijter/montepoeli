@@ -112,9 +112,7 @@ jobs:
           name: Save to the environment variable if the server is affected
           command: |
             if [[ ${CIRCLE_BRANCH} = "master" ]]; then
-              echo "in master flow"
               if [[ $( npm run affected:apps:master | grep api) != "" ]]; then
-                echo "in server affected master flow"
                 echo "export SERVER_AFFECTED=true" >> $BASH_ENV
               else
                 echo "export SERVER_AFFECTED=false" >> $BASH_ENV
@@ -126,7 +124,6 @@ jobs:
                 echo "export SERVER_AFFECTED=false" >> $BASH_ENV
               fi
             fi     
-            echo $SERVER_AFFECTED
 
       - run:
           name: Create client tag and save to environment variable
@@ -151,7 +148,7 @@ jobs:
 
       - run:
           name: Determine which data to use to call the endpoint
-          command: |            
+          command: |       
             if [ $CLIENT_AFFECTED == true ] && [ $SERVER_AFFECTED == true ]; then
               CLIENT_AND_SERVER_AFFECTED=true
               CLIENT_AFFECTED=false
@@ -174,23 +171,23 @@ jobs:
               SERVER_TAG_E2E_TESTED=$SERVER_TAG-$TAG_E2E_TESTED
             fi
             
-            # curl -u $CIRCLECI_TOKEN: -X POST --header "Content-Type: application/json" -d '{
-            #   "branch": "'"$CIRCLE_BRANCH"'",
-            #   "parameters": {
-            #     "affected-undetermined": false,
-            #     "client-and-server-affected": '$CLIENT_AND_SERVER_AFFECTED',
-            #     "client-affected": '$CLIENT_AFFECTED',
-            #     "server-affected": '$SERVER_AFFECTED',
-            #     "client-tag": "'"$CLIENT_TAG"'",
-            #     "server-tag": "'"$SERVER_TAG"'",
-            #     "client-base-image-tag": "'"$CLIENT_BASE_IMAGE_TAG"'",
-            #     "server-image-tag": "'"$SERVER_IMAGE_TAG"'",
-            #     "client-tag-to-be-e2e-tested": "'"$CLIENT_BASE_IMAGE_TAG"'",
-            #     "server-tag-to-be-e2e-tested": "'"$SERVER_IMAGE_TAG"'",
-            #     "client-tag-e2e-tested": "'"$CLIENT_TAG_E2E_TESTED"'",
-            #     "server-tag-e2e-tested": "'"$SERVER_TAG_E2E_TESTED"'"
-            #   }
-            # }' https://circleci.com/api/v2/project/github/RogierdeRuijter/montepoeli/pipeline
+            curl -u $CIRCLECI_TOKEN: -X POST --header "Content-Type: application/json" -d '{
+              "branch": "'"$CIRCLE_BRANCH"'",
+              "parameters": {
+                "affected-undetermined": false,
+                "client-and-server-affected": '$CLIENT_AND_SERVER_AFFECTED',
+                "client-affected": '$CLIENT_AFFECTED',
+                "server-affected": '$SERVER_AFFECTED',
+                "client-tag": "'"$CLIENT_TAG"'",
+                "server-tag": "'"$SERVER_TAG"'",
+                "client-base-image-tag": "'"$CLIENT_BASE_IMAGE_TAG"'",
+                "server-image-tag": "'"$SERVER_IMAGE_TAG"'",
+                "client-tag-to-be-e2e-tested": "'"$CLIENT_BASE_IMAGE_TAG"'",
+                "server-tag-to-be-e2e-tested": "'"$SERVER_IMAGE_TAG"'",
+                "client-tag-e2e-tested": "'"$CLIENT_TAG_E2E_TESTED"'",
+                "server-tag-e2e-tested": "'"$SERVER_TAG_E2E_TESTED"'"
+              }
+            }' https://circleci.com/api/v2/project/github/RogierdeRuijter/montepoeli/pipeline
 
   build-client-base:
     docker:
@@ -357,6 +354,14 @@ jobs:
     machine:
       image: circleci/classic:201808-01
     working_directory: ~/repo
+    parameters:
+      client-affected:
+        type: boolean
+        default: false
+      server-affected:
+        type: boolean
+        default: false
+
     environment:
       - IMAGE_REPOSITORY: << pipeline.parameters.image-repository >>
       - CLIENT_BASE_IMAGE_NAME: montepoeli.club/<< pipeline.parameters.client-image-name >>
@@ -398,7 +403,7 @@ jobs:
       
       # TODO: these steps are not run 
       - when:
-          condition: << pipeline.parameters.client-affected >>
+          condition: << parameters.client-affected >>
           steps:
             - run: 
                 name: Retag and push tested client image
@@ -411,7 +416,7 @@ jobs:
                 docker push $IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME:$CLIENT_TAG_E2E_TESTED
 
       - when:
-          condition: << pipeline.parameters.server-affected >>
+          condition: << parameters.server-affected >>
           steps:        
             - run: 
                 name: Retag tested server image
@@ -690,6 +695,8 @@ workflows:
                 - /dependabot.*/
 
       - e2e-tests:
+          client-affected: << pipeline.parameters.client-affected >>
+          server-affected: << pipeline.parameters.server-affected >>
           requires:
             - make-client-image-e2e-test-ready
             - make-server-image-e2e-test-ready
