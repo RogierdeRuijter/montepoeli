@@ -465,6 +465,7 @@ jobs:
           paths:
           - node_modules
           key: v1-dependencies-root-{{ checksum "package-lock.json" }}
+
       - run: 
           name: bump version based on last commit message
           command: |
@@ -502,8 +503,9 @@ jobs:
       - IMAGE_CLIENT_NAME: << pipeline.parameters.client-image-name >>
       - TAG_E2E_TESTED: << pipeline.parameters.tag-e2e >>
       - CLIENT_TYPE: << pipeline.parameters.production-client-environment-variables >> 
+      - CLIENT_TAG_E2E_TESTED: << pipeline.parameters.client-tag-e2e-tested >> 
 
-    working_directory: ~/repo/client
+    working_directory: ~/repo
     steps:
       - checkout:
           path: ~/repo
@@ -515,7 +517,6 @@ jobs:
       - run:
           name: Setup Environment Variables
           command: |
-            echo "export CLIENT_TAG_E2E_TESTED=$(cat /tmp/client-version.txt)-$TAG_E2E_TESTED" >> $BASH_ENV
             echo "export CLIENT_TAG_PRODUCTION=$(cat /tmp/version-updated.txt)" >> $BASH_ENV
 
       - run:
@@ -524,7 +525,7 @@ jobs:
 
       - run:
           command: |
-            docker build -f Dockerfile.configured -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG_PRODUCTION . --build-arg CLIENT_BASE_IMAGE_NAME=$IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME --build-arg CLIENT_BASE_IMAGE_TAG=$CLIENT_TAG_E2E_TESTED --build-arg CLIENT_TYPE=$CLIENT_TYPE
+            docker build -f Dockerfile.configured -t $IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME:$CLIENT_TAG_PRODUCTION . --build-arg CLIENT_BASE_IMAGE_NAME=$IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME --build-arg CLIENT_BASE_IMAGE_TAG=$CLIENT_TAG_E2E_TESTED --build-arg CLIENT_TYPE=$CLIENT_TYPE
 
       - deploy:
           command: |
@@ -532,8 +533,46 @@ jobs:
       
       - deploy:
           command: |
-            docker tag $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG_PRODUCTION $DOMAIN/$IMAGE_CLIENT_NAME:latest
-            docker push $DOMAIN/$IMAGE_CLIENT_NAME:latest
+            docker tag $IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME:$CLIENT_TAG_PRODUCTION $IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME:latest
+            docker push $IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME:latest
+
+  retag-latest-client-production-image-with-new-version:
+    docker:
+      - image: << pipeline.parameters.default-build-context >>
+    
+    environment:
+      - IMAGE_REPOSITORY: << pipeline.parameters.image-repository >>
+      - IMAGE_CLIENT_NAME: << pipeline.parameters.client-image-name >>
+      - LATEST_PRODUCTION_IMAGE_TAG: "latest"
+
+    working_directory: ~/repo
+    steps:
+      - checkout:
+          path: ~/repo
+      - setup_remote_docker
+
+      - attach_workspace:
+          at: /tmp
+
+      - run:
+          name: Setup Environment Variables
+          command: |
+            echo "export CLIENT_TAG_PRODUCTION=$(cat /tmp/version-updated.txt)" >> $BASH_ENV
+
+      - run:
+          command: |
+            docker login $IMAGE_REPOSITORY -u $DOCKER_USER -p $DOCKER_PASSWORD
+
+      - run:
+          name: Pull latest production image
+          command: |
+            docker pull $IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME:$LATEST_PRODUCTION_IMAGE_TAG
+    
+      - deploy:
+          name: Retag latest production image with new version tag
+          command: |
+            docker tag $IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME:$LATEST_PRODUCTION_IMAGE_TAG $IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME:CLIENT_TAG_PRODUCTION
+            docker push $IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME:$CLIENT_TAG_PRODUCTION
 
   make-server-image-production-ready:
     docker:
@@ -543,6 +582,7 @@ jobs:
       - IMAGE_REPOSITORY: << pipeline.parameters.image-repository >>
       - IMAGE_SERVER_NAME: << pipeline.parameters.server-image-name >>
       - TAG_E2E_TESTED: << pipeline.parameters.tag-e2e >>
+      - SERVER_TAG_E2E_TESTED: << pipeline.parameters.server-tag-e2e-tested >> 
 
     working_directory: ~/repo
     steps:
@@ -554,7 +594,6 @@ jobs:
       - run:
           name: Setup Environment Variables
           command: |
-            echo "export SERVER_TAG_E2E_TESTED=$(cat /tmp/server-version.txt)-$TAG_E2E_TESTED" >> $BASH_ENV
             echo "export SERVER_TAG_PRODUCTION=$(cat /tmp/version-updated.txt)" >> $BASH_ENV
 
       - run: docker login $IMAGE_REPOSITORY -u $DOCKER_USER -p $DOCKER_PASSWORD
@@ -571,6 +610,43 @@ jobs:
             docker tag $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG_PRODUCTION $DOMAIN/$IMAGE_SERVER_NAME:latest
             docker push $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:latest
 
+  retag-latest-server-production-image-with-new-version:
+    docker:
+      - image: << pipeline.parameters.default-build-context >>
+    
+    environment:
+      - IMAGE_REPOSITORY: << pipeline.parameters.image-repository >>
+      - IMAGE_SERVER_NAME: << pipeline.parameters.server-image-name >>
+      - TAG_E2E_TESTED: << pipeline.parameters.tag-e2e >>
+      - SERVER_TAG_E2E_TESTED: << pipeline.parameters.server-tag-e2e-tested >> 
+      - LATEST_PRODUCTION_IMAGE_TAG: "latest"
+
+    working_directory: ~/repo
+    steps:
+      - setup_remote_docker
+
+      - attach_workspace:
+          at: /tmp
+          
+      - run:
+          name: Setup Environment Variables
+          command: |
+            echo "export SERVER_TAG_PRODUCTION=$(cat /tmp/version-updated.txt)" >> $BASH_ENV
+
+      - run: 
+          name: Login to docker registory
+          command: docker login $IMAGE_REPOSITORY -u $DOCKER_USER -p $DOCKER_PASSWORD
+
+      - run: 
+        name: Retag latest production image with the new version
+        command: |
+          docker pull $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$LATEST_PRODUCTION_IMAGE_TAG
+          docker tag $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$LATEST_PRODUCTION_IMAGE_TAG $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG_PRODUCTION
+
+      - deploy:
+          name: Push retaged image
+          command: docker push $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG_PRODUCTION
+            
 workflows:
   version: 2
   determine_workflow:
@@ -616,6 +692,15 @@ workflows:
       - save-new-version:
           requires:
             - update-version
+          filters:
+            branches:
+              only: 
+                - master
+                - /([0-9])+?(\.([0-9])+)\.x/
+
+      - retag-latest-server-production-image-with-new-version:
+          requires:
+            - save-new-version
           filters:
             branches:
               only: 
@@ -675,6 +760,15 @@ workflows:
                 - master
                 - /([0-9])+?(\.([0-9])+)\.x/
 
+      - retag-latest-client-production-image-with-new-version:
+          requires:
+            - save-new-version
+          filters:
+            branches:
+              only: 
+                - master
+                - /([0-9])+?(\.([0-9])+)\.x/
+
       - make-server-image-production-ready:
           requires:
             - save-new-version
@@ -683,7 +777,6 @@ workflows:
               only: 
                 - master
                 - /([0-9])+?(\.([0-9])+)\.x/
-        
         
   client_and_server:
     when: << pipeline.parameters.client-and-server-affected >>
@@ -695,33 +788,33 @@ workflows:
       - make-client-image-e2e-test-ready:
           requires:
             - build-client-base
-          # filters:
-          #   branches:
-          #     only: 
-          #       - master
-          #       - /depfu.*/
-          #       - /dependabot.*/
+          filters:
+            branches:
+              only: 
+                - master
+                - /depfu.*/
+                - /dependabot.*/
 
       - make-server-image-e2e-test-ready:
           requires:
             - build-server
-          # filters:
-          #   branches:
-          #     only: 
-          #       - master
-          #       - /depfu.*/
-          #       - /dependabot.*/
+          filters:
+            branches:
+              only: 
+                - master
+                - /depfu.*/
+                - /dependabot.*/
 
       - e2e-tests:
           requires:
             - make-client-image-e2e-test-ready
             - make-server-image-e2e-test-ready
-          # filters:
-          #   branches:
-          #     only: 
-          #       - master
-          #       - /depfu.*/
-          #       - /dependabot.*/
+          filters:
+            branches:
+              only: 
+                - master
+                - /depfu.*/
+                - /dependabot.*/
 
       - rebuild-client-base:
             requires:
