@@ -113,8 +113,8 @@ jobs:
           command: |
 
             if [[ ${CIRCLE_BRANCH} = "master" ]]; then
-              echo "in master if"
               if [[ $( npm run affected:apps:master | grep api) != "" ]]; then
+                echo "in server affected master flow"
                 echo "export SERVER_AFFECTED=true" >> $BASH_ENV
               else
                 echo "export SERVER_AFFECTED=false" >> $BASH_ENV
@@ -174,23 +174,23 @@ jobs:
               SERVER_TAG_E2E_TESTED=$SERVER_TAG-$TAG_E2E_TESTED
             fi
             
-            curl -u $CIRCLECI_TOKEN: -X POST --header "Content-Type: application/json" -d '{
-              "branch": "'"$CIRCLE_BRANCH"'",
-              "parameters": {
-                "affected-undetermined": false,
-                "client-and-server-affected": '$CLIENT_AND_SERVER_AFFECTED',
-                "client-affected": '$CLIENT_AFFECTED',
-                "server-affected": '$SERVER_AFFECTED',
-                "client-tag": "'"$CLIENT_TAG"'",
-                "server-tag": "'"$SERVER_TAG"'",
-                "client-base-image-tag": "'"$CLIENT_BASE_IMAGE_TAG"'",
-                "server-image-tag": "'"$SERVER_IMAGE_TAG"'",
-                "client-tag-to-be-e2e-tested": "'"$CLIENT_BASE_IMAGE_TAG"'",
-                "server-tag-to-be-e2e-tested": "'"$SERVER_IMAGE_TAG"'",
-                "client-tag-e2e-tested": "'"$CLIENT_TAG_E2E_TESTED"'",
-                "server-tag-e2e-tested": "'"$SERVER_TAG_E2E_TESTED"'"
-              }
-            }' https://circleci.com/api/v2/project/github/RogierdeRuijter/montepoeli/pipeline
+            # curl -u $CIRCLECI_TOKEN: -X POST --header "Content-Type: application/json" -d '{
+            #   "branch": "'"$CIRCLE_BRANCH"'",
+            #   "parameters": {
+            #     "affected-undetermined": false,
+            #     "client-and-server-affected": '$CLIENT_AND_SERVER_AFFECTED',
+            #     "client-affected": '$CLIENT_AFFECTED',
+            #     "server-affected": '$SERVER_AFFECTED',
+            #     "client-tag": "'"$CLIENT_TAG"'",
+            #     "server-tag": "'"$SERVER_TAG"'",
+            #     "client-base-image-tag": "'"$CLIENT_BASE_IMAGE_TAG"'",
+            #     "server-image-tag": "'"$SERVER_IMAGE_TAG"'",
+            #     "client-tag-to-be-e2e-tested": "'"$CLIENT_BASE_IMAGE_TAG"'",
+            #     "server-tag-to-be-e2e-tested": "'"$SERVER_IMAGE_TAG"'",
+            #     "client-tag-e2e-tested": "'"$CLIENT_TAG_E2E_TESTED"'",
+            #     "server-tag-e2e-tested": "'"$SERVER_TAG_E2E_TESTED"'"
+            #   }
+            # }' https://circleci.com/api/v2/project/github/RogierdeRuijter/montepoeli/pipeline
 
   build-client-base:
     docker:
