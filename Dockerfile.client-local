@@ -1,0 +1,17 @@
+FROM montepoeli.club/montepoeli-base-node-modules:latest
+
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+
+COPY package.json package.json
+COPY package-lock.json package-lock.json
+
+COPY ngsw-config.json ngsw-config.json
+RUN cd /usr/src/app/ && npm install
+
+RUN npm run compile-ivy-dependencies
+
+ADD apps/client /usr/src/app
+
+EXPOSE 4200
+EXPOSE 49153

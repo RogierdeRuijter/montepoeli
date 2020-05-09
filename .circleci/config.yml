@@ -9,69 +9,169 @@ parameters:
   server-image-name:
     type: string
     default: "montepouli-server"
+  project-slug:
+    type: string
+    default: "github/RogierdeRuijter/montepoeli"
   tag-to-be-e2e:
     type: string
     default: "to_be_e2e"  
   tag-e2e:
     type: string
-    default: "e2e"  
+    default: "e2e"
+  client-tag:
+    type: string
+    default: ""
+  server-tag:
+    type: string
+    default: ""
+  client-base-image-tag:
+    type: string
+    default: ""
+  server-image-tag:
+    type: string
+    default: ""
+  client-tag-to-be-e2e-tested:
+    type: string
+    default: ""
+  server-tag-to-be-e2e-tested:
+    type: string
+    default: ""
+  client-tag-e2e-tested:
+    type: string
+    default: ""
+  server-tag-e2e-tested:
+    type: string
+    default: ""
   default-build-context:
     type: string
-    default: "circleci/node:12"
+    default: "circleci/node:13"
   e2e-client-environment-variables:
     type: string
     default: "e2e"
   production-client-environment-variables:
     type: string
     default: "server"
+  affected-undetermined:
+    type: boolean
+    default: true
+  client-affected:
+    type: boolean
+    default: false
+  server-affected:
+    type: boolean
+    default: false
+  client-and-server-affected:
+    type: boolean
+    default: false
       
 jobs:
-  save-docker-tags-as-artifacts:
+  determine-affected-apps:
     docker:
-      - image: << pipeline.parameters.default-build-context >>
+      - image: tjokvol/node:13-luna
+    environment:
+      - TAG_TO_BE_E2E: << pipeline.parameters.tag-to-be-e2e >>
+      - TAG_E2E_TESTED: << pipeline.parameters.tag-e2e >>
 
     working_directory: ~/repo
     steps:
       - checkout
-      
-      - run:
-          command: |
-            cd client
             
-            if [[ ${CIRCLE_BRANCH} = "master" ]]
-            then
+      - restore_cache:
+          keys:
+          - v2-nrwl-workspace-9.2.2
+
+      - run:
+          name: Install node modules
+          command: |            
+            npm install @nrwl/workspace@9.2.2
+    
+      - save_cache:
+          paths:
+          - node_modules
+          key: v2-nrwl-workspace-9.2.2
+
+      - run:
+          name: Save to the environment variable if the client is affected
+          command: |            
+            if [[ $( npm run affected:apps | grep client) != "" ]]; then
+              echo "export CLIENT_AFFECTED=true" >> $BASH_ENV
+            else
+              echo "export CLIENT_AFFECTED=false" >> $BASH_ENV
+            fi
+         
+      - run:
+          name: Save to the environment variable if the server is affected
+          command: |
+            if [[ $( npm run affected:apps | grep api) != "" ]]; then
+              echo "export SERVER_AFFECTED=true" >> $BASH_ENV
+            else
+              echo "export SERVER_AFFECTED=false" >> $BASH_ENV
+            fi
+
+      - run:
+          name: Create client tag and save to environment variable
+          command: |            
+            if [[ ${CIRCLE_BRANCH} = "master" ]]; then
               CLIENT_TAG=$(git log -n 1 --skip 1 --pretty=format:"%H")
             else
               CLIENT_TAG=${CIRCLE_SHA1}
             fi
             
-            echo ${CLIENT_TAG} > /tmp/client-version.txt
+            echo "export CLIENT_TAG=$CLIENT_TAG" >> $BASH_ENV
 
       - run:
           command: |
-            cd server
-
-            if [[ ${CIRCLE_BRANCH} = "master" ]]
-            then
+            if [[ ${CIRCLE_BRANCH} = "master" ]]; then
               SERVER_TAG=$(git log -n 1 --skip 1 --pretty=format:"%H")
             else 
               SERVER_TAG=${CIRCLE_SHA1}
             fi
             
-            echo ${SERVER_TAG} > /tmp/server-version.txt
-            
-      - store_artifacts:
-          path: /tmp/client-version.txt
-      
-      - store_artifacts:
-          path: /tmp/server-version.txt
+            echo "export SERVER_TAG=$SERVER_TAG" >> $BASH_ENV
 
-      - persist_to_workspace:
-          root: /tmp
-          paths:
-            - client-version.txt
-            - server-version.txt
+      - run:
+          name: Determine which data to use to call the endpoint
+          command: |            
+            if [ $CLIENT_AFFECTED == true ] && [ $SERVER_AFFECTED == true ]; then
+              CLIENT_AND_SERVER_AFFECTED=true
+              CLIENT_AFFECTED=false
+              SERVER_AFFECTED=false
+
+              CLIENT_BASE_IMAGE_TAG="$CLIENT_TAG-$TAG_TO_BE_E2E"
+              CLIENT_TAG_E2E_TESTED=$CLIENT_TAG-$TAG_E2E_TESTED
+              
+              SERVER_IMAGE_TAG=$SERVER_TAG-$TAG_TO_BE_E2E
+              SERVER_TAG_E2E_TESTED=$SERVER_TAG-$TAG_E2E_TESTED
+            elif [ $CLIENT_AFFECTED == true ]; then
+              CLIENT_BASE_IMAGE_TAG="$CLIENT_TAG-$TAG_TO_BE_E2E"
+              
+              SERVER_IMAGE_TAG="latest"
+              CLIENT_TAG_TO_BE_E2E="$CLIENT_TAG-$TAG_TO_BE_E2E"
+              CLIENT_TAG_E2E_TESTED="$CLIENT_TAG-$TAG_E2E_TESTED"
+            elif [ $SERVER_AFFECTED == true ]; then
+              CLIENT_BASE_IMAGE_TAG="latest"
+              SERVER_IMAGE_TAG="$SERVER_TAG-$TAG_TO_BE_E2E"
+              SERVER_TAG_E2E_TESTED=$SERVER_TAG-$TAG_E2E_TESTED
+            fi
             
+            curl -u $CIRCLECI_TOKEN: -X POST --header "Content-Type: application/json" -d '{
+              "branch": "'"$CIRCLE_BRANCH"'",
+              "parameters": {
+                "affected-undetermined": false,
+                "client-and-server-affected": '$CLIENT_AND_SERVER_AFFECTED',
+                "client-affected": '$CLIENT_AFFECTED',
+                "server-affected": '$SERVER_AFFECTED',
+                "client-tag": "'"$CLIENT_TAG"'",
+                "server-tag": "'"$SERVER_TAG"'",
+                "client-base-image-tag": "'"$CLIENT_BASE_IMAGE_TAG"'",
+                "server-image-tag": "'"$SERVER_IMAGE_TAG"'",
+                "client-tag-to-be-e2e-tested": "'"$CLIENT_BASE_IMAGE_TAG"'",
+                "server-tag-to-be-e2e-tested": "'"$SERVER_IMAGE_TAG"'",
+                "client-tag-e2e-tested": "'"$CLIENT_TAG_E2E_TESTED"'",
+                "server-tag-e2e-tested": "'"$SERVER_TAG_E2E_TESTED"'"
+              }
+            }' https://circleci.com/api/v2/project/github/RogierdeRuijter/montepoeli/pipeline
+
   build-client-base:
     docker:
       - image: << pipeline.parameters.default-build-context >>
@@ -79,8 +179,9 @@ jobs:
     environment:
       - IMAGE_CLIENT_NAME: << pipeline.parameters.client-image-name >>
       - IMAGE_REPOSITORY: << pipeline.parameters.image-repository >>
+      - CLIENT_TAG: << pipeline.parameters.client-tag >>
 
-    working_directory: ~/repo/client
+    working_directory: ~/repo
     steps:
       - checkout:
           path: ~/repo
@@ -91,11 +192,6 @@ jobs:
           at: /tmp
 
       - run:
-          name: Setup Environment Variables
-          command: |
-            echo "export CLIENT_TAG=$(cat /tmp/client-version.txt)" >> $BASH_ENV
-      
-      - run:
           name: Login to montepoeli.club docker
           command: |
             docker login $IMAGE_REPOSITORY -u $DOCKER_USER -p $DOCKER_PASSWORD
@@ -104,7 +200,7 @@ jobs:
           name: Test and build client image, if it not available in context
           command: |            
             if [[ "$(docker images -q $IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME:$CLIENT_TAG 2> /dev/null)" == "" ]]; then
-              docker build -t $IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME:$CLIENT_TAG . -f Dockerfile.prod  --compress
+              docker build -t $IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME:$CLIENT_TAG . -f Dockerfile.client-prod  --compress
             fi
             
       - run:
@@ -127,8 +223,9 @@ jobs:
     environment:
       - IMAGE_REPOSITORY: << pipeline.parameters.image-repository >>
       - IMAGE_SERVER_NAME: << pipeline.parameters.server-image-name >>
+      - SERVER_TAG: << pipeline.parameters.server-tag >>
       
-    working_directory: ~/repo/server
+    working_directory: ~/repo
     steps:
       - checkout:
           path: ~/repo
@@ -137,11 +234,6 @@ jobs:
     
       - attach_workspace:
           at: /tmp
-      
-      - run:
-          name: Setup Environment Variables
-          command: |
-            echo "export SERVER_TAG=$(cat /tmp/server-version.txt)" >> $BASH_ENV
 
       - run:
           name: Login to montepoeli.club docker
@@ -149,7 +241,7 @@ jobs:
             docker login $IMAGE_REPOSITORY -u $DOCKER_USER -p $DOCKER_PASSWORD
       
       - run:
-          name: See if the docker image is avaialbe current client tag
+          name: See if the docker image is available current server tag
           command: |
             docker pull $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG || true
 
@@ -157,7 +249,7 @@ jobs:
           name: Test and build image, if it is not available in context
           command: |
             if [[ "$(docker images -q $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG  2> /dev/null)" == "" ]]; then
-              docker build -t $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG . -f Dockerfile.prod  --compress --cache-from=$IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG
+              docker build -t $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG . -f Dockerfile.server-prod  --compress --cache-from=$IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG
             fi
 
       - run:
@@ -172,7 +264,6 @@ jobs:
       - deploy:
           command: |
             docker push $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG
-  
   make-client-image-e2e-test-ready:
     docker:
       - image: << pipeline.parameters.default-build-context >>
@@ -180,11 +271,13 @@ jobs:
     environment:
       - IMAGE_REPOSITORY: << pipeline.parameters.image-repository >>
       - IMAGE_CLIENT_NAME: << pipeline.parameters.client-image-name >>
-      - IMAGE_SERVER_NAME: << pipeline.parameters.server-image-name >>
       - TAG_TO_BE_E2E: << pipeline.parameters.tag-to-be-e2e >>
       - CLIENT_TYPE: << pipeline.parameters.e2e-client-environment-variables >>
+      - CLIENT_TAG: << pipeline.parameters.client-tag >>
+      - CLIENT_TAG_TO_BE_E2E: << pipeline.parameters.client-tag-to-be-e2e-tested >> 
 
-    working_directory: ~/repo/client
+
+    working_directory: ~/repo
     steps:
       - checkout:
           path: ~/repo
@@ -195,14 +288,6 @@ jobs:
           at: /tmp
 
       - run:
-          name: Setup Environment Variables
-          command: |
-            echo "export CLIENT_TAG=$(cat /tmp/client-version.txt)" >> $BASH_ENV
-
-            CLIENT_TAG=$(cat /tmp/client-version.txt)
-            echo "export CLIENT_TAG_TO_BE_E2E=$CLIENT_TAG-$TAG_TO_BE_E2E" >> $BASH_ENV
-
-      - run:
           name: Log into the image repository
           command: |
             docker login $IMAGE_REPOSITORY -u $DOCKER_USER -p $DOCKER_PASSWORD
@@ -210,10 +295,10 @@ jobs:
       - run:
           name: Insert e2e dynamic environment varibles in client image
           command: |
-            docker build -f Dockerfile.configured . -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG_TO_BE_E2E --build-arg CLIENT_BASE_IMAGE_NAME=$IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME --build-arg CLIENT_BASE_IMAGE_TAG=$CLIENT_TAG --build-arg CLIENT_TYPE=$CLIENT_TYPE
+            docker build -f Dockerfile.client-configured . -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG_TO_BE_E2E --build-arg CLIENT_BASE_IMAGE_NAME=$IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME --build-arg CLIENT_BASE_IMAGE_TAG=$CLIENT_TAG --build-arg CLIENT_TYPE=$CLIENT_TYPE
 
       - deploy: 
-          name: Push e2e ready client image  
+          name: Push e2e ready client image
           command: |
             docker push $IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME:$CLIENT_TAG_TO_BE_E2E
 
@@ -272,41 +357,64 @@ jobs:
       - SERVER_IMAGE_NAME: montepoeli.club/<< pipeline.parameters.server-image-name >>
       - IMAGE_CLIENT_NAME: << pipeline.parameters.client-image-name >>
       - IMAGE_SERVER_NAME: << pipeline.parameters.server-image-name >>
-      - TAG_TO_BE_E2E: << pipeline.parameters.tag-to-be-e2e >>
-      - TAG_E2E_TESTED: << pipeline.parameters.tag-e2e >>
+      - CLIENT_BASE_IMAGE_TAG: << pipeline.parameters.client-base-image-tag >>
+      - SERVER_IMAGE_TAG: << pipeline.parameters.server-image-tag >>
+      - CLIENT_TAG_E2E_TESTED: << pipeline.parameters.client-tag-e2e-tested >>
+      - SERVER_TAG_E2E_TESTED: << pipeline.parameters.server-tag-e2e-tested >>
+
     steps:
       - checkout
 
       - attach_workspace:
           at: /tmp
 
-      - run:
-          name: Setup Environment Variables
+      - run: 
+          name: Install docker compose
+          command: sudo curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+      - run: 
+          name: Make docker compose executable ?
+          command: sudo chmod +x /usr/local/bin/docker-compose
+      
+      - run: 
+          name: Log into docker registry
+          command: docker login $IMAGE_REPOSITORY -u $DOCKER_USER -p $DOCKER_PASSWORD
+      
+      - run: 
+          name: Run e2e tests
           command: |
-            CLIENT_TAG=$(cat /tmp/client-version.txt)
-            SERVER_TAG=$(cat /tmp/server-version.txt)
-
-            echo "export CLIENT_BASE_IMAGE_TAG=$CLIENT_TAG-$TAG_TO_BE_E2E" >> $BASH_ENV
-            echo "export SERVER_IMAGE_TAG=$SERVER_TAG-$TAG_TO_BE_E2E" >> $BASH_ENV
-
-            echo "export CLIENT_TAG_E2E_TESTED=$CLIENT_TAG-$TAG_E2E_TESTED" >> $BASH_ENV
-            echo "export SERVER_TAG_E2E_TESTED=$SERVER_TAG-$TAG_E2E_TESTED" >> $BASH_ENV
+            # These e2e tests use the following variables internally
+            # - CLIENT_BASE_IMAGE_NAME
+            # - SERVER_IMAGE_NAME
+            # - CLIENT_BASE_IMAGE_TAG
+            # - SERVER_IMAGE_TAG
             
-      - run: sudo curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-      - run: sudo chmod +x /usr/local/bin/docker-compose
-      - run: docker login $IMAGE_REPOSITORY -u $DOCKER_USER -p $DOCKER_PASSWORD
-      - run: npm run start:e2e-environment-build-server
-      - run: 
-          name: Retag tested images
-          command: | 
-            docker tag $CLIENT_BASE_IMAGE_NAME:$CLIENT_BASE_IMAGE_TAG $IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME:$CLIENT_TAG_E2E_TESTED
-            docker tag $SERVER_IMAGE_NAME:$SERVER_IMAGE_TAG $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG_E2E_TESTED
-           
-      - run: 
-          name: Push retagged images
-          command: | 
-            docker push $IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME:$CLIENT_TAG_E2E_TESTED
-            docker push $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG_E2E_TESTED
+            npm run docker:start:e2e-environment-build-server
+      
+      - when:
+          condition: <<pipeline.parameters.client-affected>>
+          steps:
+            - run: 
+                name: Retag and push tested client image
+                command: | 
+                  docker tag $CLIENT_BASE_IMAGE_NAME:$CLIENT_BASE_IMAGE_TAG $IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME:$CLIENT_TAG_E2E_TESTED
+            
+            - run: 
+              name: Push retagged client image
+              command: | 
+                docker push $IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME:$CLIENT_TAG_E2E_TESTED
+
+      - when:
+          condition: <<pipeline.parameters.server-affected>>
+          steps:        
+            - run: 
+                name: Retag tested server image
+                command: | 
+                  docker tag $SERVER_IMAGE_NAME:$SERVER_IMAGE_TAG $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG_E2E_TESTED
+
+            - run: 
+                name: Push retagged server image
+                command: | 
+                  docker push $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG_E2E_TESTED
 
   rebuild-client-base:
     docker:
@@ -317,7 +425,7 @@ jobs:
       - CLIENT_BASE_IMAGE: montepoeli-client-base-node-modules
       - TAG: "latest"
     
-    working_directory: ~/repo/client
+    working_directory: ~/repo
     steps:
       - checkout:
           path: ~/repo
@@ -350,7 +458,7 @@ jobs:
       
       - restore_cache:
           keys:
-          - v1-dependencies-root-{{ checksum "yarn.lock" }}
+          - v1-dependencies-root-{{ checksum "package-lock.json" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-root
 
@@ -360,12 +468,13 @@ jobs:
             git config --global user.email "rogierderuijter@hotmail.com"
             git config --global user.name "Circle Ci"
                         
-            yarn install
+            npm install
     
       - save_cache:
           paths:
           - node_modules
-          key: v1-dependencies-root-{{ checksum "yarn.lock" }}
+          key: v1-dependencies-root-{{ checksum "package-lock.json" }}
+
       - run: 
           name: bump version based on last commit message
           command: |
@@ -403,8 +512,9 @@ jobs:
       - IMAGE_CLIENT_NAME: << pipeline.parameters.client-image-name >>
       - TAG_E2E_TESTED: << pipeline.parameters.tag-e2e >>
       - CLIENT_TYPE: << pipeline.parameters.production-client-environment-variables >> 
+      - CLIENT_TAG_E2E_TESTED: << pipeline.parameters.client-tag-e2e-tested >> 
 
-    working_directory: ~/repo/client
+    working_directory: ~/repo
     steps:
       - checkout:
           path: ~/repo
@@ -416,7 +526,50 @@ jobs:
       - run:
           name: Setup Environment Variables
           command: |
-            echo "export CLIENT_TAG_E2E_TESTED=$(cat /tmp/client-version.txt)-$TAG_E2E_TESTED" >> $BASH_ENV
+            echo "export CLIENT_TAG_PRODUCTION=$(cat /tmp/version-updated.txt)" >> $BASH_ENV
+
+      - run:
+          name: Login to docker registry
+          command: |
+            docker login $IMAGE_REPOSITORY -u $DOCKER_USER -p $DOCKER_PASSWORD
+
+      - run:
+          name: Insert production environment configurations
+          command: |
+            docker build -f Dockerfile.configured -t $IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME:$CLIENT_TAG_PRODUCTION . --build-arg CLIENT_BASE_IMAGE_NAME=$IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME --build-arg CLIENT_BASE_IMAGE_TAG=$CLIENT_TAG_E2E_TESTED --build-arg CLIENT_TYPE=$CLIENT_TYPE
+
+      - deploy:
+          name: Push configured image to registry
+          command: |
+            docker push $IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME:$CLIENT_TAG_PRODUCTION
+      
+      - deploy:
+          name: Tag image with latest and push to registry
+          command: |
+            docker tag $IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME:$CLIENT_TAG_PRODUCTION $IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME:latest
+            docker push $IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME:latest
+
+  retag-latest-client-production-image-with-new-version:
+    docker:
+      - image: << pipeline.parameters.default-build-context >>
+    
+    environment:
+      - IMAGE_REPOSITORY: << pipeline.parameters.image-repository >>
+      - IMAGE_CLIENT_NAME: << pipeline.parameters.client-image-name >>
+      - LATEST_PRODUCTION_IMAGE_TAG: "latest"
+
+    working_directory: ~/repo
+    steps:
+      - checkout:
+          path: ~/repo
+      - setup_remote_docker
+
+      - attach_workspace:
+          at: /tmp
+
+      - run:
+          name: Setup Environment Variables
+          command: |
             echo "export CLIENT_TAG_PRODUCTION=$(cat /tmp/version-updated.txt)" >> $BASH_ENV
 
       - run:
@@ -424,17 +577,15 @@ jobs:
             docker login $IMAGE_REPOSITORY -u $DOCKER_USER -p $DOCKER_PASSWORD
 
       - run:
+          name: Pull latest production image
           command: |
-            docker build -f Dockerfile.configured -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG_PRODUCTION . --build-arg CLIENT_BASE_IMAGE_NAME=$IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME --build-arg CLIENT_BASE_IMAGE_TAG=$CLIENT_TAG_E2E_TESTED --build-arg CLIENT_TYPE=$CLIENT_TYPE
-
+            docker pull $IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME:$LATEST_PRODUCTION_IMAGE_TAG
+    
       - deploy:
+          name: Retag latest production image with new version tag
           command: |
+            docker tag $IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME:$LATEST_PRODUCTION_IMAGE_TAG $IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME:CLIENT_TAG_PRODUCTION
             docker push $IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME:$CLIENT_TAG_PRODUCTION
-      
-      - deploy:
-          command: |
-            docker tag $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG_PRODUCTION $DOMAIN/$IMAGE_CLIENT_NAME:latest
-            docker push $DOMAIN/$IMAGE_CLIENT_NAME:latest
 
   make-server-image-production-ready:
     docker:
@@ -444,6 +595,7 @@ jobs:
       - IMAGE_REPOSITORY: << pipeline.parameters.image-repository >>
       - IMAGE_SERVER_NAME: << pipeline.parameters.server-image-name >>
       - TAG_E2E_TESTED: << pipeline.parameters.tag-e2e >>
+      - SERVER_TAG_E2E_TESTED: << pipeline.parameters.server-tag-e2e-tested >> 
 
     working_directory: ~/repo
     steps:
@@ -455,7 +607,6 @@ jobs:
       - run:
           name: Setup Environment Variables
           command: |
-            echo "export SERVER_TAG_E2E_TESTED=$(cat /tmp/server-version.txt)-$TAG_E2E_TESTED" >> $BASH_ENV
             echo "export SERVER_TAG_PRODUCTION=$(cat /tmp/version-updated.txt)" >> $BASH_ENV
 
       - run: docker login $IMAGE_REPOSITORY -u $DOCKER_USER -p $DOCKER_PASSWORD
@@ -472,20 +623,181 @@ jobs:
             docker tag $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG_PRODUCTION $DOMAIN/$IMAGE_SERVER_NAME:latest
             docker push $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:latest
 
+  retag-latest-server-production-image-with-new-version:
+    docker:
+      - image: << pipeline.parameters.default-build-context >>
+    
+    environment:
+      - IMAGE_REPOSITORY: << pipeline.parameters.image-repository >>
+      - IMAGE_SERVER_NAME: << pipeline.parameters.server-image-name >>
+      - TAG_E2E_TESTED: << pipeline.parameters.tag-e2e >>
+      - SERVER_TAG_E2E_TESTED: << pipeline.parameters.server-tag-e2e-tested >> 
+      - LATEST_PRODUCTION_IMAGE_TAG: "latest"
+
+    working_directory: ~/repo
+    steps:
+      - setup_remote_docker
+
+      - attach_workspace:
+          at: /tmp
+          
+      - run:
+          name: Setup Environment Variables
+          command: |
+            echo "export SERVER_TAG_PRODUCTION=$(cat /tmp/version-updated.txt)" >> $BASH_ENV
+
+      - run: 
+          name: Login to docker registory
+          command: docker login $IMAGE_REPOSITORY -u $DOCKER_USER -p $DOCKER_PASSWORD
+
+      - run: 
+          name: Retag latest production image with the new version
+          command: |
+            docker pull $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$LATEST_PRODUCTION_IMAGE_TAG
+            docker tag $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$LATEST_PRODUCTION_IMAGE_TAG $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG_PRODUCTION
+
+      - deploy:
+          name: Push retaged image
+          command: docker push $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG_PRODUCTION
+            
 workflows:
   version: 2
-  client_and_server:
+  determine_workflow:
+    when: << pipeline.parameters.affected-undetermined >>
     jobs:
-      - save-docker-tags-as-artifacts
+      - determine-affected-apps
 
-      - build-client-base:
+  client:
+    when: << pipeline.parameters.client-affected >>
+    jobs:
+      - build-client-base       
+          
+      - make-client-image-e2e-test-ready:
           requires:
-            - save-docker-tags-as-artifacts
+            - build-client-base
+          filters:
+            branches:
+              only: 
+                - master
+                - /depfu.*/
+                - /dependabot.*/
 
-      - build-server:
+      - e2e-tests:
           requires:
-            - save-docker-tags-as-artifacts
+            - make-client-image-e2e-test-ready
+            - make-server-image-e2e-test-ready
+          filters:
+            branches:
+              only: 
+                - master
+                - /depfu.*/
+                - /dependabot.*/
+      
+      - update-version:
+          requires:
+            - e2e-tests
+          filters:
+            branches:
+              only: 
+                - master
+                - /([0-9])+?(\.([0-9])+)\.x/
 
+      - save-new-version:
+          requires:
+            - update-version
+          filters:
+            branches:
+              only: 
+                - master
+                - /([0-9])+?(\.([0-9])+)\.x/
+
+      - retag-latest-server-production-image-with-new-version:
+          requires:
+            - save-new-version
+          filters:
+            branches:
+              only: 
+                - master
+                - /([0-9])+?(\.([0-9])+)\.x/
+
+      - make-client-image-production-ready:
+          requires:
+            - save-new-version
+          filters:
+            branches:
+              only: 
+                - master
+                - /([0-9])+?(\.([0-9])+)\.x/
+
+  server:
+    when: << pipeline.parameters.server-affected >>
+    jobs:
+      - build-server
+      
+      - make-server-image-e2e-test-ready:
+          requires:
+            - build-server
+          filters:
+            branches:
+              only: 
+                - master
+                - /depfu.*/
+                - /dependabot.*/  
+
+      - e2e-tests:
+          requires:
+            - make-client-image-e2e-test-ready
+            - make-server-image-e2e-test-ready
+          filters:
+            branches:
+              only: 
+                - master
+                - /depfu.*/
+                - /dependabot.*/
+
+      - update-version:
+          requires:
+            - e2e-tests
+          filters:
+            branches:
+              only: 
+                - master
+                - /([0-9])+?(\.([0-9])+)\.x/
+
+      - save-new-version:
+          requires:
+            - update-version
+          filters:
+            branches:
+              only: 
+                - master
+                - /([0-9])+?(\.([0-9])+)\.x/
+
+      - retag-latest-client-production-image-with-new-version:
+          requires:
+            - save-new-version
+          filters:
+            branches:
+              only: 
+                - master
+                - /([0-9])+?(\.([0-9])+)\.x/
+
+      - make-server-image-production-ready:
+          requires:
+            - save-new-version
+          filters:
+            branches:
+              only: 
+                - master
+                - /([0-9])+?(\.([0-9])+)\.x/
+        
+  client_and_server:
+    when: << pipeline.parameters.client-and-server-affected >>
+    jobs:
+      - build-client-base
+
+      - build-server         
+      
       - make-client-image-e2e-test-ready:
           requires:
             - build-client-base

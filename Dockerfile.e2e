@@ -1,0 +1,17 @@
+FROM montepoeli.club/montepoeli-base-node-modules:latest AS builder
+
+WORKDIR /usr/src/app
+
+COPY package.json package.json
+COPY package-lock.json package-lock.json
+
+RUN npm install
+
+COPY apps/client-e2e/start-up-scripts apps/client-e2e/start-up-scripts
+COPY apps/client-e2e/nginx-conf apps/client-e2e/nginx-conf  
+COPY apps/client-e2e/protractor.conf.js apps/client-e2e/protractor.conf.js
+COPY tsconfig.json tsconfig.json
+COPY apps/client-e2e/tsconfig.json apps/client-e2e/tsconfig.json
+COPY apps/client-e2e/tsconfig.e2e.json apps/client-e2e/tsconfig.e2e.json
+
+COPY apps/client-e2e/src apps/client-e2e/src

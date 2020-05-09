@@ -1,0 +1,46 @@
+FROM montepoeli.club/montepoeli-base-node-modules:latest as builder
+
+# bcrypt dependencies
+RUN apt-get update && apt-get -y upgrade && apt-get -y install python3 make g++
+
+WORKDIR /usr/src/app
+
+COPY package.json package.json
+COPY package-lock.json package-lock.json
+
+RUN npm install
+
+COPY apps/api/tsconfig.json apps/api/tsconfig.json
+COPY apps/api/tsconfig.app.json apps/api/tsconfig.app.json
+COPY apps/api/tsconfig.build.json apps/api/tsconfig.build.json
+COPY apps/api/tsconfig.spec.json apps/api/tsconfig.spec.json
+COPY apps/api/jest.config.js apps/api/jest.config.js
+
+COPY tsconfig.json tsconfig.json
+COPY jest.config.js jest.config.js
+COPY tslint.json tslint.json
+COPY nx.json nx.json
+
+COPY apps/api/src apps/api/src
+
+RUN npm run lint:api
+
+RUN npm run test:api:cov
+
+RUN npm run build:api
+
+RUN npm install -g depcheck
+
+COPY remove-unused-deps.sh remove-unused-deps.sh
+COPY .depcheckrc .depcheckrc
+RUN ./remove-unused-deps.sh
+
+RUN npm prune --production
+
+FROM node:12-slim
+
+COPY --from=builder /usr/src/app/node_modules /node_modules
+COPY --from=builder /usr/src/app/dist/apps/api/* /dist/
+COPY --from=builder /usr/src/app/coverage/apps/api/* /usr/coverage/
+
+EXPOSE 3000

@@ -1,0 +1,38 @@
+<div class="content" id="loginPage" >
+  <div [alignment]="[Alignments.VERTICAL, Alignments.CENTER]"
+       [appGridRow]="[GridSizes.ALL]"
+       class="pull-up">
+    <div [appGridColumn]="[3]" class="image-container">
+      <div style="width: 200px;">
+        <img class="image" src="../../../../assets/images/logo_transparent.png">
+      </div>
+    </div>
+    <form #loginForm="ngForm" (submit)="loginEmitter()"
+          [appGridColumn]="[3]"
+          [appGridRow]="[GridSizes.ALL]"
+          [alignment]="[Alignments.VERTICAL, Alignments.CENTER]" @fadeInAnimation>
+      <div class="form-group">
+        <mat-form-field class="full-width">
+          <input #username autofocus id="username" matInput name="username" ngModel required>
+          <mat-placeholder>
+            <span appTranslate="pages.login.username"></span>
+          </mat-placeholder>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field class="full-width">
+          <input id="password" id="password" matInput name="password" ngModel required type="password">
+          <mat-placeholder>
+            <span appTranslate="pages.login.password"></span>
+          </mat-placeholder>
+        </mat-form-field>
+      </div>
+
+      <app-button [buttonFunction]="ButtonFunction.LOGIN"
+                  id="submit"
+                  [buttonType]="ButtonTypes.NORMAL"
+                  [disabled]="!loginForm.valid || disabled">
+      </app-button>
+    </form>
+  </div>
+</div>
