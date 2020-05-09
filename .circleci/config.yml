@@ -111,8 +111,8 @@ jobs:
       - run:
           name: Save to the environment variable if the server is affected
           command: |
-
             if [[ ${CIRCLE_BRANCH} = "master" ]]; then
+              echo "in master flow"
               if [[ $( npm run affected:apps:master | grep api) != "" ]]; then
                 echo "in server affected master flow"
                 echo "export SERVER_AFFECTED=true" >> $BASH_ENV
@@ -125,6 +125,7 @@ jobs:
               else
                 echo "export SERVER_AFFECTED=false" >> $BASH_ENV
               fi
+            fi
 
             echo $SERVER_AFFECTED
 
