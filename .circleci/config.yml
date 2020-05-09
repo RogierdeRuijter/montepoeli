@@ -125,8 +125,7 @@ jobs:
               else
                 echo "export SERVER_AFFECTED=false" >> $BASH_ENV
               fi
-            fi
-            
+            fi     
             echo $SERVER_AFFECTED
 
       - run:
