@@ -113,6 +113,7 @@ jobs:
           command: |
 
             if [[ ${CIRCLE_BRANCH} = "master" ]]; then
+              echo "in master if"
               if [[ $( npm run affected:apps:master | grep api) != "" ]]; then
                 echo "export SERVER_AFFECTED=true" >> $BASH_ENV
               else
