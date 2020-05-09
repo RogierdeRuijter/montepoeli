@@ -638,10 +638,10 @@ jobs:
           command: docker login $IMAGE_REPOSITORY -u $DOCKER_USER -p $DOCKER_PASSWORD
 
       - run: 
-        name: Retag latest production image with the new version
-        command: |
-          docker pull $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$LATEST_PRODUCTION_IMAGE_TAG
-          docker tag $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$LATEST_PRODUCTION_IMAGE_TAG $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG_PRODUCTION
+          name: Retag latest production image with the new version
+          command: |
+            docker pull $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$LATEST_PRODUCTION_IMAGE_TAG
+            docker tag $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$LATEST_PRODUCTION_IMAGE_TAG $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG_PRODUCTION
 
       - deploy:
           name: Push retaged image
