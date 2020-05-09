@@ -42,6 +42,7 @@
     "lint:api": "ng lint api",
     "e2e": "ng e2e",
     "affected:apps": "nx affected:apps",
+    "affected:apps:master": "nx affected:apps --base=master~1 --head=master",
     "affected:libs": "nx affected:libs",
     "affected:build": "nx affected:build",
     "affected:build:parallel": "nx affected:build --parallel",
