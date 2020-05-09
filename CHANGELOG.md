@@ -1,3 +1,11 @@
+## [4.9.2](https://github.com/RogierdeRuijter/montepoeli/compare/v4.9.1...v4.9.2) (2020-05-09)
+
+
+### Bug Fixes
+
+* merge conflicts ([dd6e748](https://github.com/RogierdeRuijter/montepoeli/commit/dd6e7480e2c08d89ba3b923c2b26e928f18f35d4))
+* service worker ([cd84112](https://github.com/RogierdeRuijter/montepoeli/commit/cd84112bc96591b2c1926240370e8d9fe9f21b69))
+
 ## [4.9.1](https://github.com/RogierdeRuijter/montepoeli/compare/v4.9.0...v4.9.1) (2020-03-30)
 
 
