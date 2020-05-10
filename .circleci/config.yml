@@ -148,7 +148,7 @@ jobs:
 
       - run:
           name: Determine which data to use to call the endpoint
-          command: |       
+          command: |
             if [ $CLIENT_AFFECTED == true ] && [ $SERVER_AFFECTED == true ]; then
               CLIENT_AND_SERVER_AFFECTED=true
               CLIENT_AFFECTED=false

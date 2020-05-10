@@ -42,3 +42,4 @@ node_modules
 dist
 #keys
 apps/api/secrets
+apps/client-e2e/reports
