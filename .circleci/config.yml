@@ -372,6 +372,7 @@ jobs:
       - SERVER_IMAGE_TAG: << pipeline.parameters.server-image-tag >>
       - CLIENT_TAG_E2E_TESTED: << pipeline.parameters.client-tag-e2e-tested >>
       - SERVER_TAG_E2E_TESTED: << pipeline.parameters.server-tag-e2e-tested >>
+      - CLIENT_AND_SERVER_AFFECTED: << pipeline.parameters.client-and-server-affected >>
       - CLIENT_AFFECTED: << pipeline.parameters.client-affected >>
       - SERVER_AFFECTED: << pipeline.parameters.server-affected >>
 
@@ -412,7 +413,7 @@ jobs:
       - run: 
           name: Retag and push tested client image
           command: |
-            if [[ ${CLIENT_AFFECTED} = true ]]; then
+            if [ "${CLIENT_AFFECTED}" = true ] || [ "${CLIENT_AND_SERVER_AFFECTED}" = true ]; then
               docker tag $CLIENT_BASE_IMAGE_NAME:$CLIENT_BASE_IMAGE_TAG $IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME:$CLIENT_TAG_E2E_TESTED
               docker push $IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME:$CLIENT_TAG_E2E_TESTED
             fi
@@ -420,7 +421,7 @@ jobs:
       - run: 
           name: Retag tested server image
           command: | 
-            if [[ ${SERVER_AFFECTED} = true ]]; then
+            if [ "${SERVER_AFFECTED}" = true ] || [ "${CLIENT_AND_SERVER_AFFECTED}" = true ]; then
               docker tag $SERVER_IMAGE_NAME:$SERVER_IMAGE_TAG $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG_E2E_TESTED
               docker push $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG_E2E_TESTED
             fi
