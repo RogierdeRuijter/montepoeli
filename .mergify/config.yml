@@ -1,6 +1,6 @@
 pull_request_rules:
 
-  - name: automatic merge depfu on successfull e2e tests
+  - name: successfull e2e tests for depfu branches
     conditions:
       - 'status-success=ci/circleci: e2e-tests'
       - 'head~=depfu*'
@@ -8,10 +8,10 @@ pull_request_rules:
       merge:
         method: merge
   
-  - name: automatic merge depfu on e2e tests and client base rebuild
+  - name: successfull base rebuild on depfu branches
     conditions:
-      - 'status-success=ci/circleci: rebuild-client-base'
-      - 'head~=depfu/batch_all/client*'
+      - 'status-success=ci/circleci: rebuild-base'
+      - 'head~=depfu*'
     actions:
       merge:
         method: merge

@@ -425,13 +425,13 @@ jobs:
               docker push $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG_E2E_TESTED
             fi
 
-  rebuild-client-base:
+  rebuild-base:
     docker:
       - image: << pipeline.parameters.default-build-context >>
     
     environment:
       - IMAGE_REPOSITORY: << pipeline.parameters.image-repository >>
-      - CLIENT_BASE_IMAGE: montepoeli-client-base-node-modules
+      - CLIENT_BASE_IMAGE: montepoeli-base-node-modules
       - TAG: "latest"
     
     working_directory: ~/repo
@@ -840,13 +840,13 @@ workflows:
                 - /depfu.*/
                 - /dependabot.*/
 
-      - rebuild-client-base:
+      - rebuild-base:
             requires:
               - e2e-tests
             filters:
               branches:
                 only: 
-                  - /depfu/batch_all/client.*/
+                  - /depfu/batch_all.*/
 
       - update-version:
           requires:
