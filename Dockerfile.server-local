@@ -10,8 +10,14 @@ COPY package-lock.json package-lock.json
 
 RUN npm install
 
-COPY apps/api .
+COPY tsconfig.json tsconfig.json
+COPY angular.json angular.json
+COPY nx.json nx.json
 
-RUN npm run build
+COPY apps/api apps/api
+
+RUN ls
+
+RUN npm run build:api
 
 EXPOSE 3000
