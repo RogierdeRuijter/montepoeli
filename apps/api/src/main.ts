@@ -11,6 +11,7 @@ async function bootstrap() {
   try {
     key = fs.readFileSync('./apps/api/secrets/localhost.key');
     cert = fs.readFileSync('./apps/api/secrets/localhost.crt');
+
     // tslint:disable-next-line
     console.info('Local ssl certificates loaded');
   } catch {
