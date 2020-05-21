@@ -76,7 +76,7 @@
     "pre-commit": "npm run lint:circleci && npm run lint:mergify && npm run affected:lint:parallel",
     "lint:circleci": "cd .circleci && npm run lint",
     "lint:mergify": "cd .mergify && npm run lint",
-    "start:server:dev": "ng serve api",   
+    "start:server:dev": "ng serve api",
     "pre-push": "npm run test:circleci && npm run affected:test:parallel && npm run affected:build:parallel",
     "test:circleci": "cd .circleci && npm run test",
     "build:node_modules": "docker build . -f Dockerfile.node_modules -t montepoeli-node_modules:latest",
