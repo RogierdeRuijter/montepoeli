@@ -9,8 +9,11 @@ async function bootstrap() {
   let cert: any;
 
   try {
-    key = fs.readFileSync('./secrets/localhost.key');
-    cert = fs.readFileSync('./secrets/localhost.crt');
+    key = fs.readFileSync('./apps/api/secrets/localhost.key');
+    cert = fs.readFileSync('./apps/api/secrets/localhost.crt');
+
+    // tslint:disable-next-line
+    console.info('Local ssl certificates loaded');
   } catch {
     // tslint:disable-next-line
     console.info('Cant read key or certificate');
@@ -40,6 +43,7 @@ async function bootstrap() {
   if (process.env.ENV === 'prod') {
     origin = process.env.CORS_ORIGIN;
   }
+
 
   app.enableCors({
     credentials: true, // TODO: check if the crendtials true is needed in production

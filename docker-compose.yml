@@ -1,4 +1,4 @@
-version: "3.7"
+version: "3"
 services:
   client:
     build:
@@ -13,12 +13,14 @@ services:
       - ./apps/client/tslint.json:/usr/src/app/tslint.json
     networks:
       - dev
-    command: bash -c 'npm run start:dev-no-host'
+    command: bash -c 'npm run start:client:dev-no-host'
 
   server:
     build:
       context: .
       dockerfile: Dockerfile.server-local
+    depends_on:
+      - mongodb
     container_name: montepouli-server
     environment:
       - MONGO_USERNAME=root
@@ -33,7 +35,7 @@ services:
       - ./apps/api/src:/usr/src/app/src
     networks:
       - dev
-    command: sh -c 'npm run start:dev'
+    command: sh -c 'npm run start:server:dev'
 
     
   mongodb:
