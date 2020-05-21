@@ -3,8 +3,6 @@ FROM montepoeli.club/montepoeli-base-node-modules:latest
 #bcrypt dependencies
 RUN apt-get update && apt-get -y upgrade && apt-get -y install python3 make g++
 
-WORKDIR usr/src/app
-
 COPY package.json package.json
 COPY package-lock.json package-lock.json
 
@@ -15,9 +13,5 @@ COPY angular.json angular.json
 COPY nx.json nx.json
 
 COPY apps/api apps/api
-
-RUN ls
-
-RUN npm run build:api
 
 EXPOSE 3000
