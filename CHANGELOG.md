@@ -1,3 +1,10 @@
+## [4.9.6](https://github.com/RogierdeRuijter/montepoeli/compare/v4.9.5...v4.9.6) (2020-06-01)
+
+
+### Bug Fixes
+
+* Update all npm dependencies (2020-06-01) ([c4f5b29](https://github.com/RogierdeRuijter/montepoeli/commit/c4f5b29212c44a5189dd2920ceeb6e84dfb287aa))
+
 ## [4.9.5](https://github.com/RogierdeRuijter/montepoeli/compare/v4.9.4...v4.9.5) (2020-05-25)
 
 
