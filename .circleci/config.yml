@@ -1,4 +1,6 @@
 version: 2.1
+orbs:
+  docker: skillup/docker@1.3.1
 parameters:
   image-repository:
     type: string
@@ -211,11 +213,16 @@ jobs:
 
       - attach_workspace:
           at: /tmp
-
-      - run:
-          name: Login to montepoeli.club docker
-          command: |
-            docker login $IMAGE_REPOSITORY -u $DOCKER_USER -p $DOCKER_PASSWORD
+      
+      - skillup/docker@1.3.1:
+          login: $DOCKER_USER
+          password: $DOCKER_PASSWORD
+          registry: $IMAGE_REPOSITORY
+   
+      # - run:
+      #     name: Login to montepoeli.club docker
+      #     command: |
+      #       docker login $IMAGE_REPOSITORY -u $DOCKER_USER -p $DOCKER_PASSWORD
       
       - run:
           name: Test and build client image, if it not available in context

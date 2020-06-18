@@ -1,4 +1,4 @@
-FROM montepoeli.club/montepoeli-base-node-modules:latest as builder
+FROM tjokvol/montepoeli-base-node-modules:latest as builder
 
 # bcrypt dependencies
 RUN apt-get update && apt-get -y upgrade && apt-get -y install python3 make g++
@@ -17,7 +17,6 @@ COPY apps/api/jest.config.js apps/api/jest.config.js
 COPY tsconfig.json tsconfig.json
 COPY jest.config.js jest.config.js
 COPY tslint.json tslint.json
-COPY nx.json nx.json
 
 COPY apps/api/src apps/api/src
 

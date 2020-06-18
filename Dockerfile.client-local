@@ -1,4 +1,4 @@
-FROM montepoeli.club/montepoeli-base-node-modules:latest
+FROM tjokvol/montepoeli-base-node-modules:latest
 
 COPY package.json package.json
 COPY package-lock.json package-lock.json
@@ -7,7 +7,7 @@ RUN npm install
 
 RUN npm run compile-ivy-dependencies
 
-ADD apps/client /usr/src/app
+COPY apps/client apps/client
 
 EXPOSE 4200
 EXPOSE 49153
