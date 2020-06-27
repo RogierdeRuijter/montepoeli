@@ -44,7 +44,7 @@ parameters:
     default: ""
   default-build-context:
     type: string
-    default: "circleci/node:13"
+    default: "circleci/node:14.4.0"
   e2e-client-environment-variables:
     type: string
     default: "e2e"
@@ -67,7 +67,7 @@ parameters:
 jobs:
   determine-affected-apps:
     docker:
-      - image: tjokvol/node:13-luna
+      - image: tjokvol/node:14.4.0-luna
     environment:
       - TAG_TO_BE_E2E: << pipeline.parameters.tag-to-be-e2e >>
       - TAG_E2E_TESTED: << pipeline.parameters.tag-e2e >>
