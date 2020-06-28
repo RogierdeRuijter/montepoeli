@@ -1,4 +1,4 @@
-FROM montepoeli.club/montepoeli-base-node-modules:latest AS builder
+FROM tjokvol/montepoeli-base-node-modules:latest AS builder
 
 WORKDIR /usr/src/app
 

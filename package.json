@@ -29,6 +29,9 @@
     "compile-ivy-dependencies-test": "ngcc --properties browser module main --first-only --create-ivy-entry-points",
     "docker:docker-compose-rebuild": "docker-compose build --parallel && docker-compose down && docker-compose up -d",
     "docker:docker-compose-rebuild-no-cache": "docker-compose build --no-cache && docker-compose down && docker-compose up -d",
+    "docker:build-and-push:base-node-modules": "npm run docker:build:base-node-modules && npm run docker:push:base-node-modules",
+    "docker:build:base-node-modules": "docker build -f Dockerfile.node_modules -t tjokvol/montepoeli-base-node-modules:latest . --compress",
+    "docker:push:base-node-modules": "docker push tjokvol/montepoeli-base-node-modules:latest",
     "update-with-master": "CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD) && git checkout master && git pull && git checkout $CURRENT_BRANCH && git merge master",
     "build": "ng build",
     "build:client": "ng build client",
@@ -64,9 +67,6 @@
     "dep-graph": "nx dep-graph",
     "help": "nx help",
     "bundle-report": "webpack-bundle-analyzer dist/frontend/stats-es2015.json",
-    "build-and-push-docker-node-modules": "npm run build-docker-base-node-modules && npm run push-docker-base-node-modules",
-    "build-docker-base-node-modules": "docker build -f Dockerfile.node_modules -t montepoeli.club/montepoeli-base-node-modules:latest . --compress",
-    "push-docker-base-node-modules": "docker push montepoeli.club/montepoeli-base-node-modules:latest",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "build-storybook-web-app": "build-storybook -c .storybook -o .out",
@@ -79,7 +79,6 @@
     "start:server:dev": "ng serve api",
     "pre-push": "npm run test:circleci && npm run affected:test:parallel && npm run affected:build:parallel",
     "test:circleci": "cd .circleci && npm run test",
-    "build:node_modules": "docker build . -f Dockerfile.node_modules -t montepoeli-node_modules:latest",
     "protractor": "protractor apps/client-e2e/protractor.conf.js"
   },
   "dependencies": {
