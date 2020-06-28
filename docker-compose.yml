@@ -9,11 +9,9 @@ services:
       - "4200:4200"
     volumes:
       - ./apps/client/src:/usr/src/app/src
-      - ./apps/client/angular.json:/usr/src/app/angular.json
-      - ./apps/client/tslint.json:/usr/src/app/tslint.json
     networks:
       - dev
-    command: bash -c 'npm run start:client:dev-no-host'
+    command: bash -c 'npm run client:start:dev-no-host'
 
   server:
     build:
@@ -35,7 +33,7 @@ services:
       - ./apps/api/src:/usr/src/app/src
     networks:
       - dev
-    command: sh -c 'npm run start:server:dev'
+    command: sh -c 'npm run api:start:dev'
 
     
   mongodb:
