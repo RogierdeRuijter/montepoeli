@@ -438,15 +438,15 @@ jobs:
           path: ~/repo
 
       - setup_remote_docker
-
-      - run:
-          name: Build docker image with node modules
-          command: npm run docker:build:base-node-modules
       
       - run:
           name: Login to private docker registry
           command: |
-            docker login $IMAGE_REPOSITORY -u $PUBLIC_DOCKER_USER -p $PUBLIC_DOCKER_PASSWORD
+            docker login -u $PUBLIC_DOCKER_USER -p $PUBLIC_DOCKER_PASSWORD
+
+      - run:
+          name: Build docker image with node modules
+          command: npm run docker:build:base-node-modules
 
       - run:
           name: Push image to registry
