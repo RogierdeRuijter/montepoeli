@@ -1,3 +1,10 @@
+## [4.9.12](https://github.com/RogierdeRuijter/montepoeli/compare/v4.9.11...v4.9.12) (2020-06-28)
+
+
+### Bug Fixes
+
+* add missing bootstrap scripts and toastr scripts ([#459](https://github.com/RogierdeRuijter/montepoeli/issues/459)) ([be0583e](https://github.com/RogierdeRuijter/montepoeli/commit/be0583eccdb8e87137d11ea15775132fea43a3ae))
+
 ## [4.9.11](https://github.com/RogierdeRuijter/montepoeli/compare/v4.9.10...v4.9.11) (2020-06-28)
 
 
