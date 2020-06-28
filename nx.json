@@ -6,6 +6,7 @@
       "dependencies": "*",
       "devDependencies": "*"
     },
+    "package-lock.json": "*",
     "tsconfig.json": "*",
     "tslint.json": "*",
     "nx.json": "*",
