@@ -3,6 +3,9 @@ parameters:
   private-image-repository:
     type: string
     default: "montepoeli.club"
+  public-image-repository:
+    type: string
+    default: "tjokvol"
   client-image-name:
     type: string
     default: "montepouli-client"
@@ -215,7 +218,7 @@ jobs:
       - run:
           name: Login to private docker registry
           command: |
-            docker login $IMAGE_REPOSITORY -u $DOCKER_USER -p $DOCKER_PASSWORD
+            docker login $IMAGE_REPOSITORY -u $PRIVATE_DOCKER_USER -p $PRIVATE_DOCKER_PASSWORD
       
       - run:
           name: Test and build client image, if it not available in context
@@ -259,7 +262,7 @@ jobs:
       - run:
           name: Login to private docker registry
           command: |
-            docker login $IMAGE_REPOSITORY -u $DOCKER_USER -p $DOCKER_PASSWORD
+            docker login $IMAGE_REPOSITORY -u $PRIVATE_DOCKER_USER -p $PRIVATE_DOCKER_PASSWORD
       
       - run:
           name: See if the docker image is available current server tag
@@ -311,7 +314,7 @@ jobs:
       - run:
           name: Login to private docker registry
           command: |
-            docker login $IMAGE_REPOSITORY -u $DOCKER_USER -p $DOCKER_PASSWORD
+            docker login $IMAGE_REPOSITORY -u $PRIVATE_DOCKER_USER -p $PRIVATE_DOCKER_PASSWORD
 
       - run:
           name: Insert e2e dynamic environment varibles in client image
@@ -343,7 +346,7 @@ jobs:
       - run:
           name: Login to private docker registry
           command: |
-            docker login $IMAGE_REPOSITORY -u $DOCKER_USER -p $DOCKER_PASSWORD
+            docker login $IMAGE_REPOSITORY -u $PRIVATE_DOCKER_USER -p $PRIVATE_DOCKER_PASSWORD
       - run:
           name: Fetch and Retag server image with to be e2e tag
           command: |
@@ -388,7 +391,7 @@ jobs:
       
       - run: 
           name: Login to private docker registry
-          command: docker login $IMAGE_REPOSITORY -u $DOCKER_USER -p $DOCKER_PASSWORD
+          command: docker login $IMAGE_REPOSITORY -u $PRIVATE_DOCKER_USER -p $PRIVATE_DOCKER_PASSWORD
 
       - run: 
           name: Install npm run all
@@ -426,11 +429,20 @@ jobs:
       - image: << pipeline.parameters.default-build-context >>
     
     working_directory: ~/repo
+    
+    environment:
+      - IMAGE_REPOSITORY: << pipeline.parameters.public-image-repository >>
+    
     steps:
       - checkout:
           path: ~/repo
-      
+
       - setup_remote_docker
+      
+      - run:
+          name: Login to public docker registry
+          command: |
+            docker login -u $PUBLIC_DOCKER_USER -p $PUBLIC_DOCKER_PASSWORD
 
       - run:
           name: Build docker image with node modules
@@ -527,7 +539,7 @@ jobs:
       - run:
           name: Login to private docker registry
           command: |
-            docker login $IMAGE_REPOSITORY -u $DOCKER_USER -p $DOCKER_PASSWORD
+            docker login $IMAGE_REPOSITORY -u $PRIVATE_DOCKER_USER -p $PRIVATE_DOCKER_PASSWORD
 
       - run:
           name: Insert production environment configurations
@@ -571,7 +583,7 @@ jobs:
       - run:
           name: Login to private docker registry
           command: |
-            docker login $IMAGE_REPOSITORY -u $DOCKER_USER -p $DOCKER_PASSWORD
+            docker login $IMAGE_REPOSITORY -u $PRIVATE_DOCKER_USER -p $PRIVATE_DOCKER_PASSWORD
 
       - run:
           name: Pull latest production image
@@ -608,7 +620,7 @@ jobs:
 
       - run: 
           name: Login to private docker registry
-          command: docker login $IMAGE_REPOSITORY -u $DOCKER_USER -p $DOCKER_PASSWORD
+          command: docker login $IMAGE_REPOSITORY -u $PRIVATE_DOCKER_USER -p $PRIVATE_DOCKER_PASSWORD
 
       - run: |
           docker pull $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG_E2E_TESTED
@@ -647,7 +659,7 @@ jobs:
 
       - run: 
           name: Login to private docker registry
-          command: docker login $IMAGE_REPOSITORY -u $DOCKER_USER -p $DOCKER_PASSWORD
+          command: docker login $IMAGE_REPOSITORY -u $PRIVATE_DOCKER_USER -p $PRIVATE_DOCKER_PASSWORD
 
       - run: 
           name: Retag latest production image with the new version
@@ -829,14 +841,14 @@ workflows:
                 - master
                 - /depfu.*/
                 - /dependabot.*/
-
+            
       - rebuild-base:
             requires:
               - e2e-tests
             filters:
               branches:
                 only: 
-                  - /depfu/batch_all.*/
+                  - /depfu.*/
 
       - update-version:
           requires:
