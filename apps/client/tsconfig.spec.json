@@ -1,6 +1,10 @@
 {
     "extends": "./tsconfig.json",
     "compilerOptions": {
+      "baseUrl": ".",
+      "paths": {
+        "autospy": ["./auto-spy"]
+      },
       "outDir": "./out-tsc/spec",
       "allowJs": true,
       "types": [
