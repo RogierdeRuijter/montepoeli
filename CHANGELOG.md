@@ -1,3 +1,10 @@
+## [4.9.11](https://github.com/RogierdeRuijter/montepoeli/compare/v4.9.10...v4.9.11) (2020-06-28)
+
+
+### Bug Fixes
+
+* run npm audit fix ([4945c59](https://github.com/RogierdeRuijter/montepoeli/commit/4945c59862eb10d16a5a97e0381fac3e0209fd3b))
+
 ## [4.9.10](https://github.com/RogierdeRuijter/montepoeli/compare/v4.9.9...v4.9.10) (2020-06-27)
 
 
