@@ -27,7 +27,11 @@
               "apps/client/src/favicon.ico",
               "apps/client/src/manifest.webmanifest"
             ],
-            "styles": ["apps/client/src/styles.scss"],
+            "styles": [
+              "node_modules/bootstrap/scss/bootstrap.scss",
+              "node_modules/ngx-toastr/toastr.css",
+              "apps/client/src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {

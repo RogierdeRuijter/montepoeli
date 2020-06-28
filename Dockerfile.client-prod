@@ -18,15 +18,15 @@ COPY angular.json angular.json
 COPY tsconfig.json tsconfig.json
 COPY jest.config.js jest.config.js
 
-RUN npm run compile-ivy-dependencies
+RUN npm run client:compile-ivy-dependencies
 
 COPY apps/client/src apps/client/src
 
-RUN npm run lint:client
+RUN npm run client:lint
 
-RUN npm run test:client:cov
+RUN npm run client:test:cov
 
-RUN npm run build:client:prod
+RUN npm run client:build:prod
 
 FROM nginx:alpine
 

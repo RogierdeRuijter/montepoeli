@@ -21,11 +21,11 @@ COPY nx.json nx.json
 
 COPY apps/api/src apps/api/src
 
-RUN npm run lint:api
+RUN npm run api:lint
 
-RUN npm run test:api:cov
+RUN npm run api:test:cov
 
-RUN npm run build:api
+RUN npm run api:build
 
 RUN npm install -g depcheck
 
