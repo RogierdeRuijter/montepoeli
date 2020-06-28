@@ -16,7 +16,7 @@
     "docker:restart:e2e-db": "docker-compose -f docker-compose-e2e.yml up --force-recreate -d mongodb-e2e",
     "docker:restart": "npm run docker:stop && npm run docker:start",
     "docker:start": "npm run docker:start-with-rebuild",
-    "docker:start-with-rebuild": "docker-compose build --parallel && docker-compose up -d",
+    "docker:start-with-rebuild": "docker-compose build --parallel --pull && docker-compose up -d",
     "docker:stop": "docker-compose down",
     "docker:start:server": "npm run docker:build:server-local && docker-compose up -d --force-recreate --remove-orphans server",
     "docker:start:e2e-environment-base": "(npm-run-all -p docker:build:e2e-environment docker:pull:e2e-environment) && docker-compose -f docker-compose-e2e.yml up",
