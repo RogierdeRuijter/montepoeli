@@ -1,4 +1,4 @@
-FROM montepoeli.club/montepoeli-base-node-modules:latest
+FROM tjokvol/montepoeli-base-node-modules:latest
 
 #bcrypt dependencies
 RUN apt-get update && apt-get -y upgrade && apt-get -y install python3 make g++

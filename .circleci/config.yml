@@ -1,6 +1,6 @@
 version: 2.1
 parameters:
-  image-repository:
+  private-image-repository:
     type: string
     default: "montepoeli.club"
   client-image-name:
@@ -199,7 +199,7 @@ jobs:
     
     environment:
       - IMAGE_CLIENT_NAME: << pipeline.parameters.client-image-name >>
-      - IMAGE_REPOSITORY: << pipeline.parameters.image-repository >>
+      - IMAGE_REPOSITORY: << pipeline.parameters.private-image-repository >>
       - CLIENT_TAG: << pipeline.parameters.client-tag >>
 
     working_directory: ~/repo
@@ -213,7 +213,7 @@ jobs:
           at: /tmp
 
       - run:
-          name: Login to montepoeli.club docker
+          name: Login to private docker registry
           command: |
             docker login $IMAGE_REPOSITORY -u $DOCKER_USER -p $DOCKER_PASSWORD
       
@@ -242,7 +242,7 @@ jobs:
       - image: << pipeline.parameters.default-build-context >>
 
     environment:
-      - IMAGE_REPOSITORY: << pipeline.parameters.image-repository >>
+      - IMAGE_REPOSITORY: << pipeline.parameters.private-image-repository >>
       - IMAGE_SERVER_NAME: << pipeline.parameters.server-image-name >>
       - SERVER_TAG: << pipeline.parameters.server-tag >>
       
@@ -257,7 +257,7 @@ jobs:
           at: /tmp
 
       - run:
-          name: Login to montepoeli.club docker
+          name: Login to private docker registry
           command: |
             docker login $IMAGE_REPOSITORY -u $DOCKER_USER -p $DOCKER_PASSWORD
       
@@ -290,7 +290,7 @@ jobs:
       - image: << pipeline.parameters.default-build-context >>
 
     environment:
-      - IMAGE_REPOSITORY: << pipeline.parameters.image-repository >>
+      - IMAGE_REPOSITORY: << pipeline.parameters.private-image-repository >>
       - IMAGE_CLIENT_NAME: << pipeline.parameters.client-image-name >>
       - TAG_TO_BE_E2E: << pipeline.parameters.tag-to-be-e2e >>
       - CLIENT_TYPE: << pipeline.parameters.e2e-client-environment-variables >>
@@ -309,7 +309,7 @@ jobs:
           at: /tmp
 
       - run:
-          name: Log into the image repository
+          name: Login to private docker registry
           command: |
             docker login $IMAGE_REPOSITORY -u $DOCKER_USER -p $DOCKER_PASSWORD
 
@@ -327,7 +327,7 @@ jobs:
     docker:
       - image: << pipeline.parameters.default-build-context >>
     environment:
-      - IMAGE_REPOSITORY: << pipeline.parameters.image-repository >>
+      - IMAGE_REPOSITORY: << pipeline.parameters.private-image-repository >>
       - IMAGE_SERVER_NAME: << pipeline.parameters.server-image-name >>
       - TAG_TO_BE_E2E: << pipeline.parameters.tag-to-be-e2e >>
       - SERVER_TAG: << pipeline.parameters.client-tag >>
@@ -341,7 +341,7 @@ jobs:
       - attach_workspace:
           at: /tmp
       - run:
-          name: Log into the image repository
+          name: Login to private docker registry
           command: |
             docker login $IMAGE_REPOSITORY -u $DOCKER_USER -p $DOCKER_PASSWORD
       - run:
@@ -367,7 +367,7 @@ jobs:
         default: false
 
     environment:
-      - IMAGE_REPOSITORY: << pipeline.parameters.image-repository >>
+      - IMAGE_REPOSITORY: << pipeline.parameters.private-image-repository >>
       - CLIENT_BASE_IMAGE_NAME: montepoeli.club/<< pipeline.parameters.client-image-name >>
       - SERVER_IMAGE_NAME: montepoeli.club/<< pipeline.parameters.server-image-name >>
       - IMAGE_CLIENT_NAME: << pipeline.parameters.client-image-name >>
@@ -385,17 +385,9 @@ jobs:
 
       - attach_workspace:
           at: /tmp
-
-      # - run: 
-      #     name: Install docker compose
-      #     command: sudo curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-      
-      # - run: 
-      #     name: Make docker compose executable ?
-      #     command: sudo chmod +x /usr/local/bin/docker-compose
       
       - run: 
-          name: Log into docker registry
+          name: Login to private docker registry
           command: docker login $IMAGE_REPOSITORY -u $DOCKER_USER -p $DOCKER_PASSWORD
 
       - run: 
@@ -433,11 +425,6 @@ jobs:
     docker:
       - image: << pipeline.parameters.default-build-context >>
     
-    environment:
-      - IMAGE_REPOSITORY: << pipeline.parameters.image-repository >>
-      - CLIENT_BASE_IMAGE: montepoeli-base-node-modules
-      - TAG: "latest"
-    
     working_directory: ~/repo
     steps:
       - checkout:
@@ -446,16 +433,12 @@ jobs:
       - setup_remote_docker
 
       - run:
-          name: Login to image repository
-          command: docker login $IMAGE_REPOSITORY -u $DOCKER_USER -p $DOCKER_PASSWORD
-
-      - run:
           name: Build docker image with node modules
-          command: docker build -f Dockerfile.node_modules -t $IMAGE_REPOSITORY/$CLIENT_BASE_IMAGE:$TAG . --compress
+          command: npm run docker:build:base-node-modules
 
       - run:
-          name: Push image
-          command: docker push $IMAGE_REPOSITORY/$CLIENT_BASE_IMAGE:$TAG
+          name: Push image to registry
+          command: npm run docker:push:base-node-modules
            
   update-version:
     docker:
@@ -521,7 +504,7 @@ jobs:
       - image: << pipeline.parameters.default-build-context >>
     
     environment:
-      - IMAGE_REPOSITORY: << pipeline.parameters.image-repository >>
+      - IMAGE_REPOSITORY: << pipeline.parameters.private-image-repository >>
       - IMAGE_CLIENT_NAME: << pipeline.parameters.client-image-name >>
       - TAG_E2E_TESTED: << pipeline.parameters.tag-e2e >>
       - CLIENT_TYPE: << pipeline.parameters.production-client-environment-variables >> 
@@ -542,7 +525,7 @@ jobs:
             echo "export CLIENT_TAG_PRODUCTION=$(cat /tmp/version-updated.txt)" >> $BASH_ENV
 
       - run:
-          name: Login to docker registry
+          name: Login to private docker registry
           command: |
             docker login $IMAGE_REPOSITORY -u $DOCKER_USER -p $DOCKER_PASSWORD
 
@@ -567,7 +550,7 @@ jobs:
       - image: << pipeline.parameters.default-build-context >>
     
     environment:
-      - IMAGE_REPOSITORY: << pipeline.parameters.image-repository >>
+      - IMAGE_REPOSITORY: << pipeline.parameters.private-image-repository >>
       - IMAGE_CLIENT_NAME: << pipeline.parameters.client-image-name >>
       - LATEST_PRODUCTION_IMAGE_TAG: "latest"
 
@@ -586,6 +569,7 @@ jobs:
             echo "export CLIENT_TAG_PRODUCTION=$(cat /tmp/version-updated.txt)" >> $BASH_ENV
 
       - run:
+          name: Login to private docker registry
           command: |
             docker login $IMAGE_REPOSITORY -u $DOCKER_USER -p $DOCKER_PASSWORD
 
@@ -605,7 +589,7 @@ jobs:
       - image: << pipeline.parameters.default-build-context >>
     
     environment:
-      - IMAGE_REPOSITORY: << pipeline.parameters.image-repository >>
+      - IMAGE_REPOSITORY: << pipeline.parameters.private-image-repository >>
       - IMAGE_SERVER_NAME: << pipeline.parameters.server-image-name >>
       - TAG_E2E_TESTED: << pipeline.parameters.tag-e2e >>
       - SERVER_TAG_E2E_TESTED: << pipeline.parameters.server-tag-e2e-tested >> 
@@ -622,7 +606,9 @@ jobs:
           command: |
             echo "export SERVER_TAG_PRODUCTION=$(cat /tmp/version-updated.txt)" >> $BASH_ENV
 
-      - run: docker login $IMAGE_REPOSITORY -u $DOCKER_USER -p $DOCKER_PASSWORD
+      - run: 
+          name: Login to private docker registry
+          command: docker login $IMAGE_REPOSITORY -u $DOCKER_USER -p $DOCKER_PASSWORD
 
       - run: |
           docker pull $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG_E2E_TESTED
@@ -641,7 +627,7 @@ jobs:
       - image: << pipeline.parameters.default-build-context >>
     
     environment:
-      - IMAGE_REPOSITORY: << pipeline.parameters.image-repository >>
+      - IMAGE_REPOSITORY: << pipeline.parameters.private-image-repository >>
       - IMAGE_SERVER_NAME: << pipeline.parameters.server-image-name >>
       - TAG_E2E_TESTED: << pipeline.parameters.tag-e2e >>
       - SERVER_TAG_E2E_TESTED: << pipeline.parameters.server-tag-e2e-tested >> 
@@ -660,7 +646,7 @@ jobs:
             echo "export SERVER_TAG_PRODUCTION=$(cat /tmp/version-updated.txt)" >> $BASH_ENV
 
       - run: 
-          name: Login to docker registory
+          name: Login to private docker registry
           command: docker login $IMAGE_REPOSITORY -u $DOCKER_USER -p $DOCKER_PASSWORD
 
       - run: 

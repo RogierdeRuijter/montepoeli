@@ -1,4 +1,4 @@
-FROM montepoeli.club/montepoeli-base-node-modules:latest
+FROM tjokvol/montepoeli-base-node-modules:latest
 
 COPY package.json package.json
 COPY package-lock.json package-lock.json
