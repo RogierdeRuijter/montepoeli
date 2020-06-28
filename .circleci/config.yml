@@ -807,81 +807,83 @@ workflows:
   client_and_server:
     when: << pipeline.parameters.client-and-server-affected >>
     jobs:
-      - build-client-base
+      # - build-client-base
 
-      - build-server         
+      # - build-server         
       
-      - make-client-image-e2e-test-ready:
-          requires:
-            - build-client-base
-          filters:
-            branches:
-              only: 
-                - master
-                - /depfu.*/
-                - /dependabot.*/
+      # - make-client-image-e2e-test-ready:
+      #     requires:
+      #       - build-client-base
+      #     filters:
+      #       branches:
+      #         only: 
+      #           - master
+      #           - /depfu.*/
+      #           - /dependabot.*/
 
-      - make-server-image-e2e-test-ready:
-          requires:
-            - build-server
-          filters:
-            branches:
-              only: 
-                - master
-                - /depfu.*/
-                - /dependabot.*/
+      # - make-server-image-e2e-test-ready:
+      #     requires:
+      #       - build-server
+      #     filters:
+      #       branches:
+      #         only: 
+      #           - master
+      #           - /depfu.*/
+      #           - /dependabot.*/
 
-      - e2e-tests:
-          requires:
-            - make-client-image-e2e-test-ready
-            - make-server-image-e2e-test-ready
-          filters:
-            branches:
-              only: 
-                - master
-                - /depfu.*/
-                - /dependabot.*/
+      # - e2e-tests:
+      #     requires:
+      #       - make-client-image-e2e-test-ready
+      #       - make-server-image-e2e-test-ready
+      #     filters:
+      #       branches:
+      #         only: 
+      #           - master
+      #           - /depfu.*/
+      #           - /dependabot.*/
+      
+      - rebuild-base
+      
+      # - rebuild-base:
+            # requires:
+            #   - e2e-tests
+            # filters:
+            #   branches:
+            #     only: 
+            #       - /depfu.*/
 
-      - rebuild-base:
-            requires:
-              - e2e-tests
-            filters:
-              branches:
-                only: 
-                  - /depfu/batch_all.*/
+      # - update-version:
+      #     requires:
+      #       - e2e-tests
+      #     filters:
+      #       branches:
+      #         only: 
+      #           - master
+      #           - /([0-9])+?(\.([0-9])+)\.x/
 
-      - update-version:
-          requires:
-            - e2e-tests
-          filters:
-            branches:
-              only: 
-                - master
-                - /([0-9])+?(\.([0-9])+)\.x/
+      # - save-new-version:
+      #     requires:
+      #       - update-version
+      #     filters:
+      #       branches:
+      #         only: 
+      #           - master
+      #           - /([0-9])+?(\.([0-9])+)\.x/
 
-      - save-new-version:
-          requires:
-            - update-version
-          filters:
-            branches:
-              only: 
-                - master
-                - /([0-9])+?(\.([0-9])+)\.x/
+      # - make-client-image-production-ready:
+      #     requires:
+      #       - save-new-version
+      #     filters:
+      #       branches:
+      #         only: 
+      #           - master
+      #           - /([0-9])+?(\.([0-9])+)\.x/
 
-      - make-client-image-production-ready:
-          requires:
-            - save-new-version
-          filters:
-            branches:
-              only: 
-                - master
-                - /([0-9])+?(\.([0-9])+)\.x/
-
-      - make-server-image-production-ready:
-          requires:
-            - save-new-version
-          filters:
-            branches:
-              only: 
-                - master
-                - /([0-9])+?(\.([0-9])+)\.x/
+      # - make-server-image-production-ready:
+      #     requires:
+      #       - save-new-version
+      #     filters:
+      #       branches:
+      #         only: 
+      #           - master
+      #           - /([0-9])+?(\.([0-9])+)\.x/
