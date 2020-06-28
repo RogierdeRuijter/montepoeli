@@ -72,7 +72,7 @@
     "nx:dep-graph": "nx dep-graph",
     "nx:help": "nx help",
     "husky:pre-commit": "npm-run-all -p nx:lint-workspace circleci:lint mergify:lint nx:affected:lint:parallel",
-    "husky:pre-push": "npm run circleci:test && npm run nx:affected:test:parallel && npm run nx:affected:build:parallel",
+    "husky:pre-push": "npm-run-all -p circleci:test nx:affected:test:parallel nx:affected:build:parallel",
     "husky:post-merge": "npm install",
     "husky:commit-message": "commitlint -E HUSKY_GIT_PARAMS",
     "circleci:lint": "cd .circleci && npm run lint",
