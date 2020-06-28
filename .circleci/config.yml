@@ -385,14 +385,6 @@ jobs:
 
       - attach_workspace:
           at: /tmp
-
-      # - run: 
-      #     name: Install docker compose
-      #     command: sudo curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-      
-      # - run: 
-      #     name: Make docker compose executable ?
-      #     command: sudo chmod +x /usr/local/bin/docker-compose
       
       - run: 
           name: Login to private docker registry
@@ -433,11 +425,6 @@ jobs:
     docker:
       - image: << pipeline.parameters.default-build-context >>
     
-    environment:
-      - IMAGE_REPOSITORY: << pipeline.parameters.private-image-repository >>
-      - CLIENT_BASE_IMAGE: montepoeli-base-node-modules
-      - TAG: "latest"
-    
     working_directory: ~/repo
     steps:
       - checkout:
@@ -446,16 +433,12 @@ jobs:
       - setup_remote_docker
 
       - run:
-          name: Login to private docker registry
-          command: docker login $IMAGE_REPOSITORY -u $DOCKER_USER -p $DOCKER_PASSWORD
-
-      - run:
           name: Build docker image with node modules
-          command: docker build -f Dockerfile.node_modules -t $IMAGE_REPOSITORY/$CLIENT_BASE_IMAGE:$TAG . --compress
+          command: npm run docker:build:base-node-modules
 
       - run:
-          name: Push image
-          command: docker push $IMAGE_REPOSITORY/$CLIENT_BASE_IMAGE:$TAG
+          name: Push image to registry
+          command: npm run docker:push:base-node-modules
            
   update-version:
     docker:
