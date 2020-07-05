@@ -8,7 +8,7 @@ services:
     ports:
       - "4200:4200"
     volumes:
-      - ./apps/client/src:/usr/src/app/src
+      - ./apps/client/src:/usr/src/app/apps/client/src
     networks:
       - dev
     command: bash -c 'npm run client:start:dev-no-host'
