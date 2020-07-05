@@ -52,6 +52,12 @@
   color: white;
 }
 
+.center-align-items {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 mat-placeholder, input {
   color: white;
 }

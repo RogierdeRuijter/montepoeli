@@ -3,6 +3,9 @@
   "version": "4.9.13",
   "license": "MIT",
   "private": true,
+  "config": {
+    "base_node_modules_image": "tjokvol/montepoeli-base-node-modules:latest"
+  },
   "scripts": {
     "docker:build:client": "docker build . -t montepouli_client:latest -f Dockerfile.client-prod --pull",
     "docker:build:e2e-client": "docker build -f Dockerfile.client-configured . -t montepouli_client:e2e --build-arg CLIENT_BASE_IMAGE_NAME=montepouli_client --build-arg CLIENT_BASE_IMAGE_TAG=latest --build-arg CLIENT_TYPE=e2e",
@@ -16,7 +19,7 @@
     "docker:restart:e2e-db": "docker-compose -f docker-compose-e2e.yml up --force-recreate -d mongodb-e2e",
     "docker:restart": "npm run docker:stop && npm run docker:start",
     "docker:start": "npm run docker:start-with-rebuild",
-    "docker:start-with-rebuild": "docker-compose build --parallel --pull && docker-compose up -d",
+    "docker:start-with-rebuild": "yarn docker:pull:base-node-modules && docker-compose build --parallel --pull && docker-compose up -d",
     "docker:stop": "docker-compose down",
     "docker:start:server": "npm run docker:build:server-local && docker-compose up -d --force-recreate --remove-orphans server",
     "docker:start:e2e-environment-base": "(npm-run-all -p docker:build:e2e-environment docker:pull:e2e-environment) && docker-compose -f docker-compose-e2e.yml up",
@@ -26,8 +29,9 @@
     "docker:stop:e2e": "docker-compose -f docker-compose-e2e.yml down",
     "docker:restart:e2e": "yarn docker:stop:e2e && sleep 5 && yarn docker:start:e2e",
     "docker:build-and-push:base-node-modules": "npm run docker:build:base-node-modules && npm run docker:push:base-node-modules",
-    "docker:build:base-node-modules": "docker build -f Dockerfile.node_modules -t tjokvol/montepoeli-base-node-modules:latest . --compress --no-cache",
-    "docker:push:base-node-modules": "docker push tjokvol/montepoeli-base-node-modules:latest",
+    "docker:build:base-node-modules": "docker build -f Dockerfile.node_modules -t $npm_package_config_base_node_modules_image . --compress --no-cache",
+    "docker:push:base-node-modules": "docker push $npm_package_config_base_node_modules_image",
+    "docker:pull:base-node-modules": "docker pull $npm_package_config_base_node_modules_image",
     "client:compile-ivy-dependencies": "ngcc -p es2015, es2015 -l info --create-ivy-entry-points",
     "client:compile-ivy-dependencies-test": "ngcc --properties browser module main --first-only --create-ivy-entry-points",
     "client:build": "ng build client",
