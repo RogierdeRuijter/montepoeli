@@ -1,3 +1,11 @@
+## [4.9.14](https://github.com/RogierdeRuijter/montepoeli/compare/v4.9.13...v4.9.14) (2020-07-11)
+
+
+### Bug Fixes
+
+* fix mobile alignment issues login screen ([#466](https://github.com/RogierdeRuijter/montepoeli/issues/466)) ([321d5bb](https://github.com/RogierdeRuijter/montepoeli/commit/321d5bbd1f1fab62a6667a04ca895c9b30434784))
+* Update all npm dependencies (2020-07-06) ([d15799a](https://github.com/RogierdeRuijter/montepoeli/commit/d15799a1ac1cf94edf58c1a0914458129a0214d3))
+
 ## [4.9.13](https://github.com/RogierdeRuijter/montepoeli/compare/v4.9.12...v4.9.13) (2020-06-28)
 
 
