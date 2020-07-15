@@ -8,6 +8,7 @@ export class SyncGameGateway implements OnGatewayConnection {
   private server;
 
   public handleConnection(client: Socket, ...args: any[]) {
+    // TODO: emit all the game ids to the frontend
     // this.server.emit('users', this.users);
   }
 

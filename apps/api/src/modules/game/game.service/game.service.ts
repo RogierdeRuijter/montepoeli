@@ -14,7 +14,8 @@ export class GameService {
   }
 
   public async getGames(): Promise<GameDto[]> {
-    const unSortedGames: Game[] = await this.gameRepositoryService.find();
+    const unSortedGames: Game[] = await this.getAllGames();
+
     const games = this.sortService.sortByDateDescending(unSortedGames);
 
     return this.gameMapper.convertGames(games);
@@ -33,5 +34,16 @@ export class GameService {
     }
 
     return true;
+  }
+
+  public async getAllIdsFromGames(): Promise<string[]> {
+    const games: Game[] = await this.getAllGames();
+
+
+    return games?.map((game: Game) => game.id);
+  }
+
+  public getAllGames(): Promise<Game[]> {
+    return this.gameRepositoryService.find();
   }
 }
