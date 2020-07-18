@@ -50,7 +50,7 @@ export class GameMapperService {
     }
   }
 
-  public convertCreateDto(createGameDto: CreateGameDto): Promise<Game> {
+  public convertCreateDto(createGameDto: CreateGameDto): Promise<any> {
     // TODO: write unit test
     return new Promise((resolve) =>
       this.userRepositoryService.find().then((users: User[]) => {
@@ -73,6 +73,7 @@ export class GameMapperService {
 
         // @ts-ignore
         resolve({
+          _id: createGameDto.id,
           black: blackUser.id,
           winner: winnerUser ? winnerUser.id : null,
           white: whiteUser.id,

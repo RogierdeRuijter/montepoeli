@@ -54,6 +54,7 @@
     "api:test:cov": "ng test api --code-coverage",
     "api:lint": "ng lint api",
     "api:start:dev": "ng serve api",
+    "api:new-local-cert": "openssl req -x509 -sha256 -nodes -newkey rsa:2048 -days 365 -keyout localhost.key -out localhost.crt",
     "e2e:start": "ng e2e",
     "e2e:protractor": "protractor apps/client-e2e/protractor.conf.js",
     "nx:affected:apps": "nx affected:apps",
@@ -134,6 +135,7 @@
     "mongoose": "5.9.23",
     "mysql": "2.18.1",
     "ngx-cookie-service": "3.0.4",
+    "ngx-socket-io": "^3.2.0",
     "ngx-toastr": "12.1.0",
     "passport": "0.4.1",
     "passport-http-bearer": "1.0.1",
@@ -144,6 +146,7 @@
     "tslib": "2.0.0",
     "typeorm": "0.2.25",
     "typescript": "3.9.5",
+    "uuid": "^8.2.0",
     "zone.js": "0.10.3"
   },
   "devDependencies": {

@@ -27,6 +27,7 @@ describe('GameService', () => {
       const service: GameService = TestBed.inject(GameService);
 
       const input: Game = {
+        id: '1',
         white: 'Rogier',
         black: 'Jefrey Bossers',
         winner: null
@@ -34,6 +35,7 @@ describe('GameService', () => {
       const result = service.postProcessGame(input);
 
       const expectedResult: Game = {
+        id: '1',
         white: 'Rogier',
         black: 'Jefrey Bossers',
         winner: 'Draw'
@@ -46,6 +48,7 @@ describe('GameService', () => {
       const service: GameService = TestBed.inject(GameService);
 
       const input: Game = {
+        id: '1',
         white: 'Rogier',
         black: 'Jefrey Bossers',
         winner: 'Rogier'
@@ -53,12 +56,32 @@ describe('GameService', () => {
       const result = service.postProcessGame(input);
 
       const expectedResult: Game = {
+        id: '1',
         white: 'Rogier',
         black: 'Jefrey Bossers',
         winner: 'Rogier'
       };
       
       expect(result).toEqual(expectedResult);
+    });
+  });
+
+  describe('filterIdsThatExistInTheGames', () => {
+    it('should return the ids that are not in the games', () => {
+      const service: GameService = TestBed.inject(GameService);
+
+      // const input: Game[] = [{
+        
+      // }];
+      // const result = service.postProcessGame(input);
+
+      // const expectedResult: Game = {
+      //   white: 'Rogier',
+      //   black: 'Jefrey Bossers',
+      //   winner: 'Rogier'
+      // };
+      
+      // expect(result).toEqual(expectedResult);
     });
   });
 });

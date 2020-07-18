@@ -40,6 +40,7 @@ export class DialogOverviewComponent implements OnInit {
     
     const dialogRef = this.dialog.open(DialogDataComponent, {
       data: {
+        id: this.game.id,
         white: this.game.white,
         winner: this.game.winner,
         black: this.game.black,

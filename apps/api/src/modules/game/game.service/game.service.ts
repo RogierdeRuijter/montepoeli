@@ -29,7 +29,7 @@ export class GameService {
   }
 
   private validDto(createGameDto: CreateGameDto): boolean {
-    if (!createGameDto.black || !createGameDto.white || !createGameDto.winner) {
+    if (!createGameDto.id || !createGameDto.black || !createGameDto.white || !createGameDto.winner) {
       throw new BadRequestException('not all fields defined');
     }
 

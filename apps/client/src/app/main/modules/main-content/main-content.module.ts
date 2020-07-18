@@ -9,7 +9,7 @@ import { MainContentRoutingModule } from './main-content-routing.module';
   ],
   imports: [
     CommonModule,
-    MainContentRoutingModule
+    MainContentRoutingModule,
   ],
 })
 export class MainContentModule { }

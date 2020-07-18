@@ -30,7 +30,7 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./apps/api/src:/usr/src/app/src
+      - ./apps/api:/usr/src/app/apps/api
     networks:
       - dev
     command: sh -c 'npm run api:start:dev'

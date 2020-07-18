@@ -3,6 +3,7 @@ import { tap, filter, takeUntil } from 'rxjs/operators';
 import { GridSizes } from '../../../shared/static-files/enums';
 import { GridService } from '../../../shared/services/grid/grid.service';
 import { Subject } from 'rxjs';
+import { GameService } from 'src/app/shared/modules/home/modules/game/services/game.service';
 
 @Component({
   selector: 'app-main-content',
@@ -15,7 +16,8 @@ export class MainContentComponent implements OnInit, OnDestroy {
               private injector: Injector,
               private gridService: GridService,
               private compiler: Compiler,
-              private changeDetectorRef: ChangeDetectorRef) {}
+              private changeDetectorRef: ChangeDetectorRef,
+              private gameService: GameService) {}
 
   @ViewChild('mobileContent', { read: ViewContainerRef, static: false}) 
   public mobileContentContainer: ViewContainerRef;
@@ -47,6 +49,15 @@ export class MainContentComponent implements OnInit, OnDestroy {
         tap(() => this.createMobileConent()),
         takeUntil(this.destory$)
       ).subscribe();
+
+      this.gameService.fillGameStoreWithGamesFromApi(this.destory$);
+
+      this.gameService.receiveGamesUpdate()
+        .pipe(
+          // Get all ids not currently in the frontend
+          // Go back to the API with these new ids to get the new games
+        )
+        .subscribe((gameIds: string[]) => {});
   }
 
   public async createMobileConent(): Promise<void> {

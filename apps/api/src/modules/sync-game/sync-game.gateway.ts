@@ -19,6 +19,7 @@ export class SyncGameGateway implements OnGatewayConnection {
 
   @SubscribeMessage('message')
   handleMessage(client: any, payload: any): string {
+    // console.log('in hello message');
     return 'Hello world!';
   }
 }
