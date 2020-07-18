@@ -23,9 +23,14 @@ export class CustomHttpService {
               private environmentService: EnvironmentService) {
   }
 
-  public get<T>(url: string): Observable<T> {
+  public get<T>(url: string, params?: {[param: string] : string | string[]}): Observable<T> {
     if (!this.environment) {
       this.initEnvironment();
+    }
+    
+    if (params) {
+      this.httpOptions['params'] = params;
+      console.log(this.httpOptions);
     }
 
     return this.httpClient.get<T>(this.baseUrl + url, this.httpOptions)

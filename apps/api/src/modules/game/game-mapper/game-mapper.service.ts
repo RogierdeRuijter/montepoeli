@@ -5,6 +5,7 @@ import {GameDto} from '../../../models/dtos/game.dto';
 import {Game} from '../../../models/interfaces/game.interface';
 import {CreateGameDto} from '../../../models/create-dtos/create-game.dto';
 import {UserRepositoryService} from '../../users/user-repository/user-repository.service';
+import { GameMongo } from 'apps/api/src/models/mongo-interfaces/game-mongo.interface';
 
 @Injectable()
 export class GameMapperService {
@@ -50,7 +51,7 @@ export class GameMapperService {
     }
   }
 
-  public convertCreateDto(createGameDto: CreateGameDto): Promise<any> {
+  public convertCreateDto(createGameDto: CreateGameDto): Promise<GameMongo> {
     // TODO: write unit test
     return new Promise((resolve) =>
       this.userRepositoryService.find().then((users: User[]) => {
@@ -71,7 +72,6 @@ export class GameMapperService {
           winnerUser = users.find((user: User) => user.name.toLowerCase() === winner);
         }
 
-        // @ts-ignore
         resolve({
           _id: createGameDto.id,
           black: blackUser.id,

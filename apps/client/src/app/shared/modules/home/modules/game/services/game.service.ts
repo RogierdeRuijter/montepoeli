@@ -8,6 +8,7 @@ import { Winners } from '../../../../../static-files/enums';
 import { map, takeUntil } from 'rxjs/operators';
 import { GameStore } from 'src/app/shared/stores/game.store';
 import { Socket } from 'ngx-socket-io';
+import { BadRequest } from 'src/errors/bad-request.error';
 
 @Injectable({
   providedIn: 'root',
@@ -59,6 +60,29 @@ export class GameService {
   }
 
   public filterIdsThatExistInTheGames(gameIds: string[], games: Game[]): string[] {
-    return [];
+    if (games === undefined) {
+      throw new BadRequest('games should not be undefined');
+    }
+
+    return gameIds?.filter((gameId: string) => {
+      const game: Game = this.findGameByGameId(gameId, games);
+      
+      if (!game) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+  }
+
+  private findGameByGameId(gameId: string, games: Game[]): Game {
+    return games.find((game: Game) => game.id === gameId);
+  }
+
+  public getGamesByIds(gameIds: string[]): Observable<Game[]> {
+    return this.httpService.get<Game[]>(this.environment.backend.ENTRY_POINTS.GAME + this.environment.backend.ENTRY_POINTS.BY_IDS, {'gameIds': gameIds}) 
+    .pipe(
+      map((games: Game[]) => games.map((game: Game) => this.postProcessGame(game)))
+    );
   }
 }

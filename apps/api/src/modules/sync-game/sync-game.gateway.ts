@@ -14,7 +14,7 @@ export class SyncGameGateway implements OnGatewayConnection {
     const gameIds: string[] = await this.gameService.getAllIdsFromGames();
     // TODO: emit all the game ids to the frontend
     // this.server.emit('gameIds', gameIds);
-    // console.log('in on gateway connection');
+    console.log('in on gateway connection');
   }
 
   @SubscribeMessage('message')

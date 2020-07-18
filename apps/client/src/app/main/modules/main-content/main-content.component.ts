@@ -1,9 +1,10 @@
 import { Component, ViewChild, ViewContainerRef, ComponentFactoryResolver, Injector, OnInit, Compiler, OnDestroy, ChangeDetectorRef } from '@angular/core';
-import { tap, filter, takeUntil } from 'rxjs/operators';
+import { tap, filter, takeUntil, map, switchMap } from 'rxjs/operators';
 import { GridSizes } from '../../../shared/static-files/enums';
 import { GridService } from '../../../shared/services/grid/grid.service';
-import { Subject } from 'rxjs';
+import { Subject, combineLatest } from 'rxjs';
 import { GameService } from 'src/app/shared/modules/home/modules/game/services/game.service';
+import { Game } from 'src/app/shared/interfaces/game.interface';
 
 @Component({
   selector: 'app-main-content',
@@ -51,13 +52,25 @@ export class MainContentComponent implements OnInit, OnDestroy {
       ).subscribe();
 
       this.gameService.fillGameStoreWithGamesFromApi(this.destory$);
+        
+      // TODO: write a test that test the old object ids and the new ids and see if they are retrieved correctly,
+      //  Should probably be an e2e test or integration test
+      //  Or maybe some test in the backend
 
-      this.gameService.receiveGamesUpdate()
-        .pipe(
+      this.gameService.getGamesByIds(['ObjectId("5f12ceb7ec3d64003391f7ea")', '5f12ceb7ec3d64003391f7ea'])
+        .subscribe((games: Game[]) => console.log(games));
+
+      // TODO: figure out if this get all is good. Since when the store refreshes this variable will fire.
+      combineLatest(
+        this.gameService.receiveGamesUpdate(),
+        this.gameService.getAll(this.destory$)
+      ).pipe(
           // Get all ids not currently in the frontend
+          map(([gameIds, games]: [string[], Game[]]) => this.gameService.filterIdsThatExistInTheGames(gameIds, games)),
           // Go back to the API with these new ids to get the new games
-        )
-        .subscribe((gameIds: string[]) => {});
+          switchMap((gameIds: string[]) => this.gameService.getGamesByIds(gameIds))
+          // Put these new games in the store
+        ).subscribe((gameIds: Game[]) => {});
   }
 
   public async createMobileConent(): Promise<void> {

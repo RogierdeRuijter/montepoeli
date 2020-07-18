@@ -5,6 +5,7 @@ import {GameDto} from '../../../models/dtos/game.dto';
 import {SortService} from '../../shared/services/sort/sort.service';
 import {GameMapperService} from '../game-mapper/game-mapper.service';
 import {GameRepositoryService} from '../game-repository/game-repository.service';
+import { GameMongo } from 'apps/api/src/models/mongo-interfaces/game-mongo.interface';
 
 @Injectable()
 export class GameService {
@@ -24,7 +25,7 @@ export class GameService {
   public create(createGameDto: CreateGameDto): Promise<Game> {
     if (this.validDto(createGameDto)) {
       return this.gameMapper.convertCreateDto(createGameDto)
-        .then((game: Game) => this.gameRepositoryService.save(game));
+        .then((game: GameMongo) => this.gameRepositoryService.save(game));
     }
   }
 
@@ -45,5 +46,9 @@ export class GameService {
 
   public getAllGames(): Promise<Game[]> {
     return this.gameRepositoryService.find();
+  }
+
+  public getGamesByIds(gameIds: string[]): Promise<Game[]> {
+    return this.gameRepositoryService.findByIds(gameIds);
   }
 }
