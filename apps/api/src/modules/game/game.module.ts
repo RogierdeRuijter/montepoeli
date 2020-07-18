@@ -8,6 +8,7 @@ import {SharedModule} from '../shared/shared.module';
 import {GameMapperService} from './game-mapper/game-mapper.service';
 import {GameRepositoryService} from './game-repository/game-repository.service';
 import {UsersModule} from '../users/users.module';
+import { SyncGameModule } from '../sync-game/sync-game.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import {UsersModule} from '../users/users.module';
     AuthModule,
     SharedModule,
     UsersModule,
+    SyncGameModule
   ],
   providers: [GameService, GameMapperService, GameRepositoryService],
   controllers: [GameController],

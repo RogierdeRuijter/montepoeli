@@ -3,10 +3,8 @@ import { SyncGameGateway } from './sync-game.gateway';
 import { GameModule } from '../game/game.module';
 
 @Module({
-    imports: [
-        GameModule
-    ],
-    providers: [SyncGameGateway]
+    providers: [SyncGameGateway],
+    exports: [SyncGameGateway]
 })
 export class SyncGameModule {
 }

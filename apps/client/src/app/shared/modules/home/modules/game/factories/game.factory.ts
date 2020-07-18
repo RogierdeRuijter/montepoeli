@@ -9,6 +9,7 @@ export class GameFactory implements Factory<Game> {
       black: game ? game.black : null,
       winner: game ? game.winner : null,
       white: game ? game.white : null,
+      date: game ? game.date : new Date()
     };
   }
 

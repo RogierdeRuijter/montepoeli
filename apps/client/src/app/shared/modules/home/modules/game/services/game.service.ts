@@ -9,6 +9,7 @@ import { map, takeUntil } from 'rxjs/operators';
 import { GameStore } from 'src/app/shared/stores/game.store';
 import { Socket } from 'ngx-socket-io';
 import { BadRequest } from 'src/errors/bad-request.error';
+import { SortService } from 'src/app/shared/services/sort/sort.service';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +19,8 @@ export class GameService {
   public constructor(private httpService: CustomHttpService,
                      private translateService: TranslateService,
                      private gameStore: GameStore,
-                     private socket: Socket) {
+                     private socket: Socket,
+                     private sortService: SortService) {
   }
 
   public getAll(destory$: Subject<void>): Observable<Game[]> {
@@ -56,6 +58,7 @@ export class GameService {
     if (game.winner === null) {
       game.winner = this.translateService.instant('pages.home.games.labels.' + Winners.DRAW);
     }
+    game.date = new Date(game.date);
     return game;
   }
 
@@ -84,5 +87,13 @@ export class GameService {
     .pipe(
       map((games: Game[]) => games.map((game: Game) => this.postProcessGame(game)))
     );
+  }
+
+  public sortGames(games: Game[]): Game[] {
+    return this.sortService.sortByDateDescending(games);
+  }
+
+  public updateAll(games: Game[]): void {
+    this.gameStore.set(games);
   }
 }

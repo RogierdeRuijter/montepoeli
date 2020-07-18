@@ -32,6 +32,7 @@ export class GameMapperService {
           black: userBlack ? userBlack.name : null,
           white: userWhite ? userWhite.name : null,
           winner: this.getWinnerUser(userBlack, userWhite, game),
+          date: game.date
         } as GameDto;
       },
     );

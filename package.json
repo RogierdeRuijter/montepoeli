@@ -199,7 +199,8 @@
     "ts-node": "8.10.2",
     "tsconfig-paths": "3.9.0",
     "tslint": "6.1.2",
-    "webdriver-manager": "12.1.7"
+    "webdriver-manager": "12.1.7",
+    "@nrwl/jest": "9.5.1"
   },
   "husky": {
     "hooks": {

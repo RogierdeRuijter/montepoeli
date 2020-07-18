@@ -4,6 +4,7 @@ import {Game} from '../../models/interfaces/game.interface';
 import {CreateGameDto} from '../../models/create-dtos/create-game.dto';
 import {AuthGuard} from '@nestjs/passport';
 import {GameDto} from '../../models/dtos/game.dto';
+import { SyncGameGateway } from '../sync-game/sync-game.gateway';
 
 @Controller('/game')
 export class GameController {
@@ -19,13 +20,12 @@ export class GameController {
   @Get('/ids')
   @UseGuards(AuthGuard())
   public getForIds(@Query('gameIds') gameIds: string[]): Promise<GameDto[]> {
-    console.log(gameIds);
     return this.gameService.getGamesByIds(gameIds);
   }
 
   @Post('/create')
   @UseGuards(AuthGuard())
-  public async create(@Body() body: CreateGameDto): Promise<Game> {
+  public create(@Body() body: CreateGameDto): Promise<Game> {
     return this.gameService.create(body);
   }
 }

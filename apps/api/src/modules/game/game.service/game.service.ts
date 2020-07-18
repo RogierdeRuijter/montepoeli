@@ -6,12 +6,14 @@ import {SortService} from '../../shared/services/sort/sort.service';
 import {GameMapperService} from '../game-mapper/game-mapper.service';
 import {GameRepositoryService} from '../game-repository/game-repository.service';
 import { GameMongo } from 'apps/api/src/models/mongo-interfaces/game-mongo.interface';
+import { SyncGameGateway } from '../../sync-game/sync-game.gateway';
 
 @Injectable()
 export class GameService {
   public constructor(private readonly gameMapper: GameMapperService,
                      private readonly sortService: SortService,
-                     private readonly gameRepositoryService: GameRepositoryService) {
+                     private readonly gameRepositoryService: GameRepositoryService,
+                     private readonly syncGameGateway: SyncGameGateway) {
   }
 
   public async getGames(): Promise<GameDto[]> {
@@ -22,10 +24,14 @@ export class GameService {
     return this.gameMapper.convertGames(games);
   }
 
-  public create(createGameDto: CreateGameDto): Promise<Game> {
+  public async create(createGameDto: CreateGameDto): Promise<Game> {
     if (this.validDto(createGameDto)) {
-      return this.gameMapper.convertCreateDto(createGameDto)
-        .then((game: GameMongo) => this.gameRepositoryService.save(game));
+      const gameMongo: GameMongo = await this.gameMapper.convertCreateDto(createGameDto)
+      const game: Game = await this.gameRepositoryService.save(gameMongo);
+
+      this.emitAllGameIds();
+
+      return game;
     }
   }
 
@@ -37,6 +43,18 @@ export class GameService {
     return true;
   }
 
+  private async emitAllGameIds(): Promise<void> {
+      const gameIds: string[] = await this.getAllIdsFromGames();
+
+      this.syncGameGateway.emitGames(gameIds);
+  }
+
+  public async getGamesByIds(gameIds: string[]): Promise<GameDto[]> {
+    const games: Game[] = await this.gameRepositoryService.findByIds(gameIds);
+
+    return this.gameMapper.convertGames(games);
+  }
+
   public async getAllIdsFromGames(): Promise<string[]> {
     const games: Game[] = await this.getAllGames();
 
@@ -46,9 +64,5 @@ export class GameService {
 
   public getAllGames(): Promise<Game[]> {
     return this.gameRepositoryService.find();
-  }
-
-  public getGamesByIds(gameIds: string[]): Promise<Game[]> {
-    return this.gameRepositoryService.findByIds(gameIds);
   }
 }
