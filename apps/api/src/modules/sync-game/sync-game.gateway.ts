@@ -8,7 +8,9 @@ export class SyncGameGateway implements OnGatewayConnection {
   private server;
 
   public async handleConnection(client: Socket, ...args: any[]) {
-    // TODO: emit all the game ids to the frontend
+    // TODO: emit all the game ids to the frontend with the games socket
+    //  Need to trigger the gameService here in some way.
+    //  Maybe this gateway should just move to the game module
     console.log('in on gateway connection');
   }
 
