@@ -38,7 +38,7 @@ services:
     
   mongodb:
     container_name: montepouli-mongo-db
-    image: mongo:4.1
+    image: mongo:4.2
     environment:
       - MONGO_INITDB_ROOT_USERNAME=root
       - MONGO_INITDB_ROOT_PASSWORD=example

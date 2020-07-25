@@ -1,15 +1,13 @@
 import {Injectable} from '@nestjs/common';
 import {Game} from '../../../models/interfaces/game.interface';
 import {InjectModel} from '@nestjs/mongoose';
-import * as mongoose from 'mongoose';
+import {Model} from 'mongoose';
 import { GameMongo } from 'apps/api/src/models/mongo-interfaces/game-mongo.interface';
 
 
 @Injectable()
 export class GameRepositoryService {
-  constructor(@InjectModel('Game') private readonly gameModel: mongoose.Model<any>) {
-    // TODO: remove when no longer needed
-    mongoose.set('debug', true);
+  constructor(@InjectModel('Game') private readonly gameModel: Model<any>) {
   }
 
   public find(): Promise<Game[]> {

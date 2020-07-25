@@ -1,20 +1,17 @@
-import { SubscribeMessage, WebSocketGateway, OnGatewayConnection, WebSocketServer } from '@nestjs/websockets';
+import { WebSocketGateway, OnGatewayConnection, WebSocketServer } from '@nestjs/websockets';
 import { Socket } from 'dgram';
-import { GameService } from '../game.service/game.service';
+import { GameUtilService } from '../game-util/game-util.service';
 
 @WebSocketGateway()
 export class GameGateway implements OnGatewayConnection {
 
-  constructor(private gameService: GameService) {}
+  constructor(private gameUtilService: GameUtilService) {}
 
   @WebSocketServer()
   private server;
 
   public async handleConnection(client: Socket, ...args: any[]) {
-    // TODO: emit all the game ids to the frontend with the games socket
-    //  Need to trigger the gameService here in some way.
-    //  Maybe this gateway should just move to the game module
-    const gameIds = this.gameService.getAllIdsFromGames();
+    const gameIds = this.gameUtilService.getAllIdsFromGames();
     // this.server
     //   .to(client)
     //   .emit('games', gameIds);

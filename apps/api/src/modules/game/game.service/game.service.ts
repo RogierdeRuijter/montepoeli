@@ -14,11 +14,12 @@ export class GameService {
   public constructor(private readonly gameMapper: GameMapperService,
                      private readonly sortService: SortService,
                      private readonly gameRepositoryService: GameRepositoryService,
-                     private readonly syncGameGateway: GameGateway) {
+                     private readonly syncGameGateway: GameGateway,
+                     private readonly gameUtilService: GameUtilService) {
   }
 
   public async getGames(): Promise<GameDto[]> {
-    const unSortedGames: Game[] = await this.getAllGames();
+    const unSortedGames: Game[] = await this.gameUtilService.getAllGames();
 
     const games = this.sortService.sortByDateDescending(unSortedGames);
 
@@ -45,7 +46,7 @@ export class GameService {
   }
 
   private async emitAllGameIds(): Promise<void> {
-      const gameIds: string[] = await this.getAllIdsFromGames();
+      const gameIds: string[] = await this.gameUtilService.getAllIdsFromGames();
 
       this.syncGameGateway.emitGames(gameIds);
   }
@@ -54,15 +55,5 @@ export class GameService {
     const games: Game[] = await this.gameRepositoryService.findByIds(gameIds);
 
     return this.gameMapper.convertGames(games);
-  }
-
-  public async getAllIdsFromGames(): Promise<string[]> {
-    const games: Game[] = await this.getAllGames();
-
-    return games?.map((game: Game) => game.id);
-  }
-
-  public getAllGames(): Promise<Game[]> {
-    return this.gameRepositoryService.find();
   }
 }
