@@ -1,8 +1,11 @@
 import { SubscribeMessage, WebSocketGateway, OnGatewayConnection, WebSocketServer } from '@nestjs/websockets';
 import { Socket } from 'dgram';
+import { GameService } from '../game.service/game.service';
 
 @WebSocketGateway()
-export class SyncGameGateway implements OnGatewayConnection {
+export class GameGateway implements OnGatewayConnection {
+
+  constructor(private gameService: GameService) {}
 
   @WebSocketServer()
   private server;
@@ -11,16 +14,15 @@ export class SyncGameGateway implements OnGatewayConnection {
     // TODO: emit all the game ids to the frontend with the games socket
     //  Need to trigger the gameService here in some way.
     //  Maybe this gateway should just move to the game module
-    console.log('in on gateway connection');
-  }
-
-  @SubscribeMessage('message')
-  handleMessage(client: any, payload: any): string {
-    // console.log('in hello message');
-    return 'Hello world!';
+    const gameIds = this.gameService.getAllIdsFromGames();
+    // this.server
+    //   .to(client)
+    //   .emit('games', gameIds);
+    return gameIds;
   }
 
   public emitGames(gameIds: string[]): void {
     this.server.emit('games', gameIds);
   }
 }
+

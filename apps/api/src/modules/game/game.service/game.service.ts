@@ -6,14 +6,15 @@ import {SortService} from '../../shared/services/sort/sort.service';
 import {GameMapperService} from '../game-mapper/game-mapper.service';
 import {GameRepositoryService} from '../game-repository/game-repository.service';
 import { GameMongo } from 'apps/api/src/models/mongo-interfaces/game-mongo.interface';
-import { SyncGameGateway } from '../../sync-game/sync-game.gateway';
+import { GameGateway } from '../game-gateway/game.gateway';
+import { GameUtilService } from '../game-util/game-util.service';
 
 @Injectable()
 export class GameService {
   public constructor(private readonly gameMapper: GameMapperService,
                      private readonly sortService: SortService,
                      private readonly gameRepositoryService: GameRepositoryService,
-                     private readonly syncGameGateway: SyncGameGateway) {
+                     private readonly syncGameGateway: GameGateway) {
   }
 
   public async getGames(): Promise<GameDto[]> {
@@ -57,7 +58,6 @@ export class GameService {
 
   public async getAllIdsFromGames(): Promise<string[]> {
     const games: Game[] = await this.getAllGames();
-
 
     return games?.map((game: Game) => game.id);
   }

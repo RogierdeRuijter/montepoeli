@@ -8,19 +8,24 @@ import {SharedModule} from '../shared/shared.module';
 import {GameMapperService} from './game-mapper/game-mapper.service';
 import {GameRepositoryService} from './game-repository/game-repository.service';
 import {UsersModule} from '../users/users.module';
-import { SyncGameModule } from '../sync-game/sync-game.module';
+import { GameGateway } from './game-gateway/game.gateway';
+import { GameUtilService } from './game-util/game-util.service';
 
 @Module({
   imports: [
     MongooseModule.forFeature([{name: 'Game', schema: GameSchema}]),
     AuthModule,
     SharedModule,
-    UsersModule,
-    SyncGameModule
+    UsersModule
   ],
-  providers: [GameService, GameMapperService, GameRepositoryService],
+  providers: [
+    GameService,
+    GameMapperService,
+    GameRepositoryService,
+    GameGateway,
+    GameUtilService
+  ],
   controllers: [GameController],
-  exports: [GameService],
 })
 export class GameModule {
 }

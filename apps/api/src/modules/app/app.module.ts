@@ -5,7 +5,6 @@ import {AuthModule} from '../auth/auth.module';
 import {UsersModule} from '../users/users.module';
 import {GameModule} from '../game/game.module';
 import {RuleModule} from '../rule/rule.module';
-import { SyncGameModule } from '../sync-game/sync-game.module';
 
 const username = process.env.MONGO_USERNAME;
 const password = process.env.MONGO_PASSWORD;
@@ -27,8 +26,7 @@ const constructDatabaseUrl = () => {
     AuthModule,
     UsersModule,
     GameModule,
-    RuleModule,
-    SyncGameModule
+    RuleModule
   ],
   controllers: [AppController]
 })
