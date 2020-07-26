@@ -15,10 +15,6 @@ import { GlobalErrorHandlerService } from './shared/services/global-error-handle
 import { AppInitService } from './shared/services/app.init';
 import { CustomTranslateModule } from './shared/modules/translate/custom-translate.module';
 import { MatButtonModule } from '@angular/material/button';
-import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
-
-// TODO: move this to it own module
-const config: SocketIoConfig = { url: 'https://localhost:3000', options: {}};
 
 export function init_app(appLoadService: AppInitService): () => Promise<any> {
   return () => appLoadService.init();
@@ -44,8 +40,7 @@ export function init_app(appLoadService: AppInitService): () => Promise<any> {
     ServiceWorkerModule.register('ngsw-worker.js', {enabled: true}),
     AuthModule,
     InterceptorModule,
-    MatButtonModule,
-    SocketIoModule.forRoot(config)
+    MatButtonModule
   ],
   bootstrap: [AppComponent],
 })

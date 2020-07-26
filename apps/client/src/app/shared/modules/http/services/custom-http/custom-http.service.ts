@@ -52,6 +52,6 @@ export class CustomHttpService {
   private initEnvironment(): void {
     this.environment = this.environmentService.get();
 
-    this.baseUrl = this.environment.environment.backendUrl;
+    this.baseUrl = this.environment.environment.backendUrl + '/' + this.environment.backend.API_PREFIX;
   }
 }

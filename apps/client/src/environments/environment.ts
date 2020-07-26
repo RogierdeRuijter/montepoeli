@@ -33,9 +33,7 @@ export class Environment extends DynamicEnvironment {
     };
 
     this.backend = {
-      URL: {
-        FULL: 'https://localhost:4200/api',
-      },
+      API_PREFIX: 'api',
       ENTRY_POINTS: {
         SIGNIN: '/signIn',
         SIGNOUT: '/logout',

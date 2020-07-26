@@ -1,10 +1,11 @@
-import { Component, ViewChild, ViewContainerRef, ComponentFactoryResolver, Injector, OnInit, Compiler, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Component, ViewChild, ViewContainerRef, ComponentFactoryResolver, Injector, OnInit, Compiler, OnDestroy, ChangeDetectorRef, NgZone } from '@angular/core';
 import { tap, filter, takeUntil, map, switchMap } from 'rxjs/operators';
 import { GridSizes } from '../../../shared/static-files/enums';
 import { GridService } from '../../../shared/services/grid/grid.service';
 import { Subject, combineLatest, of, forkJoin } from 'rxjs';
 import { GameService } from 'src/app/shared/modules/home/modules/game/services/game.service';
 import { Game } from 'src/app/shared/interfaces/game.interface';
+import { Socket } from 'ngx-socket-io';
 
 @Component({
   selector: 'app-main-content',
@@ -18,7 +19,9 @@ export class MainContentComponent implements OnInit, OnDestroy {
               private gridService: GridService,
               private compiler: Compiler,
               private changeDetectorRef: ChangeDetectorRef,
-              private gameService: GameService) {}
+              private gameService: GameService,
+              private socket: Socket,
+              private ngZone: NgZone) {}
 
   @ViewChild('mobileContent', { read: ViewContainerRef, static: false}) 
   public mobileContentContainer: ViewContainerRef;
@@ -56,20 +59,26 @@ export class MainContentComponent implements OnInit, OnDestroy {
       // TODO: write a test that test the old object ids and the new ids and see if they are retrieved correctly,
       //  Should probably be an e2e test or integration test
       //  Or maybe some test in the backend
-
-      combineLatest(
-        this.gameService.receiveGamesUpdate(),
-        this.gameService.getAll(this.destory$)
-      ).pipe(
-          map(([gameIds, games]: [string[], Game[]]) => [this.gameService.filterIdsThatExistInTheGames(gameIds, games), games]),
-          filter(([gameIds, games]: [string[], Game[]]) => gameIds.length > 0), // TODO: move logic to a service
-          switchMap(([gameIds, games]: [string[], Game[]]) => forkJoin(this.gameService.getGamesByIds(gameIds), of(games))),
-          map(([newGames, games]: [Game[], Game[]]) => games.concat(newGames)), // TODO: move this logic to a service
-          map((games: Game[]) => this.gameService.sortGames(games))
-        ).subscribe((games: Game[]) => {
-          this.gameService.updateAll(games);
-          this.changeDetectorRef.detectChanges();
-        });
+      
+      // Running outside of Angular is needed because otherwise the websocket implementation of socket.io hangs on the 
+      // e2e tests
+      this.ngZone.runOutsideAngular(() => {
+        combineLatest(
+          this.gameService.receiveGamesUpdate(this.socket),
+          this.gameService.getAll(this.destory$)
+        ).pipe(
+            map(([gameIds, games]: [string[], Game[]]) => [this.gameService.filterIdsThatExistInTheGames(gameIds, games), games]),
+            filter(([gameIds, games]: [string[], Game[]]) => gameIds.length > 0), // TODO: move logic to a service
+            switchMap(([gameIds, games]: [string[], Game[]]) => forkJoin(this.gameService.getGamesByIds(gameIds), of(games))),
+            map(([newGames, games]: [Game[], Game[]]) => games.concat(newGames)), // TODO: move this logic to a service
+            map((games: Game[]) => this.gameService.sortGames(games))
+          ).subscribe((games: Game[]) => {
+            this.ngZone.run(() => {
+              this.gameService.updateAll(games);
+              this.changeDetectorRef.detectChanges();
+            });
+          });
+      });
   }
 
   public async createMobileConent(): Promise<void> {

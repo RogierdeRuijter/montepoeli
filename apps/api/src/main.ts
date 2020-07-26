@@ -53,7 +53,6 @@ async function bootstrap() {
 
   app.useWebSocketAdapter(new AuthenticatedSocketIoAdapter(app));
 
-
   await app.listen(3000);
 }
 

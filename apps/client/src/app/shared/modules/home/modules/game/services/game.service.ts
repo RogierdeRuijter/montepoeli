@@ -19,7 +19,6 @@ export class GameService {
   public constructor(private httpService: CustomHttpService,
                      private translateService: TranslateService,
                      private gameStore: GameStore,
-                     private socket: Socket,
                      private sortService: SortService) {
   }
 
@@ -42,8 +41,8 @@ export class GameService {
     );
   }
 
-  public receiveGamesUpdate(): Observable<string[]> {
-    return this.socket.fromEvent('games');
+  public receiveGamesUpdate(socket: Socket): Observable<string[]> {
+    return socket.fromEvent('games');
   }
 
   public fillGameStore(games: Game[]): void {

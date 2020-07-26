@@ -19,7 +19,6 @@ export class GameRepositoryService {
   }
 
   public async findByIds(ids: string[]): Promise<Game[]> {
-    // TODO: write migration script for production ids
     return this.gameModel.find().where('_id').in(ids).exec();
   }
 
