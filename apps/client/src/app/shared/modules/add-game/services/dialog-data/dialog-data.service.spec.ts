@@ -90,9 +90,11 @@ describe('DialogDataService', () => {
       ];
 
       const game: Game = {
+        id: undefined,
         white: undefined,
         black: undefined,
-        winner: undefined
+        winner: undefined,
+        date: undefined
       };
       
       const selectedName = undefined;
@@ -118,9 +120,11 @@ describe('DialogDataService', () => {
       ];
 
       const game: Game = {
+        id: '1',
         white: 'Sjonnie',
         black: undefined,
-        winner: undefined
+        winner: undefined,
+        date: new Date()
       };
       
       const selectedName = 'black';
@@ -145,9 +149,11 @@ describe('DialogDataService', () => {
       ];
 
       const game: Game = {
+        id: '1',
         white: undefined,
         black: 'Annie',
-        winner: undefined
+        winner: undefined,
+        date: new Date()
       };
       
       const selectedName = 'white';
@@ -172,9 +178,11 @@ describe('DialogDataService', () => {
       ];
 
       const game: Game = {
+        id: '1',
         white: undefined,
         black: 'Annie',
-        winner: undefined
+        winner: undefined,
+        date: new Date()
       };
       
       const selectedName = 'black';
@@ -200,9 +208,11 @@ describe('DialogDataService', () => {
       ];
 
       const game: Game = {
+        id: '1',
         white: 'Annie',
         black: 'Sjonnie',
-        winner: undefined
+        winner: undefined,
+        date: new Date()
       };
       
       const selectedName = 'black';

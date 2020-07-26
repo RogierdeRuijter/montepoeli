@@ -8,6 +8,7 @@ import {UtilService} from '../../shared/services/util/util.service';
 import {GameRepositoryService} from '../game-repository/game-repository.service';
 import {UserRepositoryService} from '../../users/user-repository/user-repository.service';
 import { GameUtilService } from '../game-util/game-util.service';
+import { GameGateway } from '../game-gateway/game.gateway';
 
 describe('GameService', () => {
   let service: GameService;
@@ -27,7 +28,8 @@ describe('GameService', () => {
         GameMapperService,
         GameRepositoryService,
         UserRepositoryService,
-        GameUtilService
+        GameUtilService,
+        {provide: GameGateway, useValue: '1'}
       ],
     }).compile();
 
