@@ -1,4 +1,4 @@
-import { WebSocketGateway, OnGatewayConnection, WebSocketServer, ConnectedSocket, OnGatewayInit } from '@nestjs/websockets';
+import { WebSocketGateway, OnGatewayConnection, WebSocketServer, ConnectedSocket } from '@nestjs/websockets';
 import { GameUtilService } from '../game-util/game-util.service';
 import * as SocketIo from 'socket.io';
 

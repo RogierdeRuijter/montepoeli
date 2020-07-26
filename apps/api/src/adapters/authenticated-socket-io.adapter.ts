@@ -1,7 +1,6 @@
 import { INestApplicationContext } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { IoAdapter } from '@nestjs/platform-socket.io';
-import { extract, parse } from 'query-string';
 import * as cookieParser from 'cookie-parser';
 import * as cookie from 'cookie';
 
