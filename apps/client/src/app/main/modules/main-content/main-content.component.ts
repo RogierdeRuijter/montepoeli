@@ -61,29 +61,12 @@ export class MainContentComponent implements OnInit, OnDestroy {
         this.gameService.receiveGamesUpdate(),
         this.gameService.getAll(this.destory$)
       ).pipe(
-          // Get all ids not currently in the frontend
           map(([gameIds, games]: [string[], Game[]]) => [this.gameService.filterIdsThatExistInTheGames(gameIds, games), games]),
           filter(([gameIds, games]: [string[], Game[]]) => gameIds.length > 0), // TODO: move logic to a service
-          // Go back to the API with these new ids to get the new games
           switchMap(([gameIds, games]: [string[], Game[]]) => forkJoin(this.gameService.getGamesByIds(gameIds), of(games))),
-          // Append new game to current games
-          map(([newGames, games]: [Game[], Game[]]) => {
-            console.log('newGames', newGames);
-            console.log('games', games);
-            return games.concat(newGames);
-          }), // TODO: move this logic to a service
-          // Sort these games by date
-          map((games: Game[]) => {
-            console.log('unsortedGames', games);
-
-            const sortedGames = this.gameService.sortGames(games);
-            console.log('sortedGames', sortedGames);
-            return sortedGames;
-          
-          })
-          // Put these new games in the store
+          map(([newGames, games]: [Game[], Game[]]) => games.concat(newGames)), // TODO: move this logic to a service
+          map((games: Game[]) => this.gameService.sortGames(games))
         ).subscribe((games: Game[]) => {
-          console.log('games', games);
           this.gameService.updateAll(games);
           this.changeDetectorRef.detectChanges();
         });

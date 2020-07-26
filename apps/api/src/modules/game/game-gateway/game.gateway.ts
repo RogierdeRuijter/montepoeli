@@ -1,6 +1,6 @@
-import { WebSocketGateway, OnGatewayConnection, WebSocketServer } from '@nestjs/websockets';
-import { Socket } from 'dgram';
+import { WebSocketGateway, OnGatewayConnection, WebSocketServer, ConnectedSocket, OnGatewayInit } from '@nestjs/websockets';
 import { GameUtilService } from '../game-util/game-util.service';
+import * as SocketIo from 'socket.io';
 
 @WebSocketGateway()
 export class GameGateway implements OnGatewayConnection {
@@ -8,14 +8,12 @@ export class GameGateway implements OnGatewayConnection {
   constructor(private gameUtilService: GameUtilService) {}
 
   @WebSocketServer()
-  private server;
+  private server: SocketIo.Server;
 
-  public async handleConnection(client: Socket, ...args: any[]) {
-    const gameIds = this.gameUtilService.getAllIdsFromGames();
-    // this.server
-    //   .to(client)
-    //   .emit('games', gameIds);
-    return gameIds;
+  public async handleConnection(@ConnectedSocket() socket: SocketIo.Socket) {
+    const gameIds = await this.gameUtilService.getAllIdsFromGames();
+
+    socket.emit('games', gameIds);
   }
 
   public emitGames(gameIds: string[]): void {

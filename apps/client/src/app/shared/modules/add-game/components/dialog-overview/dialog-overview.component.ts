@@ -44,6 +44,7 @@ export class DialogOverviewComponent implements OnInit {
         white: this.game.white,
         winner: this.game.winner,
         black: this.game.black,
+        date: this.game.date
       } as Game,
       maxWidth: '250px'
     });

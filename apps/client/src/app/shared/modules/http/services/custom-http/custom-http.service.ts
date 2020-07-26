@@ -30,7 +30,6 @@ export class CustomHttpService {
     
     if (params) {
       this.httpOptions['params'] = params;
-      console.log(this.httpOptions);
     }
 
     return this.httpClient.get<T>(this.baseUrl + url, this.httpOptions)
