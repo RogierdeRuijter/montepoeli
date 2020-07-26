@@ -54,7 +54,6 @@
     "api:test:cov": "ng test api --code-coverage",
     "api:lint": "ng lint api",
     "api:start:dev": "ng serve api",
-    "api:new-local-cert": "openssl req -x509 -sha256 -nodes -newkey rsa:2048 -days 365 -keyout localhost.key -out localhost.crt",
     "e2e:start": "ng e2e",
     "e2e:protractor": "protractor apps/client-e2e/protractor.conf.js",
     "nx:affected:apps": "nx affected:apps",
