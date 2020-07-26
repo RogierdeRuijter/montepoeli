@@ -14,7 +14,7 @@ export class GameService {
   public constructor(private readonly gameMapper: GameMapperService,
                      private readonly sortService: SortService,
                      private readonly gameRepositoryService: GameRepositoryService,
-                     private readonly syncGameGateway: GameGateway,
+                     private readonly gameGatway: GameGateway,
                      private readonly gameUtilService: GameUtilService) {
   }
 
@@ -48,7 +48,7 @@ export class GameService {
   private async emitAllGameIds(): Promise<void> {
       const gameIds: string[] = await this.gameUtilService.getAllIdsFromGames();
 
-      this.syncGameGateway.emitGames(gameIds);
+      this.gameGatway.emitGames(gameIds);
   }
 
   public async getGamesByIds(gameIds: string[]): Promise<GameDto[]> {

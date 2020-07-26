@@ -16,8 +16,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@clark-dent/api-interfaces": ["libs/api-interfaces/src/index.ts"],
-      "@montepoeli/sort": ["libs/sort/src/index.ts"]
+      "@clark-dent/api-interfaces": ["libs/api-interfaces/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
