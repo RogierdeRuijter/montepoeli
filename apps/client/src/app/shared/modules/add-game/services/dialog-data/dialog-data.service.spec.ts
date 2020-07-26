@@ -19,9 +19,11 @@ describe('DialogDataService', () => {
       const service: DialogDataService = TestBed.inject(DialogDataService);
 
       const game: Game = {
+        id: '1',
         black: 'Sjonny',
         white: 'Anita',
-        winner: 'Anita'
+        winner: 'Anita',
+        date: new Date()
       };
   
       const output = service.allFieldsAreDefined(game);
@@ -35,9 +37,11 @@ describe('DialogDataService', () => {
       const service: DialogDataService = TestBed.inject(DialogDataService);
 
       const game: Game = {
+        id: '1',
         black: 'Sjonny',
         white: undefined,
-        winner: undefined
+        winner: undefined,
+        date: new Date()
       };
   
       const output = service.allFieldsAreDefined(game);

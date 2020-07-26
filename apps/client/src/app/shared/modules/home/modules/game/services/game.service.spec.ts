@@ -33,7 +33,8 @@ describe('GameService', () => {
         id: '1',
         white: 'Rogier',
         black: 'Jefrey Bossers',
-        winner: null
+        winner: null,
+        date: new Date
       };
       const result = service.postProcessGame(input);
 
@@ -41,7 +42,8 @@ describe('GameService', () => {
         id: '1',
         white: 'Rogier',
         black: 'Jefrey Bossers',
-        winner: 'Draw'
+        winner: 'Draw',
+        date: input.date
       };
       
       expect(result).toEqual(expectedResult);
@@ -54,7 +56,8 @@ describe('GameService', () => {
         id: '1',
         white: 'Rogier',
         black: 'Jefrey Bossers',
-        winner: 'Rogier'
+        winner: 'Rogier',
+        date: new Date()
       };
       const result = service.postProcessGame(input);
 
@@ -62,7 +65,8 @@ describe('GameService', () => {
         id: '1',
         white: 'Rogier',
         black: 'Jefrey Bossers',
-        winner: 'Rogier'
+        winner: 'Rogier',
+        date: input.date
       };
       
       expect(result).toEqual(expectedResult);
