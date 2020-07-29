@@ -38,6 +38,7 @@ export class Environment extends DynamicEnvironment {
         STATUS: '/status',
         USERS: '/users',
         CATS: '/cats',
+        BY_IDS: '/ids',
         GAME: '/game',
         CREATE: '/create',
         UPDATE_LANGUAGE_PREFERENCE: '/language-preference',

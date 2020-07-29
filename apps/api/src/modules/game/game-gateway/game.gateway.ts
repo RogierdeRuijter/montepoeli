@@ -2,7 +2,7 @@ import { WebSocketGateway, OnGatewayConnection, WebSocketServer, ConnectedSocket
 import { GameUtilService } from '../game-util/game-util.service';
 import * as SocketIo from 'socket.io';
 
-@WebSocketGateway()
+@WebSocketGateway({origin: process.env.CORS_ORIGIN })
 export class GameGateway implements OnGatewayConnection {
 
   constructor(private gameUtilService: GameUtilService) {}

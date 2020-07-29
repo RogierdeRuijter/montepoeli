@@ -27,7 +27,7 @@
     "docker:stop": "docker-compose down",
     "docker:start:server": "npm run docker:build:server-local && docker-compose up -d --force-recreate --remove-orphans server",
     "docker:start:e2e-environment-base": "(npm-run-all -p docker:build:e2e-environment docker:pull:e2e-environment) && docker-compose -f docker-compose-e2e.yml up",
-    "docker:start:e2e": "npm run docker:build-e2e-images && (npm run docker:start:e2e-environment-base -- -d)",
+    "docker:e2e:start": "npm run docker:build-e2e-images && (npm run docker:start:e2e-environment-base -- -d)",
     "docker:start:e2e-environment-build-server": "npm run docker:start:e2e-environment-base -- --abort-on-container-exit",
     "docker:start:e2e-tests": "docker-compose -f docker-compose-e2e.yml build e2e-tests && docker-compose -f docker-compose-e2e.yml up -d e2e-tests",
     "docker:stop:e2e": "docker-compose -f docker-compose-e2e.yml down",
