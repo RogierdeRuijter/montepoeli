@@ -5,8 +5,8 @@ import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {EnvironmentService} from '../../../../../../shared/services/environment/environment.service';
 import { TranslateTestingModule } from '../../../../../../testing/translate-testing.module';
 import { Game } from '../../../../../interfaces/game.interface';
-import { Socket } from 'ngx-socket-io';
 import { BadRequest } from 'src/errors/bad-request.error';
+import { WebsocketService } from '../../../../../services/websocket/websocket.service';
 
 describe('GameService', () => {
   beforeEach(() => TestBed.configureTestingModule({
@@ -16,7 +16,7 @@ describe('GameService', () => {
     ],
     providers: [
       EnvironmentService,
-      {provide: Socket, useValue: ''}
+      WebsocketService
     ]
   }));
 
