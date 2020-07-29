@@ -1,3 +1,10 @@
+## [4.10.1](https://github.com/RogierdeRuijter/montepoeli/compare/v4.10.0...v4.10.1) (2020-07-29)
+
+
+### Bug Fixes
+
+* add missing path ([76347ad](https://github.com/RogierdeRuijter/montepoeli/commit/76347ad99b2b4d93ac5eb218aa87c303f800c9bc))
+
 # [4.10.0](https://github.com/RogierdeRuijter/montepoeli/compare/v4.9.17...v4.10.0) (2020-07-29)
 
 
