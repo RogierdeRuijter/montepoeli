@@ -33,6 +33,7 @@ export class Environment extends DynamicEnvironment {
     };
 
     this.backend = {
+      API_PREFIX: 'api',
       ENTRY_POINTS: {
         SIGNIN: '/signIn',
         SIGNOUT: '/logout',
@@ -40,6 +41,7 @@ export class Environment extends DynamicEnvironment {
         STATUS: '/status',
         USERS: '/users',
         GAME: '/game',
+        BY_IDS: '/ids',
         RULE: '/rule',
         CREATE: '/create',
         UPDATE_LANGUAGE_PREFERENCE: '/language-preference',

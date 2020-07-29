@@ -34,7 +34,7 @@
 
 <div [appGridRow]="[GridSizes.ALL]"
      mat-dialog-actions>
-  <!-- TODO: app-button-row -->
+  <!-- TODO: app-button-row and refactor to remove bootstrap -->
   <app-button (clickEvent)="cancel()"
               [appGridColumn]="[6]"
               [buttonFunction]="ButtonFunction.CANCEL"
@@ -42,8 +42,7 @@
   </app-button>
 
   <app-button id="save"
-              (clickEvent)="save()"
-              [appGridColumn]="[6]"
+x              [appGridColumn]="[6]"
               [buttonFunction]="ButtonFunction.SAVE"
               [buttonType]="ButtonType.PRIMARY"
               [dialogDataToSubmit]="data"

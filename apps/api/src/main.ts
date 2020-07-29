@@ -3,6 +3,7 @@ import {AppModule} from './modules/app/app.module';
 import * as cookieParser from 'cookie-parser';
 import * as compression from 'compression';
 import * as fs from 'fs';
+import { AuthenticatedSocketIoAdapter } from './adapters/authenticated-socket-io.adapter';
 
 async function bootstrap() {
   let key: any;
@@ -49,6 +50,8 @@ async function bootstrap() {
     credentials: true, // TODO: check if the crendtials true is needed in production
     origin,
   });
+
+  app.useWebSocketAdapter(new AuthenticatedSocketIoAdapter(app));
 
   await app.listen(3000);
 }

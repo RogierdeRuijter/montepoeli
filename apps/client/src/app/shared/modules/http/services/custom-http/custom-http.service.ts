@@ -23,9 +23,13 @@ export class CustomHttpService {
               private environmentService: EnvironmentService) {
   }
 
-  public get<T>(url: string): Observable<T> {
+  public get<T>(url: string, params?: {[param: string] : string | string[]}): Observable<T> {
     if (!this.environment) {
       this.initEnvironment();
+    }
+    
+    if (params) {
+      this.httpOptions['params'] = params;
     }
 
     return this.httpClient.get<T>(this.baseUrl + url, this.httpOptions)
@@ -48,6 +52,6 @@ export class CustomHttpService {
   private initEnvironment(): void {
     this.environment = this.environmentService.get();
 
-    this.baseUrl = this.environment.environment.backendUrl;
+    this.baseUrl = this.environment.environment.backendUrl + '/' + this.environment.backend.API_PREFIX;
   }
 }
