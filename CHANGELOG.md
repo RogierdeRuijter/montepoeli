@@ -1,3 +1,10 @@
+# [4.10.0](https://github.com/RogierdeRuijter/montepoeli/compare/v4.9.17...v4.10.0) (2020-07-29)
+
+
+### Features
+
+* websocket refresh for the addition of games ([#474](https://github.com/RogierdeRuijter/montepoeli/issues/474)) ([590dedb](https://github.com/RogierdeRuijter/montepoeli/commit/590dedbb1e3765c1f08cba97b63fd1b737da97a4))
+
 ## [4.9.17](https://github.com/RogierdeRuijter/montepoeli/compare/v4.9.16...v4.9.17) (2020-07-27)
 
 
