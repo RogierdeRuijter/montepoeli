@@ -5,7 +5,8 @@ import { GridService } from '../../../shared/services/grid/grid.service';
 import { Subject, combineLatest, of, forkJoin } from 'rxjs';
 import { GameService } from 'src/app/shared/modules/home/modules/game/services/game.service';
 import { Game } from 'src/app/shared/interfaces/game.interface';
-import { Socket } from 'ngx-socket-io';
+import { WebsocketService } from 'src/app/shared/services/websocket/websocket.service';
+import { Environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-main-content',
@@ -20,7 +21,7 @@ export class MainContentComponent implements OnInit, OnDestroy {
               private compiler: Compiler,
               private changeDetectorRef: ChangeDetectorRef,
               private gameService: GameService,
-              private socket: Socket,
+              private websocketService: WebsocketService,
               private ngZone: NgZone) {}
 
   @ViewChild('mobileContent', { read: ViewContainerRef, static: false}) 
@@ -34,6 +35,8 @@ export class MainContentComponent implements OnInit, OnDestroy {
   private destory$: Subject<void> = new Subject();
 
   public ngOnInit(): void {
+    this.ngZone.runOutsideAngular(() => this.websocketService.connect(new Environment().environment.backendUrl));
+
     this.gridService.gridChangeObservable()
       .pipe(
         filter((activeGridSize: GridSizes) => activeGridSize !== GridSizes.EXTRA_SMALL && this.activeView !== 'large-screen'),
@@ -64,7 +67,7 @@ export class MainContentComponent implements OnInit, OnDestroy {
       // e2e tests
       this.ngZone.runOutsideAngular(() => {
         combineLatest(
-          this.gameService.receiveGamesUpdate(this.socket),
+          this.gameService.receiveGamesUpdate(this.websocketService),
           this.gameService.getAll(this.destory$)
         ).pipe(
             map(([gameIds, games]: [string[], Game[]]) => [this.gameService.filterIdsThatExistInTheGames(gameIds, games), games]),

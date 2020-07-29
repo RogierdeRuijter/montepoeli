@@ -7,9 +7,9 @@ import { TranslateService } from '@ngx-translate/core';
 import { Winners } from '../../../../../static-files/enums';
 import { map, takeUntil } from 'rxjs/operators';
 import { GameStore } from 'src/app/shared/stores/game.store';
-import { Socket } from 'ngx-socket-io';
 import { BadRequest } from 'src/errors/bad-request.error';
 import { SortService } from 'src/app/shared/services/sort/sort.service';
+import { WebsocketService } from 'src/app/shared/services/websocket/websocket.service';
 
 @Injectable({
   providedIn: 'root',
@@ -41,7 +41,7 @@ export class GameService {
     );
   }
 
-  public receiveGamesUpdate(socket: Socket): Observable<string[]> {
+  public receiveGamesUpdate(socket: WebsocketService): Observable<string[]> {
     return socket.fromEvent('games');
   }
 
