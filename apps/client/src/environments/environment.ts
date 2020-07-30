@@ -3,13 +3,16 @@
 // The list of file replacements can be found in `angular.json`.
 
 import {DynamicEnvironment} from './dynamic-environment';
+import { Authentication } from './interfaces/authentication.interface';
+import { Backend } from './interfaces/backend.interface';
+import { Frontend } from './interfaces/frontend.interface';
 
 export class Environment extends DynamicEnvironment {
 
   public production: boolean;
-  public authentication: any;
-  public frontend: any;
-  public backend: any;
+  public authentication: Authentication;
+  public frontend: Frontend;
+  public backend: Backend;
 
   constructor() {
     super();
@@ -37,8 +40,6 @@ export class Environment extends DynamicEnvironment {
       ENTRY_POINTS: {
         SIGNIN: '/signIn',
         SIGNOUT: '/logout',
-        DASHBOARD: '/statistics',
-        STATUS: '/status',
         USERS: '/users',
         GAME: '/game',
         BY_IDS: '/ids',
