@@ -67,6 +67,7 @@ parameters:
     type: boolean
     default: false
       
+
 jobs:
   determine-affected-apps:
     docker:
