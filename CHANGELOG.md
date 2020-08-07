@@ -1,3 +1,10 @@
+## [4.10.3](https://github.com/RogierdeRuijter/montepoeli/compare/v4.10.2...v4.10.3) (2020-08-07)
+
+
+### Bug Fixes
+
+* attempt to fix cache busts of server worker ([b207220](https://github.com/RogierdeRuijter/montepoeli/commit/b207220a1b7dadf85e2e22c9950f42ebe664d9e8))
+
 ## [4.10.2](https://github.com/RogierdeRuijter/montepoeli/compare/v4.10.1...v4.10.2) (2020-08-03)
 
 
