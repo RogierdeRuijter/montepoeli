@@ -25,21 +25,5 @@
         ]
       }
     }
-  ],
-  "dataGroups": [
-    {
-      "name": "main-data",
-      "urls": [
-        "https://montepoeli.club/api/game",
-        "https://montepoeli.club/api/rule",
-        "https://montepoeli.club/api/users"
-      ],
-      "cacheConfig": {
-        "maxSize": 10,
-        "maxAge": "10m",
-        "timeout": "1s",
-        "strategy": "freshness"
-      }
-    }
   ]
 }
