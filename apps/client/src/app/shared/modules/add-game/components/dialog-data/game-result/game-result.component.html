@@ -1,33 +1,56 @@
 <h1 appTranslate="pages.home.games.pop-up.title" mat-dialog-title></h1>
 <div mat-dialog-content>
   <form #form="ngForm">
+      <mat-form-field >
+        <mat-label [appTranslate]="'pages.home.games.labels.white'"></mat-label>
+        <mat-chip-list id='white-user' 
+        selectable
+        (change)="onListChange($event, 'white')" 
+        name="white">
+          <mat-chip *ngFor="let user of usersWhite"
+            #matChip="matChip"
+            [id]="'white-' + user.name"
+            [disabled]="user.name === data.black"
+            (click)="fieldUpdated(matChip);"
+            color="primary"
+            [value]="user.name">
+          {{user.name}}
+          </mat-chip>
+      </mat-chip-list>
+    </mat-form-field>
     <div>
-      <app-drop-down id='white-user'
-                     [(value)]="data.white"
-                     (valueChange)="fieldUpdated()"
-                     [options]="usersWhite"
-                     labelKey="pages.home.games.labels.white"
-                     optionDisplayField="name">
-      </app-drop-down>
+      <mat-form-field>
+        <mat-label [appTranslate]="'pages.home.games.labels.black'"></mat-label>
+        <mat-chip-list id='black-user' selectable
+        (change)="onListChange($event, 'black')" name="black">
+          <mat-chip *ngFor="let user of usersBlack"
+            #matChip="matChip"
+            [id]="'black-' + user.name"
+            [disabled]="user.name === data.white"
+            (click)="fieldUpdated(matChip);"
+            color="primary"
+            [value]="user.name">
+          {{user.name}}
+          </mat-chip>
+        </mat-chip-list>
+     </mat-form-field>
     </div>
     <div>
-      <app-drop-down id='black-user'
-                     [(value)]="data.black"
-                     (valueChange)="fieldUpdated()"
-                     [options]="usersBlack"
-                     labelKey="pages.home.games.labels.black"
-                     optionDisplayField="name">
-      </app-drop-down>
-    </div>
-    <!-- TODO: make this none special dropdown-->
-    <div>
-      <app-drop-down id='winner-user'
-                     [disabled]="winnerFieldHidden"
-                     [(value)]="data.winner"
-                     (valueChange)="fieldUpdated()"
-                     [options]="winnerOptions"
-                     labelKey="pages.home.games.labels.winner">
-      </app-drop-down>
+      <mat-form-field>
+        <mat-label [appTranslate]="'pages.home.games.labels.winner'"></mat-label>
+        <mat-chip-list id='winner-user' (change)="onListChange($event, 'winner')" name="winner">
+          <mat-chip *ngFor="let option of winnerOptions; let i = index"
+            #matChip="matChip"
+            [id]="'winner-' + option"
+            [selected]="winnersDeselected"
+            [disabled]="disabledWinnerOptions[i]"
+            (click)="fieldUpdated(matChip);"
+            color="primary"
+            [value]="option">
+          {{option}}
+          </mat-chip>
+        </mat-chip-list>
+      </mat-form-field>
     </div>
   </form>
 </div>
@@ -42,9 +65,9 @@
   </app-button>
 
   <app-button id="save"
-x              [appGridColumn]="[6]"
+              [appGridColumn]="[6]"
               [buttonFunction]="ButtonFunction.SAVE"
-              [buttonType]="ButtonType.PRIMARY"
+              [buttonType]="ButtonType.NORMAL"
               [dialogDataToSubmit]="data"
               [disabled]="disabled">
   </app-button>

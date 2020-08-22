@@ -3,6 +3,7 @@ import {TestBed} from '@angular/core/testing';
 import {DialogDataService} from './dialog-data.service';
 import { Game } from '../../../../interfaces/game.interface';
 import { User } from '../../../../interfaces/user.interface';
+import { GameFactory } from '../../../home/modules/game/factories/game.factory';
 
 describe('DialogDataService', () => {
   beforeEach(() => TestBed.configureTestingModule({
@@ -229,6 +230,53 @@ describe('DialogDataService', () => {
       ];
 
       expect(output).toEqual(expected);
+    });
+  });
+
+  fdescribe('determineDisabledWinnerOptions', () => {
+    it('should return true for all entries if the white and black players are not defined in the game', () => {
+      const service: DialogDataService = TestBed.inject(DialogDataService);
+
+      const winnerOptions = ['user', 'user1', 'user2', 'Draw'];
+      const game: Game = new GameFactory().create();
+      const draw = 'Draw';
+
+      const result = service.determineDisabledWinnerOptions(winnerOptions, game, draw);
+
+      const expectedResult = [true, true, true, true];
+
+      expect(result).toEqual(expectedResult);
+
+    });
+
+    it('should return true for all entries if only the white user is defined', () => {
+      const service: DialogDataService = TestBed.inject(DialogDataService);
+
+      const winnerOptions = ['user', 'user1', 'user2', 'Draw'];
+      const game: Game = new GameFactory().create({white: 'user'});
+      const draw = 'Draw';
+
+      const result = service.determineDisabledWinnerOptions(winnerOptions, game, draw);
+
+      const expectedResult = [true, true, true, true];
+
+      expect(result).toEqual(expectedResult);
+
+    });
+
+    it('should return false for the locations of the names of the users that are defined in white and black and for the draw', () => {
+      const service: DialogDataService = TestBed.inject(DialogDataService);
+
+      const winnerOptions = ['user', 'user1', 'user2', 'Draw'];
+      const game: Game = new GameFactory().create({white: 'user', black: 'user1'});
+      const draw = 'Draw';
+
+      const result = service.determineDisabledWinnerOptions(winnerOptions, game, draw);
+
+      const expectedResult = [false, false, true, false];
+
+      expect(result).toEqual(expectedResult);
+
     });
   });
 });

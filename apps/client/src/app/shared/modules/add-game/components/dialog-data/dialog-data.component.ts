@@ -7,6 +7,7 @@ import {User} from '../../../../interfaces/user.interface';
 import {TranslateService} from '@ngx-translate/core';
 import {AsyncBaseComponent} from '../../../async/components/async-base-component/async-base.component';
 import { UsersStore } from '../../../home/modules/game/stores/user.store';
+import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'app-dialog-data',
@@ -19,7 +20,11 @@ export class DialogDataComponent extends AsyncBaseComponent implements OnInit, O
 
   public Sides = Sides;
 
-  public winnerOptions: string[] = [];
+  public winnerOptions: string[] = [null, null, null];
+
+  public winnersDeselected;
+
+  public draw: string;
 
   constructor(public dialogRef: MatDialogRef<DialogDataComponent>,
               @Inject(MAT_DIALOG_DATA) public data: Game,
@@ -30,9 +35,15 @@ export class DialogDataComponent extends AsyncBaseComponent implements OnInit, O
   }
 
   public ngOnInit(): void {
-    this.userStore
-      .get(this.destroy$)
-      .subscribe((users: User[]) => this.users = users);
+    combineLatest([
+      this.userStore.get(this.destroy$),
+      this.translateService.stream('pages.home.games.labels.' + Winners.DRAW)
+    ]).subscribe(([users, draw]: [User[], string]) => {
+      this.users = users;
+      this.draw = draw;
+
+      this.determineWinnerOptions(this.users);
+    });
   }
 
   public cancelEventHandler(): void {
@@ -51,12 +62,29 @@ export class DialogDataComponent extends AsyncBaseComponent implements OnInit, O
     return !this.dialogDataService.userAreDefined(this.data);
   }
 
-  public fieldUpdateHandler(game: Partial<Game>): void {
+  public fieldUpdateHandler(event: {name: string, value: string}): void {
+    this.updateGame(event);
+  }
+
+  private updateGame(event: {name: string, value: string}): void {
+    // Needed to have a pointer change for the input
+    this.winnersDeselected = undefined;
+
+    this.data[event.name] = event.value;
+
+    if (event.value === undefined) {
+      this.winnersDeselected = false;
+    }
+  }
+
+  public determineDisabledWinnerOptions(): boolean[] {
+    return this.dialogDataService.determineDisabledWinnerOptions(this.winnerOptions, this.data, this.draw);
+  }
+
+  private determineWinnerOptions(users: User[]): void {
     this.winnerOptions = [];
-
-    this.winnerOptions.push(game?.black);
-    this.winnerOptions.push(game?.white);
-
-    this.winnerOptions.push(this.translateService.instant('pages.home.games.labels.' + Winners.DRAW));
+    
+    users.forEach((user: User) => this.winnerOptions.push(user.name));
+    this.winnerOptions.push(this.draw); 
   }
 }

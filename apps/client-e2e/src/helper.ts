@@ -87,23 +87,19 @@ export class Helper {
   }
 
   public addGame(page: any, browser: any, game: any): void {
-    page.getWhiteDropDownList().click();
+    const primaryColor = 'rgba(129, 199, 132, 1)';
     
-    page.getUser(game.white).click();
+    page.getUser('white-' + game.white).click();
 
-    expect(page.getWhiteDropDownField().getText()).toEqual(game.white);
+    expect(page.getWhiteSelectedChip(game.white).getCssValue('background-color')).toEqual(primaryColor);
 
-    page.getBlackDropDownList().click();
-
-    page.getUser(game.black).click();
+    page.getUser('black-' + game.black).click();
     
-    expect(page.getBlackDropDownField().getText()).toEqual(game.black);
+    expect(page.getBlackSelectedChip(game.black).getCssValue('background-color')).toEqual(primaryColor);
     
-    page.getWinnerDropDownList().click();
-
-    page.getUser(game.winner).click();
+    page.getUser('winner-' + game.winner).click();
     
-    expect(page.getWinnerDropDownField().getText()).toEqual(game.winner);
+    expect(page.getWinnerSelectedChip(game.winner).getCssValue('background-color')).toEqual(primaryColor);
 
     page.getSaveButton().click();
   }
