@@ -1,8 +1,5 @@
 version: 2.1
 parameters:
-  private-image-repository:
-    type: string
-    default: "montepoeli.club"
   public-image-repository:
     type: string
     default: "tjokvol"
@@ -203,7 +200,7 @@ jobs:
     
     environment:
       - IMAGE_CLIENT_NAME: << pipeline.parameters.client-image-name >>
-      - IMAGE_REPOSITORY: << pipeline.parameters.private-image-repository >>
+      - IMAGE_REPOSITORY: << pipeline.parameters.public-image-repository >>
       - CLIENT_TAG: << pipeline.parameters.client-tag >>
 
     working_directory: ~/repo
@@ -246,7 +243,7 @@ jobs:
       - image: << pipeline.parameters.default-build-context >>
 
     environment:
-      - IMAGE_REPOSITORY: << pipeline.parameters.private-image-repository >>
+      - IMAGE_REPOSITORY: << pipeline.parameters.public-image-repository >>
       - IMAGE_SERVER_NAME: << pipeline.parameters.server-image-name >>
       - SERVER_TAG: << pipeline.parameters.server-tag >>
       
@@ -294,7 +291,7 @@ jobs:
       - image: << pipeline.parameters.default-build-context >>
 
     environment:
-      - IMAGE_REPOSITORY: << pipeline.parameters.private-image-repository >>
+      - IMAGE_REPOSITORY: << pipeline.parameters.public-image-repository >>
       - IMAGE_CLIENT_NAME: << pipeline.parameters.client-image-name >>
       - TAG_TO_BE_E2E: << pipeline.parameters.tag-to-be-e2e >>
       - CLIENT_TYPE: << pipeline.parameters.e2e-client-environment-variables >>
@@ -331,7 +328,7 @@ jobs:
     docker:
       - image: << pipeline.parameters.default-build-context >>
     environment:
-      - IMAGE_REPOSITORY: << pipeline.parameters.private-image-repository >>
+      - IMAGE_REPOSITORY: << pipeline.parameters.public-image-repository >>
       - IMAGE_SERVER_NAME: << pipeline.parameters.server-image-name >>
       - TAG_TO_BE_E2E: << pipeline.parameters.tag-to-be-e2e >>
       - SERVER_TAG: << pipeline.parameters.client-tag >>
@@ -371,7 +368,7 @@ jobs:
         default: false
 
     environment:
-      - IMAGE_REPOSITORY: << pipeline.parameters.private-image-repository >>
+      - IMAGE_REPOSITORY: << pipeline.parameters.public-image-repository >>
       - CLIENT_BASE_IMAGE_NAME: montepoeli.club/<< pipeline.parameters.client-image-name >>
       - SERVER_IMAGE_NAME: montepoeli.club/<< pipeline.parameters.server-image-name >>
       - IMAGE_CLIENT_NAME: << pipeline.parameters.client-image-name >>
@@ -517,7 +514,7 @@ jobs:
       - image: << pipeline.parameters.default-build-context >>
     
     environment:
-      - IMAGE_REPOSITORY: << pipeline.parameters.private-image-repository >>
+      - IMAGE_REPOSITORY: << pipeline.parameters.public-image-repository >>
       - IMAGE_CLIENT_NAME: << pipeline.parameters.client-image-name >>
       - TAG_E2E_TESTED: << pipeline.parameters.tag-e2e >>
       - CLIENT_TYPE: << pipeline.parameters.production-client-environment-variables >> 
@@ -563,7 +560,7 @@ jobs:
       - image: << pipeline.parameters.default-build-context >>
     
     environment:
-      - IMAGE_REPOSITORY: << pipeline.parameters.private-image-repository >>
+      - IMAGE_REPOSITORY: << pipeline.parameters.public-image-repository >>
       - IMAGE_CLIENT_NAME: << pipeline.parameters.client-image-name >>
       - LATEST_PRODUCTION_IMAGE_TAG: "latest"
 
@@ -602,7 +599,7 @@ jobs:
       - image: << pipeline.parameters.default-build-context >>
     
     environment:
-      - IMAGE_REPOSITORY: << pipeline.parameters.private-image-repository >>
+      - IMAGE_REPOSITORY: << pipeline.parameters.public-image-repository >>
       - IMAGE_SERVER_NAME: << pipeline.parameters.server-image-name >>
       - TAG_E2E_TESTED: << pipeline.parameters.tag-e2e >>
       - SERVER_TAG_E2E_TESTED: << pipeline.parameters.server-tag-e2e-tested >> 
@@ -640,7 +637,7 @@ jobs:
       - image: << pipeline.parameters.default-build-context >>
     
     environment:
-      - IMAGE_REPOSITORY: << pipeline.parameters.private-image-repository >>
+      - IMAGE_REPOSITORY: << pipeline.parameters.public-image-repository >>
       - IMAGE_SERVER_NAME: << pipeline.parameters.server-image-name >>
       - TAG_E2E_TESTED: << pipeline.parameters.tag-e2e >>
       - SERVER_TAG_E2E_TESTED: << pipeline.parameters.server-tag-e2e-tested >> 
