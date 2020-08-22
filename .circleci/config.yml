@@ -1,8 +1,5 @@
 version: 2.1
 parameters:
-  private-image-repository:
-    type: string
-    default: "montepoeli.club"
   public-image-repository:
     type: string
     default: "tjokvol"
@@ -203,7 +200,7 @@ jobs:
     
     environment:
       - IMAGE_CLIENT_NAME: << pipeline.parameters.client-image-name >>
-      - IMAGE_REPOSITORY: << pipeline.parameters.private-image-repository >>
+      - IMAGE_REPOSITORY: << pipeline.parameters.public-image-repository >>
       - CLIENT_TAG: << pipeline.parameters.client-tag >>
 
     working_directory: ~/repo
@@ -217,9 +214,8 @@ jobs:
           at: /tmp
 
       - run:
-          name: Login to private docker registry
-          command: |
-            docker login $IMAGE_REPOSITORY -u $PRIVATE_DOCKER_USER -p $PRIVATE_DOCKER_PASSWORD
+          name: Login to public docker registry
+          command: docker login -u $PUBLIC_DOCKER_USER -p $PUBLIC_DOCKER_PASSWORD
       
       - run:
           name: Test and build client image, if it not available in context
@@ -246,7 +242,7 @@ jobs:
       - image: << pipeline.parameters.default-build-context >>
 
     environment:
-      - IMAGE_REPOSITORY: << pipeline.parameters.private-image-repository >>
+      - IMAGE_REPOSITORY: << pipeline.parameters.public-image-repository >>
       - IMAGE_SERVER_NAME: << pipeline.parameters.server-image-name >>
       - SERVER_TAG: << pipeline.parameters.server-tag >>
       
@@ -261,9 +257,8 @@ jobs:
           at: /tmp
 
       - run:
-          name: Login to private docker registry
-          command: |
-            docker login $IMAGE_REPOSITORY -u $PRIVATE_DOCKER_USER -p $PRIVATE_DOCKER_PASSWORD
+          name: Login to public docker registry
+          command: docker login -u $PUBLIC_DOCKER_USER -p $PUBLIC_DOCKER_PASSWORD
       
       - run:
           name: See if the docker image is available current server tag
@@ -294,7 +289,7 @@ jobs:
       - image: << pipeline.parameters.default-build-context >>
 
     environment:
-      - IMAGE_REPOSITORY: << pipeline.parameters.private-image-repository >>
+      - IMAGE_REPOSITORY: << pipeline.parameters.public-image-repository >>
       - IMAGE_CLIENT_NAME: << pipeline.parameters.client-image-name >>
       - TAG_TO_BE_E2E: << pipeline.parameters.tag-to-be-e2e >>
       - CLIENT_TYPE: << pipeline.parameters.e2e-client-environment-variables >>
@@ -313,9 +308,8 @@ jobs:
           at: /tmp
 
       - run:
-          name: Login to private docker registry
-          command: |
-            docker login $IMAGE_REPOSITORY -u $PRIVATE_DOCKER_USER -p $PRIVATE_DOCKER_PASSWORD
+          name: Login to public docker registry
+          command: docker login -u $PUBLIC_DOCKER_USER -p $PUBLIC_DOCKER_PASSWORD
 
       - run:
           name: Insert e2e dynamic environment varibles in client image
@@ -331,7 +325,7 @@ jobs:
     docker:
       - image: << pipeline.parameters.default-build-context >>
     environment:
-      - IMAGE_REPOSITORY: << pipeline.parameters.private-image-repository >>
+      - IMAGE_REPOSITORY: << pipeline.parameters.public-image-repository >>
       - IMAGE_SERVER_NAME: << pipeline.parameters.server-image-name >>
       - TAG_TO_BE_E2E: << pipeline.parameters.tag-to-be-e2e >>
       - SERVER_TAG: << pipeline.parameters.client-tag >>
@@ -345,9 +339,8 @@ jobs:
       - attach_workspace:
           at: /tmp
       - run:
-          name: Login to private docker registry
-          command: |
-            docker login $IMAGE_REPOSITORY -u $PRIVATE_DOCKER_USER -p $PRIVATE_DOCKER_PASSWORD
+          name: Login to public docker registry
+          command: docker login -u $PUBLIC_DOCKER_USER -p $PUBLIC_DOCKER_PASSWORD
       - run:
           name: Fetch and Retag server image with to be e2e tag
           command: |
@@ -371,7 +364,7 @@ jobs:
         default: false
 
     environment:
-      - IMAGE_REPOSITORY: << pipeline.parameters.private-image-repository >>
+      - IMAGE_REPOSITORY: << pipeline.parameters.public-image-repository >>
       - CLIENT_BASE_IMAGE_NAME: montepoeli.club/<< pipeline.parameters.client-image-name >>
       - SERVER_IMAGE_NAME: montepoeli.club/<< pipeline.parameters.server-image-name >>
       - IMAGE_CLIENT_NAME: << pipeline.parameters.client-image-name >>
@@ -390,9 +383,9 @@ jobs:
       - attach_workspace:
           at: /tmp
       
-      - run: 
-          name: Login to private docker registry
-          command: docker login $IMAGE_REPOSITORY -u $PRIVATE_DOCKER_USER -p $PRIVATE_DOCKER_PASSWORD
+      - run:
+          name: Login to public docker registry
+          command: docker login -u $PUBLIC_DOCKER_USER -p $PUBLIC_DOCKER_PASSWORD
 
       - run: 
           name: Install npm run all
@@ -442,8 +435,7 @@ jobs:
       
       - run:
           name: Login to public docker registry
-          command: |
-            docker login -u $PUBLIC_DOCKER_USER -p $PUBLIC_DOCKER_PASSWORD
+          command: docker login -u $PUBLIC_DOCKER_USER -p $PUBLIC_DOCKER_PASSWORD
 
       - run:
           name: Build docker image with node modules
@@ -517,7 +509,7 @@ jobs:
       - image: << pipeline.parameters.default-build-context >>
     
     environment:
-      - IMAGE_REPOSITORY: << pipeline.parameters.private-image-repository >>
+      - IMAGE_REPOSITORY: << pipeline.parameters.public-image-repository >>
       - IMAGE_CLIENT_NAME: << pipeline.parameters.client-image-name >>
       - TAG_E2E_TESTED: << pipeline.parameters.tag-e2e >>
       - CLIENT_TYPE: << pipeline.parameters.production-client-environment-variables >> 
@@ -538,9 +530,8 @@ jobs:
             echo "export CLIENT_TAG_PRODUCTION=$(cat /tmp/version-updated.txt)" >> $BASH_ENV
 
       - run:
-          name: Login to private docker registry
-          command: |
-            docker login $IMAGE_REPOSITORY -u $PRIVATE_DOCKER_USER -p $PRIVATE_DOCKER_PASSWORD
+          name: Login to public docker registry
+          command: docker login -u $PUBLIC_DOCKER_USER -p $PUBLIC_DOCKER_PASSWORD
 
       - run:
           name: Insert production environment configurations
@@ -563,7 +554,7 @@ jobs:
       - image: << pipeline.parameters.default-build-context >>
     
     environment:
-      - IMAGE_REPOSITORY: << pipeline.parameters.private-image-repository >>
+      - IMAGE_REPOSITORY: << pipeline.parameters.public-image-repository >>
       - IMAGE_CLIENT_NAME: << pipeline.parameters.client-image-name >>
       - LATEST_PRODUCTION_IMAGE_TAG: "latest"
 
@@ -582,9 +573,8 @@ jobs:
             echo "export CLIENT_TAG_PRODUCTION=$(cat /tmp/version-updated.txt)" >> $BASH_ENV
 
       - run:
-          name: Login to private docker registry
-          command: |
-            docker login $IMAGE_REPOSITORY -u $PRIVATE_DOCKER_USER -p $PRIVATE_DOCKER_PASSWORD
+          name: Login to public docker registry
+          command: docker login -u $PUBLIC_DOCKER_USER -p $PUBLIC_DOCKER_PASSWORD
 
       - run:
           name: Pull latest production image
@@ -602,7 +592,7 @@ jobs:
       - image: << pipeline.parameters.default-build-context >>
     
     environment:
-      - IMAGE_REPOSITORY: << pipeline.parameters.private-image-repository >>
+      - IMAGE_REPOSITORY: << pipeline.parameters.public-image-repository >>
       - IMAGE_SERVER_NAME: << pipeline.parameters.server-image-name >>
       - TAG_E2E_TESTED: << pipeline.parameters.tag-e2e >>
       - SERVER_TAG_E2E_TESTED: << pipeline.parameters.server-tag-e2e-tested >> 
@@ -619,9 +609,9 @@ jobs:
           command: |
             echo "export SERVER_TAG_PRODUCTION=$(cat /tmp/version-updated.txt)" >> $BASH_ENV
 
-      - run: 
-          name: Login to private docker registry
-          command: docker login $IMAGE_REPOSITORY -u $PRIVATE_DOCKER_USER -p $PRIVATE_DOCKER_PASSWORD
+      - run:
+          name: Login to public docker registry
+          command: docker login -u $PUBLIC_DOCKER_USER -p $PUBLIC_DOCKER_PASSWORD
 
       - run: |
           docker pull $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG_E2E_TESTED
@@ -640,7 +630,7 @@ jobs:
       - image: << pipeline.parameters.default-build-context >>
     
     environment:
-      - IMAGE_REPOSITORY: << pipeline.parameters.private-image-repository >>
+      - IMAGE_REPOSITORY: << pipeline.parameters.public-image-repository >>
       - IMAGE_SERVER_NAME: << pipeline.parameters.server-image-name >>
       - TAG_E2E_TESTED: << pipeline.parameters.tag-e2e >>
       - SERVER_TAG_E2E_TESTED: << pipeline.parameters.server-tag-e2e-tested >> 
@@ -658,9 +648,9 @@ jobs:
           command: |
             echo "export SERVER_TAG_PRODUCTION=$(cat /tmp/version-updated.txt)" >> $BASH_ENV
 
-      - run: 
-          name: Login to private docker registry
-          command: docker login $IMAGE_REPOSITORY -u $PRIVATE_DOCKER_USER -p $PRIVATE_DOCKER_PASSWORD
+      - run:
+          name: Login to public docker registry
+          command: docker login -u $PUBLIC_DOCKER_USER -p $PUBLIC_DOCKER_PASSWORD
 
       - run: 
           name: Retag latest production image with the new version
