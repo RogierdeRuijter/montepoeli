@@ -2,7 +2,7 @@ import {TestBed} from '@angular/core/testing';
 
 import {DialogDataService} from './dialog-data.service';
 import { Game } from '../../../../interfaces/game.interface';
-import { User } from '../../../../interfaces/user.interface';
+import { GameFactory } from '../../../home/modules/game/factories/game.factory';
 
 describe('DialogDataService', () => {
   beforeEach(() => TestBed.configureTestingModule({
@@ -83,152 +83,50 @@ describe('DialogDataService', () => {
     });
   });
 
-  describe('determineAvailableUsersForSelect', () => {
-    it('should return all users if no users are assigned to a game', () => {
+  describe('determineDisabledWinnerOptions', () => {
+    it('should return true for all entries if the white and black players are not defined in the game', () => {
       const service: DialogDataService = TestBed.inject(DialogDataService);
 
-      const users: User[] = [
-        {name: 'Meneer', preferedLanguage: 'dutch'},
-        {name: 'Sjonnie', preferedLanguage: 'dutch'},
-        {name: 'Annie', preferedLanguage: 'dutch'},
-      ];
+      const winnerOptions = ['user', 'user1', 'user2', 'Draw'];
+      const game: Game = new GameFactory().create();
+      const draw = 'Draw';
 
-      const game: Game = {
-        id: undefined,
-        white: undefined,
-        black: undefined,
-        winner: undefined,
-        date: undefined
-      };
-      
-      const selectedName = undefined;
+      const result = service.determineDisabledWinnerOptions(winnerOptions, game, draw);
 
-      const output = service.determineAvailableUsersForSelect(users, game, selectedName);
+      const expectedResult = [true, true, true, true];
 
-      const expected: User[] = [
-        {name: 'Meneer', preferedLanguage: 'dutch'},
-        {name: 'Sjonnie', preferedLanguage: 'dutch'},
-        {name: 'Annie', preferedLanguage: 'dutch'}
-      ];
+      expect(result).toEqual(expectedResult);
 
-      expect(output).toEqual(expected);
     });
 
-    it('should return partial user list if the white user is already selected', () => {
+    it('should return true for all entries if only the white user is defined', () => {
       const service: DialogDataService = TestBed.inject(DialogDataService);
 
-      const users: User[] = [
-        {name: 'Meneer', preferedLanguage: 'dutch'},
-        {name: 'Sjonnie', preferedLanguage: 'dutch'},
-        {name: 'Annie', preferedLanguage: 'dutch'},
-      ];
+      const winnerOptions = ['user', 'user1', 'user2', 'Draw'];
+      const game: Game = new GameFactory().create({white: 'user'});
+      const draw = 'Draw';
 
-      const game: Game = {
-        id: '1',
-        white: 'Sjonnie',
-        black: undefined,
-        winner: undefined,
-        date: new Date()
-      };
-      
-      const selectedName = 'black';
+      const result = service.determineDisabledWinnerOptions(winnerOptions, game, draw);
 
-      const output = service.determineAvailableUsersForSelect(users, game, selectedName);
+      const expectedResult = [true, true, true, true];
 
-      const expected: User[] = [
-        {name: 'Meneer', preferedLanguage: 'dutch'}, 
-        {name: 'Annie', preferedLanguage: 'dutch'}
-      ];
+      expect(result).toEqual(expectedResult);
 
-      expect(output).toEqual(expected);
     });
 
-    it('should return partial user list if the black user is already selected', () => {
+    it('should return false for the locations of the names of the users that are defined in white and black and for the draw', () => {
       const service: DialogDataService = TestBed.inject(DialogDataService);
 
-      const users: User[] = [
-        {name: 'Meneer', preferedLanguage: 'dutch'},
-        {name: 'Sjonnie', preferedLanguage: 'dutch'},
-        {name: 'Annie', preferedLanguage: 'dutch'},
-      ];
+      const winnerOptions = ['user', 'user1', 'user2', 'Draw'];
+      const game: Game = new GameFactory().create({white: 'user', black: 'user1'});
+      const draw = 'Draw';
 
-      const game: Game = {
-        id: '1',
-        white: undefined,
-        black: 'Annie',
-        winner: undefined,
-        date: new Date()
-      };
-      
-      const selectedName = 'white';
+      const result = service.determineDisabledWinnerOptions(winnerOptions, game, draw);
 
-      const output = service.determineAvailableUsersForSelect(users, game, selectedName);
+      const expectedResult = [false, false, true, false];
 
-      const expected: User[] = [
-        {name: 'Meneer', preferedLanguage: 'dutch'},
-        {name: 'Sjonnie', preferedLanguage: 'dutch'},
-      ];
+      expect(result).toEqual(expectedResult);
 
-      expect(output).toEqual(expected);
-    });
-
-    it('should return all users if the black user is filled in and the black user is selected again', () => {
-      const service: DialogDataService = TestBed.inject(DialogDataService);
-
-      const users: User[] = [
-        {name: 'Meneer', preferedLanguage: 'dutch'},
-        {name: 'Sjonnie', preferedLanguage: 'dutch'},
-        {name: 'Annie', preferedLanguage: 'dutch'},
-      ];
-
-      const game: Game = {
-        id: '1',
-        white: undefined,
-        black: 'Annie',
-        winner: undefined,
-        date: new Date()
-      };
-      
-      const selectedName = 'black';
-
-      const output = service.determineAvailableUsersForSelect(users, game, selectedName);
-
-      const expected: User[] = [
-        {name: 'Meneer', preferedLanguage: 'dutch'},
-        {name: 'Sjonnie', preferedLanguage: 'dutch'},
-        {name: 'Annie', preferedLanguage: 'dutch'},
-      ];
-
-      expect(output).toEqual(expected);
-    });
-
-    it('should return first two users if the white user is already filled with the last user and the black user option list is requested again', () => {
-      const service: DialogDataService = TestBed.inject(DialogDataService);
-
-      const users: User[] = [
-        {name: 'Meneer', preferedLanguage: 'dutch'},
-        {name: 'Sjonnie', preferedLanguage: 'dutch'},
-        {name: 'Annie', preferedLanguage: 'dutch'},
-      ];
-
-      const game: Game = {
-        id: '1',
-        white: 'Annie',
-        black: 'Sjonnie',
-        winner: undefined,
-        date: new Date()
-      };
-      
-      const selectedName = 'black';
-
-      const output = service.determineAvailableUsersForSelect(users, game, selectedName);
-
-      const expected: User[] = [
-        {name: 'Meneer', preferedLanguage: 'dutch'},
-        {name: 'Sjonnie', preferedLanguage: 'dutch'}
-      ];
-
-      expect(output).toEqual(expected);
     });
   });
 });

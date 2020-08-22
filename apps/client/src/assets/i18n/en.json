@@ -16,7 +16,7 @@
       "games": {
         "tooltip": "Games",
         "pop-up": {
-          "title": "Enter match result"
+          "title": "New game"
         },
         "labels": {
           "white": "White",

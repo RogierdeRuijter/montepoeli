@@ -32,32 +32,20 @@ export class AppPage {
     return this.helper.selectLastElementWithId('add-game-button');
   }
 
-  public getWhiteDropDownList(): ElementFinder {
-    return this.helper.selectLastElementWithId('white-user');
-  }
-
-  public getWhiteDropDownField(): ElementFinder {
-    return this.helper.findByXPath('//*[@id="white-user"]/div/div[1]/span/span');
+  public getWhiteSelectedChip(name: string): ElementFinder {
+    return this.helper.selectLastElementWithId('white-' + name);
   }
 
   public getUser(id: string): ElementFinder {
     return this.helper.selectLastElementWithId(id);
   }
 
-  public getWinnerDropDownList(): ElementFinder {
-    return this.helper.selectLastElementWithId('winner-user');
+  public getBlackSelectedChip(name: string): ElementFinder {
+    return this.helper.selectLastElementWithId('black-' + name);
   }
 
-  public getWinnerDropDownField(): ElementFinder {
-    return this.helper.findByXPath('//*[@id="winner-user"]/div/div[1]/span/span');
-  }
-
-  public getBlackDropDownList(): ElementFinder {
-    return this.helper.selectLastElementWithId('black-user');
-  }
-
-  public getBlackDropDownField(): ElementFinder {
-    return this.helper.findByXPath('//*[@id="black-user"]/div/div[1]/span');
+  public getWinnerSelectedChip(name: string): ElementFinder {
+    return this.helper.selectLastElementWithId('winner-' + name);
   }
 
   public getSaveButton(): ElementFinder {

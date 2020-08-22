@@ -10,6 +10,8 @@ import {GameResultComponent} from './components/dialog-data/game-result/game-res
 import {FormModule} from '../form/form.module';
 import {GridModule} from '../grid/grid.module';
 import { TransitionModule } from '../transition/transition.module';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import { TransitionModule } from '../transition/transition.module';
     FormsModule,
     FormModule,
     GridModule,
-    TransitionModule
+    TransitionModule,
+    MatChipsModule,
+    MatFormFieldModule
   ],
 })
 export class AddGameModule { }

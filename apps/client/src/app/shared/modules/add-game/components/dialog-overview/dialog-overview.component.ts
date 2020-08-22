@@ -46,7 +46,7 @@ export class DialogOverviewComponent implements OnInit {
         black: this.game.black,
         date: this.game.date
       } as Game,
-      maxWidth: '250px'
+      maxWidth: '300px'
     });
     
     // No need to unsubscribe since it is a one off observable

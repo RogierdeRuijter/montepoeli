@@ -5,6 +5,7 @@ import {Game} from '../../../../../interfaces/game.interface';
 import {User} from '../../../../../interfaces/user.interface';
 import {timer} from 'rxjs';
 import {MatSelect} from '@angular/material/select';
+import { MatChip, MatChipListChange } from '@angular/material/chips';
 
 @Component({
   selector: 'ui-game-result',
@@ -40,8 +41,14 @@ export class GameResultComponent {
   @Input()
   public winnerFieldHidden: boolean;
 
+  @Input()
+  public disabledWinnerOptions: boolean[];
+
+  @Input()
+  public winnersDeselected: boolean;
+
   @Output()
-  public fieldUpdateEvent: EventEmitter<Game> = new EventEmitter();
+  public fieldUpdateEvent: EventEmitter<{name: string, value: string}> = new EventEmitter(); // TODO: interface
 
   @Output()
   public cancelEvent: EventEmitter<void> = new EventEmitter();
@@ -56,7 +63,16 @@ export class GameResultComponent {
     this.cancelEvent.emit();
   }
 
-  public fieldUpdated(): void {
-    this.fieldUpdateEvent.emit(this.data);
+  public fieldUpdated(matChip: MatChip): void {
+    if (matChip.disabled === false && matChip.selectable === true) {
+      matChip.toggleSelected(true);    
+    }
+  }
+
+  public onListChange(event: MatChipListChange, name: string): void { 
+    this.fieldUpdateEvent.emit({
+      name,
+      value: event.value
+    });
   }
 }

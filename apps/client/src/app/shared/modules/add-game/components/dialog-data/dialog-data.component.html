@@ -3,8 +3,10 @@
                 [data]="data"
                 [disabled]="ifAllFieldsAreNotField()"
                 [winnerFieldHidden]="usersAreNotDefined()"
-                [usersBlack]="determineAvailableUsersForSelect(Sides.BLACK)"
-                [usersWhite]="determineAvailableUsersForSelect(Sides.WHITE)"
+                [usersBlack]="users"
+                [usersWhite]="users"
                 [winnerOptions]="winnerOptions"
-                [winners]="winners">
+                [winnersDeselected]="winnersDeselected"
+                [disabledWinnerOptions]="determineDisabledWinnerOptions()"
+                [winners]="winners"> 
 </ui-game-result>
