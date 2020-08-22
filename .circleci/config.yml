@@ -314,7 +314,7 @@ jobs:
       - run:
           name: Insert e2e dynamic environment varibles in client image
           command: |
-            docker build -f Dockerfile.client-configured . -t $DOMAIN/$IMAGE_CLIENT_NAME:$CLIENT_TAG_TO_BE_E2E --build-arg CLIENT_BASE_IMAGE_NAME=$IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME --build-arg CLIENT_BASE_IMAGE_TAG=$CLIENT_TAG --build-arg CLIENT_TYPE=$CLIENT_TYPE
+            docker build -f Dockerfile.client-configured . -t $IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME:$CLIENT_TAG_TO_BE_E2E --build-arg CLIENT_BASE_IMAGE_NAME=$IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME --build-arg CLIENT_BASE_IMAGE_TAG=$CLIENT_TAG --build-arg CLIENT_TYPE=$CLIENT_TYPE
 
       - deploy: 
           name: Push e2e ready client image
@@ -622,7 +622,7 @@ jobs:
             
       - deploy:
           command: |
-            docker tag $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG_PRODUCTION $DOMAIN/$IMAGE_SERVER_NAME:latest
+            docker tag $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG_PRODUCTION $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:latest
             docker push $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:latest
 
   retag-latest-server-production-image-with-new-version:
