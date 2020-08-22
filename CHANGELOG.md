@@ -1,3 +1,10 @@
+# [4.12.0](https://github.com/RogierdeRuijter/montepoeli/compare/v4.11.0...v4.12.0) (2020-08-22)
+
+
+### Features
+
+* disable black choice when opening ([#484](https://github.com/RogierdeRuijter/montepoeli/issues/484)) ([f89e0c3](https://github.com/RogierdeRuijter/montepoeli/commit/f89e0c39ce2be9d323d05fa1b0a8a5a896ef3b41))
+
 # [4.11.0](https://github.com/RogierdeRuijter/montepoeli/compare/v4.10.6...v4.11.0) (2020-08-22)
 
 
