@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {User} from '../../../../interfaces/user.interface';
 import {Game} from '../../../../interfaces/game.interface';
 import {UtilService} from '../../../../services/util/util.service';
 

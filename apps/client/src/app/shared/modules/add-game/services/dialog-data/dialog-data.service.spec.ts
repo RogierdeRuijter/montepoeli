@@ -2,7 +2,6 @@ import {TestBed} from '@angular/core/testing';
 
 import {DialogDataService} from './dialog-data.service';
 import { Game } from '../../../../interfaces/game.interface';
-import { User } from '../../../../interfaces/user.interface';
 import { GameFactory } from '../../../home/modules/game/factories/game.factory';
 
 describe('DialogDataService', () => {
@@ -83,7 +82,7 @@ describe('DialogDataService', () => {
       expect(output).toBe(expected);
     });
   });
-  
+
   describe('determineDisabledWinnerOptions', () => {
     it('should return true for all entries if the white and black players are not defined in the game', () => {
       const service: DialogDataService = TestBed.inject(DialogDataService);
