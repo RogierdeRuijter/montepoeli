@@ -403,7 +403,6 @@ jobs:
             
             npm run docker:e2e:start-environment-build-server
       
-      # TODO: these steps are not run 
       - run: 
           name: Retag and push tested client image
           command: |
