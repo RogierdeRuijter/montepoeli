@@ -50,10 +50,6 @@ export class DialogDataComponent extends AsyncBaseComponent implements OnInit, O
     this.dialogRef.close('cancelButton');
   }
 
-  public determineAvailableUsersForSelect(selectName: string): User[] {
-    return this.dialogDataService.determineAvailableUsersForSelect(this.users, this.data, selectName);
-  }
-
   public ifAllFieldsAreNotField(): boolean {
     return !this.dialogDataService.allFieldsAreDefined(this.data);
   }
