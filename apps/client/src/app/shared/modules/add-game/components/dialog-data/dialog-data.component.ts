@@ -69,6 +69,7 @@ export class DialogDataComponent extends AsyncBaseComponent implements OnInit, O
     this.data[event.name] = event.value;
 
     if (event.value === undefined) {
+      this.data.winner = undefined;
       this.winnersDeselected = false;
     }
   }
