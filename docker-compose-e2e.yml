@@ -32,7 +32,7 @@ services:
       - e2e
 
   client-e2e:
-    image: ${CLIENT_BASE_IMAGE_NAME}:${CLIENT_BASE_IMAGE_TAG}
+    image: ${IMAGE_REPOSITORY}/${CLIENT_BASE_IMAGE_NAME}:${CLIENT_BASE_IMAGE_TAG}
     container_name: montepouli-client-e2e
     ports:
       - "80:80"
@@ -43,7 +43,7 @@ services:
       - mongodb-e2e
 
   server-e2e:
-    image: ${SERVER_IMAGE_NAME}:${SERVER_IMAGE_TAG}
+    image: ${IMAGE_REPOSITORY}/${SERVER_IMAGE_NAME}:${SERVER_IMAGE_TAG}
     container_name: montepouli-server-e2e
     environment:
       - SERVER_SECRET=secret01

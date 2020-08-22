@@ -395,6 +395,7 @@ jobs:
           name: Run e2e tests
           command: |
             # These e2e tests use the following variables internally
+            # - IMAGE_REPOSITORY
             # - CLIENT_BASE_IMAGE_NAME
             # - SERVER_IMAGE_NAME
             # - CLIENT_BASE_IMAGE_TAG
