@@ -1,3 +1,10 @@
+# [4.11.0](https://github.com/RogierdeRuijter/montepoeli/compare/v4.10.6...v4.11.0) (2020-08-22)
+
+
+### Features
+
+* add game chips ([#483](https://github.com/RogierdeRuijter/montepoeli/issues/483)) ([fc3ff3e](https://github.com/RogierdeRuijter/montepoeli/commit/fc3ff3e5254e920955fd8b84f671950715a6f3ff))
+
 ## [4.10.6](https://github.com/RogierdeRuijter/montepoeli/compare/v4.10.5...v4.10.6) (2020-08-22)
 
 
