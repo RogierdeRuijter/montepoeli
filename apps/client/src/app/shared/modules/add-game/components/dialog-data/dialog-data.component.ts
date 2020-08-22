@@ -20,7 +20,7 @@ export class DialogDataComponent extends AsyncBaseComponent implements OnInit, O
 
   public Sides = Sides;
 
-  public winnerOptions: string[] = [null, null, null];
+  public winnerOptions: string[] = [];
 
   public winnersDeselected;
 
