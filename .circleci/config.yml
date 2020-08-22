@@ -401,7 +401,7 @@ jobs:
             # - CLIENT_BASE_IMAGE_TAG
             # - SERVER_IMAGE_TAG
             
-            npm run docker:start:e2e-environment-build-server
+            npm run docker:e2e:start-environment-build-server
       
       # TODO: these steps are not run 
       - run: 
