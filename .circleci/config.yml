@@ -234,7 +234,7 @@ jobs:
             bash <(curl -s https://codecov.io/bash)
 
       - deploy:
-          name: Push client image to montepoeli.club registry
+          name: Push client image to registry
           command: docker push $IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME:$CLIENT_TAG
 
   build-server:
@@ -365,8 +365,8 @@ jobs:
 
     environment:
       - IMAGE_REPOSITORY: << pipeline.parameters.public-image-repository >>
-      - CLIENT_BASE_IMAGE_NAME: montepoeli.club/<< pipeline.parameters.client-image-name >>
-      - SERVER_IMAGE_NAME: montepoeli.club/<< pipeline.parameters.server-image-name >>
+      - CLIENT_BASE_IMAGE_NAME: << pipeline.parameters.client-image-name >>
+      - SERVER_IMAGE_NAME: << pipeline.parameters.server-image-name >>
       - IMAGE_CLIENT_NAME: << pipeline.parameters.client-image-name >>
       - IMAGE_SERVER_NAME: << pipeline.parameters.server-image-name >>
       - CLIENT_BASE_IMAGE_TAG: << pipeline.parameters.client-base-image-tag >>
@@ -407,14 +407,14 @@ jobs:
           name: Retag and push tested client image
           command: |
             if [ "${CLIENT_AFFECTED}" = true ] || [ "${CLIENT_AND_SERVER_AFFECTED}" = true ]; then
-              docker tag $CLIENT_BASE_IMAGE_NAME:$CLIENT_BASE_IMAGE_TAG $IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME:$CLIENT_TAG_E2E_TESTED
+              docker tag $IMAGE_REPOSITORY/$CLIENT_BASE_IMAGE_NAME:$CLIENT_BASE_IMAGE_TAG $IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME:$CLIENT_TAG_E2E_TESTED
               docker push $IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME:$CLIENT_TAG_E2E_TESTED
             fi
       - run: 
           name: Retag tested server image
           command: | 
             if [ "${SERVER_AFFECTED}" = true ] || [ "${CLIENT_AND_SERVER_AFFECTED}" = true ]; then
-              docker tag $SERVER_IMAGE_NAME:$SERVER_IMAGE_TAG $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG_E2E_TESTED
+              docker tag $IMAGE_REPOSITORY/$SERVER_IMAGE_NAME:$SERVER_IMAGE_TAG $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG_E2E_TESTED
               docker push $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG_E2E_TESTED
             fi
 
