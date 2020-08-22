@@ -202,6 +202,8 @@ jobs:
       - IMAGE_CLIENT_NAME: << pipeline.parameters.client-image-name >>
       - IMAGE_REPOSITORY: << pipeline.parameters.public-image-repository >>
       - CLIENT_TAG: << pipeline.parameters.client-tag >>
+      - DOCKER_USER: $PUBLIC_DOCKER_USER
+      - DOCKER_PASSWORD: $PUBLIC_DOCKER_PASSWORD
 
     working_directory: ~/repo
     steps:
@@ -215,7 +217,7 @@ jobs:
 
       - run:
           name: Login to public docker registry
-          command: docker login -u $PUBLIC_DOCKER_USER -p $PUBLIC_DOCKER_PASSWORD
+          command: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
       
       - run:
           name: Test and build client image, if it not available in context
@@ -234,7 +236,7 @@ jobs:
             bash <(curl -s https://codecov.io/bash)
 
       - deploy:
-          name: Push client image to montepoeli.club registry
+          name: Push client image to registry
           command: docker push $IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME:$CLIENT_TAG
 
   build-server:
