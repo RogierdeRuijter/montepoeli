@@ -1,6 +1,7 @@
 <h2 appTranslate="pages.home.games.pop-up.title" mat-dialog-title></h2>
 <div mat-dialog-content>
   <form #form="ngForm">
+    <div>
       <mat-form-field color="accent">
         <mat-label [appTranslate]="'pages.home.games.labels.white'"></mat-label>
         <mat-chip-list id='white-user' 
@@ -16,9 +17,10 @@
             [value]="user.name">
           {{user.name}}
           </mat-chip>
-      </mat-chip-list>
-    </mat-form-field>
-    <div>
+        </mat-chip-list>
+      </mat-form-field>
+    </div>
+    <div [class.form-field-with-disabled-underline]="blackDisabled">
       <mat-form-field color="accent">
         <mat-label [appTranslate]="'pages.home.games.labels.black'"></mat-label>
         <mat-chip-list id='black-user' selectable
@@ -35,7 +37,7 @@
         </mat-chip-list>
      </mat-form-field>
     </div>
-    <div>
+    <div [class.form-field-with-disabled-underline]="winnersDisabled">
       <mat-form-field color="accent">
         <mat-label [appTranslate]="'pages.home.games.labels.winner'"></mat-label>
         <mat-chip-list id='winner-user' (change)="onListChange($event, 'winner')" name="winner">

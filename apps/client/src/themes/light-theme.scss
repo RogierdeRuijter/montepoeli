@@ -14,7 +14,8 @@ $custom-variables: (
   action-bar-top-border: lightgray,
   action-bar-border-background: white,
   button-icon-active-color: black,
-  button-icon-inactive-color: gray
+  button-icon-inactive-color: gray,
+  form-field-underline-disabled: #e0e0e0
   );
 
 $anms-light-theme: map_merge($anms-light-theme, $custom-variables);

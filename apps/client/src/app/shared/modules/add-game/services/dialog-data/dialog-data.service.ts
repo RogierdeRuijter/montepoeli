@@ -34,4 +34,13 @@ export class DialogDataService {
       return winnerOptions.map(() => true);
     }
   }
+
+  public areAllWinnerOptionsDisabled(winnerOptions: string[], game: Game, draw: string): boolean {
+    const disabledWinnerOptions: boolean[] = this.determineDisabledWinnerOptions(winnerOptions, game, draw);
+    
+    const found = disabledWinnerOptions
+      .find((disabledWinnerOption: boolean) => disabledWinnerOption === false);
+
+    return found === undefined ? true : false;
+  }
 }
