@@ -1,3 +1,10 @@
+# [4.13.0](https://github.com/RogierdeRuijter/montepoeli/compare/v4.12.0...v4.13.0) (2020-08-24)
+
+
+### Features
+
+* add theming to add game form field underline ([#487](https://github.com/RogierdeRuijter/montepoeli/issues/487)) ([d7548a3](https://github.com/RogierdeRuijter/montepoeli/commit/d7548a35c4295bdc74c2e70964a771f8dd8a6116))
+
 # [4.12.0](https://github.com/RogierdeRuijter/montepoeli/compare/v4.11.0...v4.12.0) (2020-08-22)
 
 
