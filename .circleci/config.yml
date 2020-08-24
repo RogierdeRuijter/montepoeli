@@ -402,7 +402,6 @@ jobs:
             # - SERVER_IMAGE_TAG
             
             npm run docker:e2e:start-environment-build-server
-
       - run: 
           name: Retag and push tested client image
           command: |
