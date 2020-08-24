@@ -129,4 +129,65 @@ describe('DialogDataService', () => {
 
     });
   });
+
+  describe('areAllWinnerOptionsDisabled', () => {
+    it('should return true if the white and black players are not defined in the game', () => {
+      const service: DialogDataService = TestBed.inject(DialogDataService);
+
+      const winnerOptions = ['user', 'user1', 'user2', 'Draw'];
+      const game: Game = new GameFactory().create();
+      const draw = 'Draw';
+
+      const result = service.areAllWinnerOptionsDisabled(winnerOptions, game, draw);
+
+      const expectedResult = true;
+
+      expect(result).toEqual(expectedResult);
+
+    });
+    it('should return true if the white is not defined in the game', () => {
+      const service: DialogDataService = TestBed.inject(DialogDataService);
+
+      const winnerOptions = ['user', 'user1', 'user2', 'Draw'];
+      const game: Game = new GameFactory().create({white: 'user'});
+      const draw = 'Draw';
+
+      const result = service.areAllWinnerOptionsDisabled(winnerOptions, game, draw);
+
+      const expectedResult = true;
+
+      expect(result).toEqual(expectedResult);
+
+    });
+
+    it('should return false if the white and black user are defined in the game', () => {
+      const service: DialogDataService = TestBed.inject(DialogDataService);
+
+      const winnerOptions = ['user', 'user1', 'user2', 'Draw'];
+      const game: Game = new GameFactory().create({white: 'user', black: 'user1'});
+      const draw = 'Draw';
+
+      const result = service.areAllWinnerOptionsDisabled(winnerOptions, game, draw);
+
+      const expectedResult = false;
+
+      expect(result).toEqual(expectedResult);
+
+    });
+
+    it('should return false if the white, black, and winner user are defined in the game', () => {
+      const service: DialogDataService = TestBed.inject(DialogDataService);
+
+      const winnerOptions = ['user', 'user1', 'user2', 'Draw'];
+      const game: Game = new GameFactory().create({white: 'user', black: 'user1', winner: 'user'});
+      const draw = 'Draw';
+
+      const result = service.areAllWinnerOptionsDisabled(winnerOptions, game, draw);
+
+      const expectedResult = false;
+
+      expect(result).toEqual(expectedResult);
+
+    });
+  });
 });

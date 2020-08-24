@@ -9,12 +9,14 @@
 @import './app/main/modules/main-content/modules/larger-screen-content/components/footer/footer.component-theme.scss';
 @import './app/main/modules/main-content/modules/mobile-content/components/action-bar-footer/action-bar-footer.component-theme.scss';
 @import './app/shared/modules/button/components/button-icon-active-state/button-icon-active-state.component-theme.scss';
+@import './app/shared/modules/add-game/components/dialog-data/game-result/game-result.component-theme.scss';
 
 @mixin custom-components-theme($theme) {
   @include main-content-component-theme($theme);
   @include footer-component-theme($theme);
   @include action-bar-footer-component-theme($theme);
   @include button-icon-active-state-component-theme($theme);
+  @include game-result-component-theme($theme);
 }
 
 .light-theme {

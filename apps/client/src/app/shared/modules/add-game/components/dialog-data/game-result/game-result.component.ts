@@ -47,8 +47,14 @@ export class GameResultComponent {
   @Input()
   public winnersDeselected: boolean;
 
+  @Input()
+  public winnersDisabled: boolean;
+
+  @Input()
+  public blackDisabled: boolean;
+
   @Output()
-  public fieldUpdateEvent: EventEmitter<{name: string, value: string}> = new EventEmitter(); // TODO: interface
+  public fieldUpdateEvent: EventEmitter<{name: string, value: string}> = new EventEmitter();
 
   @Output()
   public cancelEvent: EventEmitter<void> = new EventEmitter();

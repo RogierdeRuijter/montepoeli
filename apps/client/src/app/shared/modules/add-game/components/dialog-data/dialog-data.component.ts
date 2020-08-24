@@ -78,6 +78,10 @@ export class DialogDataComponent extends AsyncBaseComponent implements OnInit, O
     return this.dialogDataService.determineDisabledWinnerOptions(this.winnerOptions, this.data, this.draw);
   }
 
+  public areAllWinnerOptionsDisabled(): boolean {
+    return this.dialogDataService.areAllWinnerOptionsDisabled(this.winnerOptions, this.data, this.draw);
+  }
+
   private determineWinnerOptions(users: User[]): void {
     this.winnerOptions = [];
     

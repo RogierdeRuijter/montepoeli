@@ -8,5 +8,7 @@
                 [winnerOptions]="winnerOptions"
                 [winnersDeselected]="winnersDeselected"
                 [disabledWinnerOptions]="determineDisabledWinnerOptions()"
+                [blackDisabled]="!data.white"
+                [winnersDisabled]="areAllWinnerOptionsDisabled()"
                 [winners]="winners"> 
 </ui-game-result>
