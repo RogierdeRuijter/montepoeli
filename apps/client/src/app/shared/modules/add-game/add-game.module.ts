@@ -5,7 +5,7 @@ import {DialogDataComponent} from './components/dialog-data/dialog-data.componen
 import {DialogOverviewComponent} from './components/dialog-overview/dialog-overview.component';
 import {CustomTranslateModule} from '../translate/custom-translate.module';
 import {ButtonModule} from '../button/button.module';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {GameResultComponent} from './components/dialog-data/game-result/game-result.component';
 import {FormModule} from '../form/form.module';
 import {GridModule} from '../grid/grid.module';
@@ -42,7 +42,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     GridModule,
     TransitionModule,
     MatChipsModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    ReactiveFormsModule
   ],
 })
 export class AddGameModule { }

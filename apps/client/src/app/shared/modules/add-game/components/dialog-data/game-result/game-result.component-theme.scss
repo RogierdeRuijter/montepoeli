@@ -2,10 +2,27 @@
 
 @mixin game-result-component-theme($theme) {
     $disabled-color: map-get($theme, form-field-underline-disabled);
+    $accent-color: map-get($theme, form-field-underline-disabled);
    
     .form-field-with-disabled-underline {
       .mat-form-field-underline {
           background-color: $disabled-color;
       }
+
+      mat-label {
+        color: $disabled-color;
+      }
     }
+
+    .input-field {
+      // .mat-form-field {
+          mat-label {
+            color: green !important;
+          }
+      // }
+
+      .mat-form-field-ripple {
+        opacity: 0 !important;
+      }
+  }
 }

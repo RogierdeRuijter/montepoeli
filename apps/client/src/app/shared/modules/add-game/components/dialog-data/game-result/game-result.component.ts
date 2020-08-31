@@ -64,7 +64,7 @@ export class GameResultComponent {
   public GridSizes = GridSizes;
   public Icons = Icons;
   public timer = timer;
-
+  
   public cancel(): void {
     this.cancelEvent.emit();
   }
@@ -81,4 +81,9 @@ export class GameResultComponent {
       value: event.value
     });
   }
+
+  public clicked(): void {
+    setTimeout(() => {
+      document.getElementById('formField123').blur();
+    }, 200);  }
 }
