@@ -48,6 +48,9 @@ export class GameResultComponent {
   public winnersDeselected: boolean;
 
   @Input()
+  public blackDeselected: boolean;
+
+  @Input()
   public winnersDisabled: boolean;
 
   @Input()
