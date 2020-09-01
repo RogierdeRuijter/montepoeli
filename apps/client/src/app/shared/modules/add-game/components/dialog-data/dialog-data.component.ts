@@ -22,7 +22,8 @@ export class DialogDataComponent extends AsyncBaseComponent implements OnInit, O
 
   public winnerOptions: string[] = [];
 
-  public winnersDeselected;
+  public winnersDeselected: boolean;
+  public blackDeselected: boolean;
 
   public draw: string;
 
@@ -65,8 +66,14 @@ export class DialogDataComponent extends AsyncBaseComponent implements OnInit, O
   private updateGame(event: {name: string, value: string}): void {
     // Needed to have a pointer change for the input
     this.winnersDeselected = undefined;
-
+    this.blackDeselected = undefined;
+    
     this.data[event.name] = event.value;
+
+    if (event.name === 'white' && event.value === undefined) {
+      this.data.black = undefined;
+      this.blackDeselected = false;
+    }
 
     if (event.value === undefined) {
       this.data.winner = undefined;
