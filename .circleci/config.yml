@@ -409,6 +409,7 @@ jobs:
               docker tag $IMAGE_REPOSITORY/$CLIENT_BASE_IMAGE_NAME:$CLIENT_BASE_IMAGE_TAG $IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME:$CLIENT_TAG_E2E_TESTED
               docker push $IMAGE_REPOSITORY/$IMAGE_CLIENT_NAME:$CLIENT_TAG_E2E_TESTED
             fi
+            
       - run: 
           name: Retag tested server image
           command: | 
