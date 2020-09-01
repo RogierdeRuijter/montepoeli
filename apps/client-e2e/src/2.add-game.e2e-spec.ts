@@ -28,6 +28,7 @@ describe('Add a game', () => {
     helper.addGame(page, browser, game);
     
     browser.waitForAngular();
+    helper.sleep();
     
     helper.checkIfGameIsAddedSuccesfully(page, game);
 
