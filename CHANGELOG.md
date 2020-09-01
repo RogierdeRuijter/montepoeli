@@ -1,3 +1,10 @@
+# [4.14.0](https://github.com/RogierdeRuijter/montepoeli/compare/v4.13.0...v4.14.0) (2020-09-01)
+
+
+### Features
+
+* add game disabled state ([#489](https://github.com/RogierdeRuijter/montepoeli/issues/489)) ([f2af2eb](https://github.com/RogierdeRuijter/montepoeli/commit/f2af2eb6364a9c7581fe1c5e27c92cb0b97e0e2e))
+
 # [4.13.0](https://github.com/RogierdeRuijter/montepoeli/compare/v4.12.0...v4.13.0) (2020-08-24)
 
 
