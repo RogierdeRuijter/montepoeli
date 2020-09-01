@@ -1,3 +1,10 @@
+# [4.15.0](https://github.com/RogierdeRuijter/montepoeli/compare/v4.14.0...v4.15.0) (2020-09-01)
+
+
+### Features
+
+* remove header from add game ([ec2e726](https://github.com/RogierdeRuijter/montepoeli/commit/ec2e726155ace3b58b24fd7ab69aa1e988181e98))
+
 # [4.14.0](https://github.com/RogierdeRuijter/montepoeli/compare/v4.13.0...v4.14.0) (2020-09-01)
 
 
