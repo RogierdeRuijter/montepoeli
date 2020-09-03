@@ -43,10 +43,10 @@ export class IconComponent implements OnInit, AfterViewInit, OnChanges {
   public ngOnInit(): void {
     switch (this.icon) {
       case Icons.CHECK:
-        this.iconDefinition = faCheck;
+        this.matIcon = 'check';
         break;
       case Icons.CROSS:
-        this.iconDefinition = faTimes;
+        this.matIcon = 'clear';
         break;
       case Icons.PLUS:
         this.iconDefinition = faPlus;

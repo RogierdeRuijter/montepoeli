@@ -1,5 +1,5 @@
-$anms-light-primary: mat-palette($mat-green, 300);
-$anms-light-accent: mat-palette($mat-orange, 200);
+$anms-light-primary: mat-palette($mat-grey, 600);
+$anms-light-accent: mat-palette($mat-red, 700);
 $anms-light-warn: mat-palette($mat-deep-orange, 200);
 
 $anms-light-theme: mat-light-theme(
@@ -15,8 +15,10 @@ $custom-variables: (
   action-bar-border-background: white,
   button-icon-active-color: black,
   button-icon-inactive-color: gray,
-  form-field-underline-disabled: #e0e0e0,
-  label-color: rgba(0, 0, 0, 0.54)
+  form-field-underline-disabled: mat-color($anms-light-primary, 100), // TODO: fix naming. Iets met active of disabled in de naam
+  label-color: rgba(0, 0, 0, 0.54),
+  chip-text-color: darkgray,
+  active-chip-background-color: mat-color($anms-light-primary, 300)
   );
 
 $anms-light-theme: map_merge($anms-light-theme, $custom-variables);

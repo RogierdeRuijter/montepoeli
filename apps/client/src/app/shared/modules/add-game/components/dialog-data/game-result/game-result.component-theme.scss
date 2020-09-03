@@ -3,7 +3,9 @@
 @mixin game-result-component-theme($theme) {
     $disabled-color: map-get($theme, form-field-underline-disabled);
     $label-color: map-get($theme, label-color);
-   
+    $chip-text-color: map-get($theme, chip-text-color);
+    $active-chip-background-color: map-get($theme, active-chip-background-color);
+
     .form-field-with-disabled-underline {
       .mat-form-field-underline {
           background-color: $disabled-color;
@@ -25,6 +27,12 @@
 
       .mat-standard-chip:focus::after {
         opacity: 0 !important;
+      }
+
+      .mat-chip {
+        color: $chip-text-color;
+        background-color: $active-chip-background-color;
+        // border: 1px black solid;
       }
   }
 }

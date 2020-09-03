@@ -1,3 +1,24 @@
+<div style="display: flex; justify-content: space-between; margin-bottom: 10px; align-items: center;">
+  <div style="margin-left: -15px;">
+    <app-button-icon-active-state [icon]="icons.CROSS"
+                                  [iconSize]="iconSize.MEDIUM"
+                                  [alternativeActiveColor]="true"
+                                  [active]="true"
+                                  (clickEvent)="cancel()">
+    </app-button-icon-active-state>
+  </div>
+  <div>Nieuwe Wedstrijd</div>
+  <div style="margin-right: -15px;">
+    <app-button-icon-active-state id="save"
+                                  [icon]="icons.CHECK"
+                                  [iconSize]="iconSize.MEDIUM"
+                                  [alternativeActiveColor]="true"
+                                  [active]="!disabled">
+    </app-button-icon-active-state>
+    <!-- (clickEvent)="chessSetClicked()" -->
+    <!-- [active]="selected === Icons.CHESS_PIECES" -->
+  </div>
+</div>
 <div mat-dialog-content>
   <form #form="ngForm">
     <div>
@@ -13,7 +34,7 @@
             [disabled]="user.name === data.black"
             [disableRipple]="true"
             (click)="fieldUpdated(matChip);"
-            color="accent"
+            color=""
             [value]="user.name">
           {{user.name}}
           </mat-chip>
@@ -21,7 +42,7 @@
       </mat-form-field>
     </div>
     <div [class.form-field-with-disabled-underline]="blackDisabled">
-      <mat-form-field class="custom-input-field" color="accent">
+      <mat-form-field class="custom-input-field" color="">
         <mat-label [appTranslate]="'pages.home.games.labels.black'"></mat-label>
         <mat-chip-list id='black-user' selectable
         (change)="onListChange($event, 'black')" name="black">
@@ -32,7 +53,7 @@
             [disabled]="!data.white || user.name === data.white"
             [disableRipple]="true"
             (click)="fieldUpdated(matChip);"
-            color="accent"
+            color=""
             [value]="user.name">
           {{user.name}}
           </mat-chip>
@@ -50,7 +71,7 @@
             [disabled]="disabledWinnerOptions[i]"
             [disableRipple]="true"
             (click)="fieldUpdated(matChip);"
-            color="accent"
+            color=""
             [value]="option">
           {{option}}
           </mat-chip>
@@ -60,9 +81,9 @@
   </form>
 </div>
 
-<div [appGridRow]="[GridSizes.ALL]"
+<!-- <div [appGridRow]="[GridSizes.ALL]"
      mat-dialog-actions>
-  <!-- TODO: app-button-row and refactor to remove bootstrap -->
+  TODO: app-button-row and refactor to remove bootstrap 
   <app-button (clickEvent)="cancel()"
               [appGridColumn]="[6]"
               [buttonFunction]="ButtonFunction.CANCEL"
@@ -76,4 +97,4 @@
               [dialogDataToSubmit]="data"
               [disabled]="disabled">
   </app-button>
-</div>
+</div> -->

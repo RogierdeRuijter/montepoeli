@@ -16,7 +16,8 @@ $custom-variables: (
   button-icon-active-color: white,
   button-icon-inactive-color: gray,
   form-field-underline-disabled: #616161,
-  label-color: rgba(255, 255, 255, 0.7)
+  label-color: rgba(255, 255, 255, 0.7),
+  chip-text-color: darkgray
 );
 
 $anms-black-theme: map_merge($anms-black-theme, $custom-variables);

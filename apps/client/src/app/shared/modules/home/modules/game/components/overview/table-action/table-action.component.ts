@@ -45,7 +45,7 @@ export class TableActionComponent implements OnInit {
     switch (action) {
       case Actions.ADD:
         return Icons.PLUS;
-      case Actions.ACCEPT:
+      case Actions.ACCEPT: // TODO: not used currently
         return Icons.CHECK;
       default:
         throw new UnknownCaseException(action);

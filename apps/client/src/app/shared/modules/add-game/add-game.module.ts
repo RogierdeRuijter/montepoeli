@@ -12,6 +12,8 @@ import {GridModule} from '../grid/grid.module';
 import { TransitionModule } from '../transition/transition.module';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { IconModule } from '../icon/icon.module';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     TransitionModule,
     MatChipsModule,
     MatFormFieldModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ButtonModule
   ],
 })
 export class AddGameModule { }
