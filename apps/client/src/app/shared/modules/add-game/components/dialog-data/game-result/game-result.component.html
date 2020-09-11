@@ -1,20 +1,16 @@
 <div style="display: flex; justify-content: space-between; margin-bottom: 10px; align-items: center;">
-  <div style="margin-left: -15px;">
-    <app-button-icon-active-state [icon]="icons.CROSS"
-                                  [iconSize]="iconSize.MEDIUM"
-                                  [alternativeActiveColor]="true"
-                                  [active]="true"
-                                  (clickEvent)="cancel()">
-    </app-button-icon-active-state>
+  <div>
+    <app-button-icon [icon]="icons.CROSS"
+                     [iconSize]="iconSize.MEDIUM"
+                     (clickEvent)="cancel()">
+    </app-button-icon>
   </div>
   <div>Nieuwe Wedstrijd</div>
-  <div style="margin-right: -15px;">
-    <app-button-icon-active-state id="save"
-                                  [icon]="icons.CHECK"
-                                  [iconSize]="iconSize.MEDIUM"
-                                  [alternativeActiveColor]="true"
-                                  [active]="!disabled">
-    </app-button-icon-active-state>
+  <div>
+    <app-button-icon id="save"
+                     [icon]="icons.CHECK"
+                     [iconSize]="iconSize.MEDIUM">
+    </app-button-icon>
     <!-- (clickEvent)="chessSetClicked()" -->
     <!-- [active]="selected === Icons.CHESS_PIECES" -->
   </div>
