@@ -6,7 +6,38 @@
     $chip-text-color: map-get($theme, chip-text-color);
     $active-chip-background-color: map-get($theme, active-chip-background-color);
 
-    .form-field-with-disabled-underline {
+    .custom-input-field {
+      .mat-form-field-label {
+          // Change the color of the label so it will not get the primary color
+          // TODO: Should only be this color input field is selectable
+          color: $label-color !important;
+        }
+        
+        // Disable the ripple on the button
+      .mat-form-field-ripple {
+        opacity: 0 !important;
+      }
+      
+      // Disable the 'flow' effect on the chip
+      .mat-standard-chip:focus::after {
+        opacity: 0 !important;
+      }
+
+      // .mat-chip {
+        // color: black;
+        // background-color: $active-chip-background-color;
+        // border: 1px black solid;
+      // }
+    }
+
+    .active-form-field {
+        .mat-form-field-label {
+          // Change the color of the label so it will not get the primary color
+          color: $label-color !important;
+        }
+    }
+
+    .form-field-with-disabled {
       .mat-form-field-underline {
           background-color: $disabled-color;
       }
@@ -16,23 +47,23 @@
       }
     }
 
-    .custom-input-field {
-      .mat-form-field-label {
-          color: $label-color !important;
-        }
-
-      .mat-form-field-ripple {
-        opacity: 0 !important;
+    .mat-chip-custom-disabled {
+      // Inner class of the mat chip
+      #text {
+        color: $disabled-color;
       }
+    }
 
-      .mat-standard-chip:focus::after {
-        opacity: 0 !important;
-      }
-
+    .map-chip-selectable {
+      // TODO: use configurable value, maybe this is not even needs since the chip does this itself
       .mat-chip {
-        color: $chip-text-color;
-        background-color: $active-chip-background-color;
-        // border: 1px black solid;
+        color: black; 
       }
-  }
+    }
+
+    .map-chip-selected {
+      .mat-chip {
+        color: black;
+      }
+    }
 }

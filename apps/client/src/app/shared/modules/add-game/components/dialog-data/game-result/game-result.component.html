@@ -27,6 +27,7 @@
           <mat-chip *ngFor="let user of usersWhite"
             #matChip="matChip"
             [id]="'white-' + user.name"
+            [class.mat-chip-custom-disabled]="user.name === data.black"
             [disabled]="user.name === data.black"
             [disableRipple]="true"
             (click)="fieldUpdated(matChip);"
@@ -37,7 +38,7 @@
         </mat-chip-list>
       </mat-form-field>
     </div>
-    <div [class.form-field-with-disabled-underline]="blackDisabled">
+    <div [class.form-field-with-disabled]="blackDisabled">
       <mat-form-field class="custom-input-field" color="">
         <mat-label [appTranslate]="'pages.home.games.labels.black'"></mat-label>
         <mat-chip-list id='black-user' selectable
@@ -56,7 +57,7 @@
         </mat-chip-list>
      </mat-form-field>
     </div>
-    <div [class.form-field-with-disabled-underline]="winnersDisabled">
+    <div [class.form-field-with-disabled]="winnersDisabled">
       <mat-form-field class="custom-input-field" color="accent">
         <mat-label [appTranslate]="'pages.home.games.labels.winner'"></mat-label>
         <mat-chip-list id='winner-user' (change)="onListChange($event, 'winner')" name="winner">

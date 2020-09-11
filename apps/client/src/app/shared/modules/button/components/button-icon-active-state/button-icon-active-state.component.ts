@@ -29,6 +29,7 @@ export class ButtonIconActiveStateComponent implements OnChanges {
   public colorClass: string;
 
   public ngOnChanges(changes): void {
+    // TODO: remove this and move the alternative active color to a different component
     if (changes.active || changes.alternativeActiveColor) {
       if (!this.active) {
         this.colorClass = 'button-icon-inactive-color';
