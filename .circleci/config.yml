@@ -416,7 +416,6 @@ jobs:
               docker tag $IMAGE_REPOSITORY/$SERVER_IMAGE_NAME:$SERVER_IMAGE_TAG $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG_E2E_TESTED
               docker push $IMAGE_REPOSITORY/$IMAGE_SERVER_NAME:$SERVER_TAG_E2E_TESTED
             fi
-
   rebuild-base:
     docker:
       - image: << pipeline.parameters.default-build-context >>
