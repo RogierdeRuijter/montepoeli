@@ -28,7 +28,7 @@ export class GameResultComponent {
   public winners: Winners[];
 
   @Input()
-  public disabled: boolean;
+  public submitDisabled: boolean;
 
   @Input()
   public usersWhite: User[];

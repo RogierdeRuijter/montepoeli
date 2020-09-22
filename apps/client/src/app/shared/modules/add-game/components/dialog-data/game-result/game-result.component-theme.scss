@@ -48,10 +48,7 @@
     }
 
     .mat-chip-custom-disabled {
-      // Inner class of the mat chip
-      #text {
-        color: $disabled-color;
-      }
+      color: darkgray;
     }
 
     .map-chip-selectable {
