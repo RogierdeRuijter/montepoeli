@@ -1,20 +1,18 @@
-import {CompleteStory} from '../intefaces/complete-story.interface';
-import {of} from 'rxjs';
-import {StorybookTranslateModule} from '../../storybook-translate.module';
-import {TranslateDirective} from '../../../app/shared/modules/translate/directives/translate.directive';
+import { CompleteStory } from '../intefaces/complete-story.interface';
+import { of } from 'rxjs';
+import { StorybookTranslateModule } from '../../storybook-translate.module';
+import { TranslateDirective } from '../../../app/shared/modules/translate/directives/translate.directive';
 import { StoryApi, StoryFn } from '@storybook/addons';
 import { StoryFnAngularReturnType } from '@storybook/angular/dist/client/preview/types';
 import { MatTableModule } from '@angular/material/table';
 import { GameTableComponent } from '../../../app/shared/modules/home/modules/game/components/overview/game-table/game-table.component';
-
 
 export class GameTableStoryFactory {
   private component = GameTableComponent;
   private readonly displayedColumns: string[] = ['white', 'winner', 'black'];
   private stories: CompleteStory[] = [];
 
-  constructor(private storyApi: StoryApi<StoryFnAngularReturnType>) {
-  }
+  constructor(private storyApi: StoryApi<StoryFnAngularReturnType>) {}
 
   public create(): void {
     this.createInputs();
@@ -22,7 +20,9 @@ export class GameTableStoryFactory {
   }
 
   private appendStories(): void {
-    this.stories.forEach((story: CompleteStory) => this.storyApi.add(story.name, story.story));
+    this.stories.forEach((story: CompleteStory) =>
+      this.storyApi.add(story.name, story.story)
+    );
   }
 
   private createInputs(): void {
@@ -70,10 +70,7 @@ export class GameTableStoryFactory {
         displayedColumns: this.displayedColumns,
       },
       moduleMetadata: {
-        imports: [
-          MatTableModule,
-          StorybookTranslateModule,
-        ],
+        imports: [MatTableModule, StorybookTranslateModule],
         declarations: [TranslateDirective],
       },
     });
@@ -84,16 +81,13 @@ export class GameTableStoryFactory {
       component: GameTableComponent,
       props: {
         games$: of([
-          {white: 'user 1', black: 'user 2', winner: 'white'},
-          {white: 'user 1', black: 'user 2', winner: 'black'},
+          { white: 'user 1', black: 'user 2', winner: 'white' },
+          { white: 'user 1', black: 'user 2', winner: 'black' },
         ]),
         displayedColumns: this.displayedColumns,
       },
       moduleMetadata: {
-        imports: [
-          MatTableModule,
-          StorybookTranslateModule,
-        ],
+        imports: [MatTableModule, StorybookTranslateModule],
         declarations: [TranslateDirective],
       },
     });
@@ -104,16 +98,21 @@ export class GameTableStoryFactory {
       component: GameTableComponent,
       props: {
         games$: of([
-          {white: 'user user user user user 1', black: 'user user user user user 2', winner: 'white'},
-          {white: 'user user user user user 1', black: 'user user user user user 2', winner: 'black'},
+          {
+            white: 'user user user user user 1',
+            black: 'user user user user user 2',
+            winner: 'white',
+          },
+          {
+            white: 'user user user user user 1',
+            black: 'user user user user user 2',
+            winner: 'black',
+          },
         ]),
         displayedColumns: this.displayedColumns,
       },
       moduleMetadata: {
-        imports: [
-          MatTableModule,
-          StorybookTranslateModule,
-        ],
+        imports: [MatTableModule, StorybookTranslateModule],
         declarations: [TranslateDirective],
       },
     });
@@ -124,16 +123,13 @@ export class GameTableStoryFactory {
       component: GameTableComponent,
       props: {
         games$: of([
-          {white: 'user 1', black: 'user 2', winner: 'black'},
-          {white: 'user 1', black: 'user 2', winner: 'unknown1'},
+          { white: 'user 1', black: 'user 2', winner: 'black' },
+          { white: 'user 1', black: 'user 2', winner: 'unknown1' },
         ]),
         displayedColumns: this.displayedColumns,
       },
       moduleMetadata: {
-        imports: [
-          MatTableModule,
-          StorybookTranslateModule,
-        ],
+        imports: [MatTableModule, StorybookTranslateModule],
         declarations: [TranslateDirective],
       },
     });
@@ -144,17 +140,14 @@ export class GameTableStoryFactory {
       component: GameTableComponent,
       props: {
         games$: of([
-          {white: 'user 1', black: 'user 2', winner: 'white'},
-          {white: 'user 1', black: 'user 2', winner: 'black'},
-          {white: 'useruseruser 1', black: 'useruseruser 2', winner: 'draw'},
+          { white: 'user 1', black: 'user 2', winner: 'white' },
+          { white: 'user 1', black: 'user 2', winner: 'black' },
+          { white: 'useruseruser 1', black: 'useruseruser 2', winner: 'draw' },
         ]),
         displayedColumns: this.displayedColumns,
       },
       moduleMetadata: {
-        imports: [
-          MatTableModule,
-          StorybookTranslateModule,
-        ],
+        imports: [MatTableModule, StorybookTranslateModule],
         declarations: [TranslateDirective],
       },
     });
@@ -165,47 +158,44 @@ export class GameTableStoryFactory {
       component: GameTableComponent,
       props: {
         games$: of([
-          {white: 'user 1', black: 'user 2', winner: 'white'},
-          {white: 'user 1', black: 'user 2', winner: 'black'},
-          {white: 'useruseruser 1', black: 'useruseruser 2', winner: 'draw'},
-          {white: 'user 1', black: 'user 2', winner: 'white'},
-          {white: 'user 1', black: 'user 2', winner: 'black'},
-          {white: 'useruseruser 1', black: 'useruseruser 2', winner: 'draw'},
-          {white: 'user 1', black: 'user 2', winner: 'white'},
-          {white: 'user 1', black: 'user 2', winner: 'black'},
-          {white: 'useruseruser 1', black: 'useruseruser 2', winner: 'draw'},
-          {white: 'user 1', black: 'user 2', winner: 'white'},
-          {white: 'user 1', black: 'user 2', winner: 'black'},
-          {white: 'useruseruser 1', black: 'useruseruser 2', winner: 'draw'},
-          {white: 'user 1', black: 'user 2', winner: 'white'},
-          {white: 'user 1', black: 'user 2', winner: 'black'},
-          {white: 'useruseruser 1', black: 'useruseruser 2', winner: 'draw'},
-          {white: 'user 1', black: 'user 2', winner: 'white'},
-          {white: 'user 1', black: 'user 2', winner: 'black'},
-          {white: 'useruseruser 1', black: 'useruseruser 2', winner: 'draw'},
-          {white: 'user 1', black: 'user 2', winner: 'white'},
-          {white: 'user 1', black: 'user 2', winner: 'black'},
-          {white: 'useruseruser 1', black: 'useruseruser 2', winner: 'draw'},
-          {white: 'user 1', black: 'user 2', winner: 'white'},
-          {white: 'user 1', black: 'user 2', winner: 'black'},
-          {white: 'useruseruser 1', black: 'useruseruser 2', winner: 'draw'},
-          {white: 'user 1', black: 'user 2', winner: 'white'},
-          {white: 'user 1', black: 'user 2', winner: 'black'},
-          {white: 'useruseruser 1', black: 'useruseruser 2', winner: 'draw'},
-          {white: 'user 1', black: 'user 2', winner: 'white'},
-          {white: 'user 1', black: 'user 2', winner: 'black'},
-          {white: 'useruseruser 1', black: 'useruseruser 2', winner: 'draw'},
-          {white: 'user 1', black: 'user 2', winner: 'white'},
-          {white: 'user 1', black: 'user 2', winner: 'black'},
-          {white: 'useruseruser 1', black: 'useruseruser 2', winner: 'draw'},
+          { white: 'user 1', black: 'user 2', winner: 'white' },
+          { white: 'user 1', black: 'user 2', winner: 'black' },
+          { white: 'useruseruser 1', black: 'useruseruser 2', winner: 'draw' },
+          { white: 'user 1', black: 'user 2', winner: 'white' },
+          { white: 'user 1', black: 'user 2', winner: 'black' },
+          { white: 'useruseruser 1', black: 'useruseruser 2', winner: 'draw' },
+          { white: 'user 1', black: 'user 2', winner: 'white' },
+          { white: 'user 1', black: 'user 2', winner: 'black' },
+          { white: 'useruseruser 1', black: 'useruseruser 2', winner: 'draw' },
+          { white: 'user 1', black: 'user 2', winner: 'white' },
+          { white: 'user 1', black: 'user 2', winner: 'black' },
+          { white: 'useruseruser 1', black: 'useruseruser 2', winner: 'draw' },
+          { white: 'user 1', black: 'user 2', winner: 'white' },
+          { white: 'user 1', black: 'user 2', winner: 'black' },
+          { white: 'useruseruser 1', black: 'useruseruser 2', winner: 'draw' },
+          { white: 'user 1', black: 'user 2', winner: 'white' },
+          { white: 'user 1', black: 'user 2', winner: 'black' },
+          { white: 'useruseruser 1', black: 'useruseruser 2', winner: 'draw' },
+          { white: 'user 1', black: 'user 2', winner: 'white' },
+          { white: 'user 1', black: 'user 2', winner: 'black' },
+          { white: 'useruseruser 1', black: 'useruseruser 2', winner: 'draw' },
+          { white: 'user 1', black: 'user 2', winner: 'white' },
+          { white: 'user 1', black: 'user 2', winner: 'black' },
+          { white: 'useruseruser 1', black: 'useruseruser 2', winner: 'draw' },
+          { white: 'user 1', black: 'user 2', winner: 'white' },
+          { white: 'user 1', black: 'user 2', winner: 'black' },
+          { white: 'useruseruser 1', black: 'useruseruser 2', winner: 'draw' },
+          { white: 'user 1', black: 'user 2', winner: 'white' },
+          { white: 'user 1', black: 'user 2', winner: 'black' },
+          { white: 'useruseruser 1', black: 'useruseruser 2', winner: 'draw' },
+          { white: 'user 1', black: 'user 2', winner: 'white' },
+          { white: 'user 1', black: 'user 2', winner: 'black' },
+          { white: 'useruseruser 1', black: 'useruseruser 2', winner: 'draw' },
         ]),
         displayedColumns: this.displayedColumns,
       },
       moduleMetadata: {
-        imports: [
-          MatTableModule,
-          StorybookTranslateModule,
-        ],
+        imports: [MatTableModule, StorybookTranslateModule],
         declarations: [TranslateDirective],
       },
     });

@@ -1,5 +1,5 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Icons, IconSize} from '../../../../../static-files/enums';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Icons, IconSize } from '../../../../../static-files/enums';
 
 @Component({
   selector: 'app-option-name',
@@ -7,7 +7,6 @@ import {Icons, IconSize} from '../../../../../static-files/enums';
   styleUrls: ['./option-name.component.scss'],
 })
 export class OptionNameComponent {
-
   @Input()
   public value: string;
 

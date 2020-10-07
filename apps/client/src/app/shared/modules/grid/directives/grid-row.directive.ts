@@ -1,13 +1,12 @@
-import {Directive, ElementRef, Input, OnInit, Renderer2} from '@angular/core';
-import {Alignments, Directions, GridSizes} from '../../../static-files/enums';
-import {UtilService} from '../../../services/util/util.service';
-import {ShouldBeDefinedException} from '../../../exceptions/ShouldBeDefinedException';
+import { Directive, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
+import { Alignments, Directions, GridSizes } from '../../../static-files/enums';
+import { UtilService } from '../../../services/util/util.service';
+import { ShouldBeDefinedException } from '../../../exceptions/ShouldBeDefinedException';
 
 @Directive({
   selector: '[appGridRow]',
 })
 export class GridRowDirective implements OnInit {
-
   @Input('appGridRow')
   public gridSizes: GridSizes[];
 
@@ -17,10 +16,11 @@ export class GridRowDirective implements OnInit {
   @Input()
   public direction: Directions = Directions.ROW;
 
-  constructor(private elementRef: ElementRef,
-              private renderer: Renderer2,
-              private utilService: UtilService) {
-  }
+  constructor(
+    private elementRef: ElementRef,
+    private renderer: Renderer2,
+    private utilService: UtilService
+  ) {}
 
   public ngOnInit(): void {
     if (this.itDoesNotHaveAllNecessaryGridSizes()) {
@@ -36,7 +36,7 @@ export class GridRowDirective implements OnInit {
 
     if (!this.utilService.isNullOrUndefined(this.alignment)) {
       if (this.alignment instanceof Array) {
-        this.alignment.forEach(align => this.addAlignment(align));
+        this.alignment.forEach((align) => this.addAlignment(align));
       } else {
         this.addAlignment(this.alignment);
       }
@@ -44,12 +44,14 @@ export class GridRowDirective implements OnInit {
   }
 
   private itDoesNotHaveAllNecessaryGridSizes(): boolean {
-    return !(
-      this.gridSizes.includes(GridSizes.EXTRA_SMALL) &&
-      this.gridSizes.includes(GridSizes.SMALL) &&
-      this.gridSizes.includes(GridSizes.MEDIUM) &&
-      this.gridSizes.includes(GridSizes.LARGE)
-    ) && !this.gridSizes.includes(GridSizes.ALL);
+    return (
+      !(
+        this.gridSizes.includes(GridSizes.EXTRA_SMALL) &&
+        this.gridSizes.includes(GridSizes.SMALL) &&
+        this.gridSizes.includes(GridSizes.MEDIUM) &&
+        this.gridSizes.includes(GridSizes.LARGE)
+      ) && !this.gridSizes.includes(GridSizes.ALL)
+    );
   }
 
   private addAlignment(alignment: Alignments): void {
@@ -80,5 +82,4 @@ export class GridRowDirective implements OnInit {
   private addClassToElement(cssClass: string): void {
     this.renderer.addClass(this.elementRef.nativeElement, cssClass);
   }
-
 }

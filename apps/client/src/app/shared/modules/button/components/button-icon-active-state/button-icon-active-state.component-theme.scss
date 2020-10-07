@@ -1,8 +1,8 @@
 @import '~@angular/material/theming';
 
 @mixin button-icon-active-state-component-theme($theme) {
-    $active-color: map-get($theme, button-icon-active-color);
-    $inactive-color: map-get($theme, button-icon-inactive-color);
+  $active-color: map-get($theme, button-icon-active-color);
+  $inactive-color: map-get($theme, button-icon-inactive-color);
 
   .button-icon-active-color {
     color: $active-color;

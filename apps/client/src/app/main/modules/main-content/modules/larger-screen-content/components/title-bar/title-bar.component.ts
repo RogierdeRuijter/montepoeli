@@ -1,6 +1,12 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
-import { Alignments, GridSizes, IconColor, Icons, IconSize } from '../../../../../../../shared/static-files/enums';
+import {
+  Alignments,
+  GridSizes,
+  IconColor,
+  Icons,
+  IconSize,
+} from '../../../../../../../shared/static-files/enums';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { UnknownCaseException } from '../../../../../../../shared/exceptions/UnknownCaseException';
 
@@ -10,7 +16,6 @@ import { UnknownCaseException } from '../../../../../../../shared/exceptions/Unk
   styleUrls: ['./title-bar.component.scss'],
 })
 export class TitleBarComponent {
-
   @Output()
   public gamesSelected: EventEmitter<void> = new EventEmitter();
 
@@ -48,7 +53,7 @@ export class TitleBarComponent {
   public emitRulesSelected(): void {
     this.rulesSelected.emit();
   }
-  
+
   public handleButtonClicked(): void {
     this.iconClicked.emit();
   }

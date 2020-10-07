@@ -2,7 +2,7 @@
 
 @mixin footer-component-theme($theme) {
   $text-color: map-get($theme, text-color);
-  
+
   .footer {
     color: $text-color;
   }

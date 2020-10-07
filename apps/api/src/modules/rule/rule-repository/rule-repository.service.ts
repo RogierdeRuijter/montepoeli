@@ -1,12 +1,11 @@
-import {Injectable} from '@nestjs/common';
-import {InjectModel} from '@nestjs/mongoose';
-import {Model} from 'mongoose';
-import {Rule} from '../../../models/interfaces/rule.interface';
+import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { Rule } from '../../../models/interfaces/rule.interface';
 
 @Injectable()
 export class RuleRepositoryService {
-  constructor(@InjectModel('Rule') private readonly ruleModel: Model<any>) {
-  }
+  constructor(@InjectModel('Rule') private readonly ruleModel: Model<any>) {}
 
   public find(): Promise<Rule[]> {
     return this.ruleModel.find().exec();

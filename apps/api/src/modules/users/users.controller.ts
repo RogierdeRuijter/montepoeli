@@ -1,19 +1,26 @@
-import {BadRequestException, Body, Controller, Get, UseGuards, Post, Req} from '@nestjs/common';
-import {UsersService} from './users.service';
-import {User} from '../../models/interfaces/user.interface';
-import {CreateUserDto} from '../../models/create-dtos/create-user.dto';
-import {AuthGuard} from '@nestjs/passport';
+import {
+  BadRequestException,
+  Body,
+  Controller,
+  Get,
+  UseGuards,
+  Post,
+  Req,
+} from '@nestjs/common';
+import { UsersService } from './users.service';
+import { User } from '../../models/interfaces/user.interface';
+import { CreateUserDto } from '../../models/create-dtos/create-user.dto';
+import { AuthGuard } from '@nestjs/passport';
 import { Request } from 'express';
 import { UserDto } from '../../models/dtos/user.dto';
 
 @Controller('/users')
 @UseGuards(AuthGuard())
 export class UsersController {
+  private domain: string =
+    process.env.ENV.toString() === 'prod' ? process.env.DOMAIN : undefined;
 
-  private domain: string = process.env.ENV.toString() === 'prod' ? process.env.DOMAIN : undefined;
-
-  constructor(private readonly usersService: UsersService) {
-  }
+  constructor(private readonly usersService: UsersService) {}
 
   @Get()
   public async getUsers(): Promise<any> {
@@ -38,14 +45,21 @@ export class UsersController {
     const languagePreference: string = body.languagePreference;
 
     if (!username || !languagePreference) {
-      throw new BadRequestException('username or languagePreference is not defined');
+      throw new BadRequestException(
+        'username or languagePreference is not defined',
+      );
     }
 
     if (languagePreference !== 'dutch' && languagePreference !== 'english') {
-      throw new BadRequestException('language preference should be dutch or english');
+      throw new BadRequestException(
+        'language preference should be dutch or english',
+      );
     }
 
-    return this.usersService.setLanguagePreference(username, languagePreference);
+    return this.usersService.setLanguagePreference(
+      username,
+      languagePreference,
+    );
   }
 
   @Get('/current')

@@ -1,4 +1,4 @@
-version: "3"
+version: '3'
 services:
   client:
     build:
@@ -6,7 +6,7 @@ services:
       dockerfile: Dockerfile.client-local
     container_name: montepouli-client
     ports:
-      - "4200:4200"
+      - '4200:4200'
     volumes:
       - ./apps/client/src:/usr/src/app/apps/client/src
     networks:
@@ -28,14 +28,13 @@ services:
       - MONGO_DNS_NAME=mongodb
       - COOKIE_SECRET=secret
     ports:
-      - "3000:3000"
+      - '3000:3000'
     volumes:
       - ./apps/api:/usr/src/app/apps/api
     networks:
       - dev
     command: sh -c 'npm run api:start:dev'
 
-    
   mongodb:
     container_name: montepouli-mongo-db
     image: mongo:4.2
@@ -46,8 +45,8 @@ services:
       - montepouli-volume:/data/db
       - montepouli-volume:/data/configdb
     ports:
-      - "27017:27017"
-      - "28017:28017"
+      - '27017:27017'
+      - '28017:28017'
     networks:
       - dev
 
@@ -56,4 +55,3 @@ networks:
 
 volumes:
   montepouli-volume:
-

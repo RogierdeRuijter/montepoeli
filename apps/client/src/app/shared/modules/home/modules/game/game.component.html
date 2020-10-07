@@ -1,10 +1,11 @@
-<ui-overview (actionEvent)="handleActionEvent()"
-             [actions]="actions"
-             [disabled]="disabled"
-             [displayedColumns]="displayedColumns"
-             [games$]="games$">
+<ui-overview
+  (actionEvent)="handleActionEvent()"
+  [actions]="actions"
+  [disabled]="disabled"
+  [displayedColumns]="displayedColumns"
+  [games$]="games$"
+>
 </ui-overview>
-
 
 <ng-container #addDialogContainer></ng-container>
 <!-- <app-dialog-overview #addDialog

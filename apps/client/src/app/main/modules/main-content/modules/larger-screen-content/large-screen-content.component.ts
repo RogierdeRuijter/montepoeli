@@ -9,11 +9,12 @@ import { HomeModule } from '../../../../../shared/modules/home/home.module';
 @Component({
   selector: 'app-large-screen-content',
   templateUrl: './large-screen-content.component.html',
-  styleUrls: ['./large-screen-content.component.scss']
+  styleUrls: ['./large-screen-content.component.scss'],
 })
 export class LargeScreenContentComponent {
-  constructor(private tabChangeGlobalEventEmitter: TabChangeGlobalEventEmitter) {
-  }
+  constructor(
+    private tabChangeGlobalEventEmitter: TabChangeGlobalEventEmitter
+  ) {}
 
   public gamesHandler(): void {
     this.tabChangeGlobalEventEmitter.emit(Tabs.GAMES);
@@ -30,14 +31,7 @@ export class LargeScreenContentComponent {
 
 /* tslint:disable */
 @NgModule({
-  declarations: [
-    LargeScreenContentComponent
-  ],
-  imports: [
-    CommonModule,
-    RouterModule,
-    LargerScreenContentModule,
-    HomeModule
-    ]
+  declarations: [LargeScreenContentComponent],
+  imports: [CommonModule, RouterModule, LargerScreenContentModule, HomeModule],
 })
-export class InternalLargeScreenContentModule { }
+export class InternalLargeScreenContentModule {}

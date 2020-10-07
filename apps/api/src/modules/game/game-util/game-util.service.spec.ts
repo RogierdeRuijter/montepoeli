@@ -9,7 +9,7 @@ describe('GameUtilService', () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         GameUtilService,
-        {provide: GameRepositoryService, useValue: ''}
+        { provide: GameRepositoryService, useValue: '' },
       ],
     }).compile();
 
@@ -22,15 +22,17 @@ describe('GameUtilService', () => {
 
   describe('getAllIdsFromGames', () => {
     it('should return the a list of ids from the available games', async () => {
-      spyOn(GameUtilService.prototype, 'getAllGames').and.returnValue(new Promise(resolve => {
-        resolve([
-          {id: '1'},
-          {id: '2'},
-          {id: '3'},
-          {id: '4'},
-          {id: '5'}
-        ]);
-      }));
+      spyOn(GameUtilService.prototype, 'getAllGames').and.returnValue(
+        new Promise((resolve) => {
+          resolve([
+            { id: '1' },
+            { id: '2' },
+            { id: '3' },
+            { id: '4' },
+            { id: '5' },
+          ]);
+        }),
+      );
 
       const result = await service.getAllIdsFromGames();
 
@@ -40,9 +42,11 @@ describe('GameUtilService', () => {
     });
 
     it('should return an empty list if there are no games available', async () => {
-      spyOn(GameUtilService.prototype, 'getAllGames').and.returnValue(new Promise(resolve => {
-        resolve([]);
-      }));
+      spyOn(GameUtilService.prototype, 'getAllGames').and.returnValue(
+        new Promise((resolve) => {
+          resolve([]);
+        }),
+      );
 
       const result = await service.getAllIdsFromGames();
 
@@ -59,18 +63,18 @@ describe('GameUtilService', () => {
       const expectedResult = undefined;
 
       expect(result).toEqual(expectedResult);
-
     });
 
     it('should return undefined if undefined is the input', async () => {
-      spyOn(GameUtilService.prototype, 'getAllGames').and.returnValue(undefined);
+      spyOn(GameUtilService.prototype, 'getAllGames').and.returnValue(
+        undefined,
+      );
 
       const result = await service.getAllIdsFromGames();
 
       const expectedResult = undefined;
 
       expect(result).toEqual(expectedResult);
-
     });
   });
 });

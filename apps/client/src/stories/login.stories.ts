@@ -1,5 +1,5 @@
-import {StorybookTranslateModule} from './storybook-translate.module';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { StorybookTranslateModule } from './storybook-translate.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginFormComponent } from '../app/main/modules/login/components/login-form/login-form.component';
 import { ButtonModule } from '../app/shared/modules/button/button.module';
 import { FormModule } from '../app/shared/modules/form/form.module';
@@ -14,7 +14,7 @@ export default {
 
 export const Login = () => ({
   component: LoginFormComponent,
-  moduleMetadata: moduleMeta
+  moduleMetadata: moduleMeta,
 });
 
 const moduleMeta = {
@@ -27,6 +27,6 @@ const moduleMeta = {
     FormModule,
     MatInputModule,
     CustomTranslateModule,
-    AuthModule
-  ]
-}
+    AuthModule,
+  ],
+};

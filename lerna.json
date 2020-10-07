@@ -1,13 +1,5 @@
 {
   "npmClient": "yarn",
-  "packages": [
-    ".",
-    ".circleci",
-    ".mergify",
-    "client",
-    "e2e",
-    "server"
-  ],
+  "packages": [".", ".circleci", ".mergify", "client", "e2e", "server"],
   "version": "3.4.0"
 }
-

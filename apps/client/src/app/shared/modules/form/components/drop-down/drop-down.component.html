@@ -1,11 +1,19 @@
 <mat-form-field>
   <mat-label [appTranslate]="labelKey"></mat-label>
-  <mat-select #select (valueChange)="valueChange.emit($event)" [(ngModel)]="value" [id]="id" [disabled]="disabled">
+  <mat-select
+    #select
+    (valueChange)="valueChange.emit($event)"
+    [(ngModel)]="value"
+    [id]="id"
+    [disabled]="disabled"
+  >
     <mat-option *ngFor="let option of options" [value]="getOptionName(option)">
-      <app-option-name (iconClickEvent)="removeOption()"
-                       [showIcon]="getOptionName(option) === value && select.panelOpen"
-                       [value]="getOptionName(option)"
-                       [id]="getOptionName(option)">
+      <app-option-name
+        (iconClickEvent)="removeOption()"
+        [showIcon]="getOptionName(option) === value && select.panelOpen"
+        [value]="getOptionName(option)"
+        [id]="getOptionName(option)"
+      >
       </app-option-name>
     </mat-option>
   </mat-select>

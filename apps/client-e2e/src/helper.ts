@@ -1,4 +1,5 @@
-import {browser, by, element, ElementFinder} from 'protractor';
+/* tslint:disable */
+import { browser, by, element, ElementFinder } from 'protractor';
 
 export class Helper {
   public mobileWidth = 320;
@@ -46,7 +47,10 @@ export class Helper {
   }
 
   public setBrowserToMobileSize(browser: any): void {
-    browser.driver.manage().window().setSize(this.mobileWidth, this.mobileHeigth);
+    browser.driver
+      .manage()
+      .window()
+      .setSize(this.mobileWidth, this.mobileHeigth);
   }
 
   public deleteAllCookies(browser: any): void {
@@ -54,14 +58,17 @@ export class Helper {
   }
 
   public printAllCookies(browser: any): void {
-    browser.manage().getCookies().then((cookies) => {
-      console.log(cookies);
-  });
+    browser
+      .manage()
+      .getCookies()
+      .then((cookies) => {
+        console.log(cookies);
+      });
   }
 
   public expectNoErrorsInConsole(browser: any): void {
     const numberOfExpectedErrors = 0;
-    
+
     this.expectErrorsInConsole(browser, numberOfExpectedErrors);
   }
 
@@ -71,48 +78,69 @@ export class Helper {
     this.expectErrorsInConsole(browser, numberOfExpectedErrors);
   }
 
-  private expectErrorsInConsole(browser: any, numberOfExpectedErrors: number): void {
+  private expectErrorsInConsole(
+    browser: any,
+    numberOfExpectedErrors: number
+  ): void {
     browser.driver.getCapabilities().then((caps) => {
-      if (caps.get('browserName') === 'chrome') { // TODO: find way to access logs in firefox
-        browser.manage().logs().get('browser').then((browserLog) => {
-          const numberOfErrors = browserLog.length;
-          expect(numberOfErrors).toEqual(numberOfExpectedErrors);
-    
-          if (numberOfErrors !== numberOfExpectedErrors) {
-            console.log(browserLog);
-          }
-        });
+      if (caps.get('browserName') === 'chrome') {
+        // TODO: find way to access logs in firefox
+        browser
+          .manage()
+          .logs()
+          .get('browser')
+          .then((browserLog) => {
+            const numberOfErrors = browserLog.length;
+            expect(numberOfErrors).toEqual(numberOfExpectedErrors);
+
+            if (numberOfErrors !== numberOfExpectedErrors) {
+              console.log(browserLog);
+            }
+          });
       }
     });
   }
 
   public addGame(page: any, browser: any, game: any): void {
-    const selectedColor = 'rgba(255, 204, 128, 1)';
-    
+    const lightSelectedColor = 'rgba(255, 204, 128, 1)';
+    const darkSelectedColor = 'rgba(224, 224, 224, 1)';
+
     page.getUser('white-' + game.white).click();
-    
+
     this.sleep();
 
-    expect(page.getWhiteSelectedChip(game.white).getCssValue('background-color')).toEqual(selectedColor);
+    expect(
+      page.getWhiteSelectedChip(game.white).getCssValue('background-color')
+    ).toEqual(lightSelectedColor || darkSelectedColor);
 
     page.getUser('black-' + game.black).click();
 
     this.sleep();
-    
-    expect(page.getBlackSelectedChip(game.black).getCssValue('background-color')).toEqual(selectedColor);
-    
+
+    expect(
+      page.getBlackSelectedChip(game.black).getCssValue('background-color')
+    ).toEqual(lightSelectedColor || darkSelectedColor);
+
     page.getUser('winner-' + game.winner).click();
-    
+
     this.sleep();
-    
-    expect(page.getWinnerSelectedChip(game.winner).getCssValue('background-color')).toEqual(selectedColor);
+
+    expect(
+      page.getWinnerSelectedChip(game.winner).getCssValue('background-color')
+    ).toEqual(lightSelectedColor || darkSelectedColor);
 
     page.getSaveButton().click();
   }
 
   public checkIfGameIsAddedSuccesfully(page: any, game: any): void {
-    expect(page.getTableWhiteUserForLastAddedGame().getText()).toEqual(game.white);
-    expect(page.getTableBlackUserForLastAddedGame().getText()).toEqual(game.black);
-    expect(page.getTableWinnerUserForLastAddedGame(game.winner).getText()).toEqual(game.winner);
+    expect(page.getTableWhiteUserForLastAddedGame().getText()).toEqual(
+      game.white
+    );
+    expect(page.getTableBlackUserForLastAddedGame().getText()).toEqual(
+      game.black
+    );
+    expect(
+      page.getTableWinnerUserForLastAddedGame(game.winner).getText()
+    ).toEqual(game.winner);
   }
 }

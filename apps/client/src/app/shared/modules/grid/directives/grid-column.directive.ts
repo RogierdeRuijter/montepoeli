@@ -1,14 +1,20 @@
-import {Directive, ElementRef, Input, OnInit, Optional, Renderer2} from '@angular/core';
-import {GridRowDirective} from './grid-row.directive';
-import {Alignments, GridSizes} from '../../../static-files/enums';
-import {UtilService} from '../../../services/util/util.service';
-import {UnknownCaseException} from '../../../exceptions/UnknownCaseException';
+import {
+  Directive,
+  ElementRef,
+  Input,
+  OnInit,
+  Optional,
+  Renderer2,
+} from '@angular/core';
+import { GridRowDirective } from './grid-row.directive';
+import { Alignments, GridSizes } from '../../../static-files/enums';
+import { UtilService } from '../../../services/util/util.service';
+import { UnknownCaseException } from '../../../exceptions/UnknownCaseException';
 
 @Directive({
   selector: '[appGridColumn]',
 })
 export class GridColumnDirective implements OnInit {
-
   @Input('appGridColumn')
   public amountOfColumns: number[];
 
@@ -18,11 +24,12 @@ export class GridColumnDirective implements OnInit {
   @Input()
   public offsets: number[];
 
-  constructor(private elementRef: ElementRef,
-              private renderer: Renderer2,
-              @Optional() private bootstrapRowDirective: GridRowDirective,
-              private utilService: UtilService) {
-  }
+  constructor(
+    private elementRef: ElementRef,
+    private renderer: Renderer2,
+    @Optional() private bootstrapRowDirective: GridRowDirective,
+    private utilService: UtilService
+  ) {}
 
   public ngOnInit(): void {
     if (!this.bootstrapRowDirective) {
@@ -32,10 +39,15 @@ export class GridColumnDirective implements OnInit {
     const gridSizes: GridSizes[] = this.bootstrapRowDirective.gridSizes;
 
     if (gridSizes.length !== this.amountOfColumns.length) {
-      throw new Error('gridSizes and amountOfColumns should have the same size');
+      throw new Error(
+        'gridSizes and amountOfColumns should have the same size'
+      );
     }
 
-    if (!this.utilService.isNullOrUndefined(this.offsets) && this.amountOfColumns.length !== this.offsets.length) {
+    if (
+      !this.utilService.isNullOrUndefined(this.offsets) &&
+      this.amountOfColumns.length !== this.offsets.length
+    ) {
       throw new Error('collumns and offsets should have the same size');
     }
 
@@ -60,7 +72,8 @@ export class GridColumnDirective implements OnInit {
     let bootstrapGridClass = '';
 
     const gridPrefix = this.getBootstrapClassFor(gridSize);
-    bootstrapGridClass += 'col' + gridPrefix + '-' + this.amountOfColumns[index];
+    bootstrapGridClass +=
+      'col' + gridPrefix + '-' + this.amountOfColumns[index];
 
     this.addClassToElement(bootstrapGridClass);
   }
@@ -86,7 +99,8 @@ export class GridColumnDirective implements OnInit {
         return '-lg';
       case GridSizes.ALL:
         return '';
-      default: throw new UnknownCaseException('unkown');
+      default:
+        throw new UnknownCaseException('unkown');
     }
   }
 

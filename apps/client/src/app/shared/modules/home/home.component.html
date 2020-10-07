@@ -1,10 +1,7 @@
 <div [hidden]="showGames === false">
-    <app-game id="games"
-              [games$]="games$"
-              [users]="users">
-    </app-game>
+  <app-game id="games" [games$]="games$" [users]="users"> </app-game>
 </div>
 
 <div [hidden]="showRules === false">
-    <ng-container #rules></ng-container>
+  <ng-container #rules></ng-container>
 </div>

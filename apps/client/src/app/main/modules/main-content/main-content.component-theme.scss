@@ -2,7 +2,7 @@
 
 @mixin main-content-component-theme($theme) {
   $background: map-get($theme, background-of-main);
-  
+
   #page-container {
     background-color: $background;
   }

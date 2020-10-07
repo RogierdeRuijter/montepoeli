@@ -1,4 +1,4 @@
-import {Injectable} from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class SortService {
@@ -7,6 +7,6 @@ export class SortService {
   }
 
   public sortByDateAscending(objects: any[]): any[] {
-    return objects.sort((n1, n2) => n1.date.getTime() - n2.date.getTime() );
+    return objects.sort((n1, n2) => n1.date.getTime() - n2.date.getTime());
   }
 }

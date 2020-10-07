@@ -4,5 +4,4 @@ export class IllegalInputException extends Error {
 
     Object.setPrototypeOf(this, IllegalInputException.prototype);
   }
-
 }

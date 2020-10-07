@@ -12,12 +12,18 @@ import {
   Injector,
   Compiler,
 } from '@angular/core';
-import {BehaviorSubject, Subject, combineLatest, of} from 'rxjs';
-import {Alignments, GridSizes, Icons, IconSize, Tabs} from '../../../shared/static-files/enums';
-import {User} from '../../../shared/interfaces/user.interface';
-import {UsersStore} from './modules/game/stores/user.store';
-import {Game} from '../../../shared/interfaces/game.interface';
-import {Rule} from '../../../shared/interfaces/rule.interface';
+import { BehaviorSubject, Subject, combineLatest, of } from 'rxjs';
+import {
+  Alignments,
+  GridSizes,
+  Icons,
+  IconSize,
+  Tabs,
+} from '../../../shared/static-files/enums';
+import { User } from '../../../shared/interfaces/user.interface';
+import { UsersStore } from './modules/game/stores/user.store';
+import { Game } from '../../../shared/interfaces/game.interface';
+import { Rule } from '../../../shared/interfaces/rule.interface';
 import { GameService } from './modules/game/services/game.service';
 import { RuleService } from './modules/rule/services/rule.service';
 import { TabChangeGlobalEventEmitter } from '../../services/tab-change.global-event-emitter';
@@ -31,7 +37,6 @@ import { UserService } from '../../services/users/user.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
-
   @ViewChild('rules', { read: ViewContainerRef, static: false })
   public rulesContainer: ViewContainerRef;
   public rulesComponentRef$: Subject<ComponentRef<any>> = new Subject();
@@ -51,36 +56,39 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
 
   private destroy$: Subject<void> = new Subject();
 
-  constructor(private tabChangeGlobalEventEmitter: TabChangeGlobalEventEmitter,
-              private userService: UserService,
-              private userStore: UsersStore,
-              private changeDetectorRef: ChangeDetectorRef,
-              private gameService: GameService,
-              private ruleService: RuleService,
-              private componentFactoryResolver: ComponentFactoryResolver,
-              private injector: Injector,
-              private compiler: Compiler) {
+  constructor(
+    private tabChangeGlobalEventEmitter: TabChangeGlobalEventEmitter,
+    private userService: UserService,
+    private userStore: UsersStore,
+    private changeDetectorRef: ChangeDetectorRef,
+    private gameService: GameService,
+    private ruleService: RuleService,
+    private componentFactoryResolver: ComponentFactoryResolver,
+    private injector: Injector,
+    private compiler: Compiler
+  ) {}
 
-  }
-
-  public ngOnInit(): void {    
-    this.gameService.getAll(this.destroy$)
+  public ngOnInit(): void {
+    this.gameService
+      .getAll(this.destroy$)
       .subscribe((games: Game[]) => this.games$.next(games));
 
-    this.userService.getAll()
-      .subscribe((users: User[]) => {
-        this.users = users;
-        this.userStore.set(users);
-      });
+    this.userService.getAll().subscribe((users: User[]) => {
+      this.users = users;
+      this.userStore.set(users);
+    });
 
-      this.userStore.get(this.destroy$)
-        .subscribe((users: User[]) => this.users = users);
+    this.userStore
+      .get(this.destroy$)
+      .subscribe((users: User[]) => (this.users = users));
 
-      combineLatest([this.ruleService.getAll(), this.rulesComponentRef$])
-        .subscribe(([rules, rulesComponentRef]: [Rule[], ComponentRef<any>]) => {
-          rulesComponentRef.instance.rules = rules;
-          this.changeDetectorRef.detectChanges();
-        });
+    combineLatest([
+      this.ruleService.getAll(),
+      this.rulesComponentRef$,
+    ]).subscribe(([rules, rulesComponentRef]: [Rule[], ComponentRef<any>]) => {
+      rulesComponentRef.instance.rules = rules;
+      this.changeDetectorRef.detectChanges();
+    });
   }
 
   public ngAfterContentInit(): void {
@@ -97,8 +105,10 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
           this.showRules = true;
 
           if (this.rulesContainer.length === 0) {
-            this.createRulesComponent()
-              .then((ruleComponentRef: ComponentRef<any>) => this.rulesComponentRef$.next(ruleComponentRef));
+            this.createRulesComponent().then(
+              (ruleComponentRef: ComponentRef<any>) =>
+                this.rulesComponentRef$.next(ruleComponentRef)
+            );
             return;
           }
         }
@@ -108,14 +118,28 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
   }
 
   public async createRulesComponent(): Promise<ComponentRef<any>> {
-    const { RuleComponent, InternalRuleComponentModule } = await import('./modules/rule/rule.component');
-    
-    const compFactory = this.componentFactoryResolver.resolveComponentFactory(RuleComponent);
-    
-    const factory = await this.compiler.compileModuleAsync(InternalRuleComponentModule);
+    const { RuleComponent, InternalRuleComponentModule } = await import(
+      './modules/rule/rule.component'
+    );
+
+    const compFactory = this.componentFactoryResolver.resolveComponentFactory(
+      RuleComponent
+    );
+
+    const factory = await this.compiler.compileModuleAsync(
+      InternalRuleComponentModule
+    );
     const ref = factory.create(this.injector);
 
-    return of(this.rulesContainer.createComponent(compFactory, null, this.injector, [], ref)).toPromise();
+    return of(
+      this.rulesContainer.createComponent(
+        compFactory,
+        null,
+        this.injector,
+        [],
+        ref
+      )
+    ).toPromise();
   }
 
   public ngOnDestroy(): void {

@@ -1,7 +1,7 @@
-version: "3.7"
+version: '3.7'
 services:
   e2e-tests:
-    build: 
+    build:
       context: .
       dockerfile: Dockerfile.e2e
     container_name: montepouli-e2e-tests
@@ -16,12 +16,12 @@ services:
       - selenium-hub
       - chrome
     command: sh -c 'sleep 10 && npm run e2e:protractor'
-  
+
   webserver-e2e:
     image: nginx:mainline-alpine
     container_name: montepouli-webserver-e2e
     ports:
-      - "443:443"
+      - '443:443'
     volumes:
       - ./apps/client-e2e/nginx-conf:/etc/nginx/conf.d
     depends_on:
@@ -35,7 +35,7 @@ services:
     image: ${IMAGE_REPOSITORY}/${CLIENT_BASE_IMAGE_NAME}:${CLIENT_BASE_IMAGE_TAG}
     container_name: montepouli-client-e2e
     ports:
-      - "80:80"
+      - '80:80'
     networks:
       - e2e
     depends_on:
@@ -53,7 +53,7 @@ services:
       - CORS_ORIGIN=https://www.webserver-e2e
       - DOMAIN=webserver-e2e
     ports:
-      - "3000"
+      - '3000'
     volumes:
       - ./server/src:/usr/src/app/src
     networks:
@@ -66,8 +66,8 @@ services:
     container_name: montepouli-mongodb-e2e
     image: mongo:4.1
     ports:
-      - "27017"
-      - "28017"
+      - '27017'
+      - '28017'
     restart: always
     networks:
       - e2e
@@ -76,7 +76,7 @@ services:
     image: selenium/hub:3.141.59
     container_name: selenium-hub
     ports:
-      - "4444"
+      - '4444'
     networks:
       - e2e
 

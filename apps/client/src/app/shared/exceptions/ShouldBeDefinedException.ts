@@ -4,5 +4,4 @@ export class ShouldBeDefinedException extends Error {
 
     Object.setPrototypeOf(this, ShouldBeDefinedException.prototype);
   }
-
 }

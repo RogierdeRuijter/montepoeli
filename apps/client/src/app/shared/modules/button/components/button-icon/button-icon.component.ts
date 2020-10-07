@@ -1,14 +1,21 @@
-import { Component, EventEmitter, Input, Output, Renderer2, ViewChild, AfterViewInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  Renderer2,
+  ViewChild,
+  AfterViewInit,
+} from '@angular/core';
 import { IconColor, Icons, IconSize } from '../../../../static-files/enums';
 import { MatButton } from '@angular/material/button';
 
 @Component({
   selector: 'app-button-icon',
   templateUrl: './button-icon.component.html',
-  styleUrls: ['./button-icon.component.scss']
+  styleUrls: ['./button-icon.component.scss'],
 })
 export class ButtonIconComponent implements AfterViewInit {
-
   @Input()
   public idForElement: string;
 
@@ -30,9 +37,9 @@ export class ButtonIconComponent implements AfterViewInit {
   @Output()
   public clickEvent: EventEmitter<void> = new EventEmitter();
 
-  @ViewChild(MatButton, {static: true})
+  @ViewChild(MatButton, { static: true })
   public buttonOne: MatButton;
-  
+
   constructor(private renderer: Renderer2) {}
 
   public clicked(): void {
@@ -41,10 +48,26 @@ export class ButtonIconComponent implements AfterViewInit {
 
   public ngAfterViewInit(): void {
     if (this.squareButton) {
-      this.renderer.setStyle(this.buttonOne._elementRef.nativeElement, 'width', 'inherit');
-      this.renderer.setStyle(this.buttonOne._elementRef.nativeElement, 'height', 'inherit');
-      this.renderer.setStyle(this.buttonOne._elementRef.nativeElement, 'line-height', 'inherit');
-      this.renderer.setStyle(this.buttonOne._elementRef.nativeElement, 'border-radius', 'inherit');
-   }
+      this.renderer.setStyle(
+        this.buttonOne._elementRef.nativeElement,
+        'width',
+        'inherit'
+      );
+      this.renderer.setStyle(
+        this.buttonOne._elementRef.nativeElement,
+        'height',
+        'inherit'
+      );
+      this.renderer.setStyle(
+        this.buttonOne._elementRef.nativeElement,
+        'line-height',
+        'inherit'
+      );
+      this.renderer.setStyle(
+        this.buttonOne._elementRef.nativeElement,
+        'border-radius',
+        'inherit'
+      );
+    }
   }
 }

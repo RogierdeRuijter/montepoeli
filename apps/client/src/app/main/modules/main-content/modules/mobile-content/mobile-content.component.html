@@ -4,12 +4,14 @@
 
   <router-outlet></router-outlet>
 
-  <app-action-bar-footer [showPlusIcon]="gameView"
-                         [selected]="selected"
-                         [raised]="raisedFooter"
-                         (chessSetSelected)="gamesHandler()"
-                         (scrollSelected)="rulesHandler()"
-                         (plusSelected)="plusEventHandler()">
+  <app-action-bar-footer
+    [showPlusIcon]="gameView"
+    [selected]="selected"
+    [raised]="raisedFooter"
+    (chessSetSelected)="gamesHandler()"
+    (scrollSelected)="rulesHandler()"
+    (plusSelected)="plusEventHandler()"
+  >
   </app-action-bar-footer>
 </div>
 

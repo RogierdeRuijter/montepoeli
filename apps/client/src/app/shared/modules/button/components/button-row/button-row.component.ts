@@ -1,5 +1,10 @@
-import {Component, Input} from '@angular/core';
-import {ButtonFunction, ButtonRowType, ButtonType, GridSizes} from '../../../../static-files/enums';
+import { Component, Input } from '@angular/core';
+import {
+  ButtonFunction,
+  ButtonRowType,
+  ButtonType,
+  GridSizes,
+} from '../../../../static-files/enums';
 
 @Component({
   selector: 'app-button-row',
@@ -7,7 +12,6 @@ import {ButtonFunction, ButtonRowType, ButtonType, GridSizes} from '../../../../
   styleUrls: ['./button-row.component.scss'],
 })
 export class ButtonRowComponent {
-
   @Input()
   public buttonRowType: ButtonRowType;
 

@@ -1,15 +1,15 @@
-import {Test, TestingModule} from '@nestjs/testing';
-import {GameMapperService} from './game-mapper.service';
-import {GameFactory} from '../../../factories/game.factory';
-import {Game} from '../../../models/interfaces/game.interface';
-import {User} from '../../../models/interfaces/user.interface';
-import {UserFactory} from '../../../factories/user.factory';
-import {getModelToken} from '@nestjs/mongoose';
-import {UtilService} from '../../shared/services/util/util.service';
-import {GameDto} from '../../../models/dtos/game.dto';
-import {GameDtoFactory} from '../../../factories/gameDto.factory';
-import {FactoryUtilService} from '../../../factories/factory-util.service';
-import {UserRepositoryService} from '../../users/user-repository/user-repository.service';
+import { Test, TestingModule } from '@nestjs/testing';
+import { GameMapperService } from './game-mapper.service';
+import { GameFactory } from '../../../factories/game.factory';
+import { Game } from '../../../models/interfaces/game.interface';
+import { User } from '../../../models/interfaces/user.interface';
+import { UserFactory } from '../../../factories/user.factory';
+import { getModelToken } from '@nestjs/mongoose';
+import { UtilService } from '../../shared/services/util/util.service';
+import { GameDto } from '../../../models/dtos/game.dto';
+import { GameDtoFactory } from '../../../factories/gameDto.factory';
+import { FactoryUtilService } from '../../../factories/factory-util.service';
+import { UserRepositoryService } from '../../users/user-repository/user-repository.service';
 
 describe('GameMapperService', () => {
   let service: GameMapperService;
@@ -21,7 +21,7 @@ describe('GameMapperService', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
-        {provide: getModelToken('User'), useFactory: factory},
+        { provide: getModelToken('User'), useFactory: factory },
         UtilService,
         GameMapperService,
         UserRepositoryService,
@@ -50,12 +50,48 @@ describe('GameMapperService', () => {
       const result = service.swapUsersIdsWithNames(games, [black, white]);
 
       const output: GameDto[] = [
-        gameDtoFactory.create(games[0].id, black.name, white.name, factoryUtilService.getWinnerName(games[0], black, white), games[0].date),
-        gameDtoFactory.create(games[1].id, black.name, white.name, factoryUtilService.getWinnerName(games[1], black, white), games[1].date),
-        gameDtoFactory.create(games[2].id, black.name, white.name, factoryUtilService.getWinnerName(games[2], black, white), games[2].date),
-        gameDtoFactory.create(games[3].id, black.name, white.name, factoryUtilService.getWinnerName(games[3], black, white), games[3].date),
-        gameDtoFactory.create(games[4].id, black.name, white.name, factoryUtilService.getWinnerName(games[4], black, white), games[4].date),
-        gameDtoFactory.create(games[5].id, black.name, white.name, factoryUtilService.getWinnerName(games[5], black, white), games[5].date),
+        gameDtoFactory.create(
+          games[0].id,
+          black.name,
+          white.name,
+          factoryUtilService.getWinnerName(games[0], black, white),
+          games[0].date,
+        ),
+        gameDtoFactory.create(
+          games[1].id,
+          black.name,
+          white.name,
+          factoryUtilService.getWinnerName(games[1], black, white),
+          games[1].date,
+        ),
+        gameDtoFactory.create(
+          games[2].id,
+          black.name,
+          white.name,
+          factoryUtilService.getWinnerName(games[2], black, white),
+          games[2].date,
+        ),
+        gameDtoFactory.create(
+          games[3].id,
+          black.name,
+          white.name,
+          factoryUtilService.getWinnerName(games[3], black, white),
+          games[3].date,
+        ),
+        gameDtoFactory.create(
+          games[4].id,
+          black.name,
+          white.name,
+          factoryUtilService.getWinnerName(games[4], black, white),
+          games[4].date,
+        ),
+        gameDtoFactory.create(
+          games[5].id,
+          black.name,
+          white.name,
+          factoryUtilService.getWinnerName(games[5], black, white),
+          games[5].date,
+        ),
       ];
 
       expect(result).toEqual(output);

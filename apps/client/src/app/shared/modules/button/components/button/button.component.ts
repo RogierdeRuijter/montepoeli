@@ -1,5 +1,5 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {ButtonFunction, ButtonType} from '../../../../static-files/enums';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ButtonFunction, ButtonType } from '../../../../static-files/enums';
 import { UnknownCaseException } from '../../../../exceptions/UnknownCaseException';
 
 @Component({
@@ -8,7 +8,6 @@ import { UnknownCaseException } from '../../../../exceptions/UnknownCaseExceptio
   styleUrls: ['./button.component.scss'],
 })
 export class ButtonComponent implements OnInit {
-
   @Input()
   public id: string;
 

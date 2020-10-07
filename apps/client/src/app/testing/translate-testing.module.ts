@@ -1,18 +1,23 @@
 import { Injectable, NgModule, Pipe, PipeTransform } from '@angular/core';
-import { TranslateLoader, TranslateModule, TranslatePipe, TranslateService } from '@ngx-translate/core';
+import {
+  TranslateLoader,
+  TranslateModule,
+  TranslatePipe,
+  TranslateService,
+} from '@ngx-translate/core';
 import { Observable, of } from 'rxjs';
 import { isString } from 'util';
 // TODO: get this to work, it is currently not visiable to the game service spec
 const translations: any = {
-  'pages': {
-    'home': {
-      'games': {
-        'labels': {
-            'draw': 'Draw'
-          }
-      }
-    }
-  }
+  pages: {
+    home: {
+      games: {
+        labels: {
+          draw: 'Draw',
+        },
+      },
+    },
+  },
 };
 
 class FakeLoader implements TranslateLoader {
@@ -22,7 +27,7 @@ class FakeLoader implements TranslateLoader {
 }
 
 @Pipe({
-  name: 'translate'
+  name: 'translate',
 })
 export class TranslatePipeMock implements PipeTransform {
   public name = 'translate';
@@ -32,7 +37,7 @@ export class TranslatePipeMock implements PipeTransform {
   }
 }
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class TranslateServiceStub {
   public get<T>(key: T): Observable<T> {
     return of(key);
@@ -44,27 +49,25 @@ export class TranslateServiceStub {
     let translation: string;
     let translationObject: any = translations;
 
-    translationKeys.forEach(translationKey => {
+    translationKeys.forEach((translationKey) => {
       translationObject = translationObject[translationKey];
-      
+
       if (translationObject === (null || undefined)) {
         return;
       }
 
       if (isString(translationObject)) {
         translation = translationObject;
-        return; 
+        return;
       }
     });
-  
+
     return translation;
   }
 }
 
 @NgModule({
-  declarations: [
-    TranslatePipeMock
-  ],
+  declarations: [TranslatePipeMock],
   providers: [
     { provide: TranslateService, useClass: TranslateServiceStub },
     { provide: TranslatePipe, useClass: TranslatePipeMock },
@@ -72,11 +75,8 @@ export class TranslateServiceStub {
   imports: [
     TranslateModule.forRoot({
       loader: { provide: TranslateLoader, useClass: FakeLoader },
-    })
+    }),
   ],
-  exports: [
-    TranslatePipeMock,
-    TranslateModule
-  ]
+  exports: [TranslatePipeMock, TranslateModule],
 })
 export class TranslateTestingModule {}

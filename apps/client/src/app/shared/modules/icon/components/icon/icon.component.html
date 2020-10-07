@@ -3,14 +3,12 @@
 </ng-container>
 
 <ng-container *ngIf="svgIcon">
-  <img #svgIconElement [src]="svgIcon">
+  <img #svgIconElement [src]="svgIcon" />
 </ng-container>
 
 <ng-container *ngIf="!svgIcon && !matIcon">
   <span #fontAwesomeComponent>
-    <fa-icon class="{{color}}"
-             [icon]="iconDefinition"
-             [size]="size">
+    <fa-icon class="{{ color }}" [icon]="iconDefinition" [size]="size">
     </fa-icon>
   </span>
 </ng-container>

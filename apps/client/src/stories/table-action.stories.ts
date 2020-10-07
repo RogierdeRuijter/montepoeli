@@ -32,7 +32,6 @@
 //   moduleMetadata: moduleMeta
 // });
 
-
 // const moduleMeta = {
 //   imports: [
 //     FontAwesomeModule,
@@ -40,4 +39,3 @@
 //   declarations: [IconComponent],
 //   providers: [],
 // };
-

@@ -1,6 +1,6 @@
-import {AppPage} from './app.po';
-import {browser} from 'protractor';
-import {Helper} from './helper';
+import { AppPage } from './app.po';
+import { browser } from 'protractor';
+import { Helper } from './helper';
 
 const helper = new Helper();
 
@@ -15,23 +15,22 @@ describe('Add a game', () => {
     page.navigateToBase();
 
     browser.waitForAngular();
-    
+
     expect(browser.getCurrentUrl()).toContain('/home');
     page.getAddGameButton().click();
 
     const game: any = {
       white: 'protractor',
       black: 'protractor1',
-      winner: 'protractor'
-    }
+      winner: 'protractor',
+    };
 
     helper.addGame(page, browser, game);
-    
+
     browser.waitForAngular();
     helper.sleep();
-    
-    helper.checkIfGameIsAddedSuccesfully(page, game);
 
+    helper.checkIfGameIsAddedSuccesfully(page, game);
   });
 
   afterEach(() => helper.expectNoErrorsInConsole(browser));

@@ -20,16 +20,18 @@ export function init_app(appLoadService: AppInitService): () => Promise<any> {
   return () => appLoadService.init();
 }
 @NgModule({
-  declarations: [
-    AppComponent,
-    LandingComponent
-  ],
+  declarations: [AppComponent, LandingComponent],
   providers: [
     CookieService,
     TranslateStore,
     AppInitService,
-    { provide: APP_INITIALIZER, useFactory: init_app, deps: [AppInitService], multi: true },
-    {provide: ErrorHandler, useClass: GlobalErrorHandlerService}
+    {
+      provide: APP_INITIALIZER,
+      useFactory: init_app,
+      deps: [AppInitService],
+      multi: true,
+    },
+    { provide: ErrorHandler, useClass: GlobalErrorHandlerService },
   ],
   imports: [
     AppRoutingModule,
@@ -37,12 +39,11 @@ export function init_app(appLoadService: AppInitService): () => Promise<any> {
     BrowserModule,
     BrowserAnimationsModule,
     CustomTranslateModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {enabled: true}),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: true }),
     AuthModule,
     InterceptorModule,
-    MatButtonModule
+    MatButtonModule,
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {
-}
+export class AppModule {}

@@ -1,8 +1,8 @@
-import {Component, EventEmitter, Output, OnInit} from '@angular/core';
-import {DialogDataComponent} from '../dialog-data/dialog-data.component';
-import {Game} from '../../../../interfaces/game.interface';
-import {UtilService} from '../../../../services/util/util.service';
-import {MatDialog} from '@angular/material/dialog';
+import { Component, EventEmitter, Output, OnInit } from '@angular/core';
+import { DialogDataComponent } from '../dialog-data/dialog-data.component';
+import { Game } from '../../../../interfaces/game.interface';
+import { UtilService } from '../../../../services/util/util.service';
+import { MatDialog } from '@angular/material/dialog';
 import { Router, RouterEvent, NavigationStart } from '@angular/router';
 import { filter, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
@@ -13,7 +13,6 @@ import { GameFactory } from '../../../home/modules/game/factories/game.factory';
   template: ``,
 })
 export class DialogOverviewComponent implements OnInit {
-
   @Output()
   public addEvent: EventEmitter<Game> = new EventEmitter();
 
@@ -24,11 +23,12 @@ export class DialogOverviewComponent implements OnInit {
 
   public unsubscriber$: Subject<void>;
 
-  constructor(public dialog: MatDialog,
-              private utilService: UtilService,
-              private router: Router) {
-  }
-  
+  constructor(
+    public dialog: MatDialog,
+    private utilService: UtilService,
+    private router: Router
+  ) {}
+
   public ngOnInit(): void {
     this.openDialog();
   }
@@ -37,18 +37,18 @@ export class DialogOverviewComponent implements OnInit {
     this.unsubscriber$ = new Subject();
 
     this.dialog.closeAll();
-    
+    const data: Game = {
+      id: this.game.id,
+      white: this.game.white,
+      winner: this.game.winner,
+      black: this.game.black,
+      date: this.game.date,
+    };
     const dialogRef = this.dialog.open(DialogDataComponent, {
-      data: {
-        id: this.game.id,
-        white: this.game.white,
-        winner: this.game.winner,
-        black: this.game.black,
-        date: this.game.date
-      } as Game,
-      maxWidth: '300px'
+      data,
+      maxWidth: '300px',
     });
-    
+
     // No need to unsubscribe since it is a one off observable
     dialogRef.afterClosed().subscribe((result: Game | string) => {
       if (this.addEventIsReceived(result)) {

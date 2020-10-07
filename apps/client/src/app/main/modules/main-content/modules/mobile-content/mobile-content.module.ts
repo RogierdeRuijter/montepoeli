@@ -12,14 +12,8 @@ import { GridModule } from '../../../../../shared/modules/grid/grid.module';
 import { UserActionModule } from '../../../../../shared/modules/user-action/user-action.module';
 
 @NgModule({
-  declarations: [
-    ActionBarFooterComponent,
-    SimpleTitleBarComponent
-  ],
-  exports: [
-    ActionBarFooterComponent,
-    SimpleTitleBarComponent
-  ],
+  declarations: [ActionBarFooterComponent, SimpleTitleBarComponent],
+  exports: [ActionBarFooterComponent, SimpleTitleBarComponent],
   imports: [
     CommonModule,
     UserActionModule,
@@ -29,7 +23,7 @@ import { UserActionModule } from '../../../../../shared/modules/user-action/user
     RouterModule,
     MatToolbarModule,
     IconModule,
-    GridModule
+    GridModule,
   ],
 })
-export class MobileContentModule { }
+export class MobileContentModule {}

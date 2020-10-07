@@ -1,6 +1,6 @@
-import {Factory} from './factory';
-import {Game} from '../models/interfaces/game.interface';
-import {FactoryUtilService} from './factory-util.service';
+import { Factory } from './factory';
+import { Game } from '../models/interfaces/game.interface';
+import { FactoryUtilService } from './factory-util.service';
 
 export class GameFactory implements Factory<Game> {
   private factoryUtilService = new FactoryUtilService();
@@ -18,7 +18,11 @@ export class GameFactory implements Factory<Game> {
     };
   }
 
-  public createMany(amount: number, blackId?: string, whiteId?: string): Game[] {
+  public createMany(
+    amount: number,
+    blackId?: string,
+    whiteId?: string,
+  ): Game[] {
     const list: Game[] = [];
 
     for (let i = 0; i < amount; i++) {

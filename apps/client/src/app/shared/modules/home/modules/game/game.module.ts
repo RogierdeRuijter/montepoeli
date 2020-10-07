@@ -16,11 +16,9 @@ import { CdkTableModule } from '@angular/cdk/table';
     GameComponent,
     GameTableComponent,
     TableActionComponent,
-    OverviewComponent
+    OverviewComponent,
   ],
-  exports: [
-    GameComponent,
-  ],
+  exports: [GameComponent],
   imports: [
     ButtonModule,
     MatTableModule,
@@ -31,5 +29,4 @@ import { CdkTableModule } from '@angular/cdk/table';
     CdkTableModule,
   ],
 })
-export class GameModule {
-}
+export class GameModule {}
