@@ -13,7 +13,7 @@ export class CustomHttpService {
 
   private baseUrl: string;
 
-  public httpOptions = {
+  public httpOptions: any = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
     withCredentials: true,
     observe: 'response' as 'response',
