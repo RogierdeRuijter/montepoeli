@@ -1,7 +1,7 @@
-import {Injectable} from '@nestjs/common';
-import {User} from '../../models/interfaces/user.interface';
-import {Mapper} from '../../models/interfaces/mapper.interface';
-import {UserDto} from '../../models/dtos/user.dto';
+import { Injectable } from '@nestjs/common';
+import { User } from '../../models/interfaces/user.interface';
+import { Mapper } from '../../models/interfaces/mapper.interface';
+import { UserDto } from '../../models/dtos/user.dto';
 
 @Injectable()
 export class UserMapper implements Mapper<UserDto> {
@@ -12,7 +12,7 @@ export class UserMapper implements Mapper<UserDto> {
   public convert(user: User): UserDto {
     return {
       name: user.name,
-      preferedLanguage: user.preferedLanguage
+      preferedLanguage: user.preferedLanguage,
     };
   }
 }

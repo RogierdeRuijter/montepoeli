@@ -1,30 +1,40 @@
-import {Injectable} from '@angular/core';
-import {Game} from '../../../../interfaces/game.interface';
-import {UtilService} from '../../../../services/util/util.service';
+import { Injectable } from '@angular/core';
+import { Game } from '../../../../interfaces/game.interface';
+import { UtilService } from '../../../../services/util/util.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DialogDataService {
-
-  constructor(private utilService: UtilService) {
-  }
+  constructor(private utilService: UtilService) {}
 
   public allFieldsAreDefined(game: Game): boolean {
-    return !this.utilService.isNullOrUndefined(game.white)
-      && !this.utilService.isNullOrUndefined(game.black)
-      && !this.utilService.isNullOrUndefined(game.winner);
+    return (
+      !this.utilService.isNullOrUndefined(game.white) &&
+      !this.utilService.isNullOrUndefined(game.black) &&
+      !this.utilService.isNullOrUndefined(game.winner)
+    );
   }
 
   public userAreDefined(game: Game): boolean {
-    return !this.utilService.isNullOrUndefined(game.white)
-    && !this.utilService.isNullOrUndefined(game.black);
+    return (
+      !this.utilService.isNullOrUndefined(game.white) &&
+      !this.utilService.isNullOrUndefined(game.black)
+    );
   }
 
-  public determineDisabledWinnerOptions(winnerOptions: string[], game: Game, draw: string): boolean[] {
+  public determineDisabledWinnerOptions(
+    winnerOptions: string[],
+    game: Game,
+    draw: string
+  ): boolean[] {
     if (game.black && game.white) {
       return winnerOptions.map((winnerOption: string) => {
-        if (winnerOption === game.white || winnerOption === game.black || winnerOption === draw) {
+        if (
+          winnerOption === game.white ||
+          winnerOption === game.black ||
+          winnerOption === draw
+        ) {
           return false;
         } else {
           return true;
@@ -35,11 +45,20 @@ export class DialogDataService {
     }
   }
 
-  public areAllWinnerOptionsDisabled(winnerOptions: string[], game: Game, draw: string): boolean {
-    const disabledWinnerOptions: boolean[] = this.determineDisabledWinnerOptions(winnerOptions, game, draw);
-    
-    const found = disabledWinnerOptions
-      .find((disabledWinnerOption: boolean) => disabledWinnerOption === false);
+  public areAllWinnerOptionsDisabled(
+    winnerOptions: string[],
+    game: Game,
+    draw: string
+  ): boolean {
+    const disabledWinnerOptions: boolean[] = this.determineDisabledWinnerOptions(
+      winnerOptions,
+      game,
+      draw
+    );
+
+    const found = disabledWinnerOptions.find(
+      (disabledWinnerOption: boolean) => disabledWinnerOption === false
+    );
 
     return found === undefined ? true : false;
   }

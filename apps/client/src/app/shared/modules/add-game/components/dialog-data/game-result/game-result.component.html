@@ -1,22 +1,30 @@
-<h2 mat-dialog-title [appTranslate]="'pages.home.games.pop-up.title'"></h2>
+<h2 [appTranslate]="'pages.home.games.pop-up.title'"></h2>
 <div mat-dialog-content>
   <form #form="ngForm">
     <div>
-      <mat-form-field class="custom-input-field" color="accent" (click)="clicked()">
+      <mat-form-field
+        class="custom-input-field"
+        color="accent"
+        (click)="clicked()"
+      >
         <mat-label [appTranslate]="'pages.home.games.labels.white'"></mat-label>
-        <mat-chip-list id='white-user' 
-        selectable
-        (change)="onListChange($event, 'white')"
-        name="white">
-          <mat-chip *ngFor="let user of usersWhite"
+        <mat-chip-list
+          id="white-user"
+          selectable
+          (change)="onListChange($event, 'white')"
+          name="white"
+        >
+          <mat-chip
+            *ngFor="let user of usersWhite"
             #matChip="matChip"
             [id]="'white-' + user.name"
             [disabled]="user.name === data.black"
             [disableRipple]="true"
-            (click)="fieldUpdated(matChip);"
+            (click)="fieldUpdated(matChip)"
             color="accent"
-            [value]="user.name">
-          {{user.name}}
+            [value]="user.name"
+          >
+            {{ user.name }}
           </mat-chip>
         </mat-chip-list>
       </mat-form-field>
@@ -24,36 +32,50 @@
     <div [class.form-field-with-disabled-underline]="blackDisabled">
       <mat-form-field class="custom-input-field" color="accent">
         <mat-label [appTranslate]="'pages.home.games.labels.black'"></mat-label>
-        <mat-chip-list id='black-user' selectable
-        (change)="onListChange($event, 'black')" name="black">
-          <mat-chip *ngFor="let user of usersBlack"
+        <mat-chip-list
+          id="black-user"
+          selectable
+          (change)="onListChange($event, 'black')"
+          name="black"
+        >
+          <mat-chip
+            *ngFor="let user of usersBlack"
             #matChip="matChip"
             [id]="'black-' + user.name"
             [selected]="blackDeselected"
             [disabled]="!data.white || user.name === data.white"
             [disableRipple]="true"
-            (click)="fieldUpdated(matChip);"
+            (click)="fieldUpdated(matChip)"
             color="accent"
-            [value]="user.name">
-          {{user.name}}
+            [value]="user.name"
+          >
+            {{ user.name }}
           </mat-chip>
         </mat-chip-list>
-     </mat-form-field>
+      </mat-form-field>
     </div>
     <div [class.form-field-with-disabled-underline]="winnersDisabled">
       <mat-form-field class="custom-input-field" color="accent">
-        <mat-label [appTranslate]="'pages.home.games.labels.winner'"></mat-label>
-        <mat-chip-list id='winner-user' (change)="onListChange($event, 'winner')" name="winner">
-          <mat-chip *ngFor="let option of winnerOptions; let i = index"
+        <mat-label
+          [appTranslate]="'pages.home.games.labels.winner'"
+        ></mat-label>
+        <mat-chip-list
+          id="winner-user"
+          (change)="onListChange($event, 'winner')"
+          name="winner"
+        >
+          <mat-chip
+            *ngFor="let option of winnerOptions; let i = index"
             #matChip="matChip"
             [id]="'winner-' + option"
             [selected]="winnersDeselected"
             [disabled]="disabledWinnerOptions[i]"
             [disableRipple]="true"
-            (click)="fieldUpdated(matChip);"
+            (click)="fieldUpdated(matChip)"
             color="accent"
-            [value]="option">
-          {{option}}
+            [value]="option"
+          >
+            {{ option }}
           </mat-chip>
         </mat-chip-list>
       </mat-form-field>
@@ -61,20 +83,23 @@
   </form>
 </div>
 
-<div [appGridRow]="[GridSizes.ALL]"
-     mat-dialog-actions>
+<div [appGridRow]="[GridSizes.ALL]" mat-dialog-actions>
   <!-- TODO: app-button-row and refactor to remove bootstrap -->
-  <app-button (clickEvent)="cancel()"
-              [appGridColumn]="[6]"
-              [buttonFunction]="ButtonFunction.CANCEL"
-              [buttonType]="ButtonType.NORMAL">
+  <app-button
+    (clickEvent)="cancel()"
+    [appGridColumn]="[6]"
+    [buttonFunction]="ButtonFunction.CANCEL"
+    [buttonType]="ButtonType.NORMAL"
+  >
   </app-button>
 
-  <app-button id="save"
-              [appGridColumn]="[6]"
-              [buttonFunction]="ButtonFunction.SAVE"
-              [buttonType]="ButtonType.SECONDARY"
-              [dialogDataToSubmit]="data"
-              [disabled]="disabled">
+  <app-button
+    id="save"
+    [appGridColumn]="[6]"
+    [buttonFunction]="ButtonFunction.SAVE"
+    [buttonType]="ButtonType.SECONDARY"
+    [dialogDataToSubmit]="data"
+    [disabled]="disabled"
+  >
   </app-button>
 </div>

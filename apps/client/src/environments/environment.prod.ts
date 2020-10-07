@@ -2,13 +2,12 @@
 // `ng build ---prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-import {DynamicEnvironment} from './dynamic-environment';
+import { DynamicEnvironment } from './dynamic-environment';
 import { Authentication } from './interfaces/authentication.interface';
 import { Frontend } from './interfaces/frontend.interface';
 import { Backend } from './interfaces/backend.interface';
 
 export class Environment extends DynamicEnvironment {
-
   public production: boolean;
   public authentication: Authentication;
   public frontend: Frontend;
@@ -19,7 +18,7 @@ export class Environment extends DynamicEnvironment {
     this.production = true;
     this.authentication = {
       TOKENNAME: 'montepoeliJwt',
-      AUTHTOKENNAME: 'montepoeliAuthenticated'
+      AUTHTOKENNAME: 'montepoeliAuthenticated',
     };
     this.frontend = {
       TITLE: 'Angular Starter kit',
@@ -43,7 +42,7 @@ export class Environment extends DynamicEnvironment {
         RULE: '/rule',
         CREATE: '/create',
         UPDATE_LANGUAGE_PREFERENCE: '/language-preference',
-        CURRENT: '/current'
+        CURRENT: '/current',
       },
     };
   }

@@ -1,21 +1,53 @@
 <table mat-table [dataSource]="games$" class="mat-elevation-z8">
   <ng-container matColumnDef="white">
-    <th mat-header-cell *matHeaderCellDef appTranslate="pages.home.games.labels.white"></th>
-    <td mat-cell *matCellDef="let element; let i = index" mat-cell [id]="'table-' + element.white + '-' + i"> {{element?.white}} </td>
+    <th
+      mat-header-cell
+      *matHeaderCellDef
+      appTranslate="pages.home.games.labels.white"
+    ></th>
+    <td
+      mat-cell
+      *matCellDef="let element; let i = index"
+      mat-cell
+      [id]="'table-' + element.white + '-' + i"
+    >
+      {{ element?.white }}
+    </td>
   </ng-container>
   <span appTranslate="pages.home.games.labels.white"></span>
   <ng-container matColumnDef="black">
-    <th mat-header-cell *matHeaderCellDef appTranslate="pages.home.games.labels.black"></th>
-    <td mat-cell *matCellDef="let element; let i = index"
-        [id]="'table-' + element?.black + '-' + i"> {{element?.black}} </td>
+    <th
+      mat-header-cell
+      *matHeaderCellDef
+      appTranslate="pages.home.games.labels.black"
+    ></th>
+    <td
+      mat-cell
+      *matCellDef="let element; let i = index"
+      [id]="'table-' + element?.black + '-' + i"
+    >
+      {{ element?.black }}
+    </td>
   </ng-container>
   <ng-container matColumnDef="winner">
-    <th mat-header-cell *matHeaderCellDef appTranslate="pages.home.games.labels.winner"></th>
-    <td mat-cell *matCellDef="let element; let i = index" [id]="'table-' + element?.winner + '-' + i">
-        {{ element?.winner }}
+    <th
+      mat-header-cell
+      *matHeaderCellDef
+      appTranslate="pages.home.games.labels.winner"
+    ></th>
+    <td
+      mat-cell
+      *matCellDef="let element; let i = index"
+      [id]="'table-' + element?.winner + '-' + i"
+    >
+      {{ element?.winner }}
     </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;" @rowAnimation></tr>
+  <tr
+    mat-row
+    *matRowDef="let row; columns: displayedColumns"
+    @rowAnimation
+  ></tr>
 </table>

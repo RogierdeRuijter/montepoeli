@@ -1,6 +1,6 @@
-import {AppPage} from './app.po';
-import {browser} from 'protractor';
-import {Helper} from './helper';
+import { AppPage } from './app.po';
+import { browser } from 'protractor';
+import { Helper } from './helper';
 
 const helper = new Helper();
 
@@ -17,12 +17,12 @@ describe('Tab navigation', () => {
     browser.waitForAngular();
 
     page.getNavBarRulesTab().click();
-    
+
     browser.waitForAngular();
     expect(page.getRulesView()).toBeTruthy();
-    
+
     page.getNavBarGamesTab().click();
-    
+
     browser.waitForAngular();
     expect(page.getGamesView()).toBeTruthy();
   });

@@ -1,30 +1,30 @@
 @import '~@angular/material/theming';
 
 @mixin game-result-component-theme($theme) {
-    $disabled-color: map-get($theme, form-field-underline-disabled);
-    $label-color: map-get($theme, label-color);
-   
-    .form-field-with-disabled-underline {
-      .mat-form-field-underline {
-          background-color: $disabled-color;
-      }
+  $disabled-color: map-get($theme, form-field-underline-disabled);
+  $label-color: map-get($theme, label-color);
 
-      mat-label {
-        color: $disabled-color;
-      }
+  .form-field-with-disabled-underline {
+    .mat-form-field-underline {
+      background-color: $disabled-color;
     }
 
-    .custom-input-field {
-      .mat-form-field-label {
-          color: $label-color !important;
-        }
+    mat-label {
+      color: $disabled-color;
+    }
+  }
 
-      .mat-form-field-ripple {
-        opacity: 0 !important;
-      }
+  .custom-input-field {
+    .mat-form-field-label {
+      color: $label-color !important;
+    }
 
-      .mat-standard-chip:focus::after {
-        opacity: 0 !important;
-      }
+    .mat-form-field-ripple {
+      opacity: 0 !important;
+    }
+
+    .mat-standard-chip:focus::after {
+      opacity: 0 !important;
+    }
   }
 }

@@ -1,4 +1,6 @@
 # Add files here to ignore them from prettier formatting
 
 /dist
-/coverage
+/apps/client/coverage
+/apps/server/coverage
+/apps/client-e2e/reports

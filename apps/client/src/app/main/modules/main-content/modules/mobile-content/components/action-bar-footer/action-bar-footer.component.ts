@@ -1,13 +1,18 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Alignments, GridSizes, IconColor, Icons, IconSize } from '../../../../../../../shared/static-files/enums';
+import {
+  Alignments,
+  GridSizes,
+  IconColor,
+  Icons,
+  IconSize,
+} from '../../../../../../../shared/static-files/enums';
 
 @Component({
   selector: 'app-action-bar-footer',
   templateUrl: './action-bar-footer.component.html',
-  styleUrls: ['./action-bar-footer.component.scss']
+  styleUrls: ['./action-bar-footer.component.scss'],
 })
 export class ActionBarFooterComponent {
-
   @Input()
   public showPlusIcon: boolean;
 

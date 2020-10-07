@@ -13,14 +13,8 @@ import { UserActionModule } from '../../../../../shared/modules/user-action/user
 import { GridModule } from '../../../../../shared/modules/grid/grid.module';
 
 @NgModule({
-  declarations: [
-    TitleBarComponent,
-    FooterComponent
-  ],
-  exports: [
-    TitleBarComponent,
-    FooterComponent
-  ],
+  declarations: [TitleBarComponent, FooterComponent],
+  exports: [TitleBarComponent, FooterComponent],
   imports: [
     CommonModule,
     CustomTranslateModule,
@@ -34,7 +28,7 @@ import { GridModule } from '../../../../../shared/modules/grid/grid.module';
     RouterModule,
     UserActionModule,
 
-    GridModule
-  ]
+    GridModule,
+  ],
 })
-export class LargerScreenContentModule { }
+export class LargerScreenContentModule {}

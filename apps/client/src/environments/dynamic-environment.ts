@@ -1,4 +1,4 @@
-import {DynamicEnvironmentInterface} from './dynamic-environment.interface';
+import { DynamicEnvironmentInterface } from './dynamic-environment.interface';
 
 declare var window: any;
 

@@ -1,5 +1,5 @@
-import {NestFactory} from '@nestjs/core';
-import {AppModule} from './modules/app/app.module';
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './modules/app/app.module';
 import * as cookieParser from 'cookie-parser';
 import * as compression from 'compression';
 import * as fs from 'fs';
@@ -19,7 +19,9 @@ async function bootstrap() {
     // tslint:disable-next-line
     console.info('Cant read key or certificate');
     // tslint:disable-next-line
-    console.info('This does not have to be an issue if you handle https another way or http is good enough for now');
+    console.info(
+      'This does not have to be an issue if you handle https another way or http is good enough for now',
+    );
   }
 
   const httpsOptions = {
@@ -37,14 +39,13 @@ async function bootstrap() {
   checkEnvironmentVariables();
 
   app.use(cookieParser(process.env.COOKIE_SECRET));
-  app.use(compression({threshold: 500}));
+  app.use(compression({ threshold: 500 }));
   app.setGlobalPrefix('api');
 
   let origin: boolean | string = true;
   if (process.env.ENV === 'prod') {
     origin = process.env.CORS_ORIGIN;
   }
-
 
   app.enableCors({
     credentials: true, // TODO: check if the crendtials true is needed in production

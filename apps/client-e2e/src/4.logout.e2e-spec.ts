@@ -1,6 +1,6 @@
 import { AppPage } from './app.po';
 import { browser } from 'protractor';
-import {Helper} from './helper';
+import { Helper } from './helper';
 
 const helper = new Helper();
 
@@ -18,13 +18,13 @@ describe('montepoeli', () => {
 
     page.getUserSettings().click();
     page.getLogout().click();
-    
+
     browser.waitForAngular();
 
     expect(browser.getCurrentUrl()).toContain('/login');
-    
+
     page.navigateToHome();
-    
+
     expect(browser.getCurrentUrl()).toContain('/login');
 
     helper.expectNoErrorsInConsole(browser);

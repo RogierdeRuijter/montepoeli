@@ -1,15 +1,19 @@
 <div *ngIf="buttonRowType === ButtonRowType.TWO">
   <div [appGridRow]="[GridSizes.ALL]">
     <div [appGridColumn]="[1]">
-      <app-button [buttonFunction]="buttonFunctions[0]"
-                  [buttonType]="buttonTypes[0]">
+      <app-button
+        [buttonFunction]="buttonFunctions[0]"
+        [buttonType]="buttonTypes[0]"
+      >
       </app-button>
     </div>
 
     <div [appGridColumn]="[1]">
-      <app-button [buttonFunction]="buttonFunctions[0]"
-                  [buttonType]="buttonTypes[0]"
-                  [disabled]="disabled">
+      <app-button
+        [buttonFunction]="buttonFunctions[0]"
+        [buttonType]="buttonTypes[0]"
+        [disabled]="disabled"
+      >
       </app-button>
     </div>
   </div>

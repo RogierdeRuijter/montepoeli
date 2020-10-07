@@ -1,4 +1,4 @@
-import {Test, TestingModule} from '@nestjs/testing';
+import { Test, TestingModule } from '@nestjs/testing';
 import { UsersService } from './users.service';
 import { UserRepositoryService } from './user-repository/user-repository.service';
 import { UserMapper } from './user.mapper';
@@ -12,11 +12,11 @@ describe('UsersService', () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         UsersService,
-        { provide: UserRepositoryService, useValue: '12'},
+        { provide: UserRepositoryService, useValue: '12' },
         UserMapper,
         UtilService,
-        { provide: JwtService, useValue: '12' }
-      ]
+        { provide: JwtService, useValue: '12' },
+      ],
     }).compile();
 
     service = module.get<UsersService>(UsersService);

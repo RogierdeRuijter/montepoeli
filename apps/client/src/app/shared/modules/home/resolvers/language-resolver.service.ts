@@ -8,20 +8,19 @@ import { tap } from 'rxjs/operators';
 import { User } from '../../../interfaces/user.interface';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class LanguageResolverService implements Resolve<Observable<any>>{
-
-  constructor(private languagePreferenceService: LanguagePreferenceService,
-              private userStoreService: UserStoreService,
-              private userService: UserService) { 
-  }
+export class LanguageResolverService implements Resolve<Observable<any>> {
+  constructor(
+    private languagePreferenceService: LanguagePreferenceService,
+    private userStoreService: UserStoreService,
+    private userService: UserService
+  ) {}
 
   public resolve(): Observable<any> {
-    return this.userService.getCurrentUser()
-      .pipe(
-        tap((user: User) => this.languagePreferenceService.setWithUser(user)),
-        tap((user: User) => this.userStoreService.set(user))
-      );
+    return this.userService.getCurrentUser().pipe(
+      tap((user: User) => this.languagePreferenceService.setWithUser(user)),
+      tap((user: User) => this.userStoreService.set(user))
+    );
   }
 }

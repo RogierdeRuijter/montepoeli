@@ -1,5 +1,5 @@
-import {Test, TestingModule} from '@nestjs/testing';
-import {RuleMapperService} from './rule-mapper.service';
+import { Test, TestingModule } from '@nestjs/testing';
+import { RuleMapperService } from './rule-mapper.service';
 
 describe('RuleMapperService', () => {
   let service: RuleMapperService;

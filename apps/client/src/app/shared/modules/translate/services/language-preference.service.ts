@@ -5,28 +5,32 @@ import { UserService } from '../../../services/users/user.service';
 import { User } from '../../../interfaces/user.interface';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LanguagePreferenceService {
   private defaultLanguage = 'en';
-  
-  constructor(private utilService: UtilService,
-              private translateService: TranslateService,
-              private userService: UserService) { }
+
+  constructor(
+    private utilService: UtilService,
+    private translateService: TranslateService,
+    private userService: UserService
+  ) {}
 
   public get(): string {
     let preferedLanguage = localStorage.getItem('preferedLanguage');
 
     if (this.utilService.isNullOrUndefined(preferedLanguage)) {
-      preferedLanguage = this.defaultLanguage; 
+      preferedLanguage = this.defaultLanguage;
     }
 
     return preferedLanguage;
   }
 
   public setWithUser(user: User): void {
-    const translationFileCode = this.mapLanguageToTranslationFileCode(user.preferedLanguage);
-    
+    const translationFileCode = this.mapLanguageToTranslationFileCode(
+      user.preferedLanguage
+    );
+
     this.storagePrefereanceInBrowser(translationFileCode);
   }
 
@@ -47,11 +51,17 @@ export class LanguagePreferenceService {
 
     this.storagePrefereanceInBrowser(languageCode);
 
-    this.userService.setUserLanguagePreference(user.name, this.mapTranslationCodeToEnglishLanguageName(languageCode))
+    this.userService
+      .setUserLanguagePreference(
+        user.name,
+        this.mapTranslationCodeToEnglishLanguageName(languageCode)
+      )
       .subscribe();
   }
 
-  private mapLanguageToTranslationFileCode(englishPerferedLanguage: string): string {
+  private mapLanguageToTranslationFileCode(
+    englishPerferedLanguage: string
+  ): string {
     if (englishPerferedLanguage === 'dutch') {
       return 'nl';
     }

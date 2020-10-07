@@ -7,23 +7,25 @@ import { LandingComponent } from './main/components/landing/landing.component';
 const appRoutes: Routes = [
   {
     path: '',
-    component: LandingComponent
+    component: LandingComponent,
   },
   {
     path: 'login',
-    loadChildren: () => import('./main/modules/login/login.module').then(m => m.LoginModule)
+    loadChildren: () =>
+      import('./main/modules/login/login.module').then((m) => m.LoginModule),
   },
   {
     path: 'home',
-    loadChildren: () => import('./main/modules/main-content/main-content.module').then(m => m.MainContentModule),
+    loadChildren: () =>
+      import('./main/modules/main-content/main-content.module').then(
+        (m) => m.MainContentModule
+      ),
     canActivate: [AuthGuard],
   },
-  { path: '**', redirectTo: '' }
+  { path: '**', redirectTo: '' },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(appRoutes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule {
-
-}
+export class AppRoutingModule {}

@@ -1,6 +1,17 @@
-import {Component, EventEmitter, forwardRef, Input, Output, ViewChild} from '@angular/core';
-import {ControlValueAccessor, DefaultValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
-import {MatSelect} from '@angular/material/select';
+import {
+  Component,
+  EventEmitter,
+  forwardRef,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
+import {
+  ControlValueAccessor,
+  DefaultValueAccessor,
+  NG_VALUE_ACCESSOR,
+} from '@angular/forms';
+import { MatSelect } from '@angular/material/select';
 
 @Component({
   selector: 'app-drop-down',
@@ -12,10 +23,9 @@ import {MatSelect} from '@angular/material/select';
       useExisting: forwardRef(() => DropDownComponent),
       multi: true,
     },
-  ]
+  ],
 })
 export class DropDownComponent implements ControlValueAccessor {
-
   @Input()
   public id: string;
 
@@ -40,10 +50,10 @@ export class DropDownComponent implements ControlValueAccessor {
   @Output()
   public valueChange: EventEmitter<string> = new EventEmitter();
 
-  @ViewChild(DefaultValueAccessor, {static: true})
+  @ViewChild(DefaultValueAccessor, { static: true })
   public valueAccessor: DefaultValueAccessor;
 
-  @ViewChild('select', {static: true})
+  @ViewChild('select', { static: true })
   public select: MatSelect;
 
   public writeValue(obj: any): void {
@@ -71,5 +81,4 @@ export class DropDownComponent implements ControlValueAccessor {
   public getOptionName(option: any): any {
     return this.optionDisplayField ? option[this.optionDisplayField] : option;
   }
-
 }

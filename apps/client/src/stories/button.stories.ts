@@ -1,7 +1,7 @@
-import {ButtonFunction, ButtonType} from '../app/shared/static-files/enums';
-import {MatButtonModule} from '@angular/material/button';
-import {TranslateDirective} from '../app/shared/modules/translate/directives/translate.directive';
-import {StorybookTranslateModule} from './storybook-translate.module';
+import { ButtonFunction, ButtonType } from '../app/shared/static-files/enums';
+import { MatButtonModule } from '@angular/material/button';
+import { TranslateDirective } from '../app/shared/modules/translate/directives/translate.directive';
+import { StorybookTranslateModule } from './storybook-translate.module';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ButtonComponent } from '../app/shared/modules/button/components/button/button.component';
 
@@ -15,12 +15,11 @@ export const primaryButton = () => ({
     buttonFunction: ButtonFunction.LOGIN,
     buttonType: ButtonType.PRIMARY,
   },
-  moduleMetadata: moduleMeta
+  moduleMetadata: moduleMeta,
 });
 
-
 primaryButton.story = {
-  name: 'Primary Button'
+  name: 'Primary Button',
 };
 
 export const secondaryButton = () => ({
@@ -29,15 +28,11 @@ export const secondaryButton = () => ({
     buttonFunction: ButtonFunction.LOGIN,
     buttonType: ButtonType.SECONDARY,
   },
-  moduleMetadata: moduleMeta
+  moduleMetadata: moduleMeta,
 });
 
 const moduleMeta = {
-  imports: [
-    MatButtonModule,
-    MatDialogModule,
-    StorybookTranslateModule,
-  ],
+  imports: [MatButtonModule, MatDialogModule, StorybookTranslateModule],
   declarations: [TranslateDirective],
   providers: [],
 };

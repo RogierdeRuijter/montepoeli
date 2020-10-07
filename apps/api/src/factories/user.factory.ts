@@ -1,6 +1,6 @@
-import {Factory} from './factory';
-import {User} from '../models/interfaces/user.interface';
-import {FactoryUtilService} from './factory-util.service';
+import { Factory } from './factory';
+import { User } from '../models/interfaces/user.interface';
+import { FactoryUtilService } from './factory-util.service';
 
 export class UserFactory implements Factory<User> {
   private factoryUtilService = new FactoryUtilService();
@@ -11,7 +11,7 @@ export class UserFactory implements Factory<User> {
       name: this.factoryUtilService.name(),
       username: this.factoryUtilService.name(),
       password: this.factoryUtilService.passwordHash(),
-      preferedLanguage: 'en'
+      preferedLanguage: 'en',
     };
   }
 
@@ -24,5 +24,4 @@ export class UserFactory implements Factory<User> {
 
     return list;
   }
-
 }

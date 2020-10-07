@@ -1,10 +1,15 @@
-import {Injectable} from '@angular/core';
-import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
-import {forkJoin, Observable} from 'rxjs';
-import {TranslateService} from '@ngx-translate/core';
-import {AuthService} from '../services/auth/auth.service';
-import {NotificationService} from '../../notification/services/notification/notification.service';
-import {Environment} from '../../../../../environments/environment';
+import { Injectable } from '@angular/core';
+import {
+  ActivatedRouteSnapshot,
+  CanActivate,
+  Router,
+  RouterStateSnapshot,
+} from '@angular/router';
+import { forkJoin, Observable } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
+import { AuthService } from '../services/auth/auth.service';
+import { NotificationService } from '../../notification/services/notification/notification.service';
+import { Environment } from '../../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -12,13 +17,17 @@ import {Environment} from '../../../../../environments/environment';
 export class AuthGuard implements CanActivate {
   private environment = new Environment();
 
-  constructor(private authService: AuthService,
-              private router: Router,
-              private notificationService: NotificationService,
-              private translateService: TranslateService) {
-  }
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private notificationService: NotificationService,
+    private translateService: TranslateService
+  ) {}
 
-  public canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+  public canActivate(
+    next: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): Observable<boolean> | Promise<boolean> | boolean {
     if (this.authService.isAuthenticated()) {
       return true;
     }
@@ -33,5 +42,4 @@ export class AuthGuard implements CanActivate {
     this.router.navigate([this.environment.frontend.BASIC_ROUTES.LOGIN]);
     return false;
   }
-
 }

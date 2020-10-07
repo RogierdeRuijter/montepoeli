@@ -1,5 +1,5 @@
-import {AppPage} from './app.po';
-import {browser} from 'protractor';
+import { AppPage } from './app.po';
+import { browser } from 'protractor';
 import { Helper } from './helper';
 
 describe('montepoeli login', () => {
@@ -12,7 +12,7 @@ describe('montepoeli login', () => {
 
   it('should fail login into montepouli', () => {
     page.navigateToBase();
-    
+
     expect(browser.getCurrentUrl()).toContain('/login');
 
     page.getLoginField().sendKeys('protractor');
@@ -20,18 +20,18 @@ describe('montepoeli login', () => {
     page.getPasswordField().sendKeys('test1234');
 
     page.getSubmitButton().click();
-    
+
     helper.shortSleep();
-    
+
     expect(page.getLoginFailedWarning()).toBeTruthy();
 
     // TODO: this check is very valueable but it can't be tested stabely.
-    // Figure out how to make this more stable 
+    // Figure out how to make this more stable
     // const loginFailedWarning = page.getLoginFailedWarning().getText();
     // expect(loginFailedWarning).toEqual('Wrong username or password.');
 
     expect(browser.getCurrentUrl()).toContain('/login');
-    
+
     helper.expectThreeErrorsInConsole(browser);
   });
 
@@ -42,11 +42,11 @@ describe('montepoeli login', () => {
     page.getLoginField().sendKeys('protractor');
 
     page.getPasswordField().sendKeys('test');
-    
+
     page.getSubmitButton().click();
-    
+
     browser.waitForAngular();
-    
+
     expect(browser.getCurrentUrl()).toContain('/home');
 
     helper.expectNoErrorsInConsole(browser);

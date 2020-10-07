@@ -1,5 +1,4 @@
 pull_request_rules:
-
   - name: successfull e2e tests and rebuild of basefor depfu branches
     conditions:
       - 'status-success=ci/circleci: e2e-tests'
@@ -16,4 +15,3 @@ pull_request_rules:
     actions:
       merge:
         method: merge
-    

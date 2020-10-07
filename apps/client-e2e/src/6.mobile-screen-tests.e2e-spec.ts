@@ -21,18 +21,20 @@ describe('Mobile screen tests', () => {
     helper.sleep();
 
     page.getMobileNavButtonRules().click();
-  
+
     browser.waitForAngular();
     helper.longSleep();
     helper.longSleep();
 
     expect(page.getRulesView()).toBeTruthy();
-    
+
     expect(page.getMobileNavButtonGames()).toBeTruthy();
     expect(page.getMobileAddGameButton().getCssValue('opacity')).toEqual('0');
-    expect(page.getMobileAddGameButton().getCssValue('pointer-events')).toEqual('none');
+    expect(page.getMobileAddGameButton().getCssValue('pointer-events')).toEqual(
+      'none'
+    );
     expect(page.getMobileNavButtonRules()).toBeTruthy();
-    
+
     helper.sleep();
 
     page.getMobileNavButtonGames().click();
@@ -43,7 +45,7 @@ describe('Mobile screen tests', () => {
 
     expect(page.getGamesView()).toBeTruthy();
 
-    expect(page.getMobileAddGameButton().getCssValue('opacity')).toEqual('1');    
+    expect(page.getMobileAddGameButton().getCssValue('opacity')).toEqual('1');
     expect(page.getMobileNavButtonGames()).toBeTruthy();
     expect(page.getMobileNavButtonRules()).toBeTruthy();
   });

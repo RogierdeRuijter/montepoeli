@@ -1,18 +1,11 @@
-import {Module} from '@nestjs/common';
-import {SortService} from './services/sort/sort.service';
-import {UtilService} from './services/util/util.service';
+import { Module } from '@nestjs/common';
+import { SortService } from './services/sort/sort.service';
+import { UtilService } from './services/util/util.service';
 
 @Module({
   imports: [],
-  providers: [
-    SortService,
-    UtilService,
-  ],
+  providers: [SortService, UtilService],
   controllers: [],
-  exports: [
-    SortService,
-    UtilService,
-  ],
+  exports: [SortService, UtilService],
 })
-export class SharedModule {
-}
+export class SharedModule {}

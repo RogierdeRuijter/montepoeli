@@ -4,4 +4,3 @@
 // const storyDefinition = storiesOf('GameTable/Laptop', module);
 
 // new GameTableStoryFactory(storyDefinition).create();
-

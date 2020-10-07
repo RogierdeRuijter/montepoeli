@@ -1,7 +1,12 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Actions, IconColor, Icons, IconSize} from '../../../../../../../../shared/static-files/enums';
-import {IllegalInputException} from '../../../../../../../../shared/exceptions/IllegalInputException';
-import {UnknownCaseException} from '../../../../../../../../shared/exceptions/UnknownCaseException';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Actions,
+  IconColor,
+  Icons,
+  IconSize,
+} from '../../../../../../../../shared/static-files/enums';
+import { IllegalInputException } from '../../../../../../../../shared/exceptions/IllegalInputException';
+import { UnknownCaseException } from '../../../../../../../../shared/exceptions/UnknownCaseException';
 
 @Component({
   selector: 'ui-table-action',
@@ -9,7 +14,6 @@ import {UnknownCaseException} from '../../../../../../../../shared/exceptions/Un
   styleUrls: ['./table-action.component.scss'],
 })
 export class TableActionComponent implements OnInit {
-
   @Input()
   public ids: string[];
 
@@ -29,12 +33,17 @@ export class TableActionComponent implements OnInit {
 
   public ngOnInit(): void {
     if (this.disabled && this.disabled.length !== this.actions.length) {
-      throw new IllegalInputException('disabled and actions should be the same length');
+      throw new IllegalInputException(
+        'disabled and actions should be the same length'
+      );
     }
-    this.actions.forEach((action: Actions, index) => this.iconsMap[action] = {
-      icon: this.fetchIconForAction(action),
-      disabled: this.disabled ? this.disabled[index] : false,
-    });
+    this.actions.forEach(
+      (action: Actions, index) =>
+        (this.iconsMap[action] = {
+          icon: this.fetchIconForAction(action),
+          disabled: this.disabled ? this.disabled[index] : false,
+        })
+    );
   }
 
   public actionClick(action: Actions): void {
@@ -51,5 +60,4 @@ export class TableActionComponent implements OnInit {
         throw new UnknownCaseException(action);
     }
   }
-
 }

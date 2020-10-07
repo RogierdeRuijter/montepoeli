@@ -1,14 +1,22 @@
 <mat-toolbar>
-    <app-button-no-elevation @fadeInAnimation [noPaddingLeft]="true" (clickEvent)="handleButtonClicked()" style="height: 45px;">
-        <div style="display: flex; align-items: center;">
-            <span style="height: 45px; width: 30px;">
-                <app-icon [icon]="Icons.MONTEPOELI" [iconSize]="IconSize.SMALL"></app-icon>
-            </span>
-            <h5 style="margin-left: 10px;">Montepoeli</h5> <!-- TODO: make title component -->
-        </div>
-    </app-button-no-elevation>
-    <div class="spacer"></div>
-    
-    <app-user-actions></app-user-actions>
+  <app-button-no-elevation
+    @fadeInAnimation
+    [noPaddingLeft]="true"
+    (clickEvent)="handleButtonClicked()"
+    style="height: 45px"
+  >
+    <div style="display: flex; align-items: center">
+      <span style="height: 45px; width: 30px">
+        <app-icon
+          [icon]="Icons.MONTEPOELI"
+          [iconSize]="IconSize.SMALL"
+        ></app-icon>
+      </span>
+      <h5 style="margin-left: 10px">Montepoeli</h5>
+      <!-- TODO: make title component -->
+    </div>
+  </app-button-no-elevation>
+  <div class="spacer"></div>
+
+  <app-user-actions></app-user-actions>
 </mat-toolbar>
-      

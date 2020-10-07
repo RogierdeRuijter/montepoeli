@@ -3,14 +3,8 @@ import { CommonModule } from '@angular/common';
 import { AsyncBaseComponent } from './components/async-base-component/async-base.component';
 
 @NgModule({
-  declarations: [
-    AsyncBaseComponent
-  ],
-  exports: [
-    AsyncBaseComponent
-  ],
-  imports: [
-    CommonModule
-  ]
+  declarations: [AsyncBaseComponent],
+  exports: [AsyncBaseComponent],
+  imports: [CommonModule],
 })
-export class AsyncModule { }
+export class AsyncModule {}

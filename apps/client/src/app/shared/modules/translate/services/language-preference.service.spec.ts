@@ -10,12 +10,8 @@ describe('LanguagePreferenceService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        TranslateTestingModule
-      ],
-      providers: [
-        {provide: UserService, useClass: MockLocationStrategy},
-      ]
+      imports: [TranslateTestingModule],
+      providers: [{ provide: UserService, useClass: MockLocationStrategy }],
     });
     service = TestBed.inject(LanguagePreferenceService);
   });
@@ -28,7 +24,9 @@ describe('LanguagePreferenceService', () => {
 
   describe('get', () => {
     it('should return "nl" if it is inside local storage', () => {
-      jest.spyOn(window.localStorage.__proto__, 'getItem').mockReturnValue('nl');
+      jest
+        .spyOn(window.localStorage.__proto__, 'getItem')
+        .mockReturnValue('nl');
 
       const result = service.get();
 
@@ -38,7 +36,9 @@ describe('LanguagePreferenceService', () => {
     });
 
     it('should return "en" if it is inside local storage', () => {
-      jest.spyOn(window.localStorage.__proto__, 'getItem').mockReturnValue('en');
+      jest
+        .spyOn(window.localStorage.__proto__, 'getItem')
+        .mockReturnValue('en');
 
       const result = service.get();
 
@@ -48,7 +48,9 @@ describe('LanguagePreferenceService', () => {
     });
 
     it('should return "en" if there is nothing set in local storage', () => {
-      jest.spyOn(window.localStorage.__proto__, 'getItem').mockReturnValue(undefined);
+      jest
+        .spyOn(window.localStorage.__proto__, 'getItem')
+        .mockReturnValue(undefined);
 
       const result = service.get();
 
@@ -61,7 +63,7 @@ describe('LanguagePreferenceService', () => {
   // TODO: this method should be broken down. Checking a global state after a unit test is not a good idea
   //  The method should return something that is checked
   // describe('setWithUser', () => {
-  //   it('should use the user with dutch preference to set nl in local storage', () => {      
+  //   it('should use the user with dutch preference to set nl in local storage', () => {
   //     const user: User = {
   //       name: 'Harry',
   //       preferedLanguage: 'dutch'
@@ -75,7 +77,7 @@ describe('LanguagePreferenceService', () => {
   //     expect(result).toEqual(expectedResult);
   //   });
 
-  //   it('should use the user with english preference to set english in local storage', () => {      
+  //   it('should use the user with english preference to set english in local storage', () => {
   //     const user: User = {
   //       name: 'Harry',
   //       preferedLanguage: 'english'
@@ -89,7 +91,7 @@ describe('LanguagePreferenceService', () => {
   //     expect(result).toEqual(expectedResult);
   //   });
 
-  //   it('should set en in local storage if the user has an unkown language', () => {      
+  //   it('should set en in local storage if the user has an unkown language', () => {
   //     const user: User = {
   //       name: 'Harry',
   //       preferedLanguage: 'german'

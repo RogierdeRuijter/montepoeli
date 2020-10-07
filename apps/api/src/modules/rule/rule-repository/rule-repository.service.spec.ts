@@ -1,6 +1,6 @@
-import {Test, TestingModule} from '@nestjs/testing';
-import {RuleRepositoryService} from './rule-repository.service';
-import {getModelToken} from '@nestjs/mongoose';
+import { Test, TestingModule } from '@nestjs/testing';
+import { RuleRepositoryService } from './rule-repository.service';
+import { getModelToken } from '@nestjs/mongoose';
 
 describe('RuleRepositoryService', () => {
   let service: RuleRepositoryService;
@@ -13,7 +13,7 @@ describe('RuleRepositoryService', () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         RuleRepositoryService,
-        {provide: getModelToken('Rule'), useFactory: factory}
+        { provide: getModelToken('Rule'), useFactory: factory },
       ],
     }).compile();
 

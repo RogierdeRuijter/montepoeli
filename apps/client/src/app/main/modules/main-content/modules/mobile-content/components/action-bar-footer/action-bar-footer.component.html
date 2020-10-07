@@ -1,32 +1,42 @@
 <div class="action-bar-footer container" [class.raised]="raised">
   <div [appGridRow]="[GridSizes.ALL]">
-    <div [appGridColumn]=[6] [offsets]=[3] class="d-flex justify-content-between">
+    <div
+      [appGridColumn]="[6]"
+      [offsets]="[3]"
+      class="d-flex justify-content-between"
+    >
       <div>
-        <app-button-icon-active-state id="games-tab"
-                                      [icon]="Icons.CHESS_PIECES"
-                                      [iconSize]="IconSize.MEDIUM"
-                                      [squareButton]="true"
-                                      [active]="selected === Icons.CHESS_PIECES"
-                                      (clickEvent)="chessSetClicked()">
+        <app-button-icon-active-state
+          id="games-tab"
+          [icon]="Icons.CHESS_PIECES"
+          [iconSize]="IconSize.MEDIUM"
+          [squareButton]="true"
+          [active]="selected === Icons.CHESS_PIECES"
+          (clickEvent)="chessSetClicked()"
+        >
         </app-button-icon-active-state>
       </div>
       <div>
-        <app-button-icon-active-state id="add-game-footer"
-                                      [appShowAndHide]="showPlusIcon"
-                                      [icon]="Icons.PLUS"
-                                      [iconSize]="IconSize.MEDIUM"
-                                      [squareButton]="true"
-                                      [active]="selected === Icons.PLUS"
-                                      (clickEvent)="plusClicked()">
+        <app-button-icon-active-state
+          id="add-game-footer"
+          [appShowAndHide]="showPlusIcon"
+          [icon]="Icons.PLUS"
+          [iconSize]="IconSize.MEDIUM"
+          [squareButton]="true"
+          [active]="selected === Icons.PLUS"
+          (clickEvent)="plusClicked()"
+        >
         </app-button-icon-active-state>
       </div>
       <div>
-        <app-button-icon-active-state id="rules-tab"
-                                      [icon]="Icons.SCROLL"
-                                      [iconSize]="IconSize.MEDIUM"
-                                      [squareButton]="true"
-                                      [active]="selected === Icons.SCROLL"
-                                      (clickEvent)="scrollClicked()">
+        <app-button-icon-active-state
+          id="rules-tab"
+          [icon]="Icons.SCROLL"
+          [iconSize]="IconSize.MEDIUM"
+          [squareButton]="true"
+          [active]="selected === Icons.SCROLL"
+          (clickEvent)="scrollClicked()"
+        >
         </app-button-icon-active-state>
       </div>
     </div>

@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit, ViewChild, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnInit,
+  ViewChild,
+  ChangeDetectorRef,
+  OnDestroy,
+} from '@angular/core';
 import { IconColor, Icons, IconSize } from '../../../../static-files/enums';
 import { MatSelect } from '@angular/material/select';
 import { AuthService } from '../../../auth/services/auth/auth.service';
@@ -14,10 +22,9 @@ import { takeUntil } from 'rxjs/operators';
   selector: 'app-user-actions',
   templateUrl: './user-actions.component.html',
   styleUrls: ['./user-actions.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserActionsComponent implements OnInit, OnDestroy {
-
   @ViewChild('userSettingsDropDown')
   public userSettingsDropDown: MatSelect;
 
@@ -33,43 +40,50 @@ export class UserActionsComponent implements OnInit, OnDestroy {
   private user: User;
   private destory$: Subject<void> = new Subject();
 
-  constructor(private authService: AuthService,
-              private translateService: TranslateService,
-              private languagePreferenceService: LanguagePreferenceService,
-              private userStoreService: UserStoreService,
-              private changeDetectorRef: ChangeDetectorRef,
-              private notificationService: NotificationService) { }
+  constructor(
+    private authService: AuthService,
+    private translateService: TranslateService,
+    private languagePreferenceService: LanguagePreferenceService,
+    private userStoreService: UserStoreService,
+    private changeDetectorRef: ChangeDetectorRef,
+    private notificationService: NotificationService
+  ) {}
 
   public ngOnInit(): void {
     this.setAlternativeLanguage();
 
-    this.userStoreService.get(this.destory$)
-      .subscribe((user: User) => this.user = user);
+    this.userStoreService
+      .get(this.destory$)
+      .subscribe((user: User) => (this.user = user));
 
     this.translateService.onLangChange
-      .pipe(
-        takeUntil(this.destory$)
-      )
+      .pipe(takeUntil(this.destory$))
       .subscribe((langObject: any) => {
         const lang = langObject.lang;
 
         if (lang === 'en') {
-          this.notificationService.info(this.translateService.instant('info.language-changed.english'));
+          this.notificationService.info(
+            this.translateService.instant('info.language-changed.english')
+          );
         }
-    
+
         if (lang === 'nl') {
-          this.notificationService.info(this.translateService.instant('info.language-changed.dutch'));
+          this.notificationService.info(
+            this.translateService.instant('info.language-changed.dutch')
+          );
         }
 
         this.setAlternativeLanguage(lang);
-    });
+      });
   }
 
   private setAlternativeLanguage(lang?: string): void {
     const currentLang = lang ? lang : this.translateService.currentLang;
-    
-    this.alternativeLanguage = this.translateService.getLangs().find(lang1 => lang1 !== currentLang);
-    
+
+    this.alternativeLanguage = this.translateService
+      .getLangs()
+      .find((lang1) => lang1 !== currentLang);
+
     if (this.alternativeLanguage === 'en') {
       this.setIconLanguage = 'ie';
     }
@@ -86,8 +100,12 @@ export class UserActionsComponent implements OnInit, OnDestroy {
   }
 
   public switchLanguageHandler(): void {
-    this.waitForDropDownToClose()
-      .subscribe(() => this.languagePreferenceService.setWithLanguageCode(this.user, this.alternativeLanguage));
+    this.waitForDropDownToClose().subscribe(() =>
+      this.languagePreferenceService.setWithLanguageCode(
+        this.user,
+        this.alternativeLanguage
+      )
+    );
   }
 
   private waitForDropDownToClose(): Observable<any> {

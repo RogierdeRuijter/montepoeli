@@ -1,7 +1,11 @@
-import {NgModule} from '@angular/core';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
-import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { NgModule } from '@angular/core';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import {
+  TranslateLoader,
+  TranslateModule,
+  TranslateService,
+} from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -20,9 +24,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     }),
   ],
   declarations: [],
-  exports: [
-    TranslateModule,
-  ],
+  exports: [TranslateModule],
 })
 export class StorybookTranslateModule {
   public constructor(translate: TranslateService) {

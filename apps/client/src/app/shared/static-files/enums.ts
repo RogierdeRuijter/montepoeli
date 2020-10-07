@@ -1,13 +1,13 @@
 export enum ButtonType {
   PRIMARY = 1,
   SECONDARY = 2,
-  NORMAL = 3
+  NORMAL = 3,
 }
 
 export enum ButtonFunction {
   LOGIN = 1,
   CANCEL = 2,
-  SAVE = 3
+  SAVE = 3,
 }
 
 export enum Icons {
@@ -23,37 +23,36 @@ export enum Icons {
   MONTEPOELI = 10,
   USER = 11,
   PLUS_WITH_BOX = 12,
-  HEART = 13
-
+  HEART = 13,
 }
 
 export enum IconSize {
   SMALL = 1,
   SMALL_MEDIUM = 2,
   MEDIUM = 3,
-  LARGE = 4
+  LARGE = 4,
 }
 
 export enum IconColor {
   GRAY = 1,
   BLACK = 2,
-  ACCENT = 3
+  ACCENT = 3,
 }
 
 export enum Actions {
   ADD = 1,
-  ACCEPT = 2
+  ACCEPT = 2,
 }
 
 export enum Winners {
   WHITE = 'white',
   BLACK = 'black',
-  DRAW = 'draw'
+  DRAW = 'draw',
 }
 
 export enum Sides {
   WHITE = 'white',
-  BLACK = 'black'
+  BLACK = 'black',
 }
 
 export enum GridSizes {
@@ -62,11 +61,11 @@ export enum GridSizes {
   MEDIUM = 3,
   LARGE = 4,
   EXTRA_LARGE = 5,
-  ALL = 6
+  ALL = 6,
 }
 
 export enum ButtonRowType {
-  TWO = 1
+  TWO = 1,
 }
 
 export enum Alignments {
@@ -74,19 +73,19 @@ export enum Alignments {
   CENTER = 2,
   VERTICAL = 3,
   BASELINE = 4,
-  END = 5
+  END = 5,
 }
 
 export enum Directions {
   ROW = 1,
-  COLUMN = 2
+  COLUMN = 2,
 }
 
 export enum Positions {
-  FIXED_MIDDLE
+  FIXED_MIDDLE,
 }
 
 export enum Tabs {
   GAMES,
-  RULES
+  RULES,
 }

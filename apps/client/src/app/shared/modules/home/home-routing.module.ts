@@ -1,6 +1,6 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {HomeComponent} from './home.component';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { HomeComponent } from './home.component';
 import { LanguageResolverService } from './resolvers/language-resolver.service';
 import { AuthGuard } from '../auth/guards/auth-guard.service';
 
@@ -10,8 +10,8 @@ const homeRoutes: Routes = [
     component: HomeComponent,
     canActivate: [AuthGuard],
     resolve: {
-      language: LanguageResolverService
-    }
+      language: LanguageResolverService,
+    },
   },
 ];
 
@@ -19,5 +19,4 @@ const homeRoutes: Routes = [
   imports: [RouterModule.forChild(homeRoutes)],
   exports: [RouterModule],
 })
-export class HomeRoutingModule {
-}
+export class HomeRoutingModule {}

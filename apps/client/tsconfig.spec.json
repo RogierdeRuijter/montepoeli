@@ -1,19 +1,10 @@
 {
-    "extends": "./tsconfig.json",
-    "compilerOptions": {
-      "outDir": "./out-tsc/spec",
-      "allowJs": true,
-      "types": [
-        "jest",
-        "jquery",
-        "jsdom",
-        "node"
-      ]
-    },
-    "files": [
-      "src/polyfills.ts"
-    ],
-    "include": [
-      "src/Storyshots.test.ts"
-    ]
-  }
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./out-tsc/spec",
+    "allowJs": true,
+    "types": ["jest", "jquery", "jsdom", "node"]
+  },
+  "files": ["src/polyfills.ts"],
+  "include": ["src/Storyshots.test.ts"]
+}

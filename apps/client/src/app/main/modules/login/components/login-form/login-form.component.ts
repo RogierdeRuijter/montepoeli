@@ -1,7 +1,25 @@
-import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
-import {Alignments, ButtonFunction, ButtonType, GridSizes} from '../../../../../shared/static-files/enums';
-import {NgForm} from '@angular/forms';
-import { trigger, transition, query, style, animate } from '@angular/animations';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
+import {
+  Alignments,
+  ButtonFunction,
+  ButtonType,
+  GridSizes,
+} from '../../../../../shared/static-files/enums';
+import { NgForm } from '@angular/forms';
+import {
+  trigger,
+  transition,
+  query,
+  style,
+  animate,
+} from '@angular/animations';
 
 @Component({
   selector: 'ui-login-form',
@@ -9,19 +27,20 @@ import { trigger, transition, query, style, animate } from '@angular/animations'
   styleUrls: ['./login-form.component.scss'],
   animations: [
     trigger('fadeInAnimation', [
-    transition('* => *', [
-    query(':enter', style({ opacity: 0 }), { optional: true }),
-    query(':enter', animate('2000ms', style({ opacity: 1 })), { optional: true })
-    ])
-  ])
-  ]
+      transition('* => *', [
+        query(':enter', style({ opacity: 0 }), { optional: true }),
+        query(':enter', animate('2000ms', style({ opacity: 1 })), {
+          optional: true,
+        }),
+      ]),
+    ]),
+  ],
 })
 export class LoginFormComponent {
-
-  @ViewChild('loginForm', {static: true})
+  @ViewChild('loginForm', { static: true })
   public currentForm: NgForm;
 
-  @ViewChild('username', {static: true})
+  @ViewChild('username', { static: true })
   public usernameField: ElementRef;
 
   public ButtonFunction = ButtonFunction;
@@ -41,5 +60,4 @@ export class LoginFormComponent {
       password: this.currentForm.value.password,
     });
   }
-
 }

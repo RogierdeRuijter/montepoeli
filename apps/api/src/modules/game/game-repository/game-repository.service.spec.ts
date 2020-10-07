@@ -1,6 +1,6 @@
-import {Test, TestingModule} from '@nestjs/testing';
-import {GameRepositoryService} from './game-repository.service';
-import {getModelToken} from '@nestjs/mongoose';
+import { Test, TestingModule } from '@nestjs/testing';
+import { GameRepositoryService } from './game-repository.service';
+import { getModelToken } from '@nestjs/mongoose';
 
 describe('GameRepositoryService', () => {
   let service: GameRepositoryService;
@@ -13,7 +13,7 @@ describe('GameRepositoryService', () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         GameRepositoryService,
-        {provide: getModelToken('Game'), useFactory: factory},
+        { provide: getModelToken('Game'), useFactory: factory },
       ],
     }).compile();
 

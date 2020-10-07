@@ -1,7 +1,11 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Actions, Alignments, GridSizes} from '../../../../../../../shared/static-files/enums';
-import {Observable} from 'rxjs';
-import {Game} from '../../../../../../../shared/interfaces/game.interface';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Actions,
+  Alignments,
+  GridSizes,
+} from '../../../../../../../shared/static-files/enums';
+import { Observable } from 'rxjs';
+import { Game } from '../../../../../../../shared/interfaces/game.interface';
 
 @Component({
   selector: 'ui-overview',
@@ -9,7 +13,6 @@ import {Game} from '../../../../../../../shared/interfaces/game.interface';
   styleUrls: ['./overview.component.scss'],
 })
 export class OverviewComponent {
-
   public GridSizes = GridSizes;
 
   @Input()

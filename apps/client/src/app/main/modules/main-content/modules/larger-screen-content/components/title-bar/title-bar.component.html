@@ -1,7 +1,10 @@
 <mat-toolbar [color]="color">
-  <app-button-no-elevation (clickEvent)="handleButtonClicked()" style="height: 56px;">
-    <div style="display: flex; align-items: center;">
-      <span class="margin-right-10" style="height: 56px;">
+  <app-button-no-elevation
+    (clickEvent)="handleButtonClicked()"
+    style="height: 56px"
+  >
+    <div style="display: flex; align-items: center">
+      <span class="margin-right-10" style="height: 56px">
         <app-icon [icon]="Icons.MONTEPOELI"></app-icon>
       </span>
       <h5>Montepoeli</h5>
@@ -9,25 +12,31 @@
   </app-button-no-elevation>
   <div class="left-spacer"></div>
 
-  <mat-tab-group animationDuration="0ms" (selectedTabChange)="handleChangeEvent($event)">
+  <mat-tab-group
+    animationDuration="0ms"
+    (selectedTabChange)="handleChangeEvent($event)"
+  >
     <mat-tab>
       <ng-template mat-tab-label>
-        <app-icon [matTooltip]="'pages.home.games.tooltip' | translate"
-                  [icon]="Icons.CHESS_PIECES"
-                  [iconSize]="IconSize.MEDIUM"></app-icon>
+        <app-icon
+          [matTooltip]="'pages.home.games.tooltip' | translate"
+          [icon]="Icons.CHESS_PIECES"
+          [iconSize]="IconSize.MEDIUM"
+        ></app-icon>
       </ng-template>
     </mat-tab>
     <mat-tab>
       <ng-template mat-tab-label>
-        <app-icon [matTooltip]="'pages.home.rules.tooltip' | translate"
-                  [icon]="Icons.SCROLL"
-                  [iconSize]="IconSize.MEDIUM"></app-icon>
+        <app-icon
+          [matTooltip]="'pages.home.rules.tooltip' | translate"
+          [icon]="Icons.SCROLL"
+          [iconSize]="IconSize.MEDIUM"
+        ></app-icon>
       </ng-template>
     </mat-tab>
   </mat-tab-group>
 
   <div class="right-spacer"></div>
 
-  <app-user-actions [settingsIconColor]="IconColor.BLACK">
-  </app-user-actions>
+  <app-user-actions [settingsIconColor]="IconColor.BLACK"> </app-user-actions>
 </mat-toolbar>

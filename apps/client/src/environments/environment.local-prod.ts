@@ -8,7 +8,6 @@ import { Frontend } from './interfaces/frontend.interface';
 import { Backend } from './interfaces/backend.interface';
 
 export class Environment extends DynamicEnvironment {
-
   public production: boolean;
   public authentication: Authentication;
   public frontend: Frontend;
@@ -19,7 +18,7 @@ export class Environment extends DynamicEnvironment {
     this.production = true;
     this.authentication = {
       TOKENNAME: 'montepoeliJwt',
-      AUTHTOKENNAME: 'montepoeliAuthenticated'
+      AUTHTOKENNAME: 'montepoeliAuthenticated',
     };
     this.frontend = {
       TITLE: 'Angular Starter kit',
@@ -43,7 +42,7 @@ export class Environment extends DynamicEnvironment {
         RULE: '/rule',
         CREATE: '/create',
         UPDATE_LANGUAGE_PREFERENCE: '/language-preference',
-        CURRENT: '/current'
+        CURRENT: '/current',
       },
     };
   }
