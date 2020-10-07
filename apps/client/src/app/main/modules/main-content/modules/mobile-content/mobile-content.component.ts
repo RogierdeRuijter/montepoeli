@@ -23,7 +23,7 @@ import { AsyncBaseComponent } from '../../../../../shared/modules/async/componen
 import { NewGameStore } from '../../../../../shared/stores/new-game.store';
 import { TabChangeGlobalEventEmitter } from '../../../../../shared/services/tab-change.global-event-emitter';
 import { GameService } from '../../../../../shared/modules/home/modules/game/services/game.service';
-import { throwError } from 'rxjs';
+import { of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 @Component({
@@ -161,7 +161,7 @@ export class MobileContentComponent
         catchError((error) => {
           this.removeAddedGameFromView(game);
 
-          return throwError(error);
+          return of(error);
         })
       ).subscribe();
 

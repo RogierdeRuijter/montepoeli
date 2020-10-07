@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { AuthService } from '../../../shared/modules/auth/services/auth/auth.service';
 import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -28,7 +28,7 @@ export class LoginComponent {
         catchError((error) => { 
           this.isSubmitting = false 
           
-          return throwError(error);
+          return of(error);
         })
       )
       .subscribe();

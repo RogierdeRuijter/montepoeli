@@ -14,7 +14,7 @@ import {
 import { Game } from '../../../../../shared/interfaces/game.interface';
 import { GameService } from './services/game.service';
 import { Actions, GridSizes } from '../../../../../shared/static-files/enums';
-import { BehaviorSubject, throwError } from 'rxjs';
+import { BehaviorSubject, of } from 'rxjs';
 import { User } from '../../../../../shared/interfaces/user.interface';
 import { NewGameStore } from '../../../../stores/new-game.store';
 import { RemoveLastAddedGameStore } from '../../../../../shared/stores/remove-last-added-game.store';
@@ -112,7 +112,7 @@ export class GameComponent
         catchError((error) => {
           this.removeAddedGame(game)
 
-          return throwError(error);
+          return of(error);
         })
       ).subscribe();
 
