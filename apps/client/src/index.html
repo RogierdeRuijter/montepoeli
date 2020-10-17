@@ -200,32 +200,33 @@
         margin: auto;
       }
 
+      .app-loading .logo {
+        animation: dash 1.5s linear infinite;
+      }
+
       .app-loading .spinner .path {
         stroke-dasharray: 1, 200;
         stroke-dashoffset: 0;
-        animation: dash 1.5s ease-in-out infinite;
+        
         stroke-linecap: round;
         stroke: #ddd;
       }
 
-      @keyframes rotate {
-        100% {
-          transform: rotate(360deg);
-        }
-      }
-
       @keyframes dash {
         0% {
-          stroke-dasharray: 1, 200;
-          stroke-dashoffset: 0;
+          transform: scale(1);
+        }
+        25% {
+          transform: scale(1.15);
         }
         50% {
-          stroke-dasharray: 89, 200;
-          stroke-dashoffset: -35px;
+          transform: scale(1);
+        }
+        75% {
+          transform: scale(0.85);
         }
         100% {
-          stroke-dasharray: 89, 200;
-          stroke-dashoffset: -124px;
+          transform: scale(1);
         }
       }
     </style>
@@ -234,7 +235,7 @@
     <app-root>
       <div class="app-loading">
         <div class="logo">
-          <svg class="spinner" viewBox="25 25 50 50">
+          <!-- <svg class="spinner" viewBox="25 25 50 50">
             <circle
               class="path"
               cx="50"
@@ -244,7 +245,7 @@
               stroke-width="2"
               stroke-miterlimit="10"
             />
-          </svg>
+          </svg> -->
         </div>
       </div>
     </app-root>
