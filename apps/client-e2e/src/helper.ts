@@ -103,25 +103,19 @@ export class Helper {
 
     this.sleep();
 
-    expect(page.getWhiteSelectedChip(game.white).getCssValue('background-color')).toEqual(
-      lightSelectedColor || darkSelectedColor
-    );
+    expect(page.getWhiteSelectedChip(game.white).getCssValue('background-color')).toEqual(darkSelectedColor);
 
     page.getUser('black-' + game.black).click();
 
     this.sleep();
 
-    expect(page.getBlackSelectedChip(game.black).getCssValue('background-color')).toEqual(
-      lightSelectedColor || darkSelectedColor
-    );
+    expect(page.getBlackSelectedChip(game.black).getCssValue('background-color')).toEqual(darkSelectedColor);
 
     page.getUser('winner-' + game.winner).click();
 
     this.sleep();
 
-    expect(page.getWinnerSelectedChip(game.winner).getCssValue('background-color')).toEqual(
-      lightSelectedColor || darkSelectedColor
-    );
+    expect(page.getWinnerSelectedChip(game.winner).getCssValue('background-color')).toEqual(darkSelectedColor);
 
     page.getSaveButton().click();
   }
