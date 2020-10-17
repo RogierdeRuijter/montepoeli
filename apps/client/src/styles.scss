@@ -22,10 +22,6 @@
 .light-theme {
   @include angular-material-theme($anms-light-theme);
   @include custom-components-theme($anms-light-theme);
-
-  // span {
-  //   color: black;
-  // }
 }
 
 .black-theme {
