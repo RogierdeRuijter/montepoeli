@@ -185,12 +185,14 @@ jobs:
               SERVER_IMAGE_TAG=$SERVER_TAG-$TAG_TO_BE_E2E
               SERVER_TAG_E2E_TESTED=$SERVER_TAG-$TAG_E2E_TESTED
             elif [ $CLIENT_AFFECTED == true ]; then
+              CLIENT_AND_SERVER_AFFECTED=false
               CLIENT_BASE_IMAGE_TAG="$CLIENT_TAG-$TAG_TO_BE_E2E"
               
               SERVER_IMAGE_TAG='latest'
               CLIENT_TAG_TO_BE_E2E="$CLIENT_TAG-$TAG_TO_BE_E2E"
               CLIENT_TAG_E2E_TESTED="$CLIENT_TAG-$TAG_E2E_TESTED"
             elif [ $SERVER_AFFECTED == true ]; then
+              CLIENT_AND_SERVER_AFFECTED=false
               CLIENT_BASE_IMAGE_TAG='latest'
               SERVER_IMAGE_TAG="$SERVER_TAG-$TAG_TO_BE_E2E"
               SERVER_TAG_E2E_TESTED=$SERVER_TAG-$TAG_E2E_TESTED
