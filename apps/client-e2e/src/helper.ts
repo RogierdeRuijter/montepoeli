@@ -112,7 +112,7 @@ export class Helper {
     this.sleep();
 
     expect([lightSelectedColor, darkSelectedColor]).toContain(
-      page.getBlackSelectedChip(game.black).toContain('background-color')
+      page.getBlackSelectedChip(game.black).getCssValue('background-color')
     );
 
     page.getUser('winner-' + game.winner).click();
@@ -120,7 +120,7 @@ export class Helper {
     this.sleep();
 
     expect([lightSelectedColor, darkSelectedColor]).toContain(
-      page.getWinnerSelectedChip(game.winner).toContain('background-color')
+      page.getWinnerSelectedChip(game.winner).getCssValue('background-color')
     );
 
     page.getSaveButton().click();

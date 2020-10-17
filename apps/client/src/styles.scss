@@ -18,7 +18,6 @@
   @include button-icon-active-state-component-theme($theme);
   @include game-result-component-theme($theme);
 }
-
 .light-theme {
   @include angular-material-theme($anms-light-theme);
   @include custom-components-theme($anms-light-theme);
