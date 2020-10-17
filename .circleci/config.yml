@@ -98,14 +98,18 @@ jobs:
           command: |
             if [[ ${CIRCLE_BRANCH} = "master" ]]; then
               if [[ $( npm run nx:affected:apps:master | grep client) != "" ]]; then
+                echo "master: affected client"
                 echo "export CLIENT_AFFECTED=true" >> $BASH_ENV
               else
+                echo "master: no changes client"
                 echo "export CLIENT_AFFECTED=false" >> $BASH_ENV
               fi
             else
               if [[ $( npm run nx:affected:apps | grep client) != "" ]]; then
+                echo "branch: affected client"
                 echo "export CLIENT_AFFECTED=true" >> $BASH_ENV
               else
+                echo "branch: no changes client"
                 echo "export CLIENT_AFFECTED=false" >> $BASH_ENV
               fi
             fi
@@ -116,14 +120,18 @@ jobs:
           command: |
             if [[ ${CIRCLE_BRANCH} = "master" ]]; then
               if [[ $( npm run nx:affected:apps:master | grep api) != "" ]]; then
+                echo "master: affected server"
                 echo "export SERVER_AFFECTED=true" >> $BASH_ENV
               else
+                echo "master: no changes server"
                 echo "export SERVER_AFFECTED=false" >> $BASH_ENV
               fi
             else
               if [[ $( npm run nx:affected:apps | grep api) != "" ]]; then
+                echo "branch: affected server"
                 echo "export SERVER_AFFECTED=true" >> $BASH_ENV
               else
+                echo "branch: no changes server"
                 echo "export SERVER_AFFECTED=false" >> $BASH_ENV
               fi
             fi
