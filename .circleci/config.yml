@@ -172,17 +172,17 @@ jobs:
               SERVER_TAG_E2E_TESTED=$SERVER_TAG-$TAG_E2E_TESTED
             fi
 
-            echo "$CLIENT_AND_SERVER_AFFECTED ${CLIENT_AND_SERVER_AFFECTED}"
-            echo "$CLIENT_AFFECTED ${CLIENT_AFFECTED}"
-            echo "$SERVER_AFFECTED ${SERVER_AFFECTED}"
-            echo "$CLIENT_TAG ${CLIENT_TAG}"
-            echo "$SERVER_TAG ${SERVER_TAG}"
-            echo "$CLIENT_BASE_IMAGE_TAG ${CLIENT_BASE_IMAGE_TAG}"
-            echo "$SERVER_IMAGE_TAG ${SERVER_IMAGE_TAG}"
-            echo "$CLIENT_BASE_IMAGE_TAG ${CLIENT_BASE_IMAGE_TAG}"
-            echo "$SERVER_IMAGE_TAG ${SERVER_IMAGE_TAG}"
-            echo "$CLIENT_TAG_E2E_TESTED ${CLIENT_TAG_E2E_TESTED}"
-            echo "$SERVER_TAG_E2E_TESTED ${SERVER_TAG_E2E_TESTED}"
+            echo "CLIENT_AND_SERVER_AFFECTED ${CLIENT_AND_SERVER_AFFECTED}"
+            echo "CLIENT_AFFECTED ${CLIENT_AFFECTED}"
+            echo "SERVER_AFFECTED ${SERVER_AFFECTED}"
+            echo "CLIENT_TAG ${CLIENT_TAG}"
+            echo "SERVER_TAG ${SERVER_TAG}"
+            echo "CLIENT_BASE_IMAGE_TAG ${CLIENT_BASE_IMAGE_TAG}"
+            echo "SERVER_IMAGE_TAG ${SERVER_IMAGE_TAG}"
+            echo "CLIENT_BASE_IMAGE_TAG ${CLIENT_BASE_IMAGE_TAG}"
+            echo "SERVER_IMAGE_TAG ${SERVER_IMAGE_TAG}"
+            echo "CLIENT_TAG_E2E_TESTED ${CLIENT_TAG_E2E_TESTED}"
+            echo "SERVER_TAG_E2E_TESTED ${SERVER_TAG_E2E_TESTED}"
 
             curl -u $CIRCLECI_TOKEN: -X POST --header "Content-Type: application/json" -d '{
               "branch": "'"$CIRCLE_BRANCH"'",
