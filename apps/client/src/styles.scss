@@ -27,10 +27,6 @@
 .black-theme {
   @include angular-material-theme($anms-black-theme);
   @include custom-components-theme($anms-black-theme);
-
-  // span {
-  //   color: white;
-  // }
 }
 
 html,
