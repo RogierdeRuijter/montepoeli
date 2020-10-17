@@ -1,3 +1,17 @@
+# [4.16.0](https://github.com/RogierdeRuijter/montepoeli/compare/v4.15.6...v4.16.0) (2020-10-17)
+
+
+### Bug Fixes
+
+* fit it ([c8755bd](https://github.com/RogierdeRuijter/montepoeli/commit/c8755bdfeb7d22eb941f3bb8efff890f1f43d766))
+* make logo smaller ([586738a](https://github.com/RogierdeRuijter/montepoeli/commit/586738af16ddf6ffbc828958f1b121b303debcdd))
+* uhmm ([b0085fa](https://github.com/RogierdeRuijter/montepoeli/commit/b0085fa0ae2846d7d9fedc2956c947397a08fb65))
+
+
+### Features
+
+* scale logo ([6a39e67](https://github.com/RogierdeRuijter/montepoeli/commit/6a39e67ef44c39fa57160b33cc0b1ec15cb30fed))
+
 ## [4.15.6](https://github.com/RogierdeRuijter/montepoeli/compare/v4.15.5...v4.15.6) (2020-10-12)
 
 ### Bug Fixes
