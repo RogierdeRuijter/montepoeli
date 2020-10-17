@@ -67,6 +67,9 @@ jobs:
   determine-affected-apps:
     docker:
       - image: tjokvol/node:13-luna
+        auth:
+          username: $PUBLIC_DOCKER_USER
+          password: $PUBLIC_DOCKER_PASSWORD
     environment:
       - TAG_TO_BE_E2E: << pipeline.parameters.tag-to-be-e2e >>
       - TAG_E2E_TESTED: << pipeline.parameters.tag-e2e >>
