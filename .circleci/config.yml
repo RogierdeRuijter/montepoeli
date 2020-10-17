@@ -720,7 +720,6 @@ workflows:
           server-affected: << pipeline.parameters.server-affected >>
           requires:
             - make-client-image-e2e-test-ready
-            - make-server-image-e2e-test-ready
           filters:
             branches:
               only:
