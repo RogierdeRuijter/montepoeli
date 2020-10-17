@@ -23,6 +23,7 @@
   @include angular-material-theme($anms-light-theme);
   @include custom-components-theme($anms-light-theme);
 }
+
 .black-theme {
   @include angular-material-theme($anms-black-theme);
   @include custom-components-theme($anms-black-theme);
