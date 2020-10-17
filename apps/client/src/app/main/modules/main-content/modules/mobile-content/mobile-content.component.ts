@@ -32,9 +32,7 @@ import { catchError } from 'rxjs/operators';
   styleUrls: ['./mobile-content.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MobileContentComponent
-  extends AsyncBaseComponent
-  implements OnInit, OnDestroy {
+export class MobileContentComponent extends AsyncBaseComponent implements OnInit, OnDestroy {
   @ViewChild('addDialog', { read: ViewContainerRef })
   public addDialogContainer: ViewContainerRef;
 
@@ -60,37 +58,30 @@ export class MobileContentComponent
   }
 
   public ngOnInit(): void {
-    if (
-      window.matchMedia('(display-mode: standalone)').matches &&
-      this.isIPhoneXVariant()
-    ) {
+    if (window.matchMedia('(display-mode: standalone)').matches && this.isIPhoneXVariant()) {
       this.raisedFooter = true;
     }
 
-    this.tabChangeGlobalEventEmitter
-      .get(this.destroy$)
-      .subscribe((tab: Tabs) => {
-        if (tab === Tabs.GAMES) {
-          this.gameView = true;
-          this.selected = Icons.CHESS_PIECES;
-        }
+    this.tabChangeGlobalEventEmitter.get(this.destroy$).subscribe((tab: Tabs) => {
+      if (tab === Tabs.GAMES) {
+        this.gameView = true;
+        this.selected = Icons.CHESS_PIECES;
+      }
 
-        if (tab === Tabs.RULES) {
-          this.gameView = false;
-          this.selected = Icons.SCROLL;
-        }
+      if (tab === Tabs.RULES) {
+        this.gameView = false;
+        this.selected = Icons.SCROLL;
+      }
 
-        this.closeAddGameModalIfOpen();
-      });
+      this.closeAddGameModalIfOpen();
+    });
   }
 
   // TODO: move to service and test the method
   private isIPhoneXVariant(): boolean {
     const aspect = window.screen.width / window.screen.height;
 
-    return (
-      navigator.userAgent.match(/(iPhone)/) && aspect.toFixed(3) === '0.462'
-    );
+    return navigator.userAgent.match(/(iPhone)/) && aspect.toFixed(3) === '0.462';
   }
 
   private closeAddGameModalIfOpen(): void {
@@ -107,32 +98,18 @@ export class MobileContentComponent
     const { DialogOverviewComponent } = await import(
       '../../../../../shared/modules/add-game/components/dialog-overview/dialog-overview.component'
     );
-    const { AddGameModule } = await import(
-      '../../../../../shared/modules/add-game/add-game.module'
-    );
+    const { AddGameModule } = await import('../../../../../shared/modules/add-game/add-game.module');
 
-    const compFactory = this.componentFactoryResolver.resolveComponentFactory(
-      DialogOverviewComponent
-    );
+    const compFactory = this.componentFactoryResolver.resolveComponentFactory(DialogOverviewComponent);
 
     const factory = await this.compiler.compileModuleAsync(AddGameModule);
     const ref = factory.create(this.injector);
 
-    this.addDialogContainerRef = this.addDialogContainer.createComponent(
-      compFactory,
-      null,
-      this.injector,
-      [],
-      ref
-    );
+    this.addDialogContainerRef = this.addDialogContainer.createComponent(compFactory, null, this.injector, [], ref);
     this.changeDetectorRef.detectChanges();
 
-    this.addDialogContainerRef.instance.addEvent.subscribe((game: Game) =>
-      this.addHandler(game)
-    );
-    this.addDialogContainerRef.instance.cancelEvent.subscribe(() =>
-      this.cancelHandler()
-    );
+    this.addDialogContainerRef.instance.addEvent.subscribe((game: Game) => this.addHandler(game));
+    this.addDialogContainerRef.instance.cancelEvent.subscribe(() => this.cancelHandler());
   }
 
   public gamesHandler(): void {
@@ -156,14 +133,16 @@ export class MobileContentComponent
 
     this.updateViewWithNewGame(game);
 
-    this.gameService.save(game)
+    this.gameService
+      .save(game)
       .pipe(
         catchError((error) => {
           this.removeAddedGameFromView(game);
 
           return of(error);
         })
-      ).subscribe();
+      )
+      .subscribe();
 
     this.unsubsribeFromRunningObservablesOfAddGame();
   }

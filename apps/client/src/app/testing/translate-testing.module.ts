@@ -1,10 +1,5 @@
 import { Injectable, NgModule, Pipe, PipeTransform } from '@angular/core';
-import {
-  TranslateLoader,
-  TranslateModule,
-  TranslatePipe,
-  TranslateService,
-} from '@ngx-translate/core';
+import { TranslateLoader, TranslateModule, TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { Observable, of } from 'rxjs';
 import { isString } from 'util';
 // TODO: get this to work, it is currently not visiable to the game service spec

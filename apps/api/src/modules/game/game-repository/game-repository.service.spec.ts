@@ -11,10 +11,7 @@ describe('GameRepositoryService', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [
-        GameRepositoryService,
-        { provide: getModelToken('Game'), useFactory: factory },
-      ],
+      providers: [GameRepositoryService, { provide: getModelToken('Game'), useFactory: factory }],
     }).compile();
 
     service = module.get<GameRepositoryService>(GameRepositoryService);

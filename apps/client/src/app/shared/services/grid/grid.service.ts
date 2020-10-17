@@ -32,18 +32,15 @@ export class GridService {
       map((breakPointState: BreakpointState) => {
         let activeGrid: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
-        Object.keys(this.breakPoints).forEach(
-          (grid: 'xs' | 'sm' | 'md' | 'lg' | 'xl') => {
-            const breakPointPxValue = this.breakPoints[grid];
-            const isBreakPoint: boolean =
-              breakPointState.breakpoints[breakPointPxValue];
+        Object.keys(this.breakPoints).forEach((grid: 'xs' | 'sm' | 'md' | 'lg' | 'xl') => {
+          const breakPointPxValue = this.breakPoints[grid];
+          const isBreakPoint: boolean = breakPointState.breakpoints[breakPointPxValue];
 
-            if (isBreakPoint === true) {
-              activeGrid = grid;
-              return;
-            }
+          if (isBreakPoint === true) {
+            activeGrid = grid;
+            return;
           }
-        );
+        });
 
         return activeGrid;
       }),

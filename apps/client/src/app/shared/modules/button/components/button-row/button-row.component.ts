@@ -1,10 +1,5 @@
 import { Component, Input } from '@angular/core';
-import {
-  ButtonFunction,
-  ButtonRowType,
-  ButtonType,
-  GridSizes,
-} from '../../../../static-files/enums';
+import { ButtonFunction, ButtonRowType, ButtonType, GridSizes } from '../../../../static-files/enums';
 
 @Component({
   selector: 'app-button-row',

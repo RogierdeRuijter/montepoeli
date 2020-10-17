@@ -1,12 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-  Renderer2,
-  ViewChild,
-  AfterViewInit,
-} from '@angular/core';
+import { Component, EventEmitter, Input, Output, Renderer2, ViewChild, AfterViewInit } from '@angular/core';
 import { IconColor, Icons, IconSize } from '../../../../static-files/enums';
 import { MatButton } from '@angular/material/button';
 
@@ -48,26 +40,10 @@ export class ButtonIconComponent implements AfterViewInit {
 
   public ngAfterViewInit(): void {
     if (this.squareButton) {
-      this.renderer.setStyle(
-        this.buttonOne._elementRef.nativeElement,
-        'width',
-        'inherit'
-      );
-      this.renderer.setStyle(
-        this.buttonOne._elementRef.nativeElement,
-        'height',
-        'inherit'
-      );
-      this.renderer.setStyle(
-        this.buttonOne._elementRef.nativeElement,
-        'line-height',
-        'inherit'
-      );
-      this.renderer.setStyle(
-        this.buttonOne._elementRef.nativeElement,
-        'border-radius',
-        'inherit'
-      );
+      this.renderer.setStyle(this.buttonOne._elementRef.nativeElement, 'width', 'inherit');
+      this.renderer.setStyle(this.buttonOne._elementRef.nativeElement, 'height', 'inherit');
+      this.renderer.setStyle(this.buttonOne._elementRef.nativeElement, 'line-height', 'inherit');
+      this.renderer.setStyle(this.buttonOne._elementRef.nativeElement, 'border-radius', 'inherit');
     }
   }
 }

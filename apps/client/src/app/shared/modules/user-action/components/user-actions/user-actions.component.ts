@@ -52,37 +52,27 @@ export class UserActionsComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.setAlternativeLanguage();
 
-    this.userStoreService
-      .get(this.destory$)
-      .subscribe((user: User) => (this.user = user));
+    this.userStoreService.get(this.destory$).subscribe((user: User) => (this.user = user));
 
-    this.translateService.onLangChange
-      .pipe(takeUntil(this.destory$))
-      .subscribe((langObject: any) => {
-        const lang = langObject.lang;
+    this.translateService.onLangChange.pipe(takeUntil(this.destory$)).subscribe((langObject: any) => {
+      const lang = langObject.lang;
 
-        if (lang === 'en') {
-          this.notificationService.info(
-            this.translateService.instant('info.language-changed.english')
-          );
-        }
+      if (lang === 'en') {
+        this.notificationService.info(this.translateService.instant('info.language-changed.english'));
+      }
 
-        if (lang === 'nl') {
-          this.notificationService.info(
-            this.translateService.instant('info.language-changed.dutch')
-          );
-        }
+      if (lang === 'nl') {
+        this.notificationService.info(this.translateService.instant('info.language-changed.dutch'));
+      }
 
-        this.setAlternativeLanguage(lang);
-      });
+      this.setAlternativeLanguage(lang);
+    });
   }
 
   private setAlternativeLanguage(lang?: string): void {
     const currentLang = lang ? lang : this.translateService.currentLang;
 
-    this.alternativeLanguage = this.translateService
-      .getLangs()
-      .find((lang1) => lang1 !== currentLang);
+    this.alternativeLanguage = this.translateService.getLangs().find((lang1) => lang1 !== currentLang);
 
     if (this.alternativeLanguage === 'en') {
       this.setIconLanguage = 'ie';
@@ -101,10 +91,7 @@ export class UserActionsComponent implements OnInit, OnDestroy {
 
   public switchLanguageHandler(): void {
     this.waitForDropDownToClose().subscribe(() =>
-      this.languagePreferenceService.setWithLanguageCode(
-        this.user,
-        this.alternativeLanguage
-      )
+      this.languagePreferenceService.setWithLanguageCode(this.user, this.alternativeLanguage)
     );
   }
 

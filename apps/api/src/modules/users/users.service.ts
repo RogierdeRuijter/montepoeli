@@ -15,7 +15,7 @@ export class UsersService {
     private readonly userRepositoryService: UserRepositoryService,
     private readonly userMapper: UserMapper,
     private readonly utilService: UtilService,
-    private readonly jwtService: JwtService,
+    private readonly jwtService: JwtService
   ) {}
   public findByUsername(payload: JwtPayload): Promise<User> {
     return this.userRepositoryService.findByUsername(payload.username);
@@ -23,22 +23,20 @@ export class UsersService {
 
   public verifyUser(payload): Promise<User> {
     return new Promise((resolve, reject) =>
-      this.userRepositoryService
-        .findByUsername(payload.username)
-        .then((user: User) => {
-          if (this.utilService.isNullOrUndefined(user)) {
-            reject('user not found');
-            return;
-          }
+      this.userRepositoryService.findByUsername(payload.username).then((user: User) => {
+        if (this.utilService.isNullOrUndefined(user)) {
+          reject('user not found');
+          return;
+        }
 
-          bcrypt.compare(payload.password, user.password, (err, res) => {
-            if (res === true) {
-              resolve(user);
-            } else if (res === false) {
-              reject('hash comparison failed');
-            }
-          });
-        }),
+        bcrypt.compare(payload.password, user.password, (err, res) => {
+          if (res === true) {
+            resolve(user);
+          } else if (res === false) {
+            reject('hash comparison failed');
+          }
+        });
+      })
     );
   }
 
@@ -49,27 +47,19 @@ export class UsersService {
         // @ts-ignore
         // FIXME: convert dto
         resolve(this.userRepositoryService.save(createUserDto));
-      }),
+      })
     );
   }
 
   public getAllUsers(): Promise<UserDto[]> {
     return new Promise<UserDto[]>((resolve) => {
-      this.userRepositoryService
-        .find()
-        .then((users: User[]) => resolve(this.userMapper.convertUsers(users)));
+      this.userRepositoryService.find().then((users: User[]) => resolve(this.userMapper.convertUsers(users)));
     });
   }
 
   // TODO: write unit test
-  public setLanguagePreference(
-    username: string,
-    languagePreferance: string,
-  ): Promise<User> {
-    return this.userRepositoryService.updateLanguagePreferance(
-      username,
-      languagePreferance,
-    );
+  public setLanguagePreference(username: string, languagePreferance: string): Promise<User> {
+    return this.userRepositoryService.updateLanguagePreferance(username, languagePreferance);
   }
 
   public async getUserWithJwt(jwt: string): Promise<UserDto> {

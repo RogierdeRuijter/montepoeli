@@ -9,11 +9,7 @@ import { RuleRepositoryService } from './rule-repository/rule-repository.service
 import { RuleMapperService } from './rule-mapper/rule-mapper.service';
 
 @Module({
-  imports: [
-    MongooseModule.forFeature([{ name: 'Rule', schema: RuleSchema }]),
-    AuthModule,
-    SharedModule,
-  ],
+  imports: [MongooseModule.forFeature([{ name: 'Rule', schema: RuleSchema }]), AuthModule, SharedModule],
   providers: [RuleService, RuleRepositoryService, RuleMapperService],
   controllers: [RuleController],
   exports: [],

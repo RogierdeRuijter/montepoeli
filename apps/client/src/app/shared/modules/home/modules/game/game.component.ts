@@ -27,9 +27,7 @@ import { catchError } from 'rxjs/operators';
   styleUrls: ['./game.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GameComponent
-  extends AsyncBaseComponent
-  implements OnInit, OnDestroy {
+export class GameComponent extends AsyncBaseComponent implements OnInit, OnDestroy {
   @Input()
   public games$: BehaviorSubject<Game[]>;
 
@@ -60,9 +58,7 @@ export class GameComponent
   }
 
   public ngOnInit(): void {
-    this.newGameStore
-      .get(this.destroy$)
-      .subscribe((game: Game) => this.addGameToView(game));
+    this.newGameStore.get(this.destroy$).subscribe((game: Game) => this.addGameToView(game));
 
     this.removeLastAddedGameStore.get(this.destroy$).subscribe((game: Game) => {
       if (game) {
@@ -79,42 +75,32 @@ export class GameComponent
     const { DialogOverviewComponent } = await import(
       '../../../../../shared/modules/add-game/components/dialog-overview/dialog-overview.component'
     );
-    const { AddGameModule } = await import(
-      '../../../../../shared/modules/add-game/add-game.module'
-    );
+    const { AddGameModule } = await import('../../../../../shared/modules/add-game/add-game.module');
 
-    const compFactory = this.componentFactoryResolver.resolveComponentFactory(
-      DialogOverviewComponent
-    );
+    const compFactory = this.componentFactoryResolver.resolveComponentFactory(DialogOverviewComponent);
 
     const factory = await this.compiler.compileModuleAsync(AddGameModule);
     const ref = factory.create(this.injector);
 
-    this.addDialogContainerRef = this.addDialogContainer.createComponent(
-      compFactory,
-      null,
-      this.injector,
-      [],
-      ref
-    );
+    this.addDialogContainerRef = this.addDialogContainer.createComponent(compFactory, null, this.injector, [], ref);
     this.changeDetectorRef.detectChanges();
 
-    this.addDialogContainerRef.instance.addEvent.subscribe((game: Game) =>
-      this.handleAddEvent(game)
-    );
+    this.addDialogContainerRef.instance.addEvent.subscribe((game: Game) => this.handleAddEvent(game));
   }
 
   public handleAddEvent(game: Game): void {
     this.addGameToView(game);
     // TODO: test this
-    this.gameService.save(game)
+    this.gameService
+      .save(game)
       .pipe(
         catchError((error) => {
-          this.removeAddedGame(game)
+          this.removeAddedGame(game);
 
           return of(error);
         })
-      ).subscribe();
+      )
+      .subscribe();
 
     this.addDialogContainerRef.instance.addEvent.unsubscribe();
   }
@@ -128,8 +114,6 @@ export class GameComponent
   }
 
   private removeAddedGame(game: Game): void {
-    this.games$.next(
-      this.games$.getValue().filter((game1: Game) => game1 !== game)
-    );
+    this.games$.next(this.games$.getValue().filter((game1: Game) => game1 !== game));
   }
 }

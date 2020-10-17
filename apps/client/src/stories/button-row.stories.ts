@@ -1,8 +1,4 @@
-import {
-  ButtonFunction,
-  ButtonRowType,
-  ButtonType,
-} from '../app/shared/static-files/enums';
+import { ButtonFunction, ButtonRowType, ButtonType } from '../app/shared/static-files/enums';
 import { MatButtonModule } from '@angular/material/button';
 import { TranslateDirective } from '../app/shared/modules/translate/directives/translate.directive';
 import { StorybookTranslateModule } from './storybook-translate.module';
@@ -28,11 +24,6 @@ export const primaryButton = () => ({
 
 const moduleMeta = {
   imports: [MatButtonModule, MatDialogModule, StorybookTranslateModule],
-  declarations: [
-    TranslateDirective,
-    GridRowDirective,
-    GridColumnDirective,
-    ButtonComponent,
-  ],
+  declarations: [TranslateDirective, GridRowDirective, GridColumnDirective, ButtonComponent],
   providers: [],
 };

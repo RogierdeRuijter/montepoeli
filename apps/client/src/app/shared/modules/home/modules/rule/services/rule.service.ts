@@ -10,16 +10,11 @@ import { EnvironmentService } from '../../../../../../shared/services/environmen
 export class RuleService {
   public environment: any;
 
-  constructor(
-    private httpService: CustomHttpService,
-    private environmentService: EnvironmentService
-  ) {
+  constructor(private httpService: CustomHttpService, private environmentService: EnvironmentService) {
     this.environment = this.environmentService.get();
   }
 
   public getAll(): Observable<Rule[]> {
-    return this.httpService.get<Rule[]>(
-      this.environment.backend.ENTRY_POINTS.RULE
-    );
+    return this.httpService.get<Rule[]>(this.environment.backend.ENTRY_POINTS.RULE);
   }
 }

@@ -20,9 +20,7 @@ export class GameTableStoryFactory {
   }
 
   private appendStories(): void {
-    this.stories.forEach((story: CompleteStory) =>
-      this.storyApi.add(story.name, story.story)
-    );
+    this.stories.forEach((story: CompleteStory) => this.storyApi.add(story.name, story.story));
   }
 
   private createInputs(): void {

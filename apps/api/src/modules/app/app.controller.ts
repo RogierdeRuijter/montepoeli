@@ -1,11 +1,4 @@
-import {
-  BadRequestException,
-  Body,
-  Controller,
-  Next,
-  Post,
-  Res,
-} from '@nestjs/common';
+import { BadRequestException, Body, Controller, Next, Post, Res } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { User } from '../../models/interfaces/user.interface';
 import { AuthService } from '../auth/auth.service';
@@ -14,26 +7,17 @@ import { CreateUserDto } from '../../models/create-dtos/create-user.dto';
 
 @Controller()
 export class AppController {
-  constructor(
-    private readonly usersService: UsersService,
-    private readonly authService: AuthService,
-  ) {}
+  constructor(private readonly usersService: UsersService, private readonly authService: AuthService) {}
 
-  private secure: boolean =
-    process.env.ENV.toString() === 'prod' ? true : false;
+  private secure: boolean = process.env.ENV.toString() === 'prod' ? true : false;
 
   // private sameSite: string = process.env.ENV.toString() === 'prod' ? 'Strict' : undefined;
   // private signed: boolean = process.env.ENV.toString() === 'prod' ? true : undefined;
 
-  private domain: string =
-    process.env.ENV.toString() === 'prod' ? process.env.DOMAIN : undefined;
+  private domain: string = process.env.ENV.toString() === 'prod' ? process.env.DOMAIN : undefined;
 
   @Post('/signIn')
-  public async signIn(
-    @Body() body,
-    @Res() res: Response,
-    @Next() next,
-  ): Promise<any> {
+  public async signIn(@Body() body, @Res() res: Response, @Next() next): Promise<any> {
     return this.authService.signIn(body).then((reponse) => {
       const date = new Date();
 

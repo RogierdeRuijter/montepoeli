@@ -7,13 +7,7 @@ import { GameModule } from './modules/game/game.module';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    HomeRoutingModule,
-    MatTabsModule,
-    GameModule,
-    MatTooltipModule,
-  ],
+  imports: [CommonModule, HomeRoutingModule, MatTabsModule, GameModule, MatTooltipModule],
   declarations: [HomeComponent],
   exports: [HomeComponent],
 })

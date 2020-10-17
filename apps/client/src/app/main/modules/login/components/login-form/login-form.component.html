@@ -2,24 +2,13 @@
   <div class="center-align-items">
     <div class="image-container">
       <div style="width: 200px">
-        <img
-          class="image"
-          src="../../../../assets/images/logo_transparent.png"
-        />
+        <img class="image" src="../../../../assets/images/logo_transparent.png" />
       </div>
     </div>
     <form #loginForm="ngForm" @fadeInAnimation>
       <div class="form-group">
         <mat-form-field class="full-width">
-          <input
-            #username
-            autofocus
-            id="username"
-            matInput
-            name="username"
-            ngModel
-            required
-          />
+          <input #username autofocus id="username" matInput name="username" ngModel required />
           <mat-placeholder>
             <span appTranslate="pages.login.username"></span>
           </mat-placeholder>
@@ -28,15 +17,7 @@
 
       <div class="form-group">
         <mat-form-field class="full-width">
-          <input
-            id="password"
-            id="password"
-            matInput
-            name="password"
-            ngModel
-            required
-            type="password"
-          />
+          <input id="password" id="password" matInput name="password" ngModel required type="password" />
           <mat-placeholder>
             <span appTranslate="pages.login.password"></span>
           </mat-placeholder>

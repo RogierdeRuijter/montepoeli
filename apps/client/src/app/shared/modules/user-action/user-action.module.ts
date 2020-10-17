@@ -10,13 +10,6 @@ import { CustomTranslateModule } from '../translate/custom-translate.module';
 @NgModule({
   declarations: [UserActionsComponent],
   exports: [UserActionsComponent],
-  imports: [
-    CommonModule,
-    MatSelectModule,
-    MatOptionModule,
-    IconModule,
-    ButtonModule,
-    CustomTranslateModule,
-  ],
+  imports: [CommonModule, MatSelectModule, MatOptionModule, IconModule, ButtonModule, CustomTranslateModule],
 })
 export class UserActionModule {}

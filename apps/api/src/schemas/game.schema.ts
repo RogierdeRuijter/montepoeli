@@ -8,5 +8,5 @@ export const GameSchema = new mongoose.Schema(
     winner: String,
     date: { type: Date, default: Date.now },
   },
-  { _id: false },
+  { _id: false }
 );

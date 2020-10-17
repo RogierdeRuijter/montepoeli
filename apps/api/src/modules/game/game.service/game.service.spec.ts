@@ -43,7 +43,7 @@ describe('GameService', () => {
       spyOn(GameRepositoryService.prototype, 'find').and.returnValue(
         new Promise((resolve) => {
           resolve([{ white: '1', black: '2', winner: '2' }] as Game[]);
-        }),
+        })
       );
 
       spyOn(UserRepositoryService.prototype, 'find').and.returnValue(
@@ -52,7 +52,7 @@ describe('GameService', () => {
             { id: '1', name: 'Rogier' },
             { id: '2', name: 'Isabelle' },
           ]);
-        }),
+        })
       );
 
       const result = await service.getGames();

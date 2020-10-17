@@ -9,14 +9,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    IconModule,
-    FormsModule,
-    CustomTranslateModule,
-    MatFormFieldModule,
-    MatSelectModule,
-  ],
+  imports: [CommonModule, IconModule, FormsModule, CustomTranslateModule, MatFormFieldModule, MatSelectModule],
   declarations: [DropDownComponent, OptionNameComponent],
   exports: [DropDownComponent, FormsModule],
 })

@@ -12,21 +12,8 @@ import { CommonModule } from '@angular/common';
 import { CdkTableModule } from '@angular/cdk/table';
 
 @NgModule({
-  declarations: [
-    GameComponent,
-    GameTableComponent,
-    TableActionComponent,
-    OverviewComponent,
-  ],
+  declarations: [GameComponent, GameTableComponent, TableActionComponent, OverviewComponent],
   exports: [GameComponent],
-  imports: [
-    ButtonModule,
-    MatTableModule,
-    IconModule,
-    GridModule,
-    CustomTranslateModule,
-    CommonModule,
-    CdkTableModule,
-  ],
+  imports: [ButtonModule, MatTableModule, IconModule, GridModule, CustomTranslateModule, CommonModule, CdkTableModule],
 })
 export class GameModule {}

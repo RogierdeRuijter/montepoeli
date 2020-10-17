@@ -24,9 +24,7 @@ describe('LanguagePreferenceService', () => {
 
   describe('get', () => {
     it('should return "nl" if it is inside local storage', () => {
-      jest
-        .spyOn(window.localStorage.__proto__, 'getItem')
-        .mockReturnValue('nl');
+      jest.spyOn(window.localStorage.__proto__, 'getItem').mockReturnValue('nl');
 
       const result = service.get();
 
@@ -36,9 +34,7 @@ describe('LanguagePreferenceService', () => {
     });
 
     it('should return "en" if it is inside local storage', () => {
-      jest
-        .spyOn(window.localStorage.__proto__, 'getItem')
-        .mockReturnValue('en');
+      jest.spyOn(window.localStorage.__proto__, 'getItem').mockReturnValue('en');
 
       const result = service.get();
 
@@ -48,9 +44,7 @@ describe('LanguagePreferenceService', () => {
     });
 
     it('should return "en" if there is nothing set in local storage', () => {
-      jest
-        .spyOn(window.localStorage.__proto__, 'getItem')
-        .mockReturnValue(undefined);
+      jest.spyOn(window.localStorage.__proto__, 'getItem').mockReturnValue(undefined);
 
       const result = service.get();
 

@@ -25,13 +25,7 @@ import { SharedModule } from '../shared/shared.module';
     }),
     SharedModule,
   ],
-  providers: [
-    AuthService,
-    JwtStrategy,
-    UsersService,
-    UserMapper,
-    UserRepositoryService,
-  ],
+  providers: [AuthService, JwtStrategy, UsersService, UserMapper, UserRepositoryService],
   exports: [PassportModule, AuthService, JwtModule],
 })
 export class AuthModule {}

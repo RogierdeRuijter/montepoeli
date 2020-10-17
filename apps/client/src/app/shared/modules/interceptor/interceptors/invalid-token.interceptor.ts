@@ -1,10 +1,4 @@
-import {
-  HttpErrorResponse,
-  HttpEvent,
-  HttpHandler,
-  HttpInterceptor,
-  HttpRequest,
-} from '@angular/common/http';
+import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
@@ -22,10 +16,7 @@ export class InvalidTokenInterceptor implements HttpInterceptor {
     private translateService: TranslateService
   ) {}
 
-  public intercept(
-    request: HttpRequest<any>,
-    next: HttpHandler
-  ): Observable<HttpEvent<any>> {
+  public intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
         if (error.status === 401 && !request.url.includes('signIn')) {
@@ -33,9 +24,7 @@ export class InvalidTokenInterceptor implements HttpInterceptor {
 
           this.translateService
             .get('info.no-valid-session.body')
-            .subscribe((message: string) =>
-              this.notificationService.info(message)
-            );
+            .subscribe((message: string) => this.notificationService.info(message));
           return;
         }
 

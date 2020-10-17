@@ -26,13 +26,6 @@ import { ButtonNoElevationComponent } from './components/button-no-elevation/but
     ButtonIconActiveStateComponent,
     ButtonNoElevationComponent,
   ],
-  imports: [
-    CommonModule,
-    IconModule,
-    MatButtonModule,
-    CustomTranslateModule,
-    GridModule,
-    MatDialogModule,
-  ],
+  imports: [CommonModule, IconModule, MatButtonModule, CustomTranslateModule, GridModule, MatDialogModule],
 })
 export class ButtonModule {}

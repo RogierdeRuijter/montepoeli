@@ -30,9 +30,7 @@ describe('Mobile screen tests', () => {
 
     expect(page.getMobileNavButtonGames()).toBeTruthy();
     expect(page.getMobileAddGameButton().getCssValue('opacity')).toEqual('0');
-    expect(page.getMobileAddGameButton().getCssValue('pointer-events')).toEqual(
-      'none'
-    );
+    expect(page.getMobileAddGameButton().getCssValue('pointer-events')).toEqual('none');
     expect(page.getMobileNavButtonRules()).toBeTruthy();
 
     helper.sleep();

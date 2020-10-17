@@ -18,11 +18,7 @@ export class GameFactory implements Factory<Game> {
     };
   }
 
-  public createMany(
-    amount: number,
-    blackId?: string,
-    whiteId?: string,
-  ): Game[] {
+  public createMany(amount: number, blackId?: string, whiteId?: string): Game[] {
     const list: Game[] = [];
 
     for (let i = 0; i < amount; i++) {

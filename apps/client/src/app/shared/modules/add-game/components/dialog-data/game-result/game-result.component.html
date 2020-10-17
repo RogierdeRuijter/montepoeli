@@ -2,18 +2,9 @@
 <div mat-dialog-content>
   <form #form="ngForm">
     <div>
-      <mat-form-field
-        class="custom-input-field"
-        color="accent"
-        (click)="clicked()"
-      >
+      <mat-form-field class="custom-input-field" color="accent" (click)="clicked()">
         <mat-label [appTranslate]="'pages.home.games.labels.white'"></mat-label>
-        <mat-chip-list
-          id="white-user"
-          selectable
-          (change)="onListChange($event, 'white')"
-          name="white"
-        >
+        <mat-chip-list id="white-user" selectable (change)="onListChange($event, 'white')" name="white">
           <mat-chip
             *ngFor="let user of usersWhite"
             #matChip="matChip"
@@ -32,12 +23,7 @@
     <div [class.form-field-with-disabled-underline]="blackDisabled">
       <mat-form-field class="custom-input-field" color="accent">
         <mat-label [appTranslate]="'pages.home.games.labels.black'"></mat-label>
-        <mat-chip-list
-          id="black-user"
-          selectable
-          (change)="onListChange($event, 'black')"
-          name="black"
-        >
+        <mat-chip-list id="black-user" selectable (change)="onListChange($event, 'black')" name="black">
           <mat-chip
             *ngFor="let user of usersBlack"
             #matChip="matChip"
@@ -56,14 +42,8 @@
     </div>
     <div [class.form-field-with-disabled-underline]="winnersDisabled">
       <mat-form-field class="custom-input-field" color="accent">
-        <mat-label
-          [appTranslate]="'pages.home.games.labels.winner'"
-        ></mat-label>
-        <mat-chip-list
-          id="winner-user"
-          (change)="onListChange($event, 'winner')"
-          name="winner"
-        >
+        <mat-label [appTranslate]="'pages.home.games.labels.winner'"></mat-label>
+        <mat-chip-list id="winner-user" (change)="onListChange($event, 'winner')" name="winner">
           <mat-chip
             *ngFor="let option of winnerOptions; let i = index"
             #matChip="matChip"

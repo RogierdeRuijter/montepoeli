@@ -27,9 +27,7 @@ export class LanguagePreferenceService {
   }
 
   public setWithUser(user: User): void {
-    const translationFileCode = this.mapLanguageToTranslationFileCode(
-      user.preferedLanguage
-    );
+    const translationFileCode = this.mapLanguageToTranslationFileCode(user.preferedLanguage);
 
     this.storagePrefereanceInBrowser(translationFileCode);
   }
@@ -52,16 +50,11 @@ export class LanguagePreferenceService {
     this.storagePrefereanceInBrowser(languageCode);
 
     this.userService
-      .setUserLanguagePreference(
-        user.name,
-        this.mapTranslationCodeToEnglishLanguageName(languageCode)
-      )
+      .setUserLanguagePreference(user.name, this.mapTranslationCodeToEnglishLanguageName(languageCode))
       .subscribe();
   }
 
-  private mapLanguageToTranslationFileCode(
-    englishPerferedLanguage: string
-  ): string {
+  private mapLanguageToTranslationFileCode(englishPerferedLanguage: string): string {
     if (englishPerferedLanguage === 'dutch') {
       return 'nl';
     }

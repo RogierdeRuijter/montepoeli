@@ -161,9 +161,9 @@ describe('GameService', () => {
 
       const games: any[] = undefined;
 
-      expect(() =>
-        service.filterIdsThatExistInTheGames(gameIds, games)
-      ).toThrow(new BadRequest('games should not be undefined'));
+      expect(() => service.filterIdsThatExistInTheGames(gameIds, games)).toThrow(
+        new BadRequest('games should not be undefined')
+      );
     });
   });
 });

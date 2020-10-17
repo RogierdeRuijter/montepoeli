@@ -1,10 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  TranslateLoader,
-  TranslateModule,
-  TranslateService,
-} from '@ngx-translate/core';
+import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateDirective } from './directives/translate.directive';
@@ -28,10 +24,7 @@ import { LanguagePreferenceService } from './services/language-preference.servic
   ],
 })
 export class CustomTranslateModule {
-  constructor(
-    languagePreferenceService: LanguagePreferenceService,
-    translate: TranslateService
-  ) {
+  constructor(languagePreferenceService: LanguagePreferenceService, translate: TranslateService) {
     translate.addLangs(['nl', 'en']);
 
     const preferedLanguage = languagePreferenceService.get();

@@ -11,7 +11,7 @@ export class RuleService {
   constructor(
     private ruleRepositoryService: RuleRepositoryService,
     private ruleMapperService: RuleMapperService,
-    private sortService: SortService,
+    private sortService: SortService
   ) {}
 
   public async getAll(): Promise<RuleDto[]> {

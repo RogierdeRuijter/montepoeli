@@ -11,10 +11,7 @@ describe('RuleRepositoryService', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [
-        RuleRepositoryService,
-        { provide: getModelToken('Rule'), useFactory: factory },
-      ],
+      providers: [RuleRepositoryService, { provide: getModelToken('Rule'), useFactory: factory }],
     }).compile();
 
     service = module.get<RuleRepositoryService>(RuleRepositoryService);
