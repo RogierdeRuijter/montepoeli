@@ -67,7 +67,7 @@ parameters:
 jobs:
   determine-affected-apps:
     docker:
-      - image: tjokvol/node:13-luna
+      - image: tjokvol/montepoeli-base-node-modules:latest
         auth:
           username: $PUBLIC_DOCKER_USER
           password: $PUBLIC_DOCKER_PASSWORD
@@ -82,21 +82,21 @@ jobs:
           fingerprints:
             - 'd7:e3:8a:3a:84:5f:4b:48:cd:c0:d4:bf:66:59:16:e1'
 
-      - restore_cache:
-          keys:
-            - v2-nrwl-workspace-9.2.2
+      # - restore_cache:
+      #     keys:
+      #       - v2-nrwl-workspace-9.2.2
 
       - run:
           name: Setup environment to check affected
           command: |
             git config --global user.email "rogierderuijter@hotmail.com"
             git config --global user.name "Circle Ci"
-            npm install @nrwl/workspace@9.2.2
+            # npm install @nrwl/workspace@9.2.2
 
-      - save_cache:
-          paths:
-            - node_modules
-          key: v2-nrwl-workspace-9.2.2
+      # - save_cache:
+      #     paths:
+      #       - node_modules
+      #     key: v2-nrwl-workspace-9.2.2
 
       - run:
           name: Save to the environment variable if the client is affected
