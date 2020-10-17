@@ -63,7 +63,6 @@ parameters:
   client-and-server-affected:
     type: boolean
     default: false
-
 jobs:
   determine-affected-apps:
     docker:
