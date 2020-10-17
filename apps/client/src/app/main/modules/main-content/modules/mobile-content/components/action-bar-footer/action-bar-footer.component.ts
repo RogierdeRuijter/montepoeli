@@ -1,11 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import {
-  Alignments,
-  GridSizes,
-  IconColor,
-  Icons,
-  IconSize,
-} from '../../../../../../../shared/static-files/enums';
+import { Alignments, GridSizes, IconColor, Icons, IconSize } from '../../../../../../../shared/static-files/enums';
 
 @Component({
   selector: 'app-action-bar-footer',

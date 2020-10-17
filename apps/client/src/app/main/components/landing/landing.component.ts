@@ -10,23 +10,13 @@ import { Environment } from '../../../../environments/environment';
 export class LandingComponent implements OnInit {
   private environment = new Environment();
 
-  constructor(
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
-    private authService: AuthService
-  ) {}
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private authService: AuthService) {}
 
   public ngOnInit(): void {
     if (this.authService.isAuthenticated()) {
-      this.router.navigate(
-        ['../' + this.environment.frontend.BASIC_ROUTES.HOME],
-        { relativeTo: this.activatedRoute }
-      );
+      this.router.navigate(['../' + this.environment.frontend.BASIC_ROUTES.HOME], { relativeTo: this.activatedRoute });
     } else {
-      this.router.navigate(
-        ['../' + this.environment.frontend.BASIC_ROUTES.LOGIN],
-        { relativeTo: this.activatedRoute }
-      );
+      this.router.navigate(['../' + this.environment.frontend.BASIC_ROUTES.LOGIN], { relativeTo: this.activatedRoute });
     }
   }
 }

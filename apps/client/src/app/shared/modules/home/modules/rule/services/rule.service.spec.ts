@@ -10,10 +10,7 @@ describe('RuleService', () => {
   beforeEach(() =>
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [
-        EnvironmentService,
-        { provide: CustomHttpService, useClass: MockLocationStrategy },
-      ],
+      providers: [EnvironmentService, { provide: CustomHttpService, useClass: MockLocationStrategy }],
     })
   );
 

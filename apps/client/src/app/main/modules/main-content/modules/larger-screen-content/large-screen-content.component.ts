@@ -12,9 +12,7 @@ import { HomeModule } from '../../../../../shared/modules/home/home.module';
   styleUrls: ['./large-screen-content.component.scss'],
 })
 export class LargeScreenContentComponent {
-  constructor(
-    private tabChangeGlobalEventEmitter: TabChangeGlobalEventEmitter
-  ) {}
+  constructor(private tabChangeGlobalEventEmitter: TabChangeGlobalEventEmitter) {}
 
   public gamesHandler(): void {
     this.tabChangeGlobalEventEmitter.emit(Tabs.GAMES);

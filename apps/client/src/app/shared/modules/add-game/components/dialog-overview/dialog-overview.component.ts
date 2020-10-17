@@ -23,11 +23,7 @@ export class DialogOverviewComponent implements OnInit {
 
   public unsubscriber$: Subject<void>;
 
-  constructor(
-    public dialog: MatDialog,
-    private utilService: UtilService,
-    private router: Router
-  ) {}
+  constructor(public dialog: MatDialog, private utilService: UtilService, private router: Router) {}
 
   public ngOnInit(): void {
     this.openDialog();

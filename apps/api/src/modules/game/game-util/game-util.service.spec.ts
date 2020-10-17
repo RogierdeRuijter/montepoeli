@@ -7,10 +7,7 @@ describe('GameUtilService', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [
-        GameUtilService,
-        { provide: GameRepositoryService, useValue: '' },
-      ],
+      providers: [GameUtilService, { provide: GameRepositoryService, useValue: '' }],
     }).compile();
 
     service = module.get<GameUtilService>(GameUtilService);
@@ -24,14 +21,8 @@ describe('GameUtilService', () => {
     it('should return the a list of ids from the available games', async () => {
       spyOn(GameUtilService.prototype, 'getAllGames').and.returnValue(
         new Promise((resolve) => {
-          resolve([
-            { id: '1' },
-            { id: '2' },
-            { id: '3' },
-            { id: '4' },
-            { id: '5' },
-          ]);
-        }),
+          resolve([{ id: '1' }, { id: '2' }, { id: '3' }, { id: '4' }, { id: '5' }]);
+        })
       );
 
       const result = await service.getAllIdsFromGames();
@@ -45,7 +36,7 @@ describe('GameUtilService', () => {
       spyOn(GameUtilService.prototype, 'getAllGames').and.returnValue(
         new Promise((resolve) => {
           resolve([]);
-        }),
+        })
       );
 
       const result = await service.getAllIdsFromGames();
@@ -66,9 +57,7 @@ describe('GameUtilService', () => {
     });
 
     it('should return undefined if undefined is the input', async () => {
-      spyOn(GameUtilService.prototype, 'getAllGames').and.returnValue(
-        undefined,
-      );
+      spyOn(GameUtilService.prototype, 'getAllGames').and.returnValue(undefined);
 
       const result = await service.getAllIdsFromGames();
 

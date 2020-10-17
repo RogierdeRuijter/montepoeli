@@ -1,8 +1,5 @@
 <mat-toolbar [color]="color">
-  <app-button-no-elevation
-    (clickEvent)="handleButtonClicked()"
-    style="height: 56px"
-  >
+  <app-button-no-elevation (clickEvent)="handleButtonClicked()" style="height: 56px">
     <div style="display: flex; align-items: center">
       <span class="margin-right-10" style="height: 56px">
         <app-icon [icon]="Icons.MONTEPOELI"></app-icon>
@@ -12,10 +9,7 @@
   </app-button-no-elevation>
   <div class="left-spacer"></div>
 
-  <mat-tab-group
-    animationDuration="0ms"
-    (selectedTabChange)="handleChangeEvent($event)"
-  >
+  <mat-tab-group animationDuration="0ms" (selectedTabChange)="handleChangeEvent($event)">
     <mat-tab>
       <ng-template mat-tab-label>
         <app-icon

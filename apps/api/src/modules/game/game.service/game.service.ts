@@ -16,7 +16,7 @@ export class GameService {
     private readonly sortService: SortService,
     private readonly gameRepositoryService: GameRepositoryService,
     private readonly gameGatway: GameGateway,
-    private readonly gameUtilService: GameUtilService,
+    private readonly gameUtilService: GameUtilService
   ) {}
 
   public async getGames(): Promise<GameDto[]> {
@@ -29,9 +29,7 @@ export class GameService {
 
   public async create(createGameDto: CreateGameDto): Promise<Game> {
     if (this.validDto(createGameDto)) {
-      const gameMongo: GameMongo = await this.gameMapper.convertCreateDto(
-        createGameDto,
-      );
+      const gameMongo: GameMongo = await this.gameMapper.convertCreateDto(createGameDto);
       const game: Game = await this.gameRepositoryService.save(gameMongo);
 
       this.emitAllGameIds();
@@ -41,12 +39,7 @@ export class GameService {
   }
 
   private validDto(createGameDto: CreateGameDto): boolean {
-    if (
-      !createGameDto.id ||
-      !createGameDto.black ||
-      !createGameDto.white ||
-      !createGameDto.winner
-    ) {
+    if (!createGameDto.id || !createGameDto.black || !createGameDto.white || !createGameDto.winner) {
       throw new BadRequestException('not all fields defined');
     }
 

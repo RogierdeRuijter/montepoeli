@@ -15,9 +15,7 @@ export class UserRepositoryService {
     const users = await this.userModel.find({ username }).exec();
 
     if (users.length > 1) {
-      throw new InternalServerErrorException(
-        'more than 1 user with the same username',
-      );
+      throw new InternalServerErrorException('more than 1 user with the same username');
     }
 
     return users[0];
@@ -27,15 +25,12 @@ export class UserRepositoryService {
     return new this.userModel(user).save();
   }
 
-  public async updateLanguagePreferance(
-    username: string,
-    languagePreferance: string,
-  ): Promise<User> {
+  public async updateLanguagePreferance(username: string, languagePreferance: string): Promise<User> {
     return this.userModel.updateOne(
       { username },
       {
         preferedLanguage: languagePreferance,
-      },
+      }
     );
   }
 }

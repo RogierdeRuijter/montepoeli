@@ -12,19 +12,8 @@ import { GameGateway } from './game-gateway/game.gateway';
 import { GameUtilService } from './game-util/game-util.service';
 
 @Module({
-  imports: [
-    MongooseModule.forFeature([{ name: 'Game', schema: GameSchema }]),
-    AuthModule,
-    SharedModule,
-    UsersModule,
-  ],
-  providers: [
-    GameService,
-    GameMapperService,
-    GameRepositoryService,
-    GameGateway,
-    GameUtilService,
-  ],
+  imports: [MongooseModule.forFeature([{ name: 'Game', schema: GameSchema }]), AuthModule, SharedModule, UsersModule],
+  providers: [GameService, GameMapperService, GameRepositoryService, GameGateway, GameUtilService],
   controllers: [GameController],
 })
 export class GameModule {}

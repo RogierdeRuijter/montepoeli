@@ -25,9 +25,7 @@ describe('ThemeService', () => {
   describe('getThemeBasedOnSystemPreference', () => {
     it('should return black theme when prefers-color-scheme: dark is set to true', () => {
       const darkTheme = true;
-      jest
-        .spyOn(window, 'matchMedia')
-        .mockReturnValue({ matches: darkTheme } as any);
+      jest.spyOn(window, 'matchMedia').mockReturnValue({ matches: darkTheme } as any);
 
       const result = service.getThemeBasedOnSystemPreference();
 
@@ -38,9 +36,7 @@ describe('ThemeService', () => {
 
     it('should return light theme when prefers-color-scheme: dark is set to false', () => {
       const darkTheme = false;
-      jest
-        .spyOn(window, 'matchMedia')
-        .mockReturnValue({ matches: darkTheme } as any);
+      jest.spyOn(window, 'matchMedia').mockReturnValue({ matches: darkTheme } as any);
 
       const result = service.getThemeBasedOnSystemPreference();
 

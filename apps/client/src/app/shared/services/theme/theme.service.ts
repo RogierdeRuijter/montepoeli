@@ -12,9 +12,7 @@ export class ThemeService {
     }
   }
 
-  public getThemeForColorScheme(
-    darkMode: boolean
-  ): 'black-theme' | 'light-theme' {
+  public getThemeForColorScheme(darkMode: boolean): 'black-theme' | 'light-theme' {
     if (darkMode) {
       return 'black-theme';
     } else {

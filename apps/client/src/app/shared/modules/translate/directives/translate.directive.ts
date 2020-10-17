@@ -25,19 +25,11 @@ export class TranslateDirective implements OnInit {
       .subscribe((translation) => this.setProperty(translation));
 
     this.translateService.onLangChange
-      .pipe(
-        switchMap(() =>
-          this.translateService.get(this.key).pipe(debounceTime(200), retry(5))
-        )
-      )
+      .pipe(switchMap(() => this.translateService.get(this.key).pipe(debounceTime(200), retry(5))))
       .subscribe((translation) => this.setProperty(translation));
   }
 
   private setProperty(translation: string): void {
-    this.renderer.setProperty(
-      this.elementRef.nativeElement,
-      this.property,
-      translation
-    );
+    this.renderer.setProperty(this.elementRef.nativeElement, this.property, translation);
   }
 }

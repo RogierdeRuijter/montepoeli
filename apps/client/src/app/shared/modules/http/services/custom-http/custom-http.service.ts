@@ -19,15 +19,9 @@ export class CustomHttpService {
     observe: 'response' as 'response',
   };
 
-  constructor(
-    private httpClient: HttpClient,
-    private environmentService: EnvironmentService
-  ) {}
+  constructor(private httpClient: HttpClient, private environmentService: EnvironmentService) {}
 
-  public get<T>(
-    url: string,
-    params?: { [param: string]: string | string[] }
-  ): Observable<T> {
+  public get<T>(url: string, params?: { [param: string]: string | string[] }): Observable<T> {
     if (!this.environment) {
       this.initEnvironment();
     }
@@ -54,9 +48,6 @@ export class CustomHttpService {
   private initEnvironment(): void {
     this.environment = this.environmentService.get();
 
-    this.baseUrl =
-      this.environment.environment.backendUrl +
-      '/' +
-      this.environment.backend.API_PREFIX;
+    this.baseUrl = this.environment.environment.backendUrl + '/' + this.environment.backend.API_PREFIX;
   }
 }

@@ -21,13 +21,7 @@ const constructDatabaseUrl = () => {
 };
 
 @Module({
-  imports: [
-    MongooseModule.forRoot(constructDatabaseUrl()),
-    AuthModule,
-    UsersModule,
-    GameModule,
-    RuleModule,
-  ],
+  imports: [MongooseModule.forRoot(constructDatabaseUrl()), AuthModule, UsersModule, GameModule, RuleModule],
   controllers: [AppController],
 })
 export class AppModule {}

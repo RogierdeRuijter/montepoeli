@@ -13,13 +13,7 @@ import {
   Compiler,
 } from '@angular/core';
 import { BehaviorSubject, Subject, combineLatest, of } from 'rxjs';
-import {
-  Alignments,
-  GridSizes,
-  Icons,
-  IconSize,
-  Tabs,
-} from '../../../shared/static-files/enums';
+import { Alignments, GridSizes, Icons, IconSize, Tabs } from '../../../shared/static-files/enums';
 import { User } from '../../../shared/interfaces/user.interface';
 import { UsersStore } from './modules/game/stores/user.store';
 import { Game } from '../../../shared/interfaces/game.interface';
@@ -69,77 +63,55 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
   ) {}
 
   public ngOnInit(): void {
-    this.gameService
-      .getAll(this.destroy$)
-      .subscribe((games: Game[]) => this.games$.next(games));
+    this.gameService.getAll(this.destroy$).subscribe((games: Game[]) => this.games$.next(games));
 
     this.userService.getAll().subscribe((users: User[]) => {
       this.users = users;
       this.userStore.set(users);
     });
 
-    this.userStore
-      .get(this.destroy$)
-      .subscribe((users: User[]) => (this.users = users));
+    this.userStore.get(this.destroy$).subscribe((users: User[]) => (this.users = users));
 
-    combineLatest([
-      this.ruleService.getAll(),
-      this.rulesComponentRef$,
-    ]).subscribe(([rules, rulesComponentRef]: [Rule[], ComponentRef<any>]) => {
-      rulesComponentRef.instance.rules = rules;
+    combineLatest([this.ruleService.getAll(), this.rulesComponentRef$]).subscribe(
+      ([rules, rulesComponentRef]: [Rule[], ComponentRef<any>]) => {
+        rulesComponentRef.instance.rules = rules;
+        this.changeDetectorRef.detectChanges();
+      }
+    );
+  }
+
+  public ngAfterContentInit(): void {
+    this.tabChangeGlobalEventEmitter.get(this.destroy$).subscribe((tab: Tabs) => {
+      if (tab === Tabs.GAMES) {
+        this.showRules = false;
+        this.showGames = true;
+      }
+
+      if (tab === Tabs.RULES) {
+        this.showGames = false;
+        this.showRules = true;
+
+        if (this.rulesContainer.length === 0) {
+          this.createRulesComponent().then((ruleComponentRef: ComponentRef<any>) =>
+            this.rulesComponentRef$.next(ruleComponentRef)
+          );
+          return;
+        }
+      }
+
       this.changeDetectorRef.detectChanges();
     });
   }
 
-  public ngAfterContentInit(): void {
-    this.tabChangeGlobalEventEmitter
-      .get(this.destroy$)
-      .subscribe((tab: Tabs) => {
-        if (tab === Tabs.GAMES) {
-          this.showRules = false;
-          this.showGames = true;
-        }
-
-        if (tab === Tabs.RULES) {
-          this.showGames = false;
-          this.showRules = true;
-
-          if (this.rulesContainer.length === 0) {
-            this.createRulesComponent().then(
-              (ruleComponentRef: ComponentRef<any>) =>
-                this.rulesComponentRef$.next(ruleComponentRef)
-            );
-            return;
-          }
-        }
-
-        this.changeDetectorRef.detectChanges();
-      });
-  }
-
   public async createRulesComponent(): Promise<ComponentRef<any>> {
-    const { RuleComponent, InternalRuleComponentModule } = await import(
-      './modules/rule/rule.component'
-    );
+    const { RuleComponent, InternalRuleComponentModule } = await import('./modules/rule/rule.component');
 
-    const compFactory = this.componentFactoryResolver.resolveComponentFactory(
-      RuleComponent
-    );
+    const compFactory = this.componentFactoryResolver.resolveComponentFactory(RuleComponent);
 
-    const factory = await this.compiler.compileModuleAsync(
-      InternalRuleComponentModule
-    );
+    const factory = await this.compiler.compileModuleAsync(InternalRuleComponentModule);
     const ref = factory.create(this.injector);
 
-    return of(
-      this.rulesContainer.createComponent(
-        compFactory,
-        null,
-        this.injector,
-        [],
-        ref
-      )
-    ).toPromise();
+    return of(this.rulesContainer.createComponent(compFactory, null, this.injector, [], ref)).toPromise();
   }
 
   public ngOnDestroy(): void {

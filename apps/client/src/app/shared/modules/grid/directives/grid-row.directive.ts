@@ -16,11 +16,7 @@ export class GridRowDirective implements OnInit {
   @Input()
   public direction: Directions = Directions.ROW;
 
-  constructor(
-    private elementRef: ElementRef,
-    private renderer: Renderer2,
-    private utilService: UtilService
-  ) {}
+  constructor(private elementRef: ElementRef, private renderer: Renderer2, private utilService: UtilService) {}
 
   public ngOnInit(): void {
     if (this.itDoesNotHaveAllNecessaryGridSizes()) {

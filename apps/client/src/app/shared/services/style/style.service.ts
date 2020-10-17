@@ -10,11 +10,7 @@ export class StyleService {
     this.renderer.addClass(elementRef.nativeElement, cssClass);
   }
 
-  public addStyleToElement(
-    field: string,
-    value: string,
-    elementRef: ElementRef
-  ): void {
+  public addStyleToElement(field: string, value: string, elementRef: ElementRef): void {
     this.renderer.setStyle(elementRef.nativeElement, field, value);
   }
 }

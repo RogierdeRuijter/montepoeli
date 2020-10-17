@@ -11,14 +11,14 @@ import { GameMongo } from '../../../models/mongo-interfaces/game-mongo.interface
 export class GameMapperService {
   public constructor(
     private readonly userRepositoryService: UserRepositoryService,
-    private readonly utilService: UtilService,
+    private readonly utilService: UtilService
   ) {}
 
   public convertGames(games: Game[]): Promise<GameDto[]> {
     return new Promise((resolve) =>
       this.userRepositoryService.find().then((users: User[]) => {
         resolve(this.swapUsersIdsWithNames(games, users));
-      }),
+      })
     );
   }
 
@@ -58,18 +58,13 @@ export class GameMapperService {
     return new Promise((resolve) =>
       this.userRepositoryService.find().then((users: User[]) => {
         const blackUser: User = users.find(
-          (user: User) =>
-            user.name.toLowerCase() === createGameDto.black.toLowerCase(),
+          (user: User) => user.name.toLowerCase() === createGameDto.black.toLowerCase()
         );
         const whiteUser: User = users.find(
-          (user: User) =>
-            user.name.toLowerCase() === createGameDto.white.toLowerCase(),
+          (user: User) => user.name.toLowerCase() === createGameDto.white.toLowerCase()
         );
 
-        if (
-          this.utilService.isNullOrUndefined(blackUser) ||
-          this.utilService.isNullOrUndefined(whiteUser)
-        ) {
+        if (this.utilService.isNullOrUndefined(blackUser) || this.utilService.isNullOrUndefined(whiteUser)) {
           throw new NotFoundException('user not found');
         }
 
@@ -80,9 +75,7 @@ export class GameMapperService {
         if (winner === 'draw') {
           winnerUser = null;
         } else {
-          winnerUser = users.find(
-            (user: User) => user.name.toLowerCase() === winner,
-          );
+          winnerUser = users.find((user: User) => user.name.toLowerCase() === winner);
         }
 
         resolve({
@@ -91,7 +84,7 @@ export class GameMapperService {
           winner: winnerUser ? winnerUser.id : null,
           white: whiteUser.id,
         });
-      }),
+      })
     );
   }
 }

@@ -1,13 +1,4 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  Input,
-  OnChanges,
-  OnInit,
-  Renderer2,
-  ViewChild,
-} from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnChanges, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { IconColor, Icons, IconSize } from '../../../../static-files/enums';
 import { IconDefinition, SizeProp } from '@fortawesome/fontawesome-svg-core';
 import {
@@ -129,9 +120,7 @@ export class IconComponent implements OnInit, AfterViewInit, OnChanges {
           this.color = 'accent';
           break;
         default:
-          throw new UnknownCaseException(
-            'unkown icon color: ' + this.iconColor
-          );
+          throw new UnknownCaseException('unkown icon color: ' + this.iconColor);
       }
     }
   }
@@ -139,24 +128,12 @@ export class IconComponent implements OnInit, AfterViewInit, OnChanges {
   public ngAfterViewInit(): void {
     if (this.icon === Icons.MONTEPOELI) {
       if (this.iconSize === IconSize.SMALL) {
-        this.renderer.setStyle(
-          this.svgIconElementRef.nativeElement,
-          'height',
-          '45px'
-        );
+        this.renderer.setStyle(this.svgIconElementRef.nativeElement, 'height', '45px');
         // this.renderer.setStyle(this.svgIconElementRef.nativeElement, 'width', '33px');
       }
       if (this.iconSize === IconSize.MEDIUM) {
-        this.renderer.setStyle(
-          this.svgIconElementRef.nativeElement,
-          'height',
-          '56px'
-        );
-        this.renderer.setStyle(
-          this.svgIconElementRef.nativeElement,
-          'width',
-          '41px'
-        );
+        this.renderer.setStyle(this.svgIconElementRef.nativeElement, 'height', '56px');
+        this.renderer.setStyle(this.svgIconElementRef.nativeElement, 'width', '41px');
       }
     }
   }

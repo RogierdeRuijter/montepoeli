@@ -46,16 +46,12 @@ exports.config = {
     });
 
     jasmine.getEnv().addReporter(reporter);
-    jasmine
-      .getEnv()
-      .addReporter(new SpecReporter({ spec: { displayStacktrace: true } }));
+    jasmine.getEnv().addReporter(new SpecReporter({ spec: { displayStacktrace: true } }));
   },
   afterLaunch: (exitCode) => {
     return Promise.all([
       executeOnMongo(dbParams, tearDown),
-      new Promise((resolve) =>
-        reporter.afterLaunch(resolve.bind(this, exitCode))
-      ),
+      new Promise((resolve) => reporter.afterLaunch(resolve.bind(this, exitCode))),
     ]);
   },
 };

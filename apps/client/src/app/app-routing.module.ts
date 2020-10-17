@@ -11,15 +11,11 @@ const appRoutes: Routes = [
   },
   {
     path: 'login',
-    loadChildren: () =>
-      import('./main/modules/login/login.module').then((m) => m.LoginModule),
+    loadChildren: () => import('./main/modules/login/login.module').then((m) => m.LoginModule),
   },
   {
     path: 'home',
-    loadChildren: () =>
-      import('./main/modules/main-content/main-content.module').then(
-        (m) => m.MainContentModule
-      ),
+    loadChildren: () => import('./main/modules/main-content/main-content.module').then((m) => m.MainContentModule),
     canActivate: [AuthGuard],
   },
   { path: '**', redirectTo: '' },

@@ -55,42 +55,42 @@ describe('GameMapperService', () => {
           black.name,
           white.name,
           factoryUtilService.getWinnerName(games[0], black, white),
-          games[0].date,
+          games[0].date
         ),
         gameDtoFactory.create(
           games[1].id,
           black.name,
           white.name,
           factoryUtilService.getWinnerName(games[1], black, white),
-          games[1].date,
+          games[1].date
         ),
         gameDtoFactory.create(
           games[2].id,
           black.name,
           white.name,
           factoryUtilService.getWinnerName(games[2], black, white),
-          games[2].date,
+          games[2].date
         ),
         gameDtoFactory.create(
           games[3].id,
           black.name,
           white.name,
           factoryUtilService.getWinnerName(games[3], black, white),
-          games[3].date,
+          games[3].date
         ),
         gameDtoFactory.create(
           games[4].id,
           black.name,
           white.name,
           factoryUtilService.getWinnerName(games[4], black, white),
-          games[4].date,
+          games[4].date
         ),
         gameDtoFactory.create(
           games[5].id,
           black.name,
           white.name,
           factoryUtilService.getWinnerName(games[5], black, white),
-          games[5].date,
+          games[5].date
         ),
       ];
 

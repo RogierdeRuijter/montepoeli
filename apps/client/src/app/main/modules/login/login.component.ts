@@ -11,10 +11,7 @@ import { of } from 'rxjs';
 export class LoginComponent {
   public isSubmitting = false;
 
-  constructor(
-    private authService: AuthService,
-    private changeDetectorRef: ChangeDetectorRef
-  ) {}
+  constructor(private authService: AuthService, private changeDetectorRef: ChangeDetectorRef) {}
 
   public onLogin(userInfo: any): void {
     this.isSubmitting = true;
@@ -23,11 +20,12 @@ export class LoginComponent {
     potentialUser.username = userInfo.username;
     potentialUser.pwd = userInfo.password;
 
-    this.authService.login(potentialUser)
+    this.authService
+      .login(potentialUser)
       .pipe(
-        catchError((error) => { 
-          this.isSubmitting = false 
-          
+        catchError((error) => {
+          this.isSubmitting = false;
+
           return of(error);
         })
       )

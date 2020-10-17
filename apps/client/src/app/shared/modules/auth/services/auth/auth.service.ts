@@ -12,11 +12,7 @@ import { CookieService } from 'ngx-cookie-service';
 export class AuthService {
   private environment = new Environment();
 
-  constructor(
-    private router: Router,
-    private httpService: CustomHttpService,
-    private cookieService: CookieService
-  ) {}
+  constructor(private router: Router, private httpService: CustomHttpService, private cookieService: CookieService) {}
 
   public isAuthenticated(): boolean {
     return this.doesTheUserHaveAValidToken();
@@ -27,9 +23,7 @@ export class AuthService {
   }
 
   public getToken(): string {
-    return this.cookieService.get(
-      this.environment.authentication.AUTHTOKENNAME
-    );
+    return this.cookieService.get(this.environment.authentication.AUTHTOKENNAME);
   }
 
   public login(user: any): Observable<any> {
@@ -38,11 +32,7 @@ export class AuthService {
         username: user.username,
         password: user.pwd,
       })
-      .pipe(
-        tap(() =>
-          this.router.navigate([this.environment.frontend.BASIC_ROUTES.HOME])
-        )
-      );
+      .pipe(tap(() => this.router.navigate([this.environment.frontend.BASIC_ROUTES.HOME])));
   }
 
   public logout(): void {
@@ -56,8 +46,6 @@ export class AuthService {
   }
 
   private clearHttpCookies(): void {
-    this.httpService
-      .post(this.environment.backend.ENTRY_POINTS.SIGNOUT)
-      .subscribe();
+    this.httpService.post(this.environment.backend.ENTRY_POINTS.SIGNOUT).subscribe();
   }
 }

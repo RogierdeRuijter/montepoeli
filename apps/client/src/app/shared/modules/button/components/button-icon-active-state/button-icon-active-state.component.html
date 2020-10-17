@@ -1,13 +1,4 @@
-<span
-  [className]="
-    active ? 'button-icon-active-color' : 'button-icon-inactive-color'
-  "
->
-  <app-button-icon
-    [icon]="icon"
-    [iconSize]="iconSize"
-    [squareButton]="squareButton"
-    (clickEvent)="clickHandler()"
-  >
+<span [className]="active ? 'button-icon-active-color' : 'button-icon-inactive-color'">
+  <app-button-icon [icon]="icon" [iconSize]="iconSize" [squareButton]="squareButton" (clickEvent)="clickHandler()">
   </app-button-icon>
 </span>

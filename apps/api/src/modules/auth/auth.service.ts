@@ -10,7 +10,7 @@ export class AuthService {
   constructor(
     private readonly usersService: UsersService,
     private readonly jwtService: JwtService,
-    private readonly userMapper: UserMapper,
+    private readonly userMapper: UserMapper
   ) {}
 
   async signIn(body: any): Promise<any> {
@@ -23,7 +23,7 @@ export class AuthService {
         })
         .catch((err) => {
           reject(new UnauthorizedException('Wrong username or password.'));
-        }),
+        })
     );
   }
 

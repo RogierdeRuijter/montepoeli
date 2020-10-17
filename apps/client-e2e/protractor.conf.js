@@ -72,13 +72,9 @@ exports.config = {
     });
 
     jasmine.getEnv().addReporter(reporter);
-    jasmine
-      .getEnv()
-      .addReporter(new SpecReporter({ spec: { displayStacktrace: true } }));
+    jasmine.getEnv().addReporter(new SpecReporter({ spec: { displayStacktrace: true } }));
   },
   afterLaunch: function (exitCode) {
-    return new Promise((resolve) =>
-      reporter.afterLaunch(resolve.bind(this, exitCode))
-    );
+    return new Promise((resolve) => reporter.afterLaunch(resolve.bind(this, exitCode)));
   },
 };

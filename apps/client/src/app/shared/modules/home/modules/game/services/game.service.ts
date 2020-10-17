@@ -37,11 +37,7 @@ export class GameService {
   public getAllFromApi(): Observable<Game[]> {
     return this.httpService
       .get<Game[]>(this.environment.backend.ENTRY_POINTS.GAME)
-      .pipe(
-        map((games: Game[]) =>
-          games.map((game: Game) => this.postProcessGame(game))
-        )
-      );
+      .pipe(map((games: Game[]) => games.map((game: Game) => this.postProcessGame(game))));
   }
 
   public receiveGamesUpdate(socket: WebsocketService): Observable<string[]> {
@@ -54,26 +50,20 @@ export class GameService {
 
   public save(game: Game): Observable<Game> {
     return this.httpService.post<Game>(
-      this.environment.backend.ENTRY_POINTS.GAME +
-        this.environment.backend.ENTRY_POINTS.CREATE,
+      this.environment.backend.ENTRY_POINTS.GAME + this.environment.backend.ENTRY_POINTS.CREATE,
       game
     );
   }
 
   public postProcessGame(game: Game): Game {
     if (game.winner === null) {
-      game.winner = this.translateService.instant(
-        'pages.home.games.labels.' + Winners.DRAW
-      );
+      game.winner = this.translateService.instant('pages.home.games.labels.' + Winners.DRAW);
     }
     game.date = new Date(game.date);
     return game;
   }
 
-  public filterIdsThatExistInTheGames(
-    gameIds: string[],
-    games: Game[]
-  ): string[] {
+  public filterIdsThatExistInTheGames(gameIds: string[], games: Game[]): string[] {
     if (games === undefined) {
       throw new BadRequest('games should not be undefined');
     }
@@ -95,16 +85,10 @@ export class GameService {
 
   public getGamesByIds(gameIds: string[]): Observable<Game[]> {
     return this.httpService
-      .get<Game[]>(
-        this.environment.backend.ENTRY_POINTS.GAME +
-          this.environment.backend.ENTRY_POINTS.BY_IDS,
-        { gameIds }
-      )
-      .pipe(
-        map((games: Game[]) =>
-          games.map((game: Game) => this.postProcessGame(game))
-        )
-      );
+      .get<Game[]>(this.environment.backend.ENTRY_POINTS.GAME + this.environment.backend.ENTRY_POINTS.BY_IDS, {
+        gameIds,
+      })
+      .pipe(map((games: Game[]) => games.map((game: Game) => this.postProcessGame(game))));
   }
 
   public sortGames(games: Game[]): Game[] {

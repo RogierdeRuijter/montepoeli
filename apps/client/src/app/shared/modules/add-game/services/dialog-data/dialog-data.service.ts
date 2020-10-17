@@ -17,24 +17,13 @@ export class DialogDataService {
   }
 
   public userAreDefined(game: Game): boolean {
-    return (
-      !this.utilService.isNullOrUndefined(game.white) &&
-      !this.utilService.isNullOrUndefined(game.black)
-    );
+    return !this.utilService.isNullOrUndefined(game.white) && !this.utilService.isNullOrUndefined(game.black);
   }
 
-  public determineDisabledWinnerOptions(
-    winnerOptions: string[],
-    game: Game,
-    draw: string
-  ): boolean[] {
+  public determineDisabledWinnerOptions(winnerOptions: string[], game: Game, draw: string): boolean[] {
     if (game.black && game.white) {
       return winnerOptions.map((winnerOption: string) => {
-        if (
-          winnerOption === game.white ||
-          winnerOption === game.black ||
-          winnerOption === draw
-        ) {
+        if (winnerOption === game.white || winnerOption === game.black || winnerOption === draw) {
           return false;
         } else {
           return true;
@@ -45,20 +34,10 @@ export class DialogDataService {
     }
   }
 
-  public areAllWinnerOptionsDisabled(
-    winnerOptions: string[],
-    game: Game,
-    draw: string
-  ): boolean {
-    const disabledWinnerOptions: boolean[] = this.determineDisabledWinnerOptions(
-      winnerOptions,
-      game,
-      draw
-    );
+  public areAllWinnerOptionsDisabled(winnerOptions: string[], game: Game, draw: string): boolean {
+    const disabledWinnerOptions: boolean[] = this.determineDisabledWinnerOptions(winnerOptions, game, draw);
 
-    const found = disabledWinnerOptions.find(
-      (disabledWinnerOption: boolean) => disabledWinnerOption === false
-    );
+    const found = disabledWinnerOptions.find((disabledWinnerOption: boolean) => disabledWinnerOption === false);
 
     return found === undefined ? true : false;
   }

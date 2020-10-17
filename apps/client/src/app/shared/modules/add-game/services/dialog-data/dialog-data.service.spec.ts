@@ -93,11 +93,7 @@ describe('DialogDataService', () => {
       const game: Game = new GameFactory().create();
       const draw = 'Draw';
 
-      const result = service.determineDisabledWinnerOptions(
-        winnerOptions,
-        game,
-        draw
-      );
+      const result = service.determineDisabledWinnerOptions(winnerOptions, game, draw);
 
       const expectedResult = [true, true, true, true];
 
@@ -111,11 +107,7 @@ describe('DialogDataService', () => {
       const game: Game = new GameFactory().create({ white: 'user' });
       const draw = 'Draw';
 
-      const result = service.determineDisabledWinnerOptions(
-        winnerOptions,
-        game,
-        draw
-      );
+      const result = service.determineDisabledWinnerOptions(winnerOptions, game, draw);
 
       const expectedResult = [true, true, true, true];
 
@@ -132,11 +124,7 @@ describe('DialogDataService', () => {
       });
       const draw = 'Draw';
 
-      const result = service.determineDisabledWinnerOptions(
-        winnerOptions,
-        game,
-        draw
-      );
+      const result = service.determineDisabledWinnerOptions(winnerOptions, game, draw);
 
       const expectedResult = [false, false, true, false];
 
@@ -152,11 +140,7 @@ describe('DialogDataService', () => {
       const game: Game = new GameFactory().create();
       const draw = 'Draw';
 
-      const result = service.areAllWinnerOptionsDisabled(
-        winnerOptions,
-        game,
-        draw
-      );
+      const result = service.areAllWinnerOptionsDisabled(winnerOptions, game, draw);
 
       const expectedResult = true;
 
@@ -169,11 +153,7 @@ describe('DialogDataService', () => {
       const game: Game = new GameFactory().create({ white: 'user' });
       const draw = 'Draw';
 
-      const result = service.areAllWinnerOptionsDisabled(
-        winnerOptions,
-        game,
-        draw
-      );
+      const result = service.areAllWinnerOptionsDisabled(winnerOptions, game, draw);
 
       const expectedResult = true;
 
@@ -190,11 +170,7 @@ describe('DialogDataService', () => {
       });
       const draw = 'Draw';
 
-      const result = service.areAllWinnerOptionsDisabled(
-        winnerOptions,
-        game,
-        draw
-      );
+      const result = service.areAllWinnerOptionsDisabled(winnerOptions, game, draw);
 
       const expectedResult = false;
 
@@ -212,11 +188,7 @@ describe('DialogDataService', () => {
       });
       const draw = 'Draw';
 
-      const result = service.areAllWinnerOptionsDisabled(
-        winnerOptions,
-        game,
-        draw
-      );
+      const result = service.areAllWinnerOptionsDisabled(winnerOptions, game, draw);
 
       const expectedResult = false;
 

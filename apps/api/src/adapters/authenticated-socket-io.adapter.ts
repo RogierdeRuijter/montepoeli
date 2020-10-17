@@ -19,13 +19,9 @@ export class AuthenticatedSocketIoAdapter extends IoAdapter {
       const jsonSignedCookies = cookie.parse(signedCookies);
 
       const montepoeliJwtSigned = jsonSignedCookies.montepoeliJwt;
-      const montepoeliJwt = cookieParser.signedCookie(
-        montepoeliJwtSigned,
-        process.env.COOKIE_SECRET,
-      );
+      const montepoeliJwt = cookieParser.signedCookie(montepoeliJwtSigned, process.env.COOKIE_SECRET);
 
-      const verified =
-        montepoeliJwt && (await this.jwtService.verify(montepoeliJwt));
+      const verified = montepoeliJwt && (await this.jwtService.verify(montepoeliJwt));
 
       if (verified) {
         return allowFunction(null, true);

@@ -1,25 +1,7 @@
-import {
-  Component,
-  ElementRef,
-  EventEmitter,
-  Input,
-  Output,
-  ViewChild,
-} from '@angular/core';
-import {
-  Alignments,
-  ButtonFunction,
-  ButtonType,
-  GridSizes,
-} from '../../../../../shared/static-files/enums';
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Alignments, ButtonFunction, ButtonType, GridSizes } from '../../../../../shared/static-files/enums';
 import { NgForm } from '@angular/forms';
-import {
-  trigger,
-  transition,
-  query,
-  style,
-  animate,
-} from '@angular/animations';
+import { trigger, transition, query, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'ui-login-form',

@@ -13,9 +13,7 @@ import { combineLatest } from 'rxjs';
   selector: 'app-dialog-data',
   templateUrl: './dialog-data.component.html',
 })
-export class DialogDataComponent
-  extends AsyncBaseComponent
-  implements OnInit, OnDestroy {
+export class DialogDataComponent extends AsyncBaseComponent implements OnInit, OnDestroy {
   public users: User[];
   public winners: Winners[] = [Winners.WHITE, Winners.BLACK, Winners.DRAW];
 
@@ -85,19 +83,11 @@ export class DialogDataComponent
   }
 
   public determineDisabledWinnerOptions(): boolean[] {
-    return this.dialogDataService.determineDisabledWinnerOptions(
-      this.winnerOptions,
-      this.data,
-      this.draw
-    );
+    return this.dialogDataService.determineDisabledWinnerOptions(this.winnerOptions, this.data, this.draw);
   }
 
   public areAllWinnerOptionsDisabled(): boolean {
-    return this.dialogDataService.areAllWinnerOptionsDisabled(
-      this.winnerOptions,
-      this.data,
-      this.draw
-    );
+    return this.dialogDataService.areAllWinnerOptionsDisabled(this.winnerOptions, this.data, this.draw);
   }
 
   private determineWinnerOptions(users: User[]): void {

@@ -47,25 +47,17 @@ export class MainContentComponent implements OnInit, OnDestroy {
   private destory$: Subject<void> = new Subject();
 
   public ngOnInit(): void {
-    this.ngZone.runOutsideAngular(() =>
-      this.websocketService.connect(new Environment().environment.backendUrl)
-    );
+    this.ngZone.runOutsideAngular(() => this.websocketService.connect(new Environment().environment.backendUrl));
 
     this.gridService
       .gridChangeObservable()
       .pipe(
         filter(
-          (activeGridSize: GridSizes) =>
-            activeGridSize !== GridSizes.EXTRA_SMALL &&
-            this.activeView !== 'large-screen'
+          (activeGridSize: GridSizes) => activeGridSize !== GridSizes.EXTRA_SMALL && this.activeView !== 'large-screen'
         ),
         tap(() => (this.activeView = 'large-screen')),
         tap(() => this.changeDetectorRef.detectChanges()),
-        filter(
-          () =>
-            !this.largeScreenContentContainer ||
-            this.largeScreenContentContainer.length === 0
-        ),
+        filter(() => !this.largeScreenContentContainer || this.largeScreenContentContainer.length === 0),
         tap(() => this.createLargeScreenConent()),
         takeUntil(this.destory$)
       )
@@ -74,17 +66,10 @@ export class MainContentComponent implements OnInit, OnDestroy {
     this.gridService
       .gridChangeObservable()
       .pipe(
-        filter(
-          (activeGridSize: GridSizes) =>
-            activeGridSize === GridSizes.EXTRA_SMALL
-        ),
+        filter((activeGridSize: GridSizes) => activeGridSize === GridSizes.EXTRA_SMALL),
         tap(() => (this.activeView = 'mobile')),
         tap(() => this.changeDetectorRef.detectChanges()),
-        filter(
-          () =>
-            !this.mobileContentContainer ||
-            this.mobileContentContainer.length === 0
-        ),
+        filter(() => !this.mobileContentContainer || this.mobileContentContainer.length === 0),
         tap(() => this.createMobileConent()),
         takeUntil(this.destory$)
       )
@@ -99,10 +84,7 @@ export class MainContentComponent implements OnInit, OnDestroy {
     // Running outside of Angular is needed because otherwise the websocket implementation of socket.io hangs on the
     // e2e tests
     this.ngZone.runOutsideAngular(() => {
-      combineLatest(
-        this.gameService.receiveGamesUpdate(this.websocketService),
-        this.gameService.getAll(this.destory$)
-      )
+      combineLatest(this.gameService.receiveGamesUpdate(this.websocketService), this.gameService.getAll(this.destory$))
         .pipe(
           map(([gameIds, games]: [string[], Game[]]) => [
             this.gameService.filterIdsThatExistInTheGames(gameIds, games),
@@ -125,52 +107,30 @@ export class MainContentComponent implements OnInit, OnDestroy {
   }
 
   public async createMobileConent(): Promise<void> {
-    const {
-      MobileContentComponent,
-      InternalMobileContentComponent,
-    } = await import('./modules/mobile-content/mobile-content.component');
-
-    const factory = await this.compiler.compileModuleAsync(
-      InternalMobileContentComponent
+    const { MobileContentComponent, InternalMobileContentComponent } = await import(
+      './modules/mobile-content/mobile-content.component'
     );
+
+    const factory = await this.compiler.compileModuleAsync(InternalMobileContentComponent);
     const ref = factory.create(this.injector);
 
-    const mobileContentFactory = this.componentFactoryResolver.resolveComponentFactory(
-      MobileContentComponent
-    );
-    this.mobileContentContainer.createComponent(
-      mobileContentFactory,
-      null,
-      this.injector,
-      [],
-      ref
-    );
+    const mobileContentFactory = this.componentFactoryResolver.resolveComponentFactory(MobileContentComponent);
+    this.mobileContentContainer.createComponent(mobileContentFactory, null, this.injector, [], ref);
   }
 
   public async createLargeScreenConent(): Promise<void> {
-    const {
-      LargeScreenContentComponent,
-      InternalLargeScreenContentModule,
-    } = await import(
+    const { LargeScreenContentComponent, InternalLargeScreenContentModule } = await import(
       './modules/larger-screen-content/large-screen-content.component'
     );
 
-    const factory = await this.compiler.compileModuleAsync(
-      InternalLargeScreenContentModule
-    );
+    const factory = await this.compiler.compileModuleAsync(InternalLargeScreenContentModule);
     const ref = factory.create(this.injector);
 
     const largeScreenContentFactory = this.componentFactoryResolver.resolveComponentFactory(
       LargeScreenContentComponent
     );
 
-    this.largeScreenContentContainer.createComponent(
-      largeScreenContentFactory,
-      null,
-      this.injector,
-      [],
-      ref
-    );
+    this.largeScreenContentContainer.createComponent(largeScreenContentFactory, null, this.injector, [], ref);
   }
 
   public ngOnDestroy(): void {

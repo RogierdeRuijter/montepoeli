@@ -19,16 +19,11 @@ export class AppComponent implements OnInit, OnDestroy {
   };
 
   private removeActiveThemeFromApplication = () => {
-    const overlayContainerClasses = this.overlayContainer.getContainerElement()
-      .classList;
-    const themeClassesToRemove = Array.from(
-      overlayContainerClasses
-    ).filter((item: string) => item.includes('-theme'));
+    const overlayContainerClasses = this.overlayContainer.getContainerElement().classList;
+    const themeClassesToRemove = Array.from(overlayContainerClasses).filter((item: string) => item.includes('-theme'));
 
     if (themeClassesToRemove.length > 0) {
-      this.overlayContainer
-        .getContainerElement()
-        .classList.remove(...themeClassesToRemove);
+      this.overlayContainer.getContainerElement().classList.remove(...themeClassesToRemove);
     }
   };
 
@@ -41,9 +36,7 @@ export class AppComponent implements OnInit, OnDestroy {
   ) {}
 
   public ngOnInit(): void {
-    const theme:
-      | 'black-theme'
-      | 'light-theme' = this.themeService.getThemeBasedOnSystemPreference();
+    const theme: 'black-theme' | 'light-theme' = this.themeService.getThemeBasedOnSystemPreference();
 
     this.overlayContainer.getContainerElement().classList.add(theme);
     this.componentCssClass = theme;
@@ -53,9 +46,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.darkModeMediaQuery.addListener(this.themeChangingHandler);
   }
 
-  private addThemeToWholeApplication(
-    theme: 'black-theme' | 'light-theme'
-  ): void {
+  private addThemeToWholeApplication(theme: 'black-theme' | 'light-theme'): void {
     this.overlayContainer.getContainerElement().classList.add(theme);
     this.componentCssClass = theme;
   }

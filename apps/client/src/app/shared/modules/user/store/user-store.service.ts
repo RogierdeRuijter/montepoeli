@@ -10,10 +10,7 @@ import { StoreUnfiltered } from '../../../services/store-unfiltered';
   providedIn: 'root',
 })
 export class UserStoreService extends StoreUnfiltered<User> {
-  constructor(
-    private userService: UserService,
-    private utilService: UtilService
-  ) {
+  constructor(private userService: UserService, private utilService: UtilService) {
     super();
   }
 

@@ -9,11 +9,7 @@ import { UserRepositoryService } from './user-repository/user-repository.service
 import { SharedModule } from '../shared/shared.module';
 
 @Module({
-  imports: [
-    MongooseModule.forFeature([{ name: 'User', schema: UserSchema }]),
-    AuthModule,
-    SharedModule,
-  ],
+  imports: [MongooseModule.forFeature([{ name: 'User', schema: UserSchema }]), AuthModule, SharedModule],
   controllers: [UsersController],
   providers: [UsersService, UserMapper, UserRepositoryService],
   exports: [UsersService, UserRepositoryService],
