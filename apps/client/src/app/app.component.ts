@@ -26,7 +26,6 @@ export class AppComponent implements OnInit, OnDestroy {
       this.overlayContainer.getContainerElement().classList.remove(...themeClassesToRemove);
     }
   };
-
   public darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
   constructor(
