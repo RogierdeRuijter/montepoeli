@@ -7,7 +7,6 @@ import { ThemeService } from './shared/services/theme/theme.service';
   templateUrl: './app.component.html',
 })
 export class AppComponent implements OnInit, OnDestroy {
-  // @HostBinding('class')
   public componentCssClass;
 
   public themeChangingHandler = (e) => {
