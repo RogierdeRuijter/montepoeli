@@ -1,3 +1,10 @@
+## [4.16.2](https://github.com/RogierdeRuijter/montepoeli/compare/v4.16.1...v4.16.2) (2020-10-19)
+
+
+### Bug Fixes
+
+* add mat dialog title ([20e06ef](https://github.com/RogierdeRuijter/montepoeli/commit/20e06ef633a1785106591a315c80a5f33c0ed96b))
+
 ## [4.16.1](https://github.com/RogierdeRuijter/montepoeli/compare/v4.16.0...v4.16.1) (2020-10-19)
 
 
