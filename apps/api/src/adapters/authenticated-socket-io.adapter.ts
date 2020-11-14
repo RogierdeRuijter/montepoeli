@@ -11,7 +11,7 @@ export class AuthenticatedSocketIoAdapter extends IoAdapter {
     this.jwtService = this.app.get(JwtService);
   }
 
-  createIOServer(port: number, options?: SocketIO.ServerOptions): any {
+  createIOServer(port: number, options?: any): any {
     options.allowRequest = async (request, allowFunction) => {
       // TODO: make this a method
       const signedCookies = request.headers.cookie;

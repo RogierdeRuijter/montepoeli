@@ -1,44 +1,38 @@
 ## [4.16.4](https://github.com/RogierdeRuijter/montepoeli/compare/v4.16.3...v4.16.4) (2020-11-02)
 
-
 ### Bug Fixes
 
-* Update all npm dependencies (2020-11-02) ([5cc9588](https://github.com/RogierdeRuijter/montepoeli/commit/5cc95887109d1a2c7a55f65b819da98ddd3afaab))
+- Update all npm dependencies (2020-11-02) ([5cc9588](https://github.com/RogierdeRuijter/montepoeli/commit/5cc95887109d1a2c7a55f65b819da98ddd3afaab))
 
 ## [4.16.3](https://github.com/RogierdeRuijter/montepoeli/compare/v4.16.2...v4.16.3) (2020-10-26)
 
-
 ### Bug Fixes
 
-* Update all npm dependencies (2020-10-26) ([d4002f5](https://github.com/RogierdeRuijter/montepoeli/commit/d4002f5f516c68a45e0e5d0310f9bfab5764ee43))
+- Update all npm dependencies (2020-10-26) ([d4002f5](https://github.com/RogierdeRuijter/montepoeli/commit/d4002f5f516c68a45e0e5d0310f9bfab5764ee43))
 
 ## [4.16.2](https://github.com/RogierdeRuijter/montepoeli/compare/v4.16.1...v4.16.2) (2020-10-19)
 
-
 ### Bug Fixes
 
-* add mat dialog title ([20e06ef](https://github.com/RogierdeRuijter/montepoeli/commit/20e06ef633a1785106591a315c80a5f33c0ed96b))
+- add mat dialog title ([20e06ef](https://github.com/RogierdeRuijter/montepoeli/commit/20e06ef633a1785106591a315c80a5f33c0ed96b))
 
 ## [4.16.1](https://github.com/RogierdeRuijter/montepoeli/compare/v4.16.0...v4.16.1) (2020-10-19)
 
-
 ### Bug Fixes
 
-* Update all npm dependencies (2020-10-19) ([9792d0c](https://github.com/RogierdeRuijter/montepoeli/commit/9792d0ccfd103ab1899ade9ea77f148075458532))
+- Update all npm dependencies (2020-10-19) ([9792d0c](https://github.com/RogierdeRuijter/montepoeli/commit/9792d0ccfd103ab1899ade9ea77f148075458532))
 
 # [4.16.0](https://github.com/RogierdeRuijter/montepoeli/compare/v4.15.6...v4.16.0) (2020-10-17)
 
-
 ### Bug Fixes
 
-* fit it ([c8755bd](https://github.com/RogierdeRuijter/montepoeli/commit/c8755bdfeb7d22eb941f3bb8efff890f1f43d766))
-* make logo smaller ([586738a](https://github.com/RogierdeRuijter/montepoeli/commit/586738af16ddf6ffbc828958f1b121b303debcdd))
-* uhmm ([b0085fa](https://github.com/RogierdeRuijter/montepoeli/commit/b0085fa0ae2846d7d9fedc2956c947397a08fb65))
-
+- fit it ([c8755bd](https://github.com/RogierdeRuijter/montepoeli/commit/c8755bdfeb7d22eb941f3bb8efff890f1f43d766))
+- make logo smaller ([586738a](https://github.com/RogierdeRuijter/montepoeli/commit/586738af16ddf6ffbc828958f1b121b303debcdd))
+- uhmm ([b0085fa](https://github.com/RogierdeRuijter/montepoeli/commit/b0085fa0ae2846d7d9fedc2956c947397a08fb65))
 
 ### Features
 
-* scale logo ([6a39e67](https://github.com/RogierdeRuijter/montepoeli/commit/6a39e67ef44c39fa57160b33cc0b1ec15cb30fed))
+- scale logo ([6a39e67](https://github.com/RogierdeRuijter/montepoeli/commit/6a39e67ef44c39fa57160b33cc0b1ec15cb30fed))
 
 ## [4.15.6](https://github.com/RogierdeRuijter/montepoeli/compare/v4.15.5...v4.15.6) (2020-10-12)
 
