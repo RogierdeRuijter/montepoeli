@@ -2,7 +2,7 @@
   *ngFor="let action of actions; let i = index"
   [idForElement]="ids[i]"
   [icon]="iconsMap[action].icon"
-  [iconSize]="IconSize.MEDIUM"
+  [iconSize]="IconSize.medium"
   [accentColor]="true"
   (clickEvent)="actionClick(action)"
 >
