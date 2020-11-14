@@ -1,13 +1,13 @@
 <div class="action-bar-footer container" [class.raised]="raised">
-  <div [appGridRow]="[GridSizes.ALL]">
+  <div [appGridRow]="[GridSizes.all]">
     <div [appGridColumn]="[6]" [offsets]="[3]" class="d-flex justify-content-between">
       <div>
         <app-button-icon-active-state
           id="games-tab"
-          [icon]="Icons.CHESS_PIECES"
-          [iconSize]="IconSize.MEDIUM"
+          [icon]="Icons.chessPieces"
+          [iconSize]="IconSize.medium"
           [squareButton]="true"
-          [active]="selected === Icons.CHESS_PIECES"
+          [active]="selected === Icons.chessPieces"
           (clickEvent)="chessSetClicked()"
         >
         </app-button-icon-active-state>
@@ -16,10 +16,10 @@
         <app-button-icon-active-state
           id="add-game-footer"
           [appShowAndHide]="showPlusIcon"
-          [icon]="Icons.PLUS"
-          [iconSize]="IconSize.MEDIUM"
+          [icon]="Icons.plus"
+          [iconSize]="IconSize.medium"
           [squareButton]="true"
-          [active]="selected === Icons.PLUS"
+          [active]="selected === Icons.plus"
           (clickEvent)="plusClicked()"
         >
         </app-button-icon-active-state>
@@ -27,10 +27,10 @@
       <div>
         <app-button-icon-active-state
           id="rules-tab"
-          [icon]="Icons.SCROLL"
-          [iconSize]="IconSize.MEDIUM"
+          [icon]="Icons.scroll"
+          [iconSize]="IconSize.medium"
           [squareButton]="true"
-          [active]="selected === Icons.SCROLL"
+          [active]="selected === Icons.scroll"
           (clickEvent)="scrollClicked()"
         >
         </app-button-icon-active-state>

@@ -17,32 +17,32 @@ export class Environment extends DynamicEnvironment {
     super();
     this.production = true;
     this.authentication = {
-      TOKENNAME: 'montepoeliJwt',
-      AUTHTOKENNAME: 'montepoeliAuthenticated',
+      tokenName: 'montepoeliJwt',
+      authTokenName: 'montepoeliAuthenticated',
     };
     this.frontend = {
-      TITLE: 'Angular Starter kit',
-      POLLING_TIMEOUT: 1000,
-      PAGE_SIZE: 20,
-      BASIC_ROUTES: {
-        LANDING: 'landing',
-        LOGIN: 'login',
-        HOME: 'home',
+      title: 'Angular Starter kit',
+      rollingTimeout: 1000,
+      pageSize: 20,
+      basicRoutes: {
+        landing: 'landing',
+        login: 'login',
+        home: 'home',
       },
     };
 
     this.backend = {
-      API_PREFIX: 'api',
-      ENTRY_POINTS: {
-        SIGNIN: '/signIn',
-        SIGNOUT: '/logout',
-        USERS: '/users',
-        BY_IDS: '/ids',
-        GAME: '/game',
-        RULE: '/rule',
-        CREATE: '/create',
-        UPDATE_LANGUAGE_PREFERENCE: '/language-preference',
-        CURRENT: '/current',
+      apiPrefix: 'api',
+      entryPoints: {
+        signIn: '/signIn',
+        signOut: '/logout',
+        users: '/users',
+        byIds: '/ids',
+        game: '/game',
+        rule: '/rule',
+        create: '/create',
+        updateLanguagePreference: '/language-preference',
+        current: '/current',
       },
     };
   }

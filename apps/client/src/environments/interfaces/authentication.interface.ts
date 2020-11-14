@@ -1,4 +1,4 @@
 export interface Authentication {
-  TOKENNAME: string;
-  AUTHTOKENNAME: string;
+  tokenName: string;
+  authTokenName: string;
 }

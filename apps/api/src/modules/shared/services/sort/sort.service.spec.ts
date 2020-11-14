@@ -4,15 +4,6 @@ import { SortService } from './sort.service';
 describe('SortService', () => {
   let service: SortService;
 
-  beforeAll(() => {
-    this.input = [
-      { date: new Date(1000) },
-      { date: new Date(1800) },
-      { date: new Date(1400) },
-      { date: new Date(1200) },
-    ];
-  });
-
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [SortService],
@@ -47,7 +38,14 @@ describe('SortService', () => {
     });
 
     it('should sort the list by the last date first', () => {
-      const result = service.sortByDateDescending(this.input);
+      const input = [
+        { date: new Date(1000) },
+        { date: new Date(1800) },
+        { date: new Date(1400) },
+        { date: new Date(1200) },
+      ];
+
+      const result = service.sortByDateDescending(input);
 
       const output = [
         { date: new Date(1800) },
@@ -60,7 +58,13 @@ describe('SortService', () => {
     });
 
     it('should not sort the list ascending', () => {
-      const result = service.sortByDateDescending(this.input);
+      const input = [
+        { date: new Date(1000) },
+        { date: new Date(1800) },
+        { date: new Date(1400) },
+        { date: new Date(1200) },
+      ];
+      const result = service.sortByDateDescending(input);
 
       const output = [
         { date: new Date(1000) },
@@ -95,7 +99,14 @@ describe('SortService', () => {
     });
 
     it('should sort the list by the first date first', () => {
-      const result = service.sortByDateAscending(this.input);
+      const input = [
+        { date: new Date(1000) },
+        { date: new Date(1800) },
+        { date: new Date(1400) },
+        { date: new Date(1200) },
+      ];
+
+      const result = service.sortByDateAscending(input);
 
       const output = [
         { date: new Date(1000) },

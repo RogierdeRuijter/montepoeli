@@ -4,7 +4,7 @@ import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-transla
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 // AoT requires an exported function for factories
-export function HttpLoaderFactory(http: HttpClient) {
+const httpLoaderFactory = (http: HttpClient) => {
   return new TranslateHttpLoader(http, '../assets/i18n/', '.json');
 }
 
@@ -14,7 +14,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
+        useFactory: httpLoaderFactory,
         deps: [HttpClient],
       },
     }),

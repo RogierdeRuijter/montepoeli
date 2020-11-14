@@ -27,7 +27,7 @@ export class IconComponent implements OnInit, AfterViewInit, OnChanges {
   public icon: Icons;
 
   @Input()
-  public iconSize: IconSize = IconSize.MEDIUM;
+  public iconSize: IconSize = IconSize.medium;
 
   @Input()
   public iconColor: IconColor;
@@ -49,40 +49,40 @@ export class IconComponent implements OnInit, AfterViewInit, OnChanges {
 
   public ngOnInit(): void {
     switch (this.icon) {
-      case Icons.CHECK:
+      case Icons.check:
         this.iconDefinition = faCheck;
         break;
-      case Icons.CROSS:
+      case Icons.cross:
         this.iconDefinition = faTimes;
         break;
-      case Icons.PLUS:
+      case Icons.plus:
         this.iconDefinition = faPlus;
         break;
-      case Icons.DELETE:
+      case Icons.delete:
         this.iconDefinition = faTimes;
         break;
-      case Icons.ROOK:
+      case Icons.rook:
         this.iconDefinition = faChessRook;
         break;
-      case Icons.COFFEE:
+      case Icons.coffee:
         this.iconDefinition = faCoffee;
         break;
-      case Icons.HEART:
+      case Icons.heart:
         this.matIcon = 'heart';
         break;
-      case Icons.CHESS_PIECES:
+      case Icons.chessPieces:
         this.iconDefinition = faChess;
         break;
-      case Icons.SCROLL:
+      case Icons.scroll:
         this.iconDefinition = faScroll;
         break;
-      case Icons.USER:
+      case Icons.user:
         this.iconDefinition = faUser;
         break;
-      case Icons.PLUS_WITH_BOX:
+      case Icons.plusWithBox:
         this.iconDefinition = faPlusSquare;
         break;
-      case Icons.MONTEPOELI:
+      case Icons.montepoeli:
         this.svgIcon = '../../../../../../assets/images/florance_logo.png';
         break;
       default:
@@ -90,16 +90,16 @@ export class IconComponent implements OnInit, AfterViewInit, OnChanges {
     }
 
     switch (this.iconSize) {
-      case IconSize.SMALL:
+      case IconSize.small:
         this.size = '1x';
         break;
-      case IconSize.SMALL_MEDIUM:
+      case IconSize.smallMedium:
         this.size = 'lg';
         break;
-      case IconSize.MEDIUM:
+      case IconSize.medium:
         this.size = '2x';
         break;
-      case IconSize.LARGE:
+      case IconSize.large:
         this.size = '3x';
         break;
       default:
@@ -110,13 +110,13 @@ export class IconComponent implements OnInit, AfterViewInit, OnChanges {
   public ngOnChanges(changes: any): void {
     if (changes.iconColor && changes.iconColor.currentValue) {
       switch (this.iconColor) {
-        case IconColor.BLACK:
+        case IconColor.black:
           this.color = 'black';
           break;
-        case IconColor.GRAY:
+        case IconColor.gray:
           this.color = 'dark-grey';
           break;
-        case IconColor.ACCENT:
+        case IconColor.accent:
           this.color = 'accent';
           break;
         default:
@@ -126,12 +126,12 @@ export class IconComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   public ngAfterViewInit(): void {
-    if (this.icon === Icons.MONTEPOELI) {
-      if (this.iconSize === IconSize.SMALL) {
+    if (this.icon === Icons.montepoeli) {
+      if (this.iconSize === IconSize.small) {
         this.renderer.setStyle(this.svgIconElementRef.nativeElement, 'height', '45px');
         // this.renderer.setStyle(this.svgIconElementRef.nativeElement, 'width', '33px');
       }
-      if (this.iconSize === IconSize.MEDIUM) {
+      if (this.iconSize === IconSize.medium) {
         this.renderer.setStyle(this.svgIconElementRef.nativeElement, 'height', '56px');
         this.renderer.setStyle(this.svgIconElementRef.nativeElement, 'width', '41px');
       }

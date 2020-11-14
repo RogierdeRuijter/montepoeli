@@ -2,7 +2,7 @@
 <div mat-dialog-content>
   <form #form="ngForm">
     <div>
-      <mat-form-field class="custom-input-field" color="accent" (click)="clicked()">
+      <mat-form-field class="custom-input-field" color="accent">
         <mat-label [appTranslate]="'pages.home.games.labels.white'"></mat-label>
         <mat-chip-list id="white-user" selectable (change)="onListChange($event, 'white')" name="white">
           <mat-chip
@@ -63,21 +63,21 @@
   </form>
 </div>
 
-<div [appGridRow]="[GridSizes.ALL]" mat-dialog-actions>
+<div [appGridRow]="[GridSizes.all]" mat-dialog-actions>
   <!-- TODO: app-button-row and refactor to remove bootstrap -->
   <app-button
     (clickEvent)="cancel()"
     [appGridColumn]="[6]"
-    [buttonFunction]="ButtonFunction.CANCEL"
-    [buttonType]="ButtonType.NORMAL"
+    [buttonFunction]="ButtonFunction.cancel"
+    [buttonType]="ButtonType.normal"
   >
   </app-button>
 
   <app-button
     id="save"
     [appGridColumn]="[6]"
-    [buttonFunction]="ButtonFunction.SAVE"
-    [buttonType]="ButtonType.SECONDARY"
+    [buttonFunction]="ButtonFunction.save"
+    [buttonType]="ButtonType.secondary"
     [dialogDataToSubmit]="data"
     [disabled]="disabled"
   >

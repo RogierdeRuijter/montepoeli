@@ -14,7 +14,7 @@ export class GridRowDirective implements OnInit {
   public alignment: Alignments | Alignments[];
 
   @Input()
-  public direction: Directions = Directions.ROW;
+  public direction: Directions = Directions.row;
 
   constructor(private elementRef: ElementRef, private renderer: Renderer2, private utilService: UtilService) {}
 
@@ -23,9 +23,9 @@ export class GridRowDirective implements OnInit {
       throw new ShouldBeDefinedException('All necessary grid sizes');
     }
 
-    if (this.direction === Directions.ROW) {
+    if (this.direction === Directions.row) {
       this.addClassToElement('row');
-    } else if (this.direction === Directions.COLUMN) {
+    } else if (this.direction === Directions.column) {
       this.addClassToElement('d-flex');
       this.addClassToElement('flex-column');
     }
@@ -42,34 +42,34 @@ export class GridRowDirective implements OnInit {
   private itDoesNotHaveAllNecessaryGridSizes(): boolean {
     return (
       !(
-        this.gridSizes.includes(GridSizes.EXTRA_SMALL) &&
-        this.gridSizes.includes(GridSizes.SMALL) &&
-        this.gridSizes.includes(GridSizes.MEDIUM) &&
-        this.gridSizes.includes(GridSizes.LARGE)
-      ) && !this.gridSizes.includes(GridSizes.ALL)
+        this.gridSizes.includes(GridSizes.extraSmall) &&
+        this.gridSizes.includes(GridSizes.small) &&
+        this.gridSizes.includes(GridSizes.medium) &&
+        this.gridSizes.includes(GridSizes.large)
+      ) && !this.gridSizes.includes(GridSizes.all)
     );
   }
 
   private addAlignment(alignment: Alignments): void {
-    if (alignment === Alignments.RIGHT) {
+    if (alignment === Alignments.right) {
       this.addClassToElement('justify-content-end');
     }
 
-    if (alignment === Alignments.CENTER) {
+    if (alignment === Alignments.center) {
       this.addClassToElement('align-items-center');
     }
 
-    if (alignment === Alignments.VERTICAL) {
+    if (alignment === Alignments.vertical) {
       this.addClassToElement('d-flex');
       this.addClassToElement('flex-column');
     }
 
-    if (alignment === Alignments.BASELINE) {
+    if (alignment === Alignments.baseline) {
       this.addClassToElement('d-flex');
       this.addClassToElement('align-items-baseline');
     }
 
-    if (alignment === Alignments.END) {
+    if (alignment === Alignments.end) {
       this.addClassToElement('d-flex');
       this.addClassToElement('align-items-end');
     }

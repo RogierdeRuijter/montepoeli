@@ -23,22 +23,22 @@ export class AuthService {
   }
 
   public getToken(): string {
-    return this.cookieService.get(this.environment.authentication.AUTHTOKENNAME);
+    return this.cookieService.get(this.environment.authentication.authTokenName);
   }
 
   public login(user: any): Observable<any> {
     return this.httpService
-      .post(this.environment.backend.ENTRY_POINTS.SIGNIN, {
+      .post(this.environment.backend.entryPoints.signIn, {
         username: user.username,
         password: user.pwd,
       })
-      .pipe(tap(() => this.router.navigate([this.environment.frontend.BASIC_ROUTES.HOME])));
+      .pipe(tap(() => this.router.navigate([this.environment.frontend.basicRoutes.home])));
   }
 
   public logout(): void {
     this.clearSession();
 
-    this.router.navigate([this.environment.frontend.BASIC_ROUTES.LOGIN]);
+    this.router.navigate([this.environment.frontend.basicRoutes.login]);
   }
 
   public clearSession(): void {
@@ -46,6 +46,6 @@ export class AuthService {
   }
 
   private clearHttpCookies(): void {
-    this.httpService.post(this.environment.backend.ENTRY_POINTS.SIGNOUT).subscribe();
+    this.httpService.post(this.environment.backend.entryPoints.signOut).subscribe();
   }
 }

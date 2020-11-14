@@ -5,7 +5,7 @@ import { JwtStrategy } from '../../jwt.strategy';
 import { PassportModule } from '@nestjs/passport';
 import { UsersService } from '../users/users.service';
 import { MongooseModule } from '@nestjs/mongoose';
-import { UserSchema } from '../../schemas/user.schema';
+import { USER_SCHEMA } from '../../schemas/user.schema';
 import { UserMapper } from '../users/user.mapper';
 import { UserRepositoryService } from '../users/user-repository/user-repository.service';
 import { SharedModule } from '../shared/shared.module';
@@ -16,7 +16,7 @@ import { SharedModule } from '../shared/shared.module';
       defaultStrategy: 'jwt',
       session: false,
     }),
-    MongooseModule.forFeature([{ name: 'User', schema: UserSchema }]),
+    MongooseModule.forFeature([{ name: 'User', schema: USER_SCHEMA }]),
     JwtModule.register({
       secret: process.env.SERVER_SECRET,
       signOptions: {

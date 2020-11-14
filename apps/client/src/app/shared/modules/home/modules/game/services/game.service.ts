@@ -36,7 +36,7 @@ export class GameService {
 
   public getAllFromApi(): Observable<Game[]> {
     return this.httpService
-      .get<Game[]>(this.environment.backend.ENTRY_POINTS.GAME)
+      .get<Game[]>(this.environment.backend.entryPoints.game)
       .pipe(map((games: Game[]) => games.map((game: Game) => this.postProcessGame(game))));
   }
 
@@ -50,14 +50,14 @@ export class GameService {
 
   public save(game: Game): Observable<Game> {
     return this.httpService.post<Game>(
-      this.environment.backend.ENTRY_POINTS.GAME + this.environment.backend.ENTRY_POINTS.CREATE,
+      this.environment.backend.entryPoints.game + this.environment.backend.entryPoints.create,
       game
     );
   }
 
   public postProcessGame(game: Game): Game {
     if (game.winner === null) {
-      game.winner = this.translateService.instant('pages.home.games.labels.' + Winners.DRAW);
+      game.winner = this.translateService.instant('pages.home.games.labels.' + Winners.draw);
     }
     game.date = new Date(game.date);
     return game;
@@ -79,13 +79,9 @@ export class GameService {
     });
   }
 
-  private findGameByGameId(gameId: string, games: Game[]): Game {
-    return games.find((game: Game) => game.id === gameId);
-  }
-
   public getGamesByIds(gameIds: string[]): Observable<Game[]> {
     return this.httpService
-      .get<Game[]>(this.environment.backend.ENTRY_POINTS.GAME + this.environment.backend.ENTRY_POINTS.BY_IDS, {
+      .get<Game[]>(this.environment.backend.entryPoints.game + this.environment.backend.entryPoints.byIds, {
         gameIds,
       })
       .pipe(map((games: Game[]) => games.map((game: Game) => this.postProcessGame(game))));
@@ -97,5 +93,9 @@ export class GameService {
 
   public updateAll(games: Game[]): void {
     this.gameStore.set(games);
+  }
+  
+  private findGameByGameId(gameId: string, games: Game[]): Game {
+    return games.find((game: Game) => game.id === gameId);
   }
 }

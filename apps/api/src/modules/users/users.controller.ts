@@ -18,18 +18,6 @@ export class UsersController {
     return this.usersService.getAllUsers();
   }
 
-  // @Post('/create')
-  public createUser(@Body() createUserDto: CreateUserDto): Promise<User> {
-    const username = createUserDto.username;
-    const password = createUserDto.password;
-
-    if (!username && !password) {
-      throw new BadRequestException('username and password should be defined');
-    }
-
-    return this.usersService.create(createUserDto);
-  }
-
   @Post('/language-preference')
   public async setLanguagePreference(@Body() body: any): Promise<any> {
     const username: string = body.username;
@@ -51,5 +39,17 @@ export class UsersController {
     const jwt = req?.signedCookies?.montepoeliJwt;
 
     return this.usersService.getUserWithJwt(jwt);
+  }
+
+  // @Post('/create')
+  public createUser(@Body() createUserDto: CreateUserDto): Promise<User> {
+    const username = createUserDto.username;
+    const password = createUserDto.password;
+
+    if (!username && !password) {
+      throw new BadRequestException('username and password should be defined');
+    }
+
+    return this.usersService.create(createUserDto);
   }
 }
