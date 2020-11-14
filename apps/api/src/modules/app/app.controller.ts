@@ -7,7 +7,6 @@ import { CreateUserDto } from '../../models/create-dtos/create-user.dto';
 
 @Controller()
 export class AppController {
-  constructor(private readonly usersService: UsersService, private readonly authService: AuthService) {}
 
   private secure: boolean = process.env.ENV.toString() === 'prod' ? true : false;
 
@@ -15,6 +14,8 @@ export class AppController {
   // private signed: boolean = process.env.ENV.toString() === 'prod' ? true : undefined;
 
   private domain: string = process.env.ENV.toString() === 'prod' ? process.env.DOMAIN : undefined;
+  
+  constructor(private readonly usersService: UsersService, private readonly authService: AuthService) {}
 
   @Post('/signIn')
   public async signIn(@Body() body, @Res() res: Response, @Next() next): Promise<any> {

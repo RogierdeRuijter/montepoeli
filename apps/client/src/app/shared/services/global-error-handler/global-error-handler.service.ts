@@ -10,7 +10,7 @@ export class GlobalErrorHandlerService implements ErrorHandler {
     if (chunkFailedMessage.test(error.message)) {
       this.reloadWindow();
     } else {
-      // tslint:disable-next-line
+      // eslint-disable-next-line
       console.error(error);
     }
   }

@@ -38,6 +38,12 @@ export class GameService {
     }
   }
 
+  public async getGamesByIds(gameIds: string[]): Promise<GameDto[]> {
+    const games: Game[] = await this.gameRepositoryService.findByIds(gameIds);
+
+    return this.gameMapper.convertGames(games);
+  }
+
   private validDto(createGameDto: CreateGameDto): boolean {
     if (!createGameDto.id || !createGameDto.black || !createGameDto.white || !createGameDto.winner) {
       throw new BadRequestException('not all fields defined');
@@ -50,11 +56,5 @@ export class GameService {
     const gameIds: string[] = await this.gameUtilService.getAllIdsFromGames();
 
     this.gameGatway.emitGames(gameIds);
-  }
-
-  public async getGamesByIds(gameIds: string[]): Promise<GameDto[]> {
-    const games: Game[] = await this.gameRepositoryService.findByIds(gameIds);
-
-    return this.gameMapper.convertGames(games);
   }
 }

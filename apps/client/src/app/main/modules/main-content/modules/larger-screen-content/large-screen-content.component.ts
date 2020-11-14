@@ -27,7 +27,7 @@ export class LargeScreenContentComponent {
   }
 }
 
-/* tslint:disable */
+/* eslint-disable */
 @NgModule({
   declarations: [LargeScreenContentComponent],
   imports: [CommonModule, RouterModule, LargerScreenContentModule, HomeModule],

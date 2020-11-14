@@ -168,7 +168,7 @@ export class MobileContentComponent extends AsyncBaseComponent implements OnInit
   }
 }
 
-/* tslint:disable */
+/* eslint-disable */
 @NgModule({
   declarations: [MobileContentComponent],
   imports: [CommonModule, MobileContentModule, RouterModule, MatDialogModule],

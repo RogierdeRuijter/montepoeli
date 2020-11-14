@@ -4,10 +4,10 @@ import * as SocketIo from 'socket.io';
 
 @WebSocketGateway({ origin: process.env.CORS_ORIGIN })
 export class GameGateway implements OnGatewayConnection {
-  constructor(private gameUtilService: GameUtilService) {}
-
   @WebSocketServer()
   private server: SocketIo.Server;
+
+  constructor(private gameUtilService: GameUtilService) {}
 
   public async handleConnection(@ConnectedSocket() socket: SocketIo.Socket) {
     const gameIds = await this.gameUtilService.getAllIdsFromGames();

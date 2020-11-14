@@ -87,10 +87,12 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": ["apps/client/tsconfig.app.json", "apps/client/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**", "!apps/client/**"]
+            "lintFilePatterns": [
+              "apps/client/**/*.ts",
+              "apps/client/**/*.html"
+            ]
           }
         },
         "test": {
@@ -123,10 +125,12 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": ["apps/client-e2e/tsconfig.e2e.json"],
-            "exclude": ["**/node_modules/**", "!apps/client-e2e/**"]
+            "lintFilePatterns": [
+              "apps/client-e2e/**/*.ts",
+              "apps/client-e2e/**/*.html"
+            ]
           }
         }
       }
@@ -166,10 +170,12 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": ["apps/api/tsconfig.app.json", "apps/api/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**", "!apps/api/**"]
+            "lintFilePatterns": [
+              "apps/api/**/*.ts",
+              "apps/api/**/*.html"
+            ]
           }
         },
         "test": {
@@ -191,8 +197,14 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["libs/api-interfaces/tsconfig.lib.json", "libs/api-interfaces/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**", "!libs/api-interfaces/**"]
+            "tsConfig": [
+              "libs/api-interfaces/tsconfig.lib.json",
+              "libs/api-interfaces/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/api-interfaces/**"
+            ]
           }
         },
         "test": {

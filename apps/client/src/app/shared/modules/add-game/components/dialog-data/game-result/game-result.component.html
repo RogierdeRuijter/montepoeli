@@ -2,7 +2,7 @@
 <div mat-dialog-content>
   <form #form="ngForm">
     <div>
-      <mat-form-field class="custom-input-field" color="accent" (click)="clicked()">
+      <mat-form-field class="custom-input-field" color="accent">
         <mat-label [appTranslate]="'pages.home.games.labels.white'"></mat-label>
         <mat-chip-list id="white-user" selectable (change)="onListChange($event, 'white')" name="white">
           <mat-chip

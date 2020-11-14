@@ -1,4 +1,4 @@
-/* tslint:disable */
+/* eslint-disable */
 import { browser, by, element, ElementFinder } from 'protractor';
 
 export class Helper {
