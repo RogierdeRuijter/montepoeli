@@ -16,7 +16,7 @@ COPY apps/api/jest.config.js apps/api/jest.config.js
 
 COPY tsconfig.json tsconfig.json
 COPY jest.config.js jest.config.js
-COPY tslint.json tslint.json
+COPY .eslintrc.json .eslintrc.json
 COPY nx.json nx.json
 
 COPY apps/api/src apps/api/src
