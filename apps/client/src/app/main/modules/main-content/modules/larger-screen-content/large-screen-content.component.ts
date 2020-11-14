@@ -15,11 +15,11 @@ export class LargeScreenContentComponent {
   constructor(private tabChangeGlobalEventEmitter: TabChangeGlobalEventEmitter) {}
 
   public gamesHandler(): void {
-    this.tabChangeGlobalEventEmitter.emit(Tabs.GAMES);
+    this.tabChangeGlobalEventEmitter.emit(Tabs.games);
   }
 
   public rulesHandler(): void {
-    this.tabChangeGlobalEventEmitter.emit(Tabs.RULES);
+    this.tabChangeGlobalEventEmitter.emit(Tabs.rules);
   }
 
   public iconClickedHandler(): void {

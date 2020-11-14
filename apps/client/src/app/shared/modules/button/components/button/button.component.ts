@@ -31,13 +31,13 @@ export class ButtonComponent implements OnInit {
 
   public ngOnInit(): void {
     switch (this.buttonType) {
-      case ButtonType.PRIMARY:
+      case ButtonType.primary:
         this.buttonColor = 'primary';
         break;
-      case ButtonType.SECONDARY:
+      case ButtonType.secondary:
         this.buttonColor = 'accent';
         break;
-      case ButtonType.NORMAL:
+      case ButtonType.normal:
         this.buttonColor = '';
         break;
       default:
@@ -45,13 +45,13 @@ export class ButtonComponent implements OnInit {
     }
 
     switch (this.buttonFunction) {
-      case ButtonFunction.LOGIN:
+      case ButtonFunction.login:
         this.translationKey = 'pages.login.do_login';
         break;
-      case ButtonFunction.CANCEL:
+      case ButtonFunction.cancel:
         this.translationKey = 'buttons.cancel';
         break;
-      case ButtonFunction.SAVE:
+      case ButtonFunction.save:
         this.translationKey = 'buttons.save';
         break;
       default:

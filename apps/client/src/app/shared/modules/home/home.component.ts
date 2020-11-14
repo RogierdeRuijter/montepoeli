@@ -82,12 +82,12 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
 
   public ngAfterContentInit(): void {
     this.tabChangeGlobalEventEmitter.get(this.destroy$).subscribe((tab: Tabs) => {
-      if (tab === Tabs.GAMES) {
+      if (tab === Tabs.games) {
         this.showRules = false;
         this.showGames = true;
       }
 
-      if (tab === Tabs.RULES) {
+      if (tab === Tabs.rules) {
         this.showGames = false;
         this.showRules = true;
 

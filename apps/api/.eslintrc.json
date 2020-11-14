@@ -1,27 +1,15 @@
 {
   "extends": "../../.eslintrc.json",
-  "ignorePatterns": [
-    "!**/*"
-  ],
+  "ignorePatterns": ["!**/*"],
   "overrides": [
     {
-      "files": [
-        "*.ts"
-      ],
+      "files": ["*.ts"],
       "parserOptions": {
-        "project": [
-          "apps/api/tsconfig.app.json",
-          "apps/api/tsconfig.spec.json"
-        ],
+        "project": ["apps/api/tsconfig.app.json", "apps/api/tsconfig.spec.json"],
         "createDefaultProgram": true
       },
-      "extends": [
-        "prettier",
-        "prettier/@typescript-eslint"
-      ],
-      "plugins": [
-        "eslint-plugin-react"
-      ],
+      "extends": ["prettier", "prettier/@typescript-eslint"],
+      "plugins": ["eslint-plugin-react"],
       "rules": {
         "@typescript-eslint/array-type": [
           "error",
@@ -45,19 +33,10 @@
         "@typescript-eslint/no-empty-function": "error",
         "@typescript-eslint/no-this-alias": "error",
         "@typescript-eslint/no-var-requires": "error",
-        "@typescript-eslint/semi": [
-          "off",
-          null
-        ],
+        "@typescript-eslint/semi": ["off", null],
         "@typescript-eslint/type-annotation-spacing": "off",
-        "arrow-parens": [
-          "off",
-          "always"
-        ],
-        "brace-style": [
-          "off",
-          "off"
-        ],
+        "arrow-parens": ["off", "always"],
+        "brace-style": ["off", "off"],
         "eol-last": "off",
         "import/no-extraneous-dependencies": [
           "error",
@@ -67,10 +46,7 @@
         ],
         "import/no-internal-modules": "off",
         "linebreak-style": "off",
-        "max-classes-per-file": [
-          "error",
-          1
-        ],
+        "max-classes-per-file": ["error", 1],
         "max-len": "off",
         "new-parens": "off",
         "newline-per-chained-call": "off",
@@ -94,16 +70,11 @@
         "react/jsx-equals-spacing": "off",
         "react/jsx-wrap-multilines": "off",
         "space-before-function-paren": "off",
-        "space-in-parens": [
-          "off",
-          "never"
-        ]
+        "space-in-parens": ["off", "never"]
       }
     },
     {
-      "files": [
-        "*.html"
-      ],
+      "files": ["*.html"],
       "rules": {}
     }
   ]

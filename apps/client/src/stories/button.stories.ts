@@ -12,8 +12,8 @@ export default {
 export const primaryButton = () => ({
   component: ButtonComponent,
   props: {
-    buttonFunction: ButtonFunction.LOGIN,
-    buttonType: ButtonType.PRIMARY,
+    buttonFunction: ButtonFunction.login,
+    buttonType: ButtonType.primary,
   },
   moduleMetadata: moduleMeta,
 });
@@ -25,8 +25,8 @@ primaryButton.story = {
 export const secondaryButton = () => ({
   component: ButtonComponent,
   props: {
-    buttonFunction: ButtonFunction.LOGIN,
-    buttonType: ButtonType.SECONDARY,
+    buttonFunction: ButtonFunction.login,
+    buttonType: ButtonType.secondary,
   },
   moduleMetadata: moduleMeta,
 });

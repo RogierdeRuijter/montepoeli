@@ -15,9 +15,9 @@ export default {
 export const primaryButton = () => ({
   component: ButtonRowComponent,
   props: {
-    buttonRowType: ButtonRowType.TWO,
-    buttonFunctions: [ButtonFunction.CANCEL, ButtonFunction.SAVE],
-    buttonTypes: [ButtonType.PRIMARY, ButtonType.PRIMARY],
+    buttonRowType: ButtonRowType.two,
+    buttonFunctions: [ButtonFunction.cancel, ButtonFunction.save],
+    buttonTypes: [ButtonType.primary, ButtonType.primary],
   },
   moduleMetadata: moduleMeta,
 });

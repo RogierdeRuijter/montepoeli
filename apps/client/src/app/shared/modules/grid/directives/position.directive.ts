@@ -11,7 +11,7 @@ export class PositionDirective implements OnInit {
   constructor(private elementRef: ElementRef, private renderer: Renderer2) {}
 
   public ngOnInit(): void {
-    if (this.position === Positions.FIXED_MIDDLE) {
+    if (this.position === Positions.fixedMiddle) {
       this.addStyleToElement('position', 'fixed');
       this.addStyleToElement('bottom', '35%');
     }

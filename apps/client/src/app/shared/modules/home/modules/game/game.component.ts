@@ -38,12 +38,10 @@ export class GameComponent extends AsyncBaseComponent implements OnInit, OnDestr
   public addDialogContainer: ViewContainerRef;
   public addDialogContainerRef: any;
 
-  public actions: Actions[] = [Actions.ADD];
+  public actions: Actions[] = [Actions.add];
   public disabled: boolean[];
 
   public displayedColumns: string[] = ['white', 'black', 'winner'];
-
-  public GridSizes = GridSizes;
 
   constructor(
     private gameService: GameService,

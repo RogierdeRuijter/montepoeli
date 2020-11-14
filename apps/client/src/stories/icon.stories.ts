@@ -11,7 +11,7 @@ export default {
 export const checkNoSize = () => ({
   component: IconComponent,
   props: {
-    icon: Icons.CHECK,
+    icon: Icons.check,
   },
   moduleMetadata: moduleMeta,
 });
@@ -19,8 +19,8 @@ export const checkNoSize = () => ({
 export const checkSmall = () => ({
   component: IconComponent,
   props: {
-    icon: Icons.CHECK,
-    iconSize: IconSize.SMALL,
+    icon: Icons.check,
+    iconSize: IconSize.small,
   },
   moduleMetadata: moduleMeta,
 });
@@ -28,8 +28,8 @@ export const checkSmall = () => ({
 export const checkMedium = () => ({
   component: IconComponent,
   props: {
-    icon: Icons.CHECK,
-    iconSize: IconSize.MEDIUM,
+    icon: Icons.check,
+    iconSize: IconSize.medium,
   },
   moduleMetadata: moduleMeta,
 });
@@ -37,8 +37,8 @@ export const checkMedium = () => ({
 export const checkLarge = () => ({
   component: IconComponent,
   props: {
-    icon: Icons.CHECK,
-    iconSize: IconSize.LARGE,
+    icon: Icons.check,
+    iconSize: IconSize.large,
   },
   moduleMetadata: moduleMeta,
 });
@@ -46,8 +46,8 @@ export const checkLarge = () => ({
 export const crossMedium = () => ({
   component: IconComponent,
   props: {
-    icon: Icons.CROSS,
-    iconSize: IconSize.MEDIUM,
+    icon: Icons.cross,
+    iconSize: IconSize.medium,
   },
   moduleMetadata: moduleMeta,
 });
@@ -55,8 +55,8 @@ export const crossMedium = () => ({
 export const crossLarge = () => ({
   component: IconComponent,
   props: {
-    icon: Icons.CROSS,
-    iconSize: IconSize.LARGE,
+    icon: Icons.cross,
+    iconSize: IconSize.large,
   },
   moduleMetadata: moduleMeta,
 });
@@ -64,7 +64,7 @@ export const crossLarge = () => ({
 export const plusNoSizeSpecified = () => ({
   component: IconComponent,
   props: {
-    icon: Icons.PLUS,
+    icon: Icons.plus,
   },
   moduleMetadata: moduleMeta,
 });

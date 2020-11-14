@@ -89,10 +89,7 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": [
-              "apps/client/**/*.ts",
-              "apps/client/**/*.html"
-            ]
+            "lintFilePatterns": ["apps/client/**/*.ts", "apps/client/**/*.html"]
           }
         },
         "test": {
@@ -127,10 +124,7 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": [
-              "apps/client-e2e/**/*.ts",
-              "apps/client-e2e/**/*.html"
-            ]
+            "lintFilePatterns": ["apps/client-e2e/**/*.ts", "apps/client-e2e/**/*.html"]
           }
         }
       }
@@ -172,10 +166,7 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": [
-              "apps/api/**/*.ts",
-              "apps/api/**/*.html"
-            ]
+            "lintFilePatterns": ["apps/api/**/*.ts", "apps/api/**/*.html"]
           }
         },
         "test": {
@@ -183,35 +174,6 @@
           "options": {
             "jestConfig": "apps/api/jest.config.js",
             "tsConfig": "apps/api/tsconfig.spec.json",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
-    "api-interfaces": {
-      "root": "libs/api-interfaces",
-      "sourceRoot": "libs/api-interfaces/src",
-      "projectType": "library",
-      "schematics": {},
-      "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "libs/api-interfaces/tsconfig.lib.json",
-              "libs/api-interfaces/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/api-interfaces/**"
-            ]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/api-interfaces/jest.config.js",
-            "tsConfig": "libs/api-interfaces/tsconfig.spec.json",
             "passWithNoTests": true
           }
         }

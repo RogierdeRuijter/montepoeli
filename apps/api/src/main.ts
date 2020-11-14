@@ -53,7 +53,7 @@ const bootstrap = () => {
   app.useWebSocketAdapter(new AuthenticatedSocketIoAdapter(app));
 
   await app.listen(3000);
-}
+};
 
 const checkEnvironmentVariables = () => {
   const env = process.env.ENV.toString();

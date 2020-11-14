@@ -47,7 +47,7 @@ export class GridColumnDirective implements OnInit {
     });
 
     if (!this.utilService.isNullOrUndefined(this.alignmentCol)) {
-      if (this.alignmentCol === Alignments.CENTER) {
+      if (this.alignmentCol === Alignments.center) {
         // TODO: move to position directive
         this.addStyleToElement('text-align', 'center');
       } else {
@@ -76,15 +76,15 @@ export class GridColumnDirective implements OnInit {
 
   private getBootstrapClassFor(gridSize: GridSizes): string {
     switch (gridSize) {
-      case GridSizes.EXTRA_SMALL:
+      case GridSizes.extraSmall:
         return '';
-      case GridSizes.SMALL:
+      case GridSizes.small:
         return '-sm';
-      case GridSizes.MEDIUM:
+      case GridSizes.medium:
         return '-md';
-      case GridSizes.LARGE:
+      case GridSizes.large:
         return '-lg';
-      case GridSizes.ALL:
+      case GridSizes.all:
         return '';
       default:
         throw new UnknownCaseException('unkown');

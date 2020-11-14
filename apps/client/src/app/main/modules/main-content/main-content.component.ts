@@ -53,7 +53,7 @@ export class MainContentComponent implements OnInit, OnDestroy {
       .gridChangeObservable()
       .pipe(
         filter(
-          (activeGridSize: GridSizes) => activeGridSize !== GridSizes.EXTRA_SMALL && this.activeView !== 'large-screen'
+          (activeGridSize: GridSizes) => activeGridSize !== GridSizes.extraSmall && this.activeView !== 'large-screen'
         ),
         tap(() => (this.activeView = 'large-screen')),
         tap(() => this.changeDetectorRef.detectChanges()),
@@ -66,7 +66,7 @@ export class MainContentComponent implements OnInit, OnDestroy {
     this.gridService
       .gridChangeObservable()
       .pipe(
-        filter((activeGridSize: GridSizes) => activeGridSize === GridSizes.EXTRA_SMALL),
+        filter((activeGridSize: GridSizes) => activeGridSize === GridSizes.extraSmall),
         tap(() => (this.activeView = 'mobile')),
         tap(() => this.changeDetectorRef.detectChanges()),
         filter(() => !this.mobileContentContainer || this.mobileContentContainer.length === 0),

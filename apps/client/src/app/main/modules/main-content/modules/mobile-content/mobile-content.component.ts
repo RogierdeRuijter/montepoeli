@@ -39,7 +39,7 @@ export class MobileContentComponent extends AsyncBaseComponent implements OnInit
   public addDialogContainerRef: ComponentRef<any>; // TODO: type
 
   public gameView: boolean;
-  public selected = Icons.CHESS_PIECES;
+  public selected = Icons.chessPieces;
 
   public raisedFooter: boolean;
 
@@ -63,14 +63,14 @@ export class MobileContentComponent extends AsyncBaseComponent implements OnInit
     }
 
     this.tabChangeGlobalEventEmitter.get(this.destroy$).subscribe((tab: Tabs) => {
-      if (tab === Tabs.GAMES) {
+      if (tab === Tabs.games) {
         this.gameView = true;
-        this.selected = Icons.CHESS_PIECES;
+        this.selected = Icons.chessPieces;
       }
 
-      if (tab === Tabs.RULES) {
+      if (tab === Tabs.rules) {
         this.gameView = false;
-        this.selected = Icons.SCROLL;
+        this.selected = Icons.scroll;
       }
 
       this.closeAddGameModalIfOpen();
@@ -89,7 +89,7 @@ export class MobileContentComponent extends AsyncBaseComponent implements OnInit
   }
 
   public plusEventHandler(): void {
-    this.selected = Icons.PLUS;
+    this.selected = Icons.plus;
 
     this.createAddGameComponent();
   }
@@ -117,11 +117,11 @@ export class MobileContentComponent extends AsyncBaseComponent implements OnInit
   }
 
   private changeToGamesView(): void {
-    this.tabChangeGlobalEventEmitter.emit(Tabs.GAMES);
+    this.tabChangeGlobalEventEmitter.emit(Tabs.games);
   }
 
   public rulesHandler(): void {
-    this.tabChangeGlobalEventEmitter.emit(Tabs.RULES);
+    this.tabChangeGlobalEventEmitter.emit(Tabs.rules);
   }
 
   public iconClickedHandler(): void {

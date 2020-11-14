@@ -14,9 +14,9 @@ export class LandingComponent implements OnInit {
 
   public ngOnInit(): void {
     if (this.authService.isAuthenticated()) {
-      this.router.navigate(['../' + this.environment.frontend.BASIC_ROUTES.HOME], { relativeTo: this.activatedRoute });
+      this.router.navigate(['../' + this.environment.frontend.basicRoutes.home], { relativeTo: this.activatedRoute });
     } else {
-      this.router.navigate(['../' + this.environment.frontend.BASIC_ROUTES.LOGIN], { relativeTo: this.activatedRoute });
+      this.router.navigate(['../' + this.environment.frontend.basicRoutes.login], { relativeTo: this.activatedRoute });
     }
   }
 }

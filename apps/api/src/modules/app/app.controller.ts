@@ -7,14 +7,13 @@ import { CreateUserDto } from '../../models/create-dtos/create-user.dto';
 
 @Controller()
 export class AppController {
-
   private secure: boolean = process.env.ENV.toString() === 'prod' ? true : false;
 
   // private sameSite: string = process.env.ENV.toString() === 'prod' ? 'Strict' : undefined;
   // private signed: boolean = process.env.ENV.toString() === 'prod' ? true : undefined;
 
   private domain: string = process.env.ENV.toString() === 'prod' ? process.env.DOMAIN : undefined;
-  
+
   constructor(private readonly usersService: UsersService, private readonly authService: AuthService) {}
 
   @Post('/signIn')
