@@ -10,9 +10,8 @@
       ],
       "parserOptions": {
         "project": [
-          "apps/client-e2e/tsconfig.app.json",
-          "apps/client-e2e/tsconfig.spec.json",
-          "apps/client-e2e/e2e/tsconfig.json"
+          "apps/client-e2e/tsconfig.json",
+          "apps/client-e2e/tsconfig.e2e.json"
         ],
         "createDefaultProgram": true
       },
@@ -63,7 +62,7 @@
         "import/no-extraneous-dependencies": [
           "error",
           {
-            "devDependencies": false
+            "devDependencies": true
           }
         ],
         "import/no-internal-modules": "off",
