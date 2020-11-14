@@ -45,10 +45,10 @@ export class TableActionComponent implements OnInit {
 
   private fetchIconForAction(action: Actions): Icons {
     switch (action) {
-      case Actions.ADD:
-        return Icons.PLUS;
-      case Actions.ACCEPT:
-        return Icons.CHECK;
+      case Actions.add:
+        return Icons.plus;
+      case Actions.accept:
+        return Icons.check;
       default:
         throw new UnknownCaseException(action);
     }

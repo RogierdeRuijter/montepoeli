@@ -36,7 +36,7 @@ describe('GlobalErrorHandlerService', () => {
 
       service.handleError(error);
 
-      // tslint:disable-next-line
+      // eslint-disable-next-line
       expect(console.error).toHaveBeenCalled();
     });
   });

@@ -86,10 +86,4 @@ export class GameResultComponent {
       value: event.value,
     });
   }
-
-  public clicked(): void {
-    setTimeout(() => {
-      document.getElementById('formField123').blur();
-    }, 200);
-  }
 }

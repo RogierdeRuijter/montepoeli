@@ -5,7 +5,7 @@ import { Environment } from '../../../../environments/environment';
   providedIn: 'root',
 })
 export class EnvironmentService {
-  public get(): any {
+  public get(): Environment {
     return new Environment();
   }
 }

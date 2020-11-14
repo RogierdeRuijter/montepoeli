@@ -1,6 +1,6 @@
 import * as mongoose from 'mongoose';
 
-export const GameSchema = new mongoose.Schema(
+export const GAME_SCHEMA = new mongoose.Schema(
   {
     _id: String,
     black: String,

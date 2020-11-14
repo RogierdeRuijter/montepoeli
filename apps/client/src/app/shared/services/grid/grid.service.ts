@@ -47,17 +47,17 @@ export class GridService {
       map((activeGrid: 'xs' | 'sm' | 'md' | 'lg' | 'xl') => {
         switch (activeGrid) {
           case 'xs':
-            return GridSizes.EXTRA_SMALL;
+            return GridSizes.extraSmall;
           case 'sm':
-            return GridSizes.SMALL;
+            return GridSizes.small;
           case 'md':
-            return GridSizes.MEDIUM;
+            return GridSizes.medium;
           case 'lg':
-            return GridSizes.LARGE;
+            return GridSizes.large;
           case 'xl':
-            return GridSizes.EXTRA_LARGE;
+            return GridSizes.extraLarge;
           default:
-            return GridSizes.ALL;
+            return GridSizes.all;
         }
       })
     );

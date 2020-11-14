@@ -19,7 +19,7 @@ import { ButtonIconComponent } from '../../../app/shared/modules/button/componen
 export class GameOverviewStoryFactory {
   private readonly displayedColumns: string[] = ['white', 'winner', 'black'];
   private stories: CompleteStory[] = [];
-  private actions: Actions[] = [Actions.ADD];
+  private actions: Actions[] = [Actions.add];
   private readonly module: any;
 
   constructor(private storyApi: StoryApi<StoryFnAngularReturnType>) {

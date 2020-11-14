@@ -39,20 +39,6 @@ export class GameMapperService {
     });
   }
 
-  private getWinnerUser(userBlack: User, userWhite: User, game: Game): string {
-    if (game.winner === null) {
-      return null;
-    }
-
-    if (userWhite && userWhite.id === game.winner) {
-      return userWhite.name;
-    }
-
-    if (userBlack && userBlack.id === game.winner) {
-      return userBlack.name;
-    }
-  }
-
   public convertCreateDto(createGameDto: CreateGameDto): Promise<GameMongo> {
     // TODO: write unit test
     return new Promise((resolve) =>
@@ -86,5 +72,19 @@ export class GameMapperService {
         });
       })
     );
+  }
+
+  private getWinnerUser(userBlack: User, userWhite: User, game: Game): string {
+    if (game.winner === null) {
+      return null;
+    }
+
+    if (userWhite && userWhite.id === game.winner) {
+      return userWhite.name;
+    }
+
+    if (userBlack && userBlack.id === game.winner) {
+      return userBlack.name;
+    }
   }
 }

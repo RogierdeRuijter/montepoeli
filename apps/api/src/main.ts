@@ -5,7 +5,7 @@ import * as compression from 'compression';
 import * as fs from 'fs';
 import { AuthenticatedSocketIoAdapter } from './adapters/authenticated-socket-io.adapter';
 
-async function bootstrap() {
+const bootstrap = async () => {
   let key: any;
   let cert: any;
 
@@ -13,12 +13,12 @@ async function bootstrap() {
     key = fs.readFileSync('./apps/api/secrets/localhost.key');
     cert = fs.readFileSync('./apps/api/secrets/localhost.crt');
 
-    // tslint:disable-next-line
+    // eslint-disable-next-line
     console.info('Local ssl certificates loaded');
   } catch {
-    // tslint:disable-next-line
+    // eslint-disable-next-line
     console.info('Cant read key or certificate');
-    // tslint:disable-next-line
+    // eslint-disable-next-line
     console.info('This does not have to be an issue if you handle https another way or http is good enough for now');
   }
 
@@ -53,7 +53,7 @@ async function bootstrap() {
   app.useWebSocketAdapter(new AuthenticatedSocketIoAdapter(app));
 
   await app.listen(3000);
-}
+};
 
 const checkEnvironmentVariables = () => {
   const env = process.env.ENV.toString();

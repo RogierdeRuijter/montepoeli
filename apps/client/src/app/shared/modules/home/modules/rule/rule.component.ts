@@ -14,7 +14,7 @@ export class RuleComponent {
   public rules: Rule[];
 }
 
-/* tslint:disable */
+/* eslint-disable */
 @NgModule({
   declarations: [RuleComponent],
   imports: [CommonModule, MatListModule],

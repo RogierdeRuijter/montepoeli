@@ -15,7 +15,7 @@ import { combineLatest } from 'rxjs';
 })
 export class DialogDataComponent extends AsyncBaseComponent implements OnInit, OnDestroy {
   public users: User[];
-  public winners: Winners[] = [Winners.WHITE, Winners.BLACK, Winners.DRAW];
+  public winners: Winners[] = [Winners.white, Winners.black, Winners.draw];
 
   public Sides = Sides;
 
@@ -39,7 +39,7 @@ export class DialogDataComponent extends AsyncBaseComponent implements OnInit, O
   public ngOnInit(): void {
     combineLatest([
       this.userStore.get(this.destroy$),
-      this.translateService.stream('pages.home.games.labels.' + Winners.DRAW),
+      this.translateService.stream('pages.home.games.labels.' + Winners.draw),
     ]).subscribe(([users, draw]: [User[], string]) => {
       this.users = users;
       this.draw = draw;
