@@ -3,13 +3,14 @@ import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { EnvironmentService } from '../../../../services/environment/environment.service';
+import { Environment } from 'src/environments/environment';
 
 // TODO: move to shared services
 @Injectable({
   providedIn: 'root',
 })
 export class CustomHttpService {
-  private environment: any;
+  private environment: Environment;
 
   private baseUrl: string;
 
@@ -48,6 +49,6 @@ export class CustomHttpService {
   private initEnvironment(): void {
     this.environment = this.environmentService.get();
 
-    this.baseUrl = this.environment.environment.backendUrl + '/' + this.environment.backend.API_PREFIX;
+    this.baseUrl = this.environment.environment.backendUrl + '/' + this.environment.backend.apiPrefix;
   }
 }
