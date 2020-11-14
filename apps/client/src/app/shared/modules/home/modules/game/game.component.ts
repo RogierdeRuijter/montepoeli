@@ -13,7 +13,7 @@ import {
 } from '@angular/core';
 import { Game } from '../../../../../shared/interfaces/game.interface';
 import { GameService } from './services/game.service';
-import { Actions, GridSizes } from '../../../../../shared/static-files/enums';
+import { Actions } from '../../../../../shared/static-files/enums';
 import { BehaviorSubject, of } from 'rxjs';
 import { User } from '../../../../../shared/interfaces/user.interface';
 import { NewGameStore } from '../../../../stores/new-game.store';
@@ -69,23 +69,6 @@ export class GameComponent extends AsyncBaseComponent implements OnInit, OnDestr
     this.createAddGameComponent();
   }
 
-  private async createAddGameComponent(): Promise<void> {
-    const { DialogOverviewComponent } = await import(
-      '../../../../../shared/modules/add-game/components/dialog-overview/dialog-overview.component'
-    );
-    const { AddGameModule } = await import('../../../../../shared/modules/add-game/add-game.module');
-
-    const compFactory = this.componentFactoryResolver.resolveComponentFactory(DialogOverviewComponent);
-
-    const factory = await this.compiler.compileModuleAsync(AddGameModule);
-    const ref = factory.create(this.injector);
-
-    this.addDialogContainerRef = this.addDialogContainer.createComponent(compFactory, null, this.injector, [], ref);
-    this.changeDetectorRef.detectChanges();
-
-    this.addDialogContainerRef.instance.addEvent.subscribe((game: Game) => this.handleAddEvent(game));
-  }
-
   public handleAddEvent(game: Game): void {
     this.addGameToView(game);
     // TODO: test this
@@ -101,6 +84,23 @@ export class GameComponent extends AsyncBaseComponent implements OnInit, OnDestr
       .subscribe();
 
     this.addDialogContainerRef.instance.addEvent.unsubscribe();
+  }
+
+  private async createAddGameComponent(): Promise<void> {
+    const { DialogOverviewComponent } = await import(
+      '../../../../../shared/modules/add-game/components/dialog-overview/dialog-overview.component'
+    );
+    const { AddGameModule } = await import('../../../../../shared/modules/add-game/add-game.module');
+
+    const compFactory = this.componentFactoryResolver.resolveComponentFactory(DialogOverviewComponent);
+
+    const factory = await this.compiler.compileModuleAsync(AddGameModule);
+    const ref = factory.create(this.injector);
+
+    this.addDialogContainerRef = this.addDialogContainer.createComponent(compFactory, null, this.injector, [], ref);
+    this.changeDetectorRef.detectChanges();
+
+    this.addDialogContainerRef.instance.addEvent.subscribe((game: Game) => this.handleAddEvent(game));
   }
 
   private addGameToView(game: Game): void {
