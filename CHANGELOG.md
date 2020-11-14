@@ -1,3 +1,11 @@
+## [4.16.6](https://github.com/RogierdeRuijter/montepoeli/compare/v4.16.5...v4.16.6) (2020-11-14)
+
+
+### Bug Fixes
+
+* api tests ([59ede9b](https://github.com/RogierdeRuijter/montepoeli/commit/59ede9bb31ecf0812f4408366de1216ebaec6dce))
+* sign ([3871238](https://github.com/RogierdeRuijter/montepoeli/commit/38712388a321e68c71f529d913d21a3a1aa00a3a))
+
 ## [4.16.5](https://github.com/RogierdeRuijter/montepoeli/compare/v4.16.4...v4.16.5) (2020-11-14)
 
 
