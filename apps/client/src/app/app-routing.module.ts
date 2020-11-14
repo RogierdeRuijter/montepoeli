@@ -21,7 +21,7 @@ const appRoutes: Routes = [
   { path: '**', redirectTo: '' },
 ];
 @NgModule({
-  imports: [RouterModule.forRoot(appRoutes)],
+  imports: [RouterModule.forRoot(appRoutes, { relativeLinkResolution: 'corrected' })],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
