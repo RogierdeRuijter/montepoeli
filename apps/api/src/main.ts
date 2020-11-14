@@ -5,7 +5,7 @@ import * as compression from 'compression';
 import * as fs from 'fs';
 import { AuthenticatedSocketIoAdapter } from './adapters/authenticated-socket-io.adapter';
 
-const bootstrap = () => {
+const bootstrap = async () => {
   let key: any;
   let cert: any;
 
