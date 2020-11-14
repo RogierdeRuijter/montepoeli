@@ -37,12 +37,12 @@ export class Environment extends DynamicEnvironment {
         signIn: '/signIn',
         signOut: '/logout',
         users: '/users',
-        BY_IDS: '/ids',
+        byIds: '/ids',
         game: '/game',
         rule: '/rule',
         create: '/create',
         updateLanguagePreference: '/language-preference',
-        CURRENT: '/current',
+        current: '/current',
       },
     };
   }

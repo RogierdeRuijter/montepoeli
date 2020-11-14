@@ -81,7 +81,7 @@ export class GameService {
 
   public getGamesByIds(gameIds: string[]): Observable<Game[]> {
     return this.httpService
-      .get<Game[]>(this.environment.backend.entryPoints.game + this.environment.backend.entryPoints.BY_IDS, {
+      .get<Game[]>(this.environment.backend.entryPoints.game + this.environment.backend.entryPoints.byIds, {
         gameIds,
       })
       .pipe(map((games: Game[]) => games.map((game: Game) => this.postProcessGame(game))));

@@ -18,7 +18,7 @@ export class UserService {
   }
 
   public getCurrentUser(): Observable<User> {
-    return this.customHttpService.get<User>(this.base + this.environment.backend.entryPoints.CURRENT);
+    return this.customHttpService.get<User>(this.base + this.environment.backend.entryPoints.current);
   }
 
   public setUserLanguagePreference(username: string, languagePreference: string): Observable<User> {
