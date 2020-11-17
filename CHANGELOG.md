@@ -1,3 +1,10 @@
+## [4.16.8](https://github.com/RogierdeRuijter/montepoeli/compare/v4.16.7...v4.16.8) (2020-11-17)
+
+
+### Bug Fixes
+
+* montepoeli logo in title bar ([#514](https://github.com/RogierdeRuijter/montepoeli/issues/514)) ([572f852](https://github.com/RogierdeRuijter/montepoeli/commit/572f8529a18892442067a5810a55b3d58ab61c98))
+
 ## [4.16.7](https://github.com/RogierdeRuijter/montepoeli/compare/v4.16.6...v4.16.7) (2020-11-16)
 
 
