@@ -31,11 +31,11 @@ export class UserActionsComponent implements OnInit, OnDestroy {
   @Input()
   public settingsIconColor: IconColor;
 
-  public Icons = Icons;
-  public IconSize = IconSize;
-
   public alternativeLanguage: string;
   public setIconLanguage: string;
+
+  public icons = Icons;
+  public iconSize = IconSize;
 
   private user: User;
   private destory$: Subject<void> = new Subject();
@@ -69,6 +69,29 @@ export class UserActionsComponent implements OnInit, OnDestroy {
     });
   }
 
+  public userIconHandler(): void {
+    this.userSettingsDropDown.open();
+  }
+
+  public switchLanguageHandler(): void {
+    this.waitForDropDownToClose().subscribe(() =>
+      this.languagePreferenceService.setWithLanguageCode(this.user, this.alternativeLanguage)
+    );
+  }
+
+  public logoutHandler(): void {
+    this.authService.logout();
+  }
+
+  public ngOnDestroy(): void {
+    this.destory$.next();
+    this.destory$.complete();
+  }
+
+  private waitForDropDownToClose(): Observable<any> {
+    return timer(300);
+  }
+
   private setAlternativeLanguage(lang?: string): void {
     const currentLang = lang ? lang : this.translateService.currentLang;
 
@@ -83,28 +106,5 @@ export class UserActionsComponent implements OnInit, OnDestroy {
     }
 
     this.changeDetectorRef.detectChanges();
-  }
-
-  public userIconHandler(): void {
-    this.userSettingsDropDown.open();
-  }
-
-  public switchLanguageHandler(): void {
-    this.waitForDropDownToClose().subscribe(() =>
-      this.languagePreferenceService.setWithLanguageCode(this.user, this.alternativeLanguage)
-    );
-  }
-
-  private waitForDropDownToClose(): Observable<any> {
-    return timer(300);
-  }
-
-  public logoutHandler(): void {
-    this.authService.logout();
-  }
-
-  public ngOnDestroy(): void {
-    this.destory$.next();
-    this.destory$.complete();
   }
 }

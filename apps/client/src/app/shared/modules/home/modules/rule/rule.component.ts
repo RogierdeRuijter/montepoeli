@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { ChangeDetectionStrategy, Component, Input, NgModule } from '@angular/core';
 import { Rule } from '../../../../../shared/interfaces/rule.interface';
 import { CommonModule } from '@angular/common';
@@ -14,7 +15,6 @@ export class RuleComponent {
   public rules: Rule[];
 }
 
-/* eslint-disable */
 @NgModule({
   declarations: [RuleComponent],
   imports: [CommonModule, MatListModule],

@@ -7,6 +7,10 @@ import { TranslateDirective } from './directives/translate.directive';
 import { HttpModule } from '../http/http.module';
 import { LanguagePreferenceService } from './services/language-preference.service';
 
+const httpLoaderFactory = (http: HttpClient): any => {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+};
+
 @NgModule({
   declarations: [TranslateDirective],
   exports: [TranslateDirective, TranslateModule],
@@ -15,7 +19,7 @@ import { LanguagePreferenceService } from './services/language-preference.servic
     TranslateModule.forChild({
       loader: {
         provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
+        useFactory: httpLoaderFactory,
         deps: [HttpClient],
       },
       extend: true,
@@ -32,8 +36,4 @@ export class CustomTranslateModule {
     translate.setDefaultLang(preferedLanguage);
     translate.use(preferedLanguage);
   }
-}
-
-export function HttpLoaderFactory(http: HttpClient): any {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }

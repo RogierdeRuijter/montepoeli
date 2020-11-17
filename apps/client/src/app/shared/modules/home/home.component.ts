@@ -13,7 +13,7 @@ import {
   Compiler,
 } from '@angular/core';
 import { BehaviorSubject, Subject, combineLatest, of } from 'rxjs';
-import { Alignments, GridSizes, Icons, IconSize, Tabs } from '../../../shared/static-files/enums';
+import { Tabs } from '../../../shared/static-files/enums';
 import { User } from '../../../shared/interfaces/user.interface';
 import { UsersStore } from './modules/game/stores/user.store';
 import { Game } from '../../../shared/interfaces/game.interface';
@@ -42,12 +42,6 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
   public games$: BehaviorSubject<Game[]> = new BehaviorSubject<Game[]>(null);
 
   public rules: Rule[];
-
-  public Icons = Icons;
-  public IconSize = IconSize;
-  public GridSizes = GridSizes;
-  public Alignments = Alignments;
-
   private destroy$: Subject<void> = new Subject();
 
   constructor(
@@ -104,6 +98,7 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
   }
 
   public async createRulesComponent(): Promise<ComponentRef<any>> {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     const { RuleComponent, InternalRuleComponentModule } = await import('./modules/rule/rule.component');
 
     const compFactory = this.componentFactoryResolver.resolveComponentFactory(RuleComponent);

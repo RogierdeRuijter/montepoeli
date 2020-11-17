@@ -87,9 +87,11 @@ export class GameComponent extends AsyncBaseComponent implements OnInit, OnDestr
   }
 
   private async createAddGameComponent(): Promise<void> {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     const { DialogOverviewComponent } = await import(
       '../../../../../shared/modules/add-game/components/dialog-overview/dialog-overview.component'
     );
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     const { AddGameModule } = await import('../../../../../shared/modules/add-game/add-game.module');
 
     const compFactory = this.componentFactoryResolver.resolveComponentFactory(DialogOverviewComponent);

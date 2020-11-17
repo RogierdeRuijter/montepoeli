@@ -21,11 +21,11 @@ export class TitleBarComponent {
 
   public color: ThemePalette = 'primary';
 
-  public Icons = Icons;
-  public IconSize = IconSize;
-  public IconColor = IconColor;
-  public GridSizes = GridSizes;
-  public Alignments = Alignments;
+  public icons = Icons;
+  public iconSize = IconSize;
+  public iconColor = IconColor;
+  public gridSizes = GridSizes;
+  public alignments = Alignments;
 
   public handleChangeEvent(matTabChangeEvent: MatTabChangeEvent): void {
     switch (matTabChangeEvent.index) {

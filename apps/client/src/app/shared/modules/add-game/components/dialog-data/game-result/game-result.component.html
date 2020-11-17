@@ -63,21 +63,21 @@
   </form>
 </div>
 
-<div [appGridRow]="[GridSizes.all]" mat-dialog-actions>
+<div [appGridRow]="[gridSizes.all]" mat-dialog-actions>
   <!-- TODO: app-button-row and refactor to remove bootstrap -->
   <app-button
     (clickEvent)="cancel()"
     [appGridColumn]="[6]"
-    [buttonFunction]="ButtonFunction.cancel"
-    [buttonType]="ButtonType.normal"
+    [buttonFunction]="buttonFunction.cancel"
+    [buttonType]="buttonType.normal"
   >
   </app-button>
 
   <app-button
     id="save"
     [appGridColumn]="[6]"
-    [buttonFunction]="ButtonFunction.save"
-    [buttonType]="ButtonType.secondary"
+    [buttonFunction]="buttonFunction.save"
+    [buttonType]="buttonType.secondary"
     [dialogDataToSubmit]="data"
     [disabled]="disabled"
   >

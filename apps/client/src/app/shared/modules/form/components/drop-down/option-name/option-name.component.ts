@@ -16,8 +16,8 @@ export class OptionNameComponent {
   @Output()
   public iconClickEvent: EventEmitter<void> = new EventEmitter();
 
-  public Icons = Icons;
-  public IconSize = IconSize;
+  public icon = Icons.delete;
+  public iconSize = IconSize.small;
 
   public iconClick(): void {
     this.iconClickEvent.emit();

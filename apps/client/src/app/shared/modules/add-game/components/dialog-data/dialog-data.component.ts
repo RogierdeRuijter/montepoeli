@@ -1,6 +1,6 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Sides, Winners } from '../../../../static-files/enums';
+import { Winners } from '../../../../static-files/enums';
 import { Game } from '../../../../interfaces/game.interface';
 import { DialogDataService } from '../../services/dialog-data/dialog-data.service';
 import { User } from '../../../../interfaces/user.interface';
@@ -16,8 +16,6 @@ import { combineLatest } from 'rxjs';
 export class DialogDataComponent extends AsyncBaseComponent implements OnInit, OnDestroy {
   public users: User[];
   public winners: Winners[] = [Winners.white, Winners.black, Winners.draw];
-
-  public Sides = Sides;
 
   public winnerOptions: string[] = [];
 
@@ -64,6 +62,21 @@ export class DialogDataComponent extends AsyncBaseComponent implements OnInit, O
     this.updateGame(event);
   }
 
+  public determineDisabledWinnerOptions(): boolean[] {
+    return this.dialogDataService.determineDisabledWinnerOptions(this.winnerOptions, this.data, this.draw);
+  }
+
+  public areAllWinnerOptionsDisabled(): boolean {
+    return this.dialogDataService.areAllWinnerOptionsDisabled(this.winnerOptions, this.data, this.draw);
+  }
+
+  private determineWinnerOptions(users: User[]): void {
+    this.winnerOptions = [];
+
+    users.forEach((user: User) => this.winnerOptions.push(user.name));
+    this.winnerOptions.push(this.draw);
+  }
+
   private updateGame(event: { name: string; value: string }): void {
     // Needed to have a pointer change for the input
     this.winnersDeselected = undefined;
@@ -80,20 +93,5 @@ export class DialogDataComponent extends AsyncBaseComponent implements OnInit, O
       this.data.winner = undefined;
       this.winnersDeselected = false;
     }
-  }
-
-  public determineDisabledWinnerOptions(): boolean[] {
-    return this.dialogDataService.determineDisabledWinnerOptions(this.winnerOptions, this.data, this.draw);
-  }
-
-  public areAllWinnerOptionsDisabled(): boolean {
-    return this.dialogDataService.areAllWinnerOptionsDisabled(this.winnerOptions, this.data, this.draw);
-  }
-
-  private determineWinnerOptions(users: User[]): void {
-    this.winnerOptions = [];
-
-    users.forEach((user: User) => this.winnerOptions.push(user.name));
-    this.winnerOptions.push(this.draw);
   }
 }

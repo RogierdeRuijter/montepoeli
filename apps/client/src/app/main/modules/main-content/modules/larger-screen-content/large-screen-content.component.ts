@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Component, NgModule } from '@angular/core';
 import { Tabs } from '../../../../../shared/static-files/enums';
 import { TabChangeGlobalEventEmitter } from '../../../../../shared/services/tab-change.global-event-emitter';
@@ -27,7 +28,6 @@ export class LargeScreenContentComponent {
   }
 }
 
-/* eslint-disable */
 @NgModule({
   declarations: [LargeScreenContentComponent],
   imports: [CommonModule, RouterModule, LargerScreenContentModule, HomeModule],

@@ -4,13 +4,11 @@ import { Observable } from 'rxjs';
 import { Game } from '../../../../../../../shared/interfaces/game.interface';
 
 @Component({
-  selector: 'ui-overview',
+  selector: 'app-overview',
   templateUrl: './overview.component.html',
   styleUrls: ['./overview.component.scss'],
 })
 export class OverviewComponent {
-  public GridSizes = GridSizes;
-
   @Input()
   public loading: boolean;
 
@@ -29,7 +27,8 @@ export class OverviewComponent {
   @Output()
   public actionEvent: EventEmitter<any> = new EventEmitter();
 
-  public Alignments = Alignments;
+  public alignments = Alignments;
+  public gridSizes = GridSizes;
 
   public emitActionEvent(event: any): void {
     this.actionEvent.emit(event);

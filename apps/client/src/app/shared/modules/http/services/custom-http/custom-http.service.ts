@@ -10,15 +10,15 @@ import { Environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class CustomHttpService {
-  private environment: Environment;
-
-  private baseUrl: string;
-
   public httpOptions: any = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+    headers: new HttpHeaders({ contentType: 'application/json' }),
     withCredentials: true,
     observe: 'response' as 'response',
   };
+
+  private environment: Environment;
+
+  private baseUrl: string;
 
   constructor(private httpClient: HttpClient, private environmentService: EnvironmentService) {}
 

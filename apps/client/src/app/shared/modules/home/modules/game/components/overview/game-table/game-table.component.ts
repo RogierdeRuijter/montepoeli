@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { trigger, transition, query, style, animate } from '@angular/animations';
 
 @Component({
-  selector: 'ui-game-table',
+  selector: 'app-game-table',
   templateUrl: './game-table.component.html',
   styleUrls: ['./game-table.component.scss'],
   animations: [

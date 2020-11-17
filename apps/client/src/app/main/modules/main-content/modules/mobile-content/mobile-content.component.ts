@@ -1,3 +1,4 @@
+/* eslint-disable */
 import {
   ChangeDetectionStrategy,
   Component,
@@ -77,47 +78,14 @@ export class MobileContentComponent extends AsyncBaseComponent implements OnInit
     });
   }
 
-  // TODO: move to service and test the method
-  private isIPhoneXVariant(): boolean {
-    const aspect = window.screen.width / window.screen.height;
-
-    return navigator.userAgent.match(/(iPhone)/) && aspect.toFixed(3) === '0.462';
-  }
-
-  private closeAddGameModalIfOpen(): void {
-    this.dialog.closeAll();
-  }
-
   public plusEventHandler(): void {
     this.selected = Icons.plus;
 
     this.createAddGameComponent();
   }
 
-  private async createAddGameComponent(): Promise<void> {
-    const { DialogOverviewComponent } = await import(
-      '../../../../../shared/modules/add-game/components/dialog-overview/dialog-overview.component'
-    );
-    const { AddGameModule } = await import('../../../../../shared/modules/add-game/add-game.module');
-
-    const compFactory = this.componentFactoryResolver.resolveComponentFactory(DialogOverviewComponent);
-
-    const factory = await this.compiler.compileModuleAsync(AddGameModule);
-    const ref = factory.create(this.injector);
-
-    this.addDialogContainerRef = this.addDialogContainer.createComponent(compFactory, null, this.injector, [], ref);
-    this.changeDetectorRef.detectChanges();
-
-    this.addDialogContainerRef.instance.addEvent.subscribe((game: Game) => this.addHandler(game));
-    this.addDialogContainerRef.instance.cancelEvent.subscribe(() => this.cancelHandler());
-  }
-
   public gamesHandler(): void {
     this.changeToGamesView();
-  }
-
-  private changeToGamesView(): void {
-    this.tabChangeGlobalEventEmitter.emit(Tabs.games);
   }
 
   public rulesHandler(): void {
@@ -166,9 +134,41 @@ export class MobileContentComponent extends AsyncBaseComponent implements OnInit
     this.addDialogContainerRef.instance.addEvent.unsubscribe();
     this.addDialogContainerRef.instance.cancelEvent.unsubscribe();
   }
+
+  // TODO: move to service and test the method
+  private isIPhoneXVariant(): boolean {
+    const aspect = window.screen.width / window.screen.height;
+
+    return navigator.userAgent.match(/(iPhone)/) && aspect.toFixed(3) === '0.462';
+  }
+
+  private closeAddGameModalIfOpen(): void {
+    this.dialog.closeAll();
+  }
+
+  private async createAddGameComponent(): Promise<void> {
+    const { DialogOverviewComponent } = await import(
+      '../../../../../shared/modules/add-game/components/dialog-overview/dialog-overview.component'
+    );
+    const { AddGameModule } = await import('../../../../../shared/modules/add-game/add-game.module');
+
+    const compFactory = this.componentFactoryResolver.resolveComponentFactory(DialogOverviewComponent);
+
+    const factory = await this.compiler.compileModuleAsync(AddGameModule);
+    const ref = factory.create(this.injector);
+
+    this.addDialogContainerRef = this.addDialogContainer.createComponent(compFactory, null, this.injector, [], ref);
+    this.changeDetectorRef.detectChanges();
+
+    this.addDialogContainerRef.instance.addEvent.subscribe((game: Game) => this.addHandler(game));
+    this.addDialogContainerRef.instance.cancelEvent.subscribe(() => this.cancelHandler());
+  }
+
+  private changeToGamesView(): void {
+    this.tabChangeGlobalEventEmitter.emit(Tabs.games);
+  }
 }
 
-/* eslint-disable */
 @NgModule({
   declarations: [MobileContentComponent],
   imports: [CommonModule, MobileContentModule, RouterModule, MatDialogModule],

@@ -25,9 +25,9 @@
       </div>
     </form>
     <app-button
-      [buttonFunction]="ButtonFunction.login"
+      [buttonFunction]="buttonFunction"
       id="submit"
-      [buttonType]="ButtonTypes.normal"
+      [buttonType]="buttonType"
       [disabled]="!loginForm.valid || disabled"
       (clickEvent)="loginEmitter()"
     >
