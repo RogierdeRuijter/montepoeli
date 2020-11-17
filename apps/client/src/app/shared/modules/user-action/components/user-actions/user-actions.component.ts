@@ -7,7 +7,7 @@ import {
   ChangeDetectorRef,
   OnDestroy,
 } from '@angular/core';
-import { IconColor } from '../../../../static-files/enums';
+import { IconColor, Icons, IconSize } from '../../../../static-files/enums';
 import { MatSelect } from '@angular/material/select';
 import { AuthService } from '../../../auth/services/auth/auth.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -33,6 +33,9 @@ export class UserActionsComponent implements OnInit, OnDestroy {
 
   public alternativeLanguage: string;
   public setIconLanguage: string;
+
+  public icons = Icons;
+  public iconSize = IconSize;
 
   private user: User;
   private destory$: Subject<void> = new Subject();
