@@ -4,3 +4,5 @@
 /apps/client/coverage
 /apps/server/coverage
 /apps/client-e2e/reports
+/CHANGELOG.md
+/package-lock.json
