@@ -1,6 +1,6 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Sides, Winners } from '../../../../static-files/enums';
+import { Winners } from '../../../../static-files/enums';
 import { Game } from '../../../../interfaces/game.interface';
 import { DialogDataService } from '../../services/dialog-data/dialog-data.service';
 import { User } from '../../../../interfaces/user.interface';
