@@ -34,6 +34,9 @@ export class UserActionsComponent implements OnInit, OnDestroy {
   public alternativeLanguage: string;
   public setIconLanguage: string;
 
+  public icons = Icons;
+  public iconSize = IconSize;
+
   private user: User;
   private destory$: Subject<void> = new Subject();
 

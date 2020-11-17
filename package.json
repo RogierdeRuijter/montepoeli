@@ -78,8 +78,8 @@
     "nx:update": "ng update @nrwl/workspace",
     "nx:dep-graph": "nx dep-graph",
     "nx:help": "nx help",
-    "husky:pre-commit": "npm-run-all -p prettier:check nx:lint-workspace circleci:lint mergify:lint nx:affected:lint:parallel",
-    "husky:pre-push": "npm-run-all -p circleci:test nx:affected:test:parallel nx:affected:build:parallel",
+    "husky:pre-commit": "npm-run-all -p prettier:check nx:lint-workspace circleci:lint mergify:lint",
+    "husky:pre-push": "npm-run-all -p circleci:test nx:affected:lint:parallel nx:affected:test:parallel nx:affected:build:parallel",
     "husky:post-merge": "npm install",
     "husky:commit-message": "commitlint -E HUSKY_GIT_PARAMS",
     "circleci:lint": "cd .circleci && npm run lint",
@@ -216,7 +216,7 @@
     "@angular-eslint/template-parser": "0.7.0-beta.1",
     "@typescript-eslint/eslint-plugin": "4.7.0",
     "@typescript-eslint/parser": "4.7.0",
-    "eslint-plugin-react": "latest"
+    "eslint-plugin-react": "7.21.5"
   },
   "husky": {
     "hooks": {

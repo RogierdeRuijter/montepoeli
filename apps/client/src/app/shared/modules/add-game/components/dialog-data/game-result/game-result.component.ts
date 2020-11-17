@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
-import { ButtonFunction, ButtonType, GridSizes, Icons, Winners } from '../../../../../static-files/enums';
+import { ButtonFunction, ButtonType, GridSizes, Winners } from '../../../../../static-files/enums';
 import { NgForm } from '@angular/forms';
 import { Game } from '../../../../../interfaces/game.interface';
 import { User } from '../../../../../interfaces/user.interface';

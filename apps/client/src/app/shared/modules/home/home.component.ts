@@ -13,7 +13,7 @@ import {
   Compiler,
 } from '@angular/core';
 import { BehaviorSubject, Subject, combineLatest, of } from 'rxjs';
-import { Alignments, GridSizes, Icons, IconSize, Tabs } from '../../../shared/static-files/enums';
+import { Tabs } from '../../../shared/static-files/enums';
 import { User } from '../../../shared/interfaces/user.interface';
 import { UsersStore } from './modules/game/stores/user.store';
 import { Game } from '../../../shared/interfaces/game.interface';

@@ -1,5 +1,5 @@
 import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
-import { Alignments, ButtonFunction, ButtonType, GridSizes } from '../../../../../shared/static-files/enums';
+import { ButtonFunction, ButtonType } from '../../../../../shared/static-files/enums';
 import { NgForm } from '@angular/forms';
 import { trigger, transition, query, style, animate } from '@angular/animations';
 
