@@ -16,9 +16,9 @@ import { AppInitService } from './shared/services/app.init';
 import { CustomTranslateModule } from './shared/modules/translate/custom-translate.module';
 import { MatButtonModule } from '@angular/material/button';
 
-export function init_app(appLoadService: AppInitService): () => Promise<any> {
+export const initApp = (appLoadService: AppInitService): (() => Promise<any>) => {
   return () => appLoadService.init();
-}
+};
 @NgModule({
   declarations: [AppComponent, LandingComponent],
   providers: [
@@ -27,7 +27,7 @@ export function init_app(appLoadService: AppInitService): () => Promise<any> {
     AppInitService,
     {
       provide: APP_INITIALIZER,
-      useFactory: init_app,
+      useFactory: initApp,
       deps: [AppInitService],
       multi: true,
     },

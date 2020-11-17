@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Actions, IconColor, Icons, IconSize } from '../../../../../../../../shared/static-files/enums';
+import { Actions, Icons, IconSize } from '../../../../../../../../shared/static-files/enums';
 import { IllegalInputException } from '../../../../../../../../shared/exceptions/IllegalInputException';
 import { UnknownCaseException } from '../../../../../../../../shared/exceptions/UnknownCaseException';
 
 @Component({
-  selector: 'ui-table-action',
+  selector: 'app-table-action',
   templateUrl: './table-action.component.html',
   styleUrls: ['./table-action.component.scss'],
 })
@@ -23,8 +23,7 @@ export class TableActionComponent implements OnInit {
 
   public iconsMap: any = {};
 
-  public IconColor = IconColor;
-  public IconSize = IconSize;
+  public iconSize = IconSize.medium;
 
   public ngOnInit(): void {
     if (this.disabled && this.disabled.length !== this.actions.length) {

@@ -18,10 +18,6 @@ export class AuthService {
     return this.doesTheUserHaveAValidToken();
   }
 
-  private doesTheUserHaveAValidToken(): boolean {
-    return this.getToken().includes('true');
-  }
-
   public getToken(): string {
     return this.cookieService.get(this.environment.authentication.authTokenName);
   }
@@ -47,5 +43,9 @@ export class AuthService {
 
   private clearHttpCookies(): void {
     this.httpService.post(this.environment.backend.entryPoints.signOut).subscribe();
+  }
+
+  private doesTheUserHaveAValidToken(): boolean {
+    return this.getToken().includes('true');
   }
 }

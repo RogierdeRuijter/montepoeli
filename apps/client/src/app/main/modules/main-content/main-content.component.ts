@@ -25,6 +25,16 @@ import { Environment } from '../../../../environments/environment';
   styleUrls: ['main-content.component.scss'],
 })
 export class MainContentComponent implements OnInit, OnDestroy {
+  @ViewChild('mobileContent', { read: ViewContainerRef, static: false })
+  public mobileContentContainer: ViewContainerRef;
+
+  @ViewChild('largeScreenContent', { read: ViewContainerRef, static: false })
+  public largeScreenContentContainer: ViewContainerRef;
+
+  public activeView: string;
+
+  private destory$: Subject<void> = new Subject();
+
   constructor(
     private componentFactoryResolver: ComponentFactoryResolver,
     private injector: Injector,
@@ -35,16 +45,6 @@ export class MainContentComponent implements OnInit, OnDestroy {
     private websocketService: WebsocketService,
     private ngZone: NgZone
   ) {}
-
-  @ViewChild('mobileContent', { read: ViewContainerRef, static: false })
-  public mobileContentContainer: ViewContainerRef;
-
-  @ViewChild('largeScreenContent', { read: ViewContainerRef, static: false })
-  public largeScreenContentContainer: ViewContainerRef;
-
-  public activeView: string;
-
-  private destory$: Subject<void> = new Subject();
 
   public ngOnInit(): void {
     this.ngZone.runOutsideAngular(() => this.websocketService.connect(new Environment().environment.backendUrl));
@@ -107,6 +107,7 @@ export class MainContentComponent implements OnInit, OnDestroy {
   }
 
   public async createMobileConent(): Promise<void> {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     const { MobileContentComponent, InternalMobileContentComponent } = await import(
       './modules/mobile-content/mobile-content.component'
     );
@@ -119,6 +120,7 @@ export class MainContentComponent implements OnInit, OnDestroy {
   }
 
   public async createLargeScreenConent(): Promise<void> {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     const { LargeScreenContentComponent, InternalLargeScreenContentModule } = await import(
       './modules/larger-screen-content/large-screen-content.component'
     );

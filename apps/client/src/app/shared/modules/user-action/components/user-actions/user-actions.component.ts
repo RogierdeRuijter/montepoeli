@@ -7,7 +7,7 @@ import {
   ChangeDetectorRef,
   OnDestroy,
 } from '@angular/core';
-import { IconColor, Icons, IconSize } from '../../../../static-files/enums';
+import { IconColor } from '../../../../static-files/enums';
 import { MatSelect } from '@angular/material/select';
 import { AuthService } from '../../../auth/services/auth/auth.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -30,9 +30,6 @@ export class UserActionsComponent implements OnInit, OnDestroy {
 
   @Input()
   public settingsIconColor: IconColor;
-
-  public Icons = Icons;
-  public IconSize = IconSize;
 
   public alternativeLanguage: string;
   public setIconLanguage: string;
@@ -69,6 +66,29 @@ export class UserActionsComponent implements OnInit, OnDestroy {
     });
   }
 
+  public userIconHandler(): void {
+    this.userSettingsDropDown.open();
+  }
+
+  public switchLanguageHandler(): void {
+    this.waitForDropDownToClose().subscribe(() =>
+      this.languagePreferenceService.setWithLanguageCode(this.user, this.alternativeLanguage)
+    );
+  }
+
+  public logoutHandler(): void {
+    this.authService.logout();
+  }
+
+  public ngOnDestroy(): void {
+    this.destory$.next();
+    this.destory$.complete();
+  }
+
+  private waitForDropDownToClose(): Observable<any> {
+    return timer(300);
+  }
+
   private setAlternativeLanguage(lang?: string): void {
     const currentLang = lang ? lang : this.translateService.currentLang;
 
@@ -83,28 +103,5 @@ export class UserActionsComponent implements OnInit, OnDestroy {
     }
 
     this.changeDetectorRef.detectChanges();
-  }
-
-  public userIconHandler(): void {
-    this.userSettingsDropDown.open();
-  }
-
-  public switchLanguageHandler(): void {
-    this.waitForDropDownToClose().subscribe(() =>
-      this.languagePreferenceService.setWithLanguageCode(this.user, this.alternativeLanguage)
-    );
-  }
-
-  private waitForDropDownToClose(): Observable<any> {
-    return timer(300);
-  }
-
-  public logoutHandler(): void {
-    this.authService.logout();
-  }
-
-  public ngOnDestroy(): void {
-    this.destory$.next();
-    this.destory$.complete();
   }
 }

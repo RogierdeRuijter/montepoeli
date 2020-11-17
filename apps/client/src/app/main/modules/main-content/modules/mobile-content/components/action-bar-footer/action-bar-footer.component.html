@@ -1,13 +1,13 @@
 <div class="action-bar-footer container" [class.raised]="raised">
-  <div [appGridRow]="[GridSizes.all]">
+  <div [appGridRow]="[gridSizes.all]">
     <div [appGridColumn]="[6]" [offsets]="[3]" class="d-flex justify-content-between">
       <div>
         <app-button-icon-active-state
           id="games-tab"
-          [icon]="Icons.chessPieces"
-          [iconSize]="IconSize.medium"
+          [icon]="icons.chessPieces"
+          [iconSize]="iconSize.medium"
           [squareButton]="true"
-          [active]="selected === Icons.chessPieces"
+          [active]="selected === icons.chessPieces"
           (clickEvent)="chessSetClicked()"
         >
         </app-button-icon-active-state>
@@ -16,10 +16,10 @@
         <app-button-icon-active-state
           id="add-game-footer"
           [appShowAndHide]="showPlusIcon"
-          [icon]="Icons.plus"
-          [iconSize]="IconSize.medium"
+          [icon]="icons.plus"
+          [iconSize]="iconSize.medium"
           [squareButton]="true"
-          [active]="selected === Icons.plus"
+          [active]="selected === icons.plus"
           (clickEvent)="plusClicked()"
         >
         </app-button-icon-active-state>

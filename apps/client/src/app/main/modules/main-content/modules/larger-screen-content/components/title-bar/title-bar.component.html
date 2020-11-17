@@ -2,7 +2,7 @@
   <app-button-no-elevation (clickEvent)="handleButtonClicked()" style="height: 56px">
     <div style="display: flex; align-items: center">
       <span class="margin-right-10" style="height: 56px">
-        <app-icon [icon]="Icons.montepoeli"></app-icon>
+        <app-icon [icon]="icons.montepoeli"></app-icon>
       </span>
       <h5>Montepoeli</h5>
     </div>
@@ -14,8 +14,8 @@
       <ng-template mat-tab-label>
         <app-icon
           [matTooltip]="'pages.home.games.tooltip' | translate"
-          [icon]="Icons.chessPieces"
-          [iconSize]="IconSize.medium"
+          [icon]="icons.chessPieces"
+          [iconSize]="iconSize.medium"
         ></app-icon>
       </ng-template>
     </mat-tab>
@@ -23,8 +23,8 @@
       <ng-template mat-tab-label>
         <app-icon
           [matTooltip]="'pages.home.rules.tooltip' | translate"
-          [icon]="Icons.scroll"
-          [iconSize]="IconSize.medium"
+          [icon]="icons.scroll"
+          [iconSize]="iconSize.medium"
         ></app-icon>
       </ng-template>
     </mat-tab>
@@ -32,5 +32,5 @@
 
   <div class="right-spacer"></div>
 
-  <app-user-actions [settingsIconColor]="IconColor.black"> </app-user-actions>
+  <app-user-actions [settingsIconColor]="iconColor.black"> </app-user-actions>
 </mat-toolbar>

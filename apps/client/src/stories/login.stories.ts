@@ -12,7 +12,7 @@ export default {
   title: 'Login form',
 };
 
-export const Login = () => ({
+export const login = () => ({
   component: LoginFormComponent,
   moduleMetadata: moduleMeta,
 });

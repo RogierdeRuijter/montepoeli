@@ -20,7 +20,9 @@ describe('GlobalErrorHandlerService', () => {
         message: 'ChunkLoadError: Loading chunk 5 failed',
       };
 
-      spyOn(service, 'reloadWindow').and.callFake(() => {});
+      spyOn(service, 'reloadWindow').and.callFake(() => {
+        console.log('reload window');
+      });
 
       service.handleError(error);
 

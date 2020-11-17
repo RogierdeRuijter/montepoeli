@@ -27,9 +27,6 @@ export class UserService {
       languagePreference,
     };
 
-    return this.customHttpService.post(
-      this.base + this.environment.backend.entryPoints.updateLanguagePreference,
-      body
-    );
+    return this.customHttpService.post(this.base + this.environment.backend.entryPoints.updateLanguagePreference, body);
   }
 }

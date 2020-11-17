@@ -17,8 +17,6 @@ export class DialogDataComponent extends AsyncBaseComponent implements OnInit, O
   public users: User[];
   public winners: Winners[] = [Winners.white, Winners.black, Winners.draw];
 
-  public Sides = Sides;
-
   public winnerOptions: string[] = [];
 
   public winnersDeselected: boolean;
@@ -64,6 +62,21 @@ export class DialogDataComponent extends AsyncBaseComponent implements OnInit, O
     this.updateGame(event);
   }
 
+  public determineDisabledWinnerOptions(): boolean[] {
+    return this.dialogDataService.determineDisabledWinnerOptions(this.winnerOptions, this.data, this.draw);
+  }
+
+  public areAllWinnerOptionsDisabled(): boolean {
+    return this.dialogDataService.areAllWinnerOptionsDisabled(this.winnerOptions, this.data, this.draw);
+  }
+
+  private determineWinnerOptions(users: User[]): void {
+    this.winnerOptions = [];
+
+    users.forEach((user: User) => this.winnerOptions.push(user.name));
+    this.winnerOptions.push(this.draw);
+  }
+
   private updateGame(event: { name: string; value: string }): void {
     // Needed to have a pointer change for the input
     this.winnersDeselected = undefined;
@@ -80,20 +93,5 @@ export class DialogDataComponent extends AsyncBaseComponent implements OnInit, O
       this.data.winner = undefined;
       this.winnersDeselected = false;
     }
-  }
-
-  public determineDisabledWinnerOptions(): boolean[] {
-    return this.dialogDataService.determineDisabledWinnerOptions(this.winnerOptions, this.data, this.draw);
-  }
-
-  public areAllWinnerOptionsDisabled(): boolean {
-    return this.dialogDataService.areAllWinnerOptionsDisabled(this.winnerOptions, this.data, this.draw);
-  }
-
-  private determineWinnerOptions(users: User[]): void {
-    this.winnerOptions = [];
-
-    users.forEach((user: User) => this.winnerOptions.push(user.name));
-    this.winnerOptions.push(this.draw);
   }
 }

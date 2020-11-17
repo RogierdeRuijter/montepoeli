@@ -32,14 +32,6 @@ export class LanguagePreferenceService {
     this.storagePrefereanceInBrowser(translationFileCode);
   }
 
-  private storagePrefereanceInBrowser(preference: string): void {
-    if (this.utilService.isNullOrUndefined(preference)) {
-      localStorage.setItem('preferedLanguage', this.defaultLanguage);
-    } else {
-      localStorage.setItem('preferedLanguage', preference);
-    }
-  }
-
   public setWithLanguageCode(user: User, languageCode: string): void {
     if (languageCode === 'en') {
       this.translateService.use('en');
@@ -54,6 +46,16 @@ export class LanguagePreferenceService {
       .subscribe();
   }
 
+  public mapTranslationCodeToEnglishLanguageName(languageCode: string): string {
+    if (languageCode === 'nl') {
+      return 'dutch';
+    }
+
+    if (languageCode === 'en') {
+      return 'english';
+    }
+  }
+
   private mapLanguageToTranslationFileCode(englishPerferedLanguage: string): string {
     if (englishPerferedLanguage === 'dutch') {
       return 'nl';
@@ -64,13 +66,11 @@ export class LanguagePreferenceService {
     }
   }
 
-  public mapTranslationCodeToEnglishLanguageName(languageCode: string): string {
-    if (languageCode === 'nl') {
-      return 'dutch';
-    }
-
-    if (languageCode === 'en') {
-      return 'english';
+  private storagePrefereanceInBrowser(preference: string): void {
+    if (this.utilService.isNullOrUndefined(preference)) {
+      localStorage.setItem('preferedLanguage', this.defaultLanguage);
+    } else {
+      localStorage.setItem('preferedLanguage', preference);
     }
   }
 }

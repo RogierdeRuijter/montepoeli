@@ -94,7 +94,7 @@ export class GameService {
   public updateAll(games: Game[]): void {
     this.gameStore.set(games);
   }
-  
+
   private findGameByGameId(gameId: string, games: Game[]): Game {
     return games.find((game: Game) => game.id === gameId);
   }

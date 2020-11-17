@@ -25,12 +25,11 @@ export class ActionBarFooterComponent {
   @Output()
   public scrollSelected: EventEmitter<void> = new EventEmitter();
 
-  public Icons = Icons;
-  public IconSize = IconSize;
-  public IconColor = IconColor;
-
-  public GridSizes = GridSizes;
-  public Alignments = Alignments;
+  public icons = Icons;
+  public iconSize = IconSize;
+  public iconColor = IconColor;
+  public gridSizes = GridSizes;
+  public alignments = Alignments;
 
   public chessSetClicked(): void {
     this.chessSetSelected.emit();

@@ -39,11 +39,13 @@ export class ButtonIconComponent implements AfterViewInit {
   }
 
   public ngAfterViewInit(): void {
+    /* eslint-disable no-underscore-dangle */
     if (this.squareButton) {
       this.renderer.setStyle(this.buttonOne._elementRef.nativeElement, 'width', 'inherit');
       this.renderer.setStyle(this.buttonOne._elementRef.nativeElement, 'height', 'inherit');
       this.renderer.setStyle(this.buttonOne._elementRef.nativeElement, 'line-height', 'inherit');
       this.renderer.setStyle(this.buttonOne._elementRef.nativeElement, 'border-radius', 'inherit');
     }
+    /* eslint-enable no-underscore-dangle */
   }
 }

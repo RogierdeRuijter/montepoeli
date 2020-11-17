@@ -4,7 +4,7 @@ import { NgForm } from '@angular/forms';
 import { trigger, transition, query, style, animate } from '@angular/animations';
 
 @Component({
-  selector: 'ui-login-form',
+  selector: 'app-login-form',
   templateUrl: './login-form.component.html',
   styleUrls: ['./login-form.component.scss'],
   animations: [
@@ -25,16 +25,14 @@ export class LoginFormComponent {
   @ViewChild('username', { static: true })
   public usernameField: ElementRef;
 
-  public ButtonFunction = ButtonFunction;
-  public ButtonTypes = ButtonType;
-  public GridSizes = GridSizes;
-  public Alignments = Alignments;
-
   @Output()
   public loginEvent: EventEmitter<any> = new EventEmitter();
 
   @Input()
   public disabled: boolean;
+
+  public buttonFunction = ButtonFunction.login;
+  public buttonType = ButtonType.normal;
 
   public loginEmitter(): void {
     this.loginEvent.emit({

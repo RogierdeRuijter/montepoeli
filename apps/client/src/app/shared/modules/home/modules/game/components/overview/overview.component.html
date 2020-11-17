@@ -1,20 +1,20 @@
 <div class="container">
   <div
-    [alignment]="Alignments.baseline"
-    [appGridRow]="[GridSizes.extraSmall, GridSizes.small, GridSizes.medium, GridSizes.large]"
+    [alignment]="alignments.baseline"
+    [appGridRow]="[gridSizes.extraSmall, gridSizes.small, gridSizes.medium, gridSizes.large]"
   >
     <div [appGridColumn]="[12, 10, 11, 11]" style="margin-bottom: 30px">
-      <ui-game-table [displayedColumns]="displayedColumns" [games$]="games$"> </ui-game-table>
+      <app-game-table [displayedColumns]="displayedColumns" [games$]="games$"></app-game-table>
     </div>
     <!-- TODO: move this higher up so it does not have to be loaded on mobile -->
     <div [appGridColumn]="[2, 2, 1, 1]" class="d-none d-sm-block">
-      <ui-table-action
+      <app-table-action
         [ids]="['add-game-button']"
         (actionClickEvent)="emitActionEvent($event)"
         [actions]="actions"
         [disabled]="disabled"
       >
-      </ui-table-action>
+      </app-table-action>
     </div>
   </div>
 </div>

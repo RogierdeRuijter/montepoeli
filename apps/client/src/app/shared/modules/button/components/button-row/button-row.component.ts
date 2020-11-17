@@ -19,6 +19,6 @@ export class ButtonRowComponent {
   @Input()
   public disabled = false;
 
-  public ButtonRowType = ButtonRowType;
-  public GridSizes = GridSizes;
+  public buttonRowTypes = ButtonRowType;
+  public gridSizes = GridSizes;
 }

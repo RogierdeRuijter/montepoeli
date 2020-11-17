@@ -39,7 +39,7 @@
     "client:build:prod": "ng build client --configuration=production && npm run client:gzipper",
     "client:test": "ng test client",
     "client:test:cov": "ng test client --code-coverage",
-    "client:start": "ng serve client",
+    "client:start": "ng serve client --hmr",
     "client:start:dev-no-host": "npm run client:start -- --host 0.0.0.0 --disable-host-check",
     "client:lint": "ng lint client",
     "client:bundle-report": "webpack-bundle-analyzer dist/frontend/stats-es2015.json",

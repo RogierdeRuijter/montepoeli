@@ -9,9 +9,8 @@ import { Icons, IconSize, IconColor } from '../../../../../../../shared/static-f
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FooterComponent {
-  public SPACER = SPACER;
-
-  public IconSize = IconSize;
-  public Icons = Icons;
-  public IconColor = IconColor;
+  public spacer = SPACER;
+  public iconSize = IconSize;
+  public icons = Icons;
+  public iconColor = IconColor;
 }
