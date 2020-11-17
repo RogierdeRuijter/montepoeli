@@ -22,7 +22,7 @@ RUN npm run client:compile-ivy-dependencies
 
 COPY apps/client/src apps/client/src
 
-RUN npm run client:lint
+# RUN npm run client:lint
 
 RUN npm run client:test:cov
 
