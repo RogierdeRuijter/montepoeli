@@ -23,7 +23,7 @@ export class SimpleTitleBarComponent {
   public iconClicked: EventEmitter<void> = new EventEmitter();
 
   public icon = Icons.montepoeli;
-  public iconSize = IconSize.smallMedium;
+  public iconSize = IconSize.small;
 
   public handleButtonClicked(): void {
     this.iconClicked.emit();
