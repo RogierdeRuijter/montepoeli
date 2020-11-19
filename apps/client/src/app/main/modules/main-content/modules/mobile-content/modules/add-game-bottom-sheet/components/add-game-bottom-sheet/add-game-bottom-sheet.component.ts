@@ -9,13 +9,11 @@ import { Icons } from 'src/app/shared/static-files/enums';
   templateUrl: './add-game-bottom-sheet.component.html',
   styleUrls: ['./add-game-bottom-sheet.component.scss'],
 })
-export class AddGameBottomSheetComponent implements OnInit {
+export class AddGameBottomSheetComponent {
   public icons = Icons;
 
   constructor(
     private bottomSheetRef: MatBottomSheetRef<AddGameOverviewComponent>,
     @Inject(MAT_BOTTOM_SHEET_DATA) public game: Game
   ) {}
-
-  ngOnInit(): void {}
 }

@@ -18,7 +18,7 @@ export class AddGameOverviewComponent implements OnInit {
 
   public game: Game;
 
-  constructor(private _bottomSheet: MatBottomSheet) {}
+  constructor(private bottomSheet: MatBottomSheet) {}
 
   public ngOnInit(): void {
     this.game = new GameFactory().create();
@@ -27,7 +27,7 @@ export class AddGameOverviewComponent implements OnInit {
   }
 
   openBottomSheet(): void {
-    this._bottomSheet.open(AddGameBottomSheetComponent, {
+    this.bottomSheet.open(AddGameBottomSheetComponent, {
       data: this.game,
       closeOnNavigation: true,
     });
