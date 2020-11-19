@@ -1,17 +1,24 @@
-<app-game-result
-  (cancelEvent)="cancelEventHandler()"
-  (fieldUpdateEvent)="fieldUpdateHandler($event)"
-  [data]="data"
-  [disabled]="ifAllFieldsAreNotField()"
-  [winnerFieldHidden]="usersAreNotDefined()"
-  [usersBlack]="users"
-  [usersWhite]="users"
-  [winnerOptions]="winnerOptions"
-  [winnersDeselected]="winnersDeselected"
-  [blackDeselected]="blackDeselected"
-  [disabledWinnerOptions]="determineDisabledWinnerOptions()"
-  [blackDisabled]="!data.white"
-  [winnersDisabled]="areAllWinnerOptionsDisabled()"
-  [winners]="winners"
->
-</app-game-result>
+<h2 mat-dialog-title [appTranslate]="'pages.home.games.pop-up.title'"></h2>
+
+<app-add-game [game]="game" (cancelEvent)="cancelEventHandler()"> </app-add-game>
+
+<div [appGridRow]="[gridSizes.all]" mat-dialog-actions>
+  <!-- TODO: app-button-row and refactor to remove bootstrap -->
+  <app-button
+    (clickEvent)="cancelEventHandler()"
+    [appGridColumn]="[6]"
+    [buttonFunction]="buttonFunction.cancel"
+    [buttonType]="buttonType.normal"
+  >
+  </app-button>
+
+  <app-button
+    id="save"
+    [appGridColumn]="[6]"
+    [buttonFunction]="buttonFunction.save"
+    [buttonType]="buttonType.secondary"
+    [dialogDataToSubmit]="game"
+    [disabled]="ifAllFieldsAreNotField()"
+  >
+  </app-button>
+</div>

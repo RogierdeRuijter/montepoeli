@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
-import { ButtonFunction, ButtonType, GridSizes, Winners } from '../../../../../static-files/enums';
+import { ButtonFunction, ButtonType, GridSizes, Winners } from '../../../../static-files/enums';
 import { NgForm } from '@angular/forms';
-import { Game } from '../../../../../interfaces/game.interface';
-import { User } from '../../../../../interfaces/user.interface';
+import { Game } from '../../../../interfaces/game.interface';
+import { User } from '../../../../interfaces/user.interface';
 import { timer } from 'rxjs';
 import { MatSelect } from '@angular/material/select';
 import { MatChip, MatChipListChange } from '@angular/material/chips';
@@ -64,9 +64,6 @@ export class GameResultComponent {
   @Output()
   public cancelEvent: EventEmitter<void> = new EventEmitter();
 
-  public buttonType = ButtonType;
-  public buttonFunction = ButtonFunction;
-  public gridSizes = GridSizes;
   public timer = timer;
 
   public cancel(): void {

@@ -10,7 +10,7 @@
       },
       "root": "apps/client",
       "sourceRoot": "apps/client/src",
-      "prefix": "clark-dent",
+      "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",

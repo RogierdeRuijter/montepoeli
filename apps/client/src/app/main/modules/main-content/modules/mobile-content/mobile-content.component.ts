@@ -147,14 +147,14 @@ export class MobileContentComponent extends AsyncBaseComponent implements OnInit
   }
 
   private async createAddGameComponent(): Promise<void> {
-    const { DialogOverviewComponent } = await import(
-      '../../../../../shared/modules/add-game/components/dialog-overview/dialog-overview.component'
+    const { AddGameOverviewComponent } = await import(
+      './modules/add-game-bottom-sheet/components/add-game-overview/add-game-overview.component'
     );
-    const { AddGameModule } = await import('../../../../../shared/modules/add-game/add-game.module');
+    const { AddGameBottomSheetModule } = await import('./modules/add-game-bottom-sheet/add-game-bottom-sheet.module');
 
-    const compFactory = this.componentFactoryResolver.resolveComponentFactory(DialogOverviewComponent);
+    const compFactory = this.componentFactoryResolver.resolveComponentFactory(AddGameOverviewComponent);
 
-    const factory = await this.compiler.compileModuleAsync(AddGameModule);
+    const factory = await this.compiler.compileModuleAsync(AddGameBottomSheetModule);
     const ref = factory.create(this.injector);
 
     this.addDialogContainerRef = this.addDialogContainer.createComponent(compFactory, null, this.injector, [], ref);

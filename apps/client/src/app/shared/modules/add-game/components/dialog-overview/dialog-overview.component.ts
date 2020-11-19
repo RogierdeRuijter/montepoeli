@@ -33,15 +33,9 @@ export class DialogOverviewComponent implements OnInit {
     this.unsubscriber$ = new Subject();
 
     this.dialog.closeAll();
-    const data: Game = {
-      id: this.game.id,
-      white: this.game.white,
-      winner: this.game.winner,
-      black: this.game.black,
-      date: this.game.date,
-    };
+
     const dialogRef = this.dialog.open(DialogDataComponent, {
-      data,
+      data: this.game,
       maxWidth: '300px',
     });
 

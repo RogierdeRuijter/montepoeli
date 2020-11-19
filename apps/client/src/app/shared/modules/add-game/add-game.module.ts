@@ -6,15 +6,16 @@ import { DialogOverviewComponent } from './components/dialog-overview/dialog-ove
 import { CustomTranslateModule } from '../translate/custom-translate.module';
 import { ButtonModule } from '../button/button.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { GameResultComponent } from './components/dialog-data/game-result/game-result.component';
+import { GameResultComponent } from './components/game-result/game-result.component';
 import { FormModule } from '../form/form.module';
 import { GridModule } from '../grid/grid.module';
 import { TransitionModule } from '../transition/transition.module';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { AddGameComponent } from './components/add-game/add-game.component';
 
 @NgModule({
-  declarations: [DialogDataComponent, DialogOverviewComponent, GameResultComponent],
+  declarations: [DialogDataComponent, DialogOverviewComponent, GameResultComponent, AddGameComponent],
   providers: [
     {
       provide: MAT_DIALOG_DEFAULT_OPTIONS,
@@ -22,7 +23,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     },
   ],
   entryComponents: [DialogDataComponent],
-  exports: [DialogOverviewComponent, MatDialogModule],
+  exports: [DialogOverviewComponent, MatDialogModule, AddGameComponent],
   imports: [
     CommonModule,
     MatDialogModule,
