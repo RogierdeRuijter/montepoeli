@@ -44,7 +44,7 @@ parameters:
     default: ''
   default-build-context:
     type: string
-    default: 'circleci/node:13'
+    default: 'circleci/node:15.2.1'
   e2e-client-environment-variables:
     type: string
     default: 'e2e'
@@ -67,7 +67,7 @@ parameters:
 jobs:
   determine-affected-apps:
     docker:
-      - image: tjokvol/node:13-luna
+      - image: tjokvol/node:15.2.1-luna
         auth:
           username: $PUBLIC_DOCKER_USER
           password: $PUBLIC_DOCKER_PASSWORD
