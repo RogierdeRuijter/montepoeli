@@ -10,7 +10,8 @@
     "tsconfig.json": "*",
     "tslint.json": "*",
     "nx.json": "*",
-    ".circleci/config.yml": "*"
+    ".circleci/config.yml": "*",
+    "Dockerfile.node_modules": "*"
   },
   "projects": {
     "client": {
