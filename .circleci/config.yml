@@ -80,25 +80,11 @@ jobs:
     working_directory: ~/repo
     steps:
       - checkout
-      - add_ssh_keys:
-          fingerprints:
-            - 'd7:e3:8a:3a:84:5f:4b:48:cd:c0:d4:bf:66:59:16:e1'
-
-      - restore_cache:
-          keys:
-            - v2-nrwl-workspace-9.2.2
 
       - run:
           name: Setup environment to check affected
           command: |
-            git config --global user.email "rogierderuijter@hotmail.com"
-            git config --global user.name "Circle Ci"
             npm install
-
-      - save_cache:
-          paths:
-            - node_modules
-          key: v2-nrwl-workspace-9.2.2
 
       - run:
           name: Save to the environment variable if the client is affected

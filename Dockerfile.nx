@@ -1,9 +1,11 @@
 FROM tjokvol/node:13-luna
 
-WORKDIR /usr/src/app
-
 COPY package.json package.json
+COPY package-lock.json package-lock.json
 
 RUN npm install
 
+COPY . .
+
+RUN npm run nx:affected:apps
 
