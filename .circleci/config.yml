@@ -94,7 +94,7 @@ jobs:
           command: |
             git config --global user.email "rogierderuijter@hotmail.com"
             git config --global user.name "Circle Ci"
-            npm install @nrwl/workspace@9.2.2
+            npm install
 
       - save_cache:
           paths:
