@@ -1,3 +1,9 @@
-FROM tjokvol/montepoeli-base-node-modules:latest
+FROM tjokvol/node:13-luna
 
-RUN npm run nx:affected:apps
+WORKDIR /usr/src/app
+
+COPY package.json package.json
+
+RUN npm install
+
+
