@@ -89,7 +89,7 @@ jobs:
       - run:
           name: ls
           command: |
-            ls
+            ls -a
 
       - run:
           name: Save to the environment variable if the client is affected
