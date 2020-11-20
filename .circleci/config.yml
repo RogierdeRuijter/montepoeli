@@ -85,11 +85,11 @@ jobs:
           name: Setup environment to check affected
           command: |
             npm install
-      
+
       - run:
-        name: ls
-        command: |
-          ls
+          name: ls
+          command: |
+            ls
 
       - run:
           name: Save to the environment variable if the client is affected
