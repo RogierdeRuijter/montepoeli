@@ -70,10 +70,7 @@ parameters:
 jobs:
   determine-affected-apps:
     docker:
-      - image: tjokvol/node:14-luna
-        auth:
-          username: $PUBLIC_DOCKER_USER
-          password: $PUBLIC_DOCKER_PASSWORD
+      - image: << pipeline.parameters.default-build-context >>
     environment:
       - TAG_TO_BE_E2E: << pipeline.parameters.tag-to-be-e2e >>
       - TAG_E2E_TESTED: << pipeline.parameters.tag-e2e >>
@@ -84,10 +81,6 @@ jobs:
       - add_ssh_keys:
           fingerprints:
             - 'd7:e3:8a:3a:84:5f:4b:48:cd:c0:d4:bf:66:59:16:e1'
-
-      - restore_cache:
-          keys:
-            - v2-nrwl-workspace-9.2.2
 
       - run:
           name: Setup environment to check affected

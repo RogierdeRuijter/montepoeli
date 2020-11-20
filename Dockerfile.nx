@@ -1,7 +1,3 @@
-FROM tjokvol/node:13-luna
+FROM tjokvol/montepoeli-base-node-modules:latest
 
-WORKDIR /usr/src/app
-
-COPY package.json package.json
-
-RUN npm install @nrwl/workspace@9.2.2
+RUN npm run nx:affected:apps
