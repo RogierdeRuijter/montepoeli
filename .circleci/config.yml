@@ -44,7 +44,7 @@ parameters:
     default: ''
   default-build-context:
     type: string
-    default: 'circleci/node:15'
+    default: 'circleci/node:14'
   e2e-client-environment-variables:
     type: string
     default: 'e2e'
