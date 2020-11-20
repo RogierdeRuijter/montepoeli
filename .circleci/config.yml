@@ -70,7 +70,7 @@ parameters:
 jobs:
   determine-affected-apps:
     docker:
-      - image: tjokvol/node:13-luna
+      - image: tjokvol/node:14-luna
         auth:
           username: $PUBLIC_DOCKER_USER
           password: $PUBLIC_DOCKER_PASSWORD
