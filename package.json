@@ -57,7 +57,7 @@
     "api:start:dev": "ng serve api",
     "e2e:start": "ng e2e",
     "e2e:protractor": "protractor apps/client-e2e/protractor.conf.js",
-    "nx:affected:apps": "nx affected:apps --base=master --head=HEAD",
+    "nx:affected:apps": "nx affected:apps --base=master --head=${CIRCLE_SHA1}",
     "nx:affected:apps:ci": "nx affected:apps --base=${CIRCLE_BRANCH} --head=master",
     "nx:affected:apps:master": "nx affected:apps --base=master~1 --head=master",
     "nx:affected:libs": "nx affected:libs",
