@@ -5,8 +5,6 @@ FROM tjokvol/montepoeli-base-node-modules:latest AS builder
 COPY package.json package.json
 COPY package-lock.json package-lock.json
 
-RUN npm install
-
 COPY apps/client/tsconfig.json apps/client/tsconfig.json
 COPY apps/client/tsconfig.app.json apps/client/tsconfig.app.json
 COPY apps/client/ngsw-config.json apps/client/ngsw-config.json
@@ -22,7 +20,7 @@ RUN npm run client:compile-ivy-dependencies
 
 COPY apps/client/src apps/client/src
 
-# RUN npm run client:lint
+# RUN npm run client:lint # Currently not running because it is so slow
 
 RUN npm run client:test:cov
 
