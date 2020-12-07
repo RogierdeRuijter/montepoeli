@@ -6,8 +6,6 @@ RUN apt-get update && apt-get -y upgrade && apt-get -y install python3 make g++
 COPY package.json package.json
 COPY package-lock.json package-lock.json
 
-RUN npm install
-
 COPY tsconfig.json tsconfig.json
 COPY angular.json angular.json
 COPY nx.json nx.json
