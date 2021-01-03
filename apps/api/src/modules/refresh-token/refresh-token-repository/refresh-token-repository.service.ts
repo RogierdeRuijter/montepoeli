@@ -19,6 +19,10 @@ export class RefreshTokenRepositoryService {
 
     token.expires = expiration;
 
+    return this.createToken(token);
+  }
+
+  public createToken(token: RefreshToken): Promise<RefreshToken> {
     return new this.refreshTokenModel(token).save();
   }
 }

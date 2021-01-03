@@ -2,6 +2,8 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { RefreshTokenRepositoryService } from './refresh-token-repository.service';
 import { getModelToken } from '@nestjs/mongoose';
 import { RefreshToken } from '../refresh-token.model';
+import { User } from 'apps/api/src/models/interfaces/user.interface';
+import { UserFactory } from 'apps/api/src/factories/user.factory';
 
 describe('RefreshTokenRepositoryService', () => {
   let service: RefreshTokenRepositoryService;
@@ -22,5 +24,17 @@ describe('RefreshTokenRepositoryService', () => {
 
   it('should be defined', () => {
     expect(service).toBeDefined();
+  });
+
+  describe(RefreshTokenRepositoryService.prototype.createRefreshToken.name, () => {
+    it('The save method should be called', () => {
+      const userßFactory = new UserFactory();
+      const user: User = userFactory.create();
+      const spy = spyOn(RefreshTokenRepositoryService.prototype, 'createToken');
+
+      service.createRefreshToken(user, 1200);
+
+      expect(spy).toBeCalled();
+    });
   });
 });
