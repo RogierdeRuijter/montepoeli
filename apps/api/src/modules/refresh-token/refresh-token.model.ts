@@ -13,5 +13,5 @@ export class RefreshToken {
   @Prop()
   expires: Date;
 }
-
+// eslint-disable-line
 export const RefreshTokenSchema = SchemaFactory.createForClass(RefreshToken);
