@@ -30,7 +30,7 @@ describe('RefreshTokenRepositoryService', () => {
     it('The save method should be called', () => {
       const userFactory = new UserFactory();
       const user: User = userFactory.create();
-      const spy = spyOn(RefreshTokenRepositoryService.prototype, 'createToken');
+      const spy = spyOn(RefreshTokenRepositoryService.prototype, 'insertTokenIntoModel');
 
       service.createRefreshToken(user, 1200);
 
