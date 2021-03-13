@@ -17,6 +17,8 @@ COPY angular.json angular.json
 COPY tsconfig.json tsconfig.json
 COPY jest.config.js jest.config.js
 
+RUN npm install
+
 RUN npm run client:compile-ivy-dependencies
 
 COPY apps/client/src apps/client/src

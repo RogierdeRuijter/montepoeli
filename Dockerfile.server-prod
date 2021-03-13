@@ -21,6 +21,8 @@ COPY angular.json angular.json
 
 COPY apps/api/src apps/api/src
 
+RUN npm install
+
 RUN npm run api:lint
 
 RUN npm run api:test:cov
