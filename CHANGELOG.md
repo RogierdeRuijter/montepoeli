@@ -1,3 +1,10 @@
+## [4.16.18](https://github.com/RogierdeRuijter/montepoeli/compare/v4.16.17...v4.16.18) (2021-03-13)
+
+
+### Bug Fixes
+
+* Update all npm dependencies (2021-01-11) ([f4b57f6](https://github.com/RogierdeRuijter/montepoeli/commit/f4b57f68047774a9ab57bed4578ae72772c44b2a))
+
 ## [4.16.17](https://github.com/RogierdeRuijter/montepoeli/compare/v4.16.16...v4.16.17) (2021-01-04)
 
 
