@@ -7,6 +7,7 @@ COPY package-lock.json package-lock.json
 
 COPY apps/client/tsconfig.json apps/client/tsconfig.json
 COPY apps/client/tsconfig.app.json apps/client/tsconfig.app.json
+COPY apps/client/.eslintrc.json apps/client/.eslintrc.json
 COPY apps/client/ngsw-config.json apps/client/ngsw-config.json
 COPY apps/client/jest.config.js apps/client/jest.config.js
 COPY apps/client/tsconfig.spec.json apps/client/tsconfig.spec.json
