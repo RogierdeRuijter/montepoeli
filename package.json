@@ -205,7 +205,7 @@
     "ts-node": "9.1.1",
     "tsconfig-paths": "3.9.0",
     "webdriver-manager": "12.1.8",
-    "eslint": "7.21.0",
+    "eslint": "7.22.0",
     "eslint-plugin-import": "2.22.1",
     "eslint-plugin-jsdoc": "32.2.0",
     "eslint-plugin-prefer-arrow": "1.2.3",
