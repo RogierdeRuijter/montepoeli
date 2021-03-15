@@ -31,7 +31,7 @@ export class UsersController {
       throw new BadRequestException('language preference should be dutch or english');
     }
 
-    return this.usersService.setLanguagePreference(username, languagePreference);
+    await this.usersService.setLanguagePreference(username, languagePreference);
   }
 
   @Get('/current')
