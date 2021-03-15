@@ -104,14 +104,14 @@ jobs:
       - run:
           name: Save to the environment variable if the client is affected
           command: |
-            if [[ ${CIRCLE_BRANCH} = "master" ]]; then
-              echo "npm run nx:affected:apps:master $( npm run nx:affected:apps:master )"
-              echo "npm run nx:affected:apps:master | grep client $( npm run nx:affected:apps:master | grep client )"
-              if [[ $( npm run nx:affected:apps:master | grep client ) != "" ]]; then
-                echo "master: affected client"
+            if [[ ${CIRCLE_BRANCH} = "main" ]]; then
+              echo "npm run nx:affected:apps:main $( npm run nx:affected:apps:main )"
+              echo "npm run nx:affected:apps:main | grep client $( npm run nx:affected:apps:main | grep client )"
+              if [[ $( npm run nx:affected:apps:main | grep client ) != "" ]]; then
+                echo "main: affected client"
                 echo "export CLIENT_AFFECTED=true" >> $BASH_ENV
               else
-                echo "master: no changes client"
+                echo "main: no changes client"
                 echo "export CLIENT_AFFECTED=false" >> $BASH_ENV
               fi
             else
@@ -130,14 +130,14 @@ jobs:
       - run:
           name: Save to the environment variable if the server is affected
           command: |
-            if [[ ${CIRCLE_BRANCH} = "master" ]]; then
-              echo "npm run nx:affected:apps:master $( npm run nx:affected:apps:master )"
-              echo "npm run nx:affected:apps:master | grep api $( npm run nx:affected:apps:master | grep api )"
-              if [[ $( npm run nx:affected:apps:master | grep api) != "" ]]; then
-                echo "master: affected server"
+            if [[ ${CIRCLE_BRANCH} = "main" ]]; then
+              echo "npm run nx:affected:apps:main $( npm run nx:affected:apps:main )"
+              echo "npm run nx:affected:apps:main | grep api $( npm run nx:affected:apps:main | grep api )"
+              if [[ $( npm run nx:affected:apps:main | grep api) != "" ]]; then
+                echo "main: affected server"
                 echo "export SERVER_AFFECTED=true" >> $BASH_ENV
               else
-                echo "master: no changes server"
+                echo "main: no changes server"
                 echo "export SERVER_AFFECTED=false" >> $BASH_ENV
               fi
             else
@@ -156,7 +156,7 @@ jobs:
       - run:
           name: Create client tag and save to environment variable
           command: |
-            if [[ ${CIRCLE_BRANCH} = "master" ]]; then
+            if [[ ${CIRCLE_BRANCH} = "main" ]]; then
               CLIENT_TAG=$(git log -n 1 --skip 1 --pretty=format:"%H")
             else
               CLIENT_TAG=${CIRCLE_SHA1}
@@ -166,7 +166,7 @@ jobs:
 
       - run:
           command: |
-            if [[ ${CIRCLE_BRANCH} = "master" ]]; then
+            if [[ ${CIRCLE_BRANCH} = "main" ]]; then
               SERVER_TAG=$(git log -n 1 --skip 1 --pretty=format:"%H")
             else 
               SERVER_TAG=${CIRCLE_SHA1}
@@ -726,7 +726,7 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - main
                 - /depfu.*/
                 - /dependabot.*/
 
@@ -738,7 +738,7 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - main
                 - /depfu.*/
                 - /dependabot.*/
 
@@ -748,7 +748,7 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - main
                 - /([0-9])+?(\.([0-9])+)\.x/
 
       - save-new-version:
@@ -757,7 +757,7 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - main
                 - /([0-9])+?(\.([0-9])+)\.x/
 
       - retag-latest-server-production-image-with-new-version:
@@ -766,7 +766,7 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - main
                 - /([0-9])+?(\.([0-9])+)\.x/
 
       - make-client-image-production-ready:
@@ -775,7 +775,7 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - main
                 - /([0-9])+?(\.([0-9])+)\.x/
 
   server:
@@ -789,7 +789,7 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - main
                 - /depfu.*/
                 - /dependabot.*/
 
@@ -799,7 +799,7 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - main
                 - /depfu.*/
                 - /dependabot.*/
 
@@ -809,7 +809,7 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - main
                 - /([0-9])+?(\.([0-9])+)\.x/
 
       - save-new-version:
@@ -818,7 +818,7 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - main
                 - /([0-9])+?(\.([0-9])+)\.x/
 
       - retag-latest-client-production-image-with-new-version:
@@ -827,7 +827,7 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - main
                 - /([0-9])+?(\.([0-9])+)\.x/
 
       - make-server-image-production-ready:
@@ -836,7 +836,7 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - main
                 - /([0-9])+?(\.([0-9])+)\.x/
 
   client_and_server:
@@ -852,7 +852,7 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - main
                 - /depfu.*/
                 - /dependabot.*/
 
@@ -862,7 +862,7 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - main
                 - /depfu.*/
                 - /dependabot.*/
 
@@ -873,7 +873,7 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - main
                 - /depfu.*/
                 - /dependabot.*/
 
@@ -891,7 +891,7 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - main
                 - /([0-9])+?(\.([0-9])+)\.x/
 
       - save-new-version:
@@ -900,7 +900,7 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - main
                 - /([0-9])+?(\.([0-9])+)\.x/
 
       - make-client-image-production-ready:
@@ -909,7 +909,7 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - main
                 - /([0-9])+?(\.([0-9])+)\.x/
 
       - make-server-image-production-ready:
@@ -918,5 +918,5 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - main
                 - /([0-9])+?(\.([0-9])+)\.x/
