@@ -81,14 +81,15 @@
     "husky:pre-commit": "npm-run-all -p prettier:check nx:lint-workspace circleci:lint mergify:lint",
     "husky:pre-push": "npm-run-all -p circleci:test nx:affected:lint:parallel nx:affected:test:parallel nx:affected:build:parallel",
     "husky:post-merge": "npm install",
-    "husky:commit-message": "commitlint -E HUSKY_GIT_PARAMS",
+    "husky:commit-message": "npx --no-install commitlint --edit $1",
     "circleci:lint": "cd .circleci && npm run lint",
     "circleci:test": "cd .circleci && npm run test",
     "prettier:check": "npx prettier --check .",
     "prettier:fix": "npx prettier --write .",
     "mergify:lint": "cd .mergify && npm run lint",
     "update-with-master": "CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD) && git checkout master && git pull && git checkout $CURRENT_BRANCH && git merge master",
-    "get-version": "grep '\"version\":' package.json | cut -d\\\" -f4"
+    "get-version": "grep '\"version\":' package.json | cut -d\\\" -f4",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@angular-devkit/build-angular": "0.1102.4",
@@ -217,13 +218,5 @@
     "@typescript-eslint/eslint-plugin": "4.17.0",
     "@typescript-eslint/parser": "4.17.0",
     "eslint-plugin-react": "7.22.0"
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "npm run husky:commit-message",
-      "pre-commit": "npm run husky:pre-commit",
-      "pre-push": "npm run husky:pre-push",
-      "post-merge": "npm run husky:post-merge"
-    }
   }
 }
