@@ -58,7 +58,7 @@ export class UsersService {
   }
 
   // TODO: write unit test
-  public setLanguagePreference(username: string, languagePreferance: string): Promise<User> {
+  public setLanguagePreference(username: string, languagePreferance: string): Promise<any> {
     return this.userRepositoryService.updateLanguagePreferance(username, languagePreferance);
   }
 
