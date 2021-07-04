@@ -152,7 +152,7 @@ jobs:
                 echo "export SERVER_AFFECTED=false" >> $BASH_ENV
               fi
             fi
-            "export SERVER_AFFECTED=true" >> $BASH_ENV
+            echo "export SERVER_AFFECTED=true" >> $BASH_ENV
             echo $SERVER_AFFECTED
 
       - run:
