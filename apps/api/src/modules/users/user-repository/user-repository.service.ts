@@ -21,6 +21,10 @@ export class UserRepositoryService {
     return users[0];
   }
 
+  public async findById(id: string): Promise<User> {
+    return this.userModel.findById(id);
+  }
+
   public save(user: User): Promise<User> {
     return new this.userModel(user).save();
   }

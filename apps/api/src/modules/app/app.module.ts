@@ -5,6 +5,7 @@ import { AuthModule } from '../auth/auth.module';
 import { UsersModule } from '../users/users.module';
 import { GameModule } from '../game/game.module';
 import { RuleModule } from '../rule/rule.module';
+import { RefreshTokenModule } from '../refresh-token/refresh-token.module';
 
 const username = process.env.MONGO_USERNAME;
 const password = process.env.MONGO_PASSWORD;
@@ -21,7 +22,14 @@ const constructDatabaseUrl = () => {
 };
 
 @Module({
-  imports: [MongooseModule.forRoot(constructDatabaseUrl()), AuthModule, UsersModule, GameModule, RuleModule],
+  imports: [
+    MongooseModule.forRoot(constructDatabaseUrl()),
+    AuthModule,
+    UsersModule,
+    GameModule,
+    RuleModule,
+    RefreshTokenModule,
+  ],
   controllers: [AppController],
 })
 export class AppModule {}
