@@ -502,11 +502,11 @@ jobs:
           fingerprints:
             - 'd7:e3:8a:3a:84:5f:4b:48:cd:c0:d4:bf:66:59:16:e1'
 
-      - restore_cache:
-          keys:
-            - v1-dependencies-root-{{ checksum "package-lock.json" }}
-            # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-root
+      # - restore_cache:
+      #     keys:
+      #       - v1-dependencies-root-{{ checksum "package-lock.json" }}
+      #       # fallback to using the latest cache if no exact match is found
+      #       - v1-dependencies-root
       - run:
           name: Setup environment for version increase
           command: |
@@ -515,10 +515,10 @@ jobs:
                         
             npm install
 
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-root-{{ checksum "package-lock.json" }}
+      # - save_cache:
+      #     paths:
+      #       - node_modules
+      #     key: v1-dependencies-root-{{ checksum "package-lock.json" }}
 
       - run:
           name: bump version based on last commit message
