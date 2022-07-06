@@ -142,7 +142,7 @@
     "mysql": "2.18.1",
     "ngx-cookie-service": "11.0.2",
     "ngx-toastr": "13.2.1",
-    "passport": "0.4.1",
+    "passport": "0.6.0",
     "passport-http-bearer": "1.0.1",
     "passport-jwt": "4.0.0",
     "reflect-metadata": "0.1.13",
